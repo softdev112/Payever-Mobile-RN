@@ -9,4 +9,4 @@ gulp.task('default', ['help']);
 
 require('./gulp/main');
 require('./gulp/android');
-
+require('./gulp/ios');
