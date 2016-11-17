@@ -1,4 +1,4 @@
-# PayeverMobile
+# payever-mobile-rn
 
 ## Install a development version
 
