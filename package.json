@@ -1,0 +1,31 @@
+{
+  "name": "PayeverMobile",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "gulp start",
+    "reset": "watchman watch-del-all",
+    "test": "jest"
+  },
+  "dependencies": {
+    "react": "15.3.2",
+    "react-native": "0.37.0",
+    "react-native-fabric": "^0.3.2",
+    "react-native-router-flux": "^3.37.0"
+  },
+  "jest": {
+    "preset": "jest-react-native"
+  },
+  "devDependencies": {
+    "babel-jest": "17.0.0",
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "concurrently": "^3.1.0",
+    "gulp": "^3.9.1",
+    "gulp-task-doc": "^1.0.11",
+    "jest": "17.0.0",
+    "jest-react-native": "17.0.0",
+    "ps-node": "^0.1.4",
+    "react-test-renderer": "15.3.2",
+    "run-sequence": "^1.2.2"
+  }
+}
