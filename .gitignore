@@ -4,6 +4,8 @@
 
 # Xcode
 #
+*.ipa
+*.dSYM.zip
 build/
 *.pbxuser
 !default.pbxuser
@@ -22,7 +24,7 @@ DerivedData
 *.xcuserstate
 project.xcworkspace
 Pods/
-fastline/report.xml
+ios/fastlane/report.xml
 
 # Android/IJ
 #
