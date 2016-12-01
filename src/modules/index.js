@@ -4,6 +4,7 @@ const modules = [
   require('./auth'),
   require('./core'),
   require('./dashboard'),
+  require('./user'),
 ];
 
 export class ModuleRegistry {

@@ -1,55 +1,100 @@
 import type AuthApi from '../modules/auth/api/AuthApi';
+import type UserApi from '../modules/user/api/UserApi';
 
-import { each } from 'lodash';
+import { each, merge, isDate, now } from 'lodash';
 
 type PayeverApiConfig = {
   baseUrl: string,
   clientId: string,
-  clientSecret: string
+  clientSecret: string,
+  accessToken: string,
+  expiresIn: Date,
+  refreshToken: string;
 };
+
+declare class PayeverResponse extends Response {
+  data: {
+    error?: string,
+    error_description?: string
+  };
+  json(): Object;
+}
 
 export default class PayeverApi {
   auth: AuthApi;
+  user: UserApi;
 
   baseUrl: string;
   clientId: string;
   clientSecret: string;
 
-  constructor(config: PayeverApiConfig, childClasses: {[id: string]: Class}) {
-    this.baseUrl      = config.baseUrl;
-    this.clientId     = config.clientId;
-    this.clientSecret = config.clientSecret;
+  accessToken: string;
+  expiresIn: Date;
+  refreshToken: string;
 
-    if (this.baseUrl.endsWith('/')) {
-      this.baseUrl = this.baseUrl.slice(0, -1);
-    }
+  constructor(config: PayeverApiConfig, childClasses: {[id: string]: Class}) {
+    this.setConfig(config);
 
     each(childClasses, (Class, name) => {
       this[name] = new Class(this);
     });
   }
 
-  get(url: string, params: Object = null): Promise<Response> {
-    return fetch(this.normalizeUrl(url, params), {
-      method: 'get'
-    })
-      .then(async (response: Response) => {
-        let data = {};
-        try {
-          data = await response.json();
-        } catch(e) {
-          console.error(e);
-        }
+  setConfig(config: PayeverApiConfig) {
+    if (typeof config.baseUrl === 'string' && config.baseUrl.endsWith('/')) {
+      config.baseUrl = config.baseUrl.slice(0, -1);
+    }
 
-        response.data = data;
-        return response;
-      });
+    const expires = config.expiresIn;
+    if (expires && !isDate(expires) && isFinite(expires)) {
+      config.expiresIn = new Date(now() + (expires - 10) * 1000);
+    }
+
+    merge(this, config);
   }
 
-  normalizeUrl(url: string, getParams: Object = null) {
+  async get(url: string, query: Object = null): Promise<Response> {
+    query = {
+      ...query,
+      access_token: await this.getAccessToken()
+    };
+    return this.fetch(url, { query });
+  }
+
+  async fetch(url: string, options: Object = {}): Promise<PayeverResponse> {
+    options.method = options.method || 'GET';
+    const response: PayeverResponse = await fetch(
+      this.normalizeUrl(url, options.query),
+      options
+    );
+    const text = await response.text();
+    try {
+      response.data = JSON.parse(text);
+    } catch(e) {
+      console.log('PayeverApi: Error parsing JSON', text);
+      response.data = {
+        error: 'json_error',
+        error_description: 'Wrong server response'
+      }
+    }
+
+    return response;
+  }
+
+  async getAccessToken() {
+    if (this.accessToken && this.expiresIn > new Date()) {
+      return this.accessToken;
+    }
+    if (!this.refreshToken) {
+      throw new Error('PayeverApi: refreshToken is null')
+    }
+    return await this.auth.refreshToken(this.refreshToken);
+  }
+
+  normalizeUrl(url: string, query: Object = null) {
     let fullUrl = this.baseUrl + url;
-    if (getParams) {
-      fullUrl += '?' + objectToQueryString(getParams)
+    if (query && Object.keys(query).length) {
+      fullUrl += '?' + objectToQueryString(query)
     }
     return fullUrl;
   }

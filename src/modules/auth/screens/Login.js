@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 
 import { signIn } from '../actions/auth';
+import Loader from '../../core/components/Loader';
 
 @connect((state) => ({
   error: state.auth.get('error')
@@ -57,6 +58,7 @@ export default class Login extends Component {
           <View>
             <Button title="Sign in" onPress={::this.onSignIn}/>
           </View>
+          <Loader />
         </View>
       </View>
     );

@@ -15,7 +15,7 @@ export default async function startApp() {
   const loggedIn = store.getState().auth.loggedIn;
   Navigation.startSingleScreenApp({
     screen: {
-      screen: loggedIn ? 'dashboard.Dashboard' : 'auth.Login'
+      screen: loggedIn ? 'dashboard.Businesses' : 'auth.Login'
     }
   });
 }
