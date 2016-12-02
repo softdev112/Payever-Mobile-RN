@@ -3,15 +3,22 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "gulp start",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
     "reset": "watchman watch-del-all",
-    "test": "jest"
+    "test": "jest",
+    "build:android": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
+    "immutable": "^3.8.1",
+    "lodash": "^4.17.2",
     "react": "15.3.2",
     "react-native": "0.37.0",
     "react-native-fabric": "^0.3.2",
-    "react-native-router-flux": "^3.37.0"
+    "react-native-navigation": "^2.0.0-experimental.147",
+    "react-redux": "^4.4.6",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.7.4",
+    "redux-thunk": "^2.1.0"
   },
   "jest": {
     "preset": "jest-react-native"

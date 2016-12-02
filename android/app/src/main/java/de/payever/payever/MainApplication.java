@@ -1,46 +1,32 @@
 package de.payever.payever;
 
-import android.app.Application;
-import android.util.Log;
-
-import com.facebook.react.ReactApplication;
 import com.smixx.fabric.FabricPackage;
-import com.facebook.react.ReactInstanceManager;
-import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.facebook.react.shell.MainReactPackage;
-
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
+
+import com.reactnativenavigation.NavigationApplication;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class MainApplication extends Application implements ReactApplication {
-
-  @Override
-  public void onCreate() {
-    super.onCreate();
-    Fabric.with(this, new Crashlytics());
-  }
-
-  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+public class MainApplication extends NavigationApplication {
     @Override
-    protected boolean getUseDeveloperSupport() {
-      return BuildConfig.DEBUG;
+    public void onCreate() {
+        super.onCreate();
+        Fabric.with(this, new Crashlytics());
     }
 
     @Override
-    protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
+    public boolean isDebug() {
+	    // Make sure you are using BuildConfig from your own application
+	    return BuildConfig.DEBUG;
+    }
+
+    @Override
+    public List<ReactPackage> createAdditionalReactPackages() {
+        return Arrays.<ReactPackage>asList(
             new FabricPackage()
-      );
+        );
     }
-  };
-
-  @Override
-  public ReactNativeHost getReactNativeHost() {
-      return mReactNativeHost;
-  }
 }
