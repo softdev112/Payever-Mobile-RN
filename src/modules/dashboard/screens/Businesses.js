@@ -1,8 +1,6 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Text, View } from 'react-native';
-
-import { concat } from 'lodash';
+import { Button, Text, Container } from 'ui';
 
 import * as businessActions from '../../user/actions/busienesses'
 import * as userActions from '../../user/actions/user';
@@ -43,10 +41,10 @@ export default class Businesses extends Component {
   render() {
     const { businesses } = this.props;
     return (
-      <View>
+      <Container style={{marginTop: 50}}>
         <Loader />
         {businesses.map(::this.renderBusiness)}
-      </View>
+      </Container>
     );
   }
 }

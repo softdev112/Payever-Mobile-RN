@@ -1,5 +1,6 @@
 import { Provider } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 import configureStore from './store/configureStore';
 import { loadSnapshot } from './store/snapshot';
@@ -11,6 +12,8 @@ export default async function startApp() {
   showSplashScreen();
   const store = configureStore(await loadSnapshot());
   registerScreens(moduleRegistry.screens, store);
+
+  EStyleSheet.build();
 
   const loggedIn = store.getState().auth.loggedIn;
   Navigation.startSingleScreenApp({
