@@ -34,14 +34,15 @@ export default class Login extends Component {
     const width = Dimensions.get('window').width;
     return (
       <View style={{ alignItems: 'center' }}>
-        <View style={{ width: width * .8 }}>
-          <View style={styles.inputContainer}>
+        <View>
+          <View>
+            <Text></Text>
             <TextInput
+              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
               onChangeText={username => this.setState({ username })}
               placeholder="Your e-mail"
               autoCorrect={false}
               autoFocus={true}
-
             />
           </View>
           <View style={styles.inputContainer}>
@@ -56,7 +57,7 @@ export default class Login extends Component {
             <Text>{error}</Text>
           </View>
           <View>
-            <Button title="Sign in" onPress={::this.onSignIn}/>
+            <Button title="Sign In" onPress={::this.onSignIn} />
           </View>
           <Loader />
         </View>
