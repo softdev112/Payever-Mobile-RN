@@ -1,3 +1,7 @@
+/**
+ * @providesModule ui
+ */
+
 export { Text, View } from 'react-native';
 
 export TextInput from './TextInput';

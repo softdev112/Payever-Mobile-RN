@@ -9,8 +9,6 @@
     "build:android": "cd android && ./gradlew assembleRelease"
   },
   "dependencies": {
-    "babel": "^6.5.2",
-    "babel-plugin-module-alias": "^1.6.0",
     "immutable": "^3.8.1",
     "lodash": "^4.17.2",
     "react": "^15.4.1",
@@ -29,6 +27,7 @@
   },
   "devDependencies": {
     "babel-jest": "17.0.0",
+    "babel-plugin-module-resolver": "^2.4.0",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "concurrently": "^3.1.0",
     "gulp": "^3.9.1",

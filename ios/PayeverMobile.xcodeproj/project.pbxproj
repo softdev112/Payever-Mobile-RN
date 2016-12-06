@@ -929,8 +929,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp.rn;
 				PRODUCT_NAME = PayeverMobile;
-				PROVISIONING_PROFILE = "743c9ace-29dc-4755-aeb0-e20b14d06e80";
-				PROVISIONING_PROFILE_SPECIFIER = payever_react_native;
+				PROVISIONING_PROFILE = "35c960f7-2f88-4b28-b80f-302336e8ad5d";
+				PROVISIONING_PROFILE_SPECIFIER = payever_react_native_adhoc;
 				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

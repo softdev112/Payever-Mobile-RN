@@ -1,8 +1,12 @@
 {
   "presets": ["react-native-stage-0/decorator-support"],
-  "plugins": [[
-    "module-alias", [
-      { "expose": "ui", "src": "./src/common/ui" }
-    ]
-  ]]
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "ui": "common/ui"
+      },
+      "cwd": "babelrc"
+    }]
+  ]
 }
