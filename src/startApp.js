@@ -19,6 +19,9 @@ export default async function startApp() {
   Navigation.startSingleScreenApp({
     screen: {
       screen: loggedIn ? 'dashboard.Businesses' : 'auth.Login'
+    },
+    appStyle: {
+      screenBackgroundColor: '#ffffff',
     }
   });
 }

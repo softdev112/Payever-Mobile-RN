@@ -1,7 +1,11 @@
-import type AuthApi from '../modules/auth/api/AuthApi';
-import type UserApi from '../modules/user/api/UserApi';
+import { merge, isDate, now } from 'lodash';
 
-import { each, merge, isDate, now } from 'lodash';
+import AuthApi from './AuthApi';
+import BusinessApi from './BusinessApi';
+import DashboardApi from './DashboardApi';
+import UserApi from './UserApi';
+import ProfilesApi from './ProfilesApi';
+import MenuApi from './MenuApi';
 
 type PayeverApiConfig = {
   baseUrl: string,
@@ -22,7 +26,11 @@ declare class PayeverResponse extends Response {
 
 export default class PayeverApi {
   auth: AuthApi;
+  business: BusinessApi;
+  dashboard: DashboardApi;
   user: UserApi;
+  profiles: ProfilesApi;
+  menu: MenuApi;
 
   baseUrl: string;
   clientId: string;
@@ -32,12 +40,18 @@ export default class PayeverApi {
   expiresIn: Date;
   refreshToken: string;
 
-  constructor(config: PayeverApiConfig, childClasses: {[id: string]: Class}) {
+  constructor(config: PayeverApiConfig) {
     this.setConfig(config);
+    this.registerSubApi();
+  }
 
-    each(childClasses, (Class, name) => {
-      this[name] = new Class(this);
-    });
+  registerSubApi() {
+    this.auth      = new AuthApi(this);
+    this.dashboard = new DashboardApi(this);
+    this.business  = new BusinessApi(this);
+    this.menu      = new MenuApi(this);
+    this.user      = new UserApi(this);
+    this.profiles  = new ProfilesApi(this);
   }
 
   setConfig(config: PayeverApiConfig) {

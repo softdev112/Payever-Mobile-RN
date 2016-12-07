@@ -4,7 +4,7 @@ import createLogger from 'redux-logger';
 
 import config from '../config';
 import moduleRegistry from '../modules';
-import AuthApi from '../common/PayeverApi';
+import PayeverApi from '../common/api';
 
 const middlewares = [thunk.withExtraArgument(createThunkArgs())];
 
@@ -23,6 +23,6 @@ export default function configureStore(initialState) {
 
 function createThunkArgs() {
   return {
-    api: new AuthApi(config.api, moduleRegistry.api)
+    api: new PayeverApi(config.api)
   }
 }

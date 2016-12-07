@@ -1,4 +1,4 @@
-import type PayeverApi from '../../../common/PayeverApi';
+import type PayeverApi from './index';
 
 declare class AuthResponse extends Response {
   data: {
@@ -35,7 +35,7 @@ export default class AuthApi {
     return response;
   }
 
-  async refreshToken(refreshToken): string {
+  async refreshToken(refreshToken): Promise<string> {
     const response: AuthResponse = await this.client.fetch('/oauth/v2/token', {
       query: {
         client_id:     this.client.clientId,

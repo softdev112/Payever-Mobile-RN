@@ -10,7 +10,6 @@ const modules = [
 export class ModuleRegistry {
   screens: {[id: string]: Component};
   reducers: {[id: string]: () => Object};
-  api: {[id: string]: Class};
 
   constructor() {
     this.screens = {};
@@ -25,11 +24,6 @@ export class ModuleRegistry {
 
   registerReducer(id: string, reducer: () => Object) {
     this.reducers[id] = reducer;
-    return this;
-  }
-
-  registerApi(id: string, api: Class) {
-    this.api[id] = api;
     return this;
   }
 }

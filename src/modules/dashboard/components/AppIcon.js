@@ -11,7 +11,7 @@ const images = {
 };
 
 @connect(state => ({
-  slug: state.user.get('currentBusiness').slug,
+  slug: state.user.get('currentProfile').slug,
   siteUrl: state.config.get('siteUrl')
 }))
 export default class AppIcon extends Component {
