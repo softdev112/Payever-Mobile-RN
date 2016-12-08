@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { connect } from 'react-redux';
+import { observer, inject } from 'mobx-react/native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 import {
@@ -8,9 +8,8 @@ import {
 
 import { signIn } from '../actions/auth';
 
-@connect((state) => ({
-  error: state.auth.get('error')
-}))
+@inject('store')
+@observer
 export default class Login extends Component {
   static navigatorStyle = {
     navBarHidden: true
@@ -24,16 +23,19 @@ export default class Login extends Component {
   }
 
   onSignIn() {
-    const { dispatch, navigator } = this.props;
-    dispatch(signIn(this.username, this.password, navigator));
+    const { store } = this.props;
+    store.auth.signIn(this.username, this.password, navigator);
   }
 
   render() {
     const { error } = this.props;
+    console.log(this.props);
+    const debug = JSON.stringify(this.props.store.auth, null, '  ');
     return (
       <View style={{flex:1}}>
         <Header>
           <Link>Sign up for free</Link>
+          <Text>{debug}123</Text>
         </Header>
         <Container contentContainerStyle={styles.container}>
           <Loader>

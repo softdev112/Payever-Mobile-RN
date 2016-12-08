@@ -1,10 +1,8 @@
 import { Component } from 'react';
-import { connect } from 'react-redux';
+import { observer } from 'mobx-react/native';
 import { ActivityIndicator, View } from 'react-native';
 
-@connect(state => ({
-  isLoading: state.loader.get('isLoading')
-}))
+@observer
 export default class Loader extends Component {
   renderInline() {
     const { isLoading } = this.props;

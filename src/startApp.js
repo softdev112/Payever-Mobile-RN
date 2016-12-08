@@ -1,4 +1,4 @@
-import { Provider } from 'react-redux';
+import { Provider } from 'mobx-react/native';
 import { Navigation } from 'react-native-navigation';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
@@ -11,7 +11,7 @@ import Splash from './modules/core/screens/Splash';
 export default async function startApp() {
   showSplashScreen();
   const store = configureStore(await loadSnapshot());
-  registerScreens(moduleRegistry.screens, store);
+  registerScreens(moduleRegistry.screens, require('./store/index').default);
 
   EStyleSheet.build();
 
