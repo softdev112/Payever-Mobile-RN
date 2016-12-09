@@ -11,9 +11,6 @@ export default async function startApp() {
 
   EStyleSheet.build();
 
-  console.log(store);
   const auth = await store.auth.deserialize();
-  console.log(auth);
-
-  showScreen(auth.isLoggedIn ? 'dashboard.ChooseAccount' : 'auth.login')
+  showScreen(auth.isLoggedIn ? 'dashboard.ChooseAccount' : 'auth.Login')
 }

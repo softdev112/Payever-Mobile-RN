@@ -59,8 +59,7 @@ export default class AuthStore {
   }
 
   async deserialize(): Promise<AuthStore> {
-    return this;
-    /*let json;
+    let json;
     try {
       json = await AsyncStorage.getItem(STORE_NAME);
       if (!json) return this;
@@ -82,7 +81,7 @@ export default class AuthStore {
     });
 
     return this;
-     */
+
   }
 }
 

@@ -55,13 +55,10 @@ export default class Login extends Component {
 
   render() {
     const { isLoading, error } = this.state;
-    console.log(this.props);
-    const debug = '';//JSON.stringify(this.props, null, '  ');
     return (
       <View style={styles.component}>
         <Header>
           <Link>Sign up for free</Link>
-          <Text>{debug}123</Text>
         </Header>
         <Container contentContainerStyle={styles.container}>
           <Loader isLoading={isLoading}>
