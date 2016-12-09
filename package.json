@@ -12,17 +12,14 @@
     "immutable": "^3.8.1",
     "lodash": "^4.17.2",
     "mobx": "^2.6.5",
+    "mobx-logger": "^0.3.1",
     "mobx-react": "^4.0.3",
     "react": "^15.4.1",
     "react-native": "^0.38.1",
     "react-native-extended-stylesheet": "^0.3.0",
     "react-native-fabric": "^0.3.2",
     "react-native-md-textinput": "^2.0.4",
-    "react-native-navigation": "^2.0.0-experimental.152",
-    "react-redux": "^4.4.6",
-    "redux": "^3.6.0",
-    "redux-logger": "^2.7.4",
-    "redux-thunk": "^2.1.0"
+    "react-native-navigation": "^2.0.0-experimental.152"
   },
   "jest": {
     "preset": "jest-react-native"

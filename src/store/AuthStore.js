@@ -1,6 +1,7 @@
 import type Store from './index';
 
-import { observable, action, runInAction } from 'mobx';
+import { observable, action, runInAction, extendObservable } from 'mobx';
+import { now, isDate } from 'lodash';
 import { AsyncStorage } from 'react-native';
 
 const STORE_NAME = 'store.auth';
@@ -33,8 +34,6 @@ export default class AuthStore {
       return { success: false, error: 'Internal error. Please try later.'}
     }
 
-
-
     runInAction('Update auth state', () => {
       this.accessToken = data.access_token;
       this.refreshToken = data.refresh_token;
@@ -46,6 +45,20 @@ export default class AuthStore {
     this.serialize();
 
     return { success: true };
+  }
+
+  @action
+  updateTokens(data) {
+    const expires = data.expiresIn;
+    if (expires && !isDate(expires) && isFinite(expires)) {
+      data.expiresIn = new Date(now() + (expires - 10) * 1000);
+    }
+
+    console.log('update with', data);
+
+    extendObservable(this, data);
+    //noinspection JSIgnoredPromiseFromCall
+    this.serialize();
   }
 
   serialize(): Promise {
@@ -72,16 +85,9 @@ export default class AuthStore {
     this.isLoggedIn = data.isLoggedIn;
     this.accessToken = data.accessToken;
     this.refreshToken = data.refreshToken;
-    this.expiresIn = data.expiresIn;
-
-    this.store.api.setConfig({
-      accessToken: this.accessToken,
-      refreshToken: this.refreshToken,
-      expiresIn: this.expiresIn
-    });
+    this.expiresIn = new Date(data.expiresIn);
 
     return this;
-
   }
 }
 

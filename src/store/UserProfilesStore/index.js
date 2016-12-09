@@ -15,7 +15,6 @@ export default class UserProfilesStore {
   @observable privateProfile: PersonalProfile = null;
 
   @observable currentProfile: Profile = null;
-  @observable isLoaded: boolean = false;
 
   store: Store;
 
@@ -26,6 +25,22 @@ export default class UserProfilesStore {
   @action
   setCurrentProfile(profile: Profile) {
     this.currentProfile = profile;
+  }
+
+  toArray() {
+    let result = [];
+    if (this.privateProfile) {
+      result.push(this.privateProfile);
+    }
+
+    if (this.ownBusinesses.length) {
+      result = result.concat(this.ownBusinesses.slice())
+    }
+    if (this.staffBusinesses.length) {
+      result = result.concat(this.staffBusinesses.slice())
+    }
+
+    return result;
   }
 
   @action
@@ -46,14 +61,13 @@ export default class UserProfilesStore {
     }
 
     runInAction('Update auth state', () => {
-      this.isLoaded = true;
       this.ownBusinesses = data.businesses_own.map((profile) => {
-        return new BusinessProfile(profile);
+        return new BusinessProfile(profile, this.store);
       });
       this.staffBusinesses = data.businesses_staff.map((profile) => {
-        return new BusinessProfile(profile);
+        return new BusinessProfile(profile, this.store);
       });
-      this.privateProfile = new PersonalProfile(data.private);
+      this.privateProfile = new PersonalProfile(data.private, this.store);
     });
 
     //noinspection JSIgnoredPromiseFromCall
@@ -62,7 +76,8 @@ export default class UserProfilesStore {
     return { success: true };
   }
 
-  /*serialize(): Promise {
+  serialize(): Promise {
+    /*
     return AsyncStorage.setItem(STORE_NAME, JSON.stringify({
         isLoggedIn: this.isLoggedIn,
         accessToken: this.accessToken,
@@ -70,9 +85,11 @@ export default class UserProfilesStore {
         expiresIn: this.expiresIn
       }))
       .catch(e => console.error(e));
+     */
   }
 
   deserialize(): Promise<AuthStore> {
+    /*
     return AsyncStorage.getItem(STORE_NAME)
       .then(action((json) => {
         if (!json) return this;
@@ -84,7 +101,8 @@ export default class UserProfilesStore {
         return this;
       }))
       .catch(e => console.error(e));
-  }*/
+    */
+  }
 }
 
 type LoadProfilesResult = {

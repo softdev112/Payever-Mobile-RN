@@ -22,9 +22,9 @@ export default class ProfilesApi {
 
 type AccessibleListResponse = {
   data: ?{
-    businesses_own: Array<BusinessProfileResponse>;
-    businesses_staff: Array<BusinessProfileResponse>;
-    'private': PersonalProfileResponse;
+    businesses_own: Array<BusinessProfileData>;
+    businesses_staff: Array<BusinessProfileData>;
+    'private': PersonalProfileData;
 
     error: string;
     error_description: string;
@@ -32,7 +32,7 @@ type AccessibleListResponse = {
   ok: boolean
 };
 
-type PersonalProfileResponse = {
+type PersonalProfileData = {
   customers: number;
   followers: number;
   following: number;
@@ -62,7 +62,7 @@ type PersonalProfileResponse = {
   }
 };
 
-type BusinessProfileResponse = {
+type BusinessProfileData = {
   business: {
     currency: string;
     hidden: boolean;

@@ -1,4 +1,6 @@
-import { merge, isDate, now } from 'lodash';
+import type AuthStore from '../store/AuthStore';
+
+import { merge } from 'lodash';
 
 import AuthApi from './AuthApi';
 import BusinessApi from './BusinessApi';
@@ -6,23 +8,7 @@ import DashboardApi from './DashboardApi';
 import UserApi from './UserApi';
 import ProfilesApi from './ProfilesApi';
 import MenuApi from './MenuApi';
-
-type PayeverApiConfig = {
-  baseUrl: string,
-  clientId: string,
-  clientSecret: string,
-  accessToken: string,
-  expiresIn: Date,
-  refreshToken: string;
-};
-
-declare class PayeverResponse extends Response {
-  data: {
-    error?: string,
-    error_description?: string
-  };
-  json(): Object;
-}
+import { showScreen } from '../Navigation';
 
 export default class PayeverApi {
   auth: AuthApi;
@@ -36,9 +22,7 @@ export default class PayeverApi {
   clientId: string;
   clientSecret: string;
 
-  accessToken: string;
-  expiresIn: Date;
-  refreshToken: string;
+  authStore: AuthStore;
 
   constructor(config: PayeverApiConfig) {
     this.setConfig(config);
@@ -57,11 +41,6 @@ export default class PayeverApi {
   setConfig(config: PayeverApiConfig) {
     if (typeof config.baseUrl === 'string' && config.baseUrl.endsWith('/')) {
       config.baseUrl = config.baseUrl.slice(0, -1);
-    }
-
-    const expires = config.expiresIn;
-    if (expires && !isDate(expires) && isFinite(expires)) {
-      config.expiresIn = new Date(now() + (expires - 10) * 1000);
     }
 
     merge(this, config);
@@ -95,12 +74,12 @@ export default class PayeverApi {
       }
     }
 
-    if (!options.preventRecursion && response.data.error === 'invalid_grant') {
-      const token = await this.auth.refreshToken(this.refreshToken);
+    if (!options.preventTokenRefresh && response.data.error === 'invalid_grant') {
+      const token = await this.auth.refreshToken(this.authStore.refreshToken);
       if (token) {
-        return await this.fetch(url, { ...options, preventRecursion: true });
+        return await this.fetch(url, { ...options, preventTokenRefresh: true });
       } else {
-
+        showScreen('auth.Login');
       }
     }
 
@@ -112,13 +91,13 @@ export default class PayeverApi {
   }
 
   async getAccessToken() {
-    if (this.accessToken && this.expiresIn > new Date()) {
-      return this.accessToken;
+    if (this.authStore.accessToken && this.authStore.expiresIn > new Date()) {
+      return this.authStore.accessToken;
     }
-    if (!this.refreshToken) {
+    if (!this.authStore.refreshToken) {
       throw new Error('PayeverApi: refreshToken is null')
     }
-    return await this.auth.refreshToken(this.refreshToken);
+    return await this.auth.refreshToken(this.authStore.refreshToken);
   }
 
   normalizeUrl(url: string, query: Object = null) {
@@ -136,4 +115,19 @@ function objectToQueryString(data: Object): string {
   }).join('&');
 }
 
+type PayeverApiConfig = {
+  baseUrl: string,
+  clientId: string,
+  clientSecret: string,
+  accessToken: string,
+  expiresIn: Date,
+  refreshToken: string;
+};
 
+declare class PayeverResponse extends Response {
+  data: {
+    error?: string,
+    error_description?: string
+  };
+  json(): Object;
+}

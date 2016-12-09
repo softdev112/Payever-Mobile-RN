@@ -11,7 +11,7 @@ import imgNoBusiness from '../images/no-business.png';
 
 @inject('userProfiles')
 @observer
-export default class Businesses extends Component {
+export default class ChooseAccount extends Component {
   static navigatorStyle = {
     navBarHidden: true
   };
@@ -27,6 +27,7 @@ export default class Businesses extends Component {
   }
 
   async componentWillMount() {
+    this.setState({ isLoading: true });
     const { userProfiles } = this.props;
     const profilesLoadResult = await userProfiles.load();
     this.setState({
@@ -75,27 +76,18 @@ export default class Businesses extends Component {
   render() {
     const { isLoading } = this.state;
     const { userProfiles } = this.props;
+    const profilesArray = userProfiles.toArray();
 
     const ds = new GridView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
-    const dataSource = ds.cloneWithRows(concat(
-      userProfiles.currentProfile,
-      userProfiles.ownBusinesses,
-      userProfiles.staffBusinesses
-    ));
-
-    console.log(concat(
-      userProfiles.currentProfile,
-      userProfiles.ownBusinesses,
-      userProfiles.staffBusinesses
-    ));
+    const dataSource = ds.cloneWithRows(profilesArray);
 
     return (
       <View>
         <Header>Welcome back. Please choose buying or selling account.</Header>
         <Loader isLoading={isLoading}>
-          { userProfiles.isLoaded && (
+          { profilesArray.length && (
             <GridView
               dataSource={dataSource}
               renderRow={::this.renderRow}

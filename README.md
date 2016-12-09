@@ -28,8 +28,19 @@
 
 6. Start the application
     ```
-    npm start
+    react-native run-android
     ```
+    or
+    ```
+    react-native run-ios
+    ```    
+
+7. If the app is not connected to live server, run `npm start`
+
+## Style Guide
+
+ - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
+ - [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
 
 ## Useful information:
  

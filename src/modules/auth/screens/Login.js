@@ -49,7 +49,7 @@ export default class Login extends Component {
     });
 
     if (signInResult.success) {
-      navigator.resetTo({ screen: 'dashboard.Businesses', animated: true });
+      navigator.resetTo({ screen: 'dashboard.ChooseAccount', animated: true });
     }
   }
 

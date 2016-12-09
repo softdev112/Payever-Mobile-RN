@@ -1,25 +1,46 @@
-import type { DashboardAppItem } from 'api/BusinessApi';
+import type UserProfilesStore from '../../../store/UserProfilesStore/index';
+import type AppItem from '../../../store/UserProfilesStore/AppItem';
 
 import { Component } from 'react';
-import { GridView, ImageButton, Loader, View } from 'ui';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import { inject, observer } from 'mobx-react/native';
+import { GridView, ImageButton, Loader, StyleSheet, View } from 'ui';
 
-
+@inject('userProfiles')
+@observer
 export default class Dashboard extends Component {
   static navigatorStyle = {
     navBarHidden: true
   };
 
-  componentWillMount() {
-    const { dispatch, profileId } = this.props;
-    if (profileId) {
-      dispatch(userActions.loadMenu(profileId));
+  props: {
+    navigator: Navigator,
+    userProfiles: UserProfilesStore
+  };
+
+  state: {
+    appsTop: Array<AppItem>,
+    appsBottom: Array<AppItem>
+  };
+
+  constructor() {
+    super();
+    this.state = {
+      appsTop: [],
+      appsBottom: []
     }
   }
 
-  onAppClick(item: MenuItem) {
+  async componentWillMount() {
+    const { userProfiles } = this.props;
+    const apps = await userProfiles.currentProfile.getApplications();
+    this.setState({
+      appsTop: apps.filter(a => a.location === 'top'),
+      appsBottom: apps.filter(a => a.location === 'bottom')
+    });
+  }
+
+  onAppClick(item: AppItem) {
     const { navigator, } = this.props;
-    console.log(item);
     if (item.url) {
       navigator.push({
         title: item.name,
@@ -29,7 +50,7 @@ export default class Dashboard extends Component {
     }
   }
 
-  renderTopRow(item: DashboardAppItem) {
+  renderTopRow(item: AppItem) {
     return (
       <ImageButton
         imageStyle={styles.logoTop}
@@ -41,7 +62,7 @@ export default class Dashboard extends Component {
     );
   }
 
-  renderBottomRow(item: DashboardAppItem) {
+  renderBottomRow(item: AppItem) {
     return (
       <ImageButton
         imageStyle={styles.logoBottom}
@@ -55,15 +76,18 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { menuTop, menuBottom } = this.props;
+    const { appsTop, appsBottom } = this.state;
     const ds = new GridView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
-    const dataSourceTop = ds.cloneWithRows(menuTop);
-    const dataSourceBottom = ds.cloneWithRows(menuBottom);
+    const dataSourceTop = ds.cloneWithRows(appsTop);
+    const dataSourceBottom = ds.cloneWithRows(appsBottom);
 
     return (
-      <Loader containerStyle={styles.loaderContainer}>
+      <Loader
+        isLoading={!appsTop.length}
+        containerStyle={styles.loaderContainer}
+      >
         <GridView
           dataSource={dataSourceTop}
           renderRow={::this.renderTopRow}
@@ -76,13 +100,12 @@ export default class Dashboard extends Component {
             contentContainerStyle={styles.gridBottom}
           />
         </View>
-
       </Loader>
     );
   }
 }
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   loaderContainer: {
     flex: 1
   },
