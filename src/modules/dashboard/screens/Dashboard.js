@@ -1,26 +1,10 @@
 import type { DashboardAppItem } from 'api/BusinessApi';
 
 import { Component } from 'react';
-import { connect } from 'react-redux';
 import { GridView, ImageButton, Loader, View } from 'ui';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-import * as userActions from '../../user/actions/user';
 
-function mapStateToProps(state) {
-  const profileId = state.user.get('currentProfile').id;
-  const menu = state.user.get('menu').get(profileId) || [];
-
-  menu.sort((a, b) => a.position - b.position);
-
-  return {
-    profileId,
-    menuTop: menu.filter(i => i.location === 'top'),
-    menuBottom: menu.filter(i => i.location === 'bottom')
-  }
-}
-
-@connect(mapStateToProps)
 export default class Dashboard extends Component {
   static navigatorStyle = {
     navBarHidden: true

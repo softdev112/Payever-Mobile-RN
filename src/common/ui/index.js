@@ -3,6 +3,7 @@
  */
 
 export { Text, View } from 'react-native';
+export StyleSheet from 'react-native-extended-stylesheet';
 
 export Button from './Button';
 export Container from './Container';

@@ -1,8 +1,6 @@
 import { Component } from 'react';
-import { observer } from 'mobx-react/native';
 import { ActivityIndicator, View } from 'react-native';
 
-@observer
 export default class Loader extends Component {
   renderInline() {
     const { isLoading } = this.props;

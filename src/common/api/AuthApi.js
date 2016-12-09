@@ -1,12 +1,5 @@
 import type PayeverApi from './index';
-
-declare class AuthResponse extends Response {
-  data: {
-    access_token: string,
-    expires_in: string,
-    refresh_token: string
-  }
-}
+import { showScreen } from '../Navigation';
 
 export default class AuthApi {
   constructor(client: PayeverApi) {
@@ -42,7 +35,8 @@ export default class AuthApi {
         client_secret: this.client.clientSecret,
         grant_type:    'refresh_token',
         refresh_token: refreshToken
-      }
+      },
+      preventRecursion: true
     });
 
     if (response.ok) {
@@ -52,9 +46,22 @@ export default class AuthApi {
         refreshToken: response.data.refresh_token
       });
     } else {
+      showScreen('auth.Login');
       console.error('Could not refresh token: ', response.data);
     }
 
     return response.data.access_token;
   }
+}
+
+type AuthResponse = {
+  data: {
+    access_token: string;
+    expires_in: string;
+    refresh_token: string;
+
+    error: string;
+    error_description: string;
+  },
+  ok: boolean,
 }

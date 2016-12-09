@@ -1,43 +1,19 @@
-import { Provider } from 'mobx-react/native';
-import { Navigation } from 'react-native-navigation';
+import  { registerScreens, showScreen }  from './common/Navigation';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
-import configureStore from './store/configureStore';
-import { loadSnapshot } from './store/snapshot';
-import moduleRegistry from './modules';
-
-import Splash from './modules/core/screens/Splash';
+import config from './config';
+import screens from './screens';
+import Store from './store';
 
 export default async function startApp() {
-  showSplashScreen();
-  const store = configureStore(await loadSnapshot());
-  registerScreens(moduleRegistry.screens, require('./store/index').default);
+  const store = new Store(config);
+  registerScreens(screens, store);
 
   EStyleSheet.build();
 
-  const loggedIn = store.getState().auth.loggedIn;
-  Navigation.startSingleScreenApp({
-    screen: {
-      screen: loggedIn ? 'dashboard.Businesses' : 'auth.Login'
-    },
-    appStyle: {
-      screenBackgroundColor: '#ffffff',
-    }
-  });
-}
+  console.log(store);
+  const auth = await store.auth.deserialize();
+  console.log(auth);
 
-function showSplashScreen() {
-  Navigation.registerComponent('core.Splash', () => Splash);
-  Navigation.startSingleScreenApp({
-    screen: {
-      screen: 'core.Splash'
-    }
-  });
-}
-
-function registerScreens(screens, store) {
-  for (let i in screens) {
-    if (!screens.hasOwnProperty(i)) continue;
-    Navigation.registerComponent(i, () => screens[i], store, Provider);
-  }
+  showScreen(auth.isLoggedIn ? 'dashboard.ChooseAccount' : 'auth.login')
 }

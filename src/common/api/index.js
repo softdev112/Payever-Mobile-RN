@@ -77,19 +77,35 @@ export default class PayeverApi {
 
   async fetch(url: string, options: Object = {}): Promise<PayeverResponse> {
     options.method = options.method || 'GET';
-    const response: PayeverResponse = await fetch(
-      this.normalizeUrl(url, options.query),
-      options
-    );
+    url = this.normalizeUrl(url, options.query);
+
+    if (__DEV__) {
+      console.info(`${options.method} ${url}`);
+    }
+
+    const response: PayeverResponse = await fetch(url, options);
     const text = await response.text();
     try {
       response.data = JSON.parse(text);
     } catch(e) {
-      console.log('PayeverApi: Error parsing JSON', text);
+      console.error('PayeverApi: Error parsing JSON', text);
       response.data = {
         error: 'json_error',
         error_description: 'Wrong server response'
       }
+    }
+
+    if (!options.preventRecursion && response.data.error === 'invalid_grant') {
+      const token = await this.auth.refreshToken(this.refreshToken);
+      if (token) {
+        return await this.fetch(url, { ...options, preventRecursion: true });
+      } else {
+
+      }
+    }
+
+    if (__DEV__) {
+      console.info('Response data ', response.data);
     }
 
     return response;

@@ -1,44 +1,70 @@
+import type { Navigator } from 'react-native-navigation/src/Screen';
+import type AuthStore from '../../../store/AuthStore';
+
 import { Component } from 'react';
 import { observer, inject } from 'mobx-react/native';
-import EStyleSheet from 'react-native-extended-stylesheet';
 
 import {
-  Button, Container, Error, Header, Link, Loader, Text, TextInput, View
+  Button, Container, Error, Header, Link, Loader, StyleSheet, Text,
+  TextInput, View
 } from 'ui';
 
-import { signIn } from '../actions/auth';
 
-@inject('store')
+@inject('auth')
 @observer
 export default class Login extends Component {
   static navigatorStyle = {
     navBarHidden: true
   };
 
-  username = '';
-  password = '';
+  props: {
+    auth: AuthStore,
+    navigator: Navigator
+  };
+
+  state: {
+    isLoading: boolean
+  };
+
+  refs: {
+    password: TextInput
+  };
+
+  username: string = '';
+  password: string = '';
 
   constructor() {
     super();
+    this.state = { isLoading: false };
   }
 
-  onSignIn() {
-    const { store } = this.props;
-    store.auth.signIn(this.username, this.password, navigator);
+  async onSignIn() {
+    this.setState({ isLoading: true, error: null });
+    const { auth, navigator } = this.props;
+
+    const signInResult = await auth.signIn(this.username, this.password);
+    this.setState({
+      isLoading: false,
+      error: signInResult.error
+    });
+
+    if (signInResult.success) {
+      navigator.resetTo({ screen: 'dashboard.Businesses', animated: true });
+    }
   }
 
   render() {
-    const { error } = this.props;
+    const { isLoading, error } = this.state;
     console.log(this.props);
-    const debug = JSON.stringify(this.props.store.auth, null, '  ');
+    const debug = '';//JSON.stringify(this.props, null, '  ');
     return (
-      <View style={{flex:1}}>
+      <View style={styles.component}>
         <Header>
           <Link>Sign up for free</Link>
           <Text>{debug}123</Text>
         </Header>
         <Container contentContainerStyle={styles.container}>
-          <Loader>
+          <Loader isLoading={isLoading}>
             <Error message={error} />
             <View>
               <TextInput
@@ -72,7 +98,10 @@ export default class Login extends Component {
   }
 }
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
+  component: {
+    flex: 1,
+  },
   container: {
     marginTop: '10%'
   },
