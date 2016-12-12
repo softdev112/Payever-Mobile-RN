@@ -60,7 +60,7 @@ export default class Login extends Component {
         <Header>
           <Link>Sign up for free</Link>
         </Header>
-        <Container contentContainerStyle={styles.container}>
+        <Container layout="small" contentContainerStyle={styles.container}>
           <Loader isLoading={isLoading}>
             <Error message={error} />
             <View>
