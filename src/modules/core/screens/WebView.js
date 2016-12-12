@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { WebView as ReactWebView } from 'react-native';
+import { StyleSheet } from 'ui';
 
 export default class WebView extends Component {
   static navigatorStyle = {
@@ -22,6 +23,7 @@ export default class WebView extends Component {
     const { url } = this.props;
     return (
       <ReactWebView
+        style={styles.component}
         source={{ uri: url }}
         ref={$v => this.$view = $v}
         onLoadStart={::this.onLoadStart}
@@ -29,3 +31,11 @@ export default class WebView extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  component: {
+    '@media ios': {
+      marginTop: 10
+    }
+  },
+});

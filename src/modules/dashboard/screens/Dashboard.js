@@ -107,7 +107,10 @@ export default class Dashboard extends Component {
 
 const styles = StyleSheet.create({
   loaderContainer: {
-    flex: 1
+    flex: 1,
+    '@media ios': {
+      marginTop: 10
+    }
   },
   gridTop: {
     flex: 2,
