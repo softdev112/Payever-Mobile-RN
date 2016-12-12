@@ -898,7 +898,7 @@
 				PRODUCT_NAME = PayeverMobile;
 				PROVISIONING_PROFILE = "35c960f7-2f88-4b28-b80f-302336e8ad5d";
 				PROVISIONING_PROFILE_SPECIFIER = payever_react_native_adhoc;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -931,7 +931,7 @@
 				PRODUCT_NAME = PayeverMobile;
 				PROVISIONING_PROFILE = "35c960f7-2f88-4b28-b80f-302336e8ad5d";
 				PROVISIONING_PROFILE_SPECIFIER = payever_react_native_adhoc;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
