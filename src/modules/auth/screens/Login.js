@@ -68,6 +68,7 @@ export default class Login extends Component {
                 label="Your e-mail"
                 keyboardType="email-address"
                 returnKeyType="next"
+                autoCapitalize="none"
                 autoCorrect={false}
                 autoFocus={true}
                 onChangeText={ username => this.username = username }
@@ -80,6 +81,7 @@ export default class Login extends Component {
                 label="Your password"
                 secureTextEntry={true}
                 returnKeyType="send"
+                autoCapitalize="none"
                 autoCorrect={false}
                 onChangeText={ password => this.password = password }
                 onSubmitEditing={::this.onSignIn}
