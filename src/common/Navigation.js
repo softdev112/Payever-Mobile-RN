@@ -50,6 +50,11 @@ export function showScreen(screenId) {
     screen: { screen: screenId },
     appStyle: {
       screenBackgroundColor: '#ffffff',
+    },
+    drawer: {
+      right: {
+        screen: 'core.SideMenu'
+      }
     }
   });
 }

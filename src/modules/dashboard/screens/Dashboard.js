@@ -5,12 +5,16 @@ import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { GridView, ImageButton, Loader, StyleSheet, View } from 'ui';
 
+import SearchHeader from '../components/SearchHeader';
+
 @inject('userProfiles')
 @observer
 export default class Dashboard extends Component {
   static navigatorStyle = {
     navBarHidden: true
   };
+
+  dataSource: GridView.DataSource;
 
   props: {
     navigator: Navigator,
@@ -24,10 +28,15 @@ export default class Dashboard extends Component {
 
   constructor() {
     super();
+
     this.state = {
       appsTop: [],
       appsBottom: []
-    }
+    };
+
+    this.dataSource = new GridView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
   }
 
   async componentWillMount() {
@@ -77,17 +86,15 @@ export default class Dashboard extends Component {
 
   render() {
     const { appsTop, appsBottom } = this.state;
-    const ds = new GridView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
-    const dataSourceTop = ds.cloneWithRows(appsTop);
-    const dataSourceBottom = ds.cloneWithRows(appsBottom);
+    const dataSourceTop = this.dataSource.cloneWithRows(appsTop);
+    const dataSourceBottom = this.dataSource.cloneWithRows(appsBottom);
 
     return (
       <Loader
         isLoading={!appsTop.length}
         containerStyle={styles.loaderContainer}
       >
+        <SearchHeader navigator={this.props.navigator} />
         <GridView
           dataSource={dataSourceTop}
           renderRow={::this.renderTopRow}
@@ -107,10 +114,7 @@ export default class Dashboard extends Component {
 
 const styles = StyleSheet.create({
   loaderContainer: {
-    flex: 1,
-    '@media ios': {
-      marginTop: 10
-    }
+    flex: 1
   },
   gridTop: {
     flex: 2,

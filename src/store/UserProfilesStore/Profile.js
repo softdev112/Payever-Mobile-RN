@@ -23,6 +23,14 @@ export default class Profile {
     return this.type === 'business';
   }
 
+  get logoSource() {
+    throw new Error('Abstract getter');
+  }
+
+  get displayName() {
+    throw new Error('Abstract getter');
+  }
+
   async getApplications(): Promise<ObservableArray<AppItem>> {
     return this.appList;
   }

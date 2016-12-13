@@ -26,13 +26,13 @@ export default class ImageButton extends Component {
   };
 
   props: {
-    title: ?string,
+    title?: string,
     source: ImageSourcePropType,
     onPress: () => any,
     disabled?: ?boolean,
-    style: Object,
-    imageStyle: Object,
-    textStyle: Object
+    style?: Object,
+    imageStyle?: Object,
+    textStyle?: Object
   };
 
   render() {

@@ -1,7 +1,9 @@
-import { observable, extendObservable, runInAction } from 'mobx';
+import { computed, observable, extendObservable, runInAction } from 'mobx';
 import Profile from './Profile';
 import Business from './Business';
 import AppItem from './AppItem';
+
+import imgNoBusiness from './images/no-business.png';
 
 export default class BusinessProfile extends Profile {
   @observable business: Business;
@@ -13,6 +15,18 @@ export default class BusinessProfile extends Profile {
       data.business = new Business(data.business, store);
     }
     extendObservable(this, data);
+  }
+
+  @computed get logoSource() {
+    if (this.business.logo) {
+      return { uri: this.business.logo };
+    } else {
+      return imgNoBusiness;
+    }
+  }
+
+  @computed get displayName() {
+    return this.business.companyName || this.business.name;
   }
 
   async getApplications(): Promise<ObservableArray<AppItem>> {

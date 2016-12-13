@@ -1,13 +1,9 @@
-import type { Navigator } from 'react-native-navigation/src/Screen';
 import type UserProfilesStore from '../../../store/UserProfilesStore';
 import type Profile from '../../../store/UserProfilesStore/Profile';
 
 import { Component } from 'react';
-import { concat } from 'lodash';
 import { inject, observer } from 'mobx-react/native';
 import { GridView, Header, ImageButton, Loader, View, StyleSheet } from 'ui';
-
-import imgNoBusiness from '../images/no-business.png';
 
 @inject('userProfiles')
 @observer
@@ -47,30 +43,15 @@ export default class ChooseAccount extends Component {
   }
 
   renderRow(profile: Profile) {
-    if (profile.isBusiness) {
-      const { business } = profile;
-      const logo = business.logo ? { uri: business.logo } : imgNoBusiness;
-      return (
-        <ImageButton
-          imageStyle={styles.logo}
-          style={styles.item}
-          onPress={() => this.onProfileClick(profile)}
-          source={logo}
-          title={business.name}
-        />
-      );
-    } else {
-      const { user } = profile;
-      return (
-        <ImageButton
-          imageStyle={styles.logo}
-          style={styles.item}
-          onPress={() => this.onProfileClick(profile)}
-          source={{ uri: user.avatar }}
-          title={user.full_name}
-        />
-      );
-    }
+    return (
+      <ImageButton
+        imageStyle={styles.logo}
+        style={styles.item}
+        onPress={() => this.onProfileClick(profile)}
+        source={profile.logoSource}
+        title={profile.displayName}
+      />
+    );
   }
 
   render() {

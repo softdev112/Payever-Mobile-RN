@@ -64,8 +64,10 @@ type PersonalProfileData = {
 
 type BusinessProfileData = {
   business: {
+    companyName: ?string;
     currency: string;
     hidden: boolean;
+    legalForm: ?string;
     logo: ?string;
     name: string;
     products: ?string;
