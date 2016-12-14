@@ -345,14 +345,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-
 		52A15BBB39AFA934ECB45795 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				3B0A707613E008DCD2BA07EB /* libPods-PayeverMobile.a */,
 			);
 			name = Frameworks;
-
+			sourceTree = "<group>";
+		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -360,7 +360,6 @@
 				5E9157351DD0AC6500FF2AA8 /* libRCTAnimation-tvOS.a */,
 			);
 			name = Products;
-
 			sourceTree = "<group>";
 		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
