@@ -2,7 +2,7 @@ import type UserProfilesStore from '../../../store/UserProfilesStore/index';
 import type BusinessProfile from '../../../store/UserProfilesStore/BusinessProfile';
 
 import { Component } from 'react';
-import { Image, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 import { inject, observer } from 'mobx-react/native';
 import { ImageButton, StyleSheet, Text, View } from 'ui';
 
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: 'white',
     justifyContent: 'center',
-    width: 300
+    width: 280
   },
 
   btnClose: {

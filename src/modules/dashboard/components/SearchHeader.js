@@ -2,9 +2,7 @@ import type UserProfilesStore from '../../../store/UserProfilesStore/index';
 
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { Icon, StyleSheet, Text, View } from 'ui';
-
-import imgArrowDown from '../images/arrow_down.png';
+import { ImageButton, StyleSheet, View } from 'ui';
 
 @inject('userProfiles')
 @observer
@@ -16,19 +14,7 @@ export default class SearchHeader extends Component {
 
   onProfilePress() {
     const { navigator } = this.props;
-    navigator.resetTo({
-      screen: 'dashboard.Dashboard',
-      title: 'Home',
-      animated: true
-    });
-  }
-
-  onMenuPress() {
-    const { navigator } = this.props;
-    navigator.toggleDrawer({
-      side: 'right',
-      animated: true
-    });
+    navigator.toggleDrawer({ side: 'right' });
   }
 
   render() {
@@ -40,19 +26,11 @@ export default class SearchHeader extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.rightBox}>
-          <Icon
-            source={userProfiles.currentProfile.logoSource}
-            imageStyle={styles.profileImage}
-            onPress={::this.onProfilePress}
-          />
-          <Icon
-            source={imgArrowDown}
-            style={styles.arrowDown}
-            imageStyle={styles.arrowDown_image}
-            onPress={::this.onMenuPress}
-          />
-        </View>
+        <ImageButton
+          source={userProfiles.currentProfile.logoSource}
+          style={styles.profile}
+          onPress={::this.onProfilePress}
+        />
       </View>
     );
   }
@@ -68,24 +46,11 @@ const styles = StyleSheet.create({
     }
   },
 
-  rightBox: {
+  profile: {
     flexDirection: 'row',
-    alignSelf: 'flex-end'
-  },
-
-  profileImage: {
+    alignSelf: 'flex-end',
     width: 30,
     height: 30,
     borderRadius: 15
-  },
-
-  arrowDown: {
-    marginTop: 13,
-    marginLeft: 10
-  },
-
-  arrowDown_image: {
-    width: 15,
-    height: 8
-  },
+  }
 });
