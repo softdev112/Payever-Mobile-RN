@@ -3,7 +3,7 @@ import type Profile from '../../../store/UserProfilesStore/Profile';
 
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { GridView, Header, ImageButton, Loader, View, StyleSheet } from 'ui';
+import { GridView, Header, Icon, Loader, View, StyleSheet } from 'ui';
 
 @inject('userProfiles')
 @observer
@@ -44,7 +44,7 @@ export default class ChooseAccount extends Component {
 
   renderRow(profile: Profile) {
     return (
-      <ImageButton
+      <Icon
         imageStyle={styles.logo}
         style={styles.item}
         onPress={() => this.onProfileClick(profile)}

@@ -3,7 +3,7 @@ import type AppItem from '../../../store/UserProfilesStore/AppItem';
 
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { GridView, ImageButton, Loader, StyleSheet, View } from 'ui';
+import { GridView, Icon, Loader, StyleSheet, View } from 'ui';
 
 import SearchHeader from '../components/SearchHeader';
 
@@ -61,7 +61,7 @@ export default class Dashboard extends Component {
 
   renderTopRow(item: AppItem) {
     return (
-      <ImageButton
+      <Icon
         imageStyle={styles.logoTop}
         style={styles.itemTop}
         onPress={() => this.onAppClick(item)}
@@ -73,7 +73,7 @@ export default class Dashboard extends Component {
 
   renderBottomRow(item: AppItem) {
     return (
-      <ImageButton
+      <Icon
         imageStyle={styles.logoBottom}
         textStyle={styles.textBottom}
         style={styles.itemBottom}

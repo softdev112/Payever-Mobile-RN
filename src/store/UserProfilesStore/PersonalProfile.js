@@ -17,7 +17,7 @@ export default class PersonalProfile extends Profile {
   }
 
   @computed get logoSource() {
-    if (this.user.avatar) {
+    if (this.user && this.user.avatar) {
       return { uri: this.user.avatar };
     } else {
       return imgNoAvatar;

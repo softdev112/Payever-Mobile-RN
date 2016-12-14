@@ -2,7 +2,7 @@ import type UserProfilesStore from '../../../store/UserProfilesStore/index';
 
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { ImageButton, StyleSheet, Text, View } from 'ui';
+import { Icon, StyleSheet, Text, View } from 'ui';
 
 import imgArrowDown from '../images/arrow_down.png';
 
@@ -33,15 +33,20 @@ export default class SearchHeader extends Component {
 
   render() {
     const { userProfiles } = this.props;
+
+    if (!userProfiles.privateProfile) {
+      return null;
+    }
+
     return (
       <View style={styles.container}>
         <View style={styles.rightBox}>
-          <ImageButton
+          <Icon
             source={userProfiles.currentProfile.logoSource}
             imageStyle={styles.profileImage}
             onPress={::this.onProfilePress}
           />
-          <ImageButton
+          <Icon
             source={imgArrowDown}
             style={styles.arrowDown}
             imageStyle={styles.arrowDown_image}

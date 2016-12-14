@@ -73,7 +73,7 @@ type BusinessProfileData = {
     products: ?string;
     sector: ?string;
     slug: string;
-    url: ?string
+    url: ?string;
   };
   customers: number;
   followers: number;
@@ -83,5 +83,6 @@ type BusinessProfileData = {
   name: string;
   offers: number;
   sells: number;
-  type: string  
+  stores: number;
+  type: string;
 };

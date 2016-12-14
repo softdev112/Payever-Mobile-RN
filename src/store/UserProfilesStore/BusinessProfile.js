@@ -7,6 +7,7 @@ import imgNoBusiness from './images/no-business.png';
 
 export default class BusinessProfile extends Profile {
   @observable business: Business;
+  @observable stores: number;
 
   constructor(data, store) {
     super();

@@ -27,9 +27,9 @@ export default class UserProfilesStore {
     this.currentProfile = profile;
   }
 
-  toArray() {
+  toArray(includePrivate = true) {
     let result = [];
-    if (this.privateProfile) {
+    if (includePrivate && this.privateProfile) {
       result.push(this.privateProfile);
     }
 
@@ -60,7 +60,7 @@ export default class UserProfilesStore {
       return { success: false, error: 'Internal error. Please try later.'}
     }
 
-    runInAction('Update auth state', () => {
+    runInAction('Update profiles list', () => {
       this.ownBusinesses = data.businesses_own.map((profile) => {
         return new BusinessProfile(profile, this.store);
       });
