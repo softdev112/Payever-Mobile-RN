@@ -1,10 +1,10 @@
 import { observable, extendObservable } from 'mobx';
 
 export default class Business {
-  @observable companyName: ?string;
+  @observable company_name: ?string;
   @observable currency: string;
   @observable hidden: boolean;
-  @observable legalForm: ?string;
+  @observable legal_form: ?string;
   @observable logo: ?string;
   @observable name: string;
   @observable products: ?string;

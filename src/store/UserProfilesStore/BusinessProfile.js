@@ -27,7 +27,7 @@ export default class BusinessProfile extends Profile {
   }
 
   @computed get displayName() {
-    return this.business.companyName || this.business.name;
+    return this.business.company_name || this.business.name;
   }
 
   async getApplications(): Promise<ObservableArray<AppItem>> {
