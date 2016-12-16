@@ -1,11 +1,15 @@
 import type UserProfilesStore from '../../../store/UserProfilesStore/index';
 import type AppItem from '../../../store/UserProfilesStore/AppItem';
+import type ActivityItem from '../../../store/UserProfilesStore/ActivityItem';
 
 import { Component } from 'react';
+import { Animated, ScrollView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { GridView, Icon, Loader, StyleSheet, View } from 'ui';
 
 import SearchHeader from '../components/SearchHeader';
+import ActivityCard from '../components/ActivityCard';
+import { logger } from 'utils';
 
 @inject('userProfiles')
 @observer
@@ -17,21 +21,28 @@ export default class Dashboard extends Component {
   dataSource: GridView.DataSource;
 
   props: {
-    navigator: Navigator,
-    userProfiles: UserProfilesStore
+    navigator: Navigator;
+    userProfiles: UserProfilesStore;
   };
 
   state: {
-    appsTop: Array<AppItem>,
-    appsBottom: Array<AppItem>
+    showApps: boolean;
+    appsTop: Array<AppItem>;
+    appsBottom: Array<AppItem>;
+    activities: Array<ActivityItem>;
+    todos: Array<ActivityItem>;
   };
 
   constructor() {
     super();
 
     this.state = {
+      showApps: false,
       appsTop: [],
-      appsBottom: []
+      appsBottom: [],
+      activities: [],
+      todos: [],
+      appearAnimation: new Animated.Value(1)
     };
 
     this.dataSource = new GridView.DataSource({
@@ -41,29 +52,46 @@ export default class Dashboard extends Component {
 
   async componentWillMount() {
     const { userProfiles } = this.props;
+
     const apps = await userProfiles.currentProfile.getApplications();
     this.setState({
       appsTop: apps.filter(a => a.location === 'top'),
-      appsBottom: apps.filter(a => a.location === 'bottom')
+      appsBottom: apps.filter(a => a.location === 'bottom'),
+      activities: await userProfiles.currentProfile.getActivities(),
+      todos: await userProfiles.currentProfile.getTodos(),
     });
+  }
+
+  animateLayout() {
+    this.state.appearAnimation = new Animated.Value(2);
+    Animated.timing(this.state.appearAnimation, {
+      toValue: 1,
+      duration: 300
+    }).start();
   }
 
   onAppClick(item: AppItem) {
     const { navigator, } = this.props;
+
+    if (item.label === 'dashboard') {
+      this.animateLayout();
+      return this.setState({ showApps: !this.state.showApps });
+    }
+
     if (item.url) {
       navigator.push({
         title: item.name,
         screen: 'core.WebView',
         passProps: { url: item.url },
-      })
+      });
     }
   }
 
   renderTopRow(item: AppItem) {
     return (
       <Icon
-        imageStyle={styles.logoTop}
-        style={styles.itemTop}
+        imageStyle={styles.top_icon}
+        style={styles.top_item}
         onPress={() => this.onAppClick(item)}
         source={{ uri: item.image}}
         title={item.name}
@@ -72,20 +100,29 @@ export default class Dashboard extends Component {
   }
 
   renderBottomRow(item: AppItem) {
+    let title = item.name;
+    if (item.label === 'dashboard' && this.state.showApps) {
+      title = 'Home';
+    }
+
     return (
       <Icon
-        imageStyle={styles.logoBottom}
-        textStyle={styles.textBottom}
-        style={styles.itemBottom}
+        key={item.id}
+        imageStyle={styles.bottom_icon}
+        textStyle={styles.bottom_iconTitle}
+        style={styles.bottom_item}
         onPress={() => this.onAppClick(item)}
         source={{ uri: item.image}}
-        title={item.name}
+        title={title}
       />
     );
   }
 
   render() {
-    const { appsTop, appsBottom } = this.state;
+    const {
+      appearAnimation, appsTop, appsBottom, showApps, activities, todos
+    } = this.state;
+    const { navigator } = this.props;
     const dataSourceTop = this.dataSource.cloneWithRows(appsTop);
     const dataSourceBottom = this.dataSource.cloneWithRows(appsBottom);
 
@@ -95,17 +132,40 @@ export default class Dashboard extends Component {
         containerStyle={styles.loaderContainer}
       >
         <SearchHeader navigator={this.props.navigator} />
-        <GridView
-          dataSource={dataSourceTop}
-          renderRow={::this.renderTopRow}
-          contentContainerStyle={styles.gridTop}
-        />
-        <View>
-          <GridView
-            dataSource={dataSourceBottom}
-            renderRow={::this.renderBottomRow}
-            contentContainerStyle={styles.gridBottom}
-          />
+
+        <Animated.View style={{ flex: 1, transform: [{ scale: appearAnimation }]}}>
+          {showApps && (
+            <GridView
+              dataSource={dataSourceTop}
+              renderRow={::this.renderTopRow}
+              contentContainerStyle={styles.top_grid}
+            />
+          )}
+
+          {!showApps && (
+            <View style={styles.cards_container}>
+              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                {todos.map((activity) => (
+                  <ActivityCard
+                    key={activity.id}
+                    activity={activity}
+                    navigator={navigator}
+                  />
+                ))}
+                {activities.map((activity) => (
+                  <ActivityCard
+                    key={activity.id}
+                    activity={activity}
+                    navigator={navigator}
+                  />
+                ))}
+              </ScrollView>
+            </View>
+          )}
+        </Animated.View>
+
+        <View style={styles.bottom_grid}>
+          {appsBottom.map(::this.renderBottomRow)}
         </View>
       </Loader>
     );
@@ -116,39 +176,55 @@ const styles = StyleSheet.create({
   loaderContainer: {
     flex: 1
   },
-  gridTop: {
-    flex: 2,
+
+  top_grid: {
+    flex: 1,
     paddingTop: 20,
   },
-  itemTop: {
+
+  top_item: {
     width: 120,
     height: 90,
   },
-  logoTop: {
+
+  top_icon: {
     width: 50,
     height: 50,
     borderRadius: 15,
-    borderWidth: 1,
-    borderColor: '#dadada',
+    elevation: 5,
     shadowColor: "#000000",
     shadowOpacity: 1,
     shadowRadius: 5
   },
-  gridBottom: {
+
+  bottom_grid: {
     flexWrap: 'nowrap',
+    flexDirection: 'row',
     justifyContent: 'center',
-    paddingTop: 10,
-    backgroundColor: '#fafafa'
+    alignItems: 'flex-start',
+    paddingTop: 8,
+    backgroundColor: '#fff',
+    elevation: 25,
   },
-  itemBottom: {
+
+  bottom_item: {
     width: 70,
-    height: 80
+    height: 70
   },
-  logoBottom: {
+
+  bottom_icon: {
     width: 40,
     height: 40
   },
-  textBottom: {
-    fontSize: 12
+
+  bottom_iconTitle: {
+    fontSize: 12,
+    paddingTop: 5
+  },
+
+  cards_container: {
+    flex: 1,
+    marginLeft: 10,
+    marginRight: 10
   }
 });

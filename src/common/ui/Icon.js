@@ -1,5 +1,5 @@
 import { PropTypes, Component } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default class Icon extends Component {
@@ -60,6 +60,13 @@ export default class Icon extends Component {
       );
     }
 
+    const flatStyle = StyleSheet.flatten(imageStyles);
+    const imgStyle = {
+      width: flatStyle.width,
+      height: flatStyle.height,
+      borderRadius: flatStyle.borderRadius
+    };
+
     return (
       <TouchableOpacity
         accessibilityComponentType="button"
@@ -67,9 +74,12 @@ export default class Icon extends Component {
         disabled={disabled}
         onPress={onPress}>
         <View style={buttonStyles}>
-          <Image style={imageStyles} source={source} />
+          <View style={imageStyles}>
+            <Image style={imgStyle} source={source} />
+          </View>
           {textNode}
         </View>
+
       </TouchableOpacity>
     );
   }

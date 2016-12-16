@@ -4,7 +4,8 @@
     ["module-resolver", {
       "root": ["./src"],
       "alias": {
-        "ui": "common/ui"
+        "ui": "common/ui",
+        "utils": "common/utils"
       },
       "cwd": "babelrc"
     }]

@@ -12,6 +12,6 @@ export default class Link extends Component {
 
 const styles = EStyleSheet.create({
   component: {
-    color: '#0284d2'
+    color: '$pe_color_blue'
   }
 });

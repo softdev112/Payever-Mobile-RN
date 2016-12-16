@@ -1,5 +1,3 @@
-import { merge } from 'lodash';
-
 export default class AppItem {
   hasUnreadMessages: ?boolean;
   id: number;
@@ -15,7 +13,7 @@ export default class AppItem {
   url: string;
 
   constructor(data) {
-    merge(this, data);
+    Object.assign(this, data);
   }
 }
 

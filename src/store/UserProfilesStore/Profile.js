@@ -1,5 +1,6 @@
 import type ObservableArray from 'mobx';
 import type AppItem from './AppItem';
+import type ActivityItem from './ActivityItem';
 
 import { computed, observable } from 'mobx';
 import type Store from './index';
@@ -18,6 +19,8 @@ export default class Profile {
   @observable type: string;
 
   @observable appList: ObservableArray<AppItem> = [];
+  @observable activityList: ObservableArray<ActivityItem> = [];
+  @observable todoList: ObservableArray<ActivityItem> = [];
 
   @computed get isBusiness() {
     return this.type === 'business';
@@ -33,5 +36,13 @@ export default class Profile {
 
   async getApplications(): Promise<ObservableArray<AppItem>> {
     return this.appList;
+  }
+
+  async getActivities(): Promise<ObservableArray<ActivityItem>> {
+    return this.activityList;
+  }
+
+  async getTodos(): Promise<ObservableArray<ActivityItem>> {
+    return this.todoList;
   }
 }

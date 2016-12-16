@@ -2,6 +2,7 @@ import { computed, observable, extendObservable, runInAction } from 'mobx';
 import Profile from './Profile';
 import Business from './Business';
 import AppItem from './AppItem';
+import ActivityItem from './ActivityItem';
 
 import imgNoBusiness from './images/no-business.png';
 
@@ -38,10 +39,47 @@ export default class BusinessProfile extends Profile {
     const resp = await this.store.api.menu.getList(this.id);
     if (resp.ok) {
       runInAction('Set application to the profile', () => {
-        this.appList = resp.data.sort((a, b) => a.position - b.position);
+        this.appList = resp.data
+          .sort((a, b) => a.position - b.position)
+          .map(item => new AppItem(item));
       });
     }
 
     return this.appList;
+  }
+
+  async getActivities(): Promise<ObservableArray<ActivityItem>> {
+    if (this.activityList.length) {
+      return this.activityList;
+    }
+
+    const resp = await this.store.api.business.getActivities(this.business.slug);
+    if (resp.ok) {
+      runInAction('Set activities to the profile', () => {
+        this.activityList = resp.data
+          .sort((a, b) => a.priority - b.priority)
+          .map(item => new ActivityItem(item, this.store));
+      });
+    }
+
+    return this.activityList;
+  }
+
+  async getTodos(): Promise<ObservableArray<ActivityItem>> {
+    if (this.todoList.length) {
+      return this.todoList;
+    }
+
+    const resp = await this.store.api.business.getTodos(this.business.slug);
+
+    if (resp.ok) {
+      runInAction('Set activities to the profile', () => {
+        this.todoList = resp.data
+          .sort((a, b) => a.priority - b.priority)
+          .map(item => new ActivityItem(item, this.store));
+      });
+    }
+
+    return this.todoList;
   }
 }
