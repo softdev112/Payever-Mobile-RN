@@ -36,7 +36,8 @@ export default class AppItem {
    * Return absolute URL instead of relative inside the 'url' field
    */
   get activityUrl() {
-    return this.store.config.siteUrl + this.url;
+    const url = this.store.config.siteUrl + this.url;
+    return url.replace('?modal=true', '');
   }
 
   get plainDescription() {

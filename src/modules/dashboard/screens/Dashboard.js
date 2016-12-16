@@ -92,6 +92,7 @@ export default class Dashboard extends Component {
       <Icon
         imageStyle={styles.top_icon}
         style={styles.top_item}
+        textStyle={styles.top_iconTitle}
         onPress={() => this.onAppClick(item)}
         source={{ uri: item.image}}
         title={item.name}
@@ -144,7 +145,11 @@ export default class Dashboard extends Component {
 
           {!showApps && (
             <View style={styles.cards_container}>
-              <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+              <ScrollView 
+                contentContainerStyle={styles.cards_scroll}
+                horizontal={true} 
+                showsHorizontalScrollIndicator={false}
+              >
                 {todos.map((activity) => (
                   <ActivityCard
                     key={activity.id}
@@ -184,17 +189,23 @@ const styles = StyleSheet.create({
 
   top_item: {
     width: 120,
-    height: 90,
+    height: 105,
   },
 
   top_icon: {
     width: 50,
     height: 50,
+    marginBottom: 8,
     borderRadius: 15,
     elevation: 5,
-    shadowColor: "#000000",
+    shadowColor: 'rgba(0, 0, 0, .1)',
+    shadowOffset: { width: 0, height: 0},
     shadowOpacity: 1,
     shadowRadius: 5
+  },
+
+  top_iconTitle: {
+    paddingTop: 0
   },
 
   bottom_grid: {
@@ -204,6 +215,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     paddingTop: 8,
     backgroundColor: '#fff',
+    shadowColor: 'rgba(0, 0, 0, .06)',
+    shadowOpacity: 1,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: -8},
     elevation: 25,
   },
 
@@ -224,7 +239,11 @@ const styles = StyleSheet.create({
 
   cards_container: {
     flex: 1,
-    marginLeft: 10,
+  
+  },
+
+  cards_scroll: {
+    paddingLeft: 10,
     marginRight: 10
   }
 });

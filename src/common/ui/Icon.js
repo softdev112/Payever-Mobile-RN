@@ -67,6 +67,9 @@ export default class Icon extends Component {
       borderRadius: flatStyle.borderRadius
     };
 
+    delete flatStyle.width;
+    delete flatStyle.height;
+
     return (
       <TouchableOpacity
         accessibilityComponentType="button"
@@ -74,7 +77,7 @@ export default class Icon extends Component {
         disabled={disabled}
         onPress={onPress}>
         <View style={buttonStyles}>
-          <View style={imageStyles}>
+          <View style={flatStyle}>
             <Image style={imgStyle} source={source} />
           </View>
           {textNode}

@@ -9,7 +9,7 @@ export default class Loader extends Component {
     }
 
     return (
-      <ActivityIndicator size="large" />
+      <ActivityIndicator size="large" style={{ marginTop: 30 }} />
     );
   }
 
