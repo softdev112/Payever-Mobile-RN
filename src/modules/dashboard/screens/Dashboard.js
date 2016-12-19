@@ -125,7 +125,6 @@ export default class Dashboard extends Component {
     } = this.state;
     const { navigator } = this.props;
     const dataSourceTop = this.dataSource.cloneWithRows(appsTop);
-    const dataSourceBottom = this.dataSource.cloneWithRows(appsBottom);
 
     return (
       <Loader
@@ -134,7 +133,12 @@ export default class Dashboard extends Component {
       >
         <SearchHeader navigator={this.props.navigator} />
 
-        <Animated.View style={{ flex: 1, transform: [{ scale: appearAnimation }]}}>
+        <Animated.View
+          style={[
+            styles.animationView,
+            { transform: [{ scale: appearAnimation }]}
+          ]}
+        >
           {showApps && (
             <GridView
               dataSource={dataSourceTop}
@@ -182,13 +186,16 @@ const styles = StyleSheet.create({
     flex: 1
   },
 
+  animationView: {
+    flex: 1
+  },
+
   top_grid: {
-    flex: 1,
     paddingTop: 20,
   },
 
   top_item: {
-    width: 120,
+    width: 110,
     height: 105,
   },
 
@@ -205,7 +212,8 @@ const styles = StyleSheet.create({
   },
 
   top_iconTitle: {
-    paddingTop: 0
+    paddingTop: 0,
+    color: '$pe_color_gray_2'
   },
 
   bottom_grid: {
@@ -234,12 +242,12 @@ const styles = StyleSheet.create({
 
   bottom_iconTitle: {
     fontSize: 12,
-    paddingTop: 5
+    paddingTop: 5,
+    color: '$pe_color_gray_2'
   },
 
   cards_container: {
-    flex: 1,
-  
+    flex: 1
   },
 
   cards_scroll: {

@@ -64,7 +64,7 @@ export default class WebView extends Component {
 const styles = StyleSheet.create({
   component: {
     '@media ios': {
-      marginTop: 10
+      marginTop: 20
     }
   },
 });

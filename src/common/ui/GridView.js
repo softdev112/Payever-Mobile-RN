@@ -6,10 +6,7 @@ export default class GridView extends Component {
   static DataSource = ListView.DataSource;
 
   static propTypes = {
-    contentContainerStyle: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.number
-    ]),
+    contentContainerStyle: ListView.propTypes.contentContainerStyle,
     dataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     renderRow: PropTypes.func.isRequired
   };
@@ -22,23 +19,29 @@ export default class GridView extends Component {
   };
 
   render() {
-    const { dataSource, renderRow, contentContainerStyle, initialListSize } = this.props;
+    const { dataSource, renderRow, contentContainerStyle } = this.props;
     return (
       <ListView
         initialListSize={30}
+        style={styles.container}
         contentContainerStyle={[styles.list, contentContainerStyle]}
         dataSource={dataSource}
         renderRow={renderRow}
+        showsVerticalScrollIndicator={false}
       />
     );
   }
 }
 
 const styles = EStyleSheet.create({
+  container: {
+    alignSelf: 'center',
+  },
+
   list: {
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
     flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     flexWrap: 'wrap'
   }
 });

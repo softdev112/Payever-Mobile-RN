@@ -6,7 +6,7 @@ export default class Header extends Component {
   render() {
     let { children } = this.props;
     if (typeof children === 'string') {
-      children = <Text>{children}</Text>
+      children = <Text style={styles.text}>{children}</Text>
     }
 
     return (
@@ -21,8 +21,15 @@ export default class Header extends Component {
 
 const styles = EStyleSheet.create({
   component: {
+    flexDirection: 'row',
+    justifyContent: 'center',
     padding: 20,
     borderBottomColor: '#e1e1e1',
     borderBottomWidth: 1
+  },
+
+  text: {
+    textAlign: 'center',
+    color: '$pe_color_dark_gray'
   }
 });

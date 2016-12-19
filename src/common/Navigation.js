@@ -49,7 +49,7 @@ export function showScreen(screenId) {
   Navigation.startSingleScreenApp({
     screen: { screen: screenId },
     appStyle: {
-      screenBackgroundColor: '#ffffff',
+      screenBackgroundColor: '#ffffff'
     },
     drawer: {
       right: {

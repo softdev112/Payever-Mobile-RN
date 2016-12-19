@@ -57,7 +57,7 @@ export default class Login extends Component {
     const { isLoading, error } = this.state;
     return (
       <View style={styles.component}>
-        <Header>
+        <Header style={styles.header}>
           <Link>Sign up for free</Link>
         </Header>
         <Container layout="small" contentContainerStyle={styles.container}>
@@ -98,12 +98,18 @@ export default class Login extends Component {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    justifyContent: 'flex-start'
+  },
+
   component: {
     flex: 1,
   },
+
   container: {
     marginTop: '10%'
   },
+
   submitContainer: {
     marginTop: 20
   }

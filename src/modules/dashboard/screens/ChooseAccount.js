@@ -65,7 +65,7 @@ export default class ChooseAccount extends Component {
     const dataSource = ds.cloneWithRows(profilesArray);
 
     return (
-      <View>
+      <View style={styles.container}>
         <Header>Welcome back. Please choose buying or selling account.</Header>
         <Loader isLoading={isLoading}>
           { profilesArray.length && (
@@ -85,10 +85,12 @@ const styles = StyleSheet.create({
   grid: {
     paddingTop: 20
   },
+
   item: {
     width: 120,
     height: 120,
   },
+
   logo: {
     width: 50,
     height: 50,

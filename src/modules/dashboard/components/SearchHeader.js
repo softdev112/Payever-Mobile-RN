@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 0,
     '@media ios': {
-      marginTop: 20
+      marginTop: 30
     }
   },
 

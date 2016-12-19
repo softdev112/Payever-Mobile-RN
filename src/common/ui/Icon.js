@@ -5,34 +5,22 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default class Icon extends Component {
   static propTypes = {
     title: PropTypes.string,
-    source: PropTypes.oneOfType([
-      PropTypes.object.isRequired,
-      PropTypes.number.isRequired
-    ]),
+    source: Image.propTypes.source,
     disabled: PropTypes.bool,
     onPress: PropTypes.func.isRequired,
-    style: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.number
-    ]),
-    imageStyle: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.number
-    ]),
-    textStyle: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.number
-    ])
+    style: View.propTypes.style,
+    imageStyle: View.propTypes.style,
+    textStyle: Text.propTypes.style
   };
 
   props: {
-    title?: string,
-    source: ImageSourcePropType,
-    onPress: () => any,
-    disabled?: ?boolean,
-    style?: Object,
-    imageStyle?: Object,
-    textStyle?: Object
+    title?: string;
+    source: ImageSourcePropType;
+    onPress: () => any;
+    disabled?: ?boolean;
+    style?: Object;
+    imageStyle?: Object;
+    textStyle?: Object;
   };
 
   render() {
@@ -92,20 +80,26 @@ const styles = EStyleSheet.create({
   button: {
     alignItems: 'center',
   },
+
   image: {
     width: 60,
     height: 60
   },
+
   text: {
     textAlign: 'center',
-    padding: 8
+    padding: 8,
+    color: '$pe_color_dark_gray'
   },
+
   buttonDisabled: {
     elevation: 0
   },
+
   imageDisabled: {
     opacity: .3,
   },
+
   textDisabled: {
     color: '#a1a1a1',
   }
