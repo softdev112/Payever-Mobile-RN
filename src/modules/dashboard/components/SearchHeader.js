@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     margin: 20,
     marginTop: 10,
     marginBottom: 0,
-    '@media ios': {
+    '@media ios and (orientation: portrait)': {
       marginTop: 30
     }
   },

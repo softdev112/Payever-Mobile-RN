@@ -63,8 +63,8 @@ export default class WebView extends Component {
 
 const styles = StyleSheet.create({
   component: {
-    '@media ios': {
-      marginTop: 20
+    '@media ios and (orientation: portrait)': {
+      marginTop: 15
     }
   },
 });

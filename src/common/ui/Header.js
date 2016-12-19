@@ -25,7 +25,10 @@ const styles = EStyleSheet.create({
     justifyContent: 'center',
     padding: 20,
     borderBottomColor: '#e1e1e1',
-    borderBottomWidth: 1
+    borderBottomWidth: 1,
+    '@media ios and (orientation: portrait)': {
+      marginTop: 10
+    }
   },
 
   text: {
