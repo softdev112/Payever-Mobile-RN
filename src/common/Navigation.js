@@ -54,6 +54,9 @@ export function showScreen(screenId) {
     drawer: {
       right: {
         screen: 'core.SideMenu'
+      },
+      style: {
+        drawerShadow: 'NO'
       }
     }
   });

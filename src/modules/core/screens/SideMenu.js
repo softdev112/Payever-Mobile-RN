@@ -60,6 +60,8 @@ export default class SideMenu extends Component {
 
     return (
       <View style={styles.container}>
+        <View style={styles.shadow} />
+
         <ImageButton
           source={imgClose}
           style={styles.btnClose}
@@ -110,6 +112,22 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'center',
     width: 280
+  },
+
+  shadow: {
+    '@media ios': {
+      position: 'absolute',
+      width: 1,
+      top: 0,
+      left: 0,
+      bottom: 0,
+      backgroundColor: '#eeeeee',
+      shadowColor: 'black',
+      shadowOffset: { width: 1, height: 0 },
+      shadowOpacity: 1,
+      shadowRadius: 6,
+      zIndex: 3
+    }
   },
 
   btnClose: {

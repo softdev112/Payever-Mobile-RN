@@ -33,8 +33,8 @@ export default class Dashboard extends Component {
     todos: Array<ActivityItem>;
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       showApps: false,
@@ -252,6 +252,6 @@ const styles = StyleSheet.create({
 
   cards_scroll: {
     paddingLeft: 10,
-    marginRight: 10
+    paddingRight: 10
   }
 });
