@@ -94,8 +94,9 @@ export default class WebView extends Component {
           onLoadStart={::this.onLoadStart}
           onLoadEnd={::this.onLoadEnd}
           onMessage={::this.onMessage}
-          javaScriptEnabled={true}
+          javaScriptEnabled
           injectedJavaScript={this.injectedCode}
+          bounces={false}
         />
         {isLoading && (
           <WebViewLoader navigator={navigator} />
