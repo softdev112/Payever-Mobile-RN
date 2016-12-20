@@ -5,7 +5,7 @@ import { StyleSheet } from 'ui';
 import injectedCode from './injectedCode';
 import WebViewLoader from './WebViewLoader';
 
-const LOADER_HIDE_DELAY = 300;
+const LOADER_HIDE_DELAY = 350;
 
 export default class WebView extends Component {
   static navigatorStyle = {
@@ -84,7 +84,6 @@ export default class WebView extends Component {
     return (
       <View style={styles.container}>
         <ReactWebView
-          style={styles.webView}
           source={{ uri: url }}
           ref={$v => this.$view = $v}
           onLoadStart={::this.onLoadStart}
@@ -103,12 +102,9 @@ export default class WebView extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
-  },
-
-  webView: {
     '@media ios and (orientation: portrait)': {
       marginTop: 15
-    }
-  },
+    },
+    flex: 1
+  }
 });
