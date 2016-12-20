@@ -1,5 +1,5 @@
 import  { registerScreens, showScreen }  from './common/Navigation';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import StyleSheet from './common/ui/StyleSheet';
 
 import config from './config';
 import screens from './screens';
@@ -9,7 +9,7 @@ export default async function startApp() {
   const store = new Store(config);
   registerScreens(screens, store);
 
-  EStyleSheet.build();
+  StyleSheet.build();
 
   const auth = await store.auth.deserialize();
   showScreen(auth.isLoggedIn ? 'dashboard.ChooseAccount' : 'auth.Login')

@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Text } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import StyleSheet from './StyleSheet';
 
 export default class Link extends Component {
   render() {
@@ -10,7 +10,7 @@ export default class Link extends Component {
   }
 }
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   component: {
     color: '$pe_color_blue'
   }

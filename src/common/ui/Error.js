@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Text } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import StyleSheet from './StyleSheet';
 
 export default class Error extends Component {
   render() {
@@ -17,7 +17,7 @@ export default class Error extends Component {
   }
 }
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   component: {
     padding: 5,
     textAlign: 'center',

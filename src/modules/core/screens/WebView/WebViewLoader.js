@@ -1,20 +1,20 @@
-import type UserProfilesStore from '../../../store/UserProfilesStore';
+import type UserProfilesStore from '../../../../store/UserProfilesStore';
 
 import { Component, PropTypes } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { Icon, ImageButton, Loader as UiLoader, StyleSheet, Text, View } from 'ui';
+import { Icon, ImageButton, Loader, StyleSheet, Text, View } from 'ui';
 
 @inject('userProfiles')
 @observer
-export default class Debug extends Component {
+export default class WebViewLoader extends Component {
   static propTypes = {
     navigator: PropTypes.object.isRequired,
-    userProfiles: PropTypes.object.isRequired
+    userProfiles: PropTypes.object
   };
 
   props: {
     navigator: Navigator;
-    userProfiles: UserProfilesStore;
+    userProfiles?: UserProfilesStore;
   };
 
   onBackPress() {
@@ -45,7 +45,7 @@ export default class Debug extends Component {
           />
         </View>
         <View style={styles.main}>
-          <UiLoader style={styles.loader} isLoading />
+          <Loader style={styles.loader} isLoading />
         </View>
       </View>
     )
@@ -54,19 +54,26 @@ export default class Debug extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    bottom: 0,
+    left: 0,
+    zIndex: 4,
+    backgroundColor: '#fff'
   },
 
   header: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 11,
+    height: 55,
+    paddingTop: 13,
     paddingRight: 24,
     paddingBottom: 11,
     paddingLeft: 24,
     borderBottomWidth: 1,
-    borderBottomColor: '$border_color'
+    borderBottomColor: '$pe_color_light_gray_1'
   },
 
   back: {

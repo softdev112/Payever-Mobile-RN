@@ -51,6 +51,16 @@ export default class SideMenu extends Component {
     });
   }
 
+  onDebugPagePress() {
+    const { navigator } = this.props;
+    this.onClose();
+    navigator.push({
+      screen: 'core.Debug',
+      title: 'Debug',
+      animated: true
+    });
+  }
+
   render() {
     const { userProfiles } = this.props;
 
@@ -96,6 +106,14 @@ export default class SideMenu extends Component {
         </View>
 
         <View style={styles.bottomMenu}>
+          {__DEV__ && (
+            <Text
+              style={styles.bottomMenu_item}
+              onPress={::this.onDebugPagePress}
+            >
+              Debug page
+            </Text>
+          )}
           <Text style={styles.bottomMenu_item}>Chat with us</Text>
           <Text style={styles.bottomMenu_item}>Logout</Text>
         </View>

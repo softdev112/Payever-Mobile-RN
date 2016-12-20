@@ -1,0 +1,652 @@
+{
+  "flag-santander-de-53": {
+    "unicode": "",
+    "color": "#ffcf0b"
+  },
+  "flag-santander-dk-53": {
+    "unicode": "",
+    "color": "#ffffff"
+  },
+  "flag-santander-no-53": {
+    "unicode": "",
+    "color": "#002868"
+  },
+  "icon-add-address-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-alert-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-arrow-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-arrow-down-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-arrow-down-small-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-arrow-left-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-arrow-left-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-arrow-left-ios-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-arrow-left-ios-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-arrow-left-small-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-arrow-right-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-arrow-right-2-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-arrow-right-3-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-arrow-right-ios-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-arrow-right-ios-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-arrow-right-small-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-ascending-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-ask-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-automotive-industrial-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-bag-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-bag-fill-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-background-type-color-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-background-type-html-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-background-type-image-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-banner-place-left-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-banner-place-right-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-boxed-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-bubble-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-corners-circle-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-corners-square-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-message-place-side-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-message-place-top-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-settings-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-text-valign-bottom-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-text-valign-middle-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-banner-text-valign-top-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-beauty-health-grocery-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-books-podcasts-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-camera-64": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-card-mastercard": {
+    "unicode": "",
+    "color": "#298DFF"
+  },
+  "icon-card-visa": {
+    "unicode": "",
+    "color": "#FFFFFF"
+  },
+  "icon-case-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-case-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-chat-2-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-chat-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-chat-fill-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-chat-round-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-check-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-check2-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-checkbox-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-checkbox-checked-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-checked-64": {
+    "unicode": "",
+    "color": "#75b636"
+  },
+  "icon-checkmark-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-checkmark-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-clothing-shoes-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-collapse-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-comments-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-csvimport-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-dashboard-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-descending-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-double-arrows-64": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-edit-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-edit-user-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-electronics-computers-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-embed-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-error-128": {
+    "unicode": ""
+  },
+  "icon-expand-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-eye-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-facebook-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-facebook-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-facebook-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-filters-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-finance-express-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-fly-mail-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-fly-mail-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-ga-64": {
+    "unicode": "",
+    "color": "#ff8500"
+  },
+  "icon-games-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-geocoder-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-google-16": {
+    "unicode": "",
+    "color": "#34A853"
+  },
+  "icon-google-48": {
+    "unicode": "",
+    "color": "#34A853"
+  },
+  "icon-google-96": {
+    "unicode": "",
+    "color": "#34A853"
+  },
+  "icon-gridmode-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-home-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-home-garden-tools-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-images-128": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-invoice-128": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-jewelry-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-like-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-like-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-linemode-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-link-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-linkedin-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-linkedin-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-mac-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-mail-2-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-mail-2-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-mail-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-messages-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-minus-solid-16": {
+    "unicode": "",
+    "color": "#ffffff"
+  },
+  "icon-movies-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-msgr-add-file-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-msgr-add-img-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-music-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-offer-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-overlay-options-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-overlay-options-page-chat-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-overlay-options-page-contacts-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-overlay-options-page-description-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-overlay-options-page-faq-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-overlay-options-pages-no-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-overlay-options-pages-yes-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-payever-64": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-pencil-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-play-64": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-plus-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-plus-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-plus-circle-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-plus-solid-16": {
+    "unicode": "",
+    "color": "#ffffff"
+  },
+  "icon-plus-solid-24": {
+    "unicode": "",
+    "color": "#ffffff"
+  },
+  "icon-progress-128": {
+    "unicode": "",
+    "color": "#ffffff"
+  },
+  "icon-register-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-reply-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-search-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-sequence-24": {
+    "unicode": "",
+    "color": "#ffffff"
+  },
+  "icon-sequence-active-24": {
+    "unicode": "",
+    "color": "#0084ff"
+  },
+  "icon-settings-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-settings-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-share-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-share-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-shipping-flat_rate-64": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-shipping-free-64": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-shipping-total_order-64": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-shipping-weight-64": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-shopping-cart-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-shopping-cart-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-skin-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-slack-96": {
+    "unicode": "",
+    "color": "#443642"
+  },
+  "icon-sports-outdoors-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-success-128": {
+    "unicode": "",
+    "color": "#ffffff"
+  },
+  "icon-todo-card-32": {
+    "unicode": ""
+  },
+  "icon-toy-kids-baby-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-trashcan-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-trashcan-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-trust-certificate-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-trust-docs-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-trust-help-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-twitter-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-twitter-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-twitter-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-unchecked-64": {
+    "unicode": "",
+    "color": "#e1e1e1"
+  },
+  "icon-upload-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-user-2-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-user-3-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-user-32": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-user-48": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-user-fill-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-x-16": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-x-24": {
+    "unicode": "",
+    "color": "black"
+  },
+  "icon-x-solid-24": {
+    "unicode": "",
+    "color": "#ffffff"
+  },
+  "icon-xls-24": {
+    "unicode": "",
+    "color": "black"
+  }
+}

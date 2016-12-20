@@ -1,6 +1,8 @@
 import { Component } from 'react';
-import { Text, View } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import { View } from 'react-native';
+
+import StyleSheet from './StyleSheet';
+import Text from './Text';
 
 export default class Header extends Component {
   render() {
@@ -19,7 +21,7 @@ export default class Header extends Component {
   }
 }
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   component: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -33,6 +35,6 @@ const styles = EStyleSheet.create({
 
   text: {
     textAlign: 'center',
-    color: '$pe_color_dark_gray'
+    color: '$pe_color_dark_gray',
   }
 });

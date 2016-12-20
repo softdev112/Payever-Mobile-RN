@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, Text, TouchableOpacity, View } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import StyleSheet from './StyleSheet';
 
 export default class Button extends Component {
   static propTypes = {
@@ -9,11 +9,10 @@ export default class Button extends Component {
     onPress: React.PropTypes.func.isRequired,
   };
 
-
   props: {
-    title: string,
-    onPress: () => any,
-    disabled?: ?boolean,
+    title: string;
+    onPress: () => any;
+    disabled?: ?boolean;
   };
 
   render() {
@@ -41,22 +40,25 @@ export default class Button extends Component {
   }
 }
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   button: {
     elevation: 4,
     backgroundColor: '#0084ff',
     borderRadius: 4,
   },
+
   text: {
     textAlign: 'center',
     color: 'white',
     padding: 8,
     fontWeight: '500',
   },
+
   buttonDisabled: {
     elevation: 0,
     backgroundColor: '#dfdfdf'
   },
+
   textDisabled: {
     color: '#a1a1a1',
   }

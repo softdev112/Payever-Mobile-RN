@@ -1,8 +1,10 @@
 import { PropTypes, Component } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import { Image, TouchableOpacity, View } from 'react-native';
 
-export default class Icon extends Component {
+import StyleSheet from './StyleSheet'
+import Text from './Text'
+
+export default class IconText extends Component {
   static propTypes = {
     title: PropTypes.string,
     source: Image.propTypes.source,
@@ -76,7 +78,7 @@ export default class Icon extends Component {
   }
 }
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
   },

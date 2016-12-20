@@ -1,5 +1,6 @@
 export default {
   'auth.Login': require('./modules/auth/screens/Login').default,
+  'core.Debug': require('./modules/core/screens/Debug').default,
   'core.SideMenu': require('./modules/core/screens/SideMenu').default,
   'core.WebView': require('./modules/core/screens/WebView').default,
   'dashboard.ChooseAccount': require('./modules/dashboard/screens/ChooseAccount').default,

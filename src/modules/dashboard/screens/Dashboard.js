@@ -5,7 +5,7 @@ import type ActivityItem from '../../../store/UserProfilesStore/ActivityItem';
 import { Component } from 'react';
 import { Animated, ScrollView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
-import { GridView, Icon, Loader, StyleSheet, View } from 'ui';
+import { GridView, IconText, Loader, StyleSheet, View } from 'ui';
 
 import SearchHeader from '../components/SearchHeader';
 import ActivityCard from '../components/ActivityCard';
@@ -89,7 +89,7 @@ export default class Dashboard extends Component {
 
   renderTopRow(item: AppItem) {
     return (
-      <Icon
+      <IconText
         imageStyle={styles.top_icon}
         style={styles.top_item}
         textStyle={styles.top_iconTitle}
@@ -107,7 +107,7 @@ export default class Dashboard extends Component {
     }
 
     return (
-      <Icon
+      <IconText
         key={item.id}
         imageStyle={styles.bottom_icon}
         textStyle={styles.bottom_iconTitle}

@@ -26,11 +26,9 @@ export default class BusinessList extends Component {
           </Text>
           <Text>{profile.stores} stores</Text>
         </View>
-        {
-           profile === userProfiles.currentProfile && (
-            <Image source={imgChecked} style={styles.imgChecked}/>
-          )
-        }
+        {profile === userProfiles.currentProfile && (
+          <Image source={imgChecked} style={styles.imgChecked} />
+        )}
       </TouchableOpacity>
     );
   };

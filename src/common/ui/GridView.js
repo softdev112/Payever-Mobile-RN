@@ -1,6 +1,6 @@
 import { Component, PropTypes } from 'react';
 import { ListView } from 'react-native';
-import EStyleSheet from 'react-native-extended-stylesheet';
+import StyleSheet from './StyleSheet';
 
 export default class GridView extends Component {
   static DataSource = ListView.DataSource;
@@ -11,11 +11,10 @@ export default class GridView extends Component {
     renderRow: PropTypes.func.isRequired
   };
 
-
   props: {
-    contentContainerStyle: Object | number,
-    dataSource: ListView.DataSource,
-    renderRow: () => any
+    contentContainerStyle: Object | number;
+    dataSource: ListView.DataSource;
+    renderRow: () => any;
   };
 
   render() {
@@ -33,7 +32,7 @@ export default class GridView extends Component {
   }
 }
 
-const styles = EStyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
   },

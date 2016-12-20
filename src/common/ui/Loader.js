@@ -1,15 +1,28 @@
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import { ActivityIndicator, View } from 'react-native';
+import StyleSheet from './StyleSheet';
 
 export default class Loader extends Component {
+  static propTypes = {
+    isLoading: PropTypes.bool,
+    style: ActivityIndicator.propTypes.style,
+    containerStyle: View.propTypes.style,
+  };
+
+  props: {
+    isLoading?: boolean;
+    style?: Object | Number;
+    containerStyle? : Object | Number;
+  };
+
   renderInline() {
-    const { isLoading } = this.props;
+    const { isLoading, style } = this.props;
     if (!isLoading) {
       return null;
     }
 
     return (
-      <ActivityIndicator size="large" style={{ marginTop: 30 }} />
+      <ActivityIndicator size="large" style={[styles.container, style]} />
     );
   }
 
@@ -31,3 +44,9 @@ export default class Loader extends Component {
     }
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 30
+  }
+});

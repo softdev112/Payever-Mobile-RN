@@ -10,9 +10,9 @@ export default class ImageButton extends Component {
   };
 
   props: {
-    source: ImageSourcePropType,
-    onPress?: () => any,
-    style?: Object
+    source: ImageSourcePropType;
+    onPress?: () => any;
+    style?: Object;
   };
 
   render() {
