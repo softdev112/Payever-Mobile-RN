@@ -56,7 +56,8 @@ gulp.task('svg:convert', () => {
     }))
     .on('glyphs', g => glyphs = g)
     .pipe(svg2ttf())
-    .pipe(gulp.dest('android/app/src/main/assets/fonts'));
+    .pipe(gulp.dest('android/app/src/main/assets/fonts'))
+    .pipe(gulp.dest('ios/PayeverMobile/Resources/Fonts'));
 });
 
 /**
