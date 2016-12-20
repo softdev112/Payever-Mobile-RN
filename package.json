@@ -28,14 +28,18 @@
     "babel-jest": "17.0.0",
     "babel-plugin-module-resolver": "^2.4.0",
     "babel-preset-react-native-stage-0": "^1.0.1",
+    "cheerio": "^0.22.0",
     "concurrently": "^3.1.0",
     "gulp": "^3.9.1",
+    "gulp-svg2ttf": "^2.0.0",
+    "gulp-svgicons2svgfont": "^3.0.1",
     "gulp-task-doc": "^1.0.11",
     "jest": "17.0.0",
     "jest-react-native": "17.0.0",
     "ps-node": "^0.1.4",
     "react-test-renderer": "15.3.2",
     "run-sequence": "^1.2.2",
+    "vinyl": "^2.0.1",
     "whatwg-fetch": "^2.0.1"
   }
 }
