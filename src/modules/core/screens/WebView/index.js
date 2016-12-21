@@ -53,6 +53,11 @@ export default class WebView extends Component {
       navigator.pop();
     }
 
+    if (nativeEvent.url.endsWith('/private')) {
+      this.$view.stopLoading();
+      navigator.pop();
+    }
+
     this.setState({ isLoading: true });
   }
 

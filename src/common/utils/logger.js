@@ -84,18 +84,26 @@ function sendStathoConsoleAliCall() {
 }
 
 function logToStetho(level, ...args) {
-  try {
-    const text = args.map((arg) => {
-      if (Array.isArray(arg) || typeof arg === 'object') {
-        const cache = [];
-        arg = JSON.stringify(arg, null, '  ');
-      }
-      return arg;
-    }).join(' ');
-    sendStethoMessage(level, text);
-  } catch (e) {
+  const text = args.map((arg) => {
+    if (Array.isArray(arg) || typeof arg === 'object') {
+      arg = serialize(arg, null, '  ');
+    }
+    return arg;
+  }).join(' ');
+  sendStethoMessage(level, text);
+}
 
-  }
+function serialize(object) {
+  const seen = [];
+  return JSON.stringify(object, function(key, val) {
+    if (val != null && typeof val == "object") {
+      if (seen.indexOf(val) >= 0) {
+        return;
+      }
+      seen.push(val);
+    }
+    return val;
+  }, '  ');
 }
 
 function logObjectToStetho() {

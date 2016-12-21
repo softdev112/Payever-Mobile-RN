@@ -5,4 +5,5 @@ export default {
   'core.WebView': require('./modules/core/screens/WebView').default,
   'dashboard.ChooseAccount': require('./modules/dashboard/screens/ChooseAccount').default,
   'dashboard.Dashboard': require('./modules/dashboard/screens/Dashboard').default,
+  'dashboard.Private': require('./modules/dashboard/screens/Private').default,
 }

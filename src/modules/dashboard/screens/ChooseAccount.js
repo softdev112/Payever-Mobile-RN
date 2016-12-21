@@ -32,11 +32,11 @@ export default class ChooseAccount extends Component {
     });
   }
 
-  onProfileClick(profile) {
+  onProfileClick(profile: Profile) {
     const { userProfiles, navigator } = this.props;
     userProfiles.setCurrentProfile(profile);
     navigator.resetTo({
-      screen: 'dashboard.Dashboard',
+      screen: profile.isBusiness ? 'dashboard.Dashboard' : 'dashboard.Private',
       title: 'Home',
       animated: true
     });

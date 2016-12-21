@@ -17,8 +17,6 @@ export default class Dashboard extends Component {
     navBarHidden: true
   };
 
-  dataSource: GridView.DataSource;
-
   props: {
     navigator: Navigator;
     userProfiles: UserProfilesStore;
@@ -31,6 +29,8 @@ export default class Dashboard extends Component {
     activities: Array<ActivityItem>;
     todos: Array<ActivityItem>;
   };
+
+  dataSource: GridView.DataSource;
 
   constructor(props) {
     super(props);

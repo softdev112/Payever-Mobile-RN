@@ -45,7 +45,7 @@ export default class SideMenu extends Component {
     this.onClose();
     userProfiles.setCurrentProfile(userProfiles.privateProfile);
     navigator.push({
-      screen: 'dashboard.Dashboard',
+      screen: 'dashboard.Private',
       title: 'Home',
       animated: true
     });
