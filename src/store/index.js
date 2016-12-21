@@ -28,7 +28,7 @@ export default class Store {
         console.groupCollapsed = console.log;
         console.groupEnd = ()=>{};
       }
-      enableLogging();
+      //enableLogging();
     }
   }
 }
