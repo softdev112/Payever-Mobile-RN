@@ -23,6 +23,7 @@ function injectedBody(options) {
     if ($btnProfile) {
       //noinspection ES6ConvertVarToLetConst
       var $replace = $btnProfile.cloneNode(true);
+      $replace.href = 'javascript:return void()';
       $replace.style.marginRight = 0;
       $replace.addEventListener('click', function(e) {
         e.preventDefault();

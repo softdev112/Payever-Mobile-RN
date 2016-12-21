@@ -44,6 +44,10 @@ export default class WebView extends Component {
   onLoadStart({ nativeEvent }) {
     const { navigator } = this.props;
 
+    if (nativeEvent.url.startsWith('react-js-navigation')) {
+      return;
+    }
+
     if (nativeEvent.url.endsWith('/home')) {
       this.$view.stopLoading();
       navigator.pop();
@@ -73,12 +77,14 @@ export default class WebView extends Component {
           side: 'right',
           animated: true
         });
+        break;
       }
       case 'error': {
         console.warn(
           `WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`
         );
         log(`WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`);
+        break;
       }
     }
   }
@@ -98,6 +104,7 @@ export default class WebView extends Component {
           javaScriptEnabled
           domStorageEnabled
           injectedJavaScript={this.injectedCode}
+          bounces={false}
         />
         {isLoading && (
           <WebViewLoader navigator={navigator} />

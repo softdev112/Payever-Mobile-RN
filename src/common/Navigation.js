@@ -57,7 +57,8 @@ export function showScreen(screenId) {
       },
       style: {
         drawerShadow: 'NO'
-      }
+      },
+      disableOpenGesture: true
     }
   });
 }
