@@ -6,6 +6,7 @@ import { ScrollView } from 'react-native'
 import { inject, observer } from 'mobx-react/native';
 import { ImageButton, StyleSheet, Text, View } from 'ui';
 
+import { showScreen } from '../../../common/Navigation';
 import BusinessList from '../components/BusinessList';
 
 import imgClose from '../images/ic_close.png';
@@ -32,23 +33,14 @@ export default class SideMenu extends Component {
 
     this.onClose();
     userProfiles.setCurrentProfile(profile);
-    navigator.push({
-      screen: 'dashboard.Dashboard',
-      title: 'Home',
-      animated: true
-    });
+    showScreen('dashboard.Dashboard');
   }
 
   onUserPress() {
-    const { userProfiles, navigator } = this.props;
-
-    this.onClose();
+    const { userProfiles } = this.props;
     userProfiles.setCurrentProfile(userProfiles.privateProfile);
-    navigator.push({
-      screen: 'dashboard.Private',
-      title: 'Home',
-      animated: true
-    });
+    // todo: replace to navigator.push
+    showScreen('dashboard.Private');
   }
 
   onDebugPagePress() {
