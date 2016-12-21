@@ -26,7 +26,7 @@ export default class WebView extends Component {
 
   constructor(props) {
     super(props);
-    this.injectedCode = injectedCode();
+    this.injectedCode = injectedCode({ __DEV__ });
     this.mounted = false;
     this.state = {
       isLoading: true
@@ -74,6 +74,12 @@ export default class WebView extends Component {
           animated: true
         });
       }
+      case 'error': {
+        console.warn(
+          `WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`
+        );
+        log(`WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`);
+      }
     }
   }
 
@@ -89,7 +95,8 @@ export default class WebView extends Component {
           onLoadStart={::this.onLoadStart}
           onLoadEnd={::this.onLoadEnd}
           onMessage={::this.onMessage}
-          javaScriptEnabled={true}
+          javaScriptEnabled
+          domStorageEnabled
           injectedJavaScript={this.injectedCode}
         />
         {isLoading && (

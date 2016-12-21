@@ -1,9 +1,15 @@
-export default function injectedCode() {
-  return `(${injectedBody.toString()})()`;
+export default function injectedCode(options: Object) {
+  const optionsJson = JSON.stringify(options);
+  return `(${injectedBody.toString()})(${optionsJson})`;
 }
 
-function injectedBody() {
+function injectedBody(options) {
+  window.__DEV__ = options.__DEV__;
+
   replaceHeaderButtons();
+  if (__DEV__) {
+    attachOnError();
+  }
 
   function replaceHeaderButtons() {
     //noinspection ES6ConvertVarToLetConst
@@ -22,10 +28,20 @@ function injectedBody() {
         e.preventDefault();
         e.stopImmediatePropagation();
         sendData({ command: 'show-menu' });
-        return false;
       });
       $btnProfile.parentNode.replaceChild($replace, $btnProfile);
     }
+  }
+
+  function attachOnError() {
+    window.onerror = (errorMsg, url, lineNumber) => {
+      sendData({
+        errorMsg,
+        url,
+        lineNumber,
+        command: 'error',
+      })
+    };
   }
 
   // Overridden window.postMessage can be not available when calling
