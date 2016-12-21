@@ -32,6 +32,7 @@ ios/fastlane/report.xml
 .idea
 .gradle
 local.properties
+hs_err_pid*.log
 
 # node.js
 #

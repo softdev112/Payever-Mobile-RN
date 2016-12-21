@@ -5,11 +5,10 @@ import type ActivityItem from '../../../store/UserProfilesStore/ActivityItem';
 import { Component } from 'react';
 import { Animated, ScrollView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
-import { GridView, IconText, Loader, StyleSheet, View } from 'ui';
+import { GridView, IconText, Loader, Text, StyleSheet, View } from 'ui';
 
 import SearchHeader from '../components/SearchHeader';
 import ActivityCard from '../components/ActivityCard';
-import { logger } from 'utils';
 
 @inject('userProfiles')
 @observer
@@ -123,8 +122,12 @@ export default class Dashboard extends Component {
     const {
       appearAnimation, appsTop, appsBottom, showApps, activities, todos
     } = this.state;
-    const { navigator } = this.props;
+    const { navigator, userProfiles } = this.props;
     const dataSourceTop = this.dataSource.cloneWithRows(appsTop);
+
+    const welcomeText = (
+      'Welcome to ' + userProfiles.currentProfile.displayName
+    ).toUpperCase();
 
     return (
       <Loader
@@ -149,7 +152,11 @@ export default class Dashboard extends Component {
 
           {!showApps && (
             <View style={styles.cards_container}>
-              <ScrollView 
+              <View style={styles.cards_header}>
+                <Text style={styles.cards_welcome}>{welcomeText}</Text>
+                <Text style={styles.cards_activity}>Today’s activity</Text>
+              </View>
+              <ScrollView
                 contentContainerStyle={styles.cards_scroll}
                 horizontal={true} 
                 showsHorizontalScrollIndicator={false}
@@ -253,5 +260,32 @@ const styles = StyleSheet.create({
   cards_scroll: {
     paddingLeft: 10,
     paddingRight: 10
+  },
+
+  cards_header: {
+    paddingLeft: 20,
+    '@media (min-height: 700)': {
+      paddingTop: 20,
+      paddingBottom: 10
+    }
+  },
+
+  cards_welcome: {
+    color: '$pe_color_gray_2',
+    '@media (max-height: 640)': {
+      height: 0
+    }
+  },
+
+  cards_activity: {
+    color: '$pe_color_dark_gray',
+    fontSize: 24,
+    fontFamily: 'Open Sans_light',
+    '@media ios': {
+      fontFamily: 'HelveticaNeue-Light',
+    },
+    '@media (max-height: 600)': {
+      height: 0
+    }
   }
 });

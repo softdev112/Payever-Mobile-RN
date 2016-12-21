@@ -26,7 +26,7 @@ export default class ActivityCards extends Component {
         <Image style={styles.icon} source={activity.iconSource} />
         <Text style={styles.title}>{activity.title}</Text>
         <Text style={styles.description}>{activity.plainDescription}</Text>
-        <Image style={styles.image} resizeMode="contain" source={activity.imageSource} />
+        <Image style={styles.image} source={activity.imageSource} />
         <Link style={styles.link} onPress={::this.onLinkPress}>
           {activity.url_label}
         </Link>
@@ -51,13 +51,20 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     elevation: 4,
     borderRadius: 8,
-    width: '80%',
+    maxWidth: 320,
+    '@media (max-width: 500)': {
+      width: '80%'
+    }
   },
 
   icon: {
     marginBottom: 12,
     width: 34,
-    height: 34
+    height: 34,
+    '@media (max-height: 380)': {
+      marginBottom: 0,
+      height: 0
+    }
   },
 
   title: {
@@ -72,8 +79,12 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    height: 196,
-    marginBottom: 10
+    height: 230,
+    marginBottom: 10,
+    resizeMode: 'contain',
+    '@media (max-height: 440)': {
+      height: 0
+    }
   },
 
   link: {
