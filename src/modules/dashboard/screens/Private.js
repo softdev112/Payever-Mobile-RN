@@ -67,6 +67,9 @@ export default class Private extends Component {
               title={page.title}
               source={page.img}
               onPress={() => this.onIconClick(page)}
+              style={styles.item}
+              imageStyle={styles.icon}
+              textStyle={styles.iconTitle}
             />
           ))}
         </View>
@@ -78,6 +81,35 @@ export default class Private extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+
+  grid: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    paddingTop: 60
+  },
+
+  item: {
+    width: 110,
+    height: 105,
+  },
+
+  icon: {
+    width: 50,
+    height: 50,
+    marginBottom: 8,
+    borderRadius: 15,
+    elevation: 5,
+    shadowColor: 'rgba(0, 0, 0, .1)',
+    shadowOffset: { width: 0, height: 0},
+    shadowOpacity: 1,
+    shadowRadius: 5
+  },
+
+  iconTitle: {
+    paddingTop: 0,
+    color: '$pe_color_gray_2'
   },
 });
 
