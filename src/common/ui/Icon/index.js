@@ -1,11 +1,15 @@
 import { Component, PropTypes } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Image, Text, TouchableOpacity } from 'react-native';
 
 import StyleSheet from '../StyleSheet';
-import map from './map.json';
+import vector from './vector.json';
+import bitmap from './bitmap';
 
 /**
  * You can find all icons at https://payeverworldwide.github.io/#svg-usage
+ *
+ * Some glyphs can't be transformed correctly to font icons. These glyphs
+ * are stored as bitmap.
  */
 export default class Icon extends Component {
   static propTypes = {
@@ -20,42 +24,76 @@ export default class Icon extends Component {
     style?: Object | Number;
   };
 
-  render() {
-    const { name, style, onPress } = this.props;
-
-    const glyph = map[name];
-    if (!glyph) {
-      throw new Error(`Icon: Glyph ${name} not found.`);
+  renderRaster(bmp: Bitmap) {
+    const style = Object.assign({}, StyleSheet.flatten(this.props.style));
+    if (style.color) {
+      style.tintColor = style.color;
+      delete style.color;
     }
 
+    const bmpStyle = {
+      width: bmp.width,
+      height: bmp.height
+    };
+    return (
+      <Image {...this.props}
+        style={[bmpStyle, style]}
+        source={bmp.image}
+      />
+    )
+  }
+
+  renderVector(glyph: Glyph) {
+    const { style } = this.props.style;
     const unicode = glyph.unicode;
     const glyphStyle = {
       color: glyph.color === 'black' ? null : glyph.color,
       fontSize: glyph.width || 24
     };
-
-    if (onPress) {
-      return (
-        <TouchableOpacity
-          onPress={onPress}>
-          <Text {...this.props} style={[styles.container, glyphStyle, style]}>
-            {unicode}
-          </Text>
-        </TouchableOpacity>
-      );
-    }
-
     return (
-      <Text {...this.props} style={[styles.container, colorStyle, style]}>
+      <Text {...this.props} style={[styles.glyph, glyphStyle, style]}>
         {unicode}
       </Text>
     );
   }
+
+  render() {
+    const { name, onPress } = this.props;
+    let imgNode;
+
+    if (bitmap[name]) {
+      imgNode = this.renderRaster(bitmap[name]);
+    } else if (vector[name]) {
+      imgNode = this.renderVector(vector[name]);
+    } else {
+      throw new Error(`Icon: Glyph ${name} not found.`);
+    }
+
+    if (onPress) {
+      return (
+        <TouchableOpacity onPress={onPress}>{imgNode}</TouchableOpacity>
+      );
+    }
+
+    return imgNode;
+  }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    fontFamily: 'payeverIcons',
-    fontSize: 24
+  glyph: {
+    fontFamily: 'payeverIcons'
   }
 });
+
+type Glyph = {
+  unicode: string,
+  color: string,
+  width: number,
+  height: number
+}
+
+type Bitmap = {
+  image: number,
+  width: number,
+  height: number
+}

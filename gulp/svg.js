@@ -39,8 +39,8 @@ gulp.task('svg', ['svg:convert'], () => {
     glyphDictionary[glyph.name] = {
       unicode: glyph.unicode[0],
       color: glyph.color,
-      width: dimensions.width,
-      height: dimensions.height,
+      width: parseInt(dimensions.width),
+      height: parseInt(dimensions.height),
     }
   });
 
