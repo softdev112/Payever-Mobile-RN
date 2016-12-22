@@ -7,7 +7,7 @@ const Readable = require('stream').Readable;
 
 const cheerio = require('cheerio');
 const gulp    = require('gulp-task-doc');
-const File          = require('vinyl');
+const File    = require('vinyl');
 
 const svgicons2svgfont = require('gulp-svgicons2svgfont');
 const svg2ttf          = require('gulp-svg2ttf');
