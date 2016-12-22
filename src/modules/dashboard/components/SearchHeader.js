@@ -2,13 +2,14 @@ import type UserProfilesStore from '../../../store/UserProfilesStore';
 
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { ImageButton, StyleSheet, View } from 'ui';
+import { Icon, ImageButton, StyleSheet, View, Text } from 'ui';
 
 @inject('userProfiles')
 @observer
 export default class SearchHeader extends Component {
   props: {
     navigator: Navigator,
+    title?: string,
     userProfiles?: UserProfilesStore
   };
 
@@ -18,7 +19,7 @@ export default class SearchHeader extends Component {
   }
 
   render() {
-    const { userProfiles } = this.props;
+    const { userProfiles, title } = this.props;
 
     if (!userProfiles.privateProfile) {
       return null;
@@ -26,6 +27,8 @@ export default class SearchHeader extends Component {
 
     return (
       <View style={styles.container}>
+        <Icon name="icon-search-16" style={styles.search} />
+        <Text style={styles.title}>{title}</Text>
         <ImageButton
           source={userProfiles.currentProfile.logoSource}
           style={styles.profile}
@@ -38,6 +41,8 @@ export default class SearchHeader extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
+    alignItems: 'center',
     margin: 20,
     marginTop: 10,
     marginBottom: 0,
@@ -46,8 +51,16 @@ const styles = StyleSheet.create({
     }
   },
 
+  search: {
+    color: '#b5b9be',
+  },
+
+  title: {
+    flex: 1,
+    textAlign: 'center'
+  },
+
   profile: {
-    flexDirection: 'row',
     alignSelf: 'flex-end',
     width: 30,
     height: 30,

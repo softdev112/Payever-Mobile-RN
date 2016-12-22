@@ -27,7 +27,7 @@ const PAGES: Array<Page> = [
   }
 ];
 
-@inject('config')
+@inject('config', 'userProfiles')
 @observer
 export default class Private extends Component {
   static navigatorStyle = {
@@ -57,9 +57,12 @@ export default class Private extends Component {
   }
 
   render() {
+    const title = (
+      'Welcome ' + this.props.userProfiles.currentProfile.displayName
+    ).toUpperCase();
     return (
       <View style={styles.container}>
-        <SearchHeader navigator={this.props.navigator} />
+        <SearchHeader navigator={this.props.navigator} title={title} />
         <View style={styles.grid}>
           {PAGES.map((page: Page) => (
             <IconText
