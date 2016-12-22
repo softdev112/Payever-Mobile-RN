@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     maxWidth: 320,
     '@media (max-width: 500)': {
-      width: '80%'
+      //width: '80%'
     }
   },
 
