@@ -4,7 +4,7 @@ export default function injectedCode(options: Object) {
 }
 
 function injectedBody(options) {
-  window.__DEV__ = options.__DEV__;
+  window.__DEV__ = options.isDev;
 
   replaceHeaderButtons();
   if (__DEV__) {

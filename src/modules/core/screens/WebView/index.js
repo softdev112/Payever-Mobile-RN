@@ -26,7 +26,7 @@ export default class WebView extends Component {
 
   constructor(props) {
     super(props);
-    this.injectedCode = injectedCode({ __DEV__ });
+    this.injectedCode = injectedCode({ isDev: __DEV__ });
     this.mounted = false;
     this.state = {
       isLoading: true
