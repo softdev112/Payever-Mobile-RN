@@ -7,7 +7,7 @@ const Readable = require('stream').Readable;
 
 const cheerio = require('cheerio');
 const gulp    = require('gulp-task-doc');
-const File    = require('vinyl');
+const File          = require('vinyl');
 
 const svgicons2svgfont = require('gulp-svgicons2svgfont');
 const svg2ttf          = require('gulp-svg2ttf');
@@ -27,6 +27,7 @@ const SVG_TEMPLATE = `
 `;
 
 let glyphs = [];
+let glyphDimensions = {};
 
 /**
  * Download svg icons from payever ui-kit and transform to icon font
@@ -34,9 +35,12 @@ let glyphs = [];
 gulp.task('svg', ['svg:convert'], () => {
   const glyphDictionary = {};
   glyphs.forEach((glyph) => {
+    const dimensions = glyphDimensions[glyph.name] || {};
     glyphDictionary[glyph.name] = {
       unicode: glyph.unicode[0],
-      color: glyph.color
+      color: glyph.color,
+      width: dimensions.width,
+      height: dimensions.height,
     }
   });
 
@@ -113,15 +117,18 @@ function getPage(url) {
 function extractSymbols(html) {
   return new Promise((resolve) => {
     const $ = cheerio.load(html);
+    glyphDimensions = {};
 
     const $symbols = $('svg[data-id^=icons] symbol')
       .map((i, element) => {
         const $symbol = $(element);
         const [,,width, height] = $symbol.attr('viewbox').split(' ');
+        const id = $symbol.attr('id');
+        glyphDimensions[id] = { width, height };
         return {
           width,
           height,
-          id: $symbol.attr('id'),
+          id: id,
           html: $.html($symbol)
         };
       });

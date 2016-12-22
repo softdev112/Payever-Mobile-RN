@@ -29,13 +29,16 @@ export default class Icon extends Component {
     }
 
     const unicode = glyph.unicode;
-    const colorStyle = glyph.color === 'black' ? null : { color: glyph.color };
+    const glyphStyle = {
+      color: glyph.color === 'black' ? null : glyph.color,
+      fontSize: glyph.width || 24
+    };
 
     if (onPress) {
       return (
         <TouchableOpacity
           onPress={onPress}>
-          <Text {...this.props} style={[styles.container, colorStyle, style]}>
+          <Text {...this.props} style={[styles.container, glyphStyle, style]}>
             {unicode}
           </Text>
         </TouchableOpacity>
