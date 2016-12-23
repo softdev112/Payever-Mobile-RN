@@ -4,7 +4,7 @@ import type BusinessProfile from '../../../store/UserProfilesStore/BusinessProfi
 import { Component } from 'react';
 import { ScrollView } from 'react-native'
 import { inject, observer } from 'mobx-react/native';
-import { ImageButton, StyleSheet, Text, View } from 'ui';
+import { Icon, ImageButton, StyleSheet, Text, View } from 'ui';
 
 import { showScreen } from '../../../common/Navigation';
 import BusinessList from '../components/BusinessList';
@@ -64,11 +64,9 @@ export default class SideMenu extends Component {
       <View style={styles.container}>
         <View style={styles.shadow} />
 
-        <ImageButton
-          source={imgClose}
-          style={styles.btnClose}
-          onPress={::this.onClose}
-        />
+        <View style={styles.btnClose}>
+          <Icon name="icon-x-16" onPress={::this.onClose} />
+        </View>
 
         <View style={styles.businesses}>
           <ScrollView style={{ flex: 1}}>
@@ -82,8 +80,13 @@ export default class SideMenu extends Component {
               <Text style={styles.userInfo_name} onPress={::this.onUserPress}>
                 {userProfiles.privateProfile.displayName}
               </Text>
-              <View style={styles.userInfo_accountLink}>
-                <Text onPress={::this.onUserPress}>My account</Text>
+              <View>
+                <Text
+                  style={styles.userInfo_accountLink}
+                  onPress={::this.onUserPress}
+                >
+                  My Account
+                </Text>
               </View>
             </View>
 
@@ -172,7 +175,8 @@ const styles = StyleSheet.create({
   },
 
   userInfo_accountLink: {
-
+    color: '$pe_color_gray_2',
+    fontSize: 13
   },
 
   addBusiness: {

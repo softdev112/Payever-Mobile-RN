@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     padding: 20,
-    borderBottomColor: '#e1e1e1',
+    borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
     '@media ios and (orientation: portrait)': {
       marginTop: 10

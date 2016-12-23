@@ -18,6 +18,15 @@ export default class SearchHeader extends Component {
     navigator.toggleDrawer({ side: 'right' });
   }
 
+  onSearchPress() {
+    const { navigator } = this.props;
+    navigator.push({
+      title: 'Search',
+      animated: false,
+      screen: 'dashboard.Search'
+    })
+  }
+
   render() {
     const { userProfiles, title } = this.props;
 
@@ -27,7 +36,11 @@ export default class SearchHeader extends Component {
 
     return (
       <View style={styles.container}>
-        <Icon name="icon-search-16" style={styles.search} />
+        <Icon
+          style={styles.search}
+          name="icon-search-16"
+          onPress={::this.onSearchPress}
+        />
         <Text style={styles.title}>{title}</Text>
         <ImageButton
           source={userProfiles.currentProfile.logoSource}

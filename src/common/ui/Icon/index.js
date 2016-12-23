@@ -44,7 +44,7 @@ export default class Icon extends Component {
   }
 
   renderVector(glyph: Glyph) {
-    const { style } = this.props.style;
+    const { style } = this.props;
     const unicode = glyph.unicode;
     const glyphStyle = {
       color: glyph.color === 'black' ? null : glyph.color,

@@ -11,6 +11,7 @@ styleSheet.build({
   pe_color_gray: '#6d6d6d',
   pe_color_gray_2: '#b3b3b3',
   pe_color_light_gray_1: '#e1e1e1',
+  pe_color_white: '#fff',
   border_color: '#f4f4f4',
   font_family: Platform.OS === 'ios' ? 'Helvetica Neue' : 'Open Sans'
 });

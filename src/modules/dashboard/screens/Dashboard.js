@@ -132,7 +132,7 @@ export default class Dashboard extends Component {
     return (
       <Loader
         isLoading={!appsTop.length}
-        containerStyle={styles.loaderContainer}
+        style={styles.loader}
       >
         <SearchHeader navigator={this.props.navigator} />
 
@@ -189,7 +189,7 @@ export default class Dashboard extends Component {
 }
 
 const styles = StyleSheet.create({
-  loaderContainer: {
+  loader: {
     flex: 1
   },
 

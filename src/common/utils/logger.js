@@ -6,13 +6,7 @@ import { NativeModules, Platform } from 'react-native';
 const StethoLogger = NativeModules.StethoLogger;
 
 global.log = globalLog;
-globalLog.patchConsole = false;
-
-if (__DEV__ && Platform.OS === 'android') {
-  if (global.originalConsole && globalLog.patchConsole) {
-    patchConsole(global.originalConsole);
-  }
-}
+globalLog.patchConsole = patchConsole;
 
 function globalLog(...args) {
   if (!__DEV__ && Platform.OS === 'ios') {
@@ -21,7 +15,12 @@ function globalLog(...args) {
   logToStetho('log', ...args);
 }
 
-function patchConsole(console) {
+function patchConsole() {
+  const console = global.originalConsole;
+  if (!console || !__DEV__ || Platform.OS === 'ios') {
+    return;
+  }
+
   ['log', 'info', 'warn', 'error'].forEach((level) => {
     const originalMethod = console[level];
     console[level] = function() {

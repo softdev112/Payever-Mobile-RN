@@ -6,47 +6,51 @@ export default class Loader extends Component {
   static propTypes = {
     isLoading: PropTypes.bool,
     style: ActivityIndicator.propTypes.style,
-    containerStyle: View.propTypes.style,
+    loaderStyle: View.propTypes.style,
   };
 
   props: {
     isLoading?: boolean;
     style?: Object | Number;
-    containerStyle? : Object | Number;
+    loaderStyle? : Object | Number;
   };
 
-  renderInline() {
-    const { isLoading, style } = this.props;
+  renderInline(style) {
+    const { isLoading } = this.props;
     if (!isLoading) {
       return null;
     }
 
     return (
-      <ActivityIndicator size="large" style={[styles.container, style]} />
+      <ActivityIndicator size="large" style={style} />
     );
   }
 
-  renderContainer() {
-    const { isLoading, children, containerStyle } = this.props;
+  renderContainer(style) {
+    const { isLoading, children, loaderStyle } = this.props;
     if (!isLoading) {
-      return <View style={containerStyle}>{children}</View>;
+      return <View style={style}>{children}</View>;
     } else {
-      return this.renderInline();
+      return this.renderInline([styles.loader, loaderStyle]);
     }
   }
 
   render() {
-    const { children } = this.props;
+    const { children, style } = this.props;
     if (children) {
-      return this.renderContainer();
+      return this.renderContainer([styles.container, style]);
     } else {
-      return this.renderInline();
+      return this.renderInline([styles.loader, style]);
     }
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+
+  },
+
+  loader: {
     marginTop: 30
   }
 });

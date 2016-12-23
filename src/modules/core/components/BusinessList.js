@@ -24,7 +24,7 @@ export default class BusinessList extends Component {
           <Text style={styles.title} numberOfLines={1}>
             {profile.displayName}
           </Text>
-          <Text>{profile.stores} stores</Text>
+          <Text style={styles.stores}>{profile.stores} stores</Text>
         </View>
         {profile === userProfiles.currentProfile && (
           <Image source={imgChecked} style={styles.imgChecked} />
@@ -71,6 +71,14 @@ const styles = StyleSheet.create({
   imgChecked: {
     width: 24,
     height: 24
+  },
+
+  title: {
+    color: '$pe_color_dark_gray'
+  },
+
+  stores: {
+    color: '$pe_color_gray_2'
   },
 
   text: {

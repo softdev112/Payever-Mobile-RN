@@ -1,11 +1,11 @@
-import type PayeverApi from './index';
+import type PayeverApi, { PayeverResponse } from './index';
 
 export default class ProfilesApi {
   constructor(client: PayeverApi) {
     this.client = client;
   }
 
-  async getAccessibleList(): Promise<AccessibleListResponse> {
+  async getAccessibleList(): Promise<AccessibleListResponse|PayeverResponse> {
     const resp: AccessibleListResponse = await this.client.get(
       '/api/rest/v1/profiles/accessible-list'
     );
@@ -17,6 +17,10 @@ export default class ProfilesApi {
     data.businesses_staff = data.businesses_staff || [];
 
     return resp;
+  }
+
+  async search(query): Promise<SearchResponse|PayeverResponse> {
+    return this.client.get('/api/rest/v1/profiles/search', { k: query, c: 20 });
   }
 }
 
@@ -86,3 +90,27 @@ type BusinessProfileData = {
   stores: number;
   type: string;
 };
+
+type SearchResponse = {
+  data: ?Array<SearchDataRow>,
+  ok: boolean
+};
+
+type SearchDataRow = {
+  id: number;
+  followers: number;
+  following: number;
+  customers: number;
+  sells: number;
+  likes: number;
+  offers: number;
+  name: string;
+  type: string;
+  business: {
+    name: string;
+    currency: string;
+    slug: string;
+    logo: ?string
+  };
+  is_following: boolean;
+}
