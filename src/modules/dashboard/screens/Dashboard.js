@@ -90,31 +90,12 @@ export default class Dashboard extends Component {
   renderTopRow(item: AppItem) {
     return (
       <IconText
-        imageStyle={styles.top_icon}
         style={styles.top_item}
+        imageStyle={styles.top_icon}
         textStyle={styles.top_iconTitle}
         onPress={() => this.onAppClick(item)}
         source={{ uri: item.image}}
         title={item.name}
-      />
-    );
-  }
-
-  renderBottomRow(item: AppItem) {
-    let title = item.name;
-    if (item.label === 'dashboard' && this.state.showApps) {
-      title = 'Home';
-    }
-
-    return (
-      <IconText
-        key={item.id}
-        imageStyle={styles.bottom_icon}
-        textStyle={styles.bottom_iconTitle}
-        style={styles.bottom_item}
-        onPress={() => this.onAppClick(item)}
-        source={{ uri: item.image}}
-        title={title}
       />
     );
   }
@@ -131,69 +112,68 @@ export default class Dashboard extends Component {
     ).toUpperCase();
 
     return (
-      <Loader
-        isLoading={!appsTop.length}
-        style={styles.loader}
-      >
-        <SearchHeader navigator={this.props.navigator} />
+      <Loader isLoading={!appsTop.length}>
+        <View style={styles.container}>
+          <SearchHeader navigator={this.props.navigator} />
 
-        <Animated.View
-          style={[
-            styles.animationView,
-            { transform: [{ scale: appearAnimation }]}
-          ]}
-        >
-          {showApps && (
-            <GridView
-              dataSource={dataSourceTop}
-              renderRow={::this.renderTopRow}
-              contentContainerStyle={styles.top_grid}
-            />
-          )}
+          <Animated.View
+            style={[
+              styles.animationView,
+              { transform: [{ scale: appearAnimation }]}
+            ]}
+          >
+            {showApps && (
+              <GridView
+                dataSource={dataSourceTop}
+                renderRow={::this.renderTopRow}
+                contentContainerStyle={styles.top_grid}
+              />
+            )}
 
-          {!showApps && (
-            <View style={styles.cards_container}>
-              <View style={styles.cards_header}>
-                <Text style={styles.cards_welcome}>{welcomeText}</Text>
-                <Text style={styles.cards_activity}>Today’s activity</Text>
+            {!showApps && (
+              <View style={styles.cards_container}>
+                <View style={styles.cards_header}>
+                  <Text style={styles.cards_welcome}>{welcomeText}</Text>
+                  <Text style={styles.cards_activity}>Today’s activity</Text>
+                </View>
+                <ScrollView
+                  contentContainerStyle={styles.cards_scroll}
+                  horizontal={true}
+                  showsHorizontalScrollIndicator={false}
+                >
+                  {todos.map((activity) => (
+                    <ActivityCard
+                      key={activity.id}
+                      activity={activity}
+                      navigator={navigator}
+                    />
+                  ))}
+                  {activities.map((activity) => (
+                    <ActivityCard
+                      key={activity.id}
+                      activity={activity}
+                      navigator={navigator}
+                    />
+                  ))}
+                </ScrollView>
               </View>
-              <ScrollView
-                contentContainerStyle={styles.cards_scroll}
-                horizontal={true} 
-                showsHorizontalScrollIndicator={false}
-              >
-                {todos.map((activity) => (
-                  <ActivityCard
-                    key={activity.id}
-                    activity={activity}
-                    navigator={navigator}
-                  />
-                ))}
-                {activities.map((activity) => (
-                  <ActivityCard
-                    key={activity.id}
-                    activity={activity}
-                    navigator={navigator}
-                  />
-                ))}
-              </ScrollView>
-            </View>
-          )}
-        </Animated.View>
+            )}
+          </Animated.View>
 
-        <Dock
-          navigator={navigator}
-          apps={appsBottom}
-          onAppClick={::this.onAppClick}
-          showApps={showApps}
-        />
+          <Dock
+            navigator={navigator}
+            apps={appsBottom}
+            onAppClick={::this.onAppClick}
+            showApps={showApps}
+          />
+        </View>
       </Loader>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  loader: {
+  container: {
     flex: 1
   },
 

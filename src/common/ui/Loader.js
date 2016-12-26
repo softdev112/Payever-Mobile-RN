@@ -1,56 +1,52 @@
-import { Component, PropTypes } from 'react';
+import { Component } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import StyleSheet from './StyleSheet';
 
 export default class Loader extends Component {
-  static propTypes = {
-    isLoading: PropTypes.bool,
-    style: ActivityIndicator.propTypes.style,
-    loaderStyle: View.propTypes.style,
-  };
-
   props: {
     isLoading?: boolean;
-    style?: Object | Number;
-    loaderStyle? : Object | Number;
+    style?: Object | Number
   };
 
-  renderInline(style) {
-    const { isLoading } = this.props;
+  renderInline() {
+    const { isLoading, style } = this.props;
     if (!isLoading) {
       return null;
     }
 
     return (
-      <ActivityIndicator size="large" style={style} />
+      <View style={[styles.loaderContainer, style]}>
+        <ActivityIndicator size="large" />
+      </View>
     );
   }
 
-  renderContainer(style) {
-    const { isLoading, children, loaderStyle } = this.props;
+  renderContainer() {
+    const { isLoading, children } = this.props;
     if (!isLoading) {
-      return <View style={style}>{children}</View>;
+      if (Array.isArray(children)) {
+        throw new Error('Loader can contain only a single element');
+      }
+      return children;
     } else {
-      return this.renderInline([styles.loader, loaderStyle]);
+      return this.renderInline();
     }
   }
 
   render() {
-    const { children, style } = this.props;
+    const { children } = this.props;
     if (children) {
-      return this.renderContainer([styles.container, style]);
+      return this.renderContainer();
     } else {
-      return this.renderInline([styles.loader, style]);
+      return this.renderInline();
     }
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-
-  },
-
-  loader: {
-    marginTop: 30
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 });
