@@ -1,14 +1,15 @@
 import type UserProfilesStore from '../../../store/UserProfilesStore/index';
-import type AppItem from '../../../store/UserProfilesStore/AppItem';
 import type ActivityItem from '../../../store/UserProfilesStore/ActivityItem';
+import type AppItem from '../../../store/UserProfilesStore/AppItem';
 
 import { Component } from 'react';
 import { Animated, ScrollView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { GridView, IconText, Loader, Text, StyleSheet, View } from 'ui';
 
-import SearchHeader from '../components/SearchHeader';
 import ActivityCard from '../components/ActivityCard';
+import Dock from '../components/Dock';
+import SearchHeader from '../components/SearchHeader';
 
 @inject('userProfiles')
 @observer
@@ -180,9 +181,12 @@ export default class Dashboard extends Component {
           )}
         </Animated.View>
 
-        <View style={styles.bottom_grid}>
-          {appsBottom.map(::this.renderBottomRow)}
-        </View>
+        <Dock
+          navigator={navigator}
+          apps={appsBottom}
+          onAppClick={::this.onAppClick}
+          showApps={showApps}
+        />
       </Loader>
     );
   }
@@ -223,36 +227,6 @@ const styles = StyleSheet.create({
     color: '$pe_color_gray_2'
   },
 
-  bottom_grid: {
-    flexWrap: 'nowrap',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    paddingTop: 8,
-    backgroundColor: '#fff',
-    shadowColor: 'rgba(0, 0, 0, .06)',
-    shadowOpacity: 1,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: -8},
-    elevation: 25,
-  },
-
-  bottom_item: {
-    width: 70,
-    height: 70
-  },
-
-  bottom_icon: {
-    width: 40,
-    height: 40
-  },
-
-  bottom_iconTitle: {
-    fontSize: 12,
-    paddingTop: 5,
-    color: '$pe_color_gray_2'
-  },
-
   cards_container: {
     flex: 1
   },
@@ -279,7 +253,7 @@ const styles = StyleSheet.create({
 
   cards_activity: {
     color: '$pe_color_dark_gray',
-    fontSize: 24,
+    fontSize: 28,
     fontFamily: 'Open Sans_light',
     '@media ios': {
       fontFamily: 'HelveticaNeue-Light',
