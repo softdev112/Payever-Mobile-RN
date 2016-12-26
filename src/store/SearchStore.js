@@ -39,7 +39,7 @@ export default class SearchStore {
         this.error = null;
       });
     } catch (e) {
-      this.error = e.message;
+      runInAction(() => this.error = e.message);
     } finally {
       runInAction(() => this.isSearching = false);
     }
