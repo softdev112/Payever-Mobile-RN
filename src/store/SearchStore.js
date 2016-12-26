@@ -44,6 +44,50 @@ export default class SearchStore {
       runInAction(() => this.isSearching = false);
     }
   }
+
+  @action
+  async follow(businessId) {
+    const { api } = this.store;
+
+    try {
+      const resp = await api.profiles.follow(businessId);
+
+      runInAction('Follow business', () => {
+        if (!resp.ok) {
+          this.error = 'Sorry, internal error occurred. Info: ' +
+            resp.data.error_description;
+          return;
+        }
+        // Update this profile in state to avoid extra requests
+
+        this.error = null;
+      });
+    } catch (e) {
+      this.error = e.message;
+    }
+  }
+
+  @action
+  async unfollow(businessId) {
+    const { api } = this.store;
+
+    try {
+      const resp = await api.profiles.unfollow(businessId);
+
+      runInAction('Un follow business', () => {
+        if (!resp.ok) {
+          this.error = 'Sorry, internal error occurred. Info: ' +
+            resp.data.error_description;
+          return;
+        }
+        // Update this profile in state to avoid extra requests
+
+        this.error = null;
+      });
+    } catch (e) {
+      this.error = e.message;
+    }
+  }
 }
 
 export class SearchRow {

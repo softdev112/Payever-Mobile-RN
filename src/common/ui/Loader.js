@@ -5,7 +5,8 @@ import StyleSheet from './StyleSheet';
 export default class Loader extends Component {
   props: {
     isLoading?: boolean;
-    style?: Object | Number
+    style?: Object | Number;
+    color?: string;
   };
 
   renderInline() {
@@ -16,7 +17,10 @@ export default class Loader extends Component {
 
     return (
       <View style={[styles.loaderContainer, style]}>
-        <ActivityIndicator size="large" />
+        <ActivityIndicator
+          size="large"
+          color={this.props.color}
+        />
       </View>
     );
   }
