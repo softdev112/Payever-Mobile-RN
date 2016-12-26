@@ -41,7 +41,7 @@ export default class SearchHeader extends Component {
           name="icon-search-16"
           onPress={::this.onSearchPress}
         />
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title} onPress={::this.onSearchPress}>{title}</Text>
         <ImageButton
           source={userProfiles.currentProfile.logoSource}
           style={styles.profile}
@@ -56,16 +56,16 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    margin: 20,
-    marginTop: 10,
-    marginBottom: 0,
+    padding: 20,
+    paddingTop: 10,
+    paddingBottom: 0,
     '@media ios and (orientation: portrait)': {
-      marginTop: 30
+      paddingTop: 30
     }
   },
 
   search: {
-    color: '#b5b9be',
+    color: '#b5b9be'
   },
 
   title: {
