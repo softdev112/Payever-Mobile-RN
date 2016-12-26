@@ -54,6 +54,26 @@ export default class PayeverApi {
     return this.fetch(url, { query });
   }
 
+  async post(url: string, query: Object = null): Promise<Response> {
+    query = {
+      ...query,
+      method: 'POST',
+      access_token: await this.getAccessToken()
+    };
+
+    return this.fetch(url, query);
+  }
+
+  async delete(url: string, query: Object = null): Promise<Response> {
+    query = {
+      ...query,
+      method: 'DELETE',
+      access_token: await this.getAccessToken()
+    };
+
+    return this.fetch(url, query);
+  }
+
   async fetch(url: string, options: Object = {}): Promise<PayeverResponse> {
     options.method = options.method || 'GET';
     url = this.normalizeUrl(url, options.query);

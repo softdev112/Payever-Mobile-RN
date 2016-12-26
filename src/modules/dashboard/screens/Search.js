@@ -1,7 +1,7 @@
 import type SearchStore, { SearchRow } from '../../../store/SearchStore';
 
 import { Component } from 'react';
-import { Image, TextInput, TouchableWithoutFeedback } from 'react-native';
+import { Image, TextInput, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { Button, Icon, Loader, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
 import { ListView } from 'react-native';
@@ -14,101 +14,131 @@ export default class SearchForm extends Component {
     navBarHidden: true
   };
 
-  props: {
+  props:{
     navigator: Navigator;
     search: SearchStore;
   };
-  
-  state: {
+
+  state:{
     query: string;
   };
 
-  $input: TextInput;
+  $input:TextInput;
 
   constructor(props) {
     super(props);
+
+    this.ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
     this.state = {
-      query: ''
+      query: '',
     };
-
-    this.dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
-  }
-
-  onTextChange(query) {
-    const { search } = this.props;
-    this.setState({ query });
-    search.search(query);
-  }
-
-  onClose() {
-    const { navigator } = this.props;
-    navigator.pop({ animated: false });
-  }
-
-  onFollow(row: SearchRow) {
-
-  }
-
-  renderRow(row: SearchRow) {
-    return (
-      <View style={styles.row}>
-        <Image style={styles.logo} source={row.logoSource} />
-        <Text style={styles.title}>{row.name}</Text>
-        <Button title="Follow" onPress={::this.onFollow()} />
-      </View>
-    );
   }
 
   render() {
     const { query } = this.state;
-    const search: SearchStore = this.props.search;
-
-    const dataSource = this.dataSource.cloneWithRows(search.items.slice());
+    const search:SearchStore = this.props.search;
 
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Icon
-            style={styles.icon}
-            name="icon-search-16"
-          />
-          <TextInput
-            style={styles.input}
-            ref={i => this.$input = i}
-            onChangeText={t => this.onTextChange(t)}
-            autoFocus
-            autoCorrect={false}
-            multiline={false}
-            placeholder="Search for business"
-            returnKeyType="search"
-            underlineColorAndroid="transparent"
-          />
+          <View style={styles.menu}>
+            <TouchableOpacity
+              onPress={::this.onClose}>
+            <View style={styles.menuItems}>
+              <Icon
+                style={[styles.bluColor, styles.menuItemTextSize]}
+                name="icon-arrow-left-ios-16"/>
+              <Text style={[styles.bluColor, styles.menuItemTextSize]}>Dashboard</Text>
+            </View>
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.searchGroup}>
+            <Icon
+              style={[styles.grayColor, styles.menuItemTextSize]}
+              name="icon-search-16"
+            />
+            <TextInput
+              style={[styles.input, styles.menuItemTextSize]}
+              ref={i => this.$input = i}
+              onChangeText={text => this.onTextChange(text)}
+              autoFocus
+              autoCorrect={false}
+              multiline={false}
+              placeholder="Search for business"
+              returnKeyType="search"
+              underlineColorAndroid="transparent"
+            />
+          </View>
         </View>
 
-        <Text>{search.error}</Text>
+        <View style={styles.results}>
+          <Loader
+            isLoading={search.isSearching}
+            style={{ flex: 1 }}
+            color={'#5AC8FA'}>
 
-        {!!query && (
-          <View style={styles.results}>
-            <Loader isLoading={search.isSearching} style={{ flex: 1 }}>
-              <ListView
-                dataSource={dataSource}
-                renderRow={::this.renderRow}
-                contentContainerStyle={styles.results}
-                initialListSize={20}
-              />
-            </Loader>
-          </View>
-        )}
-
-        {!query && (
-          <TouchableWithoutFeedback onPress={::this.onClose}>
-            <View style={{ flex: 1 }}/>
-          </TouchableWithoutFeedback>
-        )}
+            {this.renderList()}
+          </Loader>
+        </View>
       </View>
     );
+  }
+
+  renderList() {
+    if(!this.state.query) {
+      return null;
+    }
+
+    const dataSource = this.ds.cloneWithRows(this.props.search.items.slice())
+
+    return (
+      <ListView
+        dataSource={dataSource}
+        renderRow={::this.renderRow}
+        renderSeparator={::this.renderSeparator}
+        contentContainerStyle={styles.resultsGrid}
+        enableEmptySections={true}
+        keyboardShouldPersistTaps={true}
+        initialListSize={20}/>
+    );
+  }
+
+  renderRow(row:SearchRow) {
+    return (
+      <View style={styles.row}>
+        <Image style={styles.logo} source={row.logoSource}/>
+        <Text style={styles.title}>{row.name}</Text>
+        <Button
+          title={row.is_following? 'Unfollow' : 'Follow'}
+          onPress={this.onFollow.bind(this, row)} />
+      </View>
+    );
+  }
+
+  renderSeparator() {
+    return (<View style={styles.separator} />);
+  }
+
+  onTextChange(query) {
+    this.setState({query});
+    this.props.search.search(query);
+  }
+
+  onClose() {
+    const { navigator } = this.props;
+    navigator.pop({animated: true});
+  }
+
+  onFollow(row:SearchRow) {
+    if(row.is_following) {
+      this.props.search.unfollow(row.id);
+    } else {
+      this.props.search.follow(row.id);
+    }
+    console.log('sssssssssssssssssssssssss');
+    console.log(row.is_following)
   }
 }
 
@@ -124,11 +154,32 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    flexDirection: 'row',
     alignItems: 'center',
-    height: 54,
-    paddingLeft: 20,
-    paddingRight: 20,
+    height: '10%',
+    paddingHorizontal: 20,
+    marginBottom: 10,
+  },
+
+  menu: {
+    height: '5%',
+    alignItems: 'flex-start',
+    alignSelf: 'stretch',
+    paddingVertical: '1rem',
+    borderBottomColor: '$pe_color_light_gray_1',
+    borderBottomWidth: 1,
+  },
+
+  menuItems: {
+    alignSelf: 'flex-start',
+    flexDirection: 'row',
+  },
+
+  searchGroup: {
+    height: '5%',
+    alignItems: 'center',
+    flexDirection: 'row',
+    borderColor: 'red',
+    width: '80%',
     borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
     '@media ios and (orientation: portrait)': {
@@ -136,27 +187,40 @@ const styles = StyleSheet.create({
     }
   },
 
-  icon: {
-    marginTop: 1,
-    color: '#b5b9be'
-  },
-
   input: {
+    marginLeft: 2,
     flex: 1,
     borderWidth: 0,
     color: 'black'
   },
 
   results: {
-    flex: 1
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'flex-start'
+
   },
 
-  row: {
+  resultsGrid: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 10,
+    justifyContent: 'center',
+  },
+
+  $rowSizeHeight: '15%',
+
+  row: {
     alignItems: 'center',
-    height: 46,
-    paddingLeft: 15,
-    paddingRight: 12
+    justifyContent: 'space-between',
+    padding: '2rem',
+    height: '$rowSizeHeight',
+    width: '$rowSizeHeight',
+  },
+
+  separator: {
+    width: 10,
+    height: '$rowSizeHeight',
   },
 
   logo: {
@@ -169,5 +233,17 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 15,
     color: 'black'
+  },
+
+  bluColor: {
+    color: '$pe_color_blue',
+  },
+
+  grayColor: {
+    color: '#b5b9be'
+  },
+
+  menuItemTextSize: {
+    fontSize: '1.2rem',
   }
 });
