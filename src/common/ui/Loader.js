@@ -13,6 +13,7 @@ export default class Loader extends Component {
     isLoading?: boolean;
     style?: Object | Number;
     loaderStyle? : Object | Number;
+    color?: string
   };
 
   renderInline(style) {
@@ -22,7 +23,10 @@ export default class Loader extends Component {
     }
 
     return (
-      <ActivityIndicator size="large" style={style} />
+      <ActivityIndicator
+        size="large"
+        style={style}
+        color={this.props.color}/>
     );
   }
 
