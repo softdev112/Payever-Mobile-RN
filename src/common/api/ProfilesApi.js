@@ -22,6 +22,14 @@ export default class ProfilesApi {
   async search(query): Promise<SearchResponse|PayeverResponse> {
     return this.client.get('/api/rest/v1/profiles/search', { k: query, c: 20 });
   }
+
+  async follow(businessId): Promise<SearchResponse|PayeverResponse> {
+    return this.client.post(`/api/rest/v1/profiles/${businessId}/follow`, {id: businessId});
+  }
+
+  async unfollow(businessId) {
+    return this.client.delete(`/api/rest/v1/profiles/${businessId}/unfollow`, {id: businessId});
+  }
 }
 
 type AccessibleListResponse = {
