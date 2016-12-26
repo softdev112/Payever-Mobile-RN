@@ -260,6 +260,9 @@ const styles = StyleSheet.create({
     },
     '@media (max-height: 600)': {
       height: 0
+    },
+    '@media (min-height: 700)': {
+      fontSize: 34
     }
   }
 });
