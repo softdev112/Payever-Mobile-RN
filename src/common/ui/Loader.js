@@ -20,7 +20,7 @@ export default class Loader extends Component {
       <View style={[styles.loaderContainer, style]}>
         <ActivityIndicator
           size="large"
-          color={this.props.color}
+          color={this.props.color || '#5AC8FA'}
         />
       </View>
     );
