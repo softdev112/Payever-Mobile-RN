@@ -67,10 +67,10 @@ export default class SearchForm extends Component {
 
     return (
       <ListView
+        contentContainerStyle={styles.listInsideContainer}
         dataSource={dataSource}
         renderRow={::this.renderRow}
         renderSeparator={::this.renderSeparator}
-        contentContainerStyle={styles.resultsGrid}
         enableEmptySections
         keyboardShouldPersistTaps
         initialListSize={20}
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
 
   },
 
-  resultsGrid: {
+  listInsideContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     marginTop: 10,
