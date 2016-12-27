@@ -1,13 +1,9 @@
-import type Store from './index';
-
 import { observable, action, runInAction } from 'mobx';
-import { AsyncStorage } from 'react-native';
 
+import type Store from './index';
 import Profile from './Profile';
 import BusinessProfile from './BusinessProfile';
 import PersonalProfile from './PersonalProfile';
-
-const STORE_NAME = 'store.user-profile';
 
 export default class UserProfilesStore {
   @observable ownBusinesses: Array<BusinessProfile> = [];
@@ -22,11 +18,6 @@ export default class UserProfilesStore {
     this.store = store;
   }
 
-  @action
-  setCurrentProfile(profile: Profile) {
-    this.currentProfile = profile;
-  }
-
   toArray(includePrivate = true) {
     let result = [];
     if (includePrivate && this.privateProfile) {
@@ -34,10 +25,10 @@ export default class UserProfilesStore {
     }
 
     if (this.ownBusinesses.length) {
-      result = result.concat(this.ownBusinesses.slice())
+      result = result.concat(this.ownBusinesses.slice());
     }
     if (this.staffBusinesses.length) {
-      result = result.concat(this.staffBusinesses.slice())
+      result = result.concat(this.staffBusinesses.slice());
     }
 
     return result;
@@ -57,7 +48,7 @@ export default class UserProfilesStore {
       }
     } catch (e) {
       console.warn(e);
-      return { success: false, error: 'Internal error. Please try later.'}
+      return { success: false, error: 'Internal error. Please try later.' };
     }
 
     runInAction('Update profiles list', () => {
@@ -70,38 +61,12 @@ export default class UserProfilesStore {
       this.privateProfile = new PersonalProfile(data.private, this.store);
     });
 
-    //noinspection JSIgnoredPromiseFromCall
-    this.serialize();
-
     return { success: true };
   }
 
-  serialize(): Promise {
-    /*
-    return AsyncStorage.setItem(STORE_NAME, JSON.stringify({
-        isLoggedIn: this.isLoggedIn,
-        accessToken: this.accessToken,
-        refreshToken: this.refreshToken,
-        expiresIn: this.expiresIn
-      }))
-      .catch(e => console.error(e));
-     */
-  }
-
-  deserialize(): Promise<AuthStore> {
-    /*
-    return AsyncStorage.getItem(STORE_NAME)
-      .then(action((json) => {
-        if (!json) return this;
-        const data = JSON.parse(json);
-        this.isLoggedIn = data.isLoggedIn;
-        this.accessToken = data.accessToken;
-        this.refreshToken = data.refreshToken;
-        this.expiresIn = data.expiresIn;
-        return this;
-      }))
-      .catch(e => console.error(e));
-    */
+  @action
+  setCurrentProfile(profile: Profile) {
+    this.currentProfile = profile;
   }
 }
 

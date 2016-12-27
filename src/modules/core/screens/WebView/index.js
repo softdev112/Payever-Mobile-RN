@@ -90,7 +90,9 @@ export default class WebView extends Component {
         console.warn(
           `WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`
         );
-        log(`WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`);
+        log(
+          `WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`
+        );
         break;
       }
       default: {

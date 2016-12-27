@@ -5,7 +5,8 @@ import { Icon, ImageButton, StyleSheet, Text, View } from 'ui';
 import type { Navigator } from 'react-native-navigation';
 
 import type UserProfilesStore from '../../../store/UserProfilesStore/index';
-import type BusinessProfile from '../../../store/UserProfilesStore/BusinessProfile';
+import type BusinessProfile
+  from '../../../store/UserProfilesStore/BusinessProfile';
 import { showScreen } from '../../../common/Navigation';
 import BusinessList from '../components/BusinessList';
 

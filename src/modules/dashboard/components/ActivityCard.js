@@ -1,7 +1,8 @@
-import type ActivityItem from '../../../store/UserProfilesStore/ActivityItem';
-
 import { Component } from 'react';
 import { Image, Link, StyleSheet, Text, View } from 'ui';
+import type { Navigator } from 'react-native-navigation';
+
+import type ActivityItem from '../../../store/UserProfilesStore/ActivityItem';
 
 export default class ActivityCards extends Component {
   props: {
@@ -22,7 +23,7 @@ export default class ActivityCards extends Component {
     const { activity } = this.props;
 
     return (
-      <View style={styles.container} >
+      <View style={styles.container}>
         <Image style={styles.icon} source={activity.iconSource} />
         <Text style={styles.title}>{activity.title}</Text>
         <Text style={styles.description}>{activity.plainDescription}</Text>
@@ -52,9 +53,6 @@ const styles = StyleSheet.create({
     elevation: 4,
     borderRadius: 8,
     maxWidth: 320,
-    '@media (max-width: 500)': {
-      //width: '80%'
-    }
   },
 
   icon: {
@@ -63,19 +61,19 @@ const styles = StyleSheet.create({
     height: 34,
     '@media (max-height: 380)': {
       marginBottom: 0,
-      height: 0
-    }
+      height: 0,
+    },
   },
 
   title: {
     fontSize: 24,
     marginBottom: 10,
-    color: '$pe_color_dark_gray'
+    color: '$pe_color_dark_gray',
   },
 
   description: {
     marginBottom: 10,
-    color: '$pe_color_gray_2'
+    color: '$pe_color_gray_2',
   },
 
   image: {
@@ -83,13 +81,13 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     resizeMode: 'contain',
     '@media (max-height: 440)': {
-      height: 0
-    }
+      height: 0,
+    },
   },
 
   link: {
-    position: "absolute",
+    position: 'absolute',
     bottom: 15,
-    left: 27
-  }
+    left: 27,
+  },
 });
