@@ -4,7 +4,8 @@ import { observer } from 'mobx-react/native';
 import { Image, StyleSheet, Text, View } from 'ui';
 
 import type UserProfilesStore from '../../../store/UserProfilesStore/index';
-import type BusinessProfile from '../../../store/UserProfilesStore/BusinessProfile';
+import type BusinessProfile
+  from '../../../store/UserProfilesStore/BusinessProfile';
 
 import imgChecked from '../images/checkMarkPressed.png';
 

@@ -1,8 +1,9 @@
-import type UserProfilesStore from '../../../store/UserProfilesStore';
-
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { Icon, ImageButton, StyleSheet, View, Text } from 'ui';
+import type { Navigator } from 'react-native-navigation';
+
+import type UserProfilesStore from '../../../store/UserProfilesStore';
 
 @inject('userProfiles')
 @observer
@@ -23,8 +24,8 @@ export default class SearchHeader extends Component {
     navigator.push({
       title: 'Search',
       animated: false,
-      screen: 'dashboard.Search'
-    })
+      screen: 'dashboard.Search',
+    });
   }
 
   render() {
@@ -60,23 +61,23 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 0,
     '@media ios and (orientation: portrait)': {
-      paddingTop: 30
-    }
+      paddingTop: 30,
+    },
   },
 
   search: {
-    color: '#b5b9be'
+    color: '#b5b9be',
   },
 
   title: {
     flex: 1,
-    textAlign: 'center'
+    textAlign: 'center',
   },
 
   profile: {
     alignSelf: 'flex-end',
     width: 30,
     height: 30,
-    borderRadius: 15
-  }
+    borderRadius: 15,
+  },
 });

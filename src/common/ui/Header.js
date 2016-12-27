@@ -1,4 +1,4 @@
-/* eslint react/prefer-stateless-function: 0*/
+/* eslint react/prefer-stateless-function: 0 */
 
 import { Component } from 'react';
 import { View } from 'react-native';

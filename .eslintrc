@@ -9,7 +9,9 @@
 
   "settings": {
     "import/core-modules": ["ui"],
-    "import/extensions": [".js", ".json", ".png"]
+    "import/extensions": [
+      ".js", ".json", ".png"
+    ]
   },
 
   "globals": {
@@ -21,6 +23,7 @@
 
   "rules": {
     "arrow-body-style": 0,
+    "arrow-parens": 0,
     "camelcase": 0,
     "class-methods-use-this": 0,
     "comma-dangle": ["error", {
@@ -41,8 +44,10 @@
     "no-multi-spaces": [2, { "exceptions": {
       "Property": true,
       "VariableDeclarator": true,
-      "AssignmentExpression": true
-    } }],
+      "AssignmentExpression": true,
+      "ObjectExpression": true,
+      "ClassProperty": true
+    }}],
     "no-param-reassign": 0,
     "no-restricted-syntax": [
       "error",
@@ -58,30 +63,22 @@
     "react/sort-comp": 0,
     "sort-class-members/sort-class-members": [2, {
       "order": [
-        "displayName",
         "[static-properties]",
         "contextTypes",
         "childContextTypes",
         "defaultProps",
         "[properties]",
         "[static-methods]",
-        "[conventional-private-properties]",
         "constructor",
         "[lifecycle]",
         "[event-handlers]",
         "[methods]",
-        "[react-getters-setters]",
-        "[conventional-private-methods]",
         "[everything-else]",
         "[sub-renderers]",
         "render"
       ],
       "groups": {
         "event-handlers": [{ "name": "/on.+/", "type": "method" }],
-        "react-getters-setters": [{
-          "name": "/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/",
-          "type": "method"
-        }],
         "sub-renderers": [{ "name": "/^render.+$/", "type": "method" }],
         "lifecycle": [
           "componentWillMount",
@@ -94,6 +91,14 @@
         ]
       },
       "accessorPairPositioning": "getThenSet"
+    }],
+
+    "spaced-comment": [2, "always", {
+      "line": { "markers": ["*package", "!", ",", "noinspection"] },
+      "block": {
+        "balanced": true,
+        "markers": ["*package", "!", ",", "noinspection"],
+        "exceptions": ["*"] }
     }]
   }
 }

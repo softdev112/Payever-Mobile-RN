@@ -3,7 +3,7 @@ import Api from 'react-native-extended-stylesheet/src/api';
 
 const styleSheet = new Api();
 
-const {height, width} = Dimensions.get('window');
+const { height } = Dimensions.get('window');
 
 console.log(height);
 // Set values from

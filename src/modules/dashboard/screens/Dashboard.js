@@ -1,12 +1,12 @@
-import type UserProfilesStore from '../../../store/UserProfilesStore/index';
-import type ActivityItem from '../../../store/UserProfilesStore/ActivityItem';
-import type AppItem from '../../../store/UserProfilesStore/AppItem';
-
 import { Component } from 'react';
 import { Animated, ScrollView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
+import type { Navigator } from 'react-native-navigation';
 import { GridView, IconText, Loader, Text, StyleSheet, View } from 'ui';
 
+import type UserProfilesStore from '../../../store/UserProfilesStore/index';
+import type ActivityItem from '../../../store/UserProfilesStore/ActivityItem';
+import type AppItem from '../../../store/UserProfilesStore/AppItem';
 import ActivityCard from '../components/ActivityCard';
 import Dock from '../components/Dock';
 import SearchHeader from '../components/SearchHeader';
@@ -15,7 +15,7 @@ import SearchHeader from '../components/SearchHeader';
 @observer
 export default class Dashboard extends Component {
   static navigatorStyle = {
-    navBarHidden: true
+    navBarHidden: true,
   };
 
   props: {
@@ -42,11 +42,11 @@ export default class Dashboard extends Component {
       appsBottom: [],
       activities: [],
       todos: [],
-      appearAnimation: new Animated.Value(1)
+      appearAnimation: new Animated.Value(1),
     };
 
     this.dataSource = new GridView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
+      rowHasChanged: (r1, r2) => r1 !== r2,
     });
   }
 
@@ -62,20 +62,13 @@ export default class Dashboard extends Component {
     });
   }
 
-  animateLayout() {
-    this.state.appearAnimation = new Animated.Value(2);
-    Animated.timing(this.state.appearAnimation, {
-      toValue: 1,
-      duration: 300
-    }).start();
-  }
-
   onAppClick(item: AppItem) {
-    const { navigator, } = this.props;
+    const { navigator } = this.props;
 
     if (item.label === 'dashboard') {
       this.animateLayout();
-      return this.setState({ showApps: !this.state.showApps });
+      this.setState({ showApps: !this.state.showApps });
+      return;
     }
 
     if (item.url) {
@@ -87,6 +80,14 @@ export default class Dashboard extends Component {
     }
   }
 
+  animateLayout() {
+    this.state.appearAnimation = new Animated.Value(2);
+    Animated.timing(this.state.appearAnimation, {
+      toValue: 1,
+      duration: 300,
+    }).start();
+  }
+
   renderTopRow(item: AppItem) {
     return (
       <IconText
@@ -94,7 +95,7 @@ export default class Dashboard extends Component {
         imageStyle={styles.top_icon}
         textStyle={styles.top_iconTitle}
         onPress={() => this.onAppClick(item)}
-        source={{ uri: item.image}}
+        source={{ uri: item.image }}
         title={item.name}
       />
     );
@@ -102,7 +103,7 @@ export default class Dashboard extends Component {
 
   render() {
     const {
-      appearAnimation, appsTop, appsBottom, showApps, activities, todos
+      appearAnimation, appsTop, appsBottom, showApps, activities, todos,
     } = this.state;
     const { navigator, userProfiles } = this.props;
     const dataSourceTop = this.dataSource.cloneWithRows(appsTop);
@@ -119,7 +120,7 @@ export default class Dashboard extends Component {
           <Animated.View
             style={[
               styles.animationView,
-              { transform: [{ scale: appearAnimation }]}
+              { transform: [{ scale: appearAnimation }] },
             ]}
           >
             {showApps && (
@@ -138,7 +139,7 @@ export default class Dashboard extends Component {
                 </View>
                 <ScrollView
                   contentContainerStyle={styles.cards_scroll}
-                  horizontal={true}
+                  horizontal
                   showsHorizontalScrollIndicator={false}
                 >
                   {todos.map((activity) => (
@@ -174,11 +175,11 @@ export default class Dashboard extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
 
   animationView: {
-    flex: 1
+    flex: 1,
   },
 
   top_grid: {
@@ -197,38 +198,38 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     elevation: 5,
     shadowColor: 'rgba(0, 0, 0, .1)',
-    shadowOffset: { width: 0, height: 0},
+    shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 1,
-    shadowRadius: 5
+    shadowRadius: 5,
   },
 
   top_iconTitle: {
     paddingTop: 0,
-    color: '$pe_color_gray_2'
+    color: '$pe_color_gray_2',
   },
 
   cards_container: {
-    flex: 1
+    flex: 1,
   },
 
   cards_scroll: {
     paddingLeft: 10,
-    paddingRight: 10
+    paddingRight: 10,
   },
 
   cards_header: {
     paddingLeft: 20,
     '@media (min-height: 700)': {
       paddingTop: 20,
-      paddingBottom: 10
-    }
+      paddingBottom: 10,
+    },
   },
 
   cards_welcome: {
     color: '$pe_color_gray_2',
     '@media (max-height: 640)': {
-      height: 0
-    }
+      height: 0,
+    },
   },
 
   cards_activity: {
@@ -239,10 +240,10 @@ const styles = StyleSheet.create({
       fontFamily: 'HelveticaNeue-Light',
     },
     '@media (max-height: 600)': {
-      height: 0
+      height: 0,
     },
     '@media (min-height: 700)': {
-      fontSize: 34
-    }
-  }
+      fontSize: 34,
+    },
+  },
 });
