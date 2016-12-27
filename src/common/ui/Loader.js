@@ -17,19 +17,12 @@ export default class Loader extends Component {
     }
 
     return (
-<<<<<<< HEAD
-      <ActivityIndicator
-        size="large"
-        style={style}
-        color={this.props.color || '#5AC8FA'}/>
-=======
       <View style={[styles.loaderContainer, style]}>
         <ActivityIndicator
           size="large"
-          color={this.props.color}
+          color={this.props.color || '#5AC8FA'}
         />
       </View>
->>>>>>> c00903091599113e3c62d66f68a4b8d4ff2c7bac
     );
   }
 
