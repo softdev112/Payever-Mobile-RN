@@ -1,13 +1,71 @@
 {
   "extends": "airbnb",
   "parser": "babel-eslint",
+
   "plugins": [
     "flowtype"
   ],
+
+  "settings": {
+    "import/core-modules": ["ui"]
+  },
+
+  "globals": {
+    "__DEV__": true,
+    "fetch": true,
+    "Response": true
+  },
+
   "rules": {
+    "arrow-body-style": 0,
     "camelcase": 0,
     "class-methods-use-this": 0,
+    "comma-dangle": ["error", {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "never"
+    }],
     "eol-last": [2, "never"],
-    "max-len": [2, 80]
+    "key-spacing": [2, {
+      "beforeColon": false,
+      "afterColon": true,
+      "mode": "minimum"
+    }],
+    "max-len": [2, 80],
+    "no-console": 0,
+    "no-multi-spaces": [2, { "exceptions": {
+      "Property": true,
+      "VariableDeclarator": true,
+      "AssignmentExpression": true
+    } }],
+    "no-param-reassign": 0,
+    "no-restricted-syntax": [
+      "error",
+      "LabeledStatement",
+      "WithStatement"
+    ],
+    "no-use-before-define": 0,
+    "prefer-template": 0,
+    "react/jsx-filename-extension": [2, { "extensions": [".js"] }],
+    "react/jsx-no-bind": 0,
+    "react/react-in-jsx-scope": 0,
+    "react/sort-comp": [2, {
+      "order": [
+        "static-methods", "type-annotations", "lifecycle", "everything-else",
+        "render"
+      ],
+      "groups": {
+        "lifecycle": [
+          "displayName", "propTypes", "contextTypes", "childContextTypes",
+          "mixins", "statics", "defaultProps", "constructor", "getDefaultProps",
+          "getInitialState", "state", "getChildContext", "componentWillMount",
+          "componentDidMount", "componentWillReceiveProps",
+          "shouldComponentUpdate", "componentWillUpdate", "componentDidUpdate",
+          "componentWillUnmount"
+        ]
+      }
+    }]
   }
 }

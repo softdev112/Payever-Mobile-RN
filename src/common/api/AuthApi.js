@@ -13,16 +13,16 @@ export default class AuthApi {
         password,
         client_id:     this.client.clientId,
         client_secret: this.client.clientSecret,
-        grant_type:    'password'
+        grant_type:    'password',
       },
-      preventTokenRefresh: true
+      preventTokenRefresh: true,
     });
 
     if (response.ok) {
       this.client.authStore.updateTokens({
         accessToken: response.data.access_token,
         expiresIn: response.data.expires_in,
-        refreshToken: response.data.refresh_token
+        refreshToken: response.data.refresh_token,
       });
     }
 
@@ -35,16 +35,16 @@ export default class AuthApi {
         client_id:     this.client.clientId,
         client_secret: this.client.clientSecret,
         grant_type:    'refresh_token',
-        refresh_token: refreshToken
+        refresh_token: refreshToken,
       },
-      preventTokenRefresh: true
+      preventTokenRefresh: true,
     });
 
     if (response.ok) {
       this.client.authStore.updateTokens({
         accessToken: response.data.access_token,
         expiresIn: response.data.expires_in,
-        refreshToken: response.data.refresh_token
+        refreshToken: response.data.refresh_token,
       });
       console.log('New token is set', [this.client, response.data]);
     } else {

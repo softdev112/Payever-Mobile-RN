@@ -1,16 +1,11 @@
-import { PropTypes, Component } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import ImageSourcePropType from 'react-native/Libraries/Image/ImageSourcePropType';
+/* eslint react/prefer-stateless-function: 0 */
+
+import { Component } from 'react';
+import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default class ImageButton extends Component {
-  static propTypes = {
-    source: Image.propTypes.source,
-    onPress: PropTypes.func,
-    style: Image.propTypes.style
-  };
-
   props: {
-    source: ImageSourcePropType;
+    source: Object | Number;
     onPress?: () => any;
     style?: Object;
   };
@@ -22,7 +17,7 @@ export default class ImageButton extends Component {
     const imageStyle = {
       width: flatStyle.width,
       height: flatStyle.height,
-      borderRadius: flatStyle.borderRadius
+      borderRadius: flatStyle.borderRadius,
     };
 
     return (
