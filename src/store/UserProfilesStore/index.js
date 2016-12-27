@@ -1,4 +1,4 @@
-import Store from './index';
+import type Store from './index';
 
 import { observable, action, runInAction } from 'mobx';
 import { AsyncStorage } from 'react-native';
