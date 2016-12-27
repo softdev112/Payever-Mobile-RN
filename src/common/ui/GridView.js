@@ -1,28 +1,23 @@
-import { Component, PropTypes } from 'react';
+import { Component } from 'react';
 import { ListView } from 'react-native';
 import StyleSheet from './StyleSheet';
 
 export default class GridView extends Component {
   static DataSource = ListView.DataSource;
 
-  static propTypes = {
-    contentContainerStyle: ListView.propTypes.contentContainerStyle,
-    dataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
-    renderRow: PropTypes.func.isRequired
-  };
-
   props: {
-    contentContainerStyle: Object | number;
+    contentContainerStyle?: Object | number;
     dataSource: ListView.DataSource;
     renderRow: () => any;
+    style?: Object | number
   };
 
   render() {
-    const { dataSource, renderRow, contentContainerStyle } = this.props;
+    const { contentContainerStyle, dataSource, renderRow, style } = this.props;
     return (
       <ListView
         initialListSize={30}
-        style={styles.container}
+        style={[styles.container, style]}
         contentContainerStyle={[styles.list, contentContainerStyle]}
         dataSource={dataSource}
         renderRow={renderRow}
@@ -41,6 +36,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    flexWrap: 'wrap'
-  }
+    flexWrap: 'wrap',
+  },
 });

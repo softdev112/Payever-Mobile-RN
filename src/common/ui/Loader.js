@@ -1,60 +1,62 @@
-import { Component, PropTypes } from 'react';
+import { Component } from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import StyleSheet from './StyleSheet';
 
 export default class Loader extends Component {
-  static propTypes = {
-    isLoading: PropTypes.bool,
-    style: ActivityIndicator.propTypes.style,
-    loaderStyle: View.propTypes.style,
-  };
-
   props: {
+    children: any;
+    color?: string;
     isLoading?: boolean;
     style?: Object | Number;
-    loaderStyle? : Object | Number;
-    color?: string
   };
 
-  renderInline(style) {
-    const { isLoading } = this.props;
+  renderInline() {
+    const { isLoading, style } = this.props;
     if (!isLoading) {
       return null;
     }
 
     return (
+<<<<<<< HEAD
       <ActivityIndicator
         size="large"
         style={style}
         color={this.props.color || '#5AC8FA'}/>
+=======
+      <View style={[styles.loaderContainer, style]}>
+        <ActivityIndicator
+          size="large"
+          color={this.props.color}
+        />
+      </View>
+>>>>>>> c00903091599113e3c62d66f68a4b8d4ff2c7bac
     );
   }
 
-  renderContainer(style) {
-    const { isLoading, children, loaderStyle } = this.props;
+  renderContainer() {
+    const { isLoading, children } = this.props;
     if (!isLoading) {
-      return <View style={style}>{children}</View>;
-    } else {
-      return this.renderInline([styles.loader, loaderStyle]);
+      if (Array.isArray(children)) {
+        throw new Error('Loader can contain only a single element');
+      }
+      return children;
     }
+    return this.renderInline();
   }
 
   render() {
-    const { children, style } = this.props;
+    const { children } = this.props;
     if (children) {
-      return this.renderContainer([styles.container, style]);
-    } else {
-      return this.renderInline([styles.loader, style]);
+      return this.renderContainer();
     }
+    return this.renderInline();
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-
-  loader: {
-    marginTop: 30
-  }
 });

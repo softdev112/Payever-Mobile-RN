@@ -1,6 +1,6 @@
 {
   "name": "PayeverMobile",
-  "version": "0.1.7",
+  "version": "0.1.9",
   "private": true,
   "scripts": {
     "start": "npm run copy:dev-config && node node_modules/react-native/local-cli/cli.js start",
@@ -8,7 +8,8 @@
     "bump": "gulp bump",
     "reset": "watchman watch-del-all",
     "test": "jest",
-    "build:android": "cd android && ./gradlew assembleRelease"
+    "build:android": "cd android && ./gradlew assembleRelease",
+    "lint": "eslint src"
   },
   "dependencies": {
     "immutable": "^3.8.1",
@@ -27,10 +28,17 @@
     "preset": "jest-react-native"
   },
   "devDependencies": {
+    "babel-eslint": "^7.1.1",
     "babel-jest": "17.0.0",
     "babel-plugin-module-resolver": "^2.4.0",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "cheerio": "^0.22.0",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-flowtype": "^2.29.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
     "gulp": "^3.9.1",
     "gulp-replace": "^0.5.4",
     "gulp-svg2ttf": "^2.0.0",

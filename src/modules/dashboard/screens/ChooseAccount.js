@@ -17,9 +17,15 @@ export default class ChooseAccount extends Component {
     userProfiles: UserProfilesStore
   };
 
-  constructor() {
-    super();
+  dataSource: GridView.DataSource;
+
+  constructor(props) {
+    super(props);
     this.state = { isLoading: false };
+
+    this.dataSource = new GridView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
   }
 
   async componentWillMount() {
@@ -45,8 +51,9 @@ export default class ChooseAccount extends Component {
   renderRow(profile: Profile) {
     return (
       <IconText
-        imageStyle={styles.logo}
         style={styles.item}
+        textStyle={styles.iconTitle}
+        imageStyle={styles.logo}
         onPress={() => this.onProfileClick(profile)}
         source={profile.logoSource}
         title={profile.displayName}
@@ -59,21 +66,20 @@ export default class ChooseAccount extends Component {
     const { userProfiles } = this.props;
     const profilesArray = userProfiles.toArray();
 
-    const ds = new GridView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
-    const dataSource = ds.cloneWithRows(profilesArray);
+    const dataSource = this.dataSource.cloneWithRows(profilesArray);
 
     return (
       <View style={styles.container}>
         <Header>Welcome back. Please choose buying or selling account.</Header>
         <Loader isLoading={isLoading}>
           {profilesArray.length && (
-            <GridView
-              dataSource={dataSource}
-              renderRow={::this.renderRow}
-              contentContainerStyle={styles.grid}
-            />
+            <View style={styles.gridWrapper}>
+              <GridView
+                dataSource={dataSource}
+                renderRow={::this.renderRow}
+                contentContainerStyle={styles.grid}
+              />
+            </View>
           )}
         </Loader>
       </View>
@@ -82,18 +88,45 @@ export default class ChooseAccount extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+
+  gridWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+
   grid: {
-    paddingTop: 20
+    alignSelf: 'center',
+    justifyContent: 'flex-start',
+    paddingTop: 20,
+    paddingBottom: 20
   },
 
   item: {
-    width: 120,
-    height: 120,
+    justifyContent: 'center',
+    margin: 10,
+    width: 200,
+    height: 200,
+    borderWidth: 1,
+    borderColor: '$border_color'
   },
 
   logo: {
-    width: 50,
-    height: 50,
-    borderRadius: 25
+    marginBottom: 20,
+    width: 120,
+    height: 120,
+    borderWidth: 1,
+    borderColor: '$border_color',
+    borderRadius: 60,
+  },
+
+  iconTitle: {
+    marginTop: 0,
+    fontSize: 14,
+    color: 'black'
   }
 });

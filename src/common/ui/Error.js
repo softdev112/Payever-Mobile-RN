@@ -3,6 +3,11 @@ import { Text } from 'react-native';
 import StyleSheet from './StyleSheet';
 
 export default class Error extends Component {
+  props: {
+    message: string;
+    style: Object | number;
+  };
+
   render() {
     const { message } = this.props;
     if (!message) {
@@ -24,6 +29,6 @@ const styles = StyleSheet.create({
     color: 'red',
     borderWidth: 1,
     borderColor: 'red',
-    borderRadius: 4
-  }
+    borderRadius: 4,
+  },
 });
