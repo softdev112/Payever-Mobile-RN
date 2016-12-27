@@ -4,9 +4,10 @@ import StyleSheet from './StyleSheet';
 
 export default class Loader extends Component {
   props: {
+    children: any;
+    color?: string;
     isLoading?: boolean;
     style?: Object | Number;
-    color?: string;
   };
 
   renderInline() {
@@ -32,18 +33,16 @@ export default class Loader extends Component {
         throw new Error('Loader can contain only a single element');
       }
       return children;
-    } else {
-      return this.renderInline();
     }
+    return this.renderInline();
   }
 
   render() {
     const { children } = this.props;
     if (children) {
       return this.renderContainer();
-    } else {
-      return this.renderInline();
     }
+    return this.renderInline();
   }
 }
 
@@ -51,6 +50,6 @@ const styles = StyleSheet.create({
   loaderContainer: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 });

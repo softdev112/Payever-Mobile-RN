@@ -12,12 +12,6 @@ import bitmap from './bitmap';
  * are stored as bitmap.
  */
 export default class Icon extends Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    onPress: PropTypes.func,
-    style: Text.propTypes.style
-  };
-
   props: {
     name: string;
     onPress?: () => any;
@@ -33,14 +27,15 @@ export default class Icon extends Component {
 
     const bmpStyle = {
       width: bmp.width,
-      height: bmp.height
+      height: bmp.height,
     };
     return (
-      <Image {...this.props}
+      <Image
+        {...this.props}
         style={[bmpStyle, style]}
         source={bmp.image}
       />
-    )
+    );
   }
 
   renderVector(glyph: Glyph) {
@@ -48,7 +43,7 @@ export default class Icon extends Component {
     const unicode = glyph.unicode;
     const glyphStyle = {
       color: glyph.color === 'black' ? null : glyph.color,
-      fontSize: glyph.width || 24
+      fontSize: glyph.width || 24,
     };
     return (
       <Text {...this.props} style={[styles.glyph, glyphStyle, style]}>
@@ -81,19 +76,19 @@ export default class Icon extends Component {
 
 const styles = StyleSheet.create({
   glyph: {
-    fontFamily: 'payeverIcons'
-  }
+    fontFamily: 'payeverIcons',
+  },
 });
 
 type Glyph = {
-  unicode: string,
-  color: string,
-  width: number,
-  height: number
+  unicode: string;
+  color: string;
+  width: number;
+  height: number;
 }
 
 type Bitmap = {
-  image: number,
-  width: number,
-  height: number
+  image: number;
+  width: number;
+  height: number;
 }

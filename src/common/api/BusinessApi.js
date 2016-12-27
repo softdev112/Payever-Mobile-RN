@@ -29,6 +29,6 @@ type ActivityItemData = {
 };
 
 type ActivityItemResponse = {
-  data: Array<ActivityItemData>,
-  ok: boolean
+  data: Array<ActivityItemData>;
+  ok: boolean;
 };

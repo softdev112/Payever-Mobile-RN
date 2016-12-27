@@ -1,8 +1,11 @@
+/* eslint no-unused-vars: 0, quotes: 0, max-len: 0 */
+
 /**
  * Module for sending logs to chrome inspector through Stetho
  * It's disabled for ios and for production
  */
 import { NativeModules, Platform } from 'react-native';
+
 const StethoLogger = NativeModules.StethoLogger;
 
 global.log = globalLog;
@@ -23,11 +26,11 @@ function patchConsole() {
 
   ['log', 'info', 'warn', 'error'].forEach((level) => {
     const originalMethod = console[level];
-    console[level] = function() {
-      logToStetho(level, ...arguments);
-      originalMethod.apply(console, arguments);
-    }
-  })
+    console[level] = (...args) => {
+      logToStetho(level, ...args);
+      originalMethod.apply(console, args);
+    };
+  });
 }
 
 function sendStethoMessage(level, text) {
@@ -41,7 +44,7 @@ function sendStethoMessage(level, text) {
       text,
       source: 'console-api',
       timestamp: Date.now(),
-    }
+    },
   });
 }
 
@@ -65,8 +68,8 @@ function sendStathoConsoleAliCall() {
         type:        'object',
         description: 'Object',
         overflow:    false,
-        properties:  [{name: 'aProperty', type: 'number', value: '1'}]
-      }
+        properties:  [{ name: 'aProperty', type: 'number', value: '1' }],
+      },
     }],
     executionContextId: 1,
     timestamp:          Date.now(),
@@ -76,9 +79,9 @@ function sendStathoConsoleAliCall() {
         scriptId:     '1',
         url:          'file:///home/megahertz/Desktop/tmp/test.js',
         lineNumber:   1,
-        columnNumber: 9
-      }]
-    }
+        columnNumber: 9,
+      }],
+    },
   });
 }
 
@@ -94,10 +97,10 @@ function logToStetho(level, ...args) {
 
 function serialize(object) {
   const seen = [];
-  return JSON.stringify(object, function(key, val) {
-    if (val != null && typeof val == "object") {
+  return JSON.stringify(object, (key, val) => {
+    if (val != null && typeof val === 'object') {
       if (seen.indexOf(val) >= 0) {
-        return;
+        return undefined;
       }
       seen.push(val);
     }
@@ -122,4 +125,3 @@ function logObjectToStetho() {
    From target: {"method":"Page.domContentEventFired","params":{"timestamp":594862.111964}}
    */
 }
-

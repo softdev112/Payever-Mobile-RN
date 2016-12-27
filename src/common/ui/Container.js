@@ -3,15 +3,15 @@ import { ScrollView, View } from 'react-native';
 import StyleSheet from './StyleSheet';
 
 export default class Container extends Component {
-  static propTypes = {
-    layout: PropTypes.oneOf(['small', 'large']),
-    scrollViewStyle: View.propTypes.style,
-    style: ScrollView.propTypes.style
-  };
-
   static defaultProps = {
     layout: 'large'
   };
+
+  props: {
+    layout: 'small' | 'large';
+    scrollViewStyle: Object | Number;
+    style: Object | Number;
+  }
 
   render() {
     const scrollViewStyle = styles[`scrollView_${this.props.layout}`];
@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
 
   scrollView_small: {
     width: '80%',
-    maxWidth: 400
-  }
+    maxWidth: 400,
+  },
 });

@@ -1,4 +1,4 @@
-import { Component, PropTypes } from 'react';
+import { Component } from 'react';
 import { ListView } from 'react-native';
 import StyleSheet from './StyleSheet';
 
@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    flexWrap: 'wrap'
-  }
+    flexWrap: 'wrap',
+  },
 });

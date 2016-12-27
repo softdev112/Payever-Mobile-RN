@@ -1,15 +1,13 @@
+/* eslint react/prefer-stateless-function: 0 */
+
 import { Component } from 'react';
 import { Text as ReactText } from 'react-native';
 
 import StyleSheet from './StyleSheet';
 
 export default class Text extends Component {
-  static propTypes = {
-    style: ReactText.propTypes.style
-  };
-
   props: {
-    style?: Object | Number;
+    style?: Object | number;
   };
 
   render() {
@@ -24,6 +22,6 @@ export default class Text extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    fontFamily: '$font_family'
-  }
+    fontFamily: '$font_family',
+  },
 });

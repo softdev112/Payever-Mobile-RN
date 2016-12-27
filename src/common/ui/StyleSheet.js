@@ -1,7 +1,7 @@
 import { StyleSheet, Platform } from 'react-native';
 import Api from 'react-native-extended-stylesheet/src/api';
 
-styleSheet = new Api();
+const styleSheet = new Api();
 
 // Set values from
 // https://github.com/payeverworldwide/ui-kit/blob/master/scss/pe_variables.scss
@@ -13,7 +13,7 @@ styleSheet.build({
   pe_color_light_gray_1: '#e1e1e1',
   pe_color_white: '#fff',
   border_color: '#f4f4f4',
-  font_family: Platform.OS === 'ios' ? 'Helvetica Neue' : 'Open Sans'
+  font_family: Platform.OS === 'ios' ? 'Helvetica Neue' : 'Open Sans',
 });
 
 styleSheet.flatten = StyleSheet.flatten;

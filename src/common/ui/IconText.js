@@ -1,23 +1,15 @@
-import { PropTypes, Component } from 'react';
+/* eslint react/prefer-stateless-function: 0*/
+
+import { Component } from 'react';
 import { Image, TouchableOpacity, View } from 'react-native';
 
-import StyleSheet from './StyleSheet'
-import Text from './Text'
+import StyleSheet from './StyleSheet';
+import Text from './Text';
 
 export default class IconText extends Component {
-  static propTypes = {
-    title: PropTypes.string,
-    source: Image.propTypes.source,
-    disabled: PropTypes.bool,
-    onPress: PropTypes.func.isRequired,
-    style: View.propTypes.style,
-    imageStyle: View.propTypes.style,
-    textStyle: Text.propTypes.style
-  };
-
   props: {
     title?: string;
-    source: ImageSourcePropType;
+    source: Object | number;
     onPress: () => any;
     disabled?: ?boolean;
     style?: Object;
@@ -27,7 +19,7 @@ export default class IconText extends Component {
 
   render() {
     const {
-      onPress, source, title, disabled, imageStyle, textStyle, style
+      onPress, source, title, disabled, imageStyle, textStyle, style,
     } = this.props;
     const buttonStyles = [styles.button, style];
     const imageStyles = [styles.image, imageStyle];
@@ -45,7 +37,9 @@ export default class IconText extends Component {
         <Text
           numberOfLines={1}
           ellipsizeMode="tail"
-          style={textStyles}>{title}
+          style={textStyles}
+        >
+          {title}
         </Text>
       );
     }
@@ -54,7 +48,7 @@ export default class IconText extends Component {
     const imgStyle = {
       width: flatStyle.width,
       height: flatStyle.height,
-      borderRadius: flatStyle.borderRadius
+      borderRadius: flatStyle.borderRadius,
     };
 
     delete flatStyle.width;
@@ -65,7 +59,8 @@ export default class IconText extends Component {
         accessibilityComponentType="button"
         accessibilityTraits={['button']}
         disabled={disabled}
-        onPress={onPress}>
+        onPress={onPress}
+      >
         <View style={buttonStyles}>
           <View style={flatStyle}>
             <Image style={imgStyle} source={source} />
@@ -85,24 +80,24 @@ const styles = StyleSheet.create({
 
   image: {
     width: 60,
-    height: 60
+    height: 60,
   },
 
   text: {
     textAlign: 'center',
     padding: 8,
-    color: '$pe_color_dark_gray'
+    color: '$pe_color_dark_gray',
   },
 
   buttonDisabled: {
-    elevation: 0
+    elevation: 0,
   },
 
   imageDisabled: {
-    opacity: .3,
+    opacity: 0.3,
   },
 
   textDisabled: {
     color: '#a1a1a1',
-  }
+  },
 });
