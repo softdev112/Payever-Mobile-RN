@@ -1,4 +1,6 @@
-import { computed, observable, extendObservable, runInAction } from 'mobx';
+import {
+  computed, observable, extendObservable, runInAction, ObservableArray,
+} from 'mobx';
 import Profile from './Profile';
 import Business from './Business';
 import AppItem from './AppItem';
@@ -22,9 +24,8 @@ export default class BusinessProfile extends Profile {
   @computed get logoSource() {
     if (this.business.logo) {
       return { uri: this.business.logo };
-    } else {
-      return imgNoBusiness;
     }
+    return imgNoBusiness;
   }
 
   @computed get displayName() {
@@ -53,7 +54,8 @@ export default class BusinessProfile extends Profile {
       return this.activityList;
     }
 
-    const resp = await this.store.api.business.getActivities(this.business.slug);
+    const resp = await this.store.api.business
+      .getActivities(this.business.slug);
     if (resp.ok) {
       runInAction('Set activities to the profile', () => {
         this.activityList = resp.data

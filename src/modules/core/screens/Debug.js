@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import type UserProfilesStore from '../../../store/UserProfilesStore';
 
 import { Component, PropTypes } from 'react';

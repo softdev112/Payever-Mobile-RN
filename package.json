@@ -39,6 +39,7 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
+    "eslint-plugin-sort-class-members": "^1.1.1",
     "gulp": "^3.9.1",
     "gulp-replace": "^0.5.4",
     "gulp-svg2ttf": "^2.0.0",

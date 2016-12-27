@@ -22,13 +22,13 @@ export default class AppItem {
 
   get imageSource() {
     return {
-      uri: this.image
+      uri: this.image,
     };
   }
 
   get iconSource() {
     return {
-      uri: this.store.config.siteUrl + this.iconImage
+      uri: this.store.config.siteUrl + this.iconImage,
     };
   }
 

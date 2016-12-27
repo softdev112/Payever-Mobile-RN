@@ -1,17 +1,13 @@
-import type UserProfilesStore from '../../../../store/UserProfilesStore';
-
-import { Component, PropTypes } from 'react';
+import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { Icon, ImageButton, Loader, StyleSheet, Text, View } from 'ui';
+import { Navigator } from 'react-native-navigation';
+
+import type UserProfilesStore from '../../../../store/UserProfilesStore';
 
 @inject('userProfiles')
 @observer
 export default class WebViewLoader extends Component {
-  static propTypes = {
-    navigator: PropTypes.object.isRequired,
-    userProfiles: PropTypes.object
-  };
-
   props: {
     navigator: Navigator;
     userProfiles?: UserProfilesStore;
@@ -48,7 +44,7 @@ export default class WebViewLoader extends Component {
           <Loader style={styles.loader} isLoading />
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -60,7 +56,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     zIndex: 4,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
 
   header: {
@@ -73,24 +69,24 @@ const styles = StyleSheet.create({
     paddingBottom: 11,
     paddingLeft: 24,
     borderBottomWidth: 1,
-    borderBottomColor: '$pe_color_light_gray_1'
+    borderBottomColor: '$pe_color_light_gray_1',
   },
 
   back: {
-    color: '$pe_color_blue'
+    color: '$pe_color_blue',
   },
 
   title: {
     flex: 1,
     textAlign: 'center',
     fontSize: 18,
-    color: '$pe_color_gray'
+    color: '$pe_color_gray',
   },
 
   profile: {
     width: 30,
     height: 30,
-    borderRadius: 15
+    borderRadius: 15,
   },
 
   main: {
@@ -100,6 +96,6 @@ const styles = StyleSheet.create({
   },
 
   loader: {
-    marginTop: 0
-  }
+    marginTop: 0,
+  },
 });

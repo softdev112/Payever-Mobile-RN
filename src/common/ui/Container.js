@@ -1,16 +1,16 @@
-import { Component, PropTypes } from 'react';
+import { Component } from 'react';
 import { ScrollView, View } from 'react-native';
 import StyleSheet from './StyleSheet';
 
 export default class Container extends Component {
   static defaultProps = {
-    layout: 'large'
+    layout: 'large',
   };
 
   props: {
     layout: 'small' | 'large';
-    scrollViewStyle: Object | Number;
-    style: Object | Number;
+    scrollViewStyle?: Object | Number;
+    style?: Object | Number;
   }
 
   render() {

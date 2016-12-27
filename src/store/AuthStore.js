@@ -1,8 +1,8 @@
-import type Store from './index';
-
 import { observable, action, runInAction, extendObservable } from 'mobx';
 import { now, isDate } from 'lodash';
 import { AsyncStorage } from 'react-native';
+
+import type Store from './index';
 
 const STORE_NAME = 'store.auth';
 
@@ -31,7 +31,7 @@ export default class AuthStore {
       }
     } catch (e) {
       console.warn(e);
-      return { success: false, error: 'Internal error. Please try later.'}
+      return { success: false, error: 'Internal error. Please try later.' };
     }
 
     runInAction('Update auth state', () => {
@@ -51,7 +51,7 @@ export default class AuthStore {
   updateTokens(data) {
     const expires = data.expiresIn;
     if (expires && !isDate(expires) && isFinite(expires)) {
-      data.expiresIn = new Date(now() + (expires - 10) * 1000);
+      data.expiresIn = new Date(now() + ((expires - 10) * 1000));
     }
 
     console.log('update with', data);
@@ -66,7 +66,7 @@ export default class AuthStore {
       isLoggedIn: this.isLoggedIn,
       accessToken: this.accessToken,
       refreshToken: this.refreshToken,
-      expiresIn: this.expiresIn
+      expiresIn: this.expiresIn,
     }))
       .catch(e => console.error(e));
   }
@@ -92,6 +92,6 @@ export default class AuthStore {
 }
 
 type SignInResult = {
-  success: boolean,
-  error: string
+  success: boolean;
+  error: string;
 }

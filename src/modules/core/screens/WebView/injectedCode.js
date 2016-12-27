@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 export default function injectedCode(options: Object) {
   const optionsJson = JSON.stringify(options);
   return `(${injectedBody.toString()})(${optionsJson})`;

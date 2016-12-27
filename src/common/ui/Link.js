@@ -6,7 +6,7 @@ import StyleSheet from './StyleSheet';
 
 export default class Link extends Component {
   props: {
-    style: Object | number;
+    style?: Object | number;
   }
 
   render() {

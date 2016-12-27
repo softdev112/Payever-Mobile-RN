@@ -2,22 +2,23 @@ import { Component } from 'react';
 import TextField from 'react-native-md-textinput';
 
 export default class TextInput extends Component {
+  $input: TextField;
 
   focus() {
-    this.refs.field.focus();
+    this.$input.focus();
   }
 
   blur() {
-    this.refs.field.blur();
+    this.$input.blur();
   }
 
   isFocused() {
-    return this.field.isFocused;
+    return this.$input.isFocused;
   }
 
   render() {
     return (
-      <TextField ref="field" dense={true} {...this.props} />
+      <TextField ref={f => this.$input = f} dense {...this.props} />
     );
   }
 }

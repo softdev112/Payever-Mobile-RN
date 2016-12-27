@@ -4,8 +4,8 @@ import StyleSheet from './StyleSheet';
 
 export default class Error extends Component {
   props: {
-    message: string;
-    style: Object | number;
+    message: ?string;
+    style?: Object | number;
   };
 
   render() {
