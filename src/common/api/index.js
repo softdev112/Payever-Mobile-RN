@@ -1,7 +1,6 @@
-import type AuthStore from '../store/AuthStore';
-
 import { merge } from 'lodash';
 
+import type AuthStore from '../../store/AuthStore';
 import AuthApi from './AuthApi';
 import BusinessApi from './BusinessApi';
 import DashboardApi from './DashboardApi';
@@ -49,7 +48,7 @@ export default class PayeverApi {
   async get(url: string, query: Object = null): Promise<Response> {
     query = {
       ...query,
-      access_token: await this.getAccessToken()
+      access_token: await this.getAccessToken(),
     };
     return this.fetch(url, { query });
   }
@@ -58,7 +57,7 @@ export default class PayeverApi {
     query = {
       ...query,
       method: 'POST',
-      access_token: await this.getAccessToken()
+      access_token: await this.getAccessToken(),
     };
 
     return this.fetch(url, query);
@@ -68,7 +67,7 @@ export default class PayeverApi {
     query = {
       ...query,
       method: 'DELETE',
-      access_token: await this.getAccessToken()
+      access_token: await this.getAccessToken(),
     };
 
     return this.fetch(url, query);
@@ -86,21 +85,21 @@ export default class PayeverApi {
     const text = await response.text();
     try {
       response.data = JSON.parse(text);
-    } catch(e) {
+    } catch (e) {
       console.error('PayeverApi: Error parsing JSON', text);
       response.data = {
         error: 'json_error',
-        error_description: 'Wrong server response'
-      }
+        error_description: 'Wrong server response',
+      };
     }
 
-    if (!options.preventTokenRefresh && response.data.error === 'invalid_grant') {
+    if (!options.preventTokenRefresh &&
+      response.data.error === 'invalid_grant') {
       const token = await this.auth.refreshToken(this.authStore.refreshToken);
       if (token) {
         return await this.fetch(url, { ...options, preventTokenRefresh: true });
-      } else {
-        showScreen('auth.Login');
       }
+      showScreen('auth.Login');
     }
 
     if (__DEV__) {
@@ -115,7 +114,7 @@ export default class PayeverApi {
       return this.authStore.accessToken;
     }
     if (!this.authStore.refreshToken) {
-      throw new Error('PayeverApi: refreshToken is null')
+      throw new Error('PayeverApi: refreshToken is null');
     }
     return await this.auth.refreshToken(this.authStore.refreshToken);
   }
@@ -123,7 +122,7 @@ export default class PayeverApi {
   normalizeUrl(url: string, query: Object = null) {
     let fullUrl = this.baseUrl + url;
     if (query && Object.keys(query).length) {
-      fullUrl += '?' + objectToQueryString(query)
+      fullUrl += '?' + objectToQueryString(query);
     }
     return fullUrl;
   }
@@ -131,7 +130,7 @@ export default class PayeverApi {
 
 function objectToQueryString(data: Object): string {
   return Object.keys(data).map((key) => {
-    return encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
+    return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
   }).join('&');
 }
 

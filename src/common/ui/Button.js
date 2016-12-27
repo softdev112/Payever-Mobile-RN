@@ -3,12 +3,6 @@ import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import StyleSheet from './StyleSheet';
 
 export default class Button extends Component {
-  static propTypes = {
-    title: React.PropTypes.string.isRequired,
-    disabled: React.PropTypes.bool,
-    onPress: React.PropTypes.func.isRequired,
-  };
-
   props: {
     title: string;
     onPress: () => any;

@@ -1,7 +1,9 @@
-import type Store from '../store';
+/* eslint no-prototype-builtins: 0, no-continue: 0 */
 
 import { Navigation } from 'react-native-navigation';
 import { Provider } from 'mobx-react/native';
+
+import type Store from '../store';
 
 const SPECIAL_REACT_KEYS = { children: true, key: true, ref: true };
 
@@ -20,26 +22,25 @@ class MobxRnnProvider extends Provider {
     // inherit stores
     const baseStores = this.context.mobxStores;
     if (baseStores) {
-      for (let key in baseStores) {
+      /* eslint guard-for-in: 0 */
+      for (const key in baseStores) {
         stores[key] = baseStores[key];
       }
     }
 
     // add own stores
-    for (let key in this.props.store) {
+    for (const key in this.props.store) {
       if (!SPECIAL_REACT_KEYS[key]) {
         stores[key] = this.props.store[key];
       }
     }
 
-    return {
-      mobxStores: stores
-    };
+    return { mobxStores: stores };
   }
 }
 
 export function registerScreens(screens: Object, store: Store) {
-  for (let i in screens) {
+  for (const i in screens) {
     if (!screens.hasOwnProperty(i)) continue;
     Navigation.registerComponent(i, () => screens[i], store, MobxRnnProvider);
   }
@@ -49,16 +50,16 @@ export function showScreen(screenId) {
   Navigation.startSingleScreenApp({
     screen: { screen: screenId },
     appStyle: {
-      screenBackgroundColor: '#ffffff'
+      screenBackgroundColor: '#ffffff',
     },
     drawer: {
       right: {
-        screen: 'core.SideMenu'
+        screen: 'core.SideMenu',
       },
       style: {
-        drawerShadow: 'NO'
+        drawerShadow: 'NO',
       },
-      disableOpenGesture: true
-    }
+      disableOpenGesture: true,
+    },
   });
 }

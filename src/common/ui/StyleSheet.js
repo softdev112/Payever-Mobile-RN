@@ -1,7 +1,7 @@
 import { StyleSheet, Platform, Dimensions, PixelRatio } from 'react-native';
 import Api from 'react-native-extended-stylesheet/src/api';
 
-styleSheet = new Api();
+const styleSheet = new Api();
 
 const {height, width} = Dimensions.get('window');
 
@@ -17,7 +17,7 @@ styleSheet.build({
   pe_color_light_gray_1: '#e1e1e1',
   pe_color_white: '#fff',
   border_color: '#f4f4f4',
-  font_family: Platform.OS === 'ios' ? 'Helvetica Neue' : 'Open Sans'
+  font_family: Platform.OS === 'ios' ? 'Helvetica Neue' : 'Open Sans',
 });
 
 styleSheet.flatten = StyleSheet.flatten;

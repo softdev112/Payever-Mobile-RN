@@ -56,12 +56,12 @@ export default class Login extends Component {
   render() {
     const { isLoading, error } = this.state;
     return (
-      <View style={styles.component}>
+      <View style={styles.container}>
         <Header style={styles.header}>
           <Link>Sign up for free</Link>
         </Header>
-        <Container layout="small" contentContainerStyle={styles.container}>
-          <Loader isLoading={isLoading}>
+        <Loader isLoading={isLoading}>
+          <Container contentContainerStyle={styles.form} layout="small">
             <Error message={error} />
             <View>
               <TextInput
@@ -90,23 +90,25 @@ export default class Login extends Component {
             <View style={styles.submitContainer}>
               <Button title="Sign in" onPress={::this.onSignIn} />
             </View>
-          </Loader>
-        </Container>
+          </Container>
+        </Loader>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    flex: 1,
+  },
+
   header: {
     justifyContent: 'flex-start'
   },
 
-  component: {
-    flex: 1,
-  },
-
-  container: {
+  form: {
+    flexDirection: 'column',
     marginTop: '10%'
   },
 
