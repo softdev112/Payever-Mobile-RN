@@ -23,12 +23,12 @@ export default class ProfilesApi {
     return this.client.get('/api/rest/v1/profiles/search', { k: query, c: 20 });
   }
 
-  async follow(businessId): Promise<SearchResponse|PayeverResponse> {
-    return this.client.post(`/api/rest/v1/profiles/${businessId}/follow`, {id: businessId});
+  async follow(businessId): Promise<SimpleOkResponse|PayeverResponse> {
+    return this.client.post(`/api/rest/v1/profiles/${businessId}/follow`, {});
   }
 
-  async unfollow(businessId) {
-    return this.client.delete(`/api/rest/v1/profiles/${businessId}/unfollow`, {id: businessId});
+  async unfollow(businessId): Promise<SimpleOkResponse|PayeverResponse> {
+    return this.client.delete(`/api/rest/v1/profiles/${businessId}/unfollow`, {});
   }
 }
 
@@ -121,4 +121,8 @@ type SearchDataRow = {
     logo: ?string
   };
   is_following: boolean;
+}
+
+type SimpleOkResponse = {
+  ok: boolean
 }
