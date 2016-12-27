@@ -1,17 +1,16 @@
 import type SearchStore, { SearchRow } from '../../../store/SearchStore';
 
-import React, { Component } from 'react';
-import { Image, TextInput, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { Component } from 'react';
+import { Image, TextInput, TouchableWithoutFeedback, TouchableOpacity, ListView } from 'react-native';
 import { Button, Icon, Loader, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
-import { ListView } from 'react-native';
 
 
 @inject('search')
 @observer
-export default class SearchForm extends React.Component {
+export default class SearchForm extends Component {
   static navigatorStyle = {
-    navBarHidden: true
+    navBarHidden: true,
   };
 
   props:{
@@ -36,11 +35,11 @@ export default class SearchForm extends React.Component {
   }
 
   componentWillReact() {
-    console.log('props props props props props ' + this.props.search.isSearching);
+    console.log('props' + this.props.search.isFollowUnfollowUpdating);
   }
 
   onTextChange(query) {
-    this.setState({query});
+    this.setState({ query });
     this.props.search.search(query);
   }
 
@@ -72,29 +71,30 @@ export default class SearchForm extends React.Component {
         renderRow={::this.renderRow}
         renderSeparator={::this.renderSeparator}
         contentContainerStyle={styles.resultsGrid}
-        enableEmptySections={true}
-        keyboardShouldPersistTaps={true}
+        enableEmptySections
+        keyboardShouldPersistTaps
         initialListSize={20}
-        />
+      />
     );
   }
 
   renderRow(row:SearchRow) {
     return (
       <View style={styles.row}>
-        <Image style={styles.logo} source={row.logoSource}/>
+        <Image style={styles.logo} source={row.logoSource} />
         <Text style={styles.title}>{row.name}</Text>
         <Button
           titleStyle={styles.followBtnTitle}
-          title={row.is_following? 'Unfollow' : 'Follow'}
+          title={row.is_following ? 'Unfollow' : 'Follow'}
           onPress={this.onFollow.bind(this, row)}
-          disabled={this.props.search.isFollowUnfollowUpdating}/>
+          disabled={this.props.search.isFollowUnfollowUpdating}
+        />
       </View>
     );
   }
 
   renderSeparator() {
-    return (<View style={styles.separator}/>);
+    return (<View style={styles.separator} />);
   }
 
   render() {
@@ -107,13 +107,13 @@ export default class SearchForm extends React.Component {
           <View style={styles.menu}>
             <TouchableOpacity
               onPress={::this.onClose}>
-            <View style={styles.menuItems}>
-              <Icon
-                style={styles.backIcon}
-                name="icon-arrow-left-ios-16"
-              />
-              <Text style={styles.backTitle}>Dashboard</Text>
-            </View>
+              <View style={styles.menuItems}>
+                <Icon
+                  style={styles.backIcon}
+                  name="icon-arrow-left-ios-16"
+                />
+                <Text style={styles.backTitle}>Dashboard</Text>
+              </View>
             </TouchableOpacity>
           </View>
 
