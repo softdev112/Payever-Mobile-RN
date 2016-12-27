@@ -14,7 +14,7 @@ export default class SearchStore {
 
   constructor(store: Store) {
     this.store = store;
-    autorun(() => console.log());
+    autorun(() => console.log('autorun' + this.isFollowUnfollowUpdating));
   }
 
   @action
@@ -33,7 +33,7 @@ export default class SearchStore {
         }
 
         if (!resp.data.length) {
-          this.error = `Sorry, we didn't find any results, try searching again`;
+          this.error = 'Sorry, we didn\'t find any results, try searching again';
           return;
         }
 
@@ -66,7 +66,7 @@ export default class SearchStore {
         // Update this profile in state to avoid extra requests
         const index = this.items.findIndex(item => item.id === businessId);
         this.items[index] = new SearchRow(Object.assign({}, this.items[index], {
-          is_following: true
+          is_following: true,
         }));
 
         this.error = null;
@@ -74,7 +74,6 @@ export default class SearchStore {
     } catch (e) {
       runInAction(() => this.error = e.message);
     } finally {
-      this.isFollowUnfollowUpdating = false;
       runInAction(() => this.isFollowUnfollowUpdating = false);
     }
   }
@@ -98,7 +97,7 @@ export default class SearchStore {
         // Update this profile in state to avoid extra requests
         const index = this.items.findIndex(item => item.id === businessId);
         this.items[index] = new SearchRow(Object.assign({}, this.items[index], {
-          is_following: false
+          is_following: false,
         }));
 
         this.error = null;
@@ -136,8 +135,8 @@ export class SearchRow {
   @computed get logoSource() {
     if (this.business.logo) {
       return { uri: this.business.logo };
-    } else {
-      return imgNoBusiness;
     }
+
+    return imgNoBusiness;
   }
 }
