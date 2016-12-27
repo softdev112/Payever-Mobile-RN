@@ -22,9 +22,11 @@ export default class Debug extends Component {
   }
 
   onRowClick(row: SearchRow) {
-    action('Change flag', () => {
-      row.is_following = !row.is_following;
-    })();
+    if (row.is_following) {
+      this.props.search.unfollow(row.id)
+    } else {
+      this.props.search.follow(row.id)
+    }
   }
 
   renderRow(row: SearchRow) {
@@ -48,6 +50,10 @@ export default class Debug extends Component {
 
     return (
       <View style={styles.container}>
+        <Text>
+          {this.props.search.isFollowUnfollowUpdating ? 'updating' : ''}
+        </Text>
+
         <Button title="Search" onPress={::this.onSearchClick} />
         <ListView
           dataSource={itemsDs}
