@@ -1,34 +1,30 @@
-import type { Navigator } from 'react-native-navigation/src/Screen';
-import type AuthStore from '../../../store/AuthStore';
-
 import { Component } from 'react';
 import { observer, inject } from 'mobx-react/native';
-
 import {
-  Button, Container, Error, Header, Link, Loader, StyleSheet, Text,
-  TextInput, View
+  Button, Container, Error, Header, Link, Loader, StyleSheet,
+  TextInput, View,
 } from 'ui';
+import type { Navigator } from 'react-native-navigation';
 
+import type AuthStore from '../../../store/AuthStore';
 
 @inject('auth')
 @observer
 export default class Login extends Component {
   static navigatorStyle = {
-    navBarHidden: true
+    navBarHidden: true,
   };
 
   props: {
-    auth: AuthStore,
-    navigator: Navigator
+    auth: AuthStore;
+    navigator: Navigator;
   };
 
   state: {
-    isLoading: boolean
+    isLoading: boolean;
   };
 
-  refs: {
-    password: TextInput
-  };
+  $password: TextInput;
 
   username: string = '';
   password: string = '';
@@ -45,7 +41,7 @@ export default class Login extends Component {
     const signInResult = await auth.signIn(this.username, this.password);
     this.setState({
       isLoading: false,
-      error: signInResult.error
+      error: signInResult.error,
     });
 
     if (signInResult.success) {
@@ -70,20 +66,20 @@ export default class Login extends Component {
                 returnKeyType="next"
                 autoCapitalize="none"
                 autoCorrect={false}
-                autoFocus={true}
-                onChangeText={ username => this.username = username }
-                onSubmitEditing={() => this.refs.password.focus() }
+                autoFocus
+                onChangeText={username => this.username = username}
+                onSubmitEditing={() => this.$password.focus()}
               />
             </View>
             <View>
               <TextInput
-                ref="password"
+                ref={f => this.$password = f}
                 label="Your password"
-                secureTextEntry={true}
+                secureTextEntry
                 returnKeyType="send"
                 autoCapitalize="none"
                 autoCorrect={false}
-                onChangeText={ password => this.password = password }
+                onChangeText={password => this.password = password}
                 onSubmitEditing={::this.onSignIn}
               />
             </View>
@@ -104,15 +100,15 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   },
 
   form: {
     flexDirection: 'column',
-    marginTop: '10%'
+    marginTop: '10%',
   },
 
   submitContainer: {
-    marginTop: 20
-  }
+    marginTop: 20,
+  },
 });

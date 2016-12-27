@@ -1,15 +1,16 @@
-import type UserProfilesStore from '../../../store/UserProfilesStore';
-import type Profile from '../../../store/UserProfilesStore/Profile';
-
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
+import type { Navigator } from 'react-native-navigation';
 import { GridView, Header, IconText, Loader, View, StyleSheet } from 'ui';
+
+import type UserProfilesStore from '../../../store/UserProfilesStore';
+import type Profile from '../../../store/UserProfilesStore/Profile';
 
 @inject('userProfiles')
 @observer
 export default class ChooseAccount extends Component {
   static navigatorStyle = {
-    navBarHidden: true
+    navBarHidden: true,
   };
 
   props: {
@@ -24,7 +25,7 @@ export default class ChooseAccount extends Component {
     this.state = { isLoading: false };
 
     this.dataSource = new GridView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
+      rowHasChanged: (r1, r2) => r1 !== r2,
     });
   }
 
@@ -34,7 +35,7 @@ export default class ChooseAccount extends Component {
     const profilesLoadResult = await userProfiles.load();
     this.setState({
       isLoading: false,
-      error: profilesLoadResult.error
+      error: profilesLoadResult.error,
     });
   }
 
@@ -44,7 +45,7 @@ export default class ChooseAccount extends Component {
     navigator.resetTo({
       screen: profile.isBusiness ? 'dashboard.Dashboard' : 'dashboard.Private',
       title: 'Home',
-      animated: true
+      animated: true,
     });
   }
 
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     justifyContent: 'flex-start',
     paddingTop: 20,
-    paddingBottom: 20
+    paddingBottom: 20,
   },
 
   item: {
@@ -112,7 +113,7 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderWidth: 1,
-    borderColor: '$border_color'
+    borderColor: '$border_color',
   },
 
   logo: {
@@ -127,6 +128,6 @@ const styles = StyleSheet.create({
   iconTitle: {
     marginTop: 0,
     fontSize: 14,
-    color: 'black'
-  }
+    color: 'black',
+  },
 });
