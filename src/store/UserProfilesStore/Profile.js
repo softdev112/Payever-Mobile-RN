@@ -1,8 +1,7 @@
-import type ObservableArray from 'mobx';
+import { computed, observable, ObservableArray } from 'mobx';
+
 import type AppItem from './AppItem';
 import type ActivityItem from './ActivityItem';
-
-import { computed, observable } from 'mobx';
 import type Store from './index';
 
 export default class Profile {

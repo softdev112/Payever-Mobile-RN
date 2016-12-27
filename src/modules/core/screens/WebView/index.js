@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { WebView as ReactWebView, View } from 'react-native';
 import { StyleSheet } from 'ui';
+import type { Navigator } from 'react-native-navigation';
 
 import injectedCode from './injectedCode';
 import WebViewLoader from './WebViewLoader';
@@ -9,11 +10,12 @@ const LOADER_HIDE_DELAY = 350;
 
 export default class WebView extends Component {
   static navigatorStyle = {
-    navBarHidden: true
+    navBarHidden: true,
   };
 
   props: {
-    navigator: Navigator
+    navigator: Navigator;
+    url: string;
   };
 
   state: {
@@ -29,7 +31,7 @@ export default class WebView extends Component {
     this.injectedCode = injectedCode({ isDev: __DEV__ });
     this.mounted = false;
     this.state = {
-      isLoading: true
+      isLoading: true,
     };
   }
 
@@ -80,7 +82,7 @@ export default class WebView extends Component {
       case 'show-menu': {
         navigator.toggleDrawer({
           side: 'right',
-          animated: true
+          animated: true,
         });
         break;
       }
@@ -88,8 +90,13 @@ export default class WebView extends Component {
         console.warn(
           `WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`
         );
-        log(`WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`);
+        log(
+          `WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`
+        );
         break;
+      }
+      default: {
+        console.warn(`Unknown webview command ${object.command}`);
       }
     }
   }
@@ -122,8 +129,8 @@ export default class WebView extends Component {
 const styles = StyleSheet.create({
   container: {
     '@media ios and (orientation: portrait)': {
-      marginTop: 15
+      marginTop: 15,
     },
-    flex: 1
-  }
+    flex: 1,
+  },
 });

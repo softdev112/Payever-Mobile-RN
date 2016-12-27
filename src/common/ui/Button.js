@@ -1,3 +1,5 @@
+/* eslint react/prefer-stateless-function: 0 */
+
 import React, { Component } from 'react';
 import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import StyleSheet from './StyleSheet';
@@ -24,13 +26,15 @@ export default class Button extends Component {
       textStyles.push(styles.textDisabled);
     }
 
-    const formattedTitle = Platform.OS === 'android' ? title.toUpperCase() : title;
+    const formattedTitle = Platform.OS === 'android'
+      ? title.toUpperCase() : title;
     return (
       <TouchableOpacity
         accessibilityComponentType="button"
         accessibilityTraits={['button']}
         disabled={disabled}
-        onPress={onPress}>
+        onPress={onPress}
+      >
         <View style={buttonStyles}>
           <Text style={textStyles}>{formattedTitle}</Text>
         </View>
@@ -55,10 +59,10 @@ const styles = StyleSheet.create({
 
   buttonDisabled: {
     elevation: 0,
-    backgroundColor: '#dfdfdf'
+    backgroundColor: '#dfdfdf',
   },
 
   textDisabled: {
     color: '#a1a1a1',
-  }
+  },
 });

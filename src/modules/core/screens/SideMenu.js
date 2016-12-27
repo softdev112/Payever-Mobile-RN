@@ -1,15 +1,14 @@
-import type UserProfilesStore from '../../../store/UserProfilesStore/index';
-import type BusinessProfile from '../../../store/UserProfilesStore/BusinessProfile';
-
 import { Component } from 'react';
-import { ScrollView } from 'react-native'
+import { ScrollView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { Icon, ImageButton, StyleSheet, Text, View } from 'ui';
+import type { Navigator } from 'react-native-navigation';
 
+import type UserProfilesStore from '../../../store/UserProfilesStore/index';
+import type BusinessProfile
+  from '../../../store/UserProfilesStore/BusinessProfile';
 import { showScreen } from '../../../common/Navigation';
 import BusinessList from '../components/BusinessList';
-
-import imgClose from '../images/ic_close.png';
 
 @inject('userProfiles')
 @observer
@@ -24,12 +23,12 @@ export default class SideMenu extends Component {
     navigator.toggleDrawer({
       side: 'right',
       animated: true,
-      to: 'closed'
+      to: 'closed',
     });
   }
 
   onProfileSelect(profile: BusinessProfile) {
-    const { userProfiles, navigator } = this.props;
+    const { userProfiles } = this.props;
 
     this.onClose();
     userProfiles.setCurrentProfile(profile);
@@ -49,7 +48,7 @@ export default class SideMenu extends Component {
     navigator.push({
       screen: 'core.Debug',
       title: 'Debug',
-      animated: true
+      animated: true,
     });
   }
 
@@ -69,7 +68,7 @@ export default class SideMenu extends Component {
         </View>
 
         <View style={styles.businesses}>
-          <ScrollView style={{ flex: 1}}>
+          <ScrollView style={{ flex: 1 }}>
 
             <View style={styles.userInfo}>
               <ImageButton
@@ -124,7 +123,7 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: 'white',
     justifyContent: 'center',
-    width: 280
+    width: 280,
   },
 
   shadow: {
@@ -139,8 +138,8 @@ const styles = StyleSheet.create({
       shadowOffset: { width: 1, height: 0 },
       shadowOpacity: 1,
       shadowRadius: 6,
-      zIndex: 3
-    }
+      zIndex: 3,
+    },
   },
 
   btnClose: {
@@ -149,45 +148,45 @@ const styles = StyleSheet.create({
     right: 19,
     width: 16,
     height: 16,
-    zIndex: 2
+    zIndex: 2,
   },
 
   businesses: {
-    flex: 1
+    flex: 1,
   },
 
   userInfo: {
     paddingTop: 25,
     paddingRight: 19,
     paddingBottom: 19,
-    paddingLeft: 25
+    paddingLeft: 25,
   },
 
   userInfo_avatar: {
     width: 64,
     height: 64,
-    borderRadius: 32
+    borderRadius: 32,
   },
 
   userInfo_name: {
     fontSize: 15,
-    color: '$pe_color_blue'
+    color: '$pe_color_blue',
   },
 
   userInfo_accountLink: {
     color: '$pe_color_gray_2',
-    fontSize: 13
+    fontSize: 13,
   },
 
   addBusiness: {
     marginLeft: 24,
     paddingTop: 18,
     fontSize: 15,
-    color: '$pe_color_blue'
+    color: '$pe_color_blue',
   },
 
   bottomMenu: {
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
 
   bottomMenu_item: {
@@ -198,6 +197,6 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '$pe_color_blue',
     borderTopWidth: 1,
-    borderTopColor: '$border_color'
-  }
+    borderTopColor: '$border_color',
+  },
 });

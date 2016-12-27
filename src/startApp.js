@@ -1,4 +1,4 @@
-import  { registerScreens, showScreen }  from './common/Navigation';
+import { registerScreens, showScreen } from './common/Navigation';
 import StyleSheet from './common/ui/StyleSheet';
 
 import config from './config';
@@ -16,5 +16,5 @@ export default async function startApp() {
   StyleSheet.build();
 
   const auth = await store.auth.deserialize();
-  showScreen(auth.isLoggedIn ? 'dashboard.ChooseAccount' : 'auth.Login')
+  showScreen(auth.isLoggedIn ? 'dashboard.ChooseAccount' : 'auth.Login');
 }

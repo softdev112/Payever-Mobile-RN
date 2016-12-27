@@ -1,12 +1,14 @@
-import type UserProfilesStore from '../../../store/UserProfilesStore/index';
-import type BusinessProfile from '../../../store/UserProfilesStore/BusinessProfile';
-
 import { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { observer } from 'mobx-react/native';
 import { Image, StyleSheet, Text, View } from 'ui';
 
+import type UserProfilesStore from '../../../store/UserProfilesStore/index';
+import type BusinessProfile
+  from '../../../store/UserProfilesStore/BusinessProfile';
+
 import imgChecked from '../images/checkMarkPressed.png';
+
 
 @observer
 export default class BusinessList extends Component {
@@ -18,7 +20,11 @@ export default class BusinessList extends Component {
   renderRow(profile: BusinessProfile) {
     const { userProfiles, onSelect } = this.props;
     return (
-      <TouchableOpacity key={profile.id} style={styles.row} onPress={() => onSelect(profile)}>
+      <TouchableOpacity
+        style={styles.row}
+        key={profile.id}
+        onPress={() => onSelect(profile)}
+      >
         <Image style={styles.logo} source={profile.logoSource} />
         <View style={styles.text}>
           <Text style={styles.title} numberOfLines={1}>
@@ -31,7 +37,7 @@ export default class BusinessList extends Component {
         )}
       </TouchableOpacity>
     );
-  };
+  }
 
   render() {
     const { userProfiles } = this.props;
@@ -48,7 +54,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     borderTopWidth: 1,
-    borderTopColor: '$border_color'
+    borderTopColor: '$border_color',
   },
 
   row: {
@@ -59,31 +65,31 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
     paddingLeft: 8,
     borderBottomWidth: 1,
-    borderBottomColor: '$border_color'
+    borderBottomColor: '$border_color',
   },
 
   logo: {
     width: 32,
     height: 32,
-    borderRadius: 16
+    borderRadius: 16,
   },
 
   imgChecked: {
     width: 24,
-    height: 24
+    height: 24,
   },
 
   title: {
-    color: '$pe_color_dark_gray'
+    color: '$pe_color_dark_gray',
   },
 
   stores: {
-    color: '$pe_color_gray_2'
+    color: '$pe_color_gray_2',
   },
 
   text: {
     flexDirection: 'column',
     flex: 1,
-    paddingLeft: 8
-  }
+    paddingLeft: 8,
+  },
 });

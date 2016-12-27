@@ -1,7 +1,8 @@
-import type Config from '../config';
+/* eslint no-unused-vars: 0 */
 
 import { enableLogging } from 'mobx-logger';
 
+import type { Config } from '../config';
 import AuthStore from './AuthStore';
 import UserProfilesStore from './UserProfilesStore';
 
@@ -29,9 +30,9 @@ export default class Store {
       // If chrome is not attached
       if (!console.groupCollapsed) {
         console.groupCollapsed = console.log;
-        console.groupEnd = ()=>{};
+        console.groupEnd = () => {};
       }
-      //enableLogging();
+      // enableLogging();
     }
   }
 }
