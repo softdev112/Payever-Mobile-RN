@@ -26,7 +26,7 @@ export default class Loader extends Component {
       <ActivityIndicator
         size="large"
         style={style}
-        color={this.props.color}/>
+        color={this.props.color || '#5AC8FA'}/>
     );
   }
 

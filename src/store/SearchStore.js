@@ -74,7 +74,7 @@ export default class SearchStore {
     try {
       const resp = await api.profiles.unfollow(businessId);
 
-      runInAction('Un follow business', () => {
+      runInAction('Unfollow business', () => {
         if (!resp.ok) {
           this.error = 'Sorry, internal error occurred. Info: ' +
             resp.data.error_description;

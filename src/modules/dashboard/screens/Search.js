@@ -35,63 +35,32 @@ export default class SearchForm extends Component {
     };
   }
 
-  render() {
-    const { query } = this.state;
-    const search:SearchStore = this.props.search;
+  onTextChange(query) {
+    this.setState({query});
+    this.props.search.search(query);
+  }
 
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <View style={styles.menu}>
-            <TouchableOpacity
-              onPress={::this.onClose}>
-            <View style={styles.menuItems}>
-              <Icon
-                style={[styles.bluColor, styles.menuItemTextSize]}
-                name="icon-arrow-left-ios-16"/>
-              <Text style={[styles.bluColor, styles.menuItemTextSize]}>Dashboard</Text>
-            </View>
-            </TouchableOpacity>
-          </View>
+  onClose() {
+    const { navigator } = this.props;
+    navigator.pop({animated: true});
+  }
 
-          <View style={styles.searchGroup}>
-            <Icon
-              style={[styles.grayColor, styles.menuItemTextSize]}
-              name="icon-search-16"
-            />
-            <TextInput
-              style={[styles.input, styles.menuItemTextSize]}
-              ref={i => this.$input = i}
-              onChangeText={text => this.onTextChange(text)}
-              autoFocus
-              autoCorrect={false}
-              multiline={false}
-              placeholder="Search for business"
-              returnKeyType="search"
-              underlineColorAndroid="transparent"
-            />
-          </View>
-        </View>
-
-        <View style={styles.results}>
-          <Loader
-            isLoading={search.isSearching}
-            style={{ flex: 1 }}
-            color={'#5AC8FA'}>
-
-            {this.renderList()}
-          </Loader>
-        </View>
-      </View>
-    );
+  onFollow(row:SearchRow) {
+    if (row.is_following) {
+      this.props.search.unfollow(row.id);
+    } else {
+      this.props.search.follow(row.id);
+    }
+    console.log('sssssssssssssssssssssssss');
+    console.log(row.is_following)
   }
 
   renderList() {
-    if(!this.state.query) {
+    if (!this.state.query) {
       return null;
     }
 
-    const dataSource = this.ds.cloneWithRows(this.props.search.items.slice())
+    const dataSource = this.ds.cloneWithRows(this.props.search.items.slice());
 
     return (
       <ListView
@@ -112,33 +81,64 @@ export default class SearchForm extends Component {
         <Text style={styles.title}>{row.name}</Text>
         <Button
           title={row.is_following? 'Unfollow' : 'Follow'}
-          onPress={this.onFollow.bind(this, row)} />
+          onPress={this.onFollow.bind(this, row)}/>
       </View>
     );
   }
 
   renderSeparator() {
-    return (<View style={styles.separator} />);
+    return (<View style={styles.separator}/>);
   }
 
-  onTextChange(query) {
-    this.setState({query});
-    this.props.search.search(query);
-  }
+  render() {
+    const { query } = this.state;
+    const search:SearchStore = this.props.search;
 
-  onClose() {
-    const { navigator } = this.props;
-    navigator.pop({animated: true});
-  }
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <View style={styles.menu}>
+            <TouchableOpacity
+              onPress={::this.onClose}>
+            <View style={styles.menuItems}>
+              <Icon
+                style={styles.backIcon}
+                name="icon-arrow-left-ios-16"
+              />
+              <Text style={styles.backTitle}>Dashboard</Text>
+            </View>
+            </TouchableOpacity>
+          </View>
 
-  onFollow(row:SearchRow) {
-    if(row.is_following) {
-      this.props.search.unfollow(row.id);
-    } else {
-      this.props.search.follow(row.id);
-    }
-    console.log('sssssssssssssssssssssssss');
-    console.log(row.is_following)
+          <View style={styles.searchGroup}>
+            <Icon
+              style={styles.searchIcon}
+              name="icon-search-16"
+            />
+            <TextInput
+              style={styles.input}
+              ref={i => this.$input = i}
+              onChangeText={text => this.onTextChange(text)}
+              autoFocus
+              autoCorrect={false}
+              multiline={false}
+              placeholder="Search for business"
+              returnKeyType="search"
+              underlineColorAndroid="transparent"
+            />
+          </View>
+        </View>
+
+        <View style={styles.results}>
+          <Loader
+            isLoading={search.isSearching}
+            style={{ flex: 1 }}
+          >
+            {this.renderList()}
+          </Loader>
+        </View>
+      </View>
+    );
   }
 }
 
@@ -156,7 +156,6 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     height: '10%',
-    paddingHorizontal: 20,
     marginBottom: 10,
   },
 
@@ -165,6 +164,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     alignSelf: 'stretch',
     paddingVertical: '1rem',
+    paddingHorizontal: 5,
     borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
   },
@@ -191,7 +191,11 @@ const styles = StyleSheet.create({
     marginLeft: 2,
     flex: 1,
     borderWidth: 0,
-    color: 'black'
+    padding: 2,
+    color: 'black',
+    fontSize: '1.2rem',
+    borderColor: 'red',
+    borderWidth: 1
   },
 
   results: {
@@ -220,7 +224,22 @@ const styles = StyleSheet.create({
 
   separator: {
     width: 10,
-    height: '$rowSizeHeight',
+    height: '$rowSizeHeight'
+  },
+
+  searchIcon: {
+    color: '#b5b9be',
+    fontSize: '1.2rem'
+  },
+
+  backIcon: {
+    color: '$pe_color_blue',
+    fontSize: '1.2rem'
+  },
+
+  backTitle: {
+    color: '$pe_color_blue',
+    fontSize: '1.2rem'
   },
 
   logo: {
@@ -233,17 +252,5 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingLeft: 15,
     color: 'black'
-  },
-
-  bluColor: {
-    color: '$pe_color_blue',
-  },
-
-  grayColor: {
-    color: '#b5b9be'
-  },
-
-  menuItemTextSize: {
-    fontSize: '1.2rem',
   }
 });
