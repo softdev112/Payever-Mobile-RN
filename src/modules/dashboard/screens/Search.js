@@ -1,6 +1,6 @@
 import type SearchStore, { SearchRow } from '../../../store/SearchStore';
 
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { Image, TextInput, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
 import { Button, Icon, Loader, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
@@ -9,7 +9,7 @@ import { ListView } from 'react-native';
 
 @inject('search')
 @observer
-export default class SearchForm extends Component {
+export default class SearchForm extends React.Component {
   static navigatorStyle = {
     navBarHidden: true
   };
@@ -35,6 +35,10 @@ export default class SearchForm extends Component {
     };
   }
 
+  componentWillReact() {
+    console.log('props props props props props ' + this.props.search.isSearching);
+  }
+
   onTextChange(query) {
     this.setState({query});
     this.props.search.search(query);
@@ -51,8 +55,8 @@ export default class SearchForm extends Component {
     } else {
       this.props.search.follow(row.id);
     }
-    console.log('sssssssssssssssssssssssss');
-    console.log(row.is_following)
+
+    this.setState({});
   }
 
   renderList() {
@@ -70,7 +74,8 @@ export default class SearchForm extends Component {
         contentContainerStyle={styles.resultsGrid}
         enableEmptySections={true}
         keyboardShouldPersistTaps={true}
-        initialListSize={20}/>
+        initialListSize={20}
+        />
     );
   }
 
@@ -80,8 +85,10 @@ export default class SearchForm extends Component {
         <Image style={styles.logo} source={row.logoSource}/>
         <Text style={styles.title}>{row.name}</Text>
         <Button
+          titleStyle={styles.followBtnTitle}
           title={row.is_following? 'Unfollow' : 'Follow'}
-          onPress={this.onFollow.bind(this, row)}/>
+          onPress={this.onFollow.bind(this, row)}
+          disabled={this.props.search.isFollowUnfollowUpdating}/>
       </View>
     );
   }
@@ -193,9 +200,7 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     padding: 2,
     color: 'black',
-    fontSize: '1.2rem',
-    borderColor: 'red',
-    borderWidth: 1
+    fontSize: '1.2rem'
   },
 
   results: {
@@ -220,6 +225,10 @@ const styles = StyleSheet.create({
     padding: '2rem',
     height: '$rowSizeHeight',
     width: '$rowSizeHeight',
+  },
+
+  followBtnTitle: {
+    fontSize: '1.2rem'
   },
 
   separator: {

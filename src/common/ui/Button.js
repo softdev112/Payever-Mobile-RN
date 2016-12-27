@@ -3,16 +3,21 @@ import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import StyleSheet from './StyleSheet';
 
 export default class Button extends Component {
-  props: {
+  props:{
     title: string;
     onPress: () => any;
     disabled?: ?boolean;
+    titleStyle?: Object | Number;
   };
 
   render() {
-    const { onPress, title, disabled } = this.props;
+    const { onPress, title, disabled, titleStyle } = this.props;
     const buttonStyles = [styles.button];
     const textStyles = [styles.text];
+
+    if (titleStyle) {
+      textStyles.push(titleStyle);
+    }
 
     if (disabled) {
       buttonStyles.push(styles.buttonDisabled);

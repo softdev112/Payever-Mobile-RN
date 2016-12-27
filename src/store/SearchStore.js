@@ -1,6 +1,6 @@
 import type Store from './index';
 
-import { action, computed, observable, runInAction } from 'mobx';
+import { action, computed, observable, runInAction, autorun } from 'mobx';
 
 import imgNoBusiness from './UserProfilesStore/images/no-business.png';
 
@@ -8,11 +8,13 @@ export default class SearchStore {
   @observable items: Array<SearchRow> = [];
   @observable error: string;
   @observable isSearching = false;
+  @observable isFollowUnfollowUpdating: boolean = false;
 
   store: Store;
 
   constructor(store: Store) {
     this.store = store;
+    autorun(() => console.log());
   }
 
   @action
@@ -49,6 +51,8 @@ export default class SearchStore {
   async follow(businessId) {
     const { api } = this.store;
 
+    runInAction(() => this.isFollowUnfollowUpdating = true);
+
     try {
       const resp = await api.profiles.follow(businessId);
 
@@ -58,18 +62,28 @@ export default class SearchStore {
             resp.data.error_description;
           return;
         }
+
         // Update this profile in state to avoid extra requests
+        const index = this.items.findIndex(item => item.id === businessId);
+        this.items[index] = new SearchRow(Object.assign({}, this.items[index], {
+          is_following: true
+        }));
 
         this.error = null;
       });
     } catch (e) {
-      this.error = e.message;
+      runInAction(() => this.error = e.message);
+    } finally {
+      this.isFollowUnfollowUpdating = false;
+      runInAction(() => this.isFollowUnfollowUpdating = false);
     }
   }
 
   @action
   async unfollow(businessId) {
     const { api } = this.store;
+
+    runInAction(() => this.isFollowUnfollowUpdating = true);
 
     try {
       const resp = await api.profiles.unfollow(businessId);
@@ -80,12 +94,19 @@ export default class SearchStore {
             resp.data.error_description;
           return;
         }
+
         // Update this profile in state to avoid extra requests
+        const index = this.items.findIndex(item => item.id === businessId);
+        this.items[index] = new SearchRow(Object.assign({}, this.items[index], {
+          is_following: false
+        }));
 
         this.error = null;
       });
     } catch (e) {
-      this.error = e.message;
+      runInAction(() => this.error = e.message);
+    } finally {
+      runInAction(() => this.isFollowUnfollowUpdating = false);
     }
   }
 }
