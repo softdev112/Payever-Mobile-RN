@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import { Image, Link, StyleSheet, Text, View } from 'ui';
+
+//noinspection JSUnresolvedVariable
 import type { Navigator } from 'react-native-navigation';
 
 import type ActivityItem from '../../../store/UserProfilesStore/ActivityItem';
@@ -89,5 +91,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 15,
     left: 27,
+    textShadowColor: '#fff',
+    textShadowRadius: 3,
   },
 });
