@@ -10,7 +10,7 @@ export default class UserProfilesStore {
   @observable staffBusinesses: Array<BusinessProfile> = [];
   @observable privateProfile: PersonalProfile = null;
 
-  @observable currentProfile: Profile = null;
+  @observable currentProfile: PersonalProfile|BusinessProfile = null;
 
   store: Store;
 
