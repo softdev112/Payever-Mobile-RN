@@ -51,10 +51,16 @@ export default class SearchStore {
   async follow(businessId) {
     const { api } = this.store;
 
+    // find row element
+    const item: SearchRow = this.items.find((row) => row.id === businessId);
+
+    if (!item) {
+      runInAction(() => this.error = 'Sorry, internal error occurred.');
+      return;
+    }
+
     // Set follow/unfollow processing flag for row
-    runInAction(() => {
-      this.isFollowUnfollowUpdating = true
-    });
+    runInAction(() => item.is_followingUpdate = true);
 
     try {
       const resp = await api.profiles.follow(businessId);
@@ -67,17 +73,13 @@ export default class SearchStore {
         }
 
         // Update this profile in state to avoid extra requests
-        const index = this.items.findIndex(item => item.id === businessId);
-        this.items[index] = new SearchRow(Object.assign({}, this.items[index], {
-          is_following: true,
-        }));
-
-        this.error = null;
+        item.is_following = true;
+        this.error = '';
       });
     } catch (e) {
       runInAction(() => this.error = e.message);
     } finally {
-      runInAction(() => this.isFollowUnfollowUpdating = false);
+      runInAction(() => item.is_followingUpdate = false);
     }
   }
 
@@ -85,7 +87,13 @@ export default class SearchStore {
   async unfollow(businessId) {
     const { api } = this.store;
 
-    runInAction(() => this.isFollowUnfollowUpdating = true);
+    // find row element
+    const item: SearchRow = this.items.find((row) => row.id === businessId);
+
+    if (!item) {
+      runInAction(() => this.error = 'Sorry, internal error occurred.');
+      return;
+    }
 
     try {
       const resp = await api.profiles.unfollow(businessId);
@@ -98,17 +106,13 @@ export default class SearchStore {
         }
 
         // Update this profile in state to avoid extra requests
-        const index = this.items.findIndex(item => item.id === businessId);
-        this.items[index] = new SearchRow(Object.assign({}, this.items[index], {
-          is_following: false,
-        }));
-
-        this.error = null;
+        item.is_following = false;
+        this.error = '';
       });
     } catch (e) {
       runInAction(() => this.error = e.message);
     } finally {
-      runInAction(() => this.isFollowUnfollowUpdating = false);
+      runInAction(() => item.is_followingUpdate = false);
     }
   }
 }
