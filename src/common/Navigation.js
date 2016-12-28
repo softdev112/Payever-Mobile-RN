@@ -1,6 +1,6 @@
 /* eslint no-prototype-builtins: 0, no-continue: 0 */
 
-import { Navigation } from 'react-native-navigation';
+import { Navigation, Navigator } from 'react-native-navigation';
 import { Provider } from 'mobx-react/native';
 
 import type Store from '../store';
@@ -61,5 +61,20 @@ export function showScreen(screenId) {
       },
       disableOpenGesture: true,
     },
+  });
+}
+
+export function toggleMenu(navigator: Navigator, params = {}) {
+  navigator.push({
+    screen: 'core.SideMenu',
+    animated: false,
+    ...params,
+  });
+}
+
+export function hideMenu(navigator: Navigator, params = {}) {
+  navigator.pop({
+    animated: false,
+    ...params,
   });
 }

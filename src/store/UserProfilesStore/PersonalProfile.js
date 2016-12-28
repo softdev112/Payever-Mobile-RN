@@ -2,6 +2,7 @@ import { observable, extendObservable, computed } from 'mobx';
 import Profile from './Profile';
 import UserAccount from './UserAccount';
 
+//noinspection JSUnresolvedVariable
 import imgNoAvatar from './images/no-avatar.png';
 
 export default class PersonalProfile extends Profile {
@@ -25,5 +26,11 @@ export default class PersonalProfile extends Profile {
 
   @computed get displayName() {
     return this.user.full_name;
+  }
+
+  @computed get settingsUrl() {
+    const templateUrl = '/private/network/{id}/account';
+    const url = this.store.config.siteUrl + templateUrl;
+    return url.replace('{id}', this.user.profile_id);
   }
 }
