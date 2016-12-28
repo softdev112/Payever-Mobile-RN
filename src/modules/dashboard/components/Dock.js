@@ -4,10 +4,14 @@ import { IconText, StyleSheet, View } from 'ui';
 import type AppItem from '../../../store/UserProfilesStore/AppItem';
 
 export default class Dock extends Component {
+  static defaultProps = {
+    showApps: true,
+  };
+
   props: {
     apps: Array<AppItem>,
     onAppClick: (item: AppItem) => any,
-    showApps: boolean
+    showApps?: boolean
   };
 
   renderIcon(item: AppItem) {
@@ -25,7 +29,7 @@ export default class Dock extends Component {
         imageStyle={styles.image}
         textStyle={styles.title}
         onPress={() => onAppClick(item)}
-        source={{ uri: item.image }}
+        source={item.logoSource}
         title={title}
       />
     );
