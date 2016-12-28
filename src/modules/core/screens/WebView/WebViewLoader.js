@@ -40,9 +40,7 @@ export default class WebViewLoader extends Component {
             onPress={::this.onProfilePress}
           />
         </View>
-        <View style={styles.main}>
-          <Loader style={styles.loader} isLoading />
-        </View>
+        <Loader isLoading />
       </View>
     );
   }
@@ -50,13 +48,7 @@ export default class WebViewLoader extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0,
-    zIndex: 4,
-    backgroundColor: '#fff',
+    flex: 1,
   },
 
   header: {
