@@ -33,6 +33,7 @@ ios/fastlane/report.xml
 .gradle
 local.properties
 hs_err_pid*.log
+payever-release.keystore
 
 # node.js
 #
