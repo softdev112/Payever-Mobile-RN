@@ -28,7 +28,6 @@ const PAGES: Array<AppItem> = [
   new AppItem({
     id: 'account',
     name: 'Account',
-    url: '/private/network/30615/account',
     image: require('../images/settings.png'),
   }),
 ];
@@ -48,20 +47,24 @@ export default class Private extends Component {
   };
 
   onAppClick(app: AppItem) {
-    const { config, navigator } = this.props;
+    const { config, navigator, userProfiles } = this.props;
 
-    if (app.url) {
-      navigator.push({
-        title: app.name,
-        screen: 'core.WebView',
-        passProps: { url: config.siteUrl + app.url },
-      });
+    let url = config.siteUrl + app.url;
+
+    if (app.id === 'account') {
+      url = userProfiles.privateProfile.settingsUrl;
     }
+
+    navigator.push({
+      title: app.name,
+      screen: 'core.WebView',
+      passProps: { url },
+    });
   }
 
   render() {
     const { userProfiles, navigator } = this.props;
-    const userName = userProfiles.currentProfile.displayName;
+    const userName = userProfiles.privateProfile.displayName;
     return (
       <View style={styles.container}>
         <SearchHeader navigator={navigator} />
@@ -69,6 +72,7 @@ export default class Private extends Component {
           <DashboardTitle
             title1="Welcome"
             title2={userName}
+            showOnSmallScreens
           />
         </View>
         <Dock

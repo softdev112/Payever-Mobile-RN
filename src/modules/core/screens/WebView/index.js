@@ -5,6 +5,7 @@ import type { Navigator } from 'react-native-navigation';
 
 import injectedCode from './injectedCode';
 import WebViewLoader from './WebViewLoader';
+import { toggleMenu } from '../../../../common/Navigation';
 
 
 export default class WebView extends Component {
@@ -46,15 +47,11 @@ export default class WebView extends Component {
   }
 
   onMessage({ nativeEvent: { data } }) {
-    const { navigator } = this.props;
     const object = JSON.parse(data);
 
     switch (object.command) {
       case 'show-menu': {
-        navigator.toggleDrawer({
-          side: 'right',
-          animated: true,
-        });
+        toggleMenu(this.props.navigator);
         break;
       }
       case 'error': {

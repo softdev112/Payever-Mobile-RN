@@ -4,6 +4,7 @@ import { Icon, ImageButton, StyleSheet, View, Text } from 'ui';
 import type { Navigator } from 'react-native-navigation';
 
 import type UserProfilesStore from '../../../store/UserProfilesStore';
+import { toggleMenu } from '../../../common/Navigation';
 
 @inject('userProfiles')
 @observer
@@ -15,8 +16,7 @@ export default class SearchHeader extends Component {
   };
 
   onProfilePress() {
-    const { navigator } = this.props;
-    navigator.toggleDrawer({ side: 'right' });
+    toggleMenu(this.props.navigator);
   }
 
   onSearchPress() {

@@ -1,14 +1,11 @@
 import { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { observer } from 'mobx-react/native';
-import { Image, StyleSheet, Text, View } from 'ui';
+import { Icon, Image, StyleSheet, Text, View } from 'ui';
 
 import type UserProfilesStore from '../../../store/UserProfilesStore/index';
 import type BusinessProfile
   from '../../../store/UserProfilesStore/BusinessProfile';
-
-import imgChecked from '../images/checkMarkPressed.png';
-
 
 @observer
 export default class BusinessList extends Component {
@@ -33,7 +30,7 @@ export default class BusinessList extends Component {
           <Text style={styles.stores}>{profile.stores} stores</Text>
         </View>
         {profile === userProfiles.currentProfile && (
-          <Image source={imgChecked} style={styles.imgChecked} />
+          <Icon name="icon-checkbox-checked-24" style={styles.imgChecked} />
         )}
       </TouchableOpacity>
     );
@@ -75,21 +72,22 @@ const styles = StyleSheet.create({
   },
 
   imgChecked: {
-    width: 24,
-    height: 24,
-  },
-
-  title: {
-    color: '$pe_color_dark_gray',
-  },
-
-  stores: {
-    color: '$pe_color_gray_2',
+    marginTop: 4,
+    color: '$pe_color_blue',
   },
 
   text: {
     flexDirection: 'column',
     flex: 1,
-    paddingLeft: 8,
+    paddingLeft: 20,
+  },
+
+  title: {
+    paddingRight: 15,
+    color: '$pe_color_dark_gray',
+  },
+
+  stores: {
+    color: '$pe_color_gray_2',
   },
 });

@@ -1,10 +1,22 @@
 import { StyleSheet, Text, View } from 'ui';
 
-export default function DashboardTitle({ title1, title2 }: Props) {
+export default function DashboardTitle(
+  { title1, title2, showOnSmallScreens = false }: Props
+) {
+  const containerStyle = [styles.container];
+  const title1Style    = [styles.title1];
+  const title2Style    = [styles.title2];
+
+  if (!showOnSmallScreens) {
+    containerStyle.push(styles.container_compact);
+    title1Style.push(styles.title1_compact);
+    title2Style.push(styles.title2_compact);
+  }
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title1}>{title1.toUpperCase()}</Text>
-      <Text style={styles.title2}>{title2}</Text>
+    <View style={containerStyle}>
+      <Text style={title1Style}>{title1.toUpperCase()}</Text>
+      <Text style={title2Style}>{title2}</Text>
     </View>
   );
 }
@@ -12,6 +24,9 @@ export default function DashboardTitle({ title1, title2 }: Props) {
 const styles = StyleSheet.create({
   container: {
     paddingLeft: 20,
+  },
+
+  container_compact: {
     '@media (min-height: 700)': {
       paddingTop: 20,
       paddingBottom: 10,
@@ -20,6 +35,9 @@ const styles = StyleSheet.create({
 
   title1: {
     color: '$pe_color_gray_2',
+  },
+
+  title1_compact: {
     '@media (max-height: 640)': {
       height: 0,
     },
@@ -29,6 +47,9 @@ const styles = StyleSheet.create({
     color: '$pe_color_dark_gray',
     fontSize: 28,
     fontFamily: 'Open Sans_light',
+  },
+
+  title2_compact: {
     '@media ios': {
       fontFamily: 'HelveticaNeue-UltraLight',
     },
@@ -47,4 +68,5 @@ const styles = StyleSheet.create({
 type Props = {
   title1: string;
   title2: string;
+  showOnSmallScreens: boolean;
 }

@@ -4,6 +4,7 @@ import { Icon, ImageButton, Loader, StyleSheet, Text, View } from 'ui';
 import { Navigator } from 'react-native-navigation';
 
 import type UserProfilesStore from '../../../../store/UserProfilesStore';
+import { toggleMenu } from '../../../../common/Navigation';
 
 @inject('userProfiles')
 @observer
@@ -18,8 +19,7 @@ export default class WebViewLoader extends Component {
   }
 
   onProfilePress() {
-    const { navigator } = this.props;
-    navigator.toggleDrawer({ side: 'right' });
+    toggleMenu(this.props.navigator);
   }
 
   render() {

@@ -2,29 +2,28 @@ import { Component } from 'react';
 import { ScrollView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { Icon, ImageButton, StyleSheet, Text, View } from 'ui';
-import type { Navigator } from 'react-native-navigation';
+import { Navigator } from 'react-native-navigation';
 
 import type UserProfilesStore from '../../../store/UserProfilesStore/index';
 import type BusinessProfile
   from '../../../store/UserProfilesStore/BusinessProfile';
-import { showScreen } from '../../../common/Navigation';
+import { hideMenu, showScreen } from '../../../common/Navigation';
 import BusinessList from '../components/BusinessList';
 
 @inject('userProfiles')
 @observer
 export default class SideMenu extends Component {
+  static navigatorStyle = {
+    navBarHidden: true,
+  };
+
   props: {
     navigator: Navigator,
     userProfiles?: UserProfilesStore
   };
 
   onClose() {
-    const { navigator } = this.props;
-    navigator.toggleDrawer({
-      side: 'right',
-      animated: true,
-      to: 'closed',
-    });
+    hideMenu(this.props.navigator);
   }
 
   onProfileSelect(profile: BusinessProfile) {
@@ -40,6 +39,15 @@ export default class SideMenu extends Component {
     userProfiles.setCurrentProfile(userProfiles.privateProfile);
     // todo: replace to navigator.push
     showScreen('dashboard.Private');
+  }
+
+  onProfileSettingsPress() {
+    const { navigator, userProfiles } = this.props;
+    this.onClose();
+    navigator.push({
+      screen: 'core.WebView',
+      passProps: { url: userProfiles.privateProfile.settingsUrl },
+    });
   }
 
   onDebugPagePress() {
@@ -61,14 +69,13 @@ export default class SideMenu extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.shadow} />
 
         <View style={styles.btnClose}>
           <Icon name="icon-x-16" onPress={::this.onClose} />
         </View>
 
         <View style={styles.businesses}>
-          <ScrollView style={{ flex: 1 }}>
+          <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
 
             <View style={styles.userInfo}>
               <ImageButton
@@ -86,6 +93,13 @@ export default class SideMenu extends Component {
                 >
                   My Account
                 </Text>
+                <View style={styles.userInfo_profile}>
+                  <Icon
+                    style={styles.userInfo_profileIcon}
+                    name="icon-settings-24"
+                    onPress={::this.onProfileSettingsPress}
+                  />
+                </View>
               </View>
             </View>
 
@@ -94,7 +108,7 @@ export default class SideMenu extends Component {
               userProfiles={userProfiles}
             />
 
-            <Text style={styles.addBusiness}>Add new business</Text>
+            <Text style={styles.addBusiness}>Add New Business</Text>
 
           </ScrollView>
         </View>
@@ -108,7 +122,7 @@ export default class SideMenu extends Component {
               Debug page
             </Text>
           )}
-          <Text style={styles.bottomMenu_item}>Chat with us</Text>
+          <Text style={styles.bottomMenu_item}>Chat With Us</Text>
           <Text style={styles.bottomMenu_item}>Logout</Text>
         </View>
       </View>
@@ -123,23 +137,6 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: 'white',
     justifyContent: 'center',
-    width: 280,
-  },
-
-  shadow: {
-    '@media ios': {
-      position: 'absolute',
-      width: 1,
-      top: 0,
-      left: 0,
-      bottom: 0,
-      backgroundColor: '#eeeeee',
-      shadowColor: 'black',
-      shadowOffset: { width: 1, height: 0 },
-      shadowOpacity: 1,
-      shadowRadius: 6,
-      zIndex: 3,
-    },
   },
 
   btnClose: {
@@ -169,18 +166,31 @@ const styles = StyleSheet.create({
   },
 
   userInfo_name: {
+    paddingTop: 20,
     fontSize: 15,
     color: '$pe_color_blue',
   },
 
   userInfo_accountLink: {
+    paddingTop: 8,
     color: '$pe_color_gray_2',
     fontSize: 13,
+  },
+
+  userInfo_profile: {
+    position: 'absolute',
+    top: -22,
+    right: 0,
+  },
+
+  userInfo_profileIcon: {
+    color: '$pe_color_gray_2',
   },
 
   addBusiness: {
     marginLeft: 24,
     paddingTop: 18,
+    paddingBottom: 18,
     fontSize: 15,
     color: '$pe_color_blue',
   },
