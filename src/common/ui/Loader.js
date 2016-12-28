@@ -4,7 +4,7 @@ import StyleSheet from './StyleSheet';
 
 export default class Loader extends Component {
   props: {
-    children: any;
+    children?: any;
     color?: string;
     isLoading?: boolean;
     style?: Object | Number;

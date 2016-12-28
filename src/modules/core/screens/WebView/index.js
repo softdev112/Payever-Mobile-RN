@@ -6,7 +6,6 @@ import type { Navigator } from 'react-native-navigation';
 import injectedCode from './injectedCode';
 import WebViewLoader from './WebViewLoader';
 
-const LOADER_HIDE_DELAY = 350;
 
 export default class WebView extends Component {
   static navigatorStyle = {
@@ -18,29 +17,12 @@ export default class WebView extends Component {
     url: string;
   };
 
-  state: {
-    isLoading: boolean;
-  };
-
   $view: ReactWebView;
   injectedCode: string;
-  mounted: boolean;
 
   constructor(props) {
     super(props);
     this.injectedCode = injectedCode({ isDev: __DEV__ });
-    this.mounted = false;
-    this.state = {
-      isLoading: true,
-    };
-  }
-
-  componentDidMount() {
-    this.mounted = true;
-  }
-
-  componentWillUnmount() {
-    this.mounted = false;
   }
 
   onLoadStart({ nativeEvent }) {
@@ -51,27 +33,16 @@ export default class WebView extends Component {
     }
 
     if (nativeEvent.url.endsWith('/home')) {
+      //noinspection JSUnresolvedFunction
       this.$view.stopLoading();
       navigator.pop();
     }
 
     if (nativeEvent.url.endsWith('/private')) {
+      //noinspection JSUnresolvedFunction
       this.$view.stopLoading();
       navigator.pop();
     }
-
-    this.setState({ isLoading: true });
-  }
-
-  onLoadEnd() {
-    // Prevent blinking, which isn't possible with renderLoading
-    setTimeout(() => {
-      if (this.mounted) {
-        this.setState({ isLoading: false });
-      } else {
-        this.state.isLoading = false;
-      }
-    }, LOADER_HIDE_DELAY);
   }
 
   onMessage({ nativeEvent: { data } }) {
@@ -103,7 +74,6 @@ export default class WebView extends Component {
 
   render() {
     const { navigator, url } = this.props;
-    const { isLoading } = this.state;
 
     return (
       <View style={styles.container}>
@@ -111,16 +81,14 @@ export default class WebView extends Component {
           source={{ uri: url }}
           ref={$v => this.$view = $v}
           onLoadStart={::this.onLoadStart}
-          onLoadEnd={::this.onLoadEnd}
           onMessage={::this.onMessage}
           javaScriptEnabled
           domStorageEnabled
+          startInLoadingState
           injectedJavaScript={this.injectedCode}
+          renderLoading={() => <WebViewLoader navigator={navigator} />}
           bounces={false}
         />
-        {isLoading && (
-          <WebViewLoader navigator={navigator} />
-        )}
       </View>
     );
   }
@@ -128,9 +96,9 @@ export default class WebView extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     '@media ios and (orientation: portrait)': {
       marginTop: 15,
     },
-    flex: 1,
   },
 });
