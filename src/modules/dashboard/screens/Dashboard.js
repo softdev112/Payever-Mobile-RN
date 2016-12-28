@@ -11,8 +11,9 @@ import ActivityCard from '../components/ActivityCard';
 import Dock from '../components/Dock';
 import DashboardTitle from '../components/DashboardTitle';
 import SearchHeader from '../components/SearchHeader';
+import type { Config } from '../../../config/index';
 
-@inject('userProfiles')
+@inject('userProfiles', 'config')
 @observer
 export default class Dashboard extends Component {
   static navigatorStyle = {
@@ -22,6 +23,7 @@ export default class Dashboard extends Component {
   props: {
     navigator: Navigator;
     userProfiles: UserProfilesStore;
+    config: Config;
   };
 
   state: {
@@ -64,7 +66,7 @@ export default class Dashboard extends Component {
   }
 
   onAppClick(item: AppItem) {
-    const { navigator } = this.props;
+    const { config, navigator, userProfiles } = this.props;
 
     if (item.label === 'dashboard') {
       this.animateLayout();
@@ -72,11 +74,17 @@ export default class Dashboard extends Component {
       return;
     }
 
+    const slug = userProfiles.currentProfile.business.slug;
+    const businessUrl = config.siteUrl + `/business/${slug}/home#home`;
+
     if (item.url) {
       navigator.push({
         title: item.name,
         screen: 'core.WebView',
-        passProps: { url: item.url },
+        passProps: {
+          url: item.url,
+          referer: businessUrl,
+        },
       });
     }
   }

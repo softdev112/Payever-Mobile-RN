@@ -16,6 +16,7 @@ export default class WebView extends Component {
   props: {
     navigator: Navigator;
     url: string;
+    referer?: string;
   };
 
   $view: ReactWebView;
@@ -70,12 +71,17 @@ export default class WebView extends Component {
   }
 
   render() {
-    const { navigator, url } = this.props;
+    const { navigator, url, referer } = this.props;
+
+    const headers = {};
+    if (referer) {
+      headers.Referer = referer;
+    }
 
     return (
       <View style={styles.container}>
         <ReactWebView
-          source={{ uri: url }}
+          source={{ uri: url, headers }}
           ref={$v => this.$view = $v}
           onLoadStart={::this.onLoadStart}
           onMessage={::this.onMessage}
