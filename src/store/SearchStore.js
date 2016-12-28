@@ -51,7 +51,10 @@ export default class SearchStore {
   async follow(businessId) {
     const { api } = this.store;
 
-    runInAction(() => this.isFollowUnfollowUpdating = true);
+    // Set follow/unfollow processing flag for row
+    runInAction(() => {
+      this.isFollowUnfollowUpdating = true
+    });
 
     try {
       const resp = await api.profiles.follow(businessId);
@@ -127,6 +130,7 @@ export class SearchRow {
     logo: ?string
   };
   @observable is_following: boolean;
+  @observable is_followingUpdate: boolean;
 
   constructor(data) {
     Object.assign(this, data);
