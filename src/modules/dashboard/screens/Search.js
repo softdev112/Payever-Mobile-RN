@@ -205,30 +205,28 @@ const styles = StyleSheet.create({
   },
 
   followBtnTitle: {
-    fontSize: '1.2rem',
+    fontSize: '1.1rem',
     color: '#0084ff',
   },
 
   followBtn: {
-    width: '25%',
+    width: '22%',
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'stretch',
     backgroundColor: '#FFF',
     borderColor: '#0084ff',
     borderWidth: 1,
   },
 
   unfollowBtnTitle: {
-    fontSize: '1.2rem',
+    fontSize: '1.1rem',
     color: '#FFF',
   },
 
   unfollowBtn: {
-    width: '25%',
+    width: '22%',
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'stretch',
     backgroundColor: '#0084ff',
     borderColor: '#0084ff',
     borderWidth: 1,
