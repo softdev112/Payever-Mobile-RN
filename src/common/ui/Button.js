@@ -9,13 +9,18 @@ export default class Button extends Component {
     title: string;
     onPress: () => any;
     disabled?: ?boolean;
-    titleStyle?: Object | Number;
+    titleStyle?: Object;
+    style?: Object;
   };
 
   render() {
-    const { onPress, title, disabled, titleStyle } = this.props;
+    const { onPress, title, disabled, style, titleStyle } = this.props;
     const buttonStyles = [styles.button];
     const textStyles = [styles.text];
+
+    if (style) {
+      buttonStyles.push(style);
+    }
 
     if (titleStyle) {
       textStyles.push(titleStyle);
