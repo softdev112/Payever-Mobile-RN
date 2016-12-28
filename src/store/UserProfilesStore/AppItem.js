@@ -15,4 +15,11 @@ export default class AppItem {
   constructor(data) {
     Object.assign(this, data);
   }
+
+  get logoSource() {
+    if (typeof this.image === 'string') {
+      return { uri: this.image };
+    }
+    return this.image;
+  }
 }

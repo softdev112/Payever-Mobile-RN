@@ -1,14 +1,15 @@
 import { Component } from 'react';
-import { Animated, ScrollView } from 'react-native';
+import { Animated, ListViewDataSource, ScrollView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
-import { GridView, IconText, Loader, Text, StyleSheet, View } from 'ui';
+import { GridView, IconText, Loader, StyleSheet, View } from 'ui';
 
 import type UserProfilesStore from '../../../store/UserProfilesStore/index';
 import type ActivityItem from '../../../store/UserProfilesStore/ActivityItem';
 import type AppItem from '../../../store/UserProfilesStore/AppItem';
 import ActivityCard from '../components/ActivityCard';
 import Dock from '../components/Dock';
+import DashboardTitle from '../components/DashboardTitle';
 import SearchHeader from '../components/SearchHeader';
 
 @inject('userProfiles')
@@ -31,7 +32,7 @@ export default class Dashboard extends Component {
     todos: Array<ActivityItem>;
   };
 
-  dataSource: GridView.DataSource;
+  dataSource: ListViewDataSource;
 
   constructor(props) {
     super(props);
@@ -107,10 +108,7 @@ export default class Dashboard extends Component {
     } = this.state;
     const { navigator, userProfiles } = this.props;
     const dataSourceTop = this.dataSource.cloneWithRows(appsTop);
-
-    const welcomeText = (
-      'Welcome to ' + userProfiles.currentProfile.displayName
-    ).toUpperCase();
+    const businessName = userProfiles.currentProfile.displayName;
 
     return (
       <Loader isLoading={!appsTop.length}>
@@ -133,10 +131,10 @@ export default class Dashboard extends Component {
 
             {!showApps && (
               <View style={styles.cards_container}>
-                <View style={styles.cards_header}>
-                  <Text style={styles.cards_welcome}>{welcomeText}</Text>
-                  <Text style={styles.cards_activity}>Today’s activity</Text>
-                </View>
+                <DashboardTitle
+                  title1={businessName}
+                  title2="Today’s activity"
+                />
                 <ScrollView
                   contentContainerStyle={styles.cards_scroll}
                   horizontal
@@ -215,35 +213,5 @@ const styles = StyleSheet.create({
   cards_scroll: {
     paddingLeft: 10,
     paddingRight: 10,
-  },
-
-  cards_header: {
-    paddingLeft: 20,
-    '@media (min-height: 700)': {
-      paddingTop: 20,
-      paddingBottom: 10,
-    },
-  },
-
-  cards_welcome: {
-    color: '$pe_color_gray_2',
-    '@media (max-height: 640)': {
-      height: 0,
-    },
-  },
-
-  cards_activity: {
-    color: '$pe_color_dark_gray',
-    fontSize: 28,
-    fontFamily: 'Open Sans_light',
-    '@media ios': {
-      fontFamily: 'HelveticaNeue-Light',
-    },
-    '@media (max-height: 600)': {
-      height: 0,
-    },
-    '@media (min-height: 700)': {
-      fontSize: 34,
-    },
   },
 });
