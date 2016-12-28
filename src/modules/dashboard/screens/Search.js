@@ -30,7 +30,6 @@ export default class SearchForm extends Component {
 
     this.state = {
       query: '',
-      currentPressedBtns: [],
     };
   }
 
@@ -44,20 +43,12 @@ export default class SearchForm extends Component {
     navigator.pop({ animated: true });
   }
 
-  onFollow(index) {
-    const row: SearchRow = this.props.search.items[index];
-
-    if (!row) return;
-
+  onFollow(row) {
     if (row.is_following) {
       this.props.search.unfollow(row.id);
     } else {
       this.props.search.follow(row.id);
     }
-
-    this.setState({
-      currentPressedBtns: this.state.currentPressedBtns.concat(index),
-    });
   }
 
   renderList() {
@@ -79,16 +70,13 @@ export default class SearchForm extends Component {
     );
   }
 
-  renderRow(row:SearchRow, index: Number) {
+  renderRow(row:SearchRow, secId, index: Number) {
     const followBtnStyle = [row.is_following ? styles.unfollowBtn : styles.followBtn];
     const followBtnTitleStyle = [row.is_following ? styles.unfollowBtnTitle : styles.followBtnTitle];
-
-    if (index === 0) {
-      followBtnStyle.push({ backgroundColor: '#CCC' });
-    }
+    const isFollowUpdating = row.is_followUpdating;
 
     return (
-      <View style={styles.row}>
+      <View style={[styles.row, index === 0 ? { backgroundColor: '#CCC' } : null]}>
         <Image style={styles.logo} source={row.logoSource} />
         <Text style={styles.title}>{row.name}</Text>
         <Button
@@ -96,7 +84,7 @@ export default class SearchForm extends Component {
           titleStyle={followBtnTitleStyle}
           title={row.is_following ? 'Unfollow' : 'Follow'}
           onPress={this.onFollow.bind(this, row)}
-          disabled={row.is_followUpdating}
+          disabled={isFollowUpdating}
         />
       </View>
     );
@@ -212,7 +200,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 4,
+    padding: 5,
     height: '7%',
   },
 
