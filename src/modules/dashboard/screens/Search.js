@@ -96,8 +96,7 @@ export default class SearchForm extends Component {
           titleStyle={followBtnTitleStyle}
           title={row.is_following ? 'Unfollow' : 'Follow'}
           onPress={this.onFollow.bind(this, row)}
-          disabled={this.props.search.isFollowUnfollowUpdating
-            && this.state.currentPressedBtns.findIndex}
+          disabled={row.is_followUpdating}
         />
       </View>
     );
@@ -106,7 +105,6 @@ export default class SearchForm extends Component {
   render() {
     const { query } = this.state;
     const search:SearchStore = this.props.search;
-    const isFollowUpdate = this.props.search.isFollowUnfollowUpdating ? '1' : '0';
 
     return (
       <View style={styles.container}>
@@ -172,8 +170,6 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    borderColor: 'cyan',
-    borderWidth: 1,
     alignItems: 'center',
     height: '8%',
     flexDirection: 'row',
@@ -187,8 +183,6 @@ const styles = StyleSheet.create({
 
   closeButton: {
     padding: 5,
-    borderColor: 'red',
-    borderWidth: 1,
   },
 
   input: {
@@ -220,8 +214,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 4,
     height: '7%',
-    borderColor: 'red',
-    borderWidth: 1,
   },
 
   followBtnTitle: {
