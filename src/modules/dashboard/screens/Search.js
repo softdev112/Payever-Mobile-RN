@@ -1,17 +1,16 @@
-import type SearchStore, { SearchRow } from '../../../store/SearchStore';
-
 import { Component } from 'react';
-import { Image, TextInput, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
-import { Button, Icon, Loader, ImageButton, StyleSheet, Text, View } from 'ui';
+import { Image, TextInput, TouchableWithoutFeedback, TouchableOpacity, ListView } from 'react-native';
+import { Button, Icon, Loader, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
-import { ListView } from 'react-native';
+import type { Navigator } from 'react-native-navigation';
 
+import type SearchStore, { SearchRow } from '../../../store/SearchStore';
 
 @inject('search')
 @observer
 export default class SearchForm extends Component {
   static navigatorStyle = {
-    navBarHidden: true
+    navBarHidden: true,
   };
 
   props: {
@@ -28,12 +27,10 @@ export default class SearchForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: ''
+      query: '',
     };
 
-    this.dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
+    this.dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
   }
 
   onTextChange(query) {
@@ -56,8 +53,6 @@ export default class SearchForm extends Component {
   }
 
   renderRow(row: SearchRow) {
-    const followBtnStyle = [row.is_following ? styles.unfollowBtn : styles.followBtn];
-    const followBtnTitleStyle = [row.is_following ? styles.unfollowBtnTitle : styles.followBtnTitle];
     const isFollowUpdating = row.is_followUpdating;
 
     return (
@@ -65,10 +60,10 @@ export default class SearchForm extends Component {
         <Image style={styles.logo} source={row.logoSource} />
         <Text style={styles.title}>{row.name}</Text>
         <Button
-          style={followBtnStyle}
-          titleStyle={followBtnTitleStyle}
+          style={styles.followBtn}
+          titleStyle={styles.followBtnTitle}
           title={row.is_following ? 'Unfollow' : 'Follow'}
-          onPress={this.onFollow.bind(this, row)}
+          onPress={() => ::this.onFollow(row)}
           disabled={isFollowUpdating}
         />
       </View>
@@ -78,7 +73,7 @@ export default class SearchForm extends Component {
   render() {
     const { query } = this.state;
     const search: SearchStore = this.props.search;
-    const isFollowingUpdating = search.isFollowUpdating;
+    const isFollowingUpdating = search.isFollowUpdating; // It definition is to get mobx tracking this observable
     const dataSource = this.dataSource.cloneWithRows(search.items.slice());
 
     return (
@@ -155,23 +150,23 @@ const styles = StyleSheet.create({
     borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
     '@media ios and (orientation: portrait)': {
-      marginTop: 10
-    }
+      marginTop: 10,
+    },
   },
 
   icon: {
     marginTop: 1,
-    color: '#b5b9be'
+    color: '#b5b9be',
   },
 
   input: {
     flex: 1,
     borderWidth: 0,
-    color: 'black'
+    color: 'black',
   },
 
   results: {
-    flex: 1
+    flex: 1,
   },
 
   row: {
@@ -179,13 +174,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 46,
     paddingLeft: 15,
-    paddingRight: 12
+    paddingRight: 12,
   },
 
   logo: {
     width: 32,
     height: 32,
-    borderRadius: 16
+    borderRadius: 16,
   },
 
   title: {
@@ -196,29 +191,17 @@ const styles = StyleSheet.create({
 
   followBtnTitle: {
     fontSize: '1.1rem',
+    fontWeight: '100',
     color: '#0084ff',
+    paddingHorizontal: 9,
+    paddingVertical: 3.5,
   },
 
   followBtn: {
-    width: '22%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFF',
     borderColor: '#0084ff',
-    borderWidth: 1,
-  },
-
-  unfollowBtnTitle: {
-    fontSize: '1.1rem',
-    color: '#FFF',
-  },
-
-  unfollowBtn: {
-    width: '22%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#0084ff',
-    borderColor: '#0084ff',
-    borderWidth: 1,
+    borderWidth: 0.7,
   },
 });
