@@ -78,6 +78,7 @@ export default class BusinessProfile extends Profile {
       runInAction('Set activities to the profile', () => {
         this.todoList = resp.data
           .sort((a, b) => a.priority - b.priority)
+          .filter(item => item.type !== 'todo_business_mobile_app')
           .map(item => new ActivityItem(item, this.store));
       });
     }
