@@ -86,7 +86,6 @@ export default class PayeverApi {
     try {
       response.data = JSON.parse(text);
     } catch (e) {
-      console.error('PayeverApi: Error parsing JSON', text);
       response.data = {
         error: 'json_error',
         error_description: 'Wrong server response',

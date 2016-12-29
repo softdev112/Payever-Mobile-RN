@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Keyboard } from 'react-native';
 import { observer, inject } from 'mobx-react/native';
 import {
   Button, Container, Error, Header, Link, Loader, StyleSheet,
@@ -7,8 +8,9 @@ import {
 import type { Navigator } from 'react-native-navigation';
 
 import type AuthStore from '../../../store/AuthStore';
+import type { Config } from '../../../config/index';
 
-@inject('auth')
+@inject('auth', 'config')
 @observer
 export default class Login extends Component {
   static navigatorStyle = {
@@ -18,6 +20,7 @@ export default class Login extends Component {
   props: {
     auth: AuthStore;
     navigator: Navigator;
+    config: Config;
   };
 
   state: {
@@ -49,12 +52,22 @@ export default class Login extends Component {
     }
   }
 
+  onSignUp() {
+    const { config, navigator } = this.props;
+    //noinspection JSUnresolvedFunction
+    Keyboard.dismiss();
+    navigator.push({
+      screen: 'core.WebView',
+      passProps: { url: config.siteUrl + '/register' },
+    });
+  }
+
   render() {
     const { isLoading, error } = this.state;
     return (
       <View style={styles.container}>
         <Header style={styles.header}>
-          <Link>Sign up for free</Link>
+          <Link onPress={::this.onSignUp}>Sign up for free</Link>
         </Header>
         <Loader isLoading={isLoading}>
           <Container contentContainerStyle={styles.form} layout="small">

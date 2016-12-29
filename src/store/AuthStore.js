@@ -48,6 +48,19 @@ export default class AuthStore {
   }
 
   @action
+  logout(): Promise {
+    const { api } = this.store;
+
+    this.accessToken = null;
+    this.refreshToken = null;
+    this.expiresIn = null;
+    this.isLoggedIn = null;
+
+    return api.auth.logout()
+      .then(() => AsyncStorage.removeItem(STORE_NAME));
+  }
+
+  @action
   updateTokens(data) {
     const expires = data.expiresIn;
     if (expires && !isDate(expires) && isFinite(expires)) {

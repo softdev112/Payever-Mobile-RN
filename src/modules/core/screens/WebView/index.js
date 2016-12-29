@@ -1,19 +1,29 @@
 import { Component } from 'react';
 import { WebView as ReactWebView, View } from 'react-native';
+import { observer, inject } from 'mobx-react/native';
 import { StyleSheet } from 'ui';
 import type { Navigator } from 'react-native-navigation';
 
 import injectedCode, { getLoaderHtml } from './injectedCode';
 import WebViewLoader from './WebViewLoader';
-import { toggleMenu } from '../../../../common/Navigation';
+import { showScreen, toggleMenu } from '../../../../common/Navigation';
+import type AuthStore from '../../../../store/AuthStore';
 
+const BACK_ON_URLS = [
+  { urlMask: '/home',    screen: 'dashboard.Dashboard', authRequired: true },
+  { urlMask: '/private', screen: 'dashboard.Private',   authRequired: true },
+  { urlMask: '/login',   screen: 'auth.Login' },
+];
 
+@inject('auth')
+@observer
 export default class WebView extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
 
   props: {
+    auth: AuthStore;
     navigator: Navigator;
     url: string;
     referer?: string;
@@ -28,23 +38,24 @@ export default class WebView extends Component {
   }
 
   onLoadStart({ nativeEvent }) {
-    const { navigator } = this.props;
+    const { auth } = this.props;
 
     if (nativeEvent.url.startsWith('react-js-navigation')) {
       return;
     }
 
-    if (nativeEvent.url.endsWith('/home')) {
-      //noinspection JSUnresolvedFunction
-      this.$view.stopLoading();
-      navigator.pop();
-    }
+    BACK_ON_URLS.forEach((url) => {
+      if (nativeEvent.url.endsWith(url.urlMask)) {
+        //noinspection JSUnresolvedFunction
+        this.$view.stopLoading();
 
-    if (nativeEvent.url.endsWith('/private')) {
-      //noinspection JSUnresolvedFunction
-      this.$view.stopLoading();
-      navigator.pop();
-    }
+        if (url.authRequired && !auth.isLoggedIn) {
+          showScreen('auth.Login');
+          return;
+        }
+        showScreen(url.screen);
+      }
+    });
   }
 
   onMessage({ nativeEvent: { data } }) {
