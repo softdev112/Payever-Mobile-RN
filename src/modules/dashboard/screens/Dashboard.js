@@ -74,16 +74,20 @@ export default class Dashboard extends Component {
       return;
     }
 
-    const slug = userProfiles.currentProfile.business.slug;
-    const businessUrl = config.siteUrl + `/business/${slug}/home#home`;
+    let referer;
+    if (item.label === 'settings') {
+      // Backend code checks if referer is business home
+      const slug = userProfiles.currentProfile.business.slug;
+      referer = config.siteUrl + `/business/${slug}/home#home`;
+    }
 
     if (item.url) {
       navigator.push({
         title: item.name,
         screen: 'core.WebView',
         passProps: {
+          referer,
           url: item.url,
-          referer: businessUrl,
         },
       });
     }
