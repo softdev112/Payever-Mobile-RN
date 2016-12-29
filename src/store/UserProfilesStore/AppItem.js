@@ -1,7 +1,7 @@
 export default class AppItem {
   hasUnreadMessages: ?boolean;
   id: number;
-  image: string;
+  image: string | Object;
   image_mac: ?string;
   image_mobile: ?string;
   image_tablet: ?string;
