@@ -35,14 +35,13 @@ export default class Button extends Component {
       ? title.toUpperCase() : title;
     return (
       <TouchableOpacity
+        style={buttonStyles}
         accessibilityComponentType="button"
         accessibilityTraits={['button']}
         disabled={disabled}
         onPress={onPress}
       >
-        <View style={buttonStyles}>
-          <Text style={textStyles}>{formattedTitle}</Text>
-        </View>
+        <Text style={textStyles}>{formattedTitle}</Text>
       </TouchableOpacity>
     );
   }
@@ -58,7 +57,6 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
     color: 'white',
-    padding: 8,
     fontWeight: '500',
   },
 

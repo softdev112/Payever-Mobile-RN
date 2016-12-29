@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 0,
     color: 'black',
-    marginLeft: 2,
+    marginLeft: 3,
   },
 
   results: {
@@ -196,11 +196,10 @@ const styles = StyleSheet.create({
   },
 
   followBtnTitle: {
-    fontSize: '1.1rem',
-    fontWeight: '100',
+    fontSize: '1.4rem',
     color: '#0084ff',
-    paddingHorizontal: 9,
-    paddingVertical: 3.5,
+    paddingHorizontal: 8,
+    paddingVertical: 3.2,
   },
 
   followBtn: {
@@ -209,5 +208,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderColor: '#0084ff',
     borderWidth: 1,
+    elevation: 3,
   },
 });
