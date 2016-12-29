@@ -100,6 +100,7 @@ export default class SearchForm extends Component {
             underlineColorAndroid="transparent"
           />
           <TouchableOpacity
+            style={styles.closeBtn}
             onPress={::this.onClose}
           >
             <Icon
@@ -199,7 +200,7 @@ const styles = StyleSheet.create({
     fontSize: '1.4rem',
     color: '#0084ff',
     paddingHorizontal: 8,
-    paddingVertical: 3.2,
+    paddingVertical: 3,
   },
 
   followBtn: {
@@ -208,6 +209,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderColor: '#0084ff',
     borderWidth: 1,
-    elevation: 3,
+  },
+
+  closeBtn: {
+    padding: 5,
   },
 });
