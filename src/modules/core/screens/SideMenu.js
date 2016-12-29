@@ -9,8 +9,9 @@ import type BusinessProfile
   from '../../../store/UserProfilesStore/BusinessProfile';
 import { hideMenu, showScreen } from '../../../common/Navigation';
 import BusinessList from '../components/BusinessList';
+import type AuthStore from '../../../store/AuthStore';
 
-@inject('userProfiles')
+@inject('userProfiles', 'auth')
 @observer
 export default class SideMenu extends Component {
   static navigatorStyle = {
@@ -18,8 +19,9 @@ export default class SideMenu extends Component {
   };
 
   props: {
-    navigator: Navigator,
-    userProfiles?: UserProfilesStore
+    navigator: Navigator;
+    userProfiles?: UserProfilesStore;
+    auth: AuthStore;
   };
 
   onClose() {
@@ -58,6 +60,13 @@ export default class SideMenu extends Component {
       title: 'Debug',
       animated: true,
     });
+  }
+
+  onLogoutPress() {
+    const { auth } = this.props;
+    auth.logout()
+      .catch(e => console.warn(e));
+    showScreen('auth.Login');
   }
 
   render() {
@@ -122,8 +131,12 @@ export default class SideMenu extends Component {
               Debug page
             </Text>
           )}
-          <Text style={styles.bottomMenu_item}>Chat With Us</Text>
-          <Text style={styles.bottomMenu_item}>Logout</Text>
+          <Text
+            style={styles.bottomMenu_item}
+            onPress={::this.onLogoutPress}
+          >
+            Logout
+          </Text>
         </View>
       </View>
     );

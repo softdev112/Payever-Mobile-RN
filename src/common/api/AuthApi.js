@@ -2,6 +2,8 @@ import type PayeverApi from './index';
 import { showScreen } from '../Navigation';
 
 export default class AuthApi {
+  client: PayeverApi;
+
   constructor(client: PayeverApi) {
     this.client = client;
   }
@@ -53,6 +55,16 @@ export default class AuthApi {
     }
 
     return response.data.access_token;
+  }
+
+  async logout() {
+    try {
+      // Now there is only web version.
+      await this.client.fetch('/logout');
+    } catch (e) {
+      return true;
+    }
+    return true;
   }
 }
 
