@@ -3,7 +3,7 @@ import { WebView as ReactWebView, View } from 'react-native';
 import { StyleSheet } from 'ui';
 import type { Navigator } from 'react-native-navigation';
 
-import injectedCode from './injectedCode';
+import injectedCode, { getLoaderHtml } from './injectedCode';
 import WebViewLoader from './WebViewLoader';
 import { toggleMenu } from '../../../../common/Navigation';
 
@@ -73,21 +73,29 @@ export default class WebView extends Component {
   render() {
     const { navigator, url, referer } = this.props;
 
-    const headers = {};
+    let source;
     if (referer) {
-      headers.Referer = referer;
+      log('Loading with referer', referer);
+      const headers = {};
+      if (referer) {
+        headers.Referer = referer;
+      }
+      source = { headers, uri: url };
+    } else {
+      log('Loading through html');
+      source = { html: getLoaderHtml(url) };
     }
 
     return (
       <View style={styles.container}>
         <ReactWebView
-          source={{ uri: url, headers }}
+          source={source}
           ref={$v => this.$view = $v}
           onLoadStart={::this.onLoadStart}
           onMessage={::this.onMessage}
           javaScriptEnabled
           domStorageEnabled
-          startInLoadingState
+          startInLoadingState={false}
           injectedJavaScript={this.injectedCode}
           renderLoading={() => <WebViewLoader navigator={navigator} />}
           bounces={false}
