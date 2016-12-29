@@ -1,0 +1,18 @@
+{
+  "spinner": {
+    "style": {
+      "width": 65,
+      "height": 65
+    },
+    "layers": [
+      {
+        "name": "spinner-container",
+        "style": { "color": "#e1e1e1" }
+      },
+      {
+        "name": "spinner-roller",
+        "style": { "color": "#0084ff" }
+      }
+    ]
+  }
+}

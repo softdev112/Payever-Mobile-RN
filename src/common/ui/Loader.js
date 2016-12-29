@@ -1,14 +1,38 @@
 import { Component } from 'react';
-import { ActivityIndicator, View } from 'react-native';
+import { Animated, Easing, View } from 'react-native';
+import Icon from './Icon';
 import StyleSheet from './StyleSheet';
 
 export default class Loader extends Component {
   props: {
     children?: any;
-    color?: string;
     isLoading?: boolean;
     style?: Object | Number;
   };
+
+  spinValue: Animated;
+
+  constructor(params) {
+    super(params);
+    this.spinValue = new Animated.Value(0);
+  }
+
+  componentDidMount() {
+    this.spin();
+  }
+
+  spin() {
+    //noinspection JSUnresolvedFunction
+    this.spinValue.setValue(0);
+    Animated.timing(
+      this.spinValue,
+      {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.linear,
+      }
+    ).start(() => this.spin());
+  }
 
   renderInline() {
     const { isLoading, style } = this.props;
@@ -16,12 +40,17 @@ export default class Loader extends Component {
       return null;
     }
 
+    //noinspection JSUnresolvedFunction
+    const spin = this.spinValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '360deg'],
+    });
+
     return (
       <View style={[styles.loaderContainer, style]}>
-        <ActivityIndicator
-          size="large"
-          color={this.props.color || '#5AC8FA'}
-        />
+        <Animated.View style={{ transform: [{ rotate: spin }] }}>
+          <Icon name="spinner" style={styles.spinner} />
+        </Animated.View>
       </View>
     );
   }

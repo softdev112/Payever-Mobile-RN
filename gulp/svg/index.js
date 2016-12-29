@@ -1,3 +1,6 @@
+/* eslint-disable strict, import/no-extraneous-dependencies, radix */
+/* eslint-disable no-underscore-dangle */
+
 'use strict';
 
 const fs       = require('fs');
@@ -26,6 +29,9 @@ const SVG_TEMPLATE = `
   </svg>
 `;
 
+const CUSTOM_DIR = path.join(__dirname, 'custom');
+const CUSTOM_FILES = fs.readdirSync(CUSTOM_DIR).map(f => f.replace('.svg', ''));
+
 let glyphs = [];
 let glyphDimensions = {};
 
@@ -41,12 +47,12 @@ gulp.task('svg', ['svg:convert'], () => {
       color: glyph.color,
       width: parseInt(dimensions.width),
       height: parseInt(dimensions.height),
-    }
+    };
   });
 
   const json = JSON.stringify(glyphDictionary, null, '  ');
   const filePath = path.join(
-    __dirname, '..', 'src', 'common', 'ui', 'Icon', 'map.json'
+    __dirname, '..', '..', 'src', 'common', 'ui', 'Icon', 'vector.json'
   );
   fs.writeFileSync(filePath, json);
 });
@@ -56,7 +62,7 @@ gulp.task('svg:convert', () => {
   return makeSvgStream()
     .pipe(svgicons2svgfont({
       fontName: 'payeverIcons',
-      normalize: true
+      normalize: true,
     }))
     .on('glyphs', g => glyphs = g)
     .pipe(svg2ttf())
@@ -72,11 +78,12 @@ function makeSvgStream() {
   const stream = new Readable({ objectMode: true });
   const symbolsPromise = getPage(PAGE_URL)
     .then(extractSymbols)
-    .then(wrapSvg);
+    .then(wrapSvg)
+    .then(addCustomIcons);
 
   let processing = false;
 
-  stream._read = function() {
+  stream._read = function read() {
     if (processing) {
       return;
     }
@@ -87,7 +94,7 @@ function makeSvgStream() {
           cwd:      __dirname,
           base:     __dirname,
           path:     path.join(__dirname, symbol.id + '.svg'),
-          contents: new Buffer(symbol.html)
+          contents: new Buffer(symbol.html),
         }));
       });
       stream.push(null);
@@ -122,18 +129,21 @@ function extractSymbols(html) {
     const $symbols = $('svg[data-id^=icons] symbol')
       .map((i, element) => {
         const $symbol = $(element);
-        const [,,width, height] = $symbol.attr('viewbox').split(' ');
+        const [, , width, height] = $symbol.attr('viewbox').split(' ');
         const id = $symbol.attr('id');
         glyphDimensions[id] = { width, height };
         return {
+          id,
           width,
           height,
-          id: id,
-          html: $.html($symbol)
+          html: $.html($symbol),
         };
       });
 
-    resolve($symbols.get());
+    const symbols = $symbols.get()
+      .filter(g => CUSTOM_FILES.indexOf(g.id) === -1);
+
+    resolve(symbols);
   });
 }
 
@@ -147,5 +157,25 @@ function wrapSvg(symbols) {
         .replace('{id}', symbol.id);
     });
     resolve(symbols);
+  });
+}
+
+function addCustomIcons(symbols) {
+  return new Promise((resolve, reject) => {
+    try {
+      CUSTOM_FILES.forEach((id) => {
+        const html = fs.readFileSync(path.join(
+          CUSTOM_DIR, id + '.svg'),
+          'utf8'
+        );
+        const [, width] = html.match(/width="(\d+)"/m);
+        const [, height] = html.match(/height="(\d+)"/m);
+        glyphDimensions[id] = { width, height };
+        symbols.push({ id, html, width, height });
+      });
+      resolve(symbols);
+    } catch (e) {
+      reject(e);
+    }
   });
 }
