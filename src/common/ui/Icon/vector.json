@@ -53,29 +53,29 @@
     "width": 16,
     "height": 16
   },
-  "icon-arrow-left-24": {
+  "icon-arrow-left-2-16": {
     "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-arrow-left-24": {
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-arrow-left-ios-16": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 16,
     "height": 16
   },
   "icon-arrow-left-ios-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
-  },
-  "icon-arrow-left-small-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
   },
   "icon-arrow-right-16": {
     "unicode": "",
@@ -107,872 +107,1209 @@
     "width": 24,
     "height": 24
   },
-  "icon-arrow-right-small-16": {
+  "icon-arrow-sort-asc-16": {
     "unicode": "",
     "color": "black",
     "width": 16,
     "height": 16
   },
-  "icon-ascending-16": {
+  "icon-arrow-sort-desc-16": {
     "unicode": "",
     "color": "black",
     "width": 16,
     "height": 16
   },
-  "icon-ask-16": {
+  "icon-arrow-up-16": {
     "unicode": "",
     "color": "black",
     "width": 16,
     "height": 16
   },
-  "icon-automotive-industrial-48": {
+  "icon-ascending-16": {
     "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-ask-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-ask-solid-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-automotive-industrial-48": {
+    "unicode": "",
     "color": "black",
     "width": 48,
     "height": 48
   },
   "icon-bag-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-bag-fill-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-banner-background-type-color-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
-  },
-  "icon-banner-background-type-html-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
-  },
-  "icon-banner-background-type-image-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
-  },
-  "icon-banner-banner-place-left-32": {
     "unicode": "",
     "color": "black",
     "width": 32,
     "height": 32
   },
-  "icon-banner-banner-place-right-32": {
+  "icon-banner-background-type-html-32": {
     "unicode": "",
     "color": "black",
     "width": 32,
     "height": 32
   },
-  "icon-banner-boxed-48": {
+  "icon-banner-background-type-image-32": {
     "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-banner-banner-place-left-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-banner-banner-place-right-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-banner-boxed-48": {
+    "unicode": "",
     "color": "black",
     "width": 48,
     "height": 48
   },
   "icon-banner-bubble-48": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 48,
     "height": 48
   },
   "icon-banner-corners-circle-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-banner-corners-square-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-banner-message-place-side-32": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 32,
     "height": 32
   },
   "icon-banner-message-place-top-32": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 32,
     "height": 32
   },
   "icon-banner-settings-32": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 32,
     "height": 32
   },
   "icon-banner-text-valign-bottom-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-banner-text-valign-middle-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-banner-text-valign-top-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-beauty-health-grocery-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
-  },
-  "icon-books-podcasts-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
-  },
-  "icon-camera-64": {
-    "unicode": "",
-    "color": "black",
-    "width": 64,
-    "height": 64
-  },
-  "icon-card-mastercard": {
     "unicode": "",
-    "color": "#298DFF",
-    "width": 512,
-    "height": 512
+    "color": "black",
+    "width": 48,
+    "height": 48
   },
-  "icon-card-visa": {
+  "icon-blob-16": {
     "unicode": "",
-    "color": "#FFFFFF",
-    "width": 512,
-    "height": 512
+    "color": "black",
+    "width": 16,
+    "height": 16
   },
-  "icon-case-32": {
+  "icon-blob-filled-16": {
     "unicode": "",
     "color": "black",
-    "width": 32,
-    "height": 32
+    "width": 16,
+    "height": 16
   },
-  "icon-case-48": {
+  "icon-books-podcasts-48": {
     "unicode": "",
     "color": "black",
     "width": 48,
     "height": 48
   },
-  "icon-chat-2-24": {
+  "icon-camera-64": {
     "unicode": "",
+    "color": "black",
+    "width": 64,
+    "height": 64
+  },
+  "icon-card-mastercard": {
+    "unicode": "",
+    "color": "#298DFF",
+    "width": 512,
+    "height": 512
+  },
+  "icon-card-visa": {
+    "unicode": "",
+    "color": "#FFFFFF",
+    "width": 512,
+    "height": 512
+  },
+  "icon-case-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-case-48": {
+    "unicode": "",
+    "color": "black",
+    "width": 48,
+    "height": 48
+  },
+  "icon-chat-2-24": {
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-chat-48": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 48,
     "height": 48
   },
   "icon-chat-fill-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
-  },
-  "icon-chat-round-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
-  },
-  "icon-check-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
-  },
-  "icon-check2-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
-  },
-  "icon-checkbox-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 20,
-    "height": 20
-  },
-  "icon-checkbox-checked-24": {
     "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
-  "icon-checked-64": {
+  "icon-chat-round-24": {
     "unicode": "",
-    "color": "#75b636",
-    "width": 64,
-    "height": 64
-  },
-  "icon-checkmark-24": {
-    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
-  "icon-checkmark-32": {
+  "icon-check-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-check2-16": {
     "unicode": "",
     "color": "black",
-    "width": 32,
-    "height": 32
+    "width": 16,
+    "height": 16
   },
-  "icon-clothing-shoes-48": {
+  "icon-checkbox-24": {
     "unicode": "",
     "color": "black",
-    "width": 48,
-    "height": 48
+    "width": 20,
+    "height": 20
   },
-  "icon-collapse-24": {
+  "icon-checkbox-checked-24": {
     "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
-  "icon-comments-24": {
+  "icon-checked-64": {
     "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "color": "#75b636",
+    "width": 64,
+    "height": 64
   },
-  "icon-csvimport-24": {
+  "icon-checkmark-24": {
     "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
-  "icon-dashboard-24": {
+  "icon-checkmark-32": {
     "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-clothing-shoes-48": {
+    "unicode": "",
+    "color": "black",
+    "width": 48,
+    "height": 48
+  },
+  "icon-collapse-24": {
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
-  "icon-descending-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
-  },
-  "icon-double-arrows-64": {
-    "unicode": "",
-    "color": "black",
-    "width": 64,
-    "height": 64
-  },
-  "icon-edit-16": {
+  "icon-comments-24": {
     "unicode": "",
     "color": "black",
-    "width": 16,
-    "height": 16
+    "width": 24,
+    "height": 24
   },
-  "icon-edit-user-24": {
+  "icon-csvimport-24": {
     "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
-  "icon-electronics-computers-48": {
+  "icon-dashboard-24": {
     "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-descending-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-double-arrows-64": {
+    "unicode": "",
+    "color": "black",
+    "width": 64,
+    "height": 64
+  },
+  "icon-download-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-edit-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-edit-user-24": {
+    "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-electronics-computers-48": {
+    "unicode": "",
     "color": "black",
     "width": 48,
     "height": 48
   },
   "icon-embed-32": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 32,
     "height": 32
   },
   "icon-error-128": {
-    "unicode": "",
+    "unicode": "",
     "width": 128,
     "height": 128
   },
   "icon-expand-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-eye-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
-  },
-  "icon-facebook-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
-  },
-  "icon-facebook-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
-  },
-  "icon-facebook-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
-  },
-  "icon-filters-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
-  },
-  "icon-finance-express-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
-  },
-  "icon-fly-mail-24": {
     "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
-  "icon-fly-mail-32": {
+  "icon-facebook-16": {
     "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-facebook-32": {
+    "unicode": "",
     "color": "black",
     "width": 32,
     "height": 32
   },
-  "icon-ga-64": {
-    "unicode": "",
-    "color": "#ff8500",
-    "width": 64,
-    "height": 64
-  },
-  "icon-games-48": {
+  "icon-facebook-48": {
     "unicode": "",
     "color": "black",
     "width": 48,
     "height": 48
   },
-  "icon-geocoder-24": {
+  "icon-filters-24": {
     "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
-  "icon-google-16": {
+  "icon-finance-express-16": {
     "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-fly-mail-24": {
+    "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-fly-mail-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-ga-64": {
+    "unicode": "",
+    "color": "#ff8500",
+    "width": 64,
+    "height": 64
+  },
+  "icon-games-48": {
+    "unicode": "",
+    "color": "black",
+    "width": 48,
+    "height": 48
+  },
+  "icon-geocoder-24": {
+    "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-google-16": {
+    "unicode": "",
     "color": "#34A853",
     "width": 16,
     "height": 16
   },
   "icon-google-48": {
-    "unicode": "",
+    "unicode": "",
     "color": "#34A853",
     "width": 48,
     "height": 48
   },
   "icon-google-96": {
-    "unicode": "",
+    "unicode": "",
     "color": "#34A853",
     "width": 96,
     "height": 96
   },
   "icon-gridmode-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-home-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
-  },
-  "icon-home-garden-tools-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
-  },
-  "icon-images-128": {
-    "unicode": "",
-    "color": "black",
-    "width": 128,
-    "height": 128
-  },
-  "icon-invoice-128": {
-    "unicode": "",
-    "color": "black",
-    "width": 128,
-    "height": 128
-  },
-  "icon-jewelry-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
-  },
-  "icon-like-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
-  },
-  "icon-like-24": {
     "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
-  "icon-linemode-24": {
+  "icon-home-garden-tools-48": {
     "unicode": "",
     "color": "black",
-    "width": 24,
-    "height": 24
+    "width": 48,
+    "height": 48
   },
-  "icon-link-32": {
+  "icon-images-128": {
     "unicode": "",
     "color": "black",
-    "width": 32,
-    "height": 32
+    "width": 128,
+    "height": 128
   },
-  "icon-linkedin-16": {
+  "icon-invoice-128": {
     "unicode": "",
     "color": "black",
-    "width": 16,
-    "height": 16
+    "width": 128,
+    "height": 128
   },
-  "icon-linkedin-48": {
+  "icon-jewelry-48": {
     "unicode": "",
     "color": "black",
     "width": 48,
     "height": 48
   },
-  "icon-mac-24": {
+  "icon-like-16": {
     "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
-  },
-  "icon-mail-2-16": {
-    "unicode": "",
     "color": "black",
     "width": 16,
     "height": 16
   },
-  "icon-mail-2-24": {
+  "icon-like-24": {
+    "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-linemode-24": {
     "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
-  "icon-mail-24": {
+  "icon-link-32": {
     "unicode": "",
     "color": "black",
-    "width": 24,
-    "height": 24
+    "width": 32,
+    "height": 32
   },
-  "icon-messages-16": {
+  "icon-linkedin-16": {
     "unicode": "",
     "color": "black",
     "width": 16,
     "height": 16
   },
-  "icon-minus-solid-16": {
+  "icon-linkedin-48": {
     "unicode": "",
-    "color": "#ffffff",
+    "color": "black",
+    "width": 48,
+    "height": 48
+  },
+  "icon-mac-24": {
+    "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-mail-2-16": {
+    "unicode": "",
+    "color": "black",
     "width": 16,
     "height": 16
   },
-  "icon-movies-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
-  },
-  "icon-msgr-add-file-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 28
-  },
-  "icon-msgr-add-img-32": {
+  "icon-mail-2-24": {
     "unicode": "",
     "color": "black",
-    "width": 25,
-    "height": 21
+    "width": 24,
+    "height": 24
   },
-  "icon-music-48": {
+  "icon-mail-24": {
     "unicode": "",
     "color": "black",
-    "width": 48,
-    "height": 48
+    "width": 24,
+    "height": 24
   },
-  "icon-offer-16": {
+  "icon-messages-16": {
     "unicode": "",
     "color": "black",
     "width": 16,
     "height": 16
   },
-  "icon-overlay-options-32": {
+  "icon-minus-solid-16": {
     "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "color": "#ffffff",
+    "width": 16,
+    "height": 16
   },
-  "icon-overlay-options-page-chat-24": {
+  "icon-movies-48": {
     "unicode": "",
     "color": "black",
-    "width": 512,
-    "height": 512
+    "width": 48,
+    "height": 48
   },
-  "icon-overlay-options-page-contacts-24": {
+  "icon-msgr-add-file-32": {
     "unicode": "",
     "color": "black",
     "width": 24,
-    "height": 24
+    "height": 28
   },
-  "icon-overlay-options-page-description-24": {
+  "icon-msgr-add-img-32": {
     "unicode": "",
     "color": "black",
-    "width": 24,
-    "height": 24
+    "width": 25,
+    "height": 21
   },
-  "icon-overlay-options-page-faq-24": {
+  "icon-music-48": {
     "unicode": "",
     "color": "black",
-    "width": 24,
-    "height": 24
+    "width": 48,
+    "height": 48
   },
-  "icon-overlay-options-pages-no-32": {
+  "icon-offer-16": {
     "unicode": "",
     "color": "black",
-    "width": 32,
-    "height": 32
+    "width": 16,
+    "height": 16
   },
-  "icon-overlay-options-pages-yes-32": {
+  "icon-overlay-options-32": {
     "unicode": "",
     "color": "black",
     "width": 32,
     "height": 32
   },
-  "icon-payever-64": {
+  "icon-overlay-options-page-chat-24": {
     "unicode": "",
     "color": "black",
-    "width": 64,
-    "height": 64
+    "width": 512,
+    "height": 512
   },
-  "icon-pencil-24": {
+  "icon-overlay-options-page-contacts-24": {
     "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
-  "icon-play-64": {
+  "icon-overlay-options-page-description-24": {
     "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-overlay-options-page-faq-24": {
+    "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-overlay-options-pages-no-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-overlay-options-pages-yes-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-payever-64": {
+    "unicode": "",
+    "color": "black",
+    "width": 64,
+    "height": 64
+  },
+  "icon-pencil-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-pencil-24": {
+    "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-play-64": {
+    "unicode": "",
     "color": "black",
     "width": 64,
     "height": 64
   },
   "icon-plus-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
-  },
-  "icon-plus-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
-  },
-  "icon-plus-circle-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
-  },
-  "icon-plus-solid-16": {
-    "unicode": "",
-    "color": "#ffffff",
-    "width": 16,
-    "height": 16
-  },
-  "icon-plus-solid-24": {
-    "unicode": "",
-    "color": "#ffffff",
-    "width": 24,
-    "height": 24
-  },
-  "icon-progress-128": {
-    "unicode": "",
-    "color": "#ffffff",
-    "width": 128,
-    "height": 128
-  },
-  "icon-register-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
-  },
-  "icon-reply-16": {
     "unicode": "",
     "color": "black",
     "width": 16,
     "height": 16
   },
-  "icon-search-16": {
+  "icon-plus-24": {
     "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-plus-circle-24": {
+    "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-plus-solid-16": {
+    "unicode": "",
+    "color": "#ffffff",
+    "width": 16,
+    "height": 16
+  },
+  "icon-plus-solid-24": {
+    "unicode": "",
+    "color": "#ffffff",
+    "width": 24,
+    "height": 24
+  },
+  "icon-plus-solid-96": {
+    "unicode": "",
+    "color": "black",
+    "width": 96,
+    "height": 96
+  },
+  "icon-progress-128": {
+    "unicode": "",
+    "color": "#ffffff",
+    "width": 128,
+    "height": 128
+  },
+  "icon-register-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-reply-16": {
+    "unicode": "",
     "color": "black",
     "width": 16,
     "height": 16
   },
+  "icon-search-16": {
+    "unicode": "",
+    "width": 16,
+    "height": 16
+  },
+  "icon-security-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-sensor-48": {
+    "unicode": "",
+    "color": "black",
+    "width": 48,
+    "height": 48
+  },
+  "icon-sensor-96": {
+    "unicode": "",
+    "width": 96,
+    "height": 96
+  },
   "icon-sequence-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "#ffffff",
     "width": 24,
     "height": 24
   },
   "icon-sequence-active-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "#0084ff",
     "width": 24,
     "height": 24
   },
   "icon-settings-16": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 16,
     "height": 16
   },
   "icon-settings-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-share-16": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 16,
     "height": 16
   },
   "icon-share-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-shipping-flat_rate-64": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 64,
     "height": 64
   },
   "icon-shipping-free-64": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 64,
     "height": 64
   },
   "icon-shipping-total_order-64": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 64,
     "height": 64
   },
   "icon-shipping-weight-64": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 64,
     "height": 64
   },
   "icon-shopping-cart-16": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 16,
     "height": 16
   },
   "icon-shopping-cart-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-skin-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-slack-96": {
-    "unicode": "",
+    "unicode": "",
     "color": "#443642",
     "width": 96,
     "height": 96
   },
   "icon-sports-outdoors-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
-  },
-  "icon-success-128": {
-    "unicode": "",
-    "color": "#ffffff",
-    "width": 128,
-    "height": 128
-  },
-  "icon-todo-card-32": {
-    "unicode": "",
-    "width": 32,
-    "height": 32
-  },
-  "icon-toy-kids-baby-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
-  },
-  "icon-trashcan-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
-  },
-  "icon-trashcan-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
-  },
-  "icon-trust-certificate-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
-  },
-  "icon-trust-docs-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
-  },
-  "icon-trust-help-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
-  },
-  "icon-twitter-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
-  },
-  "icon-twitter-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
-  },
-  "icon-twitter-48": {
     "unicode": "",
     "color": "black",
     "width": 48,
     "height": 48
   },
-  "icon-unchecked-64": {
+  "icon-storebuilder-add-widget-16": {
     "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-arrow-1-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-arrow-2-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-arrow-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-billboard-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-billboard-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-catalog-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-catalog-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-category-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-category-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-delete-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-dublicate-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-edit-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-embed-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-embed-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-facebook-24": {
+    "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-storebuilder-hamburger-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-header-position-1-64": {
+    "unicode": "",
+    "color": "black",
+    "width": 64,
+    "height": 64
+  },
+  "icon-storebuilder-header-position-2-64": {
+    "unicode": "",
+    "color": "black",
+    "width": 64,
+    "height": 64
+  },
+  "icon-storebuilder-header-position-3-64": {
+    "unicode": "",
+    "color": "black",
+    "width": 64,
+    "height": 64
+  },
+  "icon-storebuilder-header-position-4-64": {
+    "unicode": "",
+    "color": "black",
+    "width": 64,
+    "height": 64
+  },
+  "icon-storebuilder-image-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-image-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-image-grid-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-image-grid-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-map-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-map-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-pinterest-24": {
+    "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-storebuilder-slider-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-slider-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-spacer-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-spacer-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-text-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-text-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-transform-to-button-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-turn-left-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-turn-right-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-twitter-24": {
+    "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-storebuilder-two-columns-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-storebuilder-two-columns-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-unknown-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-zoom-in-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-storebuilder-zoom-out-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-success-128": {
+    "unicode": "",
+    "color": "#ffffff",
+    "width": 128,
+    "height": 128
+  },
+  "icon-todo-card-32": {
+    "unicode": "",
+    "width": 32,
+    "height": 32
+  },
+  "icon-toy-kids-baby-48": {
+    "unicode": "",
+    "color": "black",
+    "width": 48,
+    "height": 48
+  },
+  "icon-trashcan-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-trashcan-24": {
+    "unicode": "",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+  "icon-trust-certificate-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-trust-docs-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-trust-help-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-twitter-16": {
+    "unicode": "",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+  "icon-twitter-32": {
+    "unicode": "",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+  "icon-twitter-48": {
+    "unicode": "",
+    "color": "black",
+    "width": 48,
+    "height": 48
+  },
+  "icon-unchecked-64": {
+    "unicode": "",
     "color": "#e1e1e1",
     "width": 64,
     "height": 64
   },
+  "icon-upload-16": {
+    "unicode": "",
+    "width": 16,
+    "height": 16
+  },
   "icon-upload-32": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 32,
     "height": 32
   },
   "icon-user-2-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-user-3-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-user-32": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 32,
     "height": 32
   },
   "icon-user-48": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 48,
     "height": 48
   },
   "icon-user-fill-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-x-16": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 16,
     "height": 16
   },
   "icon-x-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
   },
   "icon-x-solid-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "#ffffff",
     "width": 24,
     "height": 24
   },
   "icon-xls-24": {
-    "unicode": "",
+    "unicode": "",
     "color": "black",
     "width": 24,
     "height": 24
+  },
+  "spinner-container": {
+    "unicode": "",
+    "width": 64,
+    "height": 64
+  },
+  "spinner-roller": {
+    "unicode": "",
+    "width": 64,
+    "height": 64
   }
 }

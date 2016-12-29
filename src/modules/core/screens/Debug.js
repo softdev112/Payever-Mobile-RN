@@ -2,7 +2,8 @@
 
 import { Component } from 'react';
 import { Image } from 'react-native';
-import { Icon, StyleSheet, Text, View } from 'ui';
+
+import { Icon, Loader, StyleSheet, Text, View } from 'ui';
 
 
 const EARLY_LOADING = require('../../../store/UserProfilesStore/images/no-business.png');
@@ -36,6 +37,10 @@ export default class Debug extends Component {
         <View style={styles.row}>
           <Image style={styles.image} source={EARLY_LOADING} />
           <Text>no-business early loading</Text>
+        </View>
+        <View style={styles.row}>
+          <Loader isLoading />
+          <Text>Spinner</Text>
         </View>
       </View>
     )
