@@ -1,49 +1,53 @@
-import { Component } from 'react';
-import { Image, TextInput, TouchableWithoutFeedback, TouchableOpacity, ListView, Keyboard } from 'react-native';
-import { Button, Icon, Loader, StyleSheet, Text, View } from 'ui';
-import { inject, observer } from 'mobx-react/native';
-
 import type SearchStore, { SearchRow } from '../../../store/SearchStore';
+
+import { Component } from 'react';
+import { Image, TextInput, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import { Button, Icon, Loader, ImageButton, StyleSheet, Text, View } from 'ui';
+import { inject, observer } from 'mobx-react/native';
+import { ListView } from 'react-native';
+
 
 @inject('search')
 @observer
 export default class SearchForm extends Component {
   static navigatorStyle = {
-    navBarHidden: true,
+    navBarHidden: true
   };
 
-  props:{
+  props: {
     navigator: Navigator;
     search: SearchStore;
   };
 
-  state:{
+  state: {
     query: string;
   };
 
-  $input:TextInput;
+  $input: TextInput;
 
   constructor(props) {
     super(props);
-
-    this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
-
     this.state = {
-      query: '',
+      query: ''
     };
+
+    this.dataSource = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
   }
 
   onTextChange(query) {
+    const { search } = this.props;
     this.setState({ query });
-    this.props.search.search(query);
+    search.search(query);
   }
 
   onClose() {
     const { navigator } = this.props;
-    navigator.pop({ animated: true });
+    navigator.pop({ animated: false });
   }
 
-  onFollow(row) {
+  onFollow(row: SearchRow) {
     if (row.is_following) {
       this.props.search.unfollow(row.id);
     } else {
@@ -51,32 +55,13 @@ export default class SearchForm extends Component {
     }
   }
 
-  renderList() {
-    if (!this.state.query) {
-      return null;
-    }
-
-    const dataSource = this.ds.cloneWithRows(this.props.search.items.slice());
-
-    return (
-      <ListView
-        contentContainerStyle={styles.listInsideContainer}
-        dataSource={dataSource}
-        renderRow={::this.renderRow}
-        enableEmptySections
-        keyboardShouldPersistTaps
-        initialListSize={20}
-      />
-    );
-  }
-
-  renderRow(row:SearchRow, secId, index: Number) {
+  renderRow(row: SearchRow) {
     const followBtnStyle = [row.is_following ? styles.unfollowBtn : styles.followBtn];
     const followBtnTitleStyle = [row.is_following ? styles.unfollowBtnTitle : styles.followBtnTitle];
     const isFollowUpdating = row.is_followUpdating;
 
     return (
-      <View style={[styles.row, index === 0 ? { backgroundColor: '#CCC' } : null]}>
+      <View style={styles.row}>
         <Image style={styles.logo} source={row.logoSource} />
         <Text style={styles.title}>{row.name}</Text>
         <Button
@@ -92,7 +77,9 @@ export default class SearchForm extends Component {
 
   render() {
     const { query } = this.state;
-    const search:SearchStore = this.props.search;
+    const search: SearchStore = this.props.search;
+    const isFollowingUpdating = search.isFollowUpdating;
+    const dataSource = this.dataSource.cloneWithRows(search.items.slice());
 
     return (
       <View style={styles.container}>
@@ -104,8 +91,7 @@ export default class SearchForm extends Component {
           <TextInput
             style={styles.input}
             ref={i => this.$input = i}
-            onChangeText={text => this.onTextChange(text)}
-            value={this.state.query}
+            onChangeText={t => this.onTextChange(t)}
             autoFocus
             autoCorrect={false}
             multiline={false}
@@ -114,27 +100,36 @@ export default class SearchForm extends Component {
             underlineColorAndroid="transparent"
           />
           <TouchableOpacity
-            style={styles.closeButton}
             onPress={::this.onClose}
           >
             <Icon
               style={styles.icon}
-              name="icon-close-16"
+              name="icon-close-24"
             />
           </TouchableOpacity>
         </View>
 
-        <TouchableWithoutFeedback
-          onPress={Keyboard.dismiss} >
+        <Text>{search.error}</Text>
+
+        {!!query && (
           <View style={styles.results}>
-            <Loader
-              style={styles.spinner}
-              isLoading={search.isSearching}
-            >
-              {this.renderList()}
+            <Loader isLoading={search.isSearching} style={{ flex: 1 }}>
+              <ListView
+                dataSource={dataSource}
+                renderRow={::this.renderRow}
+                contentContainerStyle={styles.results}
+                keyboardShouldPersistTaps
+                initialListSize={20}
+              />
             </Loader>
           </View>
-        </TouchableWithoutFeedback>
+        )}
+
+        {!query && (
+          <TouchableWithoutFeedback onPress={::this.onClose}>
+          <View style={{ flex: 1 }}/>
+          </TouchableWithoutFeedback>
+        )}
       </View>
     );
   }
@@ -151,57 +146,52 @@ const styles = StyleSheet.create({
     backgroundColor: '$pe_color_white',
   },
 
-  spinner: {
-    flex: 1,
-    marginTop: 10,
-    justifyContent: 'flex-start',
-  },
-
   header: {
-    alignItems: 'center',
-    height: '8%',
     flexDirection: 'row',
-    paddingHorizontal: 20,
+    alignItems: 'center',
+    height: 54,
+    paddingLeft: 20,
+    paddingRight: 20,
     borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
     '@media ios and (orientation: portrait)': {
-      marginTop: 10,
-    },
+      marginTop: 10
+    }
   },
 
-  closeButton: {
-    padding: 5,
+  icon: {
+    marginTop: 1,
+    color: '#b5b9be'
   },
 
   input: {
-    marginLeft: 2,
-    height: '8%',
     flex: 1,
     borderWidth: 0,
-    padding: 2,
-    color: 'black',
-    fontSize: '1.5rem',
+    color: 'black'
   },
 
   results: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-
-  },
-
-  listInsideContainer: {
-    justifyContent: 'center',
-    alignItems: 'stretch',
+    flex: 1
   },
 
   row: {
-    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 5,
-    height: '7%',
+    height: 46,
+    paddingLeft: 15,
+    paddingRight: 12
+  },
+
+  logo: {
+    width: 32,
+    height: 32,
+    borderRadius: 16
+  },
+
+  title: {
+    flex: 1,
+    paddingLeft: 15,
+    color: 'black',
   },
 
   followBtnTitle: {
@@ -230,22 +220,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#0084ff',
     borderColor: '#0084ff',
     borderWidth: 1,
-  },
-
-  icon: {
-    color: '#b5b9be',
-    fontSize: '1.2rem',
-  },
-
-  logo: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-  },
-
-  title: {
-    flex: 1,
-    paddingLeft: 15,
-    color: 'black',
   },
 });

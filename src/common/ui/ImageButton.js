@@ -8,6 +8,7 @@ export default class ImageButton extends Component {
     source: Object | Number;
     onPress?: () => any;
     style?: Object;
+    imageStyle?: Object;
   };
 
   render() {
