@@ -48,7 +48,7 @@ export default class Loader extends Component {
 
     return (
       <View style={[styles.loaderContainer, style]}>
-        <Animated.View style={{ transform: [{ rotate: spin }] }}>
+        <Animated.View style={[styles.animatedElement, { transform: [{ rotate: spin }] }]}>
           <Icon name="spinner" style={styles.spinner} />
         </Animated.View>
       </View>
@@ -80,5 +80,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+
+  animatedElement: {
+    paddingBottom: 1,
+    paddingLeft: 1,
   },
 });
