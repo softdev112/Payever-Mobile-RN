@@ -85,7 +85,12 @@ const styles = StyleSheet.create({
   },
 
   animatedElement: {
-    paddingBottom: 1,
+    '@media ios': {
+      paddingTop: 1,
+    },
+    '@media android': {
+      paddingBottom: 1,
+    },
     paddingLeft: 1,
   },
 });
