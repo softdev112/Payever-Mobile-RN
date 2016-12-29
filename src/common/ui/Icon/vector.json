@@ -17,6 +17,28 @@
     "width": 53,
     "height": 53
   },
+
+  "icon-close-16": {
+    "unicode": "\u2A2F",
+    "color": "black",
+    "width": 16,
+    "height": 16
+  },
+
+  "icon-close-24": {
+    "unicode": "\u2A2F",
+    "color": "black",
+    "width": 24,
+    "height": 24
+  },
+
+  "icon-close-32": {
+    "unicode": "\u2A2F",
+    "color": "black",
+    "width": 32,
+    "height": 32
+  },
+
   "icon-add-address-24": {
     "unicode": "",
     "color": "black",

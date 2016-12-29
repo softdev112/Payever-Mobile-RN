@@ -7,7 +7,10 @@ export default class SearchStore {
   @observable items: Array<SearchRow> = [];
   @observable error: string;
   @observable isSearching = false;
-  @observable isFollowUnfollowUpdating: boolean = false;
+
+  @computed get isFollowUpdating() {
+    return !!this.items.find(item => item.is_followUpdating);
+  }
 
   store: Store;
 
