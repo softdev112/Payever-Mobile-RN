@@ -12,7 +12,6 @@ export default class SearchStore {
 
   constructor(store: Store) {
     this.store = store;
-    autorun(() => console.log('autorun' + this.isFollowUnfollowUpdating));
   }
 
   @computed get isFollowUpdating() {

@@ -78,7 +78,7 @@ export default class SearchForm extends Component {
     const search: SearchStore = this.props.search;
 
     // It definition is to get mobx tracking this observable
-    const isFollowingUpdating = search.isFollowUpdating;
+    const isFollowingUpdating = search.isFollowUpdating; // eslint-disable-line
     const dataSource = this.dataSource.cloneWithRows(search.items.slice());
 
     return (
