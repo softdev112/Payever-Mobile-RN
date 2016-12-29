@@ -168,6 +168,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 0,
     color: 'black',
+    marginLeft: 2,
   },
 
   results: {
@@ -207,6 +208,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#FFF',
     borderColor: '#0084ff',
-    borderWidth: 0.7,
+    borderWidth: 1,
   },
 });
