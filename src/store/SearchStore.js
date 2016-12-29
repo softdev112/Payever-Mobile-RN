@@ -8,15 +8,15 @@ export default class SearchStore {
   @observable error: string;
   @observable isSearching = false;
 
-  @computed get isFollowUpdating() {
-    return !!this.items.find(item => item.is_followUpdating);
-  }
-
   store: Store;
 
   constructor(store: Store) {
     this.store = store;
     autorun(() => console.log('autorun' + this.isFollowUnfollowUpdating));
+  }
+
+  @computed get isFollowUpdating() {
+    return !!this.items.find(item => item.is_followUpdating);
   }
 
   @action
@@ -35,7 +35,8 @@ export default class SearchStore {
         }
 
         if (!resp.data.length) {
-          this.error = 'Sorry, we didn\'t find any results, try searching again';
+          this.error = 'Sorry, we didn\'t find any results, try ' +
+            'searching again';
           return;
         }
 
