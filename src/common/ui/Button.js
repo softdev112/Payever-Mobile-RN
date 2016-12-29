@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'center',
     color: 'white',
+    padding: 8,
     fontWeight: '500',
   },
 
