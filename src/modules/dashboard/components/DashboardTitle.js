@@ -47,12 +47,12 @@ const styles = StyleSheet.create({
     color: '$pe_color_dark_gray',
     fontSize: 28,
     fontFamily: 'Open Sans_light',
-  },
-
-  title2_compact: {
     '@media ios': {
       fontFamily: 'HelveticaNeue-UltraLight',
     },
+  },
+
+  title2_compact: {
     '@media (max-height: 600)': {
       height: 0,
     },
