@@ -127,7 +127,7 @@ export default class SearchForm extends Component {
 
         {!query && (
           <TouchableWithoutFeedback onPress={::this.onClose}>
-          <View style={{ flex: 1 }}/>
+            <View style={{ flex: 1 }} />
           </TouchableWithoutFeedback>
         )}
       </View>
