@@ -10,28 +10,25 @@ import type UserProfilesStore from '../../../store/UserProfilesStore/index';
 import AppItem from '../../../store/UserProfilesStore/AppItem';
 import type { Config } from '../../../config';
 
-
-/* eslint-disable global-require */
-const PAGES: Array<AppItem> = [
+const APPS: Array<AppItem> = [
   new AppItem({
     id: 'purchases',
     name: 'Purchases',
     url: '/private/transactions',
-    image: require('../images/communication.png'),
+    image: { uri: '/images/dashboard/purchases.png' },
   }),
   new AppItem({
     id: 'communication',
     name: 'Communication',
     url: '/private/network/app/communication',
-    image: require('../images/purchases.png'),
+    image: { uri: '/images/dashboard/communication.png' },
   }),
   new AppItem({
     id: 'account',
     name: 'Account',
-    image: require('../images/settings.png'),
+    image: { uri: '/images/dashboard/settings.png' },
   }),
 ];
-/* eslint-enable global-require */
 
 @inject('config', 'userProfiles')
 @observer
@@ -46,19 +43,32 @@ export default class Private extends Component {
     config: Config;
   };
 
-  onAppClick(app: AppItem) {
-    const { config, navigator, userProfiles } = this.props;
+  apps: Array<AppItem>;
 
-    let url = config.siteUrl + app.url;
+  constructor(params) {
+    super(params);
 
-    if (app.id === 'account') {
-      url = userProfiles.privateProfile.settingsUrl;
-    }
+    const { config, userProfiles } = this.props;
 
+    this.apps = APPS.map((app) => {
+      if (app.id === 'account') {
+        app.url = userProfiles.privateProfile.settingsUrl;
+      } else {
+        app.url = config.siteUrl + app.url;
+      }
+      //noinspection JSUnresolvedVariable
+      app.image.uri = config.siteUrl + app.image.uri;
+
+      return app;
+    });
+  }
+
+  onAppClick(item: AppItem) {
+    const { navigator } = this.props;
     navigator.push({
-      title: app.name,
+      title: item.name,
       screen: 'core.WebView',
-      passProps: { url },
+      passProps: { url: item.url },
     });
   }
 
@@ -76,7 +86,7 @@ export default class Private extends Component {
           />
         </View>
         <Dock
-          apps={PAGES}
+          apps={this.apps}
           onAppClick={::this.onAppClick}
         />
       </View>
