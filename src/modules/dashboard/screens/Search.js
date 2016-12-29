@@ -104,7 +104,7 @@ export default class SearchForm extends Component {
           >
             <Icon
               style={styles.icon}
-              name="icon-close-24"
+              name="icon-close-16"
             />
           </TouchableOpacity>
         </View>

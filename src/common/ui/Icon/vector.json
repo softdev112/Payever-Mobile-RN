@@ -19,21 +19,21 @@
   },
 
   "icon-close-16": {
-    "unicode": "\u2A2F",
+    "unicode": "\u2715",
     "color": "black",
     "width": 16,
     "height": 16
   },
 
   "icon-close-24": {
-    "unicode": "\u2A2F",
+    "unicode": "\u2715",
     "color": "black",
     "width": 24,
     "height": 24
   },
 
   "icon-close-32": {
-    "unicode": "\u2A2F",
+    "unicode": "\u2715",
     "color": "black",
     "width": 32,
     "height": 32
