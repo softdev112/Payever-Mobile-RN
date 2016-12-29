@@ -1,5 +1,6 @@
 import { Component } from 'react';
-import { Image, TextInput, TouchableWithoutFeedback, TouchableOpacity, ListView } from 'react-native';
+import { Image, TextInput, TouchableWithoutFeedback, TouchableOpacity,
+  ListView } from 'react-native';
 import { Button, Icon, Loader, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
@@ -30,7 +31,9 @@ export default class SearchForm extends Component {
       query: '',
     };
 
-    this.dataSource = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+    this.dataSource = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2,
+    });
   }
 
   onTextChange(query) {
@@ -63,7 +66,7 @@ export default class SearchForm extends Component {
           style={styles.followBtn}
           titleStyle={styles.followBtnTitle}
           title={row.is_following ? 'Unfollow' : 'Follow'}
-          onPress={() => ::this.onFollow(row)}
+          onPress={() => this.onFollow(row)}
           disabled={isFollowUpdating}
         />
       </View>
@@ -73,7 +76,9 @@ export default class SearchForm extends Component {
   render() {
     const { query } = this.state;
     const search: SearchStore = this.props.search;
-    const isFollowingUpdating = search.isFollowUpdating; // It definition is to get mobx tracking this observable
+
+    // It definition is to get mobx tracking this observable
+    const isFollowingUpdating = search.isFollowUpdating;
     const dataSource = this.dataSource.cloneWithRows(search.items.slice());
 
     return (

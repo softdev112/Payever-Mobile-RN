@@ -24,11 +24,11 @@ export default class ProfilesApi {
   }
 
   async follow(businessId): Promise<SimpleOkResponse|PayeverResponse> {
-    return this.client.post(`/api/rest/v1/profiles/${businessId}/follow`, {});
+    return this.client.post(`/api/rest/v1/profiles/${businessId}/follow`);
   }
 
   async unfollow(businessId): Promise<SimpleOkResponse|PayeverResponse> {
-    return this.client.delete(`/api/rest/v1/profiles/${businessId}/unfollow`, {});
+    return this.client.delete(`/api/rest/v1/profiles/${businessId}/unfollow`);
   }
 }
 
