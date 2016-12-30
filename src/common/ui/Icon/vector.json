@@ -1,1337 +1,2222 @@
 {
   "flag-santander-de-53": {
-    "unicode": "",
-    "color": "#ffcf0b",
-    "width": 53,
-    "height": 53
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 53,
+      "fontFamily": "payeverIcons",
+      "color": "#ffcf0b"
+    }
   },
   "flag-santander-dk-53": {
-    "unicode": "",
-    "color": "#ffffff",
-    "width": 53,
-    "height": 53
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 53,
+      "fontFamily": "payeverIcons",
+      "color": "#ffffff"
+    }
   },
   "flag-santander-no-53": {
-    "unicode": "",
-    "color": "#002868",
-    "width": 53,
-    "height": 53
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 53,
+      "fontFamily": "payeverIcons",
+      "color": "#002868"
+    }
   },
-
-  "icon-close-16": {
-    "unicode": "\u2715",
-    "color": "black",
-    "width": 16,
-    "height": 16
-  },
-
-  "icon-close-24": {
-    "unicode": "\u2715",
-    "color": "black",
-    "width": 24,
-    "height": 24
-  },
-
-  "icon-close-32": {
-    "unicode": "\u2715",
-    "color": "black",
-    "width": 32,
-    "height": 32
-  },
-
   "icon-add-address-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-alert-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-down-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-down-small-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-left-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-left-2-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-left-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-left-ios-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-left-ios-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-right-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-right-2-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-right-3-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-right-ios-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-right-ios-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-sort-asc-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-sort-desc-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-arrow-up-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-ascending-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-ask-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-ask-solid-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-automotive-industrial-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-bag-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-bag-fill-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-background-type-color-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-background-type-html-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-background-type-image-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-banner-place-left-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-banner-place-right-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-boxed-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-bubble-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-corners-circle-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-corners-square-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-message-place-side-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-message-place-top-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-settings-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-text-valign-bottom-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-text-valign-middle-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-banner-text-valign-top-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-beauty-health-grocery-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-blob-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-blob-filled-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-books-podcasts-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-camera-64": {
-    "unicode": "",
-    "color": "black",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-card-mastercard": {
-    "unicode": "",
-    "color": "#298DFF",
-    "width": 512,
-    "height": 512
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 512,
+      "fontFamily": "payeverIcons",
+      "color": "#298DFF"
+    }
   },
   "icon-card-visa": {
-    "unicode": "",
-    "color": "#FFFFFF",
-    "width": 512,
-    "height": 512
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 512,
+      "fontFamily": "payeverIcons",
+      "color": "#FFFFFF"
+    }
   },
   "icon-case-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-case-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-chat-2-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-chat-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-chat-fill-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-chat-round-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-check-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-check2-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-checkbox-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 20,
-    "height": 20
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 20,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-checkbox-checked-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-checked-64": {
-    "unicode": "",
-    "color": "#75b636",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons",
+      "color": "#75b636"
+    }
   },
   "icon-checkmark-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-checkmark-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-clothing-shoes-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-collapse-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-comments-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-csvimport-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-dashboard-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-descending-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-double-arrows-64": {
-    "unicode": "",
-    "color": "black",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-download-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-edit-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-edit-user-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-electronics-computers-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-embed-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-error-128": {
-    "unicode": "",
-    "width": 128,
-    "height": 128
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 128,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-expand-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-eye-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-facebook-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-facebook-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-facebook-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-filters-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-finance-express-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-fly-mail-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-fly-mail-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-ga-64": {
-    "unicode": "",
-    "color": "#ff8500",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons",
+      "color": "#ff8500"
+    }
   },
   "icon-games-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-geocoder-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-google-16": {
-    "unicode": "",
-    "color": "#34A853",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons",
+      "color": "#34A853"
+    }
   },
   "icon-google-48": {
-    "unicode": "",
-    "color": "#34A853",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons",
+      "color": "#34A853"
+    }
   },
   "icon-google-96": {
-    "unicode": "",
-    "color": "#34A853",
-    "width": 96,
-    "height": 96
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 96,
+      "fontFamily": "payeverIcons",
+      "color": "#34A853"
+    }
   },
   "icon-gridmode-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-home-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-home-garden-tools-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-images-128": {
-    "unicode": "",
-    "color": "black",
-    "width": 128,
-    "height": 128
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 128,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-invoice-128": {
-    "unicode": "",
-    "color": "black",
-    "width": 128,
-    "height": 128
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 128,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-jewelry-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-like-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-like-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-linemode-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-link-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-linkedin-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-linkedin-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-mac-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-mail-2-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-mail-2-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-mail-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-messages-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-minus-solid-16": {
-    "unicode": "",
-    "color": "#ffffff",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons",
+      "color": "#ffffff"
+    }
   },
   "icon-movies-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-msgr-add-file-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 28
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-msgr-add-img-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 25,
-    "height": 21
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 25,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-music-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-offer-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-overlay-options-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-overlay-options-page-chat-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 512,
-    "height": 512
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 512,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-overlay-options-page-contacts-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-overlay-options-page-description-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-overlay-options-page-faq-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-overlay-options-pages-no-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-overlay-options-pages-yes-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-payever-64": {
-    "unicode": "",
-    "color": "black",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-pencil-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-pencil-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-play-64": {
-    "unicode": "",
-    "color": "black",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-plus-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-plus-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-plus-circle-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-plus-solid-16": {
-    "unicode": "",
-    "color": "#ffffff",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons",
+      "color": "#ffffff"
+    }
   },
   "icon-plus-solid-24": {
-    "unicode": "",
-    "color": "#ffffff",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons",
+      "color": "#ffffff"
+    }
   },
   "icon-plus-solid-96": {
-    "unicode": "",
-    "color": "black",
-    "width": 96,
-    "height": 96
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 96,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-progress-128": {
-    "unicode": "",
-    "color": "#ffffff",
-    "width": 128,
-    "height": 128
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 128,
+      "fontFamily": "payeverIcons",
+      "color": "#ffffff"
+    }
   },
   "icon-register-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-reply-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-search-16": {
-    "unicode": "",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-security-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-sensor-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-sensor-96": {
-    "unicode": "",
-    "width": 96,
-    "height": 96
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 96,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-sequence-24": {
-    "unicode": "",
-    "color": "#ffffff",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons",
+      "color": "#ffffff"
+    }
   },
   "icon-sequence-active-24": {
-    "unicode": "",
-    "color": "#0084ff",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons",
+      "color": "#0084ff"
+    }
   },
   "icon-settings-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-settings-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-share-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-share-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-shipping-flat_rate-64": {
-    "unicode": "",
-    "color": "black",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-shipping-free-64": {
-    "unicode": "",
-    "color": "black",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-shipping-total_order-64": {
-    "unicode": "",
-    "color": "black",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-shipping-weight-64": {
-    "unicode": "",
-    "color": "black",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-shopping-cart-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-shopping-cart-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-skin-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-slack-96": {
-    "unicode": "",
-    "color": "#443642",
-    "width": 96,
-    "height": 96
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 96,
+      "fontFamily": "payeverIcons",
+      "color": "#443642"
+    }
   },
   "icon-sports-outdoors-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-add-widget-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-arrow-1-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-arrow-2-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-arrow-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-billboard-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-billboard-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-catalog-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-catalog-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-category-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-category-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-delete-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-dublicate-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-edit-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-embed-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-embed-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-facebook-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-hamburger-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-header-position-1-64": {
-    "unicode": "",
-    "color": "black",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-header-position-2-64": {
-    "unicode": "",
-    "color": "black",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-header-position-3-64": {
-    "unicode": "",
-    "color": "black",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-header-position-4-64": {
-    "unicode": "",
-    "color": "black",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-image-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-image-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-image-grid-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-image-grid-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-map-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-map-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-pinterest-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-slider-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-slider-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-spacer-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-spacer-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-text-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-text-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-transform-to-button-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-turn-left-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-turn-right-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-twitter-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-two-columns-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-two-columns-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-unknown-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-zoom-in-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-storebuilder-zoom-out-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-success-128": {
-    "unicode": "",
-    "color": "#ffffff",
-    "width": 128,
-    "height": 128
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 128,
+      "fontFamily": "payeverIcons",
+      "color": "#ffffff"
+    }
   },
   "icon-todo-card-32": {
-    "unicode": "",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-toy-kids-baby-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-trashcan-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-trashcan-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-trust-certificate-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-trust-docs-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-trust-help-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-twitter-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-twitter-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-twitter-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-unchecked-64": {
-    "unicode": "",
-    "color": "#e1e1e1",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons",
+      "color": "#e1e1e1"
+    }
   },
   "icon-upload-16": {
-    "unicode": "",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-upload-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-user-2-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-user-3-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-user-32": {
-    "unicode": "",
-    "color": "black",
-    "width": 32,
-    "height": 32
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-user-48": {
-    "unicode": "",
-    "color": "black",
-    "width": 48,
-    "height": 48
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-user-fill-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-x-16": {
-    "unicode": "",
-    "color": "black",
-    "width": 16,
-    "height": 16
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-x-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "icon-x-solid-24": {
-    "unicode": "",
-    "color": "#ffffff",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons",
+      "color": "#ffffff"
+    }
   },
   "icon-xls-24": {
-    "unicode": "",
-    "color": "black",
-    "width": 24,
-    "height": 24
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
   },
   "spinner-container": {
-    "unicode": "",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
   },
   "spinner-roller": {
-    "unicode": "",
-    "width": 64,
-    "height": 64
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
   }
 }

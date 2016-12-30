@@ -39,7 +39,7 @@ export default class SearchHeader extends Component {
       <View style={styles.container}>
         <Icon
           style={styles.search}
-          name="icon-search-16"
+          source="icon-search-16"
           onPress={::this.onSearchPress}
         />
         <Text style={styles.title} onPress={::this.onSearchPress}>{title}</Text>
