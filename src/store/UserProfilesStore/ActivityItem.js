@@ -32,12 +32,8 @@ export default class AppItem {
     };
   }
 
-  /**
-   * Return absolute URL instead of relative inside the 'url' field
-   */
   get activityUrl() {
-    const url = this.store.config.siteUrl + this.url;
-    return url.replace('?modal=true', '');
+    return this.url;
   }
 
   get plainDescription() {
