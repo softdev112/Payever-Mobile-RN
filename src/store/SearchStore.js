@@ -36,6 +36,7 @@ export default class SearchStore {
         if (!resp.data.length) {
           this.error = 'Sorry, we didn\'t find any results, try ' +
             'searching again';
+          this.items = [];
           return;
         }
 
