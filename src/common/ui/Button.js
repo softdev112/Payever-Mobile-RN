@@ -1,7 +1,7 @@
 /* eslint react/prefer-stateless-function: 0 */
 
 import React, { Component } from 'react';
-import { Platform, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import StyleSheet from './StyleSheet';
 
 export default class Button extends Component {
@@ -31,8 +31,6 @@ export default class Button extends Component {
       textStyles.push(styles.textDisabled);
     }
 
-    const formattedTitle = Platform.OS === 'android'
-      ? title.toUpperCase() : title;
     return (
       <TouchableOpacity
         style={buttonStyles}
@@ -41,7 +39,7 @@ export default class Button extends Component {
         disabled={disabled}
         onPress={onPress}
       >
-        <Text style={textStyles}>{formattedTitle}</Text>
+        <Text style={textStyles}>{title}</Text>
       </TouchableOpacity>
     );
   }
@@ -49,8 +47,7 @@ export default class Button extends Component {
 
 const styles = StyleSheet.create({
   button: {
-    elevation: 4,
-    backgroundColor: '#0084ff',
+    backgroundColor: '$pe_color_blue',
     borderRadius: 4,
     padding: 3,
   },
