@@ -120,6 +120,7 @@ export default class SearchForm extends Component {
                 dataSource={dataSource}
                 renderRow={::this.renderRow}
                 contentContainerStyle={styles.results}
+                enableEmptySections
                 keyboardShouldPersistTaps
                 initialListSize={20}
               />
@@ -162,7 +163,6 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    marginTop: 1,
     color: '$pe_icons_color',
     fontSize: '2.2rem',
   },
@@ -181,7 +181,12 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 0,
     color: '$pe_color_black',
-    marginLeft: 3,
+    '@media ios': {
+      marginLeft: 5,
+    },
+    '@media android': {
+      marginLeft: 3,
+    },
   },
 
   results: {
