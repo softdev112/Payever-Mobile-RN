@@ -1,4 +1,4 @@
-import { action, computed, observable, runInAction, autorun } from 'mobx';
+import { action, computed, observable, runInAction } from 'mobx';
 
 import type Store from './index';
 import imgNoBusiness from './UserProfilesStore/images/no-business.png';
