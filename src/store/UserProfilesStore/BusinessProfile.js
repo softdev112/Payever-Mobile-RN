@@ -1,3 +1,4 @@
+//noinspection JSUnresolvedVariable
 import {
   computed, observable, extendObservable, runInAction, ObservableArray,
 } from 'mobx';
@@ -6,6 +7,7 @@ import Business from './Business';
 import AppItem from './AppItem';
 import ActivityItem from './ActivityItem';
 
+//noinspection JSUnresolvedVariable
 import imgNoBusiness from './images/no-business.png';
 
 const URL_MAP = {
@@ -13,8 +15,12 @@ const URL_MAP = {
     '/business/{slug}/ad-app',
   activity_invite_team_to_communication_app:
     '/business/{slug}/contacts-app#contacts-app/import',
+  activity_import_customers:
+    '/business/{slug}/contacts-app#contacts-app/import',
   todo_business_fill_address:
     '/private/network/{id}/account',
+  todo_business_add_products:
+    '/business/{slug}/items#items-app/import',
 };
 
 export default class BusinessProfile extends Profile {
@@ -51,6 +57,7 @@ export default class BusinessProfile extends Profile {
       runInAction('Set application to the profile', () => {
         this.appList = resp.data
           .sort((a, b) => a.position - b.position)
+          .map(::this.replaceActivityUrl)
           .map(item => new AppItem(item));
       });
     }
@@ -99,9 +106,12 @@ export default class BusinessProfile extends Profile {
 
   replaceActivityUrl(activity) {
     if (URL_MAP[activity.type]) {
+      log('Fix activity', activity.title);
       activity.url = this.store.config.siteUrl + URL_MAP[activity.type]
         .replace('{slug}', this.business.slug)
         .replace('{id}', this.id);
+    } else {
+      activity.url = this.store.config.siteUrl + activity.url;
     }
     return activity;
   }
