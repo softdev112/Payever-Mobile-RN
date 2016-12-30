@@ -100,7 +100,7 @@ export default class SearchForm extends Component {
           />
           <Icon
             style={styles.icon}
-            name="icon-x-16"
+            source="icon-x-16"
             onPress={::this.onClose}
           />
         </View>
