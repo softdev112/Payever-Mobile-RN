@@ -9,7 +9,8 @@
     "reset": "watchman watch-del-all",
     "test": "jest",
     "build:android": "cd android && ./gradlew assembleRelease",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "install": "gulp install:git-hooks"
   },
   "dependencies": {
     "immutable": "^3.8.1",
@@ -40,6 +41,7 @@
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.8.0",
     "eslint-plugin-sort-class-members": "^1.1.1",
+    "git-validate": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-replace": "^0.5.4",
     "gulp-svg2ttf": "^2.0.0",
@@ -50,5 +52,8 @@
     "minimist": "^1.2.0",
     "react-test-renderer": "15.3.2",
     "vinyl": "^2.0.1"
-  }
+  },
+  "pre-commit": [
+    "lint"
+  ]
 }

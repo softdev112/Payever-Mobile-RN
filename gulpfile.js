@@ -8,4 +8,5 @@ gulp.task('help', gulp.help());
 gulp.task('default', ['help']);
 
 require('./gulp/bump');
+require('./gulp/install');
 require('./gulp/svg/index');
