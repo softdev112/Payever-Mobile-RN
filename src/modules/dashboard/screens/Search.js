@@ -1,6 +1,5 @@
 import { Component } from 'react';
-import { Image, TextInput, TouchableWithoutFeedback, TouchableOpacity,
-  ListView } from 'react-native';
+import { Image, TextInput, TouchableWithoutFeedback, ListView } from 'react-native';
 import { Button, Icon, Loader, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
@@ -14,16 +13,16 @@ export default class SearchForm extends Component {
     navBarHidden: true,
   };
 
-  props: {
+  props:{
     navigator: Navigator;
     search: SearchStore;
   };
 
-  state: {
+  state:{
     query: string;
   };
 
-  $input: TextInput;
+  $input:TextInput;
 
   constructor(props) {
     super(props);
@@ -47,7 +46,7 @@ export default class SearchForm extends Component {
     navigator.pop({ animated: false });
   }
 
-  onFollow(row: SearchRow) {
+  onFollow(row:SearchRow) {
     if (row.is_following) {
       this.props.search.unfollow(row.id);
     } else {
@@ -55,7 +54,7 @@ export default class SearchForm extends Component {
     }
   }
 
-  renderRow(row: SearchRow) {
+  renderRow(row:SearchRow) {
     const isFollowUpdating = row.is_followUpdating;
 
     return (
@@ -75,7 +74,7 @@ export default class SearchForm extends Component {
 
   render() {
     const { query } = this.state;
-    const search: SearchStore = this.props.search;
+    const search:SearchStore = this.props.search;
 
     // It definition is to get mobx tracking this observable
     const isFollowingUpdating = search.isFollowUpdating; // eslint-disable-line
@@ -99,22 +98,22 @@ export default class SearchForm extends Component {
             returnKeyType="search"
             underlineColorAndroid="transparent"
           />
-          <TouchableOpacity
-            style={styles.closeBtn}
+          <Icon
+            style={styles.icon}
+            name="icon-x-16"
             onPress={::this.onClose}
-          >
-            <Icon
-              style={styles.icon}
-              source="icon-x-16"
-            />
-          </TouchableOpacity>
+          />
         </View>
 
-        <Text>{search.error}</Text>
+        {(!!query && !search.isSearching && search.items.length === 0) && (
+        <Text style={styles.error}>{search.error}</Text>)}
 
         {!!query && (
           <View style={styles.results}>
-            <Loader isLoading={search.isSearching} style={{ flex: 1 }}>
+            <Loader
+              style={styles.spinner}
+              isLoading={search.isSearching}
+            >
               <ListView
                 dataSource={dataSource}
                 renderRow={::this.renderRow}
@@ -128,7 +127,7 @@ export default class SearchForm extends Component {
 
         {!query && (
           <TouchableWithoutFeedback onPress={::this.onClose}>
-            <View style={{ flex: 1 }} />
+            <View style={{ flex: 1 }}/>
           </TouchableWithoutFeedback>
         )}
       </View>
@@ -139,6 +138,7 @@ export default class SearchForm extends Component {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
+    alignItems: 'center',
     zIndex: 10,
     top: 0,
     left: 0,
@@ -151,8 +151,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 54,
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingHorizontal: 20,
     borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
     '@media ios and (orientation: portrait)': {
@@ -162,18 +161,30 @@ const styles = StyleSheet.create({
 
   icon: {
     marginTop: 1,
-    color: '#b5b9be',
+    color: '$pe_icons_color',
+    fontSize: '2.2rem',
+  },
+
+  spinner: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    marginTop: 10,
+  },
+
+  error: {
+    marginTop: 10,
   },
 
   input: {
     flex: 1,
     borderWidth: 0,
-    color: 'black',
+    color: '$pe_color_black',
     marginLeft: 3,
   },
 
   results: {
     flex: 1,
+    alignSelf: 'stretch',
   },
 
   row: {
@@ -193,12 +204,12 @@ const styles = StyleSheet.create({
   title: {
     flex: 1,
     paddingLeft: 15,
-    color: 'black',
+    color: '$pe_color_black',
   },
 
   followBtnTitle: {
     fontSize: '1.4rem',
-    color: '#0084ff',
+    color: '$pe_color_blue',
     paddingHorizontal: 8,
     paddingVertical: 3,
   },
@@ -206,8 +217,8 @@ const styles = StyleSheet.create({
   followBtn: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#FFF',
-    borderColor: '#0084ff',
+    backgroundColor: '$pe_color_white',
+    borderColor: '$pe_color_blue',
     borderWidth: 1,
   },
 
