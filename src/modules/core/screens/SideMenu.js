@@ -117,8 +117,6 @@ export default class SideMenu extends Component {
               userProfiles={userProfiles}
             />
 
-            <Text style={styles.addBusiness}>Add New Business</Text>
-
           </ScrollView>
         </View>
 
