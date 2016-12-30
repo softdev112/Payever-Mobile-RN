@@ -17,3 +17,4 @@ export Link from './Link';
 export Loader from './Loader';
 export Text from './Text';
 export TextInput from './TextInput';
+export SpinnerButton from './SpinnerButton';

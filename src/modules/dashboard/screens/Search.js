@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Image, TextInput, TouchableWithoutFeedback, ListView } from 'react-native';
-import { Button, Icon, Loader, StyleSheet, Text, View } from 'ui';
+import { Button, Icon, Loader, StyleSheet, Text, View, SpinnerButton } from 'ui';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 
@@ -55,29 +55,30 @@ export default class SearchForm extends Component {
   }
 
   renderRow(row:SearchRow) {
-    const isFollowUpdating = row.is_followUpdating;
+    const RowComponent = observer((props) => {
+      const business = props.business;
 
-    return (
-      <View style={styles.row}>
-        <Image style={styles.logo} source={row.logoSource} />
-        <Text style={styles.title}>{row.name}</Text>
-        <Button
-          style={styles.followBtn}
-          titleStyle={styles.followBtnTitle}
-          title={row.is_following ? 'Unfollow' : 'Follow'}
-          onPress={() => this.onFollow(row)}
-          disabled={isFollowUpdating}
-        />
-      </View>
-    );
+      return (
+        <View style={styles.row}>
+          <Image style={styles.logo} source={business.logoSource} />
+          <Text style={styles.title}>{business.name}</Text>
+          <SpinnerButton
+            style={styles.followBtn}
+            titleStyle={styles.followBtnTitle}
+            title={business.is_following ? 'Unfollow' : 'Follow'}
+            onPress={() => this.onFollow(business)}
+            disabled={business.is_followUpdating}
+          />
+        </View>
+      );
+    });
+
+    return <RowComponent business={row} />;
   }
 
   render() {
     const { query } = this.state;
     const search:SearchStore = this.props.search;
-
-    // It definition is to get mobx tracking this observable
-    const isFollowingUpdating = search.isFollowUpdating; // eslint-disable-line
     const dataSource = this.dataSource.cloneWithRows(search.items.slice());
 
     return (
