@@ -80,7 +80,7 @@ export default class SideMenu extends Component {
       <View style={styles.container}>
 
         <View style={styles.btnClose}>
-          <Icon name="icon-x-16" onPress={::this.onClose} />
+          <Icon source="icon-x-16" onPress={::this.onClose} />
         </View>
 
         <View style={styles.businesses}>
@@ -105,7 +105,7 @@ export default class SideMenu extends Component {
                 <View style={styles.userInfo_profile}>
                   <Icon
                     style={styles.userInfo_profileIcon}
-                    name="icon-settings-24"
+                    source="icon-settings-24"
                     onPress={::this.onProfileSettingsPress}
                   />
                 </View>

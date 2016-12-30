@@ -85,7 +85,7 @@ export default class SearchForm extends Component {
         <View style={styles.header}>
           <Icon
             style={styles.icon}
-            name="icon-search-16"
+            source="icon-search-16"
           />
           <TextInput
             style={styles.input}

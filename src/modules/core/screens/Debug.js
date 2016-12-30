@@ -17,15 +17,8 @@ export default class Debug extends Component {
     return (
       <View>
         <View style={styles.row}>
-          <Icon name="icon-search-16" />
+          <Icon source="icon-search-16" />
           <Text>icon-search-16 Icon</Text>
-        </View>
-        <View style={styles.row}>
-          <Image
-            style={styles.image}
-            source={require('../../../common/ui/Icon/images/icon-search-16.png')}
-          />
-          <Text>icon-search-16 Direct</Text>
         </View>
         <View style={styles.row}>
           <Image
