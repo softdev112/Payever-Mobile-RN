@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 4,
     padding: 3,
+    minWidth: 60,
   },
 
   text: {
@@ -65,7 +66,6 @@ const styles = StyleSheet.create({
 
   buttonDisabled: {
     elevation: 0,
-    width: '15%',
   },
 
   textDisabled: {
