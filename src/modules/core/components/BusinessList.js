@@ -30,7 +30,7 @@ export default class BusinessList extends Component {
           <Text style={styles.stores}>{profile.stores} stores</Text>
         </View>
         {profile === userProfiles.currentProfile && (
-          <Icon name="icon-checkbox-checked-24" style={styles.imgChecked} />
+          <Icon source="icon-checkbox-checked-24" style={styles.imgChecked} />
         )}
       </TouchableOpacity>
     );

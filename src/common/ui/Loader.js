@@ -24,14 +24,12 @@ export default class Loader extends Component {
   spin() {
     //noinspection JSUnresolvedFunction
     this.spinValue.setValue(0);
-    Animated.timing(
-      this.spinValue,
-      {
-        toValue: 1,
-        duration: 1000,
-        easing: Easing.linear,
-      }
-    ).start(() => this.spin());
+    Animated.timing(this.spinValue, {
+      toValue: 1,
+      duration: 1000,
+      easing: Easing.linear,
+    })
+      .start(() => this.spin());
   }
 
   renderInline() {
@@ -51,7 +49,7 @@ export default class Loader extends Component {
         <Animated.View
           style={[styles.animatedElement, { transform: [{ rotate: spin }] }]}
         >
-          <Icon name="spinner" style={styles.spinner} />
+          <Icon source="spinner" style={styles.spinner} />
         </Animated.View>
       </View>
     );
