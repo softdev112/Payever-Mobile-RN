@@ -30,7 +30,7 @@ export default class WebViewLoader extends Component {
         <View style={styles.header}>
           <Icon
             style={styles.back}
-            name="icon-arrow-left-ios-24"
+            source="icon-arrow-left-ios-24"
             onPress={::this.onBackPress}
           />
           <Text style={styles.title}>Loading...</Text>

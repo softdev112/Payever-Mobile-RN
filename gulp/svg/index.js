@@ -42,12 +42,20 @@ gulp.task('svg', ['svg:convert'], () => {
   const glyphDictionary = {};
   glyphs.forEach((glyph) => {
     const dimensions = glyphDimensions[glyph.name] || {};
-    glyphDictionary[glyph.name] = {
-      unicode: glyph.unicode[0],
-      color: glyph.color,
-      width: parseInt(dimensions.width),
-      height: parseInt(dimensions.height),
+    const glyphMeta = {
+      component: 'vector',
+      source: { unicode: glyph.unicode[0] },
+      style: {
+        fontSize: parseInt(dimensions.width),
+        fontFamily: 'payeverIcons',
+      },
     };
+
+    if (glyph.color && glyph.color !== 'black') {
+      glyphMeta.style.color = glyph.color;
+    }
+
+    glyphDictionary[glyph.name] = glyphMeta;
   });
 
   const json = JSON.stringify(glyphDictionary, null, '  ');
