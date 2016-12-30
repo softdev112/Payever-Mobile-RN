@@ -23,13 +23,6 @@ export default class Debug extends Component {
         <View style={styles.row}>
           <Image
             style={styles.image}
-            source={require('../../../common/ui/Icon/images/icon-search-16.png')}
-          />
-          <Text>icon-search-16 Direct</Text>
-        </View>
-        <View style={styles.row}>
-          <Image
-            style={styles.image}
             source={require('../../../store/UserProfilesStore/images/no-business.png')}
             />
           <Text>no-business1</Text>
