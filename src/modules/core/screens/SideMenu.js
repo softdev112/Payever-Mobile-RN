@@ -123,7 +123,7 @@ export default class SideMenu extends Component {
         </View>
 
         <View style={styles.bottomMenu}>
-          {1 && (
+          {__DEV__ && (
             <Text
               style={styles.bottomMenu_item}
               onPress={::this.onDebugPagePress}

@@ -26,7 +26,7 @@
 		743052952B6B4C1A8A6075AE /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E9EEEF0999B47CB877BBAD1 /* libReactNativeNavigation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		CE57C5B51E0459C40003D955 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE57C5A01E0454320003D955 /* libRCTAnimation.a */; };
-		CE9679E31E09A2BE0061A7C6 /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = CE9679E21E09A2BE0061A7C6 /* Assets */; };
+		CE9679E31E09A2BE0061A7C6 /* StaticResources in Resources */ = {isa = PBXBuildFile; fileRef = CE9679E21E09A2BE0061A7C6 /* StaticResources */; };
 		D44ACA0BC9084E329F579DA8 /* libSMXCrashlytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E272FA6FCD04EF791C75620 /* libSMXCrashlytics.a */; };
 /* End PBXBuildFile section */
 
@@ -217,7 +217,7 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		CE9679E21E09A2BE0061A7C6 /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Assets; path = PayeverMobile/Assets; sourceTree = "<group>"; };
+		CE9679E21E09A2BE0061A7C6 /* StaticResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StaticResources; path = PayeverMobile/StaticResources; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -342,7 +342,7 @@
 		13B07FAE1A68108700A75B9A /* PayeverMobile */ = {
 			isa = PBXGroup;
 			children = (
-				CE9679E21E09A2BE0061A7C6 /* Assets */,
+				CE9679E21E09A2BE0061A7C6 /* StaticResources */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -755,7 +755,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				CE9679E31E09A2BE0061A7C6 /* Assets in Resources */,
+				CE9679E31E09A2BE0061A7C6 /* StaticResources in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
