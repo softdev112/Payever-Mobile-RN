@@ -57,7 +57,6 @@ export default class BusinessProfile extends Profile {
       runInAction('Set application to the profile', () => {
         this.appList = resp.data
           .sort((a, b) => a.position - b.position)
-          .map(::this.replaceActivityUrl)
           .map(item => new AppItem(item));
       });
     }
