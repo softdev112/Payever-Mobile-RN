@@ -6,6 +6,7 @@ import type { Navigator } from 'react-native-navigation';
 
 import injectedCode, { getLoaderHtml } from './injectedCode';
 import WebViewLoader from './WebViewLoader';
+import WebViewError from './WebViewError';
 import { showScreen, toggleMenu } from '../../../../common/Navigation';
 import type AuthStore from '../../../../store/AuthStore';
 
@@ -29,12 +30,37 @@ export default class WebView extends Component {
     referer?: string;
   };
 
+  state: {
+    errorMsg: string,
+    canGoBack: boolean,
+    isLoading: boolean,
+  };
+
   $view: ReactWebView;
   injectedCode: string;
 
   constructor(props) {
     super(props);
     this.injectedCode = injectedCode({ isDev: __DEV__ });
+
+    this.state = {
+      errorMsg: '',
+      canGoBack: false,
+      isLoading: false,
+    };
+  }
+
+  onError({ nativeEvent }) {
+    this.setState({
+      errorMsg: nativeEvent.description,
+      canGoBack: nativeEvent.canGoBack,
+    });
+  }
+
+  onLoadEnd() {
+    this.setState({
+      isLoading: false,
+    });
   }
 
   onLoadStart({ nativeEvent }) {
@@ -55,6 +81,10 @@ export default class WebView extends Component {
         }
         showScreen(url.screen);
       }
+    });
+
+    this.setState({
+      isLoading: true,
     });
   }
 
@@ -81,6 +111,33 @@ export default class WebView extends Component {
     }
   }
 
+  onRefreshPress(goBack: boolean = false) {
+    // Try to refresh page after error
+    if (!this.$view) {
+      this.props.navigator.pop();
+      return;
+    }
+
+    if (goBack) {
+      this.$view.goBack();
+    } else {
+      this.$view.reload();
+    }
+  }
+
+  renderError() {
+    return (
+      <WebViewError
+        canGoBack={this.state.canGoBack}
+        isReloading={this.state.isLoading}
+        message={this.state.errorMsg
+          || 'Sorry. Some Errors detected. Restart application please!'}
+        navigator={this.props.navigator}
+        onRefreshPress={::this.onRefreshPress}
+      />
+    );
+  }
+
   render() {
     const { navigator, url, referer } = this.props;
 
@@ -102,6 +159,8 @@ export default class WebView extends Component {
         <ReactWebView
           source={source}
           ref={$v => this.$view = $v}
+          onError={::this.onError}
+          onLoadEnd={::this.onLoadEnd}
           onLoadStart={::this.onLoadStart}
           onMessage={::this.onMessage}
           javaScriptEnabled
@@ -109,6 +168,7 @@ export default class WebView extends Component {
           startInLoadingState={false}
           injectedJavaScript={this.injectedCode}
           renderLoading={() => <WebViewLoader navigator={navigator} />}
+          renderError={::this.renderError}
           bounces={false}
         />
       </View>
