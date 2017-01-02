@@ -57,29 +57,30 @@ export default class SearchForm extends Component {
   }
 
   renderRow(row:SearchRow) {
-    const isFollowUpdating = row.is_followUpdating;
+    const RowComponent = observer((props) => {
+      const business = props.business;
 
-    return (
-      <View style={styles.row}>
-        <Image style={styles.logo} source={row.logoSource} />
-        <Text style={styles.title}>{row.name}</Text>
-        <Button
-          style={styles.followBtn}
-          titleStyle={styles.followBtnTitle}
-          title={row.is_following ? 'Unfollow' : 'Follow'}
-          onPress={() => this.onFollow(row)}
-          disabled={isFollowUpdating}
-        />
-      </View>
-    );
+      return (
+        <View style={styles.row}>
+          <Image style={styles.logo} source={business.logoSource} />
+          <Text style={styles.title}>{business.name}</Text>
+          <Button
+            style={styles.followBtn}
+            titleStyle={styles.followBtnTitle}
+            title={business.is_following ? 'Unfollow' : 'Follow'}
+            onPress={() => this.onFollow(business)}
+            disabled={business.is_followUpdating}
+          />
+        </View>
+      );
+    });
+
+    return <RowComponent business={row} />;
   }
 
   render() {
     const { query } = this.state;
     const search:SearchStore = this.props.search;
-
-    // It definition is to get mobx tracking this observable
-    const isFollowingUpdating = search.isFollowUpdating; // eslint-disable-line
     const dataSource = this.dataSource.cloneWithRows(search.items.slice());
 
     return (
@@ -120,6 +121,7 @@ export default class SearchForm extends Component {
                 dataSource={dataSource}
                 renderRow={::this.renderRow}
                 contentContainerStyle={styles.results}
+                enableEmptySections
                 keyboardShouldPersistTaps
                 initialListSize={20}
               />
@@ -162,7 +164,6 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    marginTop: 1,
     color: '$pe_icons_color',
     fontSize: '2.2rem',
   },
@@ -181,7 +182,12 @@ const styles = StyleSheet.create({
     flex: 1,
     borderWidth: 0,
     color: '$pe_color_black',
-    marginLeft: 3,
+    '@media ios': {
+      marginLeft: 5,
+    },
+    '@media android': {
+      marginLeft: 3,
+    },
   },
 
   results: {
@@ -222,9 +228,5 @@ const styles = StyleSheet.create({
     backgroundColor: '$pe_color_white',
     borderColor: '$pe_color_blue',
     borderWidth: 1,
-  },
-
-  closeBtn: {
-    padding: 5,
   },
 });

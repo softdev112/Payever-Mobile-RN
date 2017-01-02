@@ -14,10 +14,6 @@ export default class SearchStore {
     this.store = store;
   }
 
-  @computed get isFollowUpdating() {
-    return !!this.items.find(item => item.is_followUpdating);
-  }
-
   @action
   async search(query) {
     const { api } = this.store;
@@ -41,7 +37,7 @@ export default class SearchStore {
         }
 
         this.items = resp.data.map(data => new SearchRow(data));
-        this.error = null;
+        this.error = '';
       });
     } catch (e) {
       runInAction(() => this.error = e.message);
