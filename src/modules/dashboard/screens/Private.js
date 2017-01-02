@@ -10,24 +10,24 @@ import type UserProfilesStore from '../../../store/UserProfilesStore/index';
 import AppItem from '../../../store/UserProfilesStore/AppItem';
 import type { Config } from '../../../config';
 
-const APPS: Array<AppItem> = [
-  new AppItem({
+const APPS: Array<Object> = [
+  {
     id: 'purchases',
     name: 'Purchases',
     url: '/private/transactions',
-    image: { uri: '/images/dashboard/purchases.png' },
-  }),
-  new AppItem({
+    image: '/images/dashboard/purchases.png',
+  },
+  {
     id: 'communication',
     name: 'Communication',
     url: '/private/network/app/communication',
-    image: { uri: '/images/dashboard/communication.png' },
-  }),
-  new AppItem({
+    image: '/images/dashboard/communication.png',
+  },
+  {
     id: 'account',
     name: 'Account',
-    image: { uri: '/images/dashboard/settings.png' },
-  }),
+    image: '/images/dashboard/settings.png',
+  },
 ];
 
 @inject('config', 'userProfiles')
@@ -51,15 +51,16 @@ export default class Private extends Component {
     const { config, userProfiles } = this.props;
 
     this.apps = APPS.map((app) => {
+      let url = config.siteUrl + app.url;
       if (app.id === 'account') {
-        app.url = userProfiles.privateProfile.settingsUrl;
-      } else {
-        app.url = config.siteUrl + app.url;
+        url = userProfiles.privateProfile.settingsUrl;
       }
-      //noinspection JSUnresolvedVariable
-      app.image.uri = config.siteUrl + app.image.uri;
-
-      return app;
+      return new AppItem({
+        url,
+        id: app.id,
+        name: app.name,
+        image: { uri: config.siteUrl + app.image },
+      });
     });
   }
 
