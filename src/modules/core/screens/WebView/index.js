@@ -33,7 +33,6 @@ export default class WebView extends Component {
   state: {
     errorMsg: string,
     canGoBack: boolean,
-    isLoading: boolean,
   };
 
   $view: ReactWebView;
@@ -46,7 +45,6 @@ export default class WebView extends Component {
     this.state = {
       errorMsg: '',
       canGoBack: false,
-      isLoading: false,
     };
   }
 
@@ -54,12 +52,6 @@ export default class WebView extends Component {
     this.setState({
       errorMsg: nativeEvent.description,
       canGoBack: nativeEvent.canGoBack,
-    });
-  }
-
-  onLoadEnd() {
-    this.setState({
-      isLoading: false,
     });
   }
 
@@ -81,10 +73,6 @@ export default class WebView extends Component {
         }
         showScreen(url.screen);
       }
-    });
-
-    this.setState({
-      isLoading: true,
     });
   }
 
@@ -129,7 +117,6 @@ export default class WebView extends Component {
     return (
       <WebViewError
         canGoBack={this.state.canGoBack}
-        isReloading={this.state.isLoading}
         message={this.state.errorMsg
           || 'Sorry. Some Errors detected. Restart application please!'}
         navigator={this.props.navigator}
@@ -160,7 +147,6 @@ export default class WebView extends Component {
           source={source}
           ref={$v => this.$view = $v}
           onError={::this.onError}
-          onLoadEnd={::this.onLoadEnd}
           onLoadStart={::this.onLoadStart}
           onMessage={::this.onMessage}
           javaScriptEnabled
