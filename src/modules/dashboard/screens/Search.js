@@ -228,8 +228,4 @@ const styles = StyleSheet.create({
     borderColor: '$pe_color_blue',
     borderWidth: 1,
   },
-
-  closeBtn: {
-    padding: 5,
-  },
 });
