@@ -32,7 +32,6 @@ export default class WebView extends Component {
 
   state: {
     errorMsg: string,
-    canGoBack: boolean,
   };
 
   $view: ReactWebView;
@@ -44,14 +43,12 @@ export default class WebView extends Component {
 
     this.state = {
       errorMsg: '',
-      canGoBack: false,
     };
   }
 
   onError({ nativeEvent }) {
     this.setState({
       errorMsg: nativeEvent.description,
-      canGoBack: nativeEvent.canGoBack,
     });
   }
 
@@ -99,28 +96,11 @@ export default class WebView extends Component {
     }
   }
 
-  onRefreshPress(goBack: boolean = false) {
-    // Try to refresh page after error
-    if (!this.$view) {
-      this.props.navigator.pop();
-      return;
-    }
-
-    if (goBack) {
-      this.$view.goBack();
-    } else {
-      this.$view.reload();
-    }
-  }
-
   renderError() {
     return (
       <WebViewError
-        canGoBack={this.state.canGoBack}
-        message={this.state.errorMsg
-          || 'Sorry. Some Errors detected. Restart application please!'}
+        message={this.state.errorMsg || 'Restart application please!'}
         navigator={this.props.navigator}
-        onRefreshPress={::this.onRefreshPress}
       />
     );
   }
