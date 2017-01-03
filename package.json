@@ -1,6 +1,6 @@
 {
   "name": "PayeverMobile",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "private": true,
   "scripts": {
     "start": "npm run copy:dev-config && node node_modules/react-native/local-cli/cli.js start",
