@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
-import { GridView, Header, IconText, Loader, View, StyleSheet } from 'ui';
+import { GridView, Header, IconText, Text, Loader, View, StyleSheet } from 'ui';
 
 import type UserProfilesStore from '../../../store/UserProfilesStore';
 import type Profile from '../../../store/UserProfilesStore/Profile';
@@ -73,15 +73,17 @@ export default class ChooseAccount extends Component {
       <View style={styles.container}>
         <Header>Welcome back. Please choose buying or selling account.</Header>
         <Loader isLoading={isLoading}>
-          {profilesArray.length && (
+          {profilesArray.length > 0 ? (
             <View style={styles.gridWrapper}>
               <GridView
                 dataSource={dataSource}
                 renderRow={::this.renderRow}
                 contentContainerStyle={styles.grid}
               />
-            </View>
-          )}
+            </View>) :
+            (<Text style={{ flex: 1 }}>
+              Sorry. Error has occurred. Try again later.
+            </Text>)}
         </Loader>
       </View>
     );
