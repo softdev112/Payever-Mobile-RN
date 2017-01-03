@@ -9,13 +9,9 @@ import { toggleMenu } from '../../../../common/Navigation';
 @inject('userProfiles')
 @observer
 export default class WebViewError extends Component {
-  static defaultProps = { canGoBack: false };
-
   props: {
-    canGoBack?: boolean;
     message: string;
     navigator: Navigator;
-    onRefreshPress: () => void;
     userProfiles?: UserProfilesStore;
   };
 
@@ -28,7 +24,7 @@ export default class WebViewError extends Component {
   }
 
   render() {
-    const { userProfiles, onRefreshPress, message, canGoBack } = this.props;
+    const { userProfiles, message } = this.props;
 
     return (
       <View style={styles.container}>
@@ -46,17 +42,15 @@ export default class WebViewError extends Component {
           />
         </View>
         <View style={styles.main}>
+          <Text style={styles.error}>
+            Sorry. Some kind of errors have occurred.
+          </Text>
+          <Text style={styles.error}>Try again later.</Text>
           <Text style={styles.error}>{message}</Text>
           <Button
             style={styles.button}
-            title={'Refresh Page'}
-            onPress={() => onRefreshPress()}
-          />
-          <Button
-            style={styles.button}
-            title={'Previous Page'}
-            disabled={!canGoBack}
-            onPress={() => onRefreshPress(true)}
+            title={'Go Back'}
+            onPress={::this.onBackPress}
           />
         </View>
       </View>
@@ -112,6 +106,6 @@ const styles = StyleSheet.create({
 
   button: {
     marginBottom: 10,
-    width: 140,
+    width: 120,
   },
 });
