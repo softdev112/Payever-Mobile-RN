@@ -49,7 +49,7 @@ export default class WebViewError extends Component {
           <Text style={styles.error}>{message}</Text>
           <Button
             style={styles.button}
-            title={'Try Again'}
+            title={'Refresh Page'}
             onPress={() => onRefreshPress()}
           />
           <Button
