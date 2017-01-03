@@ -81,9 +81,9 @@ export default class ChooseAccount extends Component {
                 contentContainerStyle={styles.grid}
               />
             </View>) :
-            (<Text style={{ flex: 1 }}>
-              Sorry. Error has occurred. Try again later.
-            </Text>)}
+            (<View style={styles.error}>
+              <Text>Sorry. Error has occurred. Try again later.</Text>
+            </View>)}
         </Loader>
       </View>
     );
@@ -94,6 +94,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+  },
+
+  error: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
   },
 
   gridWrapper: {
