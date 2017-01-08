@@ -10,18 +10,26 @@ import componentFactory from './componentFactory';
  * are stored as bitmap.
  */
 export default class Icon extends Component {
+  static defaultProps = { hitSlop: { top: 2, left: 2, bottom: 2, right: 2 } };
+
   props: {
     source: string | Object;
     onPress?: () => any;
+    hitSlop?: Object;
   };
 
   render() {
-    const { onPress, source } = this.props;
+    const { onPress, source, hitSlop } = this.props;
     const iconNode = componentFactory(source, this.props);
 
     if (onPress) {
       return (
-        <TouchableOpacity onPress={onPress}>{iconNode}</TouchableOpacity>
+        <TouchableOpacity
+          hitSlop={hitSlop}
+          onPress={onPress}
+        >
+          {iconNode}
+        </TouchableOpacity>
       );
     }
 
