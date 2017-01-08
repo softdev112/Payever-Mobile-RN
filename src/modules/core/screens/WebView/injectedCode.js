@@ -1,12 +1,28 @@
 /* eslint-disable */
-
-export default function injectedCode(options: Object) {
+export default function injectedCode(options: InjectOptions) {
   const optionsJson = JSON.stringify(options);
   return `(${injectedBody.toString()})(${optionsJson})`;
 }
 
 function injectedBody(options) {
   window.__DEV__ = options.isDev;
+
+  if (options.isAddBusiness) {
+    replaceSearchWithBackBtn(options);
+    attachListenerOnSubmit(businessAddedListener);
+  }
+
+  // To prevent error message in iOS WebView
+  var originalPostMessage = window.postMessage;
+  var patchedPostMessage = function(message, targetOrigin, transfer) {
+    originalPostMessage(message, targetOrigin, transfer);
+  };
+
+  patchedPostMessage.toString = function() { 
+    return String(Object.hasOwnProperty).replace('hasOwnProperty', 'postMessage');
+  };
+
+  window.postMessage = patchedPostMessage;
 
   replaceHeaderButtons();
   if (__DEV__) {
@@ -36,6 +52,39 @@ function injectedBody(options) {
     }
   }
 
+  function replaceSearchWithBackBtn({ title }) {
+    //noinspection ES6ConvertVarToLetConst
+    const $rootNode = document.querySelector('.main-search');
+
+    if ($rootNode) {
+      $rootNode.style.display = 'none';
+      const containerStyle = '\"padding-top: 5px; display: flex;' +
+        'flex-direction: row; justify-content: space-between\"';
+
+      $rootNode.outerHTML =
+        `<div style=${containerStyle}>
+          <a class="back-selling-link" style="align-self: center" href="#">
+            <svg class="icon icon-24">
+              <use xlink:href="#icon-arrow-left-ios-24"></use>
+            </svg>
+          </a>
+          <h4 style="">${title}</h4>
+        </div>`;
+
+      const $backA = document.querySelector('.back-selling-link');
+      $backA.addEventListener('click', goBackListener);
+    }
+  }
+
+  function attachListenerOnSubmit(listener) {
+    // Find submit button
+    const $btn = document.querySelector('button[type="submit"]');
+    
+    if (!$btn) return;
+
+    $btn.addEventListener('click', listener);
+  }
+
   function attachOnError() {
     window.onerror = (errorMsg, url, lineNumber) => {
       sendData({
@@ -52,6 +101,16 @@ function injectedBody(options) {
     try {
       window.postMessage(JSON.stringify(data));
     } catch(e) {}
+  }
+
+  function goBackListener(e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    sendData({ command: 'go-back' });
+  }
+
+  function businessAddedListener(e) {
+    sendData({ command: 'add-business' });
   }
 }
 
@@ -116,3 +175,8 @@ export function getLoaderHtml(url: string) {
     </html>
   `);
 }
+
+type InjectOptions = {
+  isDev: boolean,
+  isAddBusiness: boolean,
+};
