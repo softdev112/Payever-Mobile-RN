@@ -10,8 +10,9 @@ import type BusinessProfile
 import { hideMenu, showScreen } from '../../../common/Navigation';
 import BusinessList from '../components/BusinessList';
 import type AuthStore from '../../../store/AuthStore';
+import type { Config } from '../../../config';
 
-@inject('userProfiles', 'auth')
+@inject('userProfiles', 'auth', 'config')
 @observer
 export default class SideMenu extends Component {
   static navigatorStyle = {
@@ -19,10 +20,26 @@ export default class SideMenu extends Component {
   };
 
   props: {
+    auth: AuthStore;
+    config: Config;
     navigator: Navigator;
     userProfiles?: UserProfilesStore;
-    auth: AuthStore;
   };
+
+  onAddNewBusiness() {
+    const { navigator, config } = this.props;
+
+    navigator.push({
+      screen: 'core.WebView',
+      passProps: {
+        url: config.siteUrl + '/private/create-business',
+        injectOptions: {
+          isAddBusiness: true,
+          title: 'Add New Business',
+        },
+      },
+    });
+  }
 
   onClose() {
     hideMenu(this.props.navigator);
@@ -85,7 +102,6 @@ export default class SideMenu extends Component {
 
         <View style={styles.businesses}>
           <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
-
             <View style={styles.userInfo}>
               <ImageButton
                 style={styles.userInfo_avatar}
@@ -111,12 +127,16 @@ export default class SideMenu extends Component {
                 </View>
               </View>
             </View>
-
             <BusinessList
               onSelect={::this.onProfileSelect}
               userProfiles={userProfiles}
             />
-
+            <Text
+              style={styles.addBusiness}
+              onPress={::this.onAddNewBusiness}
+            >
+              Add New Business
+            </Text>
           </ScrollView>
         </View>
 
@@ -168,6 +188,8 @@ const styles = StyleSheet.create({
     paddingRight: 19,
     paddingBottom: 19,
     paddingLeft: 25,
+    borderBottomWidth: 1,
+    borderBottomColor: '$border_color',
   },
 
   userInfo_avatar: {
@@ -199,11 +221,10 @@ const styles = StyleSheet.create({
   },
 
   addBusiness: {
-    marginLeft: 24,
-    paddingTop: 18,
-    paddingBottom: 18,
-    fontSize: 15,
     color: '$pe_color_blue',
+    fontSize: 15,
+    marginLeft: 24,
+    paddingVertical: 12,
   },
 
   bottomMenu: {

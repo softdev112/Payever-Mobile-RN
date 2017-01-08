@@ -55,6 +55,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 3,
     minWidth: 60,
+    minHeight: 26,
+    maxHeight: 26,
   },
 
   text: {

@@ -2,7 +2,7 @@ import { Component } from 'react';
 import {
   Image, TextInput, TouchableWithoutFeedback, ListView,
 } from 'react-native';
-import { Button, Icon, Loader, StyleSheet, Text, View } from 'ui';
+import { Icon, Loader, SpinnerButton, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 
@@ -45,7 +45,7 @@ export default class SearchForm extends Component {
 
   onClose() {
     const { navigator } = this.props;
-    navigator.pop({ animated: false });
+    navigator.pop({ animated: true });
   }
 
   onFollow(row:SearchRow) {
@@ -64,7 +64,7 @@ export default class SearchForm extends Component {
         <View style={styles.row}>
           <Image style={styles.logo} source={business.logoSource} />
           <Text style={styles.title}>{business.name}</Text>
-          <Button
+          <SpinnerButton
             style={styles.followBtn}
             titleStyle={styles.followBtnTitle}
             title={business.is_following ? 'Unfollow' : 'Follow'}

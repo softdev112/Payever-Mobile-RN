@@ -9,6 +9,7 @@ import WebViewLoader from './WebViewLoader';
 import WebViewError from './WebViewError';
 import { showScreen, toggleMenu } from '../../../../common/Navigation';
 import type AuthStore from '../../../../store/AuthStore';
+import type UserProfilesStore from '../../../../store/UserProfilesStore';
 
 const BACK_ON_URLS = [
   { urlMask: '/home',    screen: 'dashboard.Dashboard', authRequired: true },
@@ -16,7 +17,7 @@ const BACK_ON_URLS = [
   { urlMask: '/login',   screen: 'auth.Login' },
 ];
 
-@inject('auth')
+@inject('auth', 'userProfiles')
 @observer
 export default class WebView extends Component {
   static navigatorStyle = {
@@ -25,9 +26,11 @@ export default class WebView extends Component {
 
   props: {
     auth: AuthStore;
+    injectOptions?: Object;
     navigator: Navigator;
-    url: string;
     referer?: string;
+    url: string;
+    userProfiles?: UserProfilesStore;
   };
 
   state: {
@@ -39,7 +42,11 @@ export default class WebView extends Component {
 
   constructor(props) {
     super(props);
-    this.injectedCode = injectedCode({ isDev: __DEV__ });
+
+    this.injectedCode = injectedCode({
+      isDev: __DEV__,
+      ...props.injectOptions,
+    });
 
     this.state = {
       errorMsg: '',
@@ -56,6 +63,23 @@ export default class WebView extends Component {
     const { auth } = this.props;
 
     if (nativeEvent.url.startsWith('react-js-navigation')) {
+      return;
+    }
+
+    // Process add business
+    if (nativeEvent.url.endsWith('/create-business')
+      && nativeEvent.navigationType === 'formsubmit') {
+      setTimeout(() => {
+        // Reload businesses with some delay
+        this.props.userProfiles.load();
+      }, 1500);
+    }
+
+    // after create-business it goes to business home just block it by pop
+    if (nativeEvent.url.endsWith('/home')
+      && nativeEvent.navigationType === 'formsubmit') {
+      this.$view.stopLoading();
+      this.props.navigator.pop({ animated: true });
       return;
     }
 
@@ -88,8 +112,18 @@ export default class WebView extends Component {
         log(
           `WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`
         );
+        this.props.navigator.pop({ animated: true });
         break;
       }
+
+      case 'add-business':
+        this.props.navigator.pop({ animated: true });
+        break;
+
+      case 'go-back':
+        this.props.navigator.pop({ animated: true });
+        break;
+
       default: {
         console.warn(`Unknown webview command ${object.command}`);
       }
