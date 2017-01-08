@@ -66,21 +66,19 @@ export default class WebView extends Component {
       return;
     }
 
-    // Process add business
-    if (nativeEvent.url.endsWith('/create-business')
-      && nativeEvent.navigationType === 'formsubmit') {
-      setTimeout(() => {
-        // Reload businesses with some delay
-        this.props.userProfiles.load();
-      }, 1500);
-    }
+    // Process submit events ONLY iOS UIWebKit there is no such
+    // field in android WebKit nativeEvent
+    if (nativeEvent.navigationType === 'formsubmit') {
+      if (nativeEvent.url.endsWith('/create-business')) {
+        this.refreshBusinesesWithTimeout();
+      }
 
-    // after create-business it goes to business home just block it by pop
-    if (nativeEvent.url.endsWith('/home')
-      && nativeEvent.navigationType === 'formsubmit') {
-      this.$view.stopLoading();
-      this.props.navigator.pop({ animated: true });
-      return;
+      // After create-business it goes to business home just block
+      if (nativeEvent.url.endsWith('/home')) {
+        this.$view.stopLoading();
+        this.props.navigator.pop({ animated: true });
+        return;
+      }
     }
 
     BACK_ON_URLS.forEach((url) => {
@@ -118,6 +116,7 @@ export default class WebView extends Component {
 
       case 'add-business':
         this.props.navigator.pop({ animated: true });
+        this.refreshBusinesesWithTimeout();
         break;
 
       case 'go-back':
@@ -127,6 +126,15 @@ export default class WebView extends Component {
       default: {
         console.warn(`Unknown webview command ${object.command}`);
       }
+    }
+  }
+
+  refreshBusinesesWithTimeout() {
+    if (!this.refreshTimer) {
+      this.refreshTimer = setTimeout(() => {
+        // Reload businesses with some delay
+        this.props.userProfiles.load();
+      }, 1200);
     }
   }
 
