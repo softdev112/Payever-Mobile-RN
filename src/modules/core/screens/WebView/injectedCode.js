@@ -5,28 +5,21 @@ export default function injectedCode(options: InjectOptions) {
 }
 
 function injectedBody(options) {
-  window.__DEV__ = options.isDev;
+  init(options);
 
-  if (options.isAddBusiness) {
-    replaceSearchWithBackBtn(options);
-    attachListenerOnSubmit(businessAddedListener);
-  }
+  function init(options) {
+    window.__DEV__ = options.isDev;
 
-  // To prevent error message in iOS WebView
-  var originalPostMessage = window.postMessage;
-  var patchedPostMessage = function(message, targetOrigin, transfer) {
-    originalPostMessage(message, targetOrigin, transfer);
-  };
+    if (options.isAddBusiness) {
+      replaceSearchWithBackBtn(options);
+      attachListenerOnSubmit(businessAddedListener);
+    }
 
-  patchedPostMessage.toString = function() { 
-    return String(Object.hasOwnProperty).replace('hasOwnProperty', 'postMessage');
-  };
-
-  window.postMessage = patchedPostMessage;
-
-  replaceHeaderButtons();
-  if (__DEV__) {
-    attachOnError();
+    replaceHeaderButtons();
+    if (__DEV__) {
+      attachOnError();
+      patchPostMessage();
+    }
   }
 
   function replaceHeaderButtons() {
@@ -61,6 +54,7 @@ function injectedBody(options) {
       const containerStyle = '\"padding-top: 5px; display: flex;' +
         'flex-direction: row; justify-content: space-between\"';
 
+      //noinspection HtmlUnknownAttribute
       $rootNode.outerHTML =
         `<div style=${containerStyle}>
           <a class="back-selling-link" style="align-self: center" href="#">
@@ -74,6 +68,23 @@ function injectedBody(options) {
       const $backA = document.querySelector('.back-selling-link');
       $backA.addEventListener('click', goBackListener);
     }
+  }
+
+  function patchPostMessage() {
+    // To prevent error message in iOS WebView
+    //noinspection ES6ConvertVarToLetConst
+    var originalPostMessage = window.postMessage;
+    //noinspection ES6ConvertVarToLetConst
+    var patchedPostMessage = function(message, targetOrigin, transfer) {
+      originalPostMessage(message, targetOrigin, transfer);
+    };
+
+    patchedPostMessage.toString = function() {
+      //noinspection JSUnresolvedVariable
+      return String(Object.hasOwnProperty).replace('hasOwnProperty', 'postMessage');
+    };
+
+    window.postMessage = patchedPostMessage;
   }
 
   function attachListenerOnSubmit(listener) {
@@ -109,7 +120,7 @@ function injectedBody(options) {
     sendData({ command: 'go-back' });
   }
 
-  function businessAddedListener(e) {
+  function businessAddedListener() {
     sendData({ command: 'add-business' });
   }
 }
@@ -177,6 +188,6 @@ export function getLoaderHtml(url: string) {
 }
 
 type InjectOptions = {
-  isDev: boolean,
-  isAddBusiness: boolean,
+  isDev: boolean;
+  isAddBusiness: boolean;
 };
