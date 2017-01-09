@@ -76,6 +76,6 @@ type AuthResponse = {
 
     error: string;
     error_description: string;
-  },
-  ok: boolean,
-}
+  };
+  ok: boolean;
+};

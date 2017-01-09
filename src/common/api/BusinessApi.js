@@ -1,6 +1,8 @@
 import type PayeverApi from './index';
 
 export default class BusinessApi {
+  client: PayeverApi;
+
   constructor(client: PayeverApi) {
     this.client = client;
   }

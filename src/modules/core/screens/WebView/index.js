@@ -34,7 +34,7 @@ export default class WebView extends Component {
   };
 
   state: {
-    errorMsg: string,
+    errorMsg: string;
   };
 
   $view: ReactWebView;

@@ -10,7 +10,7 @@ export default class UserProfilesStore {
   @observable staffBusinesses: Array<BusinessProfile> = [];
   @observable privateProfile: PersonalProfile = null;
 
-  @observable currentProfile: PersonalProfile|BusinessProfile = null;
+  @observable currentProfile: PersonalProfile | BusinessProfile = null;
 
   store: Store;
 
@@ -71,6 +71,6 @@ export default class UserProfilesStore {
 }
 
 type LoadProfilesResult = {
-  success: boolean,
-  error: string
-}
+  success: boolean;
+  error: string;
+};

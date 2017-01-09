@@ -9,7 +9,7 @@ export default class GridView extends Component {
     contentContainerStyle?: Object | number;
     dataSource: ListView.DataSource;
     renderRow: () => any;
-    style?: Object | number
+    style?: Object | number;
   };
 
   render() {

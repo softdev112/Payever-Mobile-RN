@@ -5,7 +5,7 @@ import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default class ImageButton extends Component {
   props: {
-    source: Object | Number;
+    source: Object | number;
     onPress?: () => any;
     style?: Object;
   };

@@ -1,11 +1,13 @@
 import type PayeverApi, { PayeverResponse } from './index';
 
 export default class ProfilesApi {
+  client: PayeverApi;
+
   constructor(client: PayeverApi) {
     this.client = client;
   }
 
-  async getAccessibleList(): Promise<AccessibleListResponse|PayeverResponse> {
+  async getAccessibleList(): Promise<AccessibleListResponse | PayeverResponse> {
     const resp: AccessibleListResponse = await this.client.get(
       '/api/rest/v1/profiles/accessible-list'
     );
@@ -19,15 +21,15 @@ export default class ProfilesApi {
     return resp;
   }
 
-  async search(query): Promise<SearchResponse|PayeverResponse> {
+  async search(query): Promise<SearchResponse | PayeverResponse> {
     return this.client.get('/api/rest/v1/profiles/search', { k: query, c: 20 });
   }
 
-  async follow(businessId): Promise<SimpleOkResponse|PayeverResponse> {
+  async follow(businessId): Promise<SimpleOkResponse | PayeverResponse> {
     return this.client.post(`/api/rest/v1/profiles/${businessId}/follow`);
   }
 
-  async unfollow(businessId): Promise<SimpleOkResponse|PayeverResponse> {
+  async unfollow(businessId): Promise<SimpleOkResponse | PayeverResponse> {
     return this.client.delete(`/api/rest/v1/profiles/${businessId}/unfollow`);
   }
 }
@@ -40,8 +42,8 @@ type AccessibleListResponse = {
 
     error: string;
     error_description: string;
-  },
-  ok: boolean
+  };
+  ok: boolean;
 };
 
 type PersonalProfileData = {
@@ -71,7 +73,7 @@ type PersonalProfileData = {
     registration_source: string;
     roles: Array<string>;
     updated_at: string;
-  }
+  };
 };
 
 type BusinessProfileData = {
@@ -100,8 +102,8 @@ type BusinessProfileData = {
 };
 
 type SearchResponse = {
-  data: ?Array<SearchDataRow>,
-  ok: boolean
+  data: ?Array<SearchDataRow>;
+  ok: boolean;
 };
 
 type SearchDataRow = {
@@ -118,11 +120,11 @@ type SearchDataRow = {
     name: string;
     currency: string;
     slug: string;
-    logo: ?string
+    logo: ?string;
   };
   is_following: boolean;
-}
+};
 
 type SimpleOkResponse = {
-  ok: boolean
-}
+  ok: boolean;
+};

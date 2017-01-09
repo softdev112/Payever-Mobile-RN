@@ -10,8 +10,8 @@ import type BusinessProfile
 @observer
 export default class BusinessList extends Component {
   props: {
-    onSelect: (profile: BusinessProfile) => {},
-    userProfiles: UserProfilesStore
+    onSelect: (profile: BusinessProfile) => {};
+    userProfiles: UserProfilesStore;
   };
 
   renderRow(profile: BusinessProfile) {

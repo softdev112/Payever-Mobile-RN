@@ -5,12 +5,12 @@ import { Text, TouchableOpacity } from 'react-native';
 import StyleSheet from './StyleSheet';
 
 export default class Button extends Component {
-  props:{
+  props: {
     title: string;
     onPress: () => any;
     disabled?: ?boolean;
-    titleStyle?: Object;
-    style?: Object;
+    titleStyle?: Object | number;
+    style?: Object | number;
   };
 
   render() {

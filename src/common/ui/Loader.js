@@ -7,7 +7,7 @@ export default class Loader extends Component {
   props: {
     children?: any;
     isLoading?: boolean;
-    style?: Object | Number;
+    style?: Object | number;
   };
 
   spinValue: Animated;
