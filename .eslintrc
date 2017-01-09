@@ -39,7 +39,6 @@
       "afterColon": true,
       "mode": "minimum"
     }],
-    "linebreak-style": ["error", "windows"],
     "max-len": [1, 80],
     "no-console": 0,
     "no-multi-spaces": [2, { "exceptions": {
