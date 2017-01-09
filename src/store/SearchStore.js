@@ -1,6 +1,7 @@
 import { action, computed, observable, runInAction } from 'mobx';
 
 import type Store from './index';
+//noinspection JSUnresolvedVariable
 import imgNoBusiness from './UserProfilesStore/images/no-business.png';
 
 export default class SearchStore {
@@ -133,7 +134,7 @@ export class SearchRow {
     name: string;
     currency: string;
     slug: string;
-    logo: ?string
+    logo: ?string;
   };
   @observable is_following: boolean;
   @observable is_followUpdating: boolean;

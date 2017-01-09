@@ -10,9 +10,9 @@ import { toggleMenu } from '../../../common/Navigation';
 @observer
 export default class SearchHeader extends Component {
   props: {
-    navigator: Navigator,
-    title?: string,
-    userProfiles?: UserProfilesStore
+    navigator: Navigator;
+    title?: string;
+    userProfiles?: UserProfilesStore;
   };
 
   onProfilePress() {

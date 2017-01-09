@@ -31,4 +31,4 @@ export default function VectorIcon(props: Props) {
 type Props = {
   style?: Object | number;
   source: Object | string;
-}
+};

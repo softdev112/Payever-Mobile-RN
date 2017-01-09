@@ -8,8 +8,8 @@ import type ActivityItem from '../../../store/UserProfilesStore/ActivityItem';
 
 export default class ActivityCards extends Component {
   props: {
-    navigator: Navigator,
-    activity: ActivityItem
+    navigator: Navigator;
+    activity: ActivityItem;
   };
 
   onLinkPress() {

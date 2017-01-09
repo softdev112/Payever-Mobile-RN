@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
 type Props = {
   layers: Array<Object>;
   style?: Object | number;
-}
+};

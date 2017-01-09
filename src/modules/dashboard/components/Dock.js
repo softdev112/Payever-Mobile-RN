@@ -9,9 +9,9 @@ export default class Dock extends Component {
   };
 
   props: {
-    apps: Array<AppItem>,
-    onAppClick: (item: AppItem) => any,
-    showApps?: boolean
+    apps: Array<AppItem>;
+    onAppClick: (item: AppItem) => any;
+    showApps?: boolean;
   };
 
   renderIcon(item: AppItem) {

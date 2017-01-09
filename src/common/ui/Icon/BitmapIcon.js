@@ -15,4 +15,4 @@ export default function BitmapIcon(props: Props) {
 
 type Props = {
   style?: Object | number;
-}
+};

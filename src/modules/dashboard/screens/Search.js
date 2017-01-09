@@ -15,16 +15,16 @@ export default class SearchForm extends Component {
     navBarHidden: true,
   };
 
-  props:{
+  props: {
     navigator: Navigator;
     search: SearchStore;
   };
 
-  state:{
+  state: {
     query: string;
   };
 
-  $input:TextInput;
+  $input: TextInput;
 
   constructor(props) {
     super(props);
@@ -48,7 +48,7 @@ export default class SearchForm extends Component {
     navigator.pop({ animated: true });
   }
 
-  onFollow(row:SearchRow) {
+  onFollow(row: SearchRow) {
     if (row.is_following) {
       this.props.search.unfollow(row.id);
     } else {
@@ -56,7 +56,7 @@ export default class SearchForm extends Component {
     }
   }
 
-  renderRow(row:SearchRow) {
+  renderRow(row: SearchRow) {
     const RowComponent = observer((props) => {
       const business = props.business;
 

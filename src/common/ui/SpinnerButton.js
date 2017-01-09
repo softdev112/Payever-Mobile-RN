@@ -4,7 +4,7 @@ import { Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import StyleSheet from './StyleSheet';
 
 export default class SpinnerButton extends Component {
-  props:{
+  props: {
     title: string;
     onPress: () => any;
     disabled?: ?boolean;

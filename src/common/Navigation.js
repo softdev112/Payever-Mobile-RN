@@ -9,11 +9,11 @@ const SPECIAL_REACT_KEYS = { children: true, key: true, ref: true };
 
 class MobxRnnProvider extends Provider {
   props: {
-    store: Object
+    store: Object;
   };
 
   context: {
-    mobxStores: Object
+    mobxStores: Object;
   };
 
   getChildContext() {

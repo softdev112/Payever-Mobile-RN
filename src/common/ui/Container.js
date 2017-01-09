@@ -9,8 +9,8 @@ export default class Container extends Component {
 
   props: {
     layout: 'small' | 'large';
-    scrollViewStyle?: Object | Number;
-    style?: Object | Number;
+    scrollViewStyle?: Object | number;
+    style?: Object | number;
   }
 
   render() {

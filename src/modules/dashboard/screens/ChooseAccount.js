@@ -14,8 +14,8 @@ export default class ChooseAccount extends Component {
   };
 
   props: {
-    navigator: Navigator,
-    userProfiles: UserProfilesStore
+    navigator: Navigator;
+    userProfiles: UserProfilesStore;
   };
 
   dataSource: GridView.DataSource;

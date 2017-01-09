@@ -63,6 +63,7 @@ export default class PayeverApi {
     return this.fetch(url, query);
   }
 
+  //noinspection ReservedWordAsName
   async delete(url: string, query: Object = null): Promise<Response> {
     query = {
       ...query,
@@ -73,6 +74,7 @@ export default class PayeverApi {
     return this.fetch(url, query);
   }
 
+  //noinspection InfiniteRecursionJS
   async fetch(url: string, options: Object = {}): Promise<PayeverResponse> {
     options.method = options.method || 'GET';
     url = this.normalizeUrl(url, options.query);
@@ -82,6 +84,7 @@ export default class PayeverApi {
     }
 
     const response: PayeverResponse = await fetch(url, options);
+    //noinspection JSUnresolvedFunction
     const text = await response.text();
     try {
       response.data = JSON.parse(text);
@@ -134,18 +137,18 @@ function objectToQueryString(data: Object): string {
 }
 
 type PayeverApiConfig = {
-  baseUrl: string,
-  clientId: string,
-  clientSecret: string,
-  accessToken: string,
-  expiresIn: Date,
+  baseUrl: string;
+  clientId: string;
+  clientSecret: string;
+  accessToken: string;
+  expiresIn: Date;
   refreshToken: string;
 };
 
 declare class PayeverResponse extends Response {
   data: {
-    error?: string,
-    error_description?: string
+    error?: string;
+    error_description?: string;
   };
   json(): Object;
 }

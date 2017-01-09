@@ -107,4 +107,4 @@ export default class AuthStore {
 type SignInResult = {
   success: boolean;
   error: string;
-}
+};
