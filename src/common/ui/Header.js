@@ -9,7 +9,7 @@ import Text from './Text';
 export default class Header extends Component {
   props: {
     children: any;
-    style: Object | number;
+    style?: Object | number;
   };
 
   render() {

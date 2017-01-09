@@ -67,23 +67,28 @@ export default class ChooseAccount extends Component {
     const { userProfiles } = this.props;
     const profilesArray = userProfiles.toArray();
 
+    //noinspection JSUnresolvedFunction
     const dataSource = this.dataSource.cloneWithRows(profilesArray);
 
     return (
       <View style={styles.container}>
         <Header>Welcome back. Please choose buying or selling account.</Header>
         <Loader isLoading={isLoading}>
-          {profilesArray.length > 0 ? (
+          {profilesArray.length > 0 && (
             <View style={styles.gridWrapper}>
               <GridView
                 dataSource={dataSource}
                 renderRow={::this.renderRow}
                 contentContainerStyle={styles.grid}
               />
-            </View>) :
-            (<View style={styles.error}>
+            </View>
+          )}
+
+          {profilesArray.length < 1 && (
+            <View style={styles.error}>
               <Text>Sorry. Error has occurred. Try again later.</Text>
-            </View>)}
+            </View>
+          )}
         </Loader>
       </View>
     );
