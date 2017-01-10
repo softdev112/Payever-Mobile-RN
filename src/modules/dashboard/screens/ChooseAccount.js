@@ -62,6 +62,26 @@ export default class ChooseAccount extends Component {
     );
   }
 
+  renderProfiles(profilesCount, dataSource) {
+    if (profilesCount < 1) {
+      return (
+        <View style={styles.error}>
+          <Text>Sorry. Error has occurred. Try again later.</Text>
+        </View>
+      );
+    }
+
+    return (
+      <View style={styles.gridWrapper}>
+        <GridView
+          dataSource={dataSource}
+          renderRow={::this.renderRow}
+          contentContainerStyle={styles.grid}
+        />
+      </View>
+    );
+  }
+
   render() {
     const { isLoading } = this.state;
     const { userProfiles } = this.props;
@@ -74,21 +94,7 @@ export default class ChooseAccount extends Component {
       <View style={styles.container}>
         <Header>Welcome back. Please choose buying or selling account.</Header>
         <Loader isLoading={isLoading}>
-          {profilesArray.length > 0 && (
-            <View style={styles.gridWrapper}>
-              <GridView
-                dataSource={dataSource}
-                renderRow={::this.renderRow}
-                contentContainerStyle={styles.grid}
-              />
-            </View>
-          )}
-
-          {profilesArray.length < 1 && (
-            <View style={styles.error}>
-              <Text>Sorry. Error has occurred. Try again later.</Text>
-            </View>
-          )}
+          {this.renderProfiles(profilesArray.length, dataSource)}
         </Loader>
       </View>
     );
