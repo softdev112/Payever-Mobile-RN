@@ -10,7 +10,16 @@ sudo gem install fastlane
 ```
 fastlane ios beta
 ```
+Publish a new IOS beta through fabric.io
 
+----
+
+## Android
+### android beta
+```
+fastlane android beta
+```
+Publish a new Android beta through fabric.io
 
 ----
 
