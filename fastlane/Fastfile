@@ -45,8 +45,8 @@ end
 platform :android do
   desc 'Publish a new Android beta through fabric.io'
   lane :beta do |values|
-    gradle(task: 'clean', project_dir: "android/")
-    gradle(task: "assemble", build_type: "Release", project_dir: "android/")
+    gradle(task: 'clean', project_dir: 'android/')
+    gradle(task: 'assemble', build_type: 'Release', project_dir: 'android/')
 	publish_to_fabric(values)
   end
 end
