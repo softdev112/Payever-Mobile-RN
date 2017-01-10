@@ -1,26 +1,54 @@
+require 'json'
+
 fastlane_version "1.109.0"
 
 def is_mac?
   (/darwin/ =~ RUBY_PLATFORM) != nil
 end
 
+def get_version
+  file = File.open(File.expand_path(__dir__, '../package.json')).read
+  json = JSON.parse(file)
+  json['version']
+end
+
+def get_build_info
+  "Build #{get_version} (#{Time.now.utc})\n\n" +
+  "Changelog:\n\n" +
+  changelog_from_git_commits(
+	commits_count: 5,
+	pretty: '%h %an %ar %n%s%n%b%n'
+  )
+end
+
 def publish_to_fabric(values, options = {})
   emails = values[:email] ? values[:email] : ['megahertz@l96.ru']
-  groups = values[:group] ? nil : nil
+  groups = values[:group] ? values[:group] : ['all']
 
   defaults = {
 	api_token: '48b58dc9c7da86d72ed314088b46e42f1a0b78ff',
 	build_secret: 'd81977fd8d8dd7e21bfac54c7952d0136b24603cf554084ed78b9cafed2d9aed',
 	emails: emails,
 	groups: groups,
-	notes: changelog_from_git_commits(
-	  commits_count: 5,
-	  pretty: '%h %an %ar %n%s%n%b%n'
-	),
-	notifications: true
+	notes: get_build_info,
+	notifications: false
   }
 
   crashlytics(defaults.merge(options))
+end
+
+def notify_telegram
+  release = lane_context[:LANE_NAME]
+  changelog = changelog_from_git_commits(
+  	commits_count: 5,
+  	pretty: '%h %an %ar %n%s%n%b%n'
+  )
+
+  telegram(
+    text: "A new #{release} release has been published. " + get_build_info,
+    chat_id: '-142064613',
+    bot_token: '310860880:AAEJ6vQ0ZTeQZcUnYmUIZTaVW1FJ5X8u3Vs'
+  )
 end
 
 default_platform is_mac? ? :ios : :android
@@ -48,5 +76,6 @@ platform :android do
     gradle(task: 'clean', project_dir: 'android/')
     gradle(task: 'assemble', build_type: 'Release', project_dir: 'android/')
 	publish_to_fabric(values)
+	notify_telegram
   end
 end
