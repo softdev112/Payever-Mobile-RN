@@ -10,7 +10,7 @@ export default class AuthApi {
   }
 
   async login(username: string, password: string): Promise<AuthResponse> {
-    const response: AuthResponse = await this.client.fetch('/oauth/v2/token', {
+    return this.client.fetch('/oauth/v2/token', {
       query: {
         username,
         password,
@@ -20,8 +20,6 @@ export default class AuthApi {
       },
       preventTokenRefresh: true,
     });
-
-    return response;
   }
 
   async refreshToken(refreshToken): Promise<string> {
