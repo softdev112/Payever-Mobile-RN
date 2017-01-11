@@ -8,7 +8,7 @@
   ],
 
   "settings": {
-    "import/core-modules": ["ui"],
+    "import/core-modules": ["ui", "utils"],
     "import/extensions": [
       ".js", ".json", ".png"
     ]
@@ -16,6 +16,7 @@
 
   "globals": {
     "__DEV__": true,
+    "FormData": true,
     "fetch": true,
     "log": true,
     "Response": true

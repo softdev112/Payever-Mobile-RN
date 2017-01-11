@@ -105,7 +105,6 @@ export default class BusinessProfile extends Profile {
 
   replaceActivityUrl(activity) {
     if (URL_MAP[activity.type]) {
-      log('Fix activity', activity.title);
       activity.url = this.store.config.siteUrl + URL_MAP[activity.type]
         .replace('{slug}', this.business.slug)
         .replace('{id}', this.id);
