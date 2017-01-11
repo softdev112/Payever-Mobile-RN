@@ -46,7 +46,7 @@ def notify_telegram
 
   telegram(
     text: "A new #{release} release has been published. " + get_build_info,
-    chat_id: '-142064613',
+    chat_id: '-160242491',
     bot_token: '310860880:AAEJ6vQ0ZTeQZcUnYmUIZTaVW1FJ5X8u3Vs'
   )
 end
