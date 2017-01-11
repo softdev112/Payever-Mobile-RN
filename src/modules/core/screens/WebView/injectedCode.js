@@ -15,7 +15,12 @@ function injectedBody(options) {
       attachListenerOnSubmit(businessAddedListener);
     }
 
+    if (options.platform === 'android') {
+      patchSelectElementsForAndroid();
+    }
+
     replaceHeaderButtons();
+
     if (__DEV__) {
       attachOnError();
       patchPostMessage();
@@ -67,6 +72,19 @@ function injectedBody(options) {
 
       const $backA = document.querySelector('.back-selling-link');
       $backA.addEventListener('click', goBackListener);
+    }
+  }
+
+  function patchSelectElementsForAndroid() {
+    // In Android WebView Select elements
+    // don't display well if they have css border just switch off css
+    var $selects = document.querySelectorAll('select');
+
+    if (!$selects) return;
+    for(let i = 0; i < $selects.length; ++i) {
+      // select-custom form-control select-custom-ready
+      // select-custom = {opacity: 0} it was only android issue
+      $selects[i].className = 'form-control select-custom-ready';
     }
   }
 
@@ -190,4 +208,5 @@ export function getLoaderHtml(url: string) {
 type InjectOptions = {
   isDev: boolean;
   isAddBusiness: boolean;
+  platform: string;
 };
