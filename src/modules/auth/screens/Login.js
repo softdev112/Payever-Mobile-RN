@@ -94,6 +94,7 @@ export default class Login extends Component {
                 keyboardType="email-address"
                 label="Your e-mail"
                 onChangeText={username => this.username = username}
+                onSubmitEditing={() => this.$password.focus()}
                 returnKeyType="next"
                 value={this.username}
               />

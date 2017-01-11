@@ -18,9 +18,9 @@ export default class Container extends Component {
     return (
       <View style={[styles.container, this.props.style]}>
         <ScrollView
+          style={[scrollViewStyle, this.props.scrollViewStyle]}
           keyboardShouldPersistTaps
           {...this.props}
-          style={[scrollViewStyle, this.props.scrollViewStyle]}
         />
       </View>
     );

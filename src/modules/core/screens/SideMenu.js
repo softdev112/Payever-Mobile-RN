@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Platform } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { Icon, ImageButton, StyleSheet, Text, View } from 'ui';
 import { Navigator } from 'react-native-navigation';
@@ -36,6 +36,7 @@ export default class SideMenu extends Component {
         injectOptions: {
           isAddBusiness: true,
           title: 'Add New Business',
+          platform: Platform.OS,
         },
       },
     });
