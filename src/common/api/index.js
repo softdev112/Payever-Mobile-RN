@@ -1,4 +1,5 @@
 import { merge } from 'lodash';
+import { log } from 'utils';
 
 import type AuthStore from '../../store/AuthStore';
 import AuthApi from './AuthApi';
@@ -53,25 +54,29 @@ export default class PayeverApi {
     return this.fetch(url, { query });
   }
 
-  async post(url: string, query: Object = null): Promise<Response> {
-    query = {
-      ...query,
+  async post(url: string, formData: Object = null): Promise<Response> {
+    const options = {
       method: 'POST',
-      access_token: await this.getAccessToken(),
     };
 
-    return this.fetch(url, query);
+    if (formData) {
+      options.body = objectToPhpFormData(formData);
+    }
+
+    return this.fetch(url, options);
   }
 
   //noinspection ReservedWordAsName
-  async delete(url: string, query: Object = null): Promise<Response> {
-    query = {
-      ...query,
+  async delete(url: string, formData: Object = null): Promise<Response> {
+    const options = {
       method: 'DELETE',
-      access_token: await this.getAccessToken(),
     };
 
-    return this.fetch(url, query);
+    if (formData) {
+      options.body = objectToPhpFormData(formData);
+    }
+
+    return this.fetch(url, options);
   }
 
   //noinspection InfiniteRecursionJS
@@ -80,7 +85,7 @@ export default class PayeverApi {
     url = this.normalizeUrl(url, options.query);
 
     if (__DEV__) {
-      console.info(`${options.method} ${url}`);
+      log.debug(`${options.method} ${url}`);
     }
 
     const response: PayeverResponse = await fetch(url, options);
@@ -105,7 +110,7 @@ export default class PayeverApi {
     }
 
     if (__DEV__) {
-      console.info('Response data ', response.data);
+      log.debug('Response data ', response.data);
     }
 
     return response;
@@ -134,6 +139,11 @@ function objectToQueryString(data: Object): string {
   return Object.keys(data).map((key) => {
     return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
   }).join('&');
+}
+
+function objectToPhpFormData(object: Object) {
+  // Good example: POST /api/rest/v1/channel-subscription/{id}/create-store
+  return new FormData(object);
 }
 
 type PayeverApiConfig = {

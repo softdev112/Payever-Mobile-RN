@@ -4,33 +4,13 @@
  * Module for sending logs to chrome inspector through Stetho
  * It's disabled for ios and for production
  */
-import { NativeModules, Platform } from 'react-native';
+import { NativeModules } from 'react-native';
 
 const StethoLogger = NativeModules.StethoLogger;
 
-global.log = globalLog;
-globalLog.patchConsole = patchConsole;
-
-function globalLog(...args) {
-  if (!__DEV__ && Platform.OS === 'ios') {
-    return;
-  }
-  logToStetho('log', ...args);
-}
-
-function patchConsole() {
-  const console = global.originalConsole;
-  if (!console || !__DEV__ || Platform.OS === 'ios') {
-    return;
-  }
-
-  ['log', 'info', 'warn', 'error'].forEach((level) => {
-    const originalMethod = console[level];
-    console[level] = (...args) => {
-      logToStetho(level, ...args);
-      originalMethod.apply(console, args);
-    };
-  });
+export default function log(level, ...args) {
+  const text = args.join(' ');
+  sendStethoMessage(level, text);
 }
 
 function sendStethoMessage(level, text) {
@@ -85,28 +65,6 @@ function sendStathoConsoleAliCall() {
   });
 }
 
-function logToStetho(level, ...args) {
-  const text = args.map((arg) => {
-    if (Array.isArray(arg) || typeof arg === 'object') {
-      arg = serialize(arg, null, '  ');
-    }
-    return arg;
-  }).join(' ');
-  sendStethoMessage(level, text);
-}
-
-function serialize(object) {
-  const seen = [];
-  return JSON.stringify(object, (key, val) => {
-    if (val != null && typeof val === 'object') {
-      if (seen.indexOf(val) >= 0) {
-        return undefined;
-      }
-      seen.push(val);
-    }
-    return val;
-  }, '  ');
-}
 
 function logObjectToStetho() {
   /*
