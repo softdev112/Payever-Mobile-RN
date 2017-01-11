@@ -20,14 +20,6 @@ export default class AuthApi {
       preventTokenRefresh: true,
     });
 
-    if (response.ok) {
-      this.client.authStore.updateTokens({
-        accessToken: response.data.access_token,
-        expiresIn: response.data.expires_in,
-        refreshToken: response.data.refresh_token,
-      });
-    }
-
     return response;
   }
 
