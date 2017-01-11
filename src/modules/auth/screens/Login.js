@@ -34,11 +34,21 @@ export default class Login extends Component {
 
   constructor() {
     super();
-    this.state = { isLoading: false };
+    this.state = {
+      isLoading: false,
+      error: ''
+    };
   }
 
   async onSignIn() {
-    this.setState({ isLoading: true, error: null });
+    // Test if credentials not empty
+    if (this.password === '' || this.username === '') {
+      this.setState({ error: 'Username and password can not be empty!' });
+
+      return;
+    }
+
+    this.setState({ isLoading: true, error: '' });
     const { auth, navigator } = this.props;
 
     const signInResult = await auth.signIn(this.username, this.password);
@@ -71,21 +81,26 @@ export default class Login extends Component {
         </Header>
         <Loader isLoading={isLoading}>
           <Container contentContainerStyle={styles.form} layout="small">
-            <Error message={error} />
+            <Error
+              duration={5000}
+              message={error}
+            />
             <View>
               <TextInput
-                label="Your e-mail"
-                keyboardType="email-address"
-                returnKeyType="next"
                 autoCapitalize="none"
                 autoCorrect={false}
                 autoFocus
+                inputStyle={StyleSheet.flatten(styles.inputStyle)}
+                keyboardType="email-address"
+                label="Your e-mail"
                 onChangeText={username => this.username = username}
-                onSubmitEditing={() => this.$password.focus()}
+                returnKeyType="next"
+                value={this.username}
               />
             </View>
             <View>
               <TextInput
+                inputStyle={StyleSheet.flatten(styles.inputStyle)}
                 ref={f => this.$password = f}
                 label="Your password"
                 secureTextEntry
@@ -114,6 +129,13 @@ const styles = StyleSheet.create({
 
   header: {
     justifyContent: 'flex-start',
+  },
+
+  inputStyle: {
+    '@media android': {
+      paddingBottom: 5,
+      paddingTop: 5,
+    },
   },
 
   form: {
