@@ -8,7 +8,7 @@
   ],
 
   "settings": {
-    "import/core-modules": ["ui"],
+    "import/core-modules": ["ui", "utils"],
     "import/extensions": [
       ".js", ".json", ".png"
     ]

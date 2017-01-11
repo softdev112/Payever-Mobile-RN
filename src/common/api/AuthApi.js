@@ -1,3 +1,4 @@
+import { log } from 'utils';
 import type PayeverApi from './index';
 import { showScreen } from '../Navigation';
 
@@ -48,10 +49,10 @@ export default class AuthApi {
         expiresIn: response.data.expires_in,
         refreshToken: response.data.refresh_token,
       });
-      console.log('New token is set', [this.client, response.data]);
+      log.info('New token is set', [this.client, response.data]);
     } else {
       showScreen('auth.Login');
-      console.error('Could not refresh token: ', response.data);
+      log.error('Could not refresh token: ', response.data);
     }
 
     return response.data.access_token;
