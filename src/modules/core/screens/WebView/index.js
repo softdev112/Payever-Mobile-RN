@@ -107,9 +107,6 @@ export default class WebView extends Component {
         console.warn(
           `WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`
         );
-        log(
-          `WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`
-        );
         this.props.navigator.pop({ animated: true });
         break;
       }
@@ -152,14 +149,12 @@ export default class WebView extends Component {
 
     let source;
     if (referer) {
-      log('Loading with referer', referer);
       const headers = {};
       if (referer) {
         headers.Referer = referer;
       }
       source = { headers, uri: url };
     } else {
-      log('Loading through html');
       source = { html: getLoaderHtml(url) };
     }
 

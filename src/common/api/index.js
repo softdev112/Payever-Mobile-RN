@@ -1,4 +1,5 @@
 import { merge } from 'lodash';
+import { log } from 'utils';
 
 import type AuthStore from '../../store/AuthStore';
 import AuthApi from './AuthApi';
@@ -84,7 +85,7 @@ export default class PayeverApi {
     url = this.normalizeUrl(url, options.query);
 
     if (__DEV__) {
-      console.info(`${options.method} ${url}`);
+      log.debug(`${options.method} ${url}`);
     }
 
     const response: PayeverResponse = await fetch(url, options);
@@ -109,7 +110,7 @@ export default class PayeverApi {
     }
 
     if (__DEV__) {
-      console.info('Response data ', response.data);
+      log.debug('Response data ', response.data);
     }
 
     return response;

@@ -19,8 +19,6 @@ export default function VectorIcon(props: Props) {
     );
   }
 
-  log('Vector', props, unicode);
-
   return (
     <Text {...props} style={[props.style]}>
       {unicode}
