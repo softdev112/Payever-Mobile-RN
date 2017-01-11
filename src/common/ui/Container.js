@@ -11,13 +11,14 @@ export default class Container extends Component {
     layout: 'small' | 'large';
     scrollViewStyle?: Object | number;
     style?: Object | number;
-  }
+  };
 
   render() {
     const scrollViewStyle = styles[`scrollView_${this.props.layout}`];
     return (
       <View style={[styles.container, this.props.style]}>
         <ScrollView
+          keyboardShouldPersistTaps
           {...this.props}
           style={[scrollViewStyle, this.props.scrollViewStyle]}
         />
