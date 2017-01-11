@@ -53,25 +53,29 @@ export default class PayeverApi {
     return this.fetch(url, { query });
   }
 
-  async post(url: string, query: Object = null): Promise<Response> {
-    query = {
-      ...query,
+  async post(url: string, formData: Object = null): Promise<Response> {
+    const options = {
       method: 'POST',
-      access_token: await this.getAccessToken(),
     };
 
-    return this.fetch(url, query);
+    if (formData) {
+      options.body = objectToPhpFormData(formData);
+    }
+
+    return this.fetch(url, options);
   }
 
   //noinspection ReservedWordAsName
-  async delete(url: string, query: Object = null): Promise<Response> {
-    query = {
-      ...query,
+  async delete(url: string, formData: Object = null): Promise<Response> {
+    const options = {
       method: 'DELETE',
-      access_token: await this.getAccessToken(),
     };
 
-    return this.fetch(url, query);
+    if (formData) {
+      options.body = objectToPhpFormData(formData);
+    }
+
+    return this.fetch(url, options);
   }
 
   //noinspection InfiniteRecursionJS
@@ -134,6 +138,11 @@ function objectToQueryString(data: Object): string {
   return Object.keys(data).map((key) => {
     return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
   }).join('&');
+}
+
+function objectToPhpFormData(object: Object) {
+  // Good example: POST /api/rest/v1/channel-subscription/{id}/create-store
+  return new FormData(object);
 }
 
 type PayeverApiConfig = {
