@@ -36,7 +36,7 @@ export default class Login extends Component {
     super();
     this.state = {
       isLoading: false,
-      error: ''
+      error: '',
     };
   }
 

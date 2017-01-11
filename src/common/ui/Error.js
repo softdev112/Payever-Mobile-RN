@@ -24,7 +24,7 @@ export default class Error extends Component {
     this.setUpShowTimer();
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps() {
     this.setState({ show: true });
     this.setUpShowTimer();
   }
