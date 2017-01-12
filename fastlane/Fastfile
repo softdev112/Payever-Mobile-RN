@@ -16,8 +16,8 @@ def get_build_info
   "Build #{get_version} (#{Time.now.utc})\n\n" +
   "Changelog:\n\n" +
   changelog_from_git_commits(
-	commits_count: 5,
-	pretty: '%h %an %ar %n%s%n%b%n'
+    commits_count: 5,
+    pretty: '%h %an %ar %n%s%n%b%n'
   )
 end
 
@@ -32,12 +32,12 @@ def publish_to_fabric(values, options = {})
     end
 
   defaults = {
-	api_token: '48b58dc9c7da86d72ed314088b46e42f1a0b78ff',
-	build_secret: 'd81977fd8d8dd7e21bfac54c7952d0136b24603cf554084ed78b9cafed2d9aed',
-	emails: emails,
-	groups: groups,
-	notes: get_build_info,
-	notifications: false
+    api_token: '48b58dc9c7da86d72ed314088b46e42f1a0b78ff',
+    build_secret: 'd81977fd8d8dd7e21bfac54c7952d0136b24603cf554084ed78b9cafed2d9aed',
+    emails: emails,
+    groups: groups,
+    notes: get_build_info,
+    notifications: false
   }
 
   crashlytics(defaults.merge(options))
@@ -48,8 +48,8 @@ def notify_telegram(values)
 
   release = lane_context[:LANE_NAME]
   changelog = changelog_from_git_commits(
-  	commits_count: 5,
-  	pretty: '%h %an %ar %n%s%n%b%n'
+    commits_count: 5,
+    pretty: '%h %an %ar %n%s%n%b%n'
   )
 
   telegram(
@@ -75,7 +75,8 @@ platform :ios do
       output_directory: 'fastlane/build/ios',
       output_name: 'payever.ipa'   
     )
-	publish_to_fabric(values, ipa_path: 'fastlane/build/ios/payever.ipa')
+    publish_to_fabric(values, ipa_path: 'fastlane/build/ios/payever.ipa')
+    notify_telegram(values)
   end
 end
 
@@ -84,7 +85,7 @@ platform :android do
   lane :beta do |values|
     gradle(task: 'clean', project_dir: 'android/')
     gradle(task: 'assemble', build_type: 'Release', project_dir: 'android/')
-	publish_to_fabric(values)
-	notify_telegram(values)
+    publish_to_fabric(values)
+    notify_telegram(values)
   end
 end
