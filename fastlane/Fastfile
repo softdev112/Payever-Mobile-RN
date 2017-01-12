@@ -53,7 +53,8 @@ def notify_telegram(values)
   )
 
   telegram(
-    text: "A new #{release} release has been published. " + get_build_info,
+    text: "A new #{release} release has been published in Crashlytics Beta. " +
+      get_build_info,
     chat_id: '-160242491',
     bot_token: '310860880:AAEJ6vQ0ZTeQZcUnYmUIZTaVW1FJ5X8u3Vs'
   )
