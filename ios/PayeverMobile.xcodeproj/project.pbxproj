@@ -949,8 +949,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp;
 				PRODUCT_NAME = payever;
-				PROVISIONING_PROFILE = "35c960f7-2f88-4b28-b80f-302336e8ad5d";
-				PROVISIONING_PROFILE_SPECIFIER = payever_react_native_adhoc;
+				PROVISIONING_PROFILE = "4c42a206-23ae-4db5-af30-c525cc277580";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gmbh.payeverapp";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -982,8 +982,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp;
 				PRODUCT_NAME = payever;
-				PROVISIONING_PROFILE = "35c960f7-2f88-4b28-b80f-302336e8ad5d";
-				PROVISIONING_PROFILE_SPECIFIER = payever_react_native_adhoc;
+				PROVISIONING_PROFILE = "4c42a206-23ae-4db5-af30-c525cc277580";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gmbh.payeverapp";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
