@@ -42,6 +42,26 @@
  - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
  - [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
 
+## Build tools
+
+### Increase version:
+
+    npm run bump
+
+### Release publishing
+
+- Make an internal build for members in developers group:
+`fastlane beta dev:true`
+or shortcut (with automatic version increasing):
+`npm run beta`
+
+- Build for all members with telegram notification:
+`fastlane beta`
+
+### Rebuild vector icons
+
+    gulp svg
+
 ## Useful information:
  
 ### Show In-App Debug menu in the latest android emulator:
