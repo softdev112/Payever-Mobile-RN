@@ -24,7 +24,7 @@ export default class SearchStore {
 
     apiHelper(api.profiles.search(query), this)
       .success((resp: ApiResp) => {
-        if (resp.data.length) {
+        if (resp.data.length > 0) {
           this.items = resp.data.map(data => new SearchRow(data));
         } else {
           this.error = 'Sorry, we didn\'t find any results, try ' +
@@ -50,25 +50,11 @@ export default class SearchStore {
     // Set follow/unfollow processing flag for row
     runInAction(() => item.is_followUpdating = true);
 
-    try {
-      const resp = await api.profiles.follow(businessId);
-
-      runInAction('Follow business', () => {
-        if (!resp.ok) {
-          this.error = 'Sorry, internal error occurred. Info: ' +
-            resp.errorDescription;
-          return;
-        }
-
-        // Update this profile in state to avoid extra requests
+    apiHelper(api.profiles.follow(businessId), this)
+      .success(() => {
         item.is_following = true;
-        this.error = '';
-      });
-    } catch (e) {
-      runInAction(() => this.error = e.message);
-    } finally {
-      runInAction(() => item.is_followUpdating = false);
-    }
+      })
+      .complete(() => item.is_followUpdating = false);
   }
 
   @action
@@ -86,25 +72,11 @@ export default class SearchStore {
     // Set follow/unfollow processing flag for row
     runInAction(() => item.is_followUpdating = true);
 
-    try {
-      const resp = await api.profiles.unfollow(businessId);
-
-      runInAction('Unfollow business', () => {
-        if (!resp.ok) {
-          this.error = 'Sorry, internal error occurred. Info: ' +
-            resp.data.errorDescription;
-          return;
-        }
-
-        // Update this profile in state to avoid extra requests
+    apiHelper(api.profiles.unfollow(businessId), this)
+      .success(() => {
         item.is_following = false;
-        this.error = '';
-      });
-    } catch (e) {
-      runInAction(() => this.error = e.message);
-    } finally {
-      runInAction(() => item.is_followUpdating = false);
-    }
+      })
+      .complete(() => item.is_followUpdating = false);
   }
 }
 
