@@ -152,7 +152,7 @@ function objectToPhpFormData(data: ObjectToFromData) {
   const typeDetector = Object.prototype.toString;
   const mainKey = data.key;
   const requestData = data.requestData;
-  const keys = Object.keys(data);
+  const keys = Object.keys(requestData);
 
   function appendValueToFormData(currentName, value) {
     switch (typeDetector.call(value)) {
@@ -160,8 +160,8 @@ function objectToPhpFormData(data: ObjectToFromData) {
         const objKeys = Object.keys(value);
         objKeys.forEach(key =>
           appendValueToFormData(`${currentName}[${key}]`, value[key]));
-      }
         break;
+      }
 
       case '[object Array]':
         value.forEach(element =>
