@@ -23,7 +23,13 @@ end
 
 def publish_to_fabric(values, options = {})
   emails = values[:email] ? values[:email] : ['megahertz@l96.ru']
-  groups = values[:group] ? values[:group] : ['all']
+
+  groups =
+    if values[:dev] && !values[:group]
+      ['developers']
+    else
+      values[:group] ? values[:group] : ['all']
+    end
 
   defaults = {
 	api_token: '48b58dc9c7da86d72ed314088b46e42f1a0b78ff',
@@ -37,7 +43,9 @@ def publish_to_fabric(values, options = {})
   crashlytics(defaults.merge(options))
 end
 
-def notify_telegram
+def notify_telegram(values)
+  return if values[:dev]
+
   release = lane_context[:LANE_NAME]
   changelog = changelog_from_git_commits(
   	commits_count: 5,
@@ -77,6 +85,6 @@ platform :android do
     gradle(task: 'clean', project_dir: 'android/')
     gradle(task: 'assemble', build_type: 'Release', project_dir: 'android/')
 	publish_to_fabric(values)
-	notify_telegram
+	notify_telegram(values)
   end
 end

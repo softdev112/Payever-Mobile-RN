@@ -9,7 +9,7 @@
     "reset": "watchman watch-del-all",
     "test": "jest",
     "build:android": "cd android && ./gradlew assembleRelease",
-    "beta": "npm run bump; fastlane beta",
+    "beta": "npm run bump; fastlane beta dev:true",
     "lint": "eslint src",
     "install": "gulp install:git-hooks"
   },
