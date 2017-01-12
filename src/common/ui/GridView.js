@@ -4,16 +4,25 @@ import StyleSheet from './StyleSheet';
 
 export default class GridView extends Component {
   static DataSource = ListView.DataSource;
+  static dafaultProps = { renderFooter: () => null };
 
   props: {
     contentContainerStyle?: Object | number;
     dataSource: ListView.DataSource;
     renderRow: () => any;
+    renderFooter?: () => any;
     style?: Object | number;
   };
 
   render() {
-    const { contentContainerStyle, dataSource, renderRow, style } = this.props;
+    const {
+      contentContainerStyle,
+      dataSource,
+      renderRow,
+      style,
+      renderFooter,
+    } = this.props;
+
     return (
       <ListView
         initialListSize={30}
@@ -21,6 +30,7 @@ export default class GridView extends Component {
         contentContainerStyle={[styles.list, contentContainerStyle]}
         dataSource={dataSource}
         renderRow={renderRow}
+        renderFooter={renderFooter}
         showsVerticalScrollIndicator={false}
       />
     );
