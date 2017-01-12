@@ -1,12 +1,20 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
+import { Platform } from 'react-native';
 import type { Navigator } from 'react-native-navigation';
-import { GridView, Header, IconText, Text, Loader, View, StyleSheet } from 'ui';
+import {
+  GridView, Header, IconText, Text,
+  Loader, View, StyleSheet,
+} from 'ui';
 
+import type { Config } from '../../../config';
 import type UserProfilesStore from '../../../store/UserProfilesStore';
 import type Profile from '../../../store/UserProfilesStore/Profile';
 
-@inject('userProfiles')
+import addBusinessIcon
+  from '../../../store/UserProfilesStore/images/add-business.png';
+
+@inject('userProfiles', 'config')
 @observer
 export default class ChooseAccount extends Component {
   static navigatorStyle = {
@@ -14,6 +22,7 @@ export default class ChooseAccount extends Component {
   };
 
   props: {
+    config: Config;
     navigator: Navigator;
     userProfiles: UserProfilesStore;
   };
@@ -39,6 +48,22 @@ export default class ChooseAccount extends Component {
     });
   }
 
+  onAddNewBusiness() {
+    const { navigator, config } = this.props;
+
+    navigator.push({
+      screen: 'core.WebView',
+      passProps: {
+        url: config.siteUrl + '/private/create-business',
+        injectOptions: {
+          isAddBusiness: true,
+          title: 'Add New Business',
+          platform: Platform.OS,
+        },
+      },
+    });
+  }
+
   onProfileClick(profile: Profile) {
     const { userProfiles, navigator } = this.props;
     userProfiles.setCurrentProfile(profile);
@@ -47,6 +72,19 @@ export default class ChooseAccount extends Component {
       title: 'Home',
       animated: true,
     });
+  }
+
+  renderFooter() {
+    return (
+      <IconText
+        style={styles.item}
+        textStyle={styles.iconTitle}
+        imageStyle={styles.logo}
+        onPress={::this.onAddNewBusiness}
+        source={addBusinessIcon}
+        title="Add New Business"
+      />
+    );
   }
 
   renderRow(profile: Profile) {
@@ -75,6 +113,7 @@ export default class ChooseAccount extends Component {
       <View style={styles.gridWrapper}>
         <GridView
           dataSource={dataSource}
+          renderFooter={::this.renderFooter}
           renderRow={::this.renderRow}
           contentContainerStyle={styles.grid}
         />
