@@ -143,25 +143,25 @@ function objectToQueryString(data: Object): string {
   }).join('&');
 }
 
-function objectToPhpFormData(object: ObjectToFromData) {
+function objectToPhpFormData(data: ObjectToFromData) {
   // Good example: POST /api/rest/v1/channel-subscription/{id}/create-store
   const formData = new FormData();
 
-  if (!object || object.key === '' || !object.dataObject) return formData;
+  if (!data || data.key === '' || !data.requestData) return formData;
 
-  const typeDetector = Object.prototype.toString.call;
-  const mainKey = object.key;
-  const data = object.dataObject;
+  const typeDetector = Object.prototype.toString;
+  const mainKey = data.key;
+  const requestData = data.requestData;
   const keys = Object.keys(data);
 
   function appendValueToFormData(currentName, value) {
-    switch (typeDetector(value)) {
+    switch (typeDetector.call(value)) {
       case '[object Object]': {
-        const objKeys = Object.keys();
+        const objKeys = Object.keys(value);
         objKeys.forEach(key =>
           appendValueToFormData(`${currentName}[${key}]`, value[key]));
-        break;
       }
+        break;
 
       case '[object Array]':
         value.forEach(element =>
@@ -174,16 +174,20 @@ function objectToPhpFormData(object: ObjectToFromData) {
     }
   }
 
-  keys.forEach(key => {
-    appendValueToFormData(`${mainKey}[${key}]`, data[key]);
-  });
+  try {
+    keys.forEach(key => {
+      appendValueToFormData(`${mainKey}[${key}]`, requestData[key]);
+    });
+  } catch (e) {
+    log.error(e.message);
+  }
 
   return formData;
 }
 
 type ObjectToFromData = {
   key: string;
-  dataObject: Object;
+  requestData: Object;
 };
 
 type PayeverApiConfig = {
