@@ -46,7 +46,7 @@ export default class PayeverApi {
     merge(this, config);
   }
 
-  async get(url: string, query: Object = null): Promise<Response> {
+  async get(url: string, query: Object = null): Promise<ApiResp> {
     query = {
       ...query,
       access_token: await this.getAccessToken(),
@@ -54,7 +54,7 @@ export default class PayeverApi {
     return this.fetch(url, { query });
   }
 
-  async post(url: string, formData: Object = null): Promise<Response> {
+  async post(url: string, formData: Object = null): Promise<ApiResp> {
     const options = {
       method: 'POST',
     };
@@ -67,7 +67,7 @@ export default class PayeverApi {
   }
 
   //noinspection ReservedWordAsName
-  async delete(url: string, formData: Object = null): Promise<Response> {
+  async delete(url: string, formData: Object = null): Promise<ApiResp> {
     const options = {
       method: 'DELETE',
     };
@@ -80,7 +80,7 @@ export default class PayeverApi {
   }
 
   //noinspection InfiniteRecursionJS
-  async fetch(url: string, options: Object = {}): Promise<PayeverResponse> {
+  async fetch(url: string, options: Object = {}): Promise<ApiResp> {
     options.method = options.method || 'GET';
     url = this.normalizeUrl(url, options.query);
 
@@ -88,20 +88,22 @@ export default class PayeverApi {
       log.debug(`${options.method} ${url}`);
     }
 
-    const response: PayeverResponse = await fetch(url, options);
-    //noinspection JSUnresolvedFunction
+    const response: ApiResp = await fetch(url, options);
     const text = await response.text();
     try {
       response.data = JSON.parse(text);
+      if (response.data && response.data.error) {
+        response.error = response.data.error;
+        response.errorDescription = response.data.errorDescription;
+      }
     } catch (e) {
-      response.data = {
-        error: 'json_error',
-        error_description: 'Wrong server response',
-      };
+      response.data = {};
+      response.error = 'json_error';
+      response.errorDescription = 'Wrong server response';
     }
 
     if (!options.preventTokenRefresh &&
-      response.data.error === 'invalid_grant') {
+      response.error === 'invalid_grant') {
       const token = await this.auth.refreshToken(this.authStore.refreshToken);
       if (token) {
         return await this.fetch(url, { ...options, preventTokenRefresh: true });
@@ -154,11 +156,3 @@ type PayeverApiConfig = {
   expiresIn: Date;
   refreshToken: string;
 };
-
-declare class PayeverResponse extends Response {
-  data: {
-    error?: string;
-    error_description?: string;
-  };
-  json(): Object;
-}

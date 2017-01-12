@@ -19,7 +19,7 @@
     "FormData": true,
     "fetch": true,
     "log": true,
-    "Response": true
+    "ApiResp": true
   },
 
   "rules": {

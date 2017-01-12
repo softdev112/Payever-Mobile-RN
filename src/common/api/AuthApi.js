@@ -9,7 +9,7 @@ export default class AuthApi {
     this.client = client;
   }
 
-  async login(username: string, password: string): Promise<AuthResponse> {
+  async login(username: string, password: string): Promise<AuthResp> {
     return this.client.fetch('/oauth/v2/token', {
       query: {
         username,
@@ -23,7 +23,7 @@ export default class AuthApi {
   }
 
   async refreshToken(refreshToken): Promise<string> {
-    const response: AuthResponse = await this.client.fetch('/oauth/v2/token', {
+    const response: AuthResp = await this.client.fetch('/oauth/v2/token', {
       query: {
         client_id:     this.client.clientId,
         client_secret: this.client.clientSecret,
@@ -59,14 +59,10 @@ export default class AuthApi {
   }
 }
 
-type AuthResponse = {
+declare class AuthResp extends ApiResp {
   data: {
     access_token: string;
     expires_in: string;
     refresh_token: string;
-
-    error: string;
-    error_description: string;
   };
-  ok: boolean;
-};
+}

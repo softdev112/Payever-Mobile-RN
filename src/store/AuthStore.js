@@ -27,7 +27,7 @@ export default class AuthStore {
       const resp = await api.auth.login(username, password);
       data = resp.data;
       if (!resp.ok) {
-        return { success: false, error: data.error_description };
+        return { success: false, error: resp.errorDescription };
       }
     } catch (e) {
       console.warn(e);

@@ -1,4 +1,4 @@
-import type PayeverApi, { PayeverResponse } from './index';
+import type PayeverApi from './index';
 
 export default class UserApi {
   client: PayeverApi;
@@ -7,7 +7,7 @@ export default class UserApi {
     this.client = client;
   }
 
-  getBusinesses(): Promise<PayeverResponse> {
+  getBusinesses(): Promise<ApiResp> {
     return this.client.get('/api/rest/v1/profiles/accessible-list');
   }
 }
