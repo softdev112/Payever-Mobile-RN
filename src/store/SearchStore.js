@@ -1,4 +1,5 @@
 import { action, computed, observable, runInAction } from 'mobx';
+import { apiHelper } from 'utils';
 
 import type Store from './index';
 //noinspection JSUnresolvedVariable
@@ -19,32 +20,19 @@ export default class SearchStore {
   async search(query) {
     const { api } = this.store;
 
-    runInAction(() => this.isSearching = true);
+    this.isSearching = true;
 
-    try {
-      const resp = await api.profiles.search(query);
-      runInAction('Update auth state', () => {
-        if (!resp.ok) {
-          this.error = 'Sorry, internal error occurred. Info: ' +
-            resp.data.error_description;
-          return;
-        }
-
-        if (!resp.data.length) {
+    apiHelper(api.profiles.search(query), this)
+      .success((resp: ApiResp) => {
+        if (resp.data.length) {
+          this.items = resp.data.map(data => new SearchRow(data));
+        } else {
           this.error = 'Sorry, we didn\'t find any results, try ' +
             'searching again';
           this.items = [];
-          return;
         }
-
-        this.items = resp.data.map(data => new SearchRow(data));
-        this.error = '';
-      });
-    } catch (e) {
-      runInAction(() => this.error = e.message);
-    } finally {
-      runInAction(() => this.isSearching = false);
-    }
+      })
+      .complete(() => this.isSearching = false);
   }
 
   @action
@@ -68,7 +56,7 @@ export default class SearchStore {
       runInAction('Follow business', () => {
         if (!resp.ok) {
           this.error = 'Sorry, internal error occurred. Info: ' +
-            resp.data.error_description;
+            resp.errorDescription;
           return;
         }
 
@@ -104,7 +92,7 @@ export default class SearchStore {
       runInAction('Unfollow business', () => {
         if (!resp.ok) {
           this.error = 'Sorry, internal error occurred. Info: ' +
-            resp.data.error_description;
+            resp.data.errorDescription;
           return;
         }
 

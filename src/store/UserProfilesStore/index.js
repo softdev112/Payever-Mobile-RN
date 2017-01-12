@@ -44,7 +44,7 @@ export default class UserProfilesStore {
       data = resp.data;
 
       if (!resp.ok) {
-        return { success: false, error: data.error_description };
+        return { success: false, error: resp.errorDescription };
       }
     } catch (e) {
       console.warn(e);

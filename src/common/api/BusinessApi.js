@@ -7,15 +7,20 @@ export default class BusinessApi {
     this.client = client;
   }
 
-  getActivities(slug: string): Promise<ActivityItemResponse> {
+  getActivities(slug: string): Promise<ActivityResp> {
     return this.client.get(`/api/rest/v1/business/${slug}/activities`);
   }
 
-  getTodos(slug: string): Promise<ActivityItemResponse> {
+  getTodos(slug: string): Promise<ActivityResp> {
     return this.client.get(`/api/rest/v1/business/${slug}/todos`);
   }
 }
 
+declare class ActivityResp extends ApiResp {
+  data: Array<ActivityItemData>;
+}
+
+/* eslint-disable no-unused-vars */
 type ActivityItemData = {
   active: boolean;
   channel: ?string;
@@ -28,9 +33,4 @@ type ActivityItemData = {
   type: string;
   url: string;
   url_label: string;
-};
-
-type ActivityItemResponse = {
-  data: Array<ActivityItemData>;
-  ok: boolean;
 };

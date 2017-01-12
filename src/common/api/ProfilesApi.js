@@ -1,4 +1,4 @@
-import type PayeverApi, { PayeverResponse } from './index';
+import type PayeverApi from './index';
 
 export default class ProfilesApi {
   client: PayeverApi;
@@ -7,8 +7,8 @@ export default class ProfilesApi {
     this.client = client;
   }
 
-  async getAccessibleList(): Promise<AccessibleListResponse | PayeverResponse> {
-    const resp: AccessibleListResponse = await this.client.get(
+  async getAccessibleList(): Promise<MenuResp> {
+    const resp: MenuResp = await this.client.get(
       '/api/rest/v1/profiles/accessible-list'
     );
     const data = resp.data;
@@ -21,31 +21,28 @@ export default class ProfilesApi {
     return resp;
   }
 
-  async search(query): Promise<SearchResponse | PayeverResponse> {
+  async search(query): Promise<SearchResp> {
     return this.client.get('/api/rest/v1/profiles/search', { k: query, c: 20 });
   }
 
-  async follow(businessId): Promise<SimpleOkResponse | PayeverResponse> {
+  async follow(businessId): Promise<ApiResp> {
     return this.client.post(`/api/rest/v1/profiles/${businessId}/follow`);
   }
 
-  async unfollow(businessId): Promise<SimpleOkResponse | PayeverResponse> {
+  async unfollow(businessId): Promise<ApiResp> {
     return this.client.delete(`/api/rest/v1/profiles/${businessId}/unfollow`);
   }
 }
 
-type AccessibleListResponse = {
-  data: ?{
+declare class MenuResp extends ApiResp {
+  data: {
     businesses_own: Array<BusinessProfileData>;
     businesses_staff: Array<BusinessProfileData>;
     'private': PersonalProfileData;
-
-    error: string;
-    error_description: string;
   };
-  ok: boolean;
-};
+}
 
+/* eslint-disable no-unused-vars */
 type PersonalProfileData = {
   customers: number;
   followers: number;
@@ -76,6 +73,7 @@ type PersonalProfileData = {
   };
 };
 
+/* eslint-disable no-unused-vars */
 type BusinessProfileData = {
   business: {
     company_name: ?string;
@@ -101,11 +99,11 @@ type BusinessProfileData = {
   type: string;
 };
 
-type SearchResponse = {
+declare class SearchResp extends ApiResp {
   data: ?Array<SearchDataRow>;
-  ok: boolean;
-};
+}
 
+/* eslint-disable no-unused-vars */
 type SearchDataRow = {
   id: number;
   followers: number;
@@ -123,8 +121,4 @@ type SearchDataRow = {
     logo: ?string;
   };
   is_following: boolean;
-};
-
-type SimpleOkResponse = {
-  ok: boolean;
 };

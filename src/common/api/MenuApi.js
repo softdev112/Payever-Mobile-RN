@@ -7,11 +7,16 @@ export default class MenuApi {
     this.client = client;
   }
 
-  getList(profileId, current = 'home'): Promise<MenuResponse> {
+  getList(profileId, current = 'home'): Promise<MenuResp> {
     return this.client.get(`/api/rest/v1/menu/list/${profileId}`, { current });
   }
 }
 
+declare class MenuResp extends ApiResp {
+  data: Array<MenuItemData>;
+}
+
+/* eslint-disable no-unused-vars */
 type MenuItemData = {
   hasUnreadMessages: ?boolean;
   id: number;
@@ -25,9 +30,4 @@ type MenuItemData = {
   name: string;
   position: number;
   url: string;
-};
-
-type MenuResponse = {
-  data: Array<MenuItemData>;
-  ok: boolean;
 };

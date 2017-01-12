@@ -72,6 +72,7 @@ function injectedBody(options) {
   function patchSelectElementsForAndroid() {
     // In Android WebView Select elements
     // don't display well if they have css border just switch off css
+    //noinspection ES6ConvertVarToLetConst
     var $selects = document.querySelectorAll('select');
 
     if (!$selects) return;
