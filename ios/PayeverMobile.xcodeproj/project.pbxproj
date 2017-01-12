@@ -896,7 +896,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp.rn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/payever.app/payever";
 			};
@@ -916,7 +916,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp.rn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/payever.app/payever";
 			};
@@ -947,7 +947,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp.rn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp;
 				PRODUCT_NAME = payever;
 				PROVISIONING_PROFILE = "35c960f7-2f88-4b28-b80f-302336e8ad5d";
 				PROVISIONING_PROFILE_SPECIFIER = payever_react_native_adhoc;
@@ -980,7 +980,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp.rn;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp;
 				PRODUCT_NAME = payever;
 				PROVISIONING_PROFILE = "35c960f7-2f88-4b28-b80f-302336e8ad5d";
 				PROVISIONING_PROFILE_SPECIFIER = payever_react_native_adhoc;

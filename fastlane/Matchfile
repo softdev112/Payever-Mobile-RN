@@ -1,0 +1,6 @@
+git_url "git@github.com:payeverworldwide/payever-mobile-match.git"
+
+type "adhoc" # The default type, can be: appstore, adhoc or development
+
+app_identifier "com.gmbh.payeverapp"
+username "appleios@payever.de"
