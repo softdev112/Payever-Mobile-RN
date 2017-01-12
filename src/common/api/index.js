@@ -143,10 +143,52 @@ function objectToQueryString(data: Object): string {
   }).join('&');
 }
 
-function objectToPhpFormData(object: Object) {
+function objectToPhpFormData(data: ObjectToFromData) {
   // Good example: POST /api/rest/v1/channel-subscription/{id}/create-store
-  return new FormData(object);
+  const formData = new FormData();
+
+  if (!data || data.key === '' || !data.requestData) return formData;
+
+  const typeDetector = Object.prototype.toString;
+  const mainKey = data.key;
+  const requestData = data.requestData;
+  const keys = Object.keys(data);
+
+  function appendValueToFormData(currentName, value) {
+    switch (typeDetector.call(value)) {
+      case '[object Object]': {
+        const objKeys = Object.keys(value);
+        objKeys.forEach(key =>
+          appendValueToFormData(`${currentName}[${key}]`, value[key]));
+      }
+        break;
+
+      case '[object Array]':
+        value.forEach(element =>
+          appendValueToFormData(`${currentName}[]`, element));
+        break;
+
+      default:
+        formData.append(currentName, value);
+        break;
+    }
+  }
+
+  try {
+    keys.forEach(key => {
+      appendValueToFormData(`${mainKey}[${key}]`, requestData[key]);
+    });
+  } catch (e) {
+    log.error(e.message);
+  }
+
+  return formData;
 }
+
+type ObjectToFromData = {
+  key: string;
+  requestData: Object;
+};
 
 type PayeverApiConfig = {
   baseUrl: string;
