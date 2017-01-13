@@ -68,7 +68,7 @@ platform :ios do
   #
   desc 'Publish a new IOS beta through fabric.io'
   lane :beta do |values|
-    match(type: "adhoc")
+    match(type: 'adhoc', readonly: true)
     gym(
       scheme: 'PayeverMobile',
       workspace: 'ios/PayeverMobile.xcworkspace',
