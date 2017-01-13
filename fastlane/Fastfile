@@ -94,7 +94,7 @@ platform :ios do
   end
 
   desc 'Publish to AppStore'
-  lane :beta do |values|
+  lane :store do |values|
     match(type: 'appstore', readonly: true)
     gym(
       scheme: 'PayeverMobile',
@@ -118,7 +118,7 @@ platform :android do
   end
 
   desc 'Publish to Google Play'
-  lane :beta do |values|
+  lane :store do |values|
     gradle(task: 'clean', project_dir: 'android/')
     gradle(task: 'assemble', build_type: 'Release', project_dir: 'android/')
     supply
