@@ -113,7 +113,7 @@ export default class Login extends Component {
               />
             </View>
             <View style={styles.submitContainer}>
-              <Button title="Sign in" onPress={::this.onSignIn} />
+              <Button title="Sign In" onPress={::this.onSignIn} />
             </View>
           </Container>
         </Loader>

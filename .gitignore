@@ -24,6 +24,8 @@ DerivedData
 project.xcworkspace
 Pods/
 fastlane/report.xml
+fastlane/metadata/
+fastlane/screenshots/
 
 # Android/IJ
 #
