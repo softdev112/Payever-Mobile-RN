@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    width: 70,
+    width: 65,
   },
 
   image: {
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 12,
+    fontSize: 10,
     paddingTop: 5,
     color: '$pe_color_gray_2',
   },
@@ -88,6 +88,10 @@ const styles = StyleSheet.create({
     image: {
       width: 60,
       height: 60,
+    },
+
+    title: {
+      fontSize: 12,
     },
   },
 

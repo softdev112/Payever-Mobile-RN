@@ -31,12 +31,16 @@ def publish_to_fabric(values, options = {})
       values[:group] ? values[:group] : ['all']
     end
 
+  text = ''
+  text += "#{values[:note]}\n\n" if values[:note]
+  text += get_build_info
+
   defaults = {
     api_token: '48b58dc9c7da86d72ed314088b46e42f1a0b78ff',
     build_secret: 'd81977fd8d8dd7e21bfac54c7952d0136b24603cf554084ed78b9cafed2d9aed',
     emails: emails,
     groups: groups,
-    notes: get_build_info,
+    notes: text,
     notifications: false
   }
 
@@ -52,9 +56,21 @@ def notify_telegram(values)
     pretty: '%h %an %ar %n%s%n%b%n'
   )
 
+  target =
+    case release
+    when 'ios beta' then 'Crashlytics Beta'
+    when 'ios store' then 'AppStore'
+    when 'android beta' then 'Crashlytics Beta'
+    when 'android store' then 'Google Play'
+    else 'unknow source'
+    end
+
+  text = "A new #{release} release has been published in #{target}. "
+  text += "\n\n Build notes:\n\n#{values[:note]}\n\n" if values[:note]
+  text += get_build_info
+
   telegram(
-    text: "A new #{release} release has been published in Crashlytics Beta. " +
-      get_build_info,
+    text: text,
     chat_id: '-160242491',
     bot_token: '310860880:AAEJ6vQ0ZTeQZcUnYmUIZTaVW1FJ5X8u3Vs'
   )
@@ -63,12 +79,9 @@ end
 default_platform is_mac? ? :ios : :android
 
 platform :ios do
-  #
-  # Learn more here: https://github.com/fastlane/setups/blob/master/samples-ios/distribute-beta-build.md 🚀
-  #
   desc 'Publish a new IOS beta through fabric.io'
   lane :beta do |values|
-    match(type: "adhoc")
+    match(type: 'adhoc', readonly: true)
     gym(
       scheme: 'PayeverMobile',
       workspace: 'ios/PayeverMobile.xcworkspace',
@@ -79,6 +92,20 @@ platform :ios do
     publish_to_fabric(values, ipa_path: 'fastlane/build/ios/payever.ipa')
     notify_telegram(values)
   end
+
+  desc 'Publish to AppStore'
+  lane :store do |values|
+    match(type: 'appstore', readonly: true)
+    gym(
+      scheme: 'PayeverMobile',
+      workspace: 'ios/PayeverMobile.xcworkspace',
+      export_method: 'app-store',
+      output_directory: 'fastlane/build/ios',
+      output_name: 'payever.ipa'
+    )
+    deliver
+    notify_telegram(values)
+  end
 end
 
 platform :android do
@@ -87,6 +114,14 @@ platform :android do
     gradle(task: 'clean', project_dir: 'android/')
     gradle(task: 'assemble', build_type: 'Release', project_dir: 'android/')
     publish_to_fabric(values)
+    notify_telegram(values)
+  end
+
+  desc 'Publish to Google Play'
+  lane :store do |values|
+    gradle(task: 'clean', project_dir: 'android/')
+    gradle(task: 'assemble', build_type: 'Release', project_dir: 'android/')
+    supply
     notify_telegram(values)
   end
 end
