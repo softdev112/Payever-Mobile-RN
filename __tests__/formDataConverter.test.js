@@ -134,7 +134,6 @@ describe('Object to FormData converter tests', () => {
     const formData = objectToPhpFormData({ key: 'key', requestData: 2 });
 
     expect(formData).toBeTruthy();
-    console.log(formData._parts)
     expect(formData._parts.length).toBe(0);
   });
 
