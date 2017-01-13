@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    marginBottom: 10,
     width: 120,
   },
 });
