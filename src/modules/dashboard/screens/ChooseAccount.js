@@ -31,6 +31,7 @@ export default class ChooseAccount extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = { isLoading: false };
 
     this.dataSource = new GridView.DataSource({
@@ -40,11 +41,19 @@ export default class ChooseAccount extends Component {
 
   async componentWillMount() {
     this.setState({ isLoading: true });
-    const { userProfiles } = this.props;
+    const { userProfiles, navigator } = this.props;
     const profilesLoadResult = await userProfiles.load();
+
+    if (!profilesLoadResult.success) {
+      navigator.push({
+        screen: 'core.ErrorPage',
+        animated: true,
+        passProps: { message: profilesLoadResult.error },
+      });
+    }
+
     this.setState({
       isLoading: false,
-      error: profilesLoadResult.error,
     });
   }
 

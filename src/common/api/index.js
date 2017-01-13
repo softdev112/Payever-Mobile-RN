@@ -94,7 +94,7 @@ export default class PayeverApi {
       response.data = JSON.parse(text);
       if (response.data && response.data.error) {
         response.error = response.data.error;
-        response.errorDescription = response.data.errorDescription;
+        response.errorDescription = response.data.error_description;
       }
     } catch (e) {
       response.data = {};
