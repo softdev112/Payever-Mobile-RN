@@ -98,11 +98,10 @@ export default class WebView extends Component {
   }
 
   onMessage({ nativeEvent }) {
-    if (!nativeEvent.url.startsWith(this.props.config.baseUrl)) return;
+    if (!nativeEvent.url.startsWith(this.props.config.siteUrl)) return;
 
     const data = nativeEvent.data;
     const object = JSON.parse(data);
-
     switch (object.command) {
       case 'show-menu': {
         toggleMenu(this.props.navigator);
