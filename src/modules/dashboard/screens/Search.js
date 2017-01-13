@@ -48,18 +48,16 @@ export default class SearchForm extends Component {
     navigator.pop({ animated: true });
   }
 
-  onFollow(row: SearchRow) {
-    if (row.is_following) {
-      this.props.search.unfollow(row.id);
+  onFollow(business: SearchRow) {
+    if (business.is_following) {
+      this.props.search.unfollow(business.id);
     } else {
-      this.props.search.follow(row.id);
+      this.props.search.follow(business.id);
     }
   }
 
   renderRow(row: SearchRow) {
-    const RowComponent = observer((props) => {
-      const business = props.business;
-
+    const RowComponent = observer(({ business }) => {
       return (
         <View style={styles.row}>
           <Image style={styles.logo} source={business.logoSource} />
