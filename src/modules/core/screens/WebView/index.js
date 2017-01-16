@@ -98,7 +98,8 @@ export default class WebView extends Component {
   }
 
   onMessage({ nativeEvent }) {
-    if (!nativeEvent.url.startsWith(this.props.config.siteUrl)) return;
+    if (nativeEvent.url
+      && !nativeEvent.url.startsWith(this.props.config.siteUrl)) return;
 
     const data = nativeEvent.data;
     const object = JSON.parse(data);
