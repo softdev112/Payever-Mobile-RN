@@ -43,10 +43,14 @@ export default class WebViewError extends Component {
         </View>
         <View style={styles.main}>
           <Text style={styles.error}>
-            Sorry. Some kind of errors have occurred.
+            Sorry, this service is temporary unavailable.
+            Please try again later.
           </Text>
-          <Text style={styles.error}>Try again later.</Text>
-          <Text style={styles.error}>{message}</Text>
+          { message && (
+            <Text style={styles.error}>
+              Technical information: {message}
+            </Text>
+          )}
           <Button
             style={styles.button}
             title={'Go Back'}
@@ -101,10 +105,12 @@ const styles = StyleSheet.create({
 
   error: {
     marginBottom: 10,
+    paddingHorizontal: 20,
     textAlign: 'center',
   },
 
   button: {
+    marginTop: 20,
     width: 120,
   },
 });
