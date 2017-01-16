@@ -76,7 +76,8 @@ export default class WebView extends Component {
 
     if (nativeEvent.url
       && !nativeEvent.url.startsWith(this.props.config.siteUrl)
-      && !nativeEvent.url.includes('about:blank')) {
+      && !nativeEvent.url.includes('about:blank')
+      && !nativeEvent.url.startsWith('data:text')) {
       if (this.props.enableExternalBrowser) {
         // If enableExternalBrowser === true run link in a external browser
         //noinspection JSUnresolvedFunction
