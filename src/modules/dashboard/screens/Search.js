@@ -101,7 +101,6 @@ export default class SearchForm extends Component {
           />
           <Icon
             style={styles.icon}
-            hitSlop={{ top: 10, left: 10, bottom: 10, right: 10 }}
             source="icon-x-16"
             onPress={::this.onClose}
           />
