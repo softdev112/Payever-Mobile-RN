@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { WebView as ReactWebView, View } from 'react-native';
+import { WebView as ReactWebView, View, Linking } from 'react-native';
 import { observer, inject } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import { StyleSheet } from 'ui';
@@ -22,6 +22,7 @@ const BACK_ON_URLS = [
 @inject('auth', 'userProfiles', 'config')
 @observer
 export default class WebView extends Component {
+  static defultProps = { enableExternalBrowser: false }
   static navigatorStyle = {
     navBarHidden: true,
   };
@@ -29,6 +30,7 @@ export default class WebView extends Component {
   props: {
     auth: AuthStore;
     config: Config;
+    enableExternalBrowser?: boolean;
     injectOptions?: Object;
     navigator: Navigator;
     referer?: string;
@@ -67,6 +69,19 @@ export default class WebView extends Component {
 
     if (nativeEvent.url.startsWith('react-js-navigation')) {
       return;
+    }
+
+    if (nativeEvent.url
+      && !nativeEvent.url.startsWith(this.props.config.siteUrl)
+      && !nativeEvent.url.includes('about:blank')) {
+      if (this.props.enableExternalBrowser) {
+        // If enableExternalBrowser === true run link in a external browser
+        this.$view.stopLoading();
+        Linking.openURL(nativeEvent.url)
+          .catch(err => console.error('An error occurred', err));
+
+        return;
+      }
     }
 
     // Process submit events ONLY iOS UIWebKit there is no such
