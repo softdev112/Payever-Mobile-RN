@@ -10,6 +10,7 @@ import WebViewError from './WebViewError';
 import { showScreen, toggleMenu } from '../../../../common/Navigation';
 import type AuthStore from '../../../../store/AuthStore';
 import type UserProfilesStore from '../../../../store/UserProfilesStore';
+import type { Config } from '../../../../config';
 
 const BACK_ON_URLS = [
   { urlMask: '/home',    screen: 'dashboard.Dashboard', authRequired: true },
@@ -17,7 +18,7 @@ const BACK_ON_URLS = [
   { urlMask: '/login',   screen: 'auth.Login' },
 ];
 
-@inject('auth', 'userProfiles')
+@inject('auth', 'userProfiles', 'config')
 @observer
 export default class WebView extends Component {
   static navigatorStyle = {
@@ -26,6 +27,7 @@ export default class WebView extends Component {
 
   props: {
     auth: AuthStore;
+    config: Config;
     injectOptions?: Object;
     navigator: Navigator;
     referer?: string;
@@ -95,9 +97,11 @@ export default class WebView extends Component {
     });
   }
 
-  onMessage({ nativeEvent: { data } }) {
-    const object = JSON.parse(data);
+  onMessage({ nativeEvent }) {
+    if (!nativeEvent.url.startsWith(this.props.config.siteUrl)) return;
 
+    const data = nativeEvent.data;
+    const object = JSON.parse(data);
     switch (object.command) {
       case 'show-menu': {
         toggleMenu(this.props.navigator);
