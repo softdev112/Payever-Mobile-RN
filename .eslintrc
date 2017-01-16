@@ -77,9 +77,6 @@
     "sort-class-members/sort-class-members": [2, {
       "order": [
         "[static-properties]",
-        "contextTypes",
-        "childContextTypes",
-        "defaultProps",
         "[properties]",
         "[static-methods]",
         "constructor",
