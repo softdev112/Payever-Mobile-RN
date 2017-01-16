@@ -172,11 +172,13 @@ const styles = StyleSheet.create({
   },
 
   btnClose: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 44,
     position: 'absolute',
-    top: 25,
-    right: 19,
-    width: 16,
-    height: 16,
+    right: 5,
+    top: 11,
+    width: 44,
     zIndex: 2,
   },
 

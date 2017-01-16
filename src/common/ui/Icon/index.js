@@ -9,25 +9,31 @@ const DEFAULT_HIT_SLOP   = 10;
  * You can find all icons at https://payeverworldwide.github.io/#svg-usage
  *
  * Some glyphs can't be transformed correctly to font icons. These glyphs
- * are stored as bitmap.
+ * are stored as bitmap or as transformed SVG.
  */
 export default class Icon extends Component {
-  static defaultProps = { hitSlop: { top: 2, left: 2, bottom: 2, right: 2 } };
-
   props: {
     source: string | Object;
     onPress?: () => any;
     hitSlop?: Object;
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      hitSlop: calcHitSlop(props.hitSlop, props.source),
+    };
+  }
+
   render() {
-    const { onPress, source, hitSlop } = this.props;
+    const { onPress, source } = this.props;
+    const { hitSlop } = this.state;
     const iconNode = componentFactory(source, this.props);
 
     if (onPress) {
       return (
         <TouchableOpacity
-          hitSlop={calcHitSlop(hitSlop, source)}
+          hitSlop={hitSlop}
           onPress={onPress}
         >
           <Text>{iconNode}</Text>
