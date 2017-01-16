@@ -5,13 +5,14 @@ import { Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default class ImageButton extends Component {
   props: {
-    source: Object | number;
+    hitSlop?: Object;
     onPress?: () => any;
+    source: Object | number;
     style?: Object;
   };
 
   render() {
-    const { onPress, source, style } = this.props;
+    const { hitSlop, onPress, source, style } = this.props;
 
     const flatStyle = StyleSheet.flatten(style);
     const imageStyle = {
@@ -24,6 +25,7 @@ export default class ImageButton extends Component {
       <TouchableOpacity
         accessibilityComponentType="button"
         accessibilityTraits={['button']}
+        hitSlop={hitSlop}
         onPress={onPress}
         style={style}
       >

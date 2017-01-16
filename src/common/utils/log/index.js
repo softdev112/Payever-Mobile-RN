@@ -18,21 +18,12 @@ export const transports = {
 };
 
 transports.console.level = 'silly';
-transports.stetho.level = 'verbose';
+transports.stetho.level = 'debug';
 
-function log(level, ...args) {
-  let params = args.slice(1);
-  params = params.map((arg) => {
-    if (arg instanceof Error) {
-      arg = arg.stack + '\n';
-    }
-    return arg;
-  });
-  const text = util.format(...params);
-
+function log(level, ...data) {
   const msg = {
     level,
-    text,
+    data: Array.isArray(data) ? data : [data],
     date: new Date(),
   };
 
@@ -57,16 +48,33 @@ function compareLevels(passLevel, checkLevel) {
 }
 
 function transportConsole(msg) {
-  const text = msg.text;
+  const data = msg.data;
   if (console[msg.level]) {
-    console[msg.level](text);
+    console[msg.level](...data);
   } else {
-    console.log(text);
+    console.log(...data);
   }
 }
 
 function transportStetho(msg) {
   if (Platform.OS === 'android') {
-    stetho(msg.level, msg.text);
+    stetho(msg.level, stringifyParams(msg.data));
   }
+}
+
+function stringifyParams(params: Array) {
+  const isArray = params.length > 1;
+  const primitiveTypes = ['number', 'string', 'boolean'];
+  const isPrimitive = primitiveTypes.indexOf(typeof params[0]) !== -1;
+
+  if (!isArray && isPrimitive[0]) {
+    return params;
+  }
+  params = params.map((arg) => {
+    if (arg instanceof Error) {
+      arg = arg.stack + '\n';
+    }
+    return arg;
+  });
+  return util.format(...params);
 }
