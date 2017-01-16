@@ -1,7 +1,9 @@
 import { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
-
 import componentFactory from './componentFactory';
+
+const MIN_TOUCHABLE_SIZE = 44;
+const DEFAULT_HIT_SLOP   = 10;
 
 /**
  * You can find all icons at https://payeverworldwide.github.io/#svg-usage
@@ -25,7 +27,7 @@ export default class Icon extends Component {
     if (onPress) {
       return (
         <TouchableOpacity
-          hitSlop={hitSlop}
+          hitSlop={calcHitSlop(hitSlop, source)}
           onPress={onPress}
         >
           {iconNode}
@@ -35,4 +37,34 @@ export default class Icon extends Component {
 
     return iconNode;
   }
+}
+
+function calcHitSlop(providedHitSlop, source) {
+  let hitSlop;
+
+  if (providedHitSlop && typeof providedHitSlop === 'object') {
+    return providedHitSlop;
+  }
+
+  if (providedHitSlop) {
+    hitSlop = providedHitSlop;
+  }
+
+  if (!hitSlop && typeof source === 'string') {
+    const size = source.match(/\d{2}$/);
+    if (size) {
+      hitSlop = (MIN_TOUCHABLE_SIZE - size) / 2;
+    }
+  }
+
+  if (!hitSlop) {
+    hitSlop = DEFAULT_HIT_SLOP;
+  }
+
+  return {
+    top: hitSlop,
+    left: hitSlop,
+    bottom: hitSlop,
+    right: hitSlop,
+  };
 }
