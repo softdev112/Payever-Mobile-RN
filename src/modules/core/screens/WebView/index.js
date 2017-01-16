@@ -22,7 +22,10 @@ const BACK_ON_URLS = [
 @inject('auth', 'userProfiles', 'config')
 @observer
 export default class WebView extends Component {
-  static defultProps = { enableExternalBrowser: false }
+  static defaultProps = {
+    enableExternalBrowser: false,
+  };
+
   static navigatorStyle = {
     navBarHidden: true,
   };
@@ -76,9 +79,9 @@ export default class WebView extends Component {
       && !nativeEvent.url.includes('about:blank')) {
       if (this.props.enableExternalBrowser) {
         // If enableExternalBrowser === true run link in a external browser
+        //noinspection JSUnresolvedFunction
         this.$view.stopLoading();
-        Linking.openURL(nativeEvent.url)
-          .catch(err => console.error('An error occurred', err));
+        Linking.openURL(nativeEvent.url).catch(log.error);
 
         return;
       }
@@ -93,6 +96,7 @@ export default class WebView extends Component {
 
       // After create-business it goes to business home just block
       if (nativeEvent.url.endsWith('/home')) {
+        //noinspection JSUnresolvedFunction
         this.$view.stopLoading();
         this.props.navigator.pop({ animated: true });
         return;
@@ -151,6 +155,7 @@ export default class WebView extends Component {
     if (!this.refreshTimer) {
       this.refreshTimer = setTimeout(() => {
         // Reload businesses with some delay
+        //noinspection JSIgnoredPromiseFromCall
         this.props.userProfiles.load();
       }, 1200);
     }
