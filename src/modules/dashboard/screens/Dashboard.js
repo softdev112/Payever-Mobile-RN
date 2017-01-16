@@ -74,6 +74,11 @@ export default class Dashboard extends Component {
       return;
     }
 
+    let enableExternalBrowser = false;
+    if (item.label === 'communication') {
+      enableExternalBrowser = true;
+    }
+
     let referer;
     if (item.label === 'settings') {
       // Backend code checks if referer is business home
@@ -86,6 +91,7 @@ export default class Dashboard extends Component {
         title: item.name,
         screen: 'core.WebView',
         passProps: {
+          enableExternalBrowser,
           referer,
           url: item.url,
         },
