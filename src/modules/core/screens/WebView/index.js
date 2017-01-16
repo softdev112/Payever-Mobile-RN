@@ -88,7 +88,7 @@ export default class WebView extends Component {
     // field in android WebKit nativeEvent
     if (nativeEvent.navigationType === 'formsubmit') {
       if (nativeEvent.url.endsWith('/create-business')) {
-        this.refreshBusinesesWithTimeout();
+        this.refreshBusinessesWithTimeout();
       }
 
       // After create-business it goes to business home just block
