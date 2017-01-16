@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Text } from 'react-native';
 
 import componentFactory from './componentFactory';
 
@@ -28,7 +28,7 @@ export default class Icon extends Component {
           hitSlop={hitSlop}
           onPress={onPress}
         >
-          {iconNode}
+          <Text>{iconNode}</Text>
         </TouchableOpacity>
       );
     }
