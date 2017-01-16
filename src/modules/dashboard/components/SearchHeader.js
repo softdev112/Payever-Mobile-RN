@@ -44,9 +44,10 @@ export default class SearchHeader extends Component {
         />
         <Text style={styles.title} onPress={::this.onSearchPress}>{title}</Text>
         <ImageButton
+          hitSlop={{ top: 7, right: 7, bottom: 7, left: 0 }}
+          onPress={::this.onProfilePress}
           source={userProfiles.currentProfile.logoSource}
           style={styles.profile}
-          onPress={::this.onProfilePress}
         />
       </View>
     );
