@@ -1,8 +1,9 @@
 import { Component } from 'react';
 import { WebView as ReactWebView, View } from 'react-native';
 import { observer, inject } from 'mobx-react/native';
-import { StyleSheet } from 'ui';
 import type { Navigator } from 'react-native-navigation';
+import { StyleSheet } from 'ui';
+import { log } from 'utils';
 
 import injectedCode, { getLoaderHtml } from './injectedCode';
 import WebViewLoader from './WebViewLoader';
@@ -109,7 +110,7 @@ export default class WebView extends Component {
         break;
       }
       case 'error': {
-        console.warn(
+        log.warn(
           `WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`
         );
         this.props.navigator.pop({ animated: true });
@@ -118,7 +119,7 @@ export default class WebView extends Component {
 
       case 'add-business':
         this.props.navigator.pop({ animated: true });
-        this.refreshBusinesesWithTimeout();
+        this.refreshBusinessesWithTimeout();
         break;
 
       case 'go-back':
@@ -126,12 +127,12 @@ export default class WebView extends Component {
         break;
 
       default: {
-        console.warn(`Unknown webview command ${object.command}`);
+        log.warn(`Unknown webview command ${object.command}`);
       }
     }
   }
 
-  refreshBusinesesWithTimeout() {
+  refreshBusinessesWithTimeout() {
     if (!this.refreshTimer) {
       this.refreshTimer = setTimeout(() => {
         // Reload businesses with some delay
