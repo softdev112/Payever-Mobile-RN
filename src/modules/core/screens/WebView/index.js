@@ -165,7 +165,7 @@ export default class WebView extends Component {
   renderError() {
     return (
       <WebViewError
-        message={this.state.errorMsg || 'Restart application please!'}
+        message={this.state.errorMsg}
         navigator={this.props.navigator}
       />
     );

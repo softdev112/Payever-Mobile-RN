@@ -66,7 +66,7 @@ def notify_telegram(values)
     end
 
   text = "A new #{release} release has been published in #{target}. "
-  text += "\n\n Build notes:\n\n#{values[:note]}\n\n" if values[:note]
+  text += "\n\nBuild notes: #{values[:note]}\n\n" if values[:note]
   text += get_build_info
 
   telegram(

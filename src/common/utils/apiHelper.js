@@ -3,6 +3,8 @@ import * as log from './log';
 
 export class ApiHelper {
   apiPromise: Promise<ApiResp>;
+  fetchPromise: Promise;
+  returnValue: any;
   store: ?Object = null;
 
   onSuccess: (resp: ApiResp) => any;
@@ -33,6 +35,22 @@ export class ApiHelper {
     return this;
   }
 
+  promise() {
+    return this.fetchPromise;
+  }
+
+  /**
+   * @private
+   */
+  execHandler(callback: Function) {
+    runInAction(() => {
+      const result = callback();
+      if (result !== undefined) {
+        this.returnValue = result;
+      }
+    });
+  }
+
   async fetch() {
     if (this.store) {
       this.store.error = '';
@@ -44,7 +62,7 @@ export class ApiHelper {
       resp = await this.apiPromise;
 
       if (resp.ok && !resp.error) {
-        runInAction(() => this.onSuccess(resp));
+        this.execHandler(() => this.onSuccess(resp));
       } else {
         //noinspection ExceptionCaughtLocallyJS
         throw new Error(resp.errorDescription);
@@ -53,26 +71,26 @@ export class ApiHelper {
       const error = resp ? resp.error : 'api_exception';
       const errorDescription = e.message;
 
-      runInAction(() => {
+      this.execHandler(() => {
         if (this.store) {
-          runInAction(() => this.store.error = errorDescription);
+          this.store.error = errorDescription;
         }
-        this.onError({ error, errorDescription });
+        return this.onError({ error, errorDescription });
       });
 
       log.warn(`${error} ${errorDescription}`);
     }
 
-    runInAction(() => this.onComplete(resp));
+    this.execHandler(() => this.onComplete(resp));
 
-    return true;
+    return this.returnValue !== undefined ? this.returnValue : true;
   }
 }
 
 export default function apiHelper(apiPromise: Promise<ApiResp>,
   store: Object = null): ApiHelper {
   const helper = new ApiHelper(apiPromise, store);
-  helper.fetch().catch(log.error);
+  this.fetchPromise = helper.fetch().catch(log.error);
   return helper;
 }
 
