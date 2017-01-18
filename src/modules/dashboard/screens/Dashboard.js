@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   },
 
   top_item: {
-    width: 110,
+    width: 100,
     height: 105,
   },
 
