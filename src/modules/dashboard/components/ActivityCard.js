@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     elevation: 4,
     borderRadius: 8,
-    maxWidth: 320,
+    maxWidth: 290,
   },
 
   icon: {
