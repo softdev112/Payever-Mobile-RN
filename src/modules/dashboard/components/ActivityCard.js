@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     '@media (max-width: 320)': {
       width: '80%',
     },
+    overflow: 'hidden',
   },
 
   icon: {
