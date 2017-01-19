@@ -15,8 +15,8 @@ export default function DashboardTitle(
 
   return (
     <View style={containerStyle}>
-      <Text style={title1Style}>{title1.toUpperCase()}</Text>
-      <Text style={title2Style}>{title2}</Text>
+      <Text style={title1Style} numberOfLines={1}>{title1.toUpperCase()}</Text>
+      <Text style={title2Style} numberOfLines={1}>{title2}</Text>
     </View>
   );
 }
