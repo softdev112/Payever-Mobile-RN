@@ -64,10 +64,11 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     width: 34,
     height: 34,
-    '@media (max-height: 380)': {
+    '@media (max-height: 570)': {
       marginBottom: 0,
       height: 0,
     },
+
   },
 
   title: {
