@@ -54,7 +54,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 1,
     elevation: 4,
     borderRadius: 8,
-    maxWidth: 290,
+    maxWidth: 320,
+    '@media (max-width: 320)': {
+      width: '80%',
+    },
   },
 
   icon: {
