@@ -23,42 +23,23 @@ export default class Login extends Component {
     config: Config;
   };
 
-  state: {
-    isLoading: boolean;
-  };
-
   $password: TextInput;
 
   username: string = '';
   password: string = '';
 
-  constructor() {
-    super();
-    this.state = {
-      isLoading: false,
-      error: '',
-    };
-  }
-
   async onSignIn() {
-    // Test if credentials not empty
-    if (this.password === '' || this.username === '') {
-      this.setState({ error: 'Username and password can not be empty!' });
+    const { auth, navigator } = this.props;
 
+    if (this.password === '' || this.username === '') {
+      auth.setError('E-mail and password can\'t be empty!');
       return;
     }
 
-    this.setState({ isLoading: true, error: '' });
-    const { auth, navigator } = this.props;
-
     const signInResult = await auth.signIn(this.username, this.password);
-    this.setState({
-      isLoading: false,
-      error: signInResult.error,
-    });
 
-    if (signInResult.success) {
-      navigator.resetTo({ screen: 'dashboard.ChooseAccount', animated: true });
+    if (signInResult) {
+      navigator.resetTo({ screen: 'dashboard.ChooseAccount' });
     }
   }
 
@@ -73,7 +54,7 @@ export default class Login extends Component {
   }
 
   render() {
-    const { isLoading, error } = this.state;
+    const { isLoading, error } = this.props.auth;
     return (
       <View style={styles.container}>
         <Header style={styles.header}>
