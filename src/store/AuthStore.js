@@ -1,16 +1,21 @@
-import { observable, action, runInAction, extendObservable } from 'mobx';
+import { observable, action, extendObservable } from 'mobx';
 import { now, isDate } from 'lodash';
 import { AsyncStorage } from 'react-native';
+import { apiHelper } from 'utils';
 
 import type Store from './index';
+
 
 const STORE_NAME = 'store.auth';
 
 export default class AuthStore {
-  @observable isLoggedIn   = false;
-  @observable accessToken  = null;
-  @observable refreshToken = null;
-  @observable expiresIn    = null;
+  @observable isLoggedIn: boolean  = false;
+  @observable accessToken: string  = null;
+  @observable refreshToken: string = null;
+  @observable expiresIn: Date      = null;
+
+  @observable error: string        = '';
+  @observable isLoading: string    = false;
 
   store: Store;
 
@@ -19,32 +24,26 @@ export default class AuthStore {
   }
 
   @action
-  async signIn(username, password): Promise<SignInResult> {
+  signIn(username, password): Promise<SignInResult> {
     const { api } = this.store;
 
-    let data = {};
-    try {
-      const resp = await api.auth.login(username, password);
-      data = resp.data;
-      if (!resp.ok) {
-        return { success: false, error: resp.errorDescription };
-      }
-    } catch (e) {
-      console.warn(e);
-      return { success: false, error: 'Internal error. Please try later.' };
-    }
+    return apiHelper(api.auth.login(username, password), this)
+      .success((resp: ApiResp) => {
+        const data = resp.data;
+        this.accessToken  = data.access_token;
+        this.refreshToken = data.refresh_token;
+        this.expiresIn    = data.expires_in;
+        this.isLoggedIn   = true;
+        //noinspection JSIgnoredPromiseFromCall
+        this.serialize();
+        return true;
+      })
+      .promise();
+  }
 
-    runInAction('Update auth state', () => {
-      this.accessToken = data.access_token;
-      this.refreshToken = data.refresh_token;
-      this.expiresIn = data.expires_in;
-      this.isLoggedIn = true;
-    });
-
-    //noinspection JSIgnoredPromiseFromCall
-    this.serialize();
-
-    return { success: true };
+  @action
+  setError(error: string) {
+    this.error = error;
   }
 
   @action
