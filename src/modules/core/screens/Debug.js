@@ -1,39 +1,73 @@
 /* eslint-disable */
 
-import { Component } from 'react';
-import { Image } from 'react-native';
-
+import React, { Component } from 'react';
+import { Image, Animated } from 'react-native';
+import { inject, observer } from 'mobx-react/native';
+import { showScreen, toggleMenu } from '../../../common/Navigation';
 import { Icon, Loader, StyleSheet, Text, View } from 'ui';
+import { Navigator } from 'react-native-navigation';
 
-
+import NavBar from '../components/NavBar';
 const EARLY_LOADING = require('../../../store/UserProfilesStore/images/no-business.png');
 
+@inject('userProfiles')
+@observer
 export default class Debug extends Component {
-  props: {
-    navigator: Navigator;
+  static childContextTypes = {
+    navigator: React.PropTypes.object,
   };
+
+  static navigatorStyle = { navBarHidden: true };
+
+  props:{
+    navigator: Navigator;
+    userProfiles?: UserProfilesStore;
+  };
+
+  getChildContext() {
+    return {
+      navigator: this.props.navigator,
+    }
+  }
+
+  onShowSideMenu() {
+    toggleMenu(this.props.navigator);
+  }
 
   render() {
     return (
-      <View>
-        <View style={styles.row}>
-          <Icon source="icon-search-16" />
-          <Text>icon-search-16 Icon</Text>
-        </View>
-        <View style={styles.row}>
-          <Image
-            style={styles.image}
-            source={require('../../../store/UserProfilesStore/images/no-business.png')}
+      <View style={styles.container}>
+        <NavBar style={styles.navBar}>
+          <NavBar.Back title="Back" />
+          <NavBar.Title
+            source={{uri: 'https://mein.payever.de/images/dashboard/settings.png?v5.1.1'}}
+            title={'SETTINGS'}
+          />
+          <NavBar.Menu
+            source={this.props.userProfiles.privateProfile.logoSource}
+            title="Add"
+          />
+        </NavBar>
+        <View style={styles.mainContent}>
+          <View style={styles.row}>
+            <Icon source="icon-search-16"/>
+            <Text>icon-search-16 Icon</Text>
+          </View>
+          <View style={styles.row}>
+            <Image
+              style={styles.image}
+              source={require('../../../store/UserProfilesStore/images/no-business.png')}
             />
-          <Text>no-business1</Text>
-        </View>
-        <View style={styles.row}>
-          <Image style={styles.image} source={EARLY_LOADING} />
-          <Text>no-business early loading</Text>
-        </View>
-        <View style={styles.row}>
-          <Loader isLoading />
-          <Text>Spinner</Text>
+            <Text>no-business1</Text>
+          </View>
+          <View style={styles.row}>
+            <Image style={styles.image} source={EARLY_LOADING}/>
+            <Text>no-business early loading</Text>
+          </View>
+          <View style={styles.row}>
+            <Loader isLoading/>
+            <Text>Spinner</Text>
+          </View>
         </View>
       </View>
     )
@@ -41,6 +75,10 @@ export default class Debug extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+
   row: {
     flexDirection: 'row'
   },
@@ -48,5 +86,13 @@ const styles = StyleSheet.create({
   image: {
     width: 16,
     height: 16,
-  }
+  },
+
+  navBar: {
+    flex: 10,
+  },
+
+  mainContent: {
+    flex: 90,
+  },
 });
