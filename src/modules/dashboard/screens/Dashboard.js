@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
   },
 
   top_item: {
-    width: 110,
+    width: 100,
     height: 105,
   },
 
@@ -225,11 +225,14 @@ const styles = StyleSheet.create({
   },
 
   cards_container: {
-    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+
   },
 
   cards_scroll: {
     paddingLeft: 10,
     paddingRight: 10,
+    maxHeight: 500,
   },
 });
