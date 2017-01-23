@@ -1,11 +1,16 @@
 /* eslint no-prototype-builtins: 0, no-continue: 0 */
 
-import { Navigation, Navigator } from 'react-native-navigation';
+import { PropTypes } from 'react';
 import { Provider } from 'mobx-react/native';
+import { Navigation, Navigator } from 'react-native-navigation';
+import Screen from 'react-native-navigation/src/Screen';
 
 import type Store from '../store';
 
 const SPECIAL_REACT_KEYS = { children: true, key: true, ref: true };
+
+patchRnnScreenClass(Screen);
+
 
 class MobxRnnProvider extends Provider {
   props: {
@@ -77,4 +82,15 @@ export function hideMenu(navigator: Navigator, params = {}) {
     animated: false,
     ...params,
   });
+}
+
+/**
+ * Patch RNN Screen class to pass navigator to childContext
+ */
+function patchRnnScreenClass(ScreenClass: Screen) {
+  //noinspection JSUndefinedPropertyAssignment
+  ScreenClass.childContextTypes = { navigator: PropTypes.object };
+  ScreenClass.prototype.getChildContext = function getChildContext() {
+    return { navigator: this.navigator };
+  };
 }
