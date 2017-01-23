@@ -4,7 +4,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'ui';
 
-import { toggleMenu } from '../../../../common/Navigation';
 import NavBarItem from './NavBarItem';
 
 export default class NavBar extends Component {
@@ -13,15 +12,12 @@ export default class NavBar extends Component {
     children: Array<Component>;
   };
 
-  static Back({ title, onPress }, context) {
-    const navigator = context.navigator;
-    const onPressAction = onPress || navigator.pop;
-
+  static Back({ title, onPress }) {
     return (
       <NavBarItem
-        title={title}
+        onPress={onPress}
         source="icon-arrow-left-ios-24"
-        onPress={() => onPressAction()}
+        title={title}
       />
     );
   }
@@ -37,15 +33,11 @@ export default class NavBar extends Component {
     );
   }
 
-  static Menu({ source, onPress }, context) {
-    const navigator = context.navigator;
-    const onPressAction = onPress ?
-      () => onPress() : () => toggleMenu(navigator);
-
+  static Menu({ source, onPress }) {
     return (
       <NavBarItem
         imageStyle={styles.menuProfileImg}
-        onPress={onPressAction}
+        onPress={onPress}
         source={source}
       />
     );
@@ -111,10 +103,8 @@ export default class NavBar extends Component {
   }
 }
 
-NavBar.Back.contextTypes = { navigator: React.PropTypes.object };
 NavBar.Back.defaultProps = { block: 'left' };
 
-NavBar.Menu.contextTypes = { navigator: React.PropTypes.object };
 NavBar.Menu.defaultProps = { block: 'right' };
 
 NavBar.Title.defaultProps = { block: 'mid' };
@@ -122,10 +112,9 @@ NavBar.Title.defaultProps = { block: 'mid' };
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    flexBasis: 10,
-    minHeight: 40,
+    height: 55,
     alignItems: 'stretch',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
   },
@@ -136,7 +125,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     padding: 2,
-    paddingLeft: 5,
+    paddingLeft: 20,
   },
 
   middleZone: {
@@ -153,22 +142,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: 2,
-    paddingRight: 5,
+    paddingRight: 20,
   },
 
   titleImg: {
-    shadowColor: 'rgba(0,0,0,.06)',
-    shadowRadius: 8,
+    shadowColor: 'rgba(0,0,0,.15)',
+    shadowRadius: 2,
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.1,
+    shadowOpacity: 1,
     borderRadius: 8,
-    overflow: 'hidden',
     elevation: 2,
   },
 
   titleText: {
     color: '#3d3d3d',
-    marginLeft: 5,
+    marginLeft: 6,
   },
 
   menuProfileImg: {

@@ -13,22 +13,12 @@ const EARLY_LOADING = require('../../../store/UserProfilesStore/images/no-busine
 @inject('userProfiles')
 @observer
 export default class Debug extends Component {
-  static childContextTypes = {
-    navigator: React.PropTypes.object,
-  };
-
   static navigatorStyle = { navBarHidden: true };
 
   props:{
     navigator: Navigator;
     userProfiles?: UserProfilesStore;
   };
-
-  getChildContext() {
-    return {
-      navigator: this.props.navigator,
-    }
-  }
 
   onShowSideMenu() {
     toggleMenu(this.props.navigator);
@@ -38,7 +28,7 @@ export default class Debug extends Component {
     return (
       <View style={styles.container}>
         <NavBar style={styles.navBar}>
-          <NavBar.Back title="Back" />
+          <NavBar.Back title="Back" onPress={() => this.props.navigator.pop()}/>
           <NavBar.Title
             source={{uri: 'https://mein.payever.de/images/dashboard/settings.png?v5.1.1'}}
             title={'SETTINGS'}
@@ -46,6 +36,7 @@ export default class Debug extends Component {
           <NavBar.Menu
             source={this.props.userProfiles.privateProfile.logoSource}
             title="Add"
+            onPress={() => toggleMenu(this.props.navigator)}
           />
         </NavBar>
         <View style={styles.mainContent}>
@@ -77,6 +68,9 @@ export default class Debug extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    '@media ios and (orientation: portrait)': {
+      marginTop: 15,
+    },
   },
 
   row: {
@@ -86,13 +80,16 @@ const styles = StyleSheet.create({
   image: {
     width: 16,
     height: 16,
+    shadowColor: 'rgba(0,0,0,.15)',
+    shadowRadius: 8,
+    shadowOffset: { width: 2, height: 2 },
+    shadowOpacity: 1,
+    borderRadius: 8,
   },
 
   navBar: {
-    flex: 10,
   },
 
   mainContent: {
-    flex: 90,
   },
 });
