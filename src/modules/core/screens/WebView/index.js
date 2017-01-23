@@ -6,6 +6,7 @@ import { StyleSheet } from 'ui';
 import { log } from 'utils';
 
 import injectedCode, { getLoaderHtml } from './injectedCode';
+import NavBar from '../../components/NavBar';
 import WebViewLoader from './WebViewLoader';
 import WebViewError from './WebViewError';
 import { showScreen, toggleMenu } from '../../../../common/Navigation';
@@ -43,6 +44,9 @@ export default class WebView extends Component {
 
   state: {
     errorMsg: string;
+    isCustomNavBar: boolean;
+    title: string;
+    titleImgUrl: string;
   };
 
   $view: ReactWebView;
@@ -58,6 +62,9 @@ export default class WebView extends Component {
 
     this.state = {
       errorMsg: '',
+      isCustomNavBar: false,
+      title: '',
+      titleImgUrl: '',
     };
   }
 
@@ -67,6 +74,10 @@ export default class WebView extends Component {
     });
   }
 
+  onGoBack() {
+    this.$view.goBack();
+  }
+
   onLoadStart({ nativeEvent }) {
     const { auth } = this.props;
 
@@ -74,6 +85,7 @@ export default class WebView extends Component {
       return;
     }
 
+    let isCustomNavBar = false;
     if (nativeEvent.url
       && !nativeEvent.url.startsWith(this.props.config.siteUrl)
       && !nativeEvent.url.includes('about:blank')
@@ -86,7 +98,13 @@ export default class WebView extends Component {
 
         return;
       }
+
+      // Switch on custom NavBar for navigation purporse on external sites
+      // if thay open in WebView
+      isCustomNavBar = true;
     }
+
+    this.setState({ isCustomNavBar });
 
     // Process submit events ONLY iOS UIWebKit there is no such
     // field in android WebKit nativeEvent
@@ -119,8 +137,8 @@ export default class WebView extends Component {
   }
 
   onMessage({ nativeEvent }) {
-    if (nativeEvent.url
-      && !nativeEvent.url.startsWith(this.props.config.siteUrl)) return;
+    const siteUrl = this.props.config.siteUrl;
+    if (nativeEvent.url && !nativeEvent.url.startsWith(siteUrl)) return;
 
     const data = nativeEvent.data;
     const object = JSON.parse(data);
@@ -145,6 +163,15 @@ export default class WebView extends Component {
       case 'go-back':
         this.props.navigator.pop({ animated: true });
         break;
+
+      case 'navbar-info': {
+        this.setState({
+          title: object.title,
+          titleImgUrl: siteUrl + object.titleImgUrl,
+        });
+        console.log(siteUrl + object.titleImgUrl);
+        break;
+      }
 
       default: {
         log.warn(`Unknown webview command ${object.command}`);
@@ -173,6 +200,8 @@ export default class WebView extends Component {
 
   render() {
     const { navigator, url, referer } = this.props;
+    const { isCustomNavBar } = this.state;
+    const topInset = isCustomNavBar ? -75 : 0;
 
     let source;
     if (referer) {
@@ -180,14 +209,28 @@ export default class WebView extends Component {
       if (referer) {
         headers.Referer = referer;
       }
-      source = { headers, uri: url };
+      source = { headers, uri: this.state.currentUrl || url };
     } else {
       source = { html: getLoaderHtml(url) };
     }
 
     return (
       <View style={styles.container}>
+        {isCustomNavBar &&
+        <NavBar style={styles.navBar}>
+          <NavBar.Back onPress={() => this.onGoBack()} />
+          <NavBar.Title
+            source={{ uri: this.state.titleImgUrl }}
+            title={this.state.title}
+          />
+          <NavBar.Menu
+            source={this.props.userProfiles.privateProfile.logoSource}
+            title="Add"
+            onPress={() => toggleMenu(this.props.navigator)}
+          />
+        </NavBar>}
         <ReactWebView
+          contentInset={{ top: topInset, left: 0, bottom: 0, right: 0 }}
           source={source}
           ref={$v => this.$view = $v}
           onError={::this.onError}

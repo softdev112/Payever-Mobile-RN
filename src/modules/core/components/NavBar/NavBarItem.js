@@ -113,13 +113,12 @@ export default class NavBarItem extends Component {
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    padding: 3,
+    padding: 2,
   },
 
   image: {
-    width: 35,
-    height: 35,
-    padding: 2,
+    width: 32,
+    height: 32,
     color: '$pe_color_blue',
     fontSize: 24,
   },

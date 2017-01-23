@@ -25,6 +25,8 @@ function injectedBody(options) {
       attachOnError();
       patchPostMessage();
     }
+
+    getNavBarInfo();
   }
 
   function replaceHeaderButtons() {
@@ -43,6 +45,8 @@ function injectedBody(options) {
       $btnMenu.parentNode.replaceChild($replace, $btnMenu);
     }
   }
+
+  
 
   function replaceSearchWithBackBtn({ title }) {
     //noinspection ES6ConvertVarToLetConst
@@ -125,6 +129,30 @@ function injectedBody(options) {
     try {
       window.postMessage(JSON.stringify(data));
     } catch(e) {}
+  }
+
+  function getNavBarInfo() {
+    let title = '';
+    let titleImgUrl = '';
+
+    const $titleImg = document.querySelector('.channel-title img');
+    if ($titleImg) {
+      titleImgUrl = $titleImg.getAttribute('src');
+    }
+
+    const $title = document.querySelector('.channel-title .title');
+    if ($title) {
+      title = $title.innerText;
+    }
+
+    // Send data to WebView
+    if (title !== '' && titleImgUrl !== '') {
+      sendData({
+        command: 'navbar-info',
+        title,
+        titleImgUrl,
+      });
+    }
   }
 
   function goBackListener(e) {
