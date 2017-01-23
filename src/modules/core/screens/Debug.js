@@ -13,22 +13,12 @@ const EARLY_LOADING = require('../../../store/UserProfilesStore/images/no-busine
 @inject('userProfiles')
 @observer
 export default class Debug extends Component {
-  static childContextTypes = {
-    navigator: React.PropTypes.object,
-  };
-
   static navigatorStyle = { navBarHidden: true };
 
   props:{
     navigator: Navigator;
     userProfiles?: UserProfilesStore;
   };
-
-  getChildContext() {
-    return {
-      navigator: this.props.navigator,
-    }
-  }
 
   onShowSideMenu() {
     toggleMenu(this.props.navigator);
