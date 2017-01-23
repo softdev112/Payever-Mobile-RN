@@ -15,8 +15,8 @@ export default function DashboardTitle(
 
   return (
     <View style={containerStyle}>
-      <Text style={title1Style}>{title1.toUpperCase()}</Text>
-      <Text style={title2Style}>{title2}</Text>
+      <Text style={title1Style} numberOfLines={1}>{title1.toUpperCase()}</Text>
+      <Text style={title2Style} numberOfLines={1}>{title2}</Text>
     </View>
   );
 }
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 
   title2: {
     color: '$pe_color_dark_gray',
-    fontSize: 28,
+    fontSize: 44,
     fontFamily: 'Open Sans_light',
     '@media ios': {
       fontFamily: 'HelveticaNeue-UltraLight',
@@ -55,6 +55,9 @@ const styles = StyleSheet.create({
   title2_compact: {
     '@media (max-height: 600)': {
       height: 0,
+    },
+    '@media (min-height: 600)': {
+      fontSize: 28,
     },
     '@media (min-height: 700)': {
       fontSize: 34,

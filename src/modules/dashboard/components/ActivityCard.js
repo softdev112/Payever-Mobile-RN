@@ -55,16 +55,21 @@ const styles = StyleSheet.create({
     elevation: 4,
     borderRadius: 8,
     maxWidth: 320,
+    '@media (max-width: 320)': {
+      width: '80%',
+    },
+    overflow: 'hidden',
   },
 
   icon: {
     marginBottom: 12,
     width: 34,
     height: 34,
-    '@media (max-height: 380)': {
+    '@media (max-height: 570)': {
       marginBottom: 0,
       height: 0,
     },
+
   },
 
   title: {
