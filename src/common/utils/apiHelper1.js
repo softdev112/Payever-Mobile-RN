@@ -94,6 +94,7 @@ export class ApiHelper {
       if (this.store.error !== undefined) {
         this.store.error = '';
       }
+
       if (this.store.isLoading !== undefined) {
         this.store.isLoading = true;
       }
@@ -122,6 +123,7 @@ export class ApiHelper {
         if (this.store && this.store.error !== undefined) {
           this.store.error = errorDescription;
         }
+
         return this.onError({ error, errorDescription });
       });
 
@@ -159,48 +161,49 @@ function offlinePromise(sourcePromise: Promise, cacheKey: string) {
   const TIMEOUT = 7000;
   let isTimeout = false;
 
-  return new Promise((resolve, reject) => {
-    const timeoutId = setTimeout(() => {
-      isTimeout = true;
-      loadFromStorage(cacheKey, resolve, reject);
-    }, TIMEOUT);
+  return new Promise(async (resolve, reject) => {
+    const isConnected = await NetInfo.isConnected.fetch();
 
-    sourcePromise
-      .then((result) => {
-        if (!isTimeout) {
-          clearTimeout(timeoutId);
-          resolve(result);
-        }
-      })
-      .catch(log.warn);
-
-    NetInfo.isConnected.fetch().then((isConnected) => {
-      if (isConnected) {
-        return;
-      }
-
-      clearTimeout(timeoutId);
-      isTimeout = true;
-      loadFromStorage(cacheKey, resolve, reject);
-    });
-  });
-}
-
-/* eslint-disable no-undef */
-function loadFromStorage(cacheKey, resolve, reject) {
-  if (!cacheKey) {
-    reject(new Error(NETWORK_ERROR));
-    return;
-  }
-  AsyncStorage.getItem(cacheKey)
-    .then((result => {
-      if (result !== null) {
-        resolve(new Response(JSON.stringify(result)));
+    async function loadFromCache() {
+      const data = await loadFromStorage(cacheKey);
+      if (data) {
+        resolve(data);
       } else {
         reject(new Error(NETWORK_ERROR));
       }
-    }))
-    .catch(reject);
+    }
+
+    if (isConnected) {
+      const timeoutId = setTimeout(() => {
+        isTimeout = true;
+        loadFromCache();
+      }, TIMEOUT);
+
+      sourcePromise
+        .then((result) => {
+          if (!isTimeout) {
+            clearTimeout(timeoutId);
+            resolve(result);
+          }
+        })
+        .catch(log.warn);
+    } else {
+      loadFromCache();
+    }
+  });
+}
+
+async function loadFromStorage(cacheKey) {
+  if (!cacheKey) return null;
+
+  let result = null;
+  try {
+    result  = await AsyncStorage.getItem(cacheKey);
+  } catch (e) {
+    log.error(e);
+  }
+
+  return result ? JSON.parse(result) : null;
 }
 
 function saveToStorage(cacheKey, data) {
