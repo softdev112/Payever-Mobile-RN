@@ -26,7 +26,7 @@ export default class ErrorPage extends Component {
         <View style={styles.errorContainer}>
           <Error
             style={styles.error}
-            message={this.props.message.toUpperCase()}
+            message={this.props.message}
           />
           <Button
             style={styles.button}
