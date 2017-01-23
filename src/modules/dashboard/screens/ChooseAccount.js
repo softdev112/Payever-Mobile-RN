@@ -3,16 +3,15 @@ import { inject, observer } from 'mobx-react/native';
 import { Platform } from 'react-native';
 import type { Navigator } from 'react-native-navigation';
 import {
-  GridView, Header, IconText, Text,
-  Loader, View, StyleSheet,
+  GridView, Header, IconText, Loader, Text, View, StyleSheet,
 } from 'ui';
 
 import type { Config } from '../../../config';
 import type UserProfilesStore from '../../../store/UserProfilesStore';
 import type Profile from '../../../store/UserProfilesStore/Profile';
 
-import addBusinessIcon
-  from '../../../store/UserProfilesStore/images/add-business.png';
+//noinspection JSUnresolvedVariable
+import addBusinessIcon from '../images/add-business.png';
 
 @inject('userProfiles', 'config')
 @observer
@@ -31,30 +30,21 @@ export default class ChooseAccount extends Component {
 
   constructor(props) {
     super(props);
-
-    this.state = { isLoading: false };
-
     this.dataSource = new GridView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
     });
   }
 
   async componentWillMount() {
-    this.setState({ isLoading: true });
     const { userProfiles, navigator } = this.props;
-    const profilesLoadResult = await userProfiles.load();
 
-    if (!profilesLoadResult.success) {
+    if (!await userProfiles.load()) {
       navigator.push({
         screen: 'core.ErrorPage',
         animated: true,
-        passProps: { message: profilesLoadResult.error },
+        passProps: { message: userProfiles.error },
       });
     }
-
-    this.setState({
-      isLoading: false,
-    });
   }
 
   onAddNewBusiness() {
@@ -109,8 +99,9 @@ export default class ChooseAccount extends Component {
     );
   }
 
-  renderProfiles(profilesCount, dataSource) {
-    if (profilesCount < 1) {
+  renderProfiles(dataSource: GridView.DataSource) {
+    //noinspection JSUnresolvedFunction
+    if (dataSource.getRowCount() < 1) {
       return (
         <View style={styles.error}>
           <Text>Sorry. Error has occurred. Try again later.</Text>
@@ -131,18 +122,16 @@ export default class ChooseAccount extends Component {
   }
 
   render() {
-    const { isLoading } = this.state;
     const { userProfiles } = this.props;
-    const profilesArray = userProfiles.toArray();
 
     //noinspection JSUnresolvedFunction
-    const dataSource = this.dataSource.cloneWithRows(profilesArray);
+    const dataSource = this.dataSource.cloneWithRows(userProfiles.toArray());
 
     return (
       <View style={styles.container}>
         <Header>Welcome back. Please choose buying or selling account.</Header>
-        <Loader isLoading={isLoading}>
-          {this.renderProfiles(profilesArray.length, dataSource)}
+        <Loader isLoading={userProfiles.isLoading}>
+          {this.renderProfiles(dataSource)}
         </Loader>
       </View>
     );

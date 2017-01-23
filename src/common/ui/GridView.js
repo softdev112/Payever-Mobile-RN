@@ -3,8 +3,8 @@ import { ListView } from 'react-native';
 import StyleSheet from './StyleSheet';
 
 export default class GridView extends Component {
-  static DataSource = ListView.DataSource;
-  static dafaultProps = { renderFooter: () => null };
+  static DataSource: DataSource = ListView.DataSource;
+  static defaultProps = { renderFooter: () => null };
 
   props: {
     contentContainerStyle?: Object | number;
@@ -49,3 +49,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
 });
+
+declare class DataSource extends ListView.DataSource {
+  getRowCount(): number;
+}
