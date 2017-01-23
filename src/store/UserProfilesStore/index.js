@@ -54,6 +54,7 @@ export default class UserProfilesStore {
         });
         this.privateProfile = new PersonalProfile(data.private, this.store);
       })
+      .cache('profiles')
       .promise();
   }
 

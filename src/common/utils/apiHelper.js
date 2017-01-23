@@ -1,5 +1,9 @@
 import { runInAction } from 'mobx';
+import { AsyncStorage, NetInfo } from 'react-native';
 import * as log from './log';
+
+const NETWORK_ERROR = 'Sorry, payever server is not responsible. ' +
+  'Please try again later.';
 
 /**
  * This helper simplifies API call from Store
@@ -9,6 +13,7 @@ export class ApiHelper {
   fetchPromise: Promise;
   returnValue: any;
   store: ?Object = null;
+  cacheKey: string = null;
 
   onSuccess: (resp: ApiResp) => any;
   onError: (e: ErrorObject) => any;
@@ -48,6 +53,11 @@ export class ApiHelper {
    */
   complete(callback: () => any): ApiHelper {
     this.onComplete = callback;
+    return this;
+  }
+
+  cache(key) {
+    this.cacheKey = 'cache:' + key;
     return this;
   }
 
@@ -92,9 +102,12 @@ export class ApiHelper {
     let resp;
 
     try {
-      resp = await this.apiPromise;
+      resp = await offlinePromise(this.apiPromise, this.cacheKey);
 
       if (resp.ok && !resp.error) {
+        if (this.cacheKey) {
+          saveToStorage(this.cacheKey, resp.data);
+        }
         this.execHandler(() => this.onSuccess(resp));
       } else {
         //noinspection ExceptionCaughtLocallyJS
@@ -103,6 +116,7 @@ export class ApiHelper {
     } catch (e) {
       const error = resp ? resp.error : 'api_exception';
       const errorDescription = e.message;
+      console.log(e);
 
       this.execHandler(() => {
         if (this.store && this.store.error !== undefined) {
@@ -139,6 +153,57 @@ export default function apiHelper(
   const helper = new ApiHelper(apiPromise, store);
   helper.fetchPromise = helper.fetch().catch(log.error);
   return helper;
+}
+
+function offlinePromise(sourcePromise: Promise, cacheKey: string) {
+  const TIMEOUT = 7000;
+  let isTimeout = false;
+
+  return new Promise((resolve, reject) => {
+    const timeoutId = setTimeout(() => {
+      isTimeout = true;
+      loadFromStorage(cacheKey, resolve, reject);
+    }, TIMEOUT);
+
+    sourcePromise
+      .then((result) => {
+        if (!isTimeout) {
+          clearTimeout(timeoutId);
+          resolve(result);
+        }
+      })
+      .catch(log.warn);
+
+    NetInfo.isConnected.fetch().then((isConnected) => {
+      if (isConnected) {
+        return;
+      }
+
+      clearTimeout(timeoutId);
+      isTimeout = true;
+      loadFromStorage(cacheKey, resolve, reject);
+    });
+  });
+}
+
+function loadFromStorage(cacheKey, resolve, reject) {
+  if (!cacheKey) {
+    reject(new Error(NETWORK_ERROR));
+    return;
+  }
+  AsyncStorage.getItem(cacheKey)
+    .then((result => {
+      if (result !== null) {
+        resolve(new Response(JSON.stringify(result)));
+      } else {
+        reject(new Error(NETWORK_ERROR));
+      }
+    }))
+    .catch(reject);
+}
+
+function saveToStorage(cacheKey, data) {
+  AsyncStorage.setItem(cacheKey, JSON.stringify(data)).catch(log.error);
 }
 
 export type ErrorObject = {
