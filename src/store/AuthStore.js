@@ -38,6 +38,7 @@ export default class AuthStore {
         this.serialize();
         return true;
       })
+      .cache('auth')
       .promise();
   }
 
