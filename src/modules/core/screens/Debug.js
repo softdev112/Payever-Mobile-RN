@@ -1,14 +1,11 @@
 /* eslint-disable */
 
-import React, { Component } from 'react';
-import { Image, Animated } from 'react-native';
+import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { showScreen, toggleMenu } from '../../../common/Navigation';
-import { Icon, Loader, StyleSheet, Text, View } from 'ui';
+import { toggleMenu } from '../../../common/Navigation';
+import { NavBar, StyleSheet, View } from 'ui';
 import { Navigator } from 'react-native-navigation';
 
-import NavBar from '../components/NavBar';
-const EARLY_LOADING = require('../../../store/UserProfilesStore/images/no-business.png');
 
 @inject('userProfiles')
 @observer
@@ -17,7 +14,6 @@ export default class Debug extends Component {
 
   props:{
     navigator: Navigator;
-    userProfiles?: UserProfilesStore;
   };
 
   onShowSideMenu() {
@@ -40,25 +36,7 @@ export default class Debug extends Component {
           />
         </NavBar>
         <View style={styles.mainContent}>
-          <View style={styles.row}>
-            <Icon source="icon-search-16"/>
-            <Text>icon-search-16 Icon</Text>
-          </View>
-          <View style={styles.row}>
-            <Image
-              style={styles.image}
-              source={require('../../../store/UserProfilesStore/images/no-business.png')}
-            />
-            <Text>no-business1</Text>
-          </View>
-          <View style={styles.row}>
-            <Image style={styles.image} source={EARLY_LOADING}/>
-            <Text>no-business early loading</Text>
-          </View>
-          <View style={styles.row}>
-            <Loader isLoading/>
-            <Text>Spinner</Text>
-          </View>
+
         </View>
       </View>
     )

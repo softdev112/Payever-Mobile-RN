@@ -1,12 +1,11 @@
-/**
- * Created by Elf on 17.01.2017.
- */
-/* eslint react/prefer-stateless-function: 0 */
 import { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { Icon, Image, View, Text, StyleSheet } from 'ui';
+import { Image, TouchableOpacity, View } from 'react-native';
 
-const DEFAULT_HIT_SLOP   = 10;
+import Icon from '../Icon';
+import Text from '../Text';
+import StyleSheet from '../StyleSheet';
+
+const DEFAULT_HIT_SLOP = 10;
 
 export default class NavBarItem extends Component {
   static defaultProps = {
@@ -16,7 +15,7 @@ export default class NavBarItem extends Component {
   props: {
     title?: string;
     source: Object | number | string;
-    onPress: () => any;
+    onPress?: () => any;
     style?: Object;
     imageStyle?: Object;
     titleStyle?: Object;

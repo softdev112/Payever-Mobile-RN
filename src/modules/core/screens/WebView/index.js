@@ -2,11 +2,10 @@ import { Component } from 'react';
 import { WebView as ReactWebView, View, Linking } from 'react-native';
 import { observer, inject } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
-import { StyleSheet } from 'ui';
+import { NavBar, StyleSheet } from 'ui';
 import { log } from 'utils';
 
 import injectedCode, { getLoaderHtml } from './injectedCode';
-import NavBar from '../../components/NavBar';
 import WebViewLoader from './WebViewLoader';
 import WebViewError from './WebViewError';
 import { showScreen, toggleMenu } from '../../../../common/Navigation';
@@ -217,15 +216,14 @@ export default class WebView extends Component {
     return (
       <View style={styles.container}>
         {isCustomNavBar &&
-        <NavBar style={styles.navBar}>
-          <NavBar.Back onPress={() => this.onGoBack()} />
+        <NavBar>
+          <NavBar.Back onPress={::this.onGoBack} />
           <NavBar.Title
             source={{ uri: this.state.titleImgUrl }}
             title={this.state.title}
           />
           <NavBar.Menu
             source={this.props.userProfiles.privateProfile.logoSource}
-            title="Add"
             onPress={() => toggleMenu(this.props.navigator)}
           />
         </NavBar>}
