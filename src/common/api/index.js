@@ -54,26 +54,34 @@ export default class PayeverApi {
     return this.fetch(url, { query });
   }
 
-  async post(url: string, formData: Object = null): Promise<ApiResp> {
+  async post(url: string, requestData: RequestData = null): Promise<ApiResp> {
     const options = {
       method: 'POST',
     };
 
-    if (formData) {
-      options.body = objectToPhpFormData(formData);
+    if (requestData && typeof requestData === 'object') {
+      if (requestData.format && requestData.format !== 'json') {
+        options.body = objectToPhpFormData(requestData.data);
+      } else {
+        options.body = JSON.stringify(requestData.data);
+      }
     }
 
     return this.fetch(url, options);
   }
 
   //noinspection ReservedWordAsName
-  async delete(url: string, formData: Object = null): Promise<ApiResp> {
+  async delete(url: string, requestData: RequestData = null): Promise<ApiResp> {
     const options = {
       method: 'DELETE',
     };
 
-    if (formData) {
-      options.body = objectToPhpFormData(formData);
+    if (requestData && typeof requestData === 'object') {
+      if (requestData.format && requestData.format !== 'json') {
+        options.body = objectToPhpFormData(requestData.data);
+      } else {
+        options.body = JSON.stringify(requestData.data);
+      }
     }
 
     return this.fetch(url, options);
@@ -143,16 +151,13 @@ function objectToQueryString(data: Object): string {
   }).join('&');
 }
 
-function objectToPhpFormData(data: ObjectToFromData) {
-  // Good example: POST /api/rest/v1/channel-subscription/{id}/create-store
+function objectToPhpFormData(data: Object) {
   const formData = new FormData();
 
-  if (!data || data.key === '' || !data.requestData) return formData;
+  if (!data || typeof data !== 'object') return formData;
 
   const typeDetector = Object.prototype.toString;
-  const mainKey = data.key;
-  const requestData = data.requestData;
-  const keys = Object.keys(requestData);
+  const keys = Object.keys(data);
 
   function appendValueToFormData(currentName, value) {
     switch (typeDetector.call(value)) {
@@ -176,7 +181,7 @@ function objectToPhpFormData(data: ObjectToFromData) {
 
   try {
     keys.forEach(key => {
-      appendValueToFormData(`${mainKey}[${key}]`, requestData[key]);
+      appendValueToFormData(key, data[key]);
     });
   } catch (e) {
     log.error(e.message);
@@ -185,11 +190,6 @@ function objectToPhpFormData(data: ObjectToFromData) {
   return formData;
 }
 
-type ObjectToFromData = {
-  key: string;
-  requestData: Object;
-};
-
 type PayeverApiConfig = {
   baseUrl: string;
   clientId: string;
@@ -197,4 +197,9 @@ type PayeverApiConfig = {
   accessToken: string;
   expiresIn: Date;
   refreshToken: string;
+};
+
+type RequestData = {
+  format: string;
+  data: Object;
 };
