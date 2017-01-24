@@ -148,9 +148,9 @@ function injectedBody(options) {
     // Send data to WebView
     if (title !== '' && titleImgUrl !== '') {
       sendData({
-        command: 'navbar-info',
         title,
         titleImgUrl,
+        command: 'navbar-info',
       });
     }
   }
