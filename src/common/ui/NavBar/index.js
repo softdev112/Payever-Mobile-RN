@@ -1,9 +1,7 @@
-/**
- * Created by Elf on 17.01.2017.
- */
-import React, { Component } from 'react';
-import { View, StyleSheet } from 'ui';
+import { Children, Component } from 'react';
+import { View } from 'react-native';
 
+import StyleSheet from '../StyleSheet';
 import NavBarItem from './NavBarItem';
 
 export default class NavBar extends Component {
@@ -61,7 +59,8 @@ export default class NavBar extends Component {
 
     const { children, style } = this.props;
 
-    React.Children.forEach(children, (child) => {
+    Children.forEach(children, (child: Component) => {
+      //noinspection JSUnresolvedVariable
       switch (child.props.block) {
         case 'left': {
           leftChildren.push(child);
