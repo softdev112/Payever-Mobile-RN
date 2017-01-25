@@ -10,9 +10,10 @@
     "bump": "gulp bump",
     "reset": "watchman watch-del-all",
     "test": "jest",
+    "test:upd": "jest -u",
     "build:android": "cd android && ./gradlew assembleRelease",
     "beta": "npm run bump; fastlane beta dev:true",
-    "lint": "eslint src",
+    "lint": "eslint src __tests__",
     "install": "gulp install:git-hooks"
   },
   "dependencies": {
@@ -29,7 +30,7 @@
     "react-native-navigation": "^2.0.0-experimental.183"
   },
   "jest": {
-    "preset": "jest-react-native"
+    "preset": "react-native"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",
@@ -53,7 +54,7 @@
     "jest": "17.0.0",
     "jest-react-native": "17.0.0",
     "minimist": "^1.2.0",
-    "react-test-renderer": "15.3.2",
+    "react-test-renderer": "^15.4.2",
     "vinyl": "^2.0.1"
   },
   "pre-commit": [
