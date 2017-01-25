@@ -1,86 +1,19 @@
-import { Component } from 'react';
-import { Image, TouchableOpacity, View } from 'react-native';
+/* eslint-disable react/prefer-stateless-function */
 
-import Icon from '../Icon';
-import Text from '../Text';
+import { Component } from 'react';
+import { TouchableOpacity } from 'react-native';
 import StyleSheet from '../StyleSheet';
 
 const DEFAULT_HIT_SLOP = 10;
 
 export default class NavBarItem extends Component {
-  static defaultProps = {
-    align: 'row',
-  };
-
   props: {
-    title?: string;
-    source: Object | number | string;
     onPress?: () => any;
-    style?: Object;
-    imageStyle?: Object;
-    titleStyle?: Object;
-    align?: string;
+    children: any;
   };
 
   render() {
-    const {
-      onPress, source, title, imageStyle, titleStyle, style, align,
-    } = this.props;
-
-    const buttonStyles = [styles.button, style, { flexDirection: align }];
-    const imageStyles = [styles.image, imageStyle];
-    const titleStyles = [styles.title, titleStyle];
-
-    let textNode = null;
-    if (title) {
-      textNode = (
-        <Text
-          numberOfLines={1}
-          ellipsizeMode="tail"
-          style={titleStyles}
-        >
-          {title}
-        </Text>
-      );
-    }
-
-    const flatImgStyle = StyleSheet.flatten(imageStyles);
-    let imgStyle;
-    let imgNode = null;
-
-    switch (typeof source) {
-      case 'object':
-      case 'number': {
-        imgStyle = {
-          width: flatImgStyle.width,
-          height: flatImgStyle.height,
-          borderRadius: flatImgStyle.borderRadius,
-        };
-
-        imgNode = <Image style={imgStyle} source={source} />;
-        break;
-      }
-
-      case 'string': {
-        imgStyle = {
-          fontSize: flatImgStyle.fontSize,
-          color: flatImgStyle.color,
-        };
-
-        imgNode = <Icon style={imgStyle} source={source} />;
-        break;
-      }
-
-      default: {
-        imgNode = null;
-        break;
-      }
-    }
-
-    delete flatImgStyle.width;
-    delete flatImgStyle.height;
-    delete flatImgStyle.fontSize;
-    delete flatImgStyle.color;
+    const { children, onPress } = this.props;
 
     const hitSlop = {
       top: DEFAULT_HIT_SLOP,
@@ -96,35 +29,19 @@ export default class NavBarItem extends Component {
         disabled={!onPress}
         hitSlop={hitSlop}
         onPress={onPress}
+        style={style.container}
       >
-        <View style={buttonStyles}>
-          <View style={flatImgStyle}>
-            {imgNode}
-          </View>
-          {textNode}
-        </View>
+        {children}
 
       </TouchableOpacity>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  button: {
+const style = StyleSheet.create({
+  container: {
     alignItems: 'center',
-    padding: 2,
-  },
-
-  image: {
-    width: 32,
-    height: 32,
-    color: '$pe_color_blue',
-    fontSize: 24,
-  },
-
-  title: {
-    textAlign: 'center',
-    color: '$pe_color_blue',
-    fontSize: 16,
+    flexDirection: 'row',
+    padding: 6,
   },
 });
