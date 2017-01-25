@@ -12,5 +12,7 @@ export default async function startApp() {
   StyleSheet.build();
 
   const auth = await store.auth.deserialize();
-  showScreen(auth.isLoggedIn ? 'dashboard.ChooseAccount' : 'auth.Login');
+  showScreen(
+    auth && auth.isLoggedIn ? 'dashboard.ChooseAccount' : 'auth.Login'
+  );
 }

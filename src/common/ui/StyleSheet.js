@@ -5,7 +5,6 @@ const styleSheet = new Api();
 
 const { height } = Dimensions.get('window');
 
-console.log(height);
 // Set values from
 // https://github.com/payeverworldwide/ui-kit/blob/master/scss/pe_variables.scss
 styleSheet.build({

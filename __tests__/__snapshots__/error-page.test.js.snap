@@ -1,0 +1,118 @@
+exports[`src/modules/core/screens/ErrorPage.js src/modules/core/screens/ErrorPage.js renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }>
+  <View
+    style={
+      Array [
+        Object {
+          "borderBottomColor": "#e1e1e1",
+          "borderBottomWidth": 1,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "marginTop": 10,
+          "padding": 20,
+        },
+        undefined,
+      ]
+    }>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "fontFamily": "Helvetica Neue",
+          },
+          Object {
+            "color": "#3d3d3d",
+            "textAlign": "center",
+          },
+        ]
+      }>
+      Error
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      duration={0}
+      ellipsizeMode="tail"
+      message="Hello World!"
+      style={
+        Array [
+          Object {
+            "borderColor": "red",
+            "borderRadius": 4,
+            "borderWidth": 1,
+            "color": "red",
+            "padding": 5,
+            "textAlign": "center",
+          },
+          Object {
+            "width": 600,
+          },
+        ]
+      }>
+      Hello World!
+    </Text>
+    <View
+      accessibilityComponentType="button"
+      accessibilityLabel={undefined}
+      accessibilityTraits={
+        Array [
+          "button",
+        ]
+      }
+      accessible={true}
+      hitSlop={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "backgroundColor": "#0084ff",
+          "borderRadius": 4,
+          "marginTop": 10,
+          "opacity": 1,
+          "padding": 3,
+          "width": 120,
+        }
+      }
+      testID={undefined}>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "white",
+              "fontWeight": "500",
+              "padding": 8,
+              "textAlign": "center",
+            },
+          ]
+        }>
+        Go To Login
+      </Text>
+    </View>
+  </View>
+</View>
+`;
