@@ -62,11 +62,18 @@ const styles = StyleSheet.create({
     color: '$pe_color_gray',
     fontSize: 18,
     textAlign: 'center',
+    '@media (max-width: 600)': {
+      width: 0,
+      height: 0,
+    },
   },
 
   title_icon: {
     marginLeft: 13,
     textAlign: 'left',
+    '@media (max-width: 600)': {
+      marginLeft: 0,
+    },
   },
 
   title_popup: {
