@@ -6,7 +6,6 @@ import { NavBar, StyleSheet } from 'ui';
 import { log } from 'utils';
 
 import injectedCode, { getLoaderHtml } from './injectedCode';
-import WebViewLoader from './WebViewLoader';
 import WebViewError from './WebViewError';
 import { showScreen, toggleMenu } from '../../../../common/Navigation';
 import type AuthStore from '../../../../store/AuthStore';
@@ -74,6 +73,7 @@ export default class WebView extends Component {
   }
 
   onGoBack() {
+    //noinspection JSUnresolvedFunction
     this.$view.goBack();
   }
 
@@ -198,8 +198,8 @@ export default class WebView extends Component {
   }
 
   render() {
-    const { navigator, url, referer } = this.props;
-    const { isCustomNavBar } = this.state;
+    const { url, referer } = this.props;
+    const { errorMsg, isCustomNavBar, title, titleImgUrl } = this.state;
     const topInset = isCustomNavBar ? -75 : 0;
 
     let source;
@@ -208,25 +208,22 @@ export default class WebView extends Component {
       if (referer) {
         headers.Referer = referer;
       }
-      source = { headers, uri: this.state.currentUrl || url };
+      source = { headers, uri: url };
     } else {
       source = { html: getLoaderHtml(url) };
     }
 
+    const titleImgSource = titleImgUrl ? { uri: titleImgUrl } : null;
+
     return (
       <View style={styles.container}>
-        {isCustomNavBar &&
-        <NavBar>
-          <NavBar.Back onPress={::this.onGoBack} />
-          <NavBar.Title
-            source={{ uri: this.state.titleImgUrl }}
-            title={this.state.title}
-          />
-          <NavBar.Menu
-            source={this.props.userProfiles.privateProfile.logoSource}
-            onPress={() => toggleMenu(this.props.navigator)}
-          />
-        </NavBar>}
+        {isCustomNavBar && !errorMsg && (
+          <NavBar>
+            <NavBar.Back onPress={::this.onGoBack} />
+            <NavBar.Title source={titleImgSource} title={title} />
+            <NavBar.Menu />
+          </NavBar>
+        )}
         <ReactWebView
           contentInset={{ top: topInset, left: 0, bottom: 0, right: 0 }}
           source={source}
@@ -238,7 +235,6 @@ export default class WebView extends Component {
           domStorageEnabled
           startInLoadingState={false}
           injectedJavaScript={this.injectedCode}
-          renderLoading={() => <WebViewLoader navigator={navigator} />}
           renderError={::this.renderError}
           bounces={false}
         />

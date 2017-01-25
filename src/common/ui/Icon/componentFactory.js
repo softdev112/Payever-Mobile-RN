@@ -1,3 +1,4 @@
+import { Image } from 'react-native';
 import VectorIcon from './VectorIcon';
 import BitmapIcon from './BitmapIcon';
 import StackedIcon from './StackedIcon';
@@ -6,8 +7,22 @@ import icons from './icons';
 
 export default function componentFactory(componentInfo, newProps = {}) {
   let meta = componentInfo;
-  if (typeof componentInfo === 'string') {
-    meta = icons[componentInfo];
+
+  /* eslint-disable default-case */
+  switch (typeof componentInfo) {
+    case 'string': {
+      meta = icons[componentInfo];
+      break;
+    }
+    case 'object': {
+      if (componentInfo.uri) {
+        meta.component = 'image';
+      }
+      break;
+    }
+    case 'number': {
+      meta = { component: 'image', source: componentInfo };
+    }
   }
 
   if (!meta || !meta.component) {
@@ -36,6 +51,7 @@ function getComponentByAlias(alias) {
     case 'vector':  return VectorIcon;
     case 'bitmap':  return BitmapIcon;
     case 'stacked': return StackedIcon;
+    case 'image':   return Image;
     default: {
       throw new Error('Unknown icon type ' + alias);
     }

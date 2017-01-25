@@ -1,166 +1,148 @@
-import { Children, Component } from 'react';
-import { View } from 'react-native';
-
+import { Children, Component, PropTypes } from 'react';
+import { Image, View } from 'react-native';
 import StyleSheet from '../StyleSheet';
-import NavBarItem from './NavBarItem';
+
+import Back from './Back';
+import Button from './Button';
+import IconButton from './IconButton';
+import Menu from './Menu';
+import Title from './Title';
+
+//noinspection JSUnresolvedVariable
+import bgGradient from './images/gradient.png';
 
 export default class NavBar extends Component {
-  props: {
-    style?: Object;
-    children: Array<Component>;
+  static Back       = Back;
+  static Button     = Button;
+  static Default    = Default;
+  static IconButton = IconButton;
+  static Menu       = Menu;
+  static Title      = Title;
+
+  static childContextTypes = {
+    popup: PropTypes.bool,
   };
 
-  static Back({ title, onPress }) {
-    return (
-      <NavBarItem
-        onPress={onPress}
-        source="icon-arrow-left-ios-24"
-        title={title}
-      />
-    );
-  }
+  static defaultProps = {
+    popup: false,
+  };
 
-  static IconButton({ title, source, align, onPress }) {
-    return (
-      <NavBarItem
-        align={align}
-        onPress={() => onPress()}
-        source={source}
-        title={title}
-      />
-    );
-  }
+  props: {
+    children?: Array;
+    /**
+     * Apply popup styles to NavBar
+     */
+    popup?: boolean;
+    style?: Object | number;
+  };
 
-  static Menu({ source, onPress }) {
-    return (
-      <NavBarItem
-        imageStyle={styles.menuProfileImg}
-        onPress={onPress}
-        source={source}
-      />
-    );
-  }
-
-  static Title({ title, source }) {
-    return (
-      <NavBarItem
-        imageStyle={styles.titleImg}
-        source={source}
-        title={title}
-        titleStyle={styles.titleText}
-      />
-    );
+  getChildContext() {
+    return {
+      popup: this.props.popup,
+    };
   }
 
   render() {
-    const leftChildren = [];
-    const middleChildren = [];
-    const rightChildren = [];
+    const { style, popup } = this.props;
+    const children = Children.toArray(this.props.children);
 
-    const { children, style } = this.props;
-
-    Children.forEach(children, (child: Component) => {
-      //noinspection JSUnresolvedVariable
-      switch (child.props.block) {
-        case 'left': {
-          leftChildren.push(child);
-          break;
-        }
-
-        case 'mid': {
-          middleChildren.push(child);
-          break;
-        }
-
-        case 'right': {
-          rightChildren.push(child);
-          break;
-        }
-
-        default: {
-          leftChildren.push(child);
-          break;
-        }
-      }
-    });
+    const additionalStyle = popup ? styles.container_popup : null;
+    const leftStyle       = popup ? styles.leftZone_popup : null;
 
     return (
-      <View style={[styles.container, style]}>
-        <View style={styles.leftZone}>
-          {leftChildren}
+      <View style={[styles.container, additionalStyle, style]}>
+        <View style={[styles.leftZone, leftStyle]}>
+          {children.filter(filterByAlign('left'))}
         </View>
 
-        <View style={styles.middleZone}>
-          {middleChildren}
+        <View style={styles.centerZone}>
+          {children.filter(filterByAlign('center'))}
         </View>
 
-        <View style={styles.rightZone}>
-          {rightChildren}
-        </View>
+        <Image style={styles.rightZone} source={bgGradient}>
+          {children.filter(filterByRightAlign())}
+        </Image>
       </View>
     );
   }
 }
 
-NavBar.Back.defaultProps = { block: 'left' };
+function Default({ title, source }: DefaultNavBarProps) {
+  return (
+    <NavBar>
+      <NavBar.Back />
+      <NavBar.Title source={source} title={title} />
+      <NavBar.Menu />
+    </NavBar>
+  );
+}
 
-NavBar.Menu.defaultProps = { block: 'right' };
+function filterByAlign(align) {
+  return ({ props }) => props.align === align;
+}
 
-NavBar.Title.defaultProps = { block: 'mid' };
+function filterByRightAlign() {
+  return ({ props }) => props.align !== 'left' && props.align !== 'center';
+}
 
 const styles = StyleSheet.create({
+  $padding: 18,
+  $paddingPopup: 9,
+
   container: {
-    flexDirection: 'row',
-    height: 55,
-    alignItems: 'stretch',
-    justifyContent: 'space-between',
+    alignItems: 'center',
     borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
+    flexDirection: 'row',
+    height: 55,
+    justifyContent: 'flex-end',
+    paddingHorizontal: '$padding',
+  },
+
+  container_popup: {
+    paddingHorizontal: '$paddingPopup',
   },
 
   leftZone: {
-    flex: 30,
-    flexDirection: 'row',
     alignItems: 'center',
+    bottom: 0,
+    flexDirection: 'row',
     justifyContent: 'flex-start',
-    padding: 2,
-    paddingLeft: 20,
+    left: '$padding',
+    position: 'absolute',
+    top: 0,
+    zIndex: 1,
   },
 
-  middleZone: {
-    flex: 40,
-    flexDirection: 'row',
+  leftZone_popup: {
+    left: '$paddingPopup',
+  },
+
+  centerZone: {
     alignItems: 'center',
+    bottom: 0,
+    flexDirection: 'row',
     justifyContent: 'center',
-    padding: 2,
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+    zIndex: 0,
   },
 
   rightZone: {
-    flex: 30,
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
+    width: null,
+    height: null,
     justifyContent: 'flex-end',
-    padding: 2,
-    paddingRight: 20,
-  },
-
-  titleImg: {
-    shadowColor: 'rgba(0,0,0,.15)',
-    shadowRadius: 2,
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 1,
-    borderRadius: 8,
-    elevation: 2,
-  },
-
-  titleText: {
-    color: '#3d3d3d',
-    marginLeft: 6,
-  },
-
-  menuProfileImg: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
+    paddingLeft: 20,
+    resizeMode: 'stretch',
+    zIndex: 2,
   },
 });
+
+type DefaultNavBarProps = {
+  source?: Object | string | number;
+  title?: string;
+};
