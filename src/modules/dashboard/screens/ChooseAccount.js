@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { Platform } from 'react-native';
+import { Keyboard, Platform } from 'react-native';
 import type { Navigator } from 'react-native-navigation';
 import {
   GridView, Header, IconText, Loader, Text, View, StyleSheet,
@@ -37,6 +37,8 @@ export default class ChooseAccount extends Component {
 
   async componentWillMount() {
     const { userProfiles, navigator } = this.props;
+
+    Keyboard.dismiss();
 
     if (!await userProfiles.load()) {
       navigator.push({
