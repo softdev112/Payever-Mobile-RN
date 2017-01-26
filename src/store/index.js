@@ -1,5 +1,6 @@
 /* eslint no-unused-vars: 0 */
 
+//noinspection ES6UnusedImports
 import { enableLogging } from 'mobx-logger';
 
 import type { Config } from '../config';
@@ -17,7 +18,7 @@ export default class Store {
   api: PayeverApi;
   config: Config;
   search: SearchStore;
-  comminucation: CommunicationStore;
+  communication: CommunicationStore;
 
   constructor(config: Config) {
     this.auth = new AuthStore(this);

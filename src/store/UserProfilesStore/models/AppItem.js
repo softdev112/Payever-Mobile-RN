@@ -3,11 +3,7 @@ import type Store from '../../index';
 
 const SETTINGS = {
   communication: {
-    // screenId: 'communication',
-    // Should be removed when communications becomes native
-    webView: {
-      enableExternalBrowser: true,
-    },
+    screenId: 'communication.Contacts',
   },
   settings: {
     webView: {
