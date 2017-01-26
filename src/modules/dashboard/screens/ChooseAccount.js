@@ -8,7 +8,7 @@ import {
 
 import type { Config } from '../../../config';
 import type UserProfilesStore from '../../../store/UserProfilesStore';
-import type Profile from '../../../store/UserProfilesStore/Profile';
+import type Profile from '../../../store/UserProfilesStore/models/Profile';
 
 //noinspection JSUnresolvedVariable
 import addBusinessIcon from '../images/add-business.png';

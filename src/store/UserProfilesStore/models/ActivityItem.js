@@ -1,5 +1,5 @@
 import type BusinessProfile from './BusinessProfile';
-import type Store from '../index';
+import type Store from '../../index';
 
 const URL_MAP = {
   activity_advertising_offer:

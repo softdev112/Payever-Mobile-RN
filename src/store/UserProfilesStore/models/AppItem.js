@@ -1,5 +1,5 @@
 import type BusinessProfile from './BusinessProfile';
-import type Store from '../index';
+import type Store from '../../index';
 
 const SETTINGS = {
   communication: {

@@ -3,7 +3,7 @@ import Profile from './Profile';
 import UserAccount from './UserAccount';
 
 //noinspection JSUnresolvedVariable
-import imgNoAvatar from './images/no-avatar.png';
+import imgNoAvatar from '../images/no-avatar.png';
 
 export default class PersonalProfile extends Profile {
   @observable user: UserAccount;
