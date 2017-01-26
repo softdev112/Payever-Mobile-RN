@@ -6,8 +6,4 @@ export default class UserApi {
   constructor(client: PayeverApi) {
     this.client = client;
   }
-
-  getBusinesses(): Promise<ApiResp> {
-    return this.client.get('/api/rest/v1/profiles/accessible-list');
-  }
 }
