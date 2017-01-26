@@ -1,6 +1,3 @@
-/**
- * Created by Elf on 25.01.2017.
- */
 import { observable } from 'mobx';
 import MessengerPrivateInfo from './MessengerPrivateInfo';
 
