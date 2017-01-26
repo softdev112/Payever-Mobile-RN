@@ -1,14 +1,19 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { ListViewDataSource } from 'react-native';
-import { GridView, Loader, StyleSheet, Text, View } from 'ui';
+import { NavBar, StyleSheet, View } from 'ui';
 
 import type { Navigator } from 'react-native-navigation';
 import type { Config } from '../../../config/index';
 
+import Contacts from '../components/Contacts';
+
+//noinspection JSUnresolvedVariable
+import imgCommunication from '../images/communication.png';
+
 @inject('communication', 'config')
 @observer
-export default class Contacts extends Component {
+export default class Main extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
@@ -29,10 +34,6 @@ export default class Contacts extends Component {
 
     this.state = {
     };
-
-    this.dataSource = new GridView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
   }
 
   componentWillMount() {
@@ -49,11 +50,10 @@ export default class Contacts extends Component {
 
   render() {
     return (
-      <Loader isLoading={this.state.isLoading}>
-        <View style={styles.container}>
-          <Text>Hello in Contacts</Text>
-        </View>
-      </Loader>
+      <View style={styles.container}>
+        <NavBar.Default title="Communication" source={imgCommunication} />
+        <Contacts />
+      </View>
     );
   }
 }
