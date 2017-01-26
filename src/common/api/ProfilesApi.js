@@ -7,11 +7,11 @@ export default class ProfilesApi {
     this.client = client;
   }
 
-  async getAccessibleList(): Promise<MenuResp> {
-    const resp: MenuResp = await this.client.get(
+  async getAccessibleList(): Promise<ProfileResp> {
+    const resp: ProfileResp = await this.client.get(
       '/api/rest/v1/profiles/accessible-list'
     );
-    const data = resp.data;
+    const data              = resp.data;
 
     if (!resp.ok) return resp;
 
@@ -34,13 +34,15 @@ export default class ProfilesApi {
   }
 }
 
-declare class MenuResp extends ApiResp {
-  data: {
-    businesses_own: Array<BusinessProfileData>;
-    businesses_staff: Array<BusinessProfileData>;
-    'private': PersonalProfileData;
-  };
+declare class ProfileResp extends ApiResp {
+  data: ProfilesData;
 }
+
+export type ProfilesData = {
+  businesses_own: Array<BusinessProfileData>;
+  businesses_staff: Array<BusinessProfileData>;
+  'private': PersonalProfileData;
+};
 
 /* eslint-disable no-unused-vars */
 type PersonalProfileData = {
@@ -104,7 +106,7 @@ declare class SearchResp extends ApiResp {
 }
 
 /* eslint-disable no-unused-vars */
-type SearchDataRow = {
+export type SearchDataRow = {
   id: number;
   followers: number;
   following: number;

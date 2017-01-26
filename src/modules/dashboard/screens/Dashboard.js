@@ -11,7 +11,6 @@ import ActivityCard from '../components/ActivityCard';
 import Dock from '../components/Dock';
 import DashboardTitle from '../components/DashboardTitle';
 import SearchHeader from '../components/SearchHeader';
-import type { Config } from '../../../config/index';
 
 @inject('userProfiles', 'config')
 @observer
@@ -23,7 +22,6 @@ export default class Dashboard extends Component {
   props: {
     navigator: Navigator;
     userProfiles: UserProfilesStore;
-    config: Config;
   };
 
   state: {
@@ -55,45 +53,41 @@ export default class Dashboard extends Component {
 
   async componentWillMount() {
     const { userProfiles } = this.props;
+    const profile = userProfiles.currentProfile;
 
-    const apps = await userProfiles.currentProfile.getApplications();
+    const apps = await userProfiles.loadApplications(profile.id);
     this.setState({
-      appsTop: apps.filter(a => a.location === 'top'),
+      appsTop:    apps.filter(a => a.location === 'top'),
       appsBottom: apps.filter(a => a.location === 'bottom'),
-      activities: await userProfiles.currentProfile.getActivities(),
-      todos: await userProfiles.currentProfile.getTodos(),
+      activities: await userProfiles.loadActivities(profile.id),
+      todos:      await userProfiles.loadTodos(profile.id),
     });
   }
 
-  onAppClick(item: AppItem) {
-    const { config, navigator, userProfiles } = this.props;
+  onAppClick(app: AppItem) {
+    const { navigator } = this.props;
 
-    if (item.label === 'dashboard') {
+    if (app.label === 'dashboard') {
       this.animateLayout();
       this.setState({ showApps: !this.state.showApps });
       return;
     }
 
-    let enableExternalBrowser = false;
-    if (item.label === 'communication') {
-      enableExternalBrowser = true;
-    }
-
-    let referer;
-    if (item.label === 'settings') {
-      // Backend code checks if referer is business home
-      const slug = userProfiles.currentProfile.business.slug;
-      referer = config.siteUrl + `/business/${slug}/home#home`;
-    }
-
-    if (item.url) {
+    if (app.settings.screenId) {
       navigator.push({
-        title: item.name,
+        title: app.name,
+        screen: app.settings.screenId,
+      });
+      return;
+    }
+
+    if (app.url) {
+      navigator.push({
+        title: app.name,
         screen: 'core.WebView',
         passProps: {
-          enableExternalBrowser,
-          referer,
-          url: item.url,
+          ...app.settings.webView,
+          url: app.url,
         },
       });
     }
@@ -129,7 +123,7 @@ export default class Dashboard extends Component {
     const businessName = userProfiles.currentProfile.displayName;
 
     return (
-      <Loader isLoading={!appsTop.length}>
+      <Loader isLoading={appsTop.length < 1}>
         <View style={styles.container}>
           <SearchHeader navigator={this.props.navigator} />
 

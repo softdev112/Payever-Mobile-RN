@@ -2,13 +2,15 @@ import { action, computed, observable, runInAction } from 'mobx';
 import { apiHelper } from 'utils';
 
 import type Store from './index';
+import type { SearchDataRow } from '../common/api/ProfilesApi';
 //noinspection JSUnresolvedVariable
 import imgNoBusiness from './UserProfilesStore/images/no-business.png';
 
 export default class SearchStore {
   @observable items: Array<SearchRow> = [];
-  @observable error: string;
   @observable isSearching = false;
+
+  @observable error: string = '';
 
   store: Store;
 
@@ -23,9 +25,9 @@ export default class SearchStore {
     this.isSearching = true;
 
     apiHelper(api.profiles.search(query), this)
-      .success((resp: ApiResp) => {
-        if (resp.data.length > 0) {
-          this.items = resp.data.map(data => new SearchRow(data));
+      .success((data: Array<SearchDataRow>) => {
+        if (data.length > 0) {
+          this.items = data.map(d => new SearchRow(d));
         } else {
           this.error = 'Sorry, we didn\'t find any results, try ' +
             'searching again';
