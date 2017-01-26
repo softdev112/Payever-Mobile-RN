@@ -7,7 +7,7 @@ import DashboardTitle from '../components/DashboardTitle';
 import Dock from '../components/Dock';
 import SearchHeader from '../components/SearchHeader';
 import type UserProfilesStore from '../../../store/UserProfilesStore/index';
-import AppItem from '../../../store/UserProfilesStore/AppItem';
+import AppItem from '../../../store/UserProfilesStore/models/AppItem';
 import type { Config } from '../../../config';
 
 const APPS: Array<Object> = [

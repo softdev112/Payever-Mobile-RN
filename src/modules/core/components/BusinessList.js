@@ -5,7 +5,7 @@ import { Icon, Image, StyleSheet, Text, View } from 'ui';
 
 import type UserProfilesStore from '../../../store/UserProfilesStore/index';
 import type BusinessProfile
-  from '../../../store/UserProfilesStore/BusinessProfile';
+  from '../../../store/UserProfilesStore/models/BusinessProfile';
 
 @observer
 export default class BusinessList extends Component {

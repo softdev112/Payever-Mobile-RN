@@ -4,7 +4,8 @@ import { Image, Link, StyleSheet, Text, View } from 'ui';
 //noinspection JSUnresolvedVariable
 import type { Navigator } from 'react-native-navigation';
 
-import type ActivityItem from '../../../store/UserProfilesStore/ActivityItem';
+import type ActivityItem from
+  '../../../store/UserProfilesStore/models/ActivityItem';
 
 export default class ActivityCards extends Component {
   props: {

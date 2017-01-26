@@ -6,7 +6,7 @@ import Business from './Business';
 import Profile from './Profile';
 
 //noinspection JSUnresolvedVariable
-import imgNoBusiness from './images/no-business.png';
+import imgNoBusiness from '../images/no-business.png';
 
 export default class BusinessProfile extends Profile {
   @observable business: Business;

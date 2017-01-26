@@ -6,7 +6,7 @@ import { Navigator } from 'react-native-navigation';
 
 import type UserProfilesStore from '../../../store/UserProfilesStore/index';
 import type BusinessProfile
-  from '../../../store/UserProfilesStore/BusinessProfile';
+  from '../../../store/UserProfilesStore/models/BusinessProfile';
 import { hideMenu, showScreen } from '../../../common/Navigation';
 import BusinessList from '../components/BusinessList';
 import type AuthStore from '../../../store/AuthStore';

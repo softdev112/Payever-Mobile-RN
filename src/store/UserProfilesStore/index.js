@@ -5,11 +5,11 @@ import type { ProfilesData } from '../../common/api/ProfilesApi';
 import type { MenuItemData } from '../../common/api/MenuApi';
 import type { ActivityItemData } from '../../common/api/BusinessApi';
 import type Store from './index';
-import ActivityItem from './ActivityItem';
-import AppItem from './AppItem';
-import BusinessProfile from './BusinessProfile';
-import PersonalProfile from './PersonalProfile';
-import Profile from './Profile';
+import ActivityItem from './models/ActivityItem';
+import AppItem from './models/AppItem';
+import BusinessProfile from './models/BusinessProfile';
+import PersonalProfile from './models/PersonalProfile';
+import Profile from './models/Profile';
 
 export default class UserProfilesStore {
   @observable ownBusinesses: Array<BusinessProfile>   = [];

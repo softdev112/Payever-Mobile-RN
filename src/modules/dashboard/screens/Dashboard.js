@@ -5,8 +5,9 @@ import type { Navigator } from 'react-native-navigation';
 import { GridView, IconText, Loader, StyleSheet, View } from 'ui';
 
 import type UserProfilesStore from '../../../store/UserProfilesStore/index';
-import type ActivityItem from '../../../store/UserProfilesStore/ActivityItem';
-import type AppItem from '../../../store/UserProfilesStore/AppItem';
+import type ActivityItem from
+  '../../../store/UserProfilesStore/models/ActivityItem';
+import type AppItem from '../../../store/UserProfilesStore/models/AppItem';
 import ActivityCard from '../components/ActivityCard';
 import Dock from '../components/Dock';
 import DashboardTitle from '../components/DashboardTitle';
