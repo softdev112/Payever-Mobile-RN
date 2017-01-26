@@ -2,9 +2,11 @@ import { observable, action } from 'mobx';
 import { apiHelper } from 'utils';
 
 import type Store from './index';
-import Profile from './Profile';
+import ActivityItem from './ActivityItem';
+import AppItem from './AppItem';
 import BusinessProfile from './BusinessProfile';
 import PersonalProfile from './PersonalProfile';
+import Profile from './Profile';
 
 export default class UserProfilesStore {
   @observable ownBusinesses: Array<BusinessProfile>   = [];
@@ -39,13 +41,12 @@ export default class UserProfilesStore {
   }
 
   @action
-  async load(): Promise<LoadProfilesResult> {
+  async load(): Promise<boolean> {
     const { api } = this.store;
 
-    //noinspection ES6ModulesDependencies
     return apiHelper(api.profiles.getAccessibleList(), this)
-      .success((resp: ApiResp) => {
-        const data = resp.data;
+      .cache('profiles', { lifetime: 3600 })
+      .success((data) => {
         this.ownBusinesses = data.businesses_own.map((profile) => {
           return new BusinessProfile(profile, this.store);
         });
@@ -54,7 +55,72 @@ export default class UserProfilesStore {
         });
         this.privateProfile = new PersonalProfile(data.private, this.store);
       })
-      .cache('profiles')
+      .promise();
+  }
+
+  @action
+  async loadApplications(profileId) {
+    const { api } = this.store;
+
+    const profile = this.businessById(profileId);
+    if (profile.applications.length > 0) {
+      return profile.applications;
+    }
+
+    return apiHelper(api.menu.getList(profileId))
+      .cache(`applications-${profileId}`, { lifetime: 3600 })
+      .success((data) => {
+        const apps = data
+          .sort((a, b) => a.position - b.position)
+          .map(item => new AppItem(item, this.store, profile));
+        profile.applications = apps;
+        return apps;
+      })
+      .promise();
+  }
+
+  @action
+  async loadActivities(profileId) {
+    const { api } = this.store;
+
+    const profile = this.businessById(profileId);
+    if (profile.activities.length > 0) {
+      return profile.activities;
+    }
+
+    const slug = profile.business.slug;
+    return apiHelper(api.business.getActivities(slug))
+      .cache(`activities-${profileId}`, { lifetime: 3600 })
+      .success((data) => {
+        const activities = data
+          .sort((a, b) => a.position - b.position)
+          .map(item => new ActivityItem(item, this.store, profile));
+        profile.activities = activities;
+        return activities;
+      })
+      .promise();
+  }
+
+  @action
+  async loadTodos(profileId) {
+    const { api } = this.store;
+
+    const profile = this.businessById(profileId);
+    if (profile.todos.length > 0) {
+      return profile.todos;
+    }
+
+    const slug = profile.business.slug;
+    return apiHelper(api.business.getTodos(slug))
+      .cache(`todos-${profileId}`, { lifetime: 3600 })
+      .success((data) => {
+        const activities = data
+          .sort((a, b) => a.priority - b.priority)
+          .filter(item => item.type !== 'todo_business_mobile_app')
+          .map(item => new ActivityItem(item, this.store, profile));
+        profile.todos = activities;
+        return activities;
+      })
       .promise();
   }
 
@@ -62,9 +128,12 @@ export default class UserProfilesStore {
   setCurrentProfile(profile: Profile) {
     this.currentProfile = profile;
   }
-}
 
-type LoadProfilesResult = {
-  success: boolean;
-  error: string;
-};
+  businessById(profileId): BusinessProfile {
+    const profile = this.toArray().filter(p => p.id === profileId)[0];
+    if (!profile || !profile.business) {
+      throw new Error(`Couldn't find business with id = ${profileId}`);
+    }
+    return profile;
+  }
+}

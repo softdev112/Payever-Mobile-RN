@@ -53,13 +53,14 @@ export default class Dashboard extends Component {
 
   async componentWillMount() {
     const { userProfiles } = this.props;
+    const profile = userProfiles.currentProfile;
 
-    const apps = await userProfiles.currentProfile.getApplications();
+    const apps = await userProfiles.loadApplications(profile.id);
     this.setState({
-      appsTop: apps.filter(a => a.location === 'top'),
+      appsTop:    apps.filter(a => a.location === 'top'),
       appsBottom: apps.filter(a => a.location === 'bottom'),
-      activities: await userProfiles.currentProfile.getActivities(),
-      todos: await userProfiles.currentProfile.getTodos(),
+      activities: await userProfiles.loadActivities(profile.id),
+      todos:      await userProfiles.loadTodos(profile.id),
     });
   }
 
@@ -122,7 +123,7 @@ export default class Dashboard extends Component {
     const businessName = userProfiles.currentProfile.displayName;
 
     return (
-      <Loader isLoading={!appsTop.length}>
+      <Loader isLoading={appsTop.length < 1}>
         <View style={styles.container}>
           <SearchHeader navigator={this.props.navigator} />
 

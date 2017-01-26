@@ -39,6 +39,8 @@ export default class Login extends Component {
     const signInResult = await auth.signIn(this.username, this.password);
 
     if (signInResult) {
+      //noinspection JSUnresolvedFunction
+      Keyboard.dismiss();
       navigator.resetTo({ screen: 'dashboard.ChooseAccount' });
     }
   }

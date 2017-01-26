@@ -28,17 +28,14 @@ export default class AuthStore {
     const { api } = this.store;
 
     return apiHelper(api.auth.login(username, password), this)
-      .success((resp: ApiResp) => {
-        const data = resp.data;
+      .success((data) => {
         this.accessToken  = data.access_token;
         this.refreshToken = data.refresh_token;
         this.expiresIn    = data.expires_in;
         this.isLoggedIn   = true;
         //noinspection JSIgnoredPromiseFromCall
         this.serialize();
-        return true;
       })
-      .cache('auth')
       .promise();
   }
 
@@ -57,7 +54,7 @@ export default class AuthStore {
     this.isLoggedIn = null;
 
     return api.auth.logout()
-      .then(() => AsyncStorage.removeItem(STORE_NAME));
+      .then(() => AsyncStorage.clear());
   }
 
   @action
@@ -66,8 +63,6 @@ export default class AuthStore {
     if (expires && !isDate(expires) && isFinite(expires)) {
       data.expiresIn = new Date(now() + ((expires - 10) * 1000));
     }
-
-    console.log('update with', data);
 
     extendObservable(this, data);
     //noinspection JSIgnoredPromiseFromCall
