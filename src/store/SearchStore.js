@@ -7,8 +7,9 @@ import imgNoBusiness from './UserProfilesStore/images/no-business.png';
 
 export default class SearchStore {
   @observable items: Array<SearchRow> = [];
-  @observable error: string;
   @observable isSearching = false;
+
+  @observable error: string = '';
 
   store: Store;
 

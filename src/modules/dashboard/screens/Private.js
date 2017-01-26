@@ -64,21 +64,23 @@ export default class Private extends Component {
     });
   }
 
-  onAppClick(item: AppItem) {
+  onAppClick(app: AppItem) {
     const { navigator } = this.props;
 
-    // Customize WebView fro each App
-    let enableExternalBrowser = false;
-    if (item.id === 'communication') {
-      enableExternalBrowser = true;
+    if (app.settings.screenId) {
+      navigator.push({
+        title: app.name,
+        screen: app.settings.screenId,
+      });
+      return;
     }
 
     navigator.push({
-      title: item.name,
+      title: app.name,
       screen: 'core.WebView',
       passProps: {
-        enableExternalBrowser,
-        url: item.url,
+        ...app.settings.webView,
+        url: app.url,
       },
     });
   }

@@ -1,4 +1,8 @@
 /* eslint-disable no-unused-vars */
+
+/**
+ * @name ApiResp
+ */
 declare class ApiResp {
   bodyUsed: boolean;
   headers: Object;
@@ -20,3 +24,5 @@ declare class ApiResp {
   json(): Promise<Object>;
   text(): Promise<string>;
 }
+
+type Response = Object;
