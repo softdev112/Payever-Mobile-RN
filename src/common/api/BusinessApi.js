@@ -21,7 +21,7 @@ declare class ActivityResp extends ApiResp {
 }
 
 /* eslint-disable no-unused-vars */
-type ActivityItemData = {
+export type ActivityItemData = {
   active: boolean;
   channel: ?string;
   description: string;
