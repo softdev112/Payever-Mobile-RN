@@ -15,9 +15,10 @@ export default class PayeverApi {
   auth: AuthApi;
   business: BusinessApi;
   dashboard: DashboardApi;
+  menu: MenuApi;
+  messenger: MessengerApi;
   user: UserApi;
   profiles: ProfilesApi;
-  menu: MenuApi;
 
   baseUrl: string;
   clientId: string;
@@ -35,9 +36,9 @@ export default class PayeverApi {
     this.dashboard = new DashboardApi(this);
     this.business  = new BusinessApi(this);
     this.menu      = new MenuApi(this);
+    this.messenger = new MessengerApi(this);
     this.user      = new UserApi(this);
     this.profiles  = new ProfilesApi(this);
-    this.messenger = new MessengerApi(this);
   }
 
   setConfig(config: PayeverApiConfig) {
