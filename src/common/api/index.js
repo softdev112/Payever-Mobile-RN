@@ -8,6 +8,7 @@ import DashboardApi from './DashboardApi';
 import UserApi from './UserApi';
 import ProfilesApi from './ProfilesApi';
 import MenuApi from './MenuApi';
+import MessengerApi from './MessengerApi';
 import { showScreen } from '../Navigation';
 
 export default class PayeverApi {
@@ -36,6 +37,7 @@ export default class PayeverApi {
     this.menu      = new MenuApi(this);
     this.user      = new UserApi(this);
     this.profiles  = new ProfilesApi(this);
+    this.messenger = new MessengerApi(this);
   }
 
   setConfig(config: PayeverApiConfig) {
