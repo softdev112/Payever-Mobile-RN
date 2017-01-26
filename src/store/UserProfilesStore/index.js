@@ -1,6 +1,9 @@
 import { observable, action } from 'mobx';
 import { apiHelper } from 'utils';
 
+import type { ProfilesData } from '../../common/api/ProfilesApi';
+import type { MenuItemData } from '../../common/api/MenuApi';
+import type { ActivityItemData } from '../../common/api/BusinessApi';
 import type Store from './index';
 import ActivityItem from './ActivityItem';
 import AppItem from './AppItem';
@@ -46,7 +49,7 @@ export default class UserProfilesStore {
 
     return apiHelper(api.profiles.getAccessibleList(), this)
       .cache('profiles', { lifetime: 3600 })
-      .success((data) => {
+      .success((data: ProfilesData) => {
         this.ownBusinesses = data.businesses_own.map((profile) => {
           return new BusinessProfile(profile, this.store);
         });
@@ -69,7 +72,7 @@ export default class UserProfilesStore {
 
     return apiHelper(api.menu.getList(profileId))
       .cache(`applications-${profileId}`, { lifetime: 3600 })
-      .success((data) => {
+      .success((data: Array<MenuItemData>) => {
         const apps = data
           .sort((a, b) => a.position - b.position)
           .map(item => new AppItem(item, this.store, profile));
@@ -91,7 +94,7 @@ export default class UserProfilesStore {
     const slug = profile.business.slug;
     return apiHelper(api.business.getActivities(slug))
       .cache(`activities-${profileId}`, { lifetime: 3600 })
-      .success((data) => {
+      .success((data: Array<ActivityItemData>) => {
         const activities = data
           .sort((a, b) => a.position - b.position)
           .map(item => new ActivityItem(item, this.store, profile));
@@ -113,7 +116,7 @@ export default class UserProfilesStore {
     const slug = profile.business.slug;
     return apiHelper(api.business.getTodos(slug))
       .cache(`todos-${profileId}`, { lifetime: 3600 })
-      .success((data) => {
+      .success((data: Array<ActivityItemData>) => {
         const activities = data
           .sort((a, b) => a.priority - b.priority)
           .filter(item => item.type !== 'todo_business_mobile_app')

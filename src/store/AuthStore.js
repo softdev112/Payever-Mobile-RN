@@ -4,6 +4,7 @@ import { AsyncStorage } from 'react-native';
 import { apiHelper } from 'utils';
 
 import type Store from './index';
+import type { AuthData } from '../common/api/AuthApi';
 
 
 const STORE_NAME = 'store.auth';
@@ -28,7 +29,7 @@ export default class AuthStore {
     const { api } = this.store;
 
     return apiHelper(api.auth.login(username, password), this)
-      .success((data) => {
+      .success((data: AuthData) => {
         this.accessToken  = data.access_token;
         this.refreshToken = data.refresh_token;
         this.expiresIn    = data.expires_in;

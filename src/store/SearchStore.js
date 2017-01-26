@@ -2,6 +2,7 @@ import { action, computed, observable, runInAction } from 'mobx';
 import { apiHelper } from 'utils';
 
 import type Store from './index';
+import type { SearchDataRow } from '../common/api/ProfilesApi';
 //noinspection JSUnresolvedVariable
 import imgNoBusiness from './UserProfilesStore/images/no-business.png';
 
@@ -24,7 +25,7 @@ export default class SearchStore {
     this.isSearching = true;
 
     apiHelper(api.profiles.search(query), this)
-      .success((data) => {
+      .success((data: Array<SearchDataRow>) => {
         if (data.length > 0) {
           this.items = data.map(d => new SearchRow(d));
         } else {
