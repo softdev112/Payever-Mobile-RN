@@ -32,16 +32,4 @@ export default class Profile {
   get displayName() {
     throw new Error('Abstract getter');
   }
-
-  async getApplications(): Promise<ObservableArray<AppItem>> {
-    return this.appList;
-  }
-
-  async getActivities(): Promise<ObservableArray<ActivityItem>> {
-    return this.activityList;
-  }
-
-  async getTodos(): Promise<ObservableArray<ActivityItem>> {
-    return this.todoList;
-  }
 }

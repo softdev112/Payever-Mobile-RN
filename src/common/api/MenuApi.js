@@ -16,8 +16,7 @@ declare class MenuResp extends ApiResp {
   data: Array<MenuItemData>;
 }
 
-/* eslint-disable no-unused-vars */
-type MenuItemData = {
+export type MenuItemData = {
   hasUnreadMessages: ?boolean;
   id: number;
   image: string;

@@ -1,4 +1,30 @@
+import type BusinessProfile from './BusinessProfile';
+import type Store from '../index';
+
+const SETTINGS = {
+  communication: {
+    // screenId: 'communication',
+    // Should be removed when communications becomes native
+    webView: {
+      enableExternalBrowser: true,
+    },
+  },
+  settings: {
+    webView: {
+      referer: '/business/{slug}/home#home',
+    },
+  },
+};
+
 export default class AppItem {
+  profile: BusinessProfile;
+  store: Store;
+
+  /**
+   * Local-overridden app settings
+   */
+  settings: Settings;
+
   hasUnreadMessages: ?boolean;
   id: number;
   image: string | Object;
@@ -12,8 +38,11 @@ export default class AppItem {
   position: number;
   url: string;
 
-  constructor(data) {
+  constructor(data, store: Store, profile: BusinessProfile) {
+    this.store = store;
+    this.profile = profile;
     Object.assign(this, data);
+    this.settings = this.makeSettings();
   }
 
   get logoSource() {
@@ -22,4 +51,27 @@ export default class AppItem {
     }
     return this.image;
   }
+
+  makeSettings() {
+    if (!SETTINGS[this.label]) {
+      return { webView: {} };
+    }
+
+    const settings = Object.assign({ webView: {} }, SETTINGS[this.label]);
+
+    if (settings.webView.referer) {
+      settings.webView.referer = this.store.config.siteUrl +
+        settings.webView.referer.replace('{slug}', this.profile.business.slug);
+    }
+
+    return settings;
+  }
 }
+
+type Settings = {
+  webView: {
+    enableExternalBrowser?: boolean;
+    referer?: boolean;
+  };
+  screenId?: string;
+};
