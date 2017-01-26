@@ -24,9 +24,9 @@ export default class SearchStore {
     this.isSearching = true;
 
     apiHelper(api.profiles.search(query), this)
-      .success((resp: ApiResp) => {
-        if (resp.data.length > 0) {
-          this.items = resp.data.map(data => new SearchRow(data));
+      .success((data) => {
+        if (data.length > 0) {
+          this.items = data.map(d => new SearchRow(d));
         } else {
           this.error = 'Sorry, we didn\'t find any results, try ' +
             'searching again';
