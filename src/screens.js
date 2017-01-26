@@ -10,4 +10,5 @@ export default {
   'dashboard.Dashboard': require('./modules/dashboard/screens/Dashboard').default,
   'dashboard.Private': require('./modules/dashboard/screens/Private').default,
   'dashboard.Search': require('./modules/dashboard/screens/Search').default,
+  'communication.Contacts': require('./modules/communication/screens/Contacts').default,
 };
