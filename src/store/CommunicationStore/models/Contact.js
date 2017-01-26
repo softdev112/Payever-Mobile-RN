@@ -1,4 +1,3 @@
-//noinspection JSUnresolvedVariable
 import type { UserAvatar } from './MessengerPrivateInfo';
 
 export default class Contact {

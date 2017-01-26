@@ -1,6 +1,3 @@
-/**
- * Created by Elf on 25.01.2017.
- */
 import type { UserAvatar } from './MessengerPrivateInfo';
 import type Message from './Message';
 
