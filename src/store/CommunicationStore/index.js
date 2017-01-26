@@ -2,9 +2,9 @@ import { observable, action } from 'mobx';
 import { apiHelper } from 'utils';
 
 import type Store from './index';
-import type MessengerPrivateInfo from './model/MessengerPrivateInfo';
-import type MessengerBusinessInfo from './model/MessengerBusinessInfo';
-import type Contact from './model/Contact';
+import type MessengerPrivateInfo from './models/MessengerPrivateInfo';
+import type MessengerBusinessInfo from './models/MessengerBusinessInfo';
+import type Contact from './models/Contact';
 
 export default class CommunicationStore {
   @observable messengerInfo: MessengerPrivateInfo | MessengerBusinessInfo;
