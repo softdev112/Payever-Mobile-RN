@@ -35,12 +35,14 @@ export default class ProfilesApi {
 }
 
 declare class MenuResp extends ApiResp {
-  data: {
-    businesses_own: Array<BusinessProfileData>;
-    businesses_staff: Array<BusinessProfileData>;
-    'private': PersonalProfileData;
-  };
+  data: MenuData;
 }
+
+export type MenuData = {
+  businesses_own: Array<BusinessProfileData>;
+  businesses_staff: Array<BusinessProfileData>;
+  'private': PersonalProfileData;
+};
 
 /* eslint-disable no-unused-vars */
 type PersonalProfileData = {
@@ -104,7 +106,7 @@ declare class SearchResp extends ApiResp {
 }
 
 /* eslint-disable no-unused-vars */
-type SearchDataRow = {
+export type SearchDataRow = {
   id: number;
   followers: number;
   following: number;

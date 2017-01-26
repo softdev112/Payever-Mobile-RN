@@ -60,9 +60,11 @@ export default class AuthApi {
 }
 
 declare class AuthResp extends ApiResp {
-  data: {
-    access_token: string;
-    expires_in: string;
-    refresh_token: string;
-  };
+  data: AuthData;
 }
+
+export type AuthData = {
+  access_token: string;
+  expires_in: string;
+  refresh_token: string;
+};
