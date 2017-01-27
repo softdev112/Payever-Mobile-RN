@@ -1,63 +1,43 @@
 import { Component } from 'react';
 import { ListView, ListViewDataSource } from 'react-native';
-import { Loader, StyleSheet } from 'ui';
+import { StyleSheet } from 'ui';
 
-import Contact from '../contacts/Contact';
-import ListHeader from '../contacts/ListHeader';
-import Search from '../contacts/Search';
+import data from './dummyData';
+import ChatMessage from './ChatMessage';
 
-export default class Contacts extends Component {
+export default class MessgesList extends Component {
 
   dataSource: ListViewDataSource;
 
   constructor(props) {
     super(props);
+
     this.state = {};
     this.dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
-      sectionHeaderHasChanged: (r1, r2) => r1 !== r2,
     });
   }
 
-  componentWillMount() {
-
+  renderRow(row) {
+    return <ChatMessage message={row} />;
   }
 
   render() {
-    const ds = this.dataSource.cloneWithRowsAndSections({
-      contacts: [
-        { name: 'Alexey Prokhorov' },
-        { name: 'Personal Assistant', online: true },
-        { name: 'Fredrik Malmqvist', online: true },
-        { name: 'Alex TEST' },
-        { name: 'Hans Meier' },
-        { name: '(empty)' },
-      ],
-      groups: [
-        { name: 'Samsung TV Customers' },
-        { name: 'Design' },
-        { name: 't' },
-        { name: 'Chat group payever' },
-      ],
-    }, ['contacts', 'groups']);
+    const ds = this.dataSource.cloneWithRows(data);
 
     return (
-      <Loader isLoading={this.state.isLoading}>
-        <ListView
-          contentContainerStyle={styles.container}
-          dataSource={ds}
-          renderHeader={() => <Search />}
-          renderRow={(item, type) => <Contact item={item} type={type} />}
-          renderSectionHeader={(_, type) => <ListHeader type={type} />}
-        />
-      </Loader>
+      <ListView
+        contentContainerStyle={styles.container}
+        dataSource={ds}
+        renderRow={::this.renderRow}
+      />
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 37,
-    paddingVertical: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
   },
 });

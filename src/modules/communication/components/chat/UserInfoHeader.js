@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
     paddingLeft: 30,
     paddingRight: 20,
     paddingVertical: 10,
-    borderColor: 'red',
-    borderWidth: 1,
+    borderBottomColor: '$pe_color_light_gray_1',
+    borderBottomWidth: 1,
   },
 
   userName: {

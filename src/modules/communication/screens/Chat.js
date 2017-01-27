@@ -5,6 +5,7 @@ import { NavBar, StyleSheet, View } from 'ui';
 import type { Navigator } from 'react-native-navigation';
 import type { Config } from '../../../config/index';
 import ChatBottomBar from '../components/chat/ChatBottomBar';
+import MessagesList from '../components/chat/MessgesList';
 import UserInfoHeader from '../components/chat/UserInfoHeader';
 
 //noinspection JSUnresolvedVariable
@@ -30,14 +31,11 @@ export default class Main extends Component {
     super(props);
 
     this.state = {
+      isLoading: true
     };
   }
 
   componentWillMount() {
-    this.setState({
-      isLoading: true,
-    });
-
     setTimeout(() => {
       this.setState({
         isLoading: false,
@@ -51,6 +49,7 @@ export default class Main extends Component {
         <NavBar.Default title="Communication" source={imgCommunication} />
         <View style={styles.content}>
           <UserInfoHeader userName="Personal Assistant" />
+          <MessagesList />
         </View>
         <ChatBottomBar />
       </View>
