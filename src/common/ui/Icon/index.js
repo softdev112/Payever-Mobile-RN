@@ -13,9 +13,10 @@ const DEFAULT_HIT_SLOP   = 10;
  */
 export default class Icon extends Component {
   props: {
-    source: string | Object;
-    onPress?: () => any;
     hitSlop?: Object;
+    onPress?: () => any;
+    source: string | Object;
+    touchStyle?: Object | number;
   };
 
   constructor(props) {
@@ -26,7 +27,7 @@ export default class Icon extends Component {
   }
 
   render() {
-    const { onPress, source } = this.props;
+    const { onPress, source, touchStyle } = this.props;
     const { hitSlop } = this.state;
     const iconNode = componentFactory(source, this.props);
 
@@ -35,6 +36,7 @@ export default class Icon extends Component {
         <TouchableOpacity
           hitSlop={hitSlop}
           onPress={onPress}
+          style={touchStyle}
         >
           <Text>{iconNode}</Text>
         </TouchableOpacity>
