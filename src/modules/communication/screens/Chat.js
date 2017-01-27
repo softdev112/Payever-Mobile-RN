@@ -23,26 +23,6 @@ export default class Main extends Component {
     config: Config;
   };
 
-  state: {
-    isLoading: false;
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isLoading: true
-    };
-  }
-
-  componentWillMount() {
-    setTimeout(() => {
-      this.setState({
-        isLoading: false,
-      });
-    }, 2000);
-  }
-
   render() {
     return (
       <View style={styles.container}>
