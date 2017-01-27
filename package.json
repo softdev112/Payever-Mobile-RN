@@ -26,6 +26,7 @@
     "react-native": "^0.39.2",
     "react-native-extended-stylesheet": "^0.3.0",
     "react-native-fabric": "^0.3.2",
+    "react-native-hyperlink": "0.0.8",
     "react-native-md-textinput": "^2.0.4",
     "react-native-navigation": "^2.0.0-experimental.183"
   },

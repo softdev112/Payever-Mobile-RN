@@ -1,4 +1,6 @@
+import { Linking } from 'react-native';
 import { Icon, StyleSheet, Text, View } from 'ui';
+import Hyperlink from 'react-native-hyperlink';
 
 export default function ChatMessage({ message }: PropTypes) {
   return (
@@ -14,7 +16,14 @@ export default function ChatMessage({ message }: PropTypes) {
           <Text style={styles.userName}>{`${message.userName} `}</Text>
           <Text style={styles.date}>{message.date}</Text>
         </View>
-        <Text style={styles.message}>{message.message}</Text>
+        <Hyperlink
+          linkStyle={styles.links}
+          onPress={(url) => Linking.openURL(url)}
+        >
+          <Text style={styles.message}>
+            {message.message}
+          </Text>
+        </Hyperlink>
       </View>
     </View>
   );
@@ -54,6 +63,10 @@ const styles = StyleSheet.create({
   message: {
     fontSize: 12,
     color: '$pe_color_gray',
+  },
+
+  links: {
+    color: '#00F',
   },
 });
 

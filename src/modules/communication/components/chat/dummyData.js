@@ -13,14 +13,14 @@ const data = [
   {
     userName: 'Personal Assistant',
     date: '02 Jun 02:15PM',
-    message: 'E-Conomic added as a new channel.',
+    message: 'E-Conomic added as a new channel. www.ya.ru',
     avatar: 'https://mein.payever.de/images/payeverbot-32.png?v5.3.0',
   },
 
   {
     userName: 'Personal Assistant',
     date: '20 Jan 12:15PM',
-    message: 'Other ShopSystem added as a new channel.',
+    message: 'Other ShopSystem added as a new channel. www.google.com',
     avatar: 'https://mein.payever.de/images/payeverbot-32.png?v5.3.0',
   },
 
@@ -41,7 +41,7 @@ const data = [
   {
     userName: 'John Smith',
     date: '20 Jan 12:15PM',
-    message: 'Hello world',
+    message: 'Hello world www.youtube.com',
     avatar: 'https://mein.payever.de/images/dashboard/V2/contacts_app.png?v5.3.0',
   },
 
@@ -55,7 +55,7 @@ const data = [
   {
     userName: 'Personal Assistant',
     date: '20 Jan 12:15PM',
-    message: 'Other ShopSystem added as a new channel.',
+    message: 'Other ShopSystem added as a new channel. www.ebay.com',
     avatar: 'https://mein.payever.de/images/payeverbot-32.png?v5.3.0',
   },
 
@@ -76,7 +76,7 @@ const data = [
   {
     userName: 'John Smith',
     date: '20 Jan 12:15PM',
-    message: 'Hello world',
+    message: 'Hello world www.sports.ru',
     avatar: 'https://mein.payever.de/images/dashboard/V2/contacts_app.png?v5.3.0',
   },
 
@@ -97,7 +97,7 @@ const data = [
   {
     userName: 'Someone',
     date: '20 Jan 12:15PM',
-    message: 'Hi nice to meet you',
+    message: 'Hi nice to meet you www.reactnative.com',
     avatar: 'https://mein.payever.de/images/dashboard/V2/contacts_app.png?v5.3.0',
   },
 
@@ -118,7 +118,7 @@ const data = [
   {
     userName: 'Personal Assistant',
     date: '02 Jun 02:15PM',
-    message: 'E-Conomic added as a new channel.',
+    message: 'E-Conomic added as a new channel. www.ya.ru',
     avatar: 'https://mein.payever.de/images/payeverbot-32.png?v5.3.0',
   },
 
@@ -139,7 +139,7 @@ const data = [
   {
     userName: 'Jack Jonson',
     date: '20 Jan 12:15PM',
-    message: 'Welcome to my Store',
+    message: 'Welcome to my Store www.github.com',
     avatar: 'https://mein.payever.de/images/dashboard/V2/contacts_app.png?v5.3.0',
   },
 ];
