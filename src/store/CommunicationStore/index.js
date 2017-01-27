@@ -31,6 +31,7 @@ export default class CommunicationStore {
     }
 
     return apiHelper(apiPromise, this)
+      .cache('communication:conversation:' + profile.id)
       .success((data: MessengerData) => {
         const info = new MessengerInfo(data);
         this.profiles[profile.id] = info;
