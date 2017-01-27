@@ -23,7 +23,12 @@ describe('Communication Store Tests', () => {
   });
 
   it('Call action getUserInfo should set store state to truthy', async () => {
-    await store.communication.getUserInfo();
-    expect(1).toBe(1);
+    store.userProfiles.currentProfile = {
+      id: 'again-9',
+      isBusiness: true,
+    };
+    const bb = await store.communication.getUserInfo();
+    console.log(bb);
+    expect(store.contacts.length).toBeGreaterThan(0);
   });
 });

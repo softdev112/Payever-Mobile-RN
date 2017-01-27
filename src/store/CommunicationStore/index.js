@@ -38,7 +38,8 @@ export default class CommunicationStore {
       .success((resp: ApiResp) => {
         resp.data.map(data => console.log(data));
       })
-      .complete(() => this.isLoading = false);
+      .complete(() => this.isLoading = false)
+      .promise();
   }
 
   @action

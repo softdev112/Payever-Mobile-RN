@@ -1,9 +1,9 @@
 /* eslint-disable */
-
 import { Component } from 'react';
+import { TouchableOpacity } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { toggleMenu } from '../../../common/Navigation';
-import { NavBar, StyleSheet, View } from 'ui';
+import { NavBar, StyleSheet, Text, View } from 'ui';
 import { Navigator } from 'react-native-navigation';
 
 @inject('userProfiles')
@@ -14,6 +14,12 @@ export default class Debug extends Component {
   props:{
     navigator: Navigator;
   };
+
+  onGoToChat() {
+    this.props.navigator.push({
+      screen: 'communication.Chat',
+    })
+  }
 
   onShowSideMenu() {
     toggleMenu(this.props.navigator);
@@ -68,6 +74,9 @@ export default class Debug extends Component {
         </NavBar>
 
         <View style={styles.mainContent}>
+          <TouchableOpacity onPress={::this.onGoToChat}>
+            <Text>ASDDSDA</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )
