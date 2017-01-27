@@ -1,10 +1,8 @@
-import { NetInfo } from 'react-native';
-
 export const NETWORK_ERROR = 'Sorry, a payever server isn\'t responsible. ' +
   'Please try again later.';
 
 export async function isConnected() {
-  return NetInfo.isConnected.fetch();
+  return true;
 }
 
 export async function loadFromApi(apiPromise, timeout) {
