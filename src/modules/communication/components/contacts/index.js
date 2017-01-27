@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import { ListView, ListViewDataSource } from 'react-native';
-import { Loader, StyleSheet, View } from 'ui';
+import { Loader, StyleSheet } from 'ui';
 
 import Contact from './Contact';
-import Header from './Header';
+import ListHeader from './ListHeader';
 import Search from './Search';
 
 export default class Contacts extends Component {
@@ -25,26 +25,31 @@ export default class Contacts extends Component {
 
   render() {
     const ds = this.dataSource.cloneWithRowsAndSections({
-      direct: [
-        { name: 'User 1' },
-        { name: 'User 2' },
+      contacts: [
+        { name: 'Alexey Prokhorov' },
+        { name: 'Personal Assistant', online: true },
+        { name: 'Fredrik Malmqvist', online: true },
+        { name: 'Alex TEST' },
+        { name: 'Hans Meier' },
+        { name: '(empty)' },
       ],
       groups: [
-        { name: 'Group 1' },
-        { name: 'Group 2' },
+        { name: 'Samsung TV Customers' },
+        { name: 'Design' },
+        { name: 't' },
+        { name: 'Chat group payever' },
       ],
-    }, ['direct', 'groups']);
+    }, ['contacts', 'groups']);
 
     return (
       <Loader isLoading={this.state.isLoading}>
-        <View style={styles.container}>
-          <Search />
-          <ListView
-            dataSource={ds}
-            renderRow={(item, type) => <Contact item={item} type={type} />}
-            renderSectionHeader={(_, type) => <Header type={type} />}
-          />
-        </View>
+        <ListView
+          contentContainerStyle={styles.container}
+          dataSource={ds}
+          renderHeader={() => <Search />}
+          renderRow={(item, type) => <Contact item={item} type={type} />}
+          renderSectionHeader={(_, type) => <ListHeader type={type} />}
+        />
       </Loader>
     );
   }
@@ -52,7 +57,6 @@ export default class Contacts extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     paddingHorizontal: 37,
     paddingVertical: 30,
   },

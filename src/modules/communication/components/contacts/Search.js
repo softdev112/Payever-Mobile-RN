@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     color: '$pe_color_dark_gray',
     flex: 1,
     fontSize: 13,
+    fontWeight: '200',
     marginLeft: 12,
     padding: 0,
   },
