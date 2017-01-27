@@ -43,16 +43,17 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 12,
     color: '#000',
+    fontWeight: '500',
   },
 
   date: {
     fontSize: 12,
-    color: '$pe_color_gray',
+    color: '$pe_color_gray_2',
   },
 
   message: {
-    fontSize: 14,
-    color: '$pe_color_gray_2',
+    fontSize: 12,
+    color: '$pe_color_gray',
   },
 });
 
