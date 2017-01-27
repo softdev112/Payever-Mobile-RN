@@ -3,7 +3,7 @@ import type Store from '../../index';
 
 const SETTINGS = {
   communication: {
-    screenId: 'communication.Contacts',
+    screenId: 'communication.Main',
   },
   settings: {
     webView: {

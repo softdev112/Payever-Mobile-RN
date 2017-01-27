@@ -1,7 +1,9 @@
 import { Component, PropTypes } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import { StyleSheet, Text } from 'ui';
+
+import OnlineStatus from '../common/OnlineStatus';
 
 export default class Contact extends Component {
   static contextTypes = {
@@ -27,13 +29,15 @@ export default class Contact extends Component {
   }
 
   renderContact(item) {
-    const statusStyle = item.online ? styles.status_online : null;
     return (
       <TouchableOpacity
         style={styles.container}
         onPress={() => this.onContactClick(item)}
       >
-        <View style={[styles.status, statusStyle]} />
+        <OnlineStatus
+          style={styles.status}
+          isOnline={item.online}
+        />
         <Text style={styles.title}>{item.name}</Text>
       </TouchableOpacity>
     );
@@ -75,17 +79,7 @@ const styles = StyleSheet.create({
   },
 
   status: {
-    borderColor: '#d8d8d8',
-    borderRadius: 4,
-    borderWidth: 1,
-    height: 8,
     marginRight: 9,
-    width: 8,
-  },
-
-  status_online: {
-    backgroundColor: '#75b636',
-    borderWidth: 0,
   },
 
   title: {
