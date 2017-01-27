@@ -1,11 +1,11 @@
 import { Icon, StyleSheet, Text, View } from 'ui';
 
 const TITLES = {
-  direct: 'DIRECT MESSAGES',
-  groups: 'GROUPS',
+  contacts: 'DIRECT MESSAGES',
+  groups:   'GROUPS',
 };
 
-export default function Header({ type }: PropTypes) {
+export default function ListHeader({ type }: PropTypes) {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{TITLES[type]}</Text>
@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     color: '#959ba3',
     flex: 1,
     fontSize: 10,
+    fontWeight: '200',
   },
 
   add: {
@@ -38,5 +39,5 @@ const styles = StyleSheet.create({
 });
 
 type PropTypes = {
-  type: string;
+  type: 'contacts' | 'groups';
 };

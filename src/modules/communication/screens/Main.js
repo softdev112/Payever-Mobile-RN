@@ -6,7 +6,7 @@ import { NavBar, StyleSheet, View } from 'ui';
 import type { Navigator } from 'react-native-navigation';
 import type { Config } from '../../../config/index';
 
-import Contacts from '../components/Contacts';
+import Contacts from '../components/contacts';
 
 //noinspection JSUnresolvedVariable
 import imgCommunication from '../images/communication.png';
