@@ -1,4 +1,4 @@
-import type { UserAvatar } from './MessengerPrivateInfo';
+import type { UserAvatar } from './MessengerInfo';
 
 export default class Contact {
   id: string;

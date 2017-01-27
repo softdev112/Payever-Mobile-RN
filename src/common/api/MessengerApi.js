@@ -7,11 +7,11 @@ export default class MessengerApi {
     this.client = client;
   }
 
-  getMsgrBusinessInfo(slug: string): Promise<MsgrBusinessInfoResp> {
+  getBusiness(slug: string): Promise<MessengerDataResp> {
     return this.client.get(`/api/rest/v1/messenger/business/${slug}`);
   }
 
-  getMsgrPrivateInfo(): Promise<MsgrPrivateInfoResp> {
+  getPrivate(): Promise<MessengerDataResp> {
     return this.client.get('/api/rest/v1/messenger/private');
   }
 
@@ -142,7 +142,7 @@ export default class MessengerApi {
 
   async saveSettings(
     userId: number,
-    settings: UserSettings
+    settings: UserSettingsData
   ): Promise<UserSettingsResp> {
     return this.client.post('/api/rest/v1/messenger/user/setting', {
       format: 'formData',
@@ -154,123 +154,90 @@ export default class MessengerApi {
   }
 }
 
-declare class MsgrPrivateInfoResp extends ApiResp {
-  data: MessengerPrivateInfo;
-}
-
-declare class MsgrBusinessInfoResp extends ApiResp {
-  data: MessengerBusinessInfo;
+declare class MessengerDataResp extends ApiResp {
+  data: MessengerData;
 }
 
 declare class AllContactsResp extends ApiResp {
-  data: Array<Contact>;
+  data: Array<ContactData>;
 }
 
 declare class ContactResp extends ApiResp {
-  data: Contact;
+  data: ContactData;
 }
 
 declare class MessageResp extends ApiResp {
-  data: Message;
+  data: MessageData;
 }
 
 declare class GroupResp extends ApiResp {
-  data: Group;
+  data: GroupData;
 }
 
 declare class UserSettingsResp extends ApiResp {
-  data: UserSettings;
+  data: UserSettingsData;
 }
 
-/* eslint-disable no-unused-vars */
-type MessengerPrivateInfo = {
+export type MessengerData = {
+  conversations: Array<ConversationData>;
+  groups: Array<GroupData>;
+  marketingGroups?: Array<GroupData>;
+  messengerUser: {
+    avatar: AvatarData;
+    id: number;
+    name: string;
+    user_type: 'business' | 'user';
+  };
+  userSettings: UserSettingsData;
   wsUrl: string;
-  messengerUser: MessengerUser;
-  userSettings: UserSettings;
-  conversations: Array<Conversation>;
-  groups: Array<Group>;
 };
 
-type MessengerBusinessInfo = {
-  wsUrl: string;
-  messengerUser: MessengerUser;
-  userSettings: UserSettings;
-  conversations: Array<Conversation>;
-  marketingGroups: Array<Group>;
-  groups: Array<Group>;
-};
-
-type MessengerUser = {
-  id: number;
-  name: string;
-  avatar: UserAvatar;
-  user_type: string;
-};
-
-type UserAvatar = {
+type AvatarData = {
   type: string;
   value: string;
+  valueRetina?: string;
 };
 
-type UserSettings = {
+type UserSettingsData = {
   id: number;
   notificationDesktop: boolean;
   notificationPreview: boolean;
   notificationSound: boolean;
   notificationVolume: number;
-  silentPeriodState: boolean;
   silentPeriodStart: {
     hour: number;
     minute: number;
   };
+  silentPeriodState: boolean;
   silentPeriodStop: {
     hour: number;
     minute: number;
   };
 };
 
-type Conversation = {
-  id: number;
-  name: string;
-  type: string;
-  recipient_id: string;
-  status: ConversationStatus;
-  hasUnread: boolean;
-  unreadCount: number;
+type ConversationData = {
   archived: boolean;
-  notification: boolean;
-  isBot: boolean;
-  avatar: UserAvatar;
-  latestMessage: Message;
-};
-
-type ConversationStatus = {
-  online: boolean;
-  lastVisit: string;
-  label: string;
-  userId: number;
-};
-
-type Message = {
+  avatar: AvatarData;
+  hasUnread: boolean;
   id: number;
+  isBot: boolean;
+  latestMessage: MessageData;
+  name: string;
+  notification: boolean;
+  recipient_id: string;
+  status: {
+    label: string;
+    lastVisit: string;
+    online: boolean;
+    userId: number;
+  };
+  type: string;
+  unreadCount: number;
+};
+
+type MessageData = {
+  avatar: AvatarData;
   body: string;
-  editBody: string;
-  offerId: ?number;
-  offer: ?Object;
-  senderId: number;
-  senderName: string;
-  date: string;
-  dateOnly: string;
-  dateFormated: string;
-  avatar: UserAvatar;
-  own: boolean;
-  isSystem: boolean;
-  replyTo: ?Object;
-  forwardFrom: ?Object;
-  edited: boolean;
-  deleted: boolean;
-  editable: boolean;
-  deletable: boolean;
   conversation: {
     id: number;
     name: string;
@@ -278,30 +245,48 @@ type Message = {
     archived: boolean;
     notification: boolean;
   };
-  recipient: string;
-  unread: boolean;
-  opponentUnread: boolean;
+  date: string;
+  dateFormated: string;
+  dateOnly: string;
+  deletable: boolean;
+  deleted: boolean;
+  editable: boolean;
+  editBody: string;
+  edited: boolean;
+  forwardFrom: ?Object;
+  id: number;
+  isSystem: boolean;
   medias: Array<any>;
+  offer: ?Object;
+  offerId: ?number;
+  opponentUnread: boolean;
+  own: boolean;
+  recipient: string;
+  replyTo: ?Object;
+  senderId: number;
+  senderName: string;
+  unread: boolean;
 };
 
-type Contact = {
+/* eslint-disable no-unused-vars */
+type ContactData = {
+  avatar: AvatarData;
+  blockName: string;
+  email: string;
   id: string;
   name: string;
-  email: string;
-  avatar: UserAvatar;
-  blockName: string;
 };
 
-type Group = {
-  id: number;
-  name: string;
-  type: string;
-  recipient_id: string;
-  hasUnread: boolean;
-  unreadCount: number;
-  avatar: UserAvatar;
-  participantsCount: string;
+type GroupData = {
   addDate: string;
   addDateFormated: string;
-  latestMessage: ?Message;
+  avatar: AvatarData;
+  hasUnread: boolean;
+  id: number;
+  latestMessage: ?MessageData;
+  name: string;
+  participantsCount: string;
+  recipient_id: string;
+  type: string;
+  unreadCount: number;
 };

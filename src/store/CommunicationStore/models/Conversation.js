@@ -1,4 +1,4 @@
-import type { UserAvatar } from './MessengerPrivateInfo';
+import type { UserAvatar } from './MessengerInfo';
 import type Message from './Message';
 
 export default class Conversation {
@@ -14,6 +14,10 @@ export default class Conversation {
   isBot: ?boolean;
   avatar: ?UserAvatar;
   latestMessage: ?Message;
+
+  constructor(data) {
+    Object.assign(this, data);
+  }
 }
 
 type ConversationStatus = {

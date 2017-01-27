@@ -4,6 +4,9 @@ import { Navigator } from 'react-native-navigation';
 import { StyleSheet, Text } from 'ui';
 
 import OnlineStatus from '../common/OnlineStatus';
+import Conversation from
+  '../../../../store/CommunicationStore/models/Conversation';
+import Group from '../../../../store/CommunicationStore/models/Group';
 
 export default class Contact extends Component {
   static contextTypes = {
@@ -23,12 +26,12 @@ export default class Contact extends Component {
     this.context.navigator.push({
       screen: 'communication.Chat',
       passProps: {
-        title: item.name,
+        contactId: item.id,
       },
     });
   }
 
-  renderContact(item) {
+  renderContact(item: Conversation) {
     return (
       <TouchableOpacity
         style={styles.container}
@@ -36,20 +39,20 @@ export default class Contact extends Component {
       >
         <OnlineStatus
           style={styles.status}
-          isOnline={item.online}
+          isOnline={item.status.online}
         />
         <Text style={styles.title}>{item.name}</Text>
       </TouchableOpacity>
     );
   }
 
-  renderGroup(item) {
+  renderGroup(item: Group) {
     return (
       <TouchableOpacity
         style={styles.container}
         onPress={() => this.onContactClick(item)}
       >
-        <Text style={styles.title}>#{item.name}</Text>
+        <Text style={styles.title}>{item.name}</Text>
       </TouchableOpacity>
     );
   }
