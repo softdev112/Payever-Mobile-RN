@@ -1,14 +1,15 @@
 import { observable, action } from 'mobx';
 import { apiHelper } from 'utils';
 
-import type Store from './index';
-import type MessengerPrivateInfo from './models/MessengerPrivateInfo';
-import type MessengerBusinessInfo from './models/MessengerBusinessInfo';
+import type Store from '../index';
+import MessengerInfo from './models/MessengerInfo';
 import type Contact from './models/Contact';
+import type BusinessProfile from '../UserProfilesStore/models/BusinessProfile';
+import { MessengerData } from '../../common/api/MessengerApi';
 
 export default class CommunicationStore {
-  @observable messengerInfo: MessengerPrivateInfo | MessengerBusinessInfo;
-  @observable contacts: Array<Contact> = [];
+  @observable profiles: Object<MessengerInfo> = {};
+
   @observable isLoading: boolean;
   @observable error: string;
 
@@ -19,7 +20,27 @@ export default class CommunicationStore {
   }
 
   @action
-  async getUserInfo(): Promise<MessengerPrivateInfo | MessengerBusinessInfo> {
+  async loadConversations(profile: BusinessProfile): MessengerInfo {
+    const { api } = this.store;
+
+    let apiPromise;
+    if (profile.isBusiness) {
+      apiPromise = api.messenger.getBusiness(profile.business.slug);
+    } else {
+      apiPromise = api.messenger.getPrivate();
+    }
+
+    return apiHelper(apiPromise, this)
+      .success((data: MessengerData) => {
+        const info = new MessengerInfo(data);
+        this.profiles[profile.id] = info;
+        return info;
+      })
+      .promise();
+  }
+
+  @action
+  async getUserInfo(): Promise<MessengerInfo> {
     this.isLoading = true;
 
     const { currentProfile } = this.store.userProfiles;
@@ -27,12 +48,12 @@ export default class CommunicationStore {
     if (!currentProfile) return null;
 
     const {
-      getMsgrPrivateInfo,
-      getMsgrBusinessInfo,
+      getPrivate,
+      getBusiness,
     } = this.store.api.messenger;
 
     const apiEndPoint = currentProfile.isBusiness
-      ? getMsgrBusinessInfo.bind(null, currentProfile.id) : getMsgrPrivateInfo;
+      ? getBusiness.bind(null, currentProfile.id) : getPrivate;
 
     return apiHelper(apiEndPoint, this)
       .success((resp: ApiResp) => {

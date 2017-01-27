@@ -1,4 +1,4 @@
-import type { UserAvatar } from './MessengerPrivateInfo';
+import type { UserAvatar } from './MessengerInfo';
 import type Message from './Message';
 
 export default class Group {
@@ -13,4 +13,8 @@ export default class Group {
   addDate: string;
   addDateFormated: string;
   latestMessage: ?Message;
+
+  constructor(data) {
+    Object.assign(this, data);
+  }
 }

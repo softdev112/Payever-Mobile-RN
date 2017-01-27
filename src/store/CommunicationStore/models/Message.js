@@ -1,4 +1,4 @@
-import type { UserAvatar } from './MessengerPrivateInfo';
+import type { UserAvatar } from './MessengerInfo';
 import type Conversation from './Conversation';
 
 export default class Message {

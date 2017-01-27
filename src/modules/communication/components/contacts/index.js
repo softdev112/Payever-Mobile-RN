@@ -1,51 +1,66 @@
 import { Component } from 'react';
 import { ListView, ListViewDataSource } from 'react-native';
+import { inject, observer } from 'mobx-react/native';
 import { Loader, StyleSheet } from 'ui';
 
 import Contact from './Contact';
 import ListHeader from './ListHeader';
 import Search from './Search';
+import type MessengerInfo from
+  '../../../../store/CommunicationStore/models/MessengerInfo';
+import type CommunicationStore
+  from '../../../../store/CommunicationStore/index';
+import type UserProfilesStore
+  from '../../../../store/UserProfilesStore/index';
 
+
+@inject('communication', 'userProfiles')
+@observer
 export default class Contacts extends Component {
-
   dataSource: ListViewDataSource;
+
+  props: {
+    communication: CommunicationStore;
+    userProfiles: UserProfilesStore;
+  };
+
+  state: {
+    info: MessengerInfo;
+  };
 
   constructor(props) {
     super(props);
-    this.state = {};
-    this.dataSource = new ListView.DataSource({
+
+    const dataSource = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2,
       sectionHeaderHasChanged: (r1, r2) => r1 !== r2,
     });
+
+    this.state = { dataSource };
   }
 
-  componentWillMount() {
+  async componentWillMount() {
+    const { communication, userProfiles } = this.props;
 
+    const info = await communication.loadConversations(
+      userProfiles.currentProfile
+    );
+    this.setState({
+      dataSource: this.state.dataSource.cloneWithRowsAndSections({
+        contacts: info.conversations.slice(),
+        groups: info.groups.slice(),
+      }, ['contacts', 'groups']),
+    });
   }
 
   render() {
-    const ds = this.dataSource.cloneWithRowsAndSections({
-      contacts: [
-        { name: 'Alexey Prokhorov' },
-        { name: 'Personal Assistant', online: true },
-        { name: 'Fredrik Malmqvist', online: true },
-        { name: 'Alex TEST' },
-        { name: 'Hans Meier' },
-        { name: '(empty)' },
-      ],
-      groups: [
-        { name: 'Samsung TV Customers' },
-        { name: 'Design' },
-        { name: 't' },
-        { name: 'Chat group payever' },
-      ],
-    }, ['contacts', 'groups']);
+    const dataSource: ListViewDataSource = this.state.dataSource;
 
     return (
-      <Loader isLoading={this.state.isLoading}>
+      <Loader isLoading={dataSource.getRowCount() < 1}>
         <ListView
           contentContainerStyle={styles.container}
-          dataSource={ds}
+          dataSource={dataSource}
           renderHeader={() => <Search />}
           renderRow={(item, type) => <Contact item={item} type={type} />}
           renderSectionHeader={(_, type) => <ListHeader type={type} />}
