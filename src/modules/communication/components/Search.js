@@ -54,6 +54,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     height: 27,
+    marginBottom: 20,
   },
 
   iconSearch: {
@@ -69,16 +70,15 @@ const styles = StyleSheet.create({
   },
 
   iconSettings: {
-    borderWidth: 0,
     color: '$pe_icons_color',
     fontSize: 16,
     height: 16,
-    marginTop: 7,
     width: 16,
   },
 
   iconSettings_offset: {
     marginTop: 7,
+    marginRight: 10,
   },
 
   input: {
