@@ -41,30 +41,6 @@ export default class CommunicationStore {
   }
 
   @action
-  async getUserInfo(): Promise<MessengerInfo> {
-    this.isLoading = true;
-
-    const { currentProfile } = this.store.userProfiles;
-
-    if (!currentProfile) return null;
-
-    const {
-      getPrivate,
-      getBusiness,
-    } = this.store.api.messenger;
-
-    const apiEndPoint = currentProfile.isBusiness
-      ? getBusiness.bind(null, currentProfile.id) : getPrivate;
-
-    return apiHelper(apiEndPoint, this)
-      .success((resp: ApiResp) => {
-        resp.data.map(data => console.log(data));
-      })
-      .complete(() => this.isLoading = false)
-      .promise();
-  }
-
-  @action
   async loadContacts(): Promise<Contact[]> {
     this.isLoading = true;
 

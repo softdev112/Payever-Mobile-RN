@@ -31,7 +31,9 @@
     "react-native-navigation": "^2.0.0-experimental.183"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "setupTestFrameworkScriptFile": "__tests__/jest-env.js",
+    "modulePathIgnorePatterns": ["test-data", "jest-env.js"]
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",

@@ -3,17 +3,17 @@ import { inject, observer } from 'mobx-react/native';
 import { NavBar, StyleSheet, View } from 'ui';
 
 import type { Navigator } from 'react-native-navigation';
-import type { Config } from '../../../config/index';
-import ChatBottomBar from '../components/chat/ChatBottomBar';
-import MessagesList from '../components/chat/MessgesList';
-import UserInfoHeader from '../components/chat/UserInfoHeader';
+import type { Config } from '../../../../config/index';
+import ChatBottomBar from './ChatBottomBar';
+import MessagesList from './MessgesList';
+import UserInfoHeader from './UserInfoHeader';
 
 //noinspection JSUnresolvedVariable
-import imgCommunication from '../images/communication.png';
+import imgCommunication from '../../images/communication.png';
 
 @inject('communication', 'config')
 @observer
-export default class Main extends Component {
+export default class Chat extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
