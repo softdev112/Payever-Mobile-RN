@@ -1,11 +1,11 @@
 /**
  * Created by Elf on 12.01.2017.
  */
-import startApp from '../src/startApp';
-import AuthStore from '../src/store/AuthStore';
-import { showScreen } from '../src/common/Navigation';
+import startApp from '../../src/startApp';
+import AuthStore from '../../src/store/AuthStore';
+import { showScreen } from '../../src/common/Navigation';
 
-jest.mock('../src/common/Navigation');
+jest.mock('../../src/common/Navigation');
 
 describe('Test startApp function', () => {
   const mockGetAuth = jest.fn()

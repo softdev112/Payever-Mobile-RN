@@ -1,8 +1,8 @@
 /**
  * Created by Elf on 12.01.2017.
  */
-import Store from '../src/store';
-import config from '../src/config';
+import Store from '../../src/store';
+import config from '../../src/config';
 
 /* eslint-disable no-underscore-dangle */
 describe('Object to FormData converter tests', () => {

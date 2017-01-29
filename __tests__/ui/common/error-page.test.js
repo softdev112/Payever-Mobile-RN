@@ -1,10 +1,7 @@
-import React from 'react';
 import 'react-native';
 import renderer from 'react-test-renderer';
 
-import ErrorPage from '../src/modules/core/screens/ErrorPage';
-
-global.React = React;
+import ErrorPage from '../../../src/modules/core/screens/ErrorPage';
 
 describe('src/modules/core/screens/ErrorPage.js', () => {
   it('src/modules/core/screens/ErrorPage.js renders correctly', () => {
