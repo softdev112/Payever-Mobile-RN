@@ -25,7 +25,7 @@ export default class Dock extends Component {
     return (
       <IconText
         style={styles.icon}
-        key={item.id}
+        key={item.label}
         imageStyle={styles.image}
         textStyle={styles.title}
         onPress={() => onAppClick(item)}

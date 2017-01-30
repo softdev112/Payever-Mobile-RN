@@ -12,19 +12,19 @@ import type { Config } from '../../../config';
 
 const APPS: Array<Object> = [
   {
-    id: 'purchases',
+    label: 'purchases',
     name: 'Purchases',
     url: '/private/transactions',
     image: '/images/dashboard/purchases.png',
   },
   {
-    id: 'communication',
+    label: 'communication',
     name: 'Communication',
     url: '/private/network/app/communication',
     image: '/images/dashboard/communication.png',
   },
   {
-    id: 'account',
+    label: 'account',
     name: 'Account',
     image: '/images/dashboard/settings.png',
   },
@@ -52,12 +52,12 @@ export default class Private extends Component {
 
     this.apps = APPS.map((app) => {
       let url = config.siteUrl + app.url;
-      if (app.id === 'account') {
+      if (app.label === 'account') {
         url = userProfiles.privateProfile.settingsUrl;
       }
       return new AppItem({
         url,
-        id: app.id,
+        label: app.label,
         name: app.name,
         image: { uri: config.siteUrl + app.image },
       });

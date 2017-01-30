@@ -61,6 +61,7 @@ export default class Contacts extends Component {
         <ListView
           contentContainerStyle={styles.container}
           dataSource={dataSource}
+          enableEmptySections
           renderHeader={() => <Search />}
           renderRow={(item, type) => <Contact item={item} type={type} />}
           renderSectionHeader={(_, type) => <ListHeader type={type} />}
