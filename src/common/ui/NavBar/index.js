@@ -60,7 +60,7 @@ export default class NavBar extends Component {
         </View>
 
         <Image style={styles.rightZone} source={bgGradient}>
-          {children.filter(filterByRightAlign())}
+          {children.filter(filterByAlign('right'))}
         </Image>
       </View>
     );
@@ -79,10 +79,6 @@ function Default({ title, source }: DefaultNavBarProps) {
 
 function filterByAlign(align) {
   return ({ props }) => props.align === align;
-}
-
-function filterByRightAlign() {
-  return ({ props }) => props.align !== 'left' && props.align !== 'center';
 }
 
 const styles = StyleSheet.create({
