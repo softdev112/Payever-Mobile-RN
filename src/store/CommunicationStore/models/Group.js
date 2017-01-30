@@ -1,18 +1,18 @@
-import type { UserAvatar } from './MessengerInfo';
+import type Avatar from './Avatar';
 import type Message from './Message';
 
 export default class Group {
-  id: number;
-  name: string;
-  type: string;
-  recipient_id: string;
-  hasUnread: boolean;
-  unreadCount: number;
-  avatar: UserAvatar;
-  participantsCount: string;
   addDate: string;
   addDateFormated: string;
+  avatar: Avatar;
+  hasUnread: boolean;
+  id: number;
   latestMessage: ?Message;
+  name: string;
+  participantsCount: string;
+  recipient_id: string;
+  type: string;
+  unreadCount: number;
 
   constructor(data) {
     Object.assign(this, data);

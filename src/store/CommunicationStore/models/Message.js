@@ -1,29 +1,29 @@
-import type { UserAvatar } from './MessengerInfo';
+import type Avatar from './Avatar';
 import type Conversation from './Conversation';
 
 export default class Message {
-  id: number;
+  avatar: Avatar;
   body: string;
-  editBody: string;
-  offerId: ?number;
-  offer: ?Object;
-  senderId: number;
-  senderName: string;
+  conversation: Conversation;
   date: string;
-  dateOnly: string;
   dateFormated: string;
-  avatar: UserAvatar;
-  own: boolean;
-  isSystem: boolean;
-  replyTo: ?Object;
-  forwardFrom: ?Object;
-  edited: boolean;
+  dateOnly: string;
+  deletable: boolean;
   deleted: boolean;
   editable: boolean;
-  deletable: boolean;
-  conversation: Conversation;
-  recipient: string;
-  unread: boolean;
-  opponentUnread: boolean;
+  editBody: string;
+  edited: boolean;
+  forwardFrom: ?Object;
+  id: number;
+  isSystem: boolean;
   medias: Array<any>;
+  offer: ?Object;
+  offerId: ?number;
+  opponentUnread: boolean;
+  own: boolean;
+  recipient: string;
+  replyTo: ?Object;
+  senderId: number;
+  senderName: string;
+  unread: boolean;
 }
