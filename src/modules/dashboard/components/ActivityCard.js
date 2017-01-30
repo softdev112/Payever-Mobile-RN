@@ -27,13 +27,15 @@ export default class ActivityCards extends Component {
 
     return (
       <View style={styles.container}>
-        <Image style={styles.icon} source={activity.iconSource} />
-        <Text style={styles.title}>{activity.title}</Text>
-        <Text style={styles.description}>{activity.plainDescription}</Text>
-        <Image style={styles.image} source={activity.imageSource} />
-        <Link style={styles.link} onPress={::this.onLinkPress}>
-          {activity.url_label}
-        </Link>
+        <View style={styles.overflow}>
+          <Image style={styles.icon} source={activity.iconSource} />
+          <Text style={styles.title}>{activity.title}</Text>
+          <Text style={styles.description}>{activity.plainDescription}</Text>
+          <Image style={styles.image} source={activity.imageSource} />
+          <Link style={styles.link} onPress={::this.onLinkPress}>
+            {activity.url_label}
+          </Link>
+        </View>
       </View>
     );
   }
@@ -59,6 +61,9 @@ const styles = StyleSheet.create({
     '@media (max-width: 320)': {
       width: '80%',
     },
+  },
+
+  overflow: {
     overflow: 'hidden',
   },
 
