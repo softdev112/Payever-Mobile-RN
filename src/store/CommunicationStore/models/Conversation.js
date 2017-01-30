@@ -1,19 +1,19 @@
-import type { UserAvatar } from './MessengerInfo';
+import type Avatar from './Avatar';
 import type Message from './Message';
 
 export default class Conversation {
-  id: number;
-  name: string;
-  type: string;
   archived: boolean;
+  avatar: ?Avatar;
+  hasUnread: ?boolean;
+  id: number;
+  isBot: ?boolean;
+  latestMessage: ?Message;
+  name: string;
   notification: boolean;
   recipientId: ?string;
   status: ?ConversationStatus;
-  hasUnread: ?boolean;
+  type: string;
   unreadCount: ?number;
-  isBot: ?boolean;
-  avatar: ?UserAvatar;
-  latestMessage: ?Message;
 
   constructor(data) {
     Object.assign(this, data);
@@ -21,8 +21,8 @@ export default class Conversation {
 }
 
 type ConversationStatus = {
-  online: boolean;
-  lastVisit: string;
   label: string;
+  lastVisit: string;
+  online: boolean;
   userId: number;
 };
