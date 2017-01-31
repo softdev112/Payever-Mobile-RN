@@ -9,8 +9,10 @@ export default class CheckBoxPref extends Component {
   props: {
     icon: string;
     checked?: boolean;
+    settings: Object;
     title: string;
-    onSwitched: (prefName: string) => {};
+    prefName: string;
+    onSwitched?: (prefName: string) => {};
   };
 
   state: {
@@ -21,17 +23,23 @@ export default class CheckBoxPref extends Component {
     super(props);
 
     this.state = {
-      checked: !!props.checked,
+      checked: !!(props.settings && props.settings[props.prefName]),
     };
   }
 
   onSwitchPress() {
+    const { onSwitched, prefName, settings } = this.props;
+
+    if (onSwitched) {
+      onSwitched();
+    }
+
+    settings[prefName] = !this.state.checked;
     this.setState({ checked: !this.state.checked });
-    this.props.onSwitched();
   }
 
   render() {
-    const { title, icon } = this.props;
+    const { title, icon, checked } = this.props;
 
     return (
       <View style={styles.container}>
@@ -40,7 +48,7 @@ export default class CheckBoxPref extends Component {
           <Text style={styles.title}>{title}</Text>
         </View>
         <Switch
-          value={this.state.checked}
+          value={this.state.checked || checked}
           onValueChange={::this.onSwitchPress}
         />
       </View>
@@ -56,6 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingVertical: 5,
     paddingHorizontal: 3,
+    height: 40,
   },
 
   titleBlock: {
@@ -69,6 +78,6 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    marginLeft: 0,
+    fontSize: 14,
   },
 });
