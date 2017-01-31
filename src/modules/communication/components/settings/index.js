@@ -8,8 +8,6 @@ import type CommunicationStore
   from '../../../../store/CommunicationStore/index';
 import settingsTempl from './templates/MainSettings';
 import prefsFactory from './prefsFactory';
-import CheckBoxPref from './CheckBoxPref';
-import EnabledSliderPref from './EnabledSliderPref';
 
 @inject('communication')
 @observer
@@ -30,43 +28,24 @@ export default class Settings extends Component {
     communication: CommunicationStore;
   };
 
-  onCheckBoxSwitch(propertyName) {
-    const { userSettings } = this.props.communication.currentMsgrProfile;
-    userSettings[propertyName] = !userSettings[propertyName];
-    console.log(settingsTempl);
-    prefsFactory('dddd', null);
-  }
-
   onCancelPress() {
     this.context.navigator.pop();
   }
 
-  render() {
+  renderPrefs() {
     const { userSettings } = this.props.communication.currentMsgrProfile;
+
+    return settingsTempl.map(pref => prefsFactory(pref, userSettings));
+  }
+
+  render() {
     return (
       <View style={styles.container}>
         <Container
           style={styles.settings}
           contentContainerStyle={styles.settingsContent}
         >
-          <CheckBoxPref
-            checked={userSettings.notificationDesktop}
-            onSwitched={this.onCheckBoxSwitch.bind(this, 'notificationDesktop')}
-            title="Desktop Notifications"
-            icon="icon-mac-24"
-          />
-          <CheckBoxPref
-            checked={userSettings.notificationPreview}
-            onSwitched={this.onCheckBoxSwitch.bind(this, 'notificationPreview')}
-            title="Message Preview"
-            icon="icon-mail-2-16"
-          />
-          <EnabledSliderPref
-            checked={userSettings.notificationSound}
-            onSwitched={this.onCheckBoxSwitch.bind(this, 'notificationSound')}
-            title="Message Preview"
-            icon="icon-mail-2-16"
-          />
+          {this.renderPrefs()}
         </Container>
         <View style={styles.buttons}>
           <TouchableOpacity onPress={::this.onCancelPress}>
