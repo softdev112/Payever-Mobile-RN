@@ -57,34 +57,38 @@ export default class PayeverApi {
     return this.fetch(url, { query });
   }
 
-  async post(url: string, requestData: RequestData = null): Promise<ApiResp> {
+  async post(
+    url: string,
+    requestData: Object = null,
+    { format = 'formData' }: { format: DataFormat } = {}
+  ): Promise<ApiResp> {
     const options = {
       method: 'POST',
     };
 
-    if (requestData && typeof requestData === 'object') {
-      if (requestData.format && requestData.format !== 'json') {
-        options.body = objectToPhpFormData(requestData.data);
-      } else {
-        options.body = JSON.stringify(requestData.data);
-      }
+    if (format === 'formData') {
+      options.body = objectToPhpFormData(requestData);
+    } else {
+      options.body = JSON.stringify(requestData);
     }
 
     return this.fetch(url, options);
   }
 
   //noinspection ReservedWordAsName
-  async delete(url: string, requestData: RequestData = null): Promise<ApiResp> {
+  async delete(
+    url: string,
+    requestData: Object = null,
+    { format = 'formData' }: { format: DataFormat } = {}
+  ): Promise<ApiResp> {
     const options = {
       method: 'DELETE',
     };
 
-    if (requestData && typeof requestData === 'object') {
-      if (requestData.format && requestData.format !== 'json') {
-        options.body = objectToPhpFormData(requestData.data);
-      } else {
-        options.body = JSON.stringify(requestData.data);
-      }
+    if (format === 'formData') {
+      options.body = objectToPhpFormData(requestData);
+    } else {
+      options.body = JSON.stringify(requestData);
     }
 
     return this.fetch(url, options);
@@ -202,7 +206,4 @@ type PayeverApiConfig = {
   refreshToken: string;
 };
 
-type RequestData = {
-  format: string;
-  data: Object;
-};
+type DataFormat = 'json' | 'formData';

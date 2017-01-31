@@ -37,10 +37,11 @@ export default class UserInfoHeader extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: 75,
+    height: 70,
     paddingLeft: 30,
     paddingRight: 20,
-    paddingVertical: 10,
+    paddingTop: 10,
+    paddingBottom: 14,
     borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
   },

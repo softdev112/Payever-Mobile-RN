@@ -14,7 +14,6 @@ describe('Object to FormData converter tests', () => {
 
   const testObject1 = {
     testObj: {
-      format: 'formData',
       data: {
         a: 1,
         b: 2,
@@ -33,7 +32,6 @@ describe('Object to FormData converter tests', () => {
 
   const testObject2 = {
     testObj: {
-      format: 'formData',
       data: {
         a: { a: 1, b: 2, c: { f: 1, g: 'Hi' } },
         b: 2,
@@ -55,7 +53,6 @@ describe('Object to FormData converter tests', () => {
 
   const testObject3 = {
     testObj: {
-      format: 'formData',
       data: {
         a: { a: 1, b: 2, c: { f: 1, g: 'Hi' } },
         b: [1, 2, 3],
@@ -82,7 +79,6 @@ describe('Object to FormData converter tests', () => {
 
   const testObject4 = {
     testObj: {
-      format: 'formData',
       data: {
         a: { a: [1, 2, 3], b: 2, c: { f: 1, g: 'Hi' } },
         b: [1, 2, 3],
@@ -104,7 +100,6 @@ describe('Object to FormData converter tests', () => {
 
   const testObject5 = {
     testObj: {
-      format: 'formData',
       data: {
         a: { a: [1, 2, 3], b: 2, c: { f: 1, g: 'Hi' } },
         b: [[1, 2, 3], ['e', 'd'], { a: 3 }],
@@ -140,33 +135,38 @@ describe('Object to FormData converter tests', () => {
     const resp = await api.post(URL, null);
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
-    expect(resp).not.toBeTruthy();
-    expect(resp).toBeUndefined();
+    expect(resp._parts).toBeTruthy();
+    expect(resp._parts).toEqual([]);
   });
 
   it('If it gets corrupt request data should get empty FormData', async () => {
     const resp = await api.post(URL, 2);
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
-    expect(resp).not.toBeTruthy();
-    expect(resp).toBeUndefined();
+    expect(resp._parts).toBeTruthy();
+    expect(resp._parts).toEqual([]);
   });
 
-  it('If it gets no format field data should return JSON', async () => {
-    const data = { k: 1 };
-    const resp = await api.post(URL, { data });
+  it('If it gets no format field data should return formData', async () => {
+    const resp = await api.post(URL, { k: 1 });
+
+    expect(mockFetch).toHaveBeenCalledTimes(1);
+    expect(resp).toBeTruthy();
+    expect(resp._parts).toBeTruthy();
+    expect(resp._parts).toEqual([['k', 1]]);
+  });
+
+  it('If it gets format = json should return json for same data', async () => {
+    const resp = await api.post(URL, { k: 1 }, { format: 'json' });
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(resp).toBeTruthy();
     expect(resp).toBe('{"k":1}');
-    expect(resp._parts_).not.toBeTruthy();
+    expect(resp._parts).not.toBeTruthy();
   });
 
   it('If it gets format and null data should get empty FormData', async () => {
-    const resp = await api.post(URL, {
-      data: null,
-      format: 'formData',
-    });
+    const resp = await api.post(URL, null, { format: 'formData' });
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(resp).toBeTruthy();
@@ -176,9 +176,7 @@ describe('Object to FormData converter tests', () => {
 
   it('Test on test objects №1', async () => {
     const { testObj, results } = testObject1;
-    const resp = await api.post(URL, {
-      ...testObj,
-    });
+    const resp = await api.post(URL, testObj.data);
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(resp).toBeTruthy();
@@ -188,9 +186,7 @@ describe('Object to FormData converter tests', () => {
 
   it('Test on test objects №2', async () => {
     const { testObj, results } = testObject2;
-    const resp = await api.post(URL, {
-      ...testObj,
-    });
+    const resp = await api.post(URL, testObj.data);
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(resp).toBeTruthy();
@@ -200,9 +196,7 @@ describe('Object to FormData converter tests', () => {
 
   it('Test on test objects №3', async () => {
     const { testObj, results } = testObject3;
-    const resp = await api.post(URL, {
-      ...testObj,
-    });
+    const resp = await api.post(URL, testObj.data);
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(resp).toBeTruthy();
@@ -212,9 +206,7 @@ describe('Object to FormData converter tests', () => {
 
   it('Test on test objects №4', async () => {
     const { testObj, results } = testObject4;
-    const resp = await api.post(URL, {
-      ...testObj,
-    });
+    const resp = await api.post(URL, testObj.data);
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(resp).toBeTruthy();
@@ -224,9 +216,7 @@ describe('Object to FormData converter tests', () => {
 
   it('Test on test objects №5', async () => {
     const { testObj, results } = testObject5;
-    const resp = await api.post(URL, {
-      ...testObj,
-    });
+    const resp = await api.post(URL, testObj.data);
 
     expect(mockFetch).toHaveBeenCalledTimes(1);
     expect(resp).toBeTruthy();

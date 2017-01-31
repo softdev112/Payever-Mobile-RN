@@ -1,16 +1,27 @@
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import { TextInput } from 'react-native';
+import type { Navigator } from 'react-native-navigation';
 import { Icon, StyleSheet, View } from 'ui';
 
 export default class Search extends Component {
+  static contextTypes = {
+    navigator: PropTypes.object.isRequired,
+  };
+
   $input: TextInput;
+
+  context: {
+    navigator: Navigator;
+  };
 
   onSearchPress() {
     this.$input.focus();
   }
 
   onSettingsPress() {
-
+    this.context.navigator.push({
+      screen: 'communication.Settings',
+    });
   }
 
   onTextChange(text) {
