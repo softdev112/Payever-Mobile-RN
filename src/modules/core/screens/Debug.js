@@ -1,10 +1,12 @@
 /* eslint-disable */
 import { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { ListView, TouchableOpacity } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { toggleMenu } from '../../../common/Navigation';
-import { NavBar, StyleSheet, Text, View } from 'ui';
+import { Icon, NavBar, StyleSheet, Text, View } from 'ui';
 import { Navigator } from 'react-native-navigation';
+
+import vector from '../../../common/ui/Icon/vector.json';
 
 @inject('userProfiles')
 @observer
@@ -14,6 +16,14 @@ export default class Debug extends Component {
   props:{
     navigator: Navigator;
   };
+
+  constructor(props) {
+    super(props);
+
+    this.ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
+  }
 
   onGoToChat() {
     this.props.navigator.push({
@@ -34,7 +44,17 @@ export default class Debug extends Component {
     })
   }
 
+  renderRow(row) {
+    return (
+      <View style={{flexDirection: 'row'}}>
+        <Icon source={row} />
+        <Text>{row}</Text>
+      </View>
+    );
+  }
+
   render() {
+    const listData = this.ds.cloneWithRows(Object.keys(vector));
     return (
       <View style={styles.container}>
 
@@ -77,6 +97,11 @@ export default class Debug extends Component {
           <TouchableOpacity onPress={::this.onGoToChat}>
             <Text>ASDDSDA</Text>
           </TouchableOpacity>
+          <ListView
+            style={{height: 300}}
+            dataSource={listData}
+            renderRow={::this.renderRow}
+          />
         </View>
       </View>
     )

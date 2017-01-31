@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import { apiHelper } from 'utils';
 
 import type Store from '../index';
@@ -17,6 +17,13 @@ export default class CommunicationStore {
 
   constructor(store: Store) {
     this.store = store;
+  }
+
+  @computed get currentMsgrProfile() {
+    const { currentProfile } = this.store.userProfiles;
+    if (!currentProfile) return null;
+
+    return this.profiles[currentProfile.id] || null;
   }
 
   @action

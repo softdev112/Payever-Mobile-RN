@@ -3,7 +3,6 @@ import { inject, observer } from 'mobx-react/native';
 import { NavBar, StyleSheet, View } from 'ui';
 
 import type { Navigator } from 'react-native-navigation';
-import type { Config } from '../../../../config/index';
 import ChatBottomBar from './ChatBottomBar';
 import MessagesList from './MessgesList';
 import UserInfoHeader from './UserInfoHeader';
@@ -11,16 +10,15 @@ import UserInfoHeader from './UserInfoHeader';
 //noinspection JSUnresolvedVariable
 import imgCommunication from '../../images/communication.png';
 
-@inject('communication', 'config')
+@inject('communication')
 @observer
 export default class Chat extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
 
-  props: {
+  context: {
     navigator: Navigator;
-    config: Config;
   };
 
   render() {
