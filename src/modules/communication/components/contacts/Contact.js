@@ -3,7 +3,7 @@ import { TouchableOpacity } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import { StyleSheet, Text } from 'ui';
 
-import OnlineStatus from '../common/OnlineStatus';
+import OnlineStatus from '../OnlineStatus';
 import Conversation from
   '../../../../store/CommunicationStore/models/ConversationInfo';
 import Group from '../../../../store/CommunicationStore/models/Group';
@@ -26,7 +26,7 @@ export default class Contact extends Component {
     this.context.navigator.push({
       screen: 'communication.Chat',
       passProps: {
-        contactId: item.id,
+        conversationId: item.id,
       },
     });
   }

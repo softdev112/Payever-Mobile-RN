@@ -2,7 +2,7 @@
 
 export default {
   'auth.Login': require('./modules/auth/screens/Login').default,
-  'communication.Chat': require('./modules/communication/components/chat').default,
+  'communication.Chat': require('./modules/communication/screens/Chat').default,
   'communication.Main': require('./modules/communication/screens/Main').default,
   'communication.Settings': require('./modules/communication/components/settings').default,
   'core.Debug': require('./modules/core/screens/Debug').default,

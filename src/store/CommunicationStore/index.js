@@ -22,7 +22,7 @@ export default class CommunicationStore {
   }
 
   @action
-  async loadMessengerInfo(profile: BusinessProfile): MessengerInfo {
+  async loadMessengerInfo(profile: BusinessProfile): Promise<MessengerInfo> {
     const { api } = this.store;
 
     let apiPromise;
@@ -44,9 +44,13 @@ export default class CommunicationStore {
   }
 
   @action
-  async loadConversation(id) {
+  async loadConversation(id: number): Promise<Conversation> {
     const socket = await this.store.api.messenger.getSocket();
     const userId = socket.userId;
+
+    if (!id) {
+      throw new Error('loadConversation: id is undefined');
+    }
 
     return apiHelper(socket.getConversation({ id }), this)
       .cache(`communication:conversations:${userId}:${id}`)
