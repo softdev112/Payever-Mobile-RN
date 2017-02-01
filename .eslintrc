@@ -23,7 +23,8 @@
     "FormData": true,
     "fetch": true,
     "log": true,
-    "ApiResp": true
+    "ApiResp": true,
+    "WebSocket": true
   },
 
   "rules": {

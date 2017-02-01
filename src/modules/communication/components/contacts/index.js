@@ -20,8 +20,8 @@ export default class Contacts extends Component {
   dataSource: ListViewDataSource;
 
   props: {
-    communication: CommunicationStore;
-    userProfiles: UserProfilesStore;
+    communication?: CommunicationStore;
+    userProfiles?: UserProfilesStore;
   };
 
   state: {
