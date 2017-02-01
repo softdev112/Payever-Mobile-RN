@@ -81,6 +81,11 @@ function filterByAlign(align) {
   return ({ props }) => props.align === align;
 }
 
+/**
+ * Align=right by default. In some cases we can't easily set an align property.
+ * For example, when we wrap a component into decorator.
+ * @return {function({props: Object}): boolean}
+ */
 function filterByRightAlign() {
   return ({ props }) => props.align !== 'left' && props.align !== 'center';
 }
