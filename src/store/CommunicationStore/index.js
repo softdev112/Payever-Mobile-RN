@@ -38,11 +38,24 @@ export default class CommunicationStore {
     }
 
     return apiHelper(apiPromise, this)
-      .cache('communication:conversation:' + profile.id)
+      .cache('communication:loadConversations:' + profile.id)
       .success((data: MessengerData) => {
+        api.messenger.connectToWebSocket(data.wsUrl, data.messengerUser.id);
         const info = new MessengerInfo(data);
         this.profiles[profile.id] = info;
         return info;
+      })
+      .promise();
+  }
+
+  @action
+  async loadConversation(id) {
+    const socket = await this.store.api.messenger.getSocket();
+
+    return apiHelper(socket.getConversation({ id }), this)
+      .cache('communication:loadConversation:' + id)
+      .success((data) => {
+        console.log('CONVERSATION', data);
       })
       .promise();
   }

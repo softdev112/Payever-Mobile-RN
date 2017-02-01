@@ -1,7 +1,10 @@
-import type PayeverApi from './index';
+import type PayeverApi from '../index';
+import SocketApi from './SocketApi';
+import WampClient from './WampClient';
 
 export default class MessengerApi {
   client: PayeverApi;
+  socket: SocketApi;
 
   constructor(client: PayeverApi) {
     this.client = client;
@@ -13,6 +16,21 @@ export default class MessengerApi {
 
   getPrivate(): Promise<MessengerDataResp> {
     return this.client.get('/api/rest/v1/messenger/private');
+  }
+
+  connectToWebSocket(wsUrl, userId) {
+    if (this.socket) {
+      this.socket.close();
+    }
+    const client = new WampClient(wsUrl);
+    this.socket = new SocketApi(client, userId);
+  }
+
+  async getSocket(): Promise<SocketApi> {
+    if (!this.socket) {
+      throw new Error('WAMP socket isn\'t initialized');
+    }
+    return this.socket.resolveWhenConnected();
   }
 
   updateFlagForConversation(
