@@ -33,7 +33,7 @@ export default class Settings extends Component {
   }
 
   renderPrefs() {
-    const { userSettings } = this.props.communication.currentMsgrProfile;
+    const { userSettings } = this.props.communication.messengerInfo;
 
     return settingsTempl.map(pref => prefsFactory(pref, userSettings));
   }

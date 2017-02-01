@@ -1,14 +1,16 @@
-import { observable, action, computed } from 'mobx';
+import { observable, action } from 'mobx';
 import { apiHelper } from 'utils';
 
 import type Store from '../index';
 import MessengerInfo from './models/MessengerInfo';
 import type Contact from './models/Contact';
+import Conversation from './models/Conversation';
 import type BusinessProfile from '../UserProfilesStore/models/BusinessProfile';
 import { MessengerData } from '../../common/api/MessengerApi';
 
 export default class CommunicationStore {
-  @observable profiles: Object<MessengerInfo> = {};
+  @observable conversations: Object<Conversation> = {};
+  @observable messengerInfo: MessengerInfo;
 
   @observable isLoading: boolean;
   @observable error: string;
@@ -19,15 +21,8 @@ export default class CommunicationStore {
     this.store = store;
   }
 
-  @computed get currentMsgrProfile() {
-    const { currentProfile } = this.store.userProfiles;
-    if (!currentProfile) return null;
-
-    return this.profiles[currentProfile.id] || null;
-  }
-
   @action
-  async loadConversations(profile: BusinessProfile): MessengerInfo {
+  async loadMessengerInfo(profile: BusinessProfile): MessengerInfo {
     const { api } = this.store;
 
     let apiPromise;
@@ -38,12 +33,12 @@ export default class CommunicationStore {
     }
 
     return apiHelper(apiPromise, this)
-      .cache('communication:loadConversations:' + profile.id)
+      .cache('communication:messengerInfo:' + profile.id)
       .success((data: MessengerData) => {
         api.messenger.connectToWebSocket(data.wsUrl, data.messengerUser.id);
-        const info = new MessengerInfo(data);
-        this.profiles[profile.id] = info;
-        return info;
+        this.messengerInfo = new MessengerInfo(data);
+        this.conversations = {};
+        return this.messengerInfo;
       })
       .promise();
   }
@@ -51,11 +46,14 @@ export default class CommunicationStore {
   @action
   async loadConversation(id) {
     const socket = await this.store.api.messenger.getSocket();
+    const userId = socket.userId;
 
     return apiHelper(socket.getConversation({ id }), this)
-      .cache('communication:loadConversation:' + id)
+      .cache(`communication:conversations:${userId}:${id}`)
       .success((data) => {
-        console.log('CONVERSATION', data);
+        const conversation = new Conversation(data);
+        this.conversations[id] = conversation;
+        return conversation;
       })
       .promise();
   }

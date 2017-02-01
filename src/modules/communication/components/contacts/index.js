@@ -42,7 +42,7 @@ export default class Contacts extends Component {
   async componentWillMount() {
     const { communication, userProfiles } = this.props;
 
-    const info = await communication.loadConversations(
+    const info = await communication.loadMessengerInfo(
       userProfiles.currentProfile
     );
     this.setState({

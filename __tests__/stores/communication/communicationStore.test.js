@@ -41,7 +41,7 @@ describe('Communication Store Tests', () => {
       isBusiness: true,
     };
 
-    await store.communication.loadConversations(profile);
+    await store.communication.loadMessengerInfo(profile);
 
     const { profiles } = store.communication;
 

@@ -1,11 +1,17 @@
 import type Avatar from './Avatar';
-import type Conversation from './Conversation';
 
 export default class Message {
   avatar: Avatar;
   body: string;
-  conversation: Conversation;
+  conversation: {
+    archived: boolean;
+    id: number;
+    name: string;
+    notification: boolean;
+    type: 'conversation';
+  };
   date: string;
+  //noinspection SpellCheckingInspection
   dateFormated: string;
   dateOnly: string;
   deletable: boolean;
@@ -26,4 +32,8 @@ export default class Message {
   senderId: number;
   senderName: string;
   unread: boolean;
+
+  constructor(data) {
+    Object.assign(this, data);
+  }
 }
