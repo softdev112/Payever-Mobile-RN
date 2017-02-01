@@ -5,7 +5,7 @@ import { StyleSheet, Text } from 'ui';
 
 import OnlineStatus from '../common/OnlineStatus';
 import Conversation from
-  '../../../../store/CommunicationStore/models/Conversation';
+  '../../../../store/CommunicationStore/models/ConversationInfo';
 import Group from '../../../../store/CommunicationStore/models/Group';
 
 export default class Contact extends Component {
