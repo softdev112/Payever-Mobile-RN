@@ -1,10 +1,12 @@
 import { Component } from 'react';
 import { Icon, StyleSheet, Text, View } from 'ui';
 
-import OnlineStatus from './../common/OnlineStatus';
+import OnlineStatus from '../OnlineStatus';
 
 export default class UserInfoHeader extends Component {
   props: {
+    online: boolean;
+    status: string;
     userName: string;
   };
 
@@ -12,15 +14,13 @@ export default class UserInfoHeader extends Component {
     console.log('Settings settings');
   }
 
-  onTextChange(text) {
-    console.log(text);
-  }
-
   render() {
+    const { online, status, userName } = this.props;
+
     return (
       <View style={styles.container}>
         <View style={styles.titleRow}>
-          <Text style={styles.userName}>{this.props.userName}</Text>
+          <Text style={styles.userName} numberOfLines={1}>{userName}</Text>
           <Icon
             style={styles.iconSettings}
             hitSlop={14}
@@ -29,7 +29,13 @@ export default class UserInfoHeader extends Component {
             touchStyle={styles.iconSettings_offset}
           />
         </View>
-        <OnlineStatus isOnline />
+        {online && (
+          <OnlineStatus isOnline />
+        )}
+
+        {!online && (
+          <Text style={styles.status}>{status}</Text>
+        )}
       </View>
     );
   }
@@ -47,20 +53,18 @@ const styles = StyleSheet.create({
   },
 
   userName: {
+    color: '$pe_color_dark_gray',
     fontSize: 24,
+    fontWeight: '200',
   },
 
   iconSettings: {
     color: '$pe_icons_color',
-    fontSize: 16,
-    height: 16,
-    width: 16,
-    borderColor: 'red',
-    borderWidth: 1,
+    fontSize: 20,
   },
 
   iconSettings_offset: {
-    marginTop: 7,
+    marginTop: 3,
     marginRight: 10,
   },
 
@@ -68,5 +72,10 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+
+  status: {
+    color: '#959ba3',
+    fontSize: 12,
   },
 });

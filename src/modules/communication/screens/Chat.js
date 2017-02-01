@@ -1,21 +1,26 @@
 import { Component } from 'react';
 import { NavBar, StyleSheet, View } from 'ui';
 
-import Contacts from '../components/contacts';
+import Chat from '../components/chat';
 
 //noinspection JSUnresolvedVariable
 import imgCommunication from '../images/communication.png';
 
-export default class Main extends Component {
+export default class ChatScreen extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
 
+  props: {
+    conversationId: number;
+  };
+
   render() {
+    const { conversationId } = this.props;
     return (
       <View style={styles.container}>
         <NavBar.Default title="Communication" source={imgCommunication} />
-        <Contacts />
+        <Chat conversationId={conversationId} />
       </View>
     );
   }

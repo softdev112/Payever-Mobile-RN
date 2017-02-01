@@ -220,9 +220,13 @@ export default class WampClient extends EventEmitter {
     return new Promise((resolve, reject) => {
       let isResolved = false;
       const callId = Math.random().toString(36).substring(2);
-      this.calls[callId] = (...args) => {
+      this.calls[callId] = (e, result) => {
         isResolved = true;
-        resolve(...args);
+        if (e) {
+          reject(e);
+        } else {
+          resolve({ ok: true, data: result });
+        }
       };
       this.send([MSG_CALL, callId, uri, ...params]);
       setTimeout(() => {

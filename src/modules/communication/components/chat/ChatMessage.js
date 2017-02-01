@@ -1,75 +1,90 @@
+import { Component } from 'react';
 import { Linking } from 'react-native';
+import { inject, observer } from 'mobx-react/native';
 import { Icon, StyleSheet, Text, View } from 'ui';
 import Hyperlink from 'react-native-hyperlink';
+import type Message from '../../../../store/CommunicationStore/models/Message';
+import { Config } from '../../../../config';
 
-export default function ChatMessage({ message }: PropTypes) {
-  return (
-    <View style={styles.container}>
-      <View style={styles.avatar}>
-        <Icon
-          style={styles.avatar}
-          source={{ uri: message.avatar }}
-        />
-      </View>
-      <View style={styles.textContent}>
-        <View style={styles.titleRow}>
-          <Text style={styles.userName}>{`${message.userName} `}</Text>
-          <Text style={styles.date}>{message.date}</Text>
+@inject('config')
+@observer
+// eslint-disable-next-line react/prefer-stateless-function
+export default class ChatMessage extends Component {
+  props: {
+    config?: Config;
+    message: Message;
+  };
+
+  render() {
+    const message: Message = this.props.message;
+
+    let avatar = message.avatar.valueRetina || message.avatar.value;
+    if (!avatar.startsWith('http')) {
+      avatar = this.props.config.siteUrl + avatar;
+    }
+
+    return (
+      <View style={styles.container}>
+        <Icon style={styles.avatar} source={{ uri: avatar }} />
+        <View>
+          <View style={styles.titleRow}>
+            <Text style={styles.userName}>{`${message.senderName} `}</Text>
+            <Text style={styles.date}>{message.dateFormated}</Text>
+          </View>
+          <Hyperlink
+            linkStyle={styles.links}
+            onPress={(url) => Linking.openURL(url)}
+          >
+            <Text style={styles.message}>
+              {message.body}
+            </Text>
+          </Hyperlink>
         </View>
-        <Hyperlink
-          linkStyle={styles.links}
-          onPress={(url) => Linking.openURL(url)}
-        >
-          <Text style={styles.message}>
-            {message.message}
-          </Text>
-        </Hyperlink>
       </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
     alignItems: 'center',
+    flexDirection: 'row',
+    marginBottom: 12,
     minHeight: 50,
   },
 
   avatar: {
-    width: 30,
-    height: 30,
-  },
-
-  textContent: {
-    paddingLeft: 10,
+    borderRadius: 16,
+    height: 32,
+    marginRight: 22,
+    width: 32,
   },
 
   titleRow: {
+    alignItems: 'center',
     flexDirection: 'row',
   },
 
   userName: {
-    fontSize: 12,
-    color: '#000',
+    fontSize: 13,
+    color: '$pe_color_dark_gray',
     fontWeight: '500',
   },
 
   date: {
-    fontSize: 12,
-    color: '$pe_color_gray_2',
+    color: '$pe_icons_color',
+    fontSize: 11,
+    marginLeft: 5,
   },
 
   message: {
-    fontSize: 12,
-    color: '$pe_color_gray',
+    color: '$pe_color_dark_gray',
+    fontSize: 13,
+    fontWeight: '200',
+    marginTop: 2,
   },
 
   links: {
     color: '#00F',
   },
 });
-
-type PropTypes = {
-  message: Object;
-};
