@@ -35,10 +35,12 @@ export default class WampClient extends EventEmitter {
   calls = {};
   omitSubscribe = false;
 
-  constructor(host) {
+  constructor(host, accessToken) {
     super();
     this.checkTimeout();
-    this.socket = new WebSocket(host);
+    this.socket = new WebSocket(host, 'wamp', {
+      Authorization: `Bearer ${accessToken}`,
+    });
     //noinspection JSUnresolvedFunction
     this.socket.onmessage = ::this.onMessage;
     this.socket.onerror = ::this.onError;
@@ -69,7 +71,7 @@ export default class WampClient extends EventEmitter {
 
   /** @private */
   send(data) {
-    console.log('SEND', data);
+    log.debug('SEND', data);
     this.socket.send(JSON.stringify(data));
   }
 
@@ -83,7 +85,7 @@ export default class WampClient extends EventEmitter {
   onMessage(event) {
     const message = JSON.parse(event.data);
     const type = message.shift();
-    console.log('MSG', message);
+    log.debug('MSG', message);
 
     // eslint-disable-next-line default-case
     switch (type) {
@@ -136,8 +138,9 @@ export default class WampClient extends EventEmitter {
   }
 
   onClose(event) {
+    const reason = event.reason || event.error;
     log.info(
-      `WAMP socket is closed with the reason: ${event.reason} (${event.code})`
+      `WAMP socket is closed with the reason: ${reason} (${event.code})`
     );
   }
 

@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx';
-import { apiHelper } from 'utils';
+import { apiHelper, log } from 'utils';
 
 import type Store from '../index';
 import MessengerInfo from './models/MessengerInfo';
@@ -23,7 +23,7 @@ export default class CommunicationStore {
 
   @action
   async loadMessengerInfo(profile: BusinessProfile): Promise<MessengerInfo> {
-    const { api } = this.store;
+    const { api, auth } = this.store;
 
     let apiPromise;
     if (profile.isBusiness) {
@@ -35,7 +35,11 @@ export default class CommunicationStore {
     return apiHelper(apiPromise, this)
       .cache('communication:messengerInfo:' + profile.id)
       .success((data: MessengerData) => {
-        api.messenger.connectToWebSocket(data.wsUrl, data.messengerUser.id);
+        api.messenger.connectToWebSocket(
+          data.wsUrl,
+          data.messengerUser.id,
+          auth.accessToken
+        );
         this.messengerInfo = new MessengerInfo(data);
         this.conversations = {};
         return this.messengerInfo;
@@ -55,6 +59,7 @@ export default class CommunicationStore {
     return apiHelper(socket.getConversation({ id }), this)
       .cache(`communication:conversations:${userId}:${id}`)
       .success((data) => {
+        log.info(data.messages);
         const conversation = new Conversation(data);
         this.conversations[id] = conversation;
         return conversation;
