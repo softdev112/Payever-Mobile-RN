@@ -42,6 +42,7 @@ export default class WampClient extends EventEmitter {
     //noinspection JSUnresolvedFunction
     this.socket.onmessage = ::this.onMessage;
     this.socket.onerror = ::this.onError;
+    this.socket.onclose = ::this.onClose;
   }
 
   checkTimeout() {
@@ -132,6 +133,12 @@ export default class WampClient extends EventEmitter {
 
   onError(event) {
     log.warn('WAMP error', event.message);
+  }
+
+  onClose(event) {
+    log.info(
+      `WAMP socket is closed with the reason: ${event.reason} (${event.code})`
+    );
   }
 
   /** @private */
