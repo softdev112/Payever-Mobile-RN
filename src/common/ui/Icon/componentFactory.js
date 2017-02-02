@@ -6,7 +6,7 @@ import StackedIcon from './StackedIcon';
 import icons from './icons';
 
 export default function componentFactory(componentInfo, newProps = {}) {
-  let meta = componentInfo;
+  let meta;
 
   /* eslint-disable default-case */
   switch (typeof componentInfo) {
@@ -16,12 +16,18 @@ export default function componentFactory(componentInfo, newProps = {}) {
     }
     case 'object': {
       if (componentInfo.uri) {
-        meta.component = 'image';
+        meta = { ...componentInfo, component: 'image' };
+      } else {
+        meta = componentInfo;
       }
       break;
     }
     case 'number': {
       meta = { component: 'image', source: componentInfo };
+      break;
+    }
+    default: {
+      meta = componentInfo;
     }
   }
 
