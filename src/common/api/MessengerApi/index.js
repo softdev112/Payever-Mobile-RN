@@ -18,11 +18,11 @@ export default class MessengerApi {
     return this.client.get('/api/rest/v1/messenger/private');
   }
 
-  connectToWebSocket(wsUrl, userId) {
+  connectToWebSocket(wsUrl, userId, accessToken) {
     if (this.socket) {
       this.socket.close();
     }
-    const client = new WampClient(wsUrl);
+    const client = new WampClient(wsUrl, accessToken);
     this.socket = new SocketApi(client, userId);
   }
 
