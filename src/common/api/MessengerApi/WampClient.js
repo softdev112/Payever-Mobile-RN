@@ -1,5 +1,6 @@
 /* eslint-disable sort-class-members/sort-class-members */
 import EventEmitter from 'react-native/Libraries/EventEmitter/EventEmitter';
+import { log } from 'utils';
 
 const MSG_WELCOME     = 0;
 const MSG_PREFIX      = 1;
@@ -40,6 +41,7 @@ export default class WampClient extends EventEmitter {
     this.socket = new WebSocket(host);
     //noinspection JSUnresolvedFunction
     this.socket.onmessage = ::this.onMessage;
+    this.socket.onerror = ::this.onError;
   }
 
   checkTimeout() {
@@ -126,6 +128,10 @@ export default class WampClient extends EventEmitter {
         break;
       }
     }
+  }
+
+  onError(event) {
+    log.warn('WAMP error', event.message);
   }
 
   /** @private */
