@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ListView, ListViewDataSource } from 'react-native';
+import { ListView, ListViewDataSource, Platform } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { Loader, StyleSheet, View } from 'ui';
 
@@ -55,6 +55,10 @@ export default class Chat extends Component {
   }
 
   scrollToBottom(animated = false) {
+    if (Platform.OS === 'ios') {
+      // On IOS you should use a real y offset instead of Number.MAX_VALUE
+      return;
+    }
     const scrollResponder = this.$listView.getScrollResponder();
     scrollResponder.scrollTo({ animated, y: Number.MAX_VALUE });
   }
