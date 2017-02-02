@@ -27,7 +27,7 @@ export default class Store {
     this.communication = new CommunicationStore(this);
 
     // Initialize some helper objects
-    this.api = new PayeverApi({ ...config.api, authStore: this.auth });
+    this.api = new PayeverApi(config, this.auth);
     this.config = config;
 
     if (__DEV__) {

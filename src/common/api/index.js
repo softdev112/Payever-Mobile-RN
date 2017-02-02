@@ -1,4 +1,3 @@
-import { merge } from 'lodash';
 import { log } from 'utils';
 
 import type AuthStore from '../../store/AuthStore';
@@ -10,6 +9,7 @@ import ProfilesApi from './ProfilesApi';
 import MenuApi from './MenuApi';
 import MessengerApi from './MessengerApi';
 import { showScreen } from '../Navigation';
+import type { Config } from '../../config';
 
 export default class PayeverApi {
   auth: AuthApi;
@@ -23,11 +23,15 @@ export default class PayeverApi {
   baseUrl: string;
   clientId: string;
   clientSecret: string;
+  logApiCall: boolean;
 
   authStore: AuthStore;
 
-  constructor(config: PayeverApiConfig) {
-    this.setConfig(config);
+  constructor(config: Config, authStore: AuthStore) {
+    Object.assign(this, config.api);
+    this.authStore = authStore;
+    this.logApiCall = config.debug.logApiCall;
+
     this.registerSubApi();
   }
 
@@ -39,14 +43,6 @@ export default class PayeverApi {
     this.messenger = new MessengerApi(this);
     this.user      = new UserApi(this);
     this.profiles  = new ProfilesApi(this);
-  }
-
-  setConfig(config: PayeverApiConfig) {
-    if (typeof config.baseUrl === 'string' && config.baseUrl.endsWith('/')) {
-      config.baseUrl = config.baseUrl.slice(0, -1);
-    }
-
-    merge(this, config);
   }
 
   async get(url: string, query: Object = null): Promise<ApiResp> {
@@ -99,7 +95,7 @@ export default class PayeverApi {
     options.method = options.method || 'GET';
     url = this.normalizeUrl(url, options.query);
 
-    if (__DEV__) {
+    if (__DEV__ && this.logApiCall) {
       log.debug(`${options.method} ${url}`);
     }
 
@@ -126,7 +122,7 @@ export default class PayeverApi {
       showScreen('auth.Login');
     }
 
-    if (__DEV__) {
+    if (__DEV__ && this.logApiCall) {
       log.debug('Response data ', response.data);
     }
 
@@ -196,14 +192,5 @@ function objectToPhpFormData(data: Object) {
 
   return formData;
 }
-
-type PayeverApiConfig = {
-  baseUrl: string;
-  clientId: string;
-  clientSecret: string;
-  accessToken: string;
-  expiresIn: Date;
-  refreshToken: string;
-};
 
 type DataFormat = 'json' | 'formData';
