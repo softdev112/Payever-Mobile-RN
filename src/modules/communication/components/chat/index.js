@@ -13,7 +13,6 @@ import type Conversation from
 @inject('communication')
 @observer
 export default class Chat extends Component {
-
   props: {
     communication?: CommunicationStore;
     conversationId: number;
@@ -23,6 +22,8 @@ export default class Chat extends Component {
     dataSource: ListViewDataSource;
     conversation: Conversation;
   };
+
+  $listView: ListView;
 
   constructor(props) {
     super(props);
@@ -46,6 +47,18 @@ export default class Chat extends Component {
     }
   }
 
+  componentDidUpdate() {
+    // TODO: Replace this hack by a normal solution
+    setTimeout(() => this.scrollToBottom());
+    setTimeout(() => this.scrollToBottom(), 200);
+    setTimeout(() => this.scrollToBottom(true), 400);
+  }
+
+  scrollToBottom(animated = false) {
+    const scrollResponder = this.$listView.getScrollResponder();
+    scrollResponder.scrollTo({ animated, y: Number.MAX_VALUE });
+  }
+
   renderRow(row) {
     return <ChatMessage message={row} />;
   }
@@ -66,6 +79,7 @@ export default class Chat extends Component {
           <ListView
             contentContainerStyle={styles.list}
             dataSource={dataSource}
+            ref={ref => this.$listView = ref}
             renderRow={this.renderRow}
           />
           <ChatBottomBar />

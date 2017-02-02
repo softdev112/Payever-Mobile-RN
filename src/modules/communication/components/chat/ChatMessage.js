@@ -2,6 +2,8 @@ import { Component } from 'react';
 import { Linking } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { Icon, StyleSheet, Text, View } from 'ui';
+import { log } from 'utils';
+//noinspection JSUnresolvedVariable
 import Hyperlink from 'react-native-hyperlink';
 import type Message from '../../../../store/CommunicationStore/models/Message';
 import { Config } from '../../../../config';
@@ -14,6 +16,10 @@ export default class ChatMessage extends Component {
     config?: Config;
     message: Message;
   };
+
+  onLinkOpen(url) {
+    Linking.openURL(url).catch(log.warn);
+  }
 
   render() {
     const message: Message = this.props.message;
@@ -33,11 +39,9 @@ export default class ChatMessage extends Component {
           </View>
           <Hyperlink
             linkStyle={styles.links}
-            onPress={(url) => Linking.openURL(url)}
+            onPress={url => Linking.openURL(url)}
           >
-            <Text style={styles.message}>
-              {message.body}
-            </Text>
+            <Text style={styles.message}>{message.body}</Text>
           </Hyperlink>
         </View>
       </View>
@@ -66,8 +70,8 @@ const styles = StyleSheet.create({
   },
 
   userName: {
-    fontSize: 13,
     color: '$pe_color_dark_gray',
+    fontSize: 13,
     fontWeight: '500',
   },
 
@@ -85,6 +89,6 @@ const styles = StyleSheet.create({
   },
 
   links: {
-    color: '#00F',
+    color: '$pe_color_blue',
   },
 });
