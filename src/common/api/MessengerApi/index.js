@@ -24,6 +24,7 @@ export default class MessengerApi {
     }
     const client = new WampClient(wsUrl, accessToken);
     this.socket = new SocketApi(client, userId);
+    return this.socket;
   }
 
   async getSocket(): Promise<SocketApi> {

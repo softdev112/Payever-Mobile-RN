@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
 
   iconSettings: {
-    color: '$pe_icons_color',
+    color: '$pe_color_icon',
     fontSize: 20,
   },
 

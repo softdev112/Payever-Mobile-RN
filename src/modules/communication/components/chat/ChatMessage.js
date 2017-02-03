@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   },
 
   date: {
-    color: '$pe_icons_color',
+    color: '$pe_color_icon',
     fontSize: 11,
     marginLeft: 5,
   },
