@@ -7,6 +7,7 @@ import type Contact from './models/Contact';
 import Conversation from './models/Conversation';
 import type BusinessProfile from '../UserProfilesStore/models/BusinessProfile';
 import { MessengerData } from '../../common/api/MessengerApi';
+import SocketHandlers from './SocketHandlers';
 
 export default class CommunicationStore {
   @observable conversations: Object<Conversation> = {};
@@ -16,9 +17,11 @@ export default class CommunicationStore {
   @observable error: string;
 
   store: Store;
+  socketHandlers: SocketHandlers;
 
   constructor(store: Store) {
     this.store = store;
+    this.socketHandlers = new SocketHandlers(this);
   }
 
   @action
@@ -35,11 +38,12 @@ export default class CommunicationStore {
     return apiHelper(apiPromise, this)
       .cache('communication:messengerInfo:' + profile.id)
       .success((data: MessengerData) => {
-        api.messenger.connectToWebSocket(
+        const socket = api.messenger.connectToWebSocket(
           data.wsUrl,
           data.messengerUser.id,
           auth.accessToken
         );
+        this.socketHandlers.subscribe(socket);
         this.messengerInfo = new MessengerInfo(data);
         this.conversations = {};
         return this.messengerInfo;
@@ -65,6 +69,12 @@ export default class CommunicationStore {
         return conversation;
       })
       .promise();
+  }
+
+  @action
+  async sendMessage(conversationId, body) {
+    const socket = await this.store.api.messenger.getSocket();
+    return socket.sendMessage({ conversationId, body });
   }
 
   @action

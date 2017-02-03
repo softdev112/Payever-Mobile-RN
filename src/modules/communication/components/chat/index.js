@@ -3,9 +3,9 @@ import { ListView, ListViewDataSource } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { Loader, StyleSheet, View } from 'ui';
 
-import ChatBottomBar from './ChatBottomBar';
+import Footer from './Footer';
 import ChatMessage from './ChatMessage';
-import UserInfoHeader from './UserInfoHeader';
+import Header from './Header';
 import CommunicationStore from '../../../../store/CommunicationStore';
 import type Conversation from
   '../../../../store/CommunicationStore/models/Conversation';
@@ -65,13 +65,14 @@ export default class Chat extends Component {
 
   render() {
     const { conversation = {}, dataSource } = this.state;
+    const { conversationId } = this.props;
 
     const status = conversation.status || {};
 
     return (
       <Loader isLoading={!conversation}>
         <View style={styles.container}>
-          <UserInfoHeader
+          <Header
             online={status.online}
             status={status.label}
             userName={conversation.name}
@@ -82,7 +83,7 @@ export default class Chat extends Component {
             ref={ref => this.$listView = ref}
             renderRow={this.renderRow}
           />
-          <ChatBottomBar />
+          <Footer conversationId={conversationId} />
         </View>
       </Loader>
     );

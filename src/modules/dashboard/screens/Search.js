@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    color: '$pe_icons_color',
+    color: '$pe_color_icon',
     fontSize: '2.2rem',
   },
 
