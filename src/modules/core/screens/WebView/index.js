@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import { WebView as ReactWebView, View, Linking } from 'react-native';
+import { Linking } from 'react-native';
 import { observer, inject } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
-import { NavBar, StyleSheet } from 'ui';
+import { NavBar, StyleSheet, View, WebViewEx } from 'ui';
 import { log } from 'utils';
 
 import injectedCode, { getLoaderHtml } from './injectedCode';
@@ -43,11 +43,12 @@ export default class WebView extends Component {
   state: {
     errorMsg: string;
     isCustomNavBar: boolean;
+    isGoBackAvailable: boolean;
     title: string;
     titleImgUrl: string;
   };
 
-  $view: ReactWebView;
+  $view: WebView;
   injectedCode: string;
 
   constructor(props) {
@@ -61,6 +62,7 @@ export default class WebView extends Component {
     this.state = {
       errorMsg: '',
       isCustomNavBar: false,
+      canGoBack: false,
       title: '',
       titleImgUrl: '',
     };
@@ -73,13 +75,20 @@ export default class WebView extends Component {
   }
 
   onGoBack() {
-    //noinspection JSUnresolvedFunction
-    this.$view.goBack();
+    // Test if we can go back in WebView then go back else
+    // navigator pop
+    if (this.state.canGoBack) {
+      //noinspection JSUnresolvedFunction
+      this.$view.goBack();
+    } else {
+      this.props.navigator.pop();
+    }
   }
 
   onLoadStart({ nativeEvent }) {
     const { auth } = this.props;
 
+    console.log(nativeEvent);
     if (nativeEvent.url.startsWith('react-js-navigation')) {
       return;
     }
@@ -98,12 +107,15 @@ export default class WebView extends Component {
         return;
       }
 
-      // Switch on custom NavBar for navigation purporse on external sites
-      // if thay open in WebView
+      // Switch on custom NavBar for navigation purpose on external sites
+      // if they open in WebView
       isCustomNavBar = true;
     }
 
-    this.setState({ isCustomNavBar });
+    this.setState({
+      isCustomNavBar,
+      canGoBack: nativeEvent.canGoBack,
+    });
 
     // Process submit events ONLY iOS UIWebKit there is no such
     // field in android WebKit nativeEvent
@@ -210,7 +222,9 @@ export default class WebView extends Component {
       }
       source = { headers, uri: url };
     } else {
-      source = { html: getLoaderHtml(url) };
+      source = {
+        html: getLoaderHtml('http://oak.pw/pe/bar_code_capture/index2.html'),
+      };
     }
 
     const titleImgSource = titleImgUrl ? { uri: titleImgUrl } : null;
@@ -224,7 +238,7 @@ export default class WebView extends Component {
             <NavBar.Menu />
           </NavBar>
         )}
-        <ReactWebView
+        <WebViewEx
           contentInset={{ top: topInset, left: 0, bottom: 0, right: 0 }}
           source={source}
           ref={$v => this.$view = $v}
@@ -237,6 +251,7 @@ export default class WebView extends Component {
           injectedJavaScript={this.injectedCode}
           renderError={::this.renderError}
           bounces={false}
+          uploadEnabledAndroid
         />
       </View>
     );

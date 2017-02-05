@@ -11,7 +11,8 @@
     "import/core-modules": ["ui", "utils"],
     "import/extensions": [
       ".js", ".json", ".png"
-    ]
+    ],
+    "import/resolver": "reactnative"
   },
 
   "env": {

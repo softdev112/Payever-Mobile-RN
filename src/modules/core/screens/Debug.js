@@ -1,10 +1,11 @@
 /* eslint-disable */
 import { Component } from 'react';
-import { ListView, TouchableOpacity } from 'react-native';
+import { ListView, TouchableOpacity, requireNativeComponent } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { toggleMenu } from '../../../common/Navigation';
-import { Icon, NavBar, StyleSheet, Text, View } from 'ui';
+import { Icon, NavBar, StyleSheet, Text, View, WebViewEx } from 'ui';
 import { Navigator } from 'react-native-navigation';
+import injectedCode from './WebView/injectedCode';
 
 import vector from '../../../common/ui/Icon/vector.json';
 
@@ -22,6 +23,11 @@ export default class Debug extends Component {
 
     this.ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
+    });
+
+    this.injectedCode = injectedCode({
+      isDev: __DEV__,
+      ...props.injectOptions,
     });
   }
 
@@ -53,8 +59,14 @@ export default class Debug extends Component {
     );
   }
 
+  onLoadStart({ nativeEvent }) {
+    console.log(nativeEvent);
+  }
+
   render() {
     const listData = this.ds.cloneWithRows(Object.keys(vector));
+    const source = { uri: 'http://ya.ru' };
+
     return (
       <View style={styles.container}>
 
@@ -68,39 +80,28 @@ export default class Debug extends Component {
           <NavBar.Menu />
         </NavBar>
 
-        <NavBar style={styles.navBar}>
-          <NavBar.Back />
-          <NavBar.Title
-            source={{
-              uri: 'https://mein.payever.de/images/dashboard/communication.png'
-            }}
-            title="Communication"
-          />
-          <NavBar.Menu />
-        </NavBar>
-
-        <NavBar style={styles.navBar} popup>
-          <NavBar.Back />
-          <NavBar.Title title="Create New Offer" />
-          <NavBar.Button title="Save Draft" />
-          <NavBar.IconButton source="icon-fly-mail-24" title="Send Offer" />
-        </NavBar>
-
-        <NavBar style={styles.navBar} popup>
-          <NavBar.Back />
-          <NavBar.Title title="New Offer" />
-          <NavBar.Button title="Save Draft" />
-          <NavBar.IconButton source="icon-fly-mail-24" title="Send Offer" />
-        </NavBar>
-
         <View style={styles.mainContent}>
           <TouchableOpacity onPress={::this.onGoToChat}>
             <Text>ASDDSDA</Text>
           </TouchableOpacity>
           <ListView
-            style={{height: 300}}
+            style={{height: 30}}
             dataSource={listData}
             renderRow={::this.renderRow}
+          />
+          <WebViewEx
+            style={{height: 800}}
+            source={source}
+            onError={() => {}}
+            onLoadStart={::this.onLoadStart}
+            onMessage={() => {}}
+            javaScriptEnabled
+            domStorageEnabled
+            injectedJavaScript={this.injectedCode}
+            startInLoadingState={false}
+            renderError={() => {}}
+            bounces={false}
+            uploadEnabledAndroid
           />
         </View>
       </View>
@@ -110,7 +111,8 @@ export default class Debug extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    width: '100%',
   },
 
   row: {
@@ -132,5 +134,6 @@ const styles = StyleSheet.create({
   },
 
   mainContent: {
+    flex: 1,
   },
 });

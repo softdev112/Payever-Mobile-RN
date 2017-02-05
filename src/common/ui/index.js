@@ -16,6 +16,7 @@ export ImageButton from './ImageButton';
 export Link from './Link';
 export Loader from './Loader';
 export NavBar from './NavBar';
+export WebViewEx from './WebViewEx';
 export Text from './Text';
 export TextInput from './TextInput';
 export SpinnerButton from './SpinnerButton';
