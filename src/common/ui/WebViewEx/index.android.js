@@ -339,14 +339,14 @@ export default class WebViewEx extends Component {
         javaScriptEnabled={this.props.javaScriptEnabled}
         domStorageEnabled={this.props.domStorageEnabled}
         messagingEnabled={typeof this.props.onMessage === 'function'}
-        onMessage={this.onMessage}
+        onMessage={::this.onMessage}
         contentInset={this.props.contentInset}
         // eslint-disable-next-line max-len
         automaticallyAdjustContentInsets={this.props.automaticallyAdjustContentInsets}
         onContentSizeChange={this.props.onContentSizeChange}
-        onLoadingStart={this.onLoadingStart}
-        onLoadingFinish={this.onLoadingFinish}
-        onLoadingError={this.onLoadingError}
+        onLoadingStart={::this.onLoadingStart}
+        onLoadingFinish={::this.onLoadingFinish}
+        onLoadingError={::this.onLoadingError}
         testID={this.props.testID}
         // eslint-disable-next-line max-len
         mediaPlaybackRequiresUserAction={this.props.mediaPlaybackRequiresUserAction}
