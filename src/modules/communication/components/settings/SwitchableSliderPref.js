@@ -7,10 +7,16 @@ import { Icon, StyleSheet, Text, View } from 'ui';
 
 export default class SwitchableSliderPref extends Component {
   props: {
-    checkBox: CheckBox;
-    slider: SliderPref;
+    switchPrefName: string;
+    switchTitle: string;
+    switchIcon: string;
+    sliderPrefName: string;
+    sliderMin: number;
+    sliderMax: number;
+    sliderTitle: string;
+    sliderIcon: string;
     settings: Object;
-    onSwitched: () => {};
+    onSwitched: () => void;
   };
 
   state: {
@@ -22,21 +28,21 @@ export default class SwitchableSliderPref extends Component {
   constructor(props) {
     super(props);
 
-    const { settings, checkBox, slider } = this.props;
+    const { settings, switchPrefName, sliderPrefName } = this.props;
 
-    const initialState = !!(settings && settings[checkBox.prefName]);
+    const initialState = !!(settings && settings[switchPrefName]);
     this.state = {
       isSliderOn: initialState,
-      value:  settings ? settings[slider.prefName] : 0,
+      value:  settings ? settings[sliderPrefName] : 0,
       sliderHeight: new Animated.Value(initialState ? 40 : 0),
     };
   }
 
   onSlidingComplete(value) {
-    const { settings, slider } = this.props;
+    const { settings, sliderPrefName } = this.props;
 
     if (settings) {
-      settings[slider.prefName] = value;
+      settings[sliderPrefName] = value;
     }
   }
 
@@ -44,12 +50,12 @@ export default class SwitchableSliderPref extends Component {
     const { sliderHeight, isSliderOn } = this.state;
     this.setState({ isSliderOn: !isSliderOn });
 
-    const { onSwitched, settings, checkBox } = this.props;
+    const { onSwitched, settings, switchPrefName } = this.props;
     if (onSwitched) {
       onSwitched();
     }
 
-    settings[checkBox.prefName] = !isSliderOn;
+    settings[switchPrefName] = !isSliderOn;
 
     Animated.timing(sliderHeight, {
       toValue: isSliderOn ? 0 : 40,
@@ -62,7 +68,13 @@ export default class SwitchableSliderPref extends Component {
   }
 
   render() {
-    const { checkBox, slider } = this.props;
+    const { switchTitle, switchIcon,
+      sliderTitle,
+      sliderIcon,
+      sliderMin,
+      sliderMax,
+    } = this.props;
+
     const { sliderHeight, value } = this.state;
     const opacity = sliderHeight.interpolate({
       inputRange: [0, 40],
@@ -73,9 +85,9 @@ export default class SwitchableSliderPref extends Component {
       <View style={styles.container}>
         <View style={styles.checkBoxBlock}>
           <View style={styles.titleBlock}>
-            {checkBox.icon &&
-            <Icon style={styles.icon} source={checkBox.icon} />}
-            <Text style={styles.title}>{checkBox.title}</Text>
+            {switchIcon &&
+            <Icon style={styles.icon} source={switchIcon} />}
+            <Text style={styles.title}>{switchTitle}</Text>
           </View>
           <Switch
             value={this.state.isSliderOn}
@@ -91,14 +103,14 @@ export default class SwitchableSliderPref extends Component {
           ]}
         >
           <View style={styles.sliderTitleBlock}>
-            {slider.icon &&
-            <Icon style={styles.icon} source={slider.icon} />}
-            <Text style={styles.title}>{slider.title}</Text>
+            {sliderIcon &&
+            <Icon style={styles.icon} source={sliderIcon} />}
+            <Text style={styles.title}>{sliderTitle}</Text>
           </View>
           <Slider
             style={styles.sliderGauge}
-            minimumValue={slider.min}
-            maximumValue={slider.max}
+            minimumValue={sliderMin}
+            maximumValue={sliderMax}
             onSlidingComplete={::this.onSlidingComplete}
             onValueChange={::this.onValueChange}
             value={value}
@@ -149,18 +161,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
-type CheckBox = {
-  icon: string;
-  checked?: boolean;
-  title: string;
-  onSwitched: () => {};
-};
-
-type SliderPref = {
-  icon: string;
-  title: string;
-  prefName: string;
-  min: number;
-  max: number;
-};

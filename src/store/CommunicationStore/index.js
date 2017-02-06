@@ -81,7 +81,7 @@ export default class CommunicationStore {
   async loadContacts(): Promise<Contact[]> {
     this.isLoading = true;
 
-    const { api } = this.props.store;
+    const { api } = this.store;
     const userId = this.userProfiles.currentProfile.id;
     console.log(userId);
 
@@ -96,5 +96,19 @@ export default class CommunicationStore {
         }
       })
       .complete(() => this.isLoading = false);
+  }
+
+  @action
+  async saveUserSettings() {
+    const { api } = this.store;
+    const { messengerUser, userSettings } = this.messengerInfo;
+
+    const temp = Object.assign({}, userSettings);
+    delete temp.id;
+
+    console.log(messengerUser);
+    if (MessengerInfo) {
+      await api.messenger.saveSettings(messengerUser.id, temp);
+    }
   }
 }

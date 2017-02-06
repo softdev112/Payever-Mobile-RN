@@ -163,13 +163,16 @@ export default class MessengerApi {
     userId: number,
     settings: UserSettingsData
   ): Promise<UserSettingsResp> {
-    return this.client.post('/api/rest/v1/messenger/user/setting', {
-      format: 'formData',
-      data: {
-        userId,
-        user_settings: settings,
-      },
-    });
+    const options = { format: 'formData' };
+    const requestData = {
+      userId,
+      user_settings: settings,
+    };
+
+    return this.client.post('/api/rest/v1/messenger/user/settings',
+      requestData,
+      options
+    );
   }
 }
 

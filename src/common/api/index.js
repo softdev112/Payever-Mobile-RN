@@ -63,10 +63,14 @@ export default class PayeverApi {
     };
 
     if (format === 'formData') {
-      options.body = objectToPhpFormData(requestData);
+      options.body = objectToFormData(requestData);
     } else {
       options.body = JSON.stringify(requestData);
     }
+
+    console.log(1111111111111111111111111111111111111111);
+    console.log(options);
+    console.log(1111111111111111111111111111111111111111);
 
     return this.fetch(url, options);
   }
@@ -82,7 +86,7 @@ export default class PayeverApi {
     };
 
     if (format === 'formData') {
-      options.body = objectToPhpFormData(requestData);
+      options.body = objectToFormData(requestData);
     } else {
       options.body = JSON.stringify(requestData);
     }
@@ -154,7 +158,7 @@ function objectToQueryString(data: Object): string {
   }).join('&');
 }
 
-function objectToPhpFormData(data: Object) {
+function objectToFormData(data: Object) {
   const formData = new FormData();
 
   if (!data || typeof data !== 'object') return formData;

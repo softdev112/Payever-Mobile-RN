@@ -6,8 +6,9 @@ import type { Navigator } from 'react-native-navigation';
 
 import type CommunicationStore
   from '../../../../store/CommunicationStore/index';
-import settingsTempl from './templates/MainSettings';
-import prefsFactory from './prefsFactory';
+import CheckBoxPref from './CheckBoxPref';
+import SwitchableSliderPref from './SwitchableSliderPref';
+import SwitchableTimePeriodPref from './SwitchableTimePeriodPref';
 
 @inject('communication')
 @observer
@@ -32,20 +33,54 @@ export default class Settings extends Component {
     this.context.navigator.pop();
   }
 
-  renderPrefs() {
-    const { userSettings } = this.props.communication.messengerInfo;
-
-    return settingsTempl.map(pref => prefsFactory(pref, userSettings));
+  onSavePress() {
+    this.props.communication.saveUserSettings();
+    this.context.navigator.pop();
   }
 
   render() {
+    const { userSettings } = this.props.communication.messengerInfo;
+
     return (
       <View style={styles.container}>
         <Container
           style={styles.settings}
           contentContainerStyle={styles.settingsContent}
         >
-          {this.renderPrefs()}
+          <CheckBoxPref
+            prefName="notificationDesktop"
+            title="Desktop Notifications"
+            icon="icon-mac-24"
+            settings={userSettings}
+          />
+          <CheckBoxPref
+            prefName="notificationPreview"
+            title="Message Preview"
+            icon="icon-mail-2-16"
+            settings={userSettings}
+          />
+          <SwitchableSliderPref
+            switchPrefName="notificationSound"
+            switchTitle="Sound Notifications"
+            switchIcon="icon-check2-16"
+            sliderPrefName="notificationVolume"
+            sliderMin={0}
+            sliderMax={100}
+            sliderTitle="Sound Volume"
+            sliderIcon="icon-check2-16"
+            settings={userSettings}
+          />
+          <SwitchableTimePeriodPref
+            switchPrefName="silentPeriodState"
+            switchTitle="Do not disturb period"
+            switchIcon="icon-check2-16"
+            periodTitle={'Select time period during which desktop and sound' +
+              'notifications will not be shown.'}
+            periodIcon="icon-check2-16"
+            periodFromPrefName="silentPeriodStart"
+            periodToPrefName="silentPeriodStop"
+            settings={userSettings}
+          />
         </Container>
         <View style={styles.buttons}>
           <TouchableOpacity onPress={::this.onCancelPress}>
@@ -54,7 +89,7 @@ export default class Settings extends Component {
 
           <View style={styles.divider} />
 
-          <TouchableOpacity onPress={() => console.log('save save save')}>
+          <TouchableOpacity onPress={::this.onSavePress}>
             <Text style={styles.saveBtnText}>Save</Text>
           </TouchableOpacity>
         </View>
@@ -66,8 +101,9 @@ export default class Settings extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    marginTop: '22%',
   },
 
   settings: {

@@ -42,5 +42,5 @@ const styles = StyleSheet.create({
 });
 
 type PropTypes = {
-  online: boolean;
+  isOnline: boolean;
 };
