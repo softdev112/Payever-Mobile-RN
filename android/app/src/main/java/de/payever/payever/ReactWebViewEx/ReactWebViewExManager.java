@@ -1,6 +1,7 @@
 package de.payever.payever.reactwebviewex;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -284,6 +285,20 @@ public class ReactWebViewExManager extends ReactWebViewManager {
 
        			@Override
        			public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+       				if (Build.VERSION.SDK_INT < 21
+       					&& mActivity != null
+       					&& mActivity.get() != null) {
+       					new AlertDialog.Builder(mActivity.get())
+                        	.setTitle("Message")
+                            .setMessage(message)
+                            .setPositiveButton(android.R.string.ok, null)
+                            .setCancelable(false)
+                            .create()
+                            .show();
+
+                    	return false;
+					}
+
    					return super.onJsAlert(view, url, message, result);
        			}
 

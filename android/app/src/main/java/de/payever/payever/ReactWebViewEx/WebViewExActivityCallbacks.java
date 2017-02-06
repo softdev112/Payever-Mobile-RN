@@ -39,7 +39,7 @@ public class WebViewExActivityCallbacks extends ActivityCallbacks {
         if (mFileUploadCallbackBefore5 == null) return;
 
        	Uri results = null;
-       	if ( requestCode == Activity.RESULT_OK ) {
+       	if ( resultCode == Activity.RESULT_OK ) {
 			if (data != null) {
 				results = data.getData();
 			} else {
