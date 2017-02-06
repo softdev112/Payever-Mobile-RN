@@ -23,7 +23,7 @@ export default class MessengerInfo {
     data.conversations = (data.conversations || [])
       .map(c => new ConversationInfo(c));
 
-    this.groups = (data.groups || [])
+    data.groups = (data.groups || [])
       .map(g => new Group(g));
 
     data.marketingGroups = data.marketingGroups || [];

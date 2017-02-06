@@ -37,12 +37,20 @@ export default class ChatMessage extends Component {
             <Text style={styles.userName}>{`${message.senderName} `}</Text>
             <Text style={styles.date}>{message.dateFormated}</Text>
           </View>
-          <Hyperlink
-            linkStyle={styles.links}
-            onPress={url => Linking.openURL(url)}
-          >
-            <Text style={styles.message}>{message.body}</Text>
-          </Hyperlink>
+
+          {!message.deleted && (
+            <Hyperlink
+              linkStyle={styles.links}
+              onPress={url => Linking.openURL(url)}
+            >
+              <Text style={styles.message}>{message.body}</Text>
+            </Hyperlink>
+          )}
+
+          {message.deleted && (
+            <Text style={styles.message_deleted}>(deleted)</Text>
+          )}
+
         </View>
       </View>
     );
@@ -85,6 +93,13 @@ const styles = StyleSheet.create({
     color: '$pe_color_dark_gray',
     fontSize: 13,
     fontWeight: '200',
+    marginTop: 2,
+  },
+
+  message_deleted: {
+    color: '$pe_color_icon',
+    fontSize: 11,
+    fontWeight: '600',
     marginTop: 2,
   },
 

@@ -27,6 +27,9 @@ export default class WampClient extends EventEmitter {
   static EVENT_WELCOME = 'socket/welcome';
   static EVENT_STATE   = 'socket/state';
 
+  host: string;
+  accessToken: string;
+
   socket: WebSocket;
   state: number = WampClient.STATE_OFFLINE;
 
@@ -37,14 +40,20 @@ export default class WampClient extends EventEmitter {
 
   constructor(host, accessToken) {
     super();
+    this.host = host;
+    this.accessToken = accessToken;
+    this.connect();
+  }
+
+  connect() {
     this.checkTimeout();
-    this.socket = new WebSocket(host, 'wamp', {
-      Authorization: `Bearer ${accessToken}`,
+    this.socket = new WebSocket(this.host, 'wamp', {
+      Authorization: `Bearer ${this.accessToken}`,
     });
     //noinspection JSUnresolvedFunction
     this.socket.onmessage = ::this.onMessage;
-    this.socket.onerror = ::this.onError;
-    this.socket.onclose = ::this.onClose;
+    this.socket.onerror   = ::this.onError;
+    this.socket.onclose   = ::this.onClose;
   }
 
   checkTimeout() {

@@ -18,7 +18,7 @@ export default class MessengerApi {
     return this.client.get('/api/rest/v1/messenger/private');
   }
 
-  connectToWebSocket(wsUrl, userId, accessToken) {
+  connectToWebSocket(wsUrl, userId, accessToken): SocketApi {
     if (this.socket) {
       this.socket.close();
     }
@@ -27,6 +27,9 @@ export default class MessengerApi {
     return this.socket;
   }
 
+  /**
+   * Return a SocketApi instance only when it's connected
+   */
   async getSocket(): Promise<SocketApi> {
     if (!this.socket) {
       throw new Error('WAMP socket isn\'t initialized');
