@@ -40,18 +40,19 @@ export default class Chat extends Component {
 
     const conversation = await communication.loadConversation(conversationId);
     if (conversation) {
-      this.setState({
-        conversation,
-        dataSource: this.state.dataSource.cloneWithRows(conversation.messages),
-      });
+      this.setState({ conversation });
     }
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     // TODO: Replace this hack by a normal solution
     setTimeout(() => this.scrollToBottom());
     setTimeout(() => this.scrollToBottom(), 200);
-    setTimeout(() => this.scrollToBottom(true), 400);
+    setTimeout(() => this.scrollToBottom(), 400);
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom(true);
   }
 
   scrollToBottom(animated = false) {
@@ -68,10 +69,15 @@ export default class Chat extends Component {
   }
 
   render() {
-    const { conversation = {}, dataSource } = this.state;
+    const { conversation = {} } = this.state;
+    let { dataSource } = this.state;
     const { conversationId } = this.props;
 
     const status = conversation.status || {};
+
+    if (conversation.messages) {
+      dataSource = dataSource.cloneWithRows(conversation.messages.slice());
+    }
 
     return (
       <Loader isLoading={!conversation}>

@@ -1,16 +1,32 @@
+import { extendObservable, observable } from 'mobx';
 import Message from './Message';
 
 export default class Conversation {
   archived: boolean;
   id: number;
-  messages: Array;
+  @observable messages: Array;
   name: string;
   status: ConversationStatus;
   type: 'conversation';
 
   constructor(data) {
     data.messages = (data.messages || []).map(m => new Message(m));
-    Object.assign(this, data);
+    extendObservable(this, data);
+  }
+
+  updateMessage(message: Message) {
+    if (message.conversation.id !== this.id) {
+      return;
+    }
+
+    const existedIdx = this.messages.findIndex(m => m.id === message.id);
+    if (existedIdx !== -1) {
+      this.messages[existedIdx] = message;
+      return;
+    }
+
+    console.log('PUSH MSG');
+    this.messages.push(message);
   }
 }
 
