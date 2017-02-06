@@ -2,43 +2,70 @@
  * Created by Elf on 30.01.2017.
  */
 import { Component } from 'react';
-import { Animated, Switch } from 'react-native';
+import { Animated, Switch, TouchableOpacity } from 'react-native';
 import { Icon, StyleSheet, Text, View } from 'ui';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
-import HourPicker from './HourPicker';
-import MinutePicker from './MinutePicker';
+const PERIOD_BLOCK_HEIGHT = 70;
 
 export default class SwitchableTimePeriodPref extends Component {
   props: {
-    checkBox: CheckBox;
-    timePeriod: TimePeriod;
+    switchPrefName: string;
+    switchTitle: string;
+    switchIcon: string;
+    periodTitle: string;
+    periodIcon: string;
+    periodFromPrefName: string;
+    periodToPrefName: string;
     settings: Object;
-    onSwitched: () => {};
+    onSwitched?: () => void;
   };
 
   state: {
     isTimePeriodOn: boolean;
-    from: TimePoint;
-    to: TimePoint;
+    isTimePickerOn: boolean;
+    isFrom: boolean;
+    from: Object;
+    to: Object;
     timePeriodHeight: Object;
   };
 
   constructor(props) {
     super(props);
 
-    const { settings, checkBox, timePeriod } = this.props;
-    const { from, to } = timePeriod;
+    const {
+      periodFromPrefName,
+      periodToPrefName,
+      settings,
+      switchPrefName,
+    } = this.props;
 
-    const initialState = !!(settings && settings[checkBox.prefName]);
-    const initFrom = settings
-      ? settings[from.prefName] : { hour: 0, minute: 0 };
-    const initTo = settings ? settings[to.prefName] : { hour: 0, minute: 0 };
+    let initialState = false; // Period off
+    let initFrom = new Date(0, 0, 0, 0, 0); // year month day hour minute
+    let initTo = new Date(0, 0, 0, 0, 0);
+
+    if (settings) {
+      initialState = !!(settings[switchPrefName]);
+
+      const currentFrom = settings[periodFromPrefName];
+      if (currentFrom && currentFrom.hour && currentFrom.minute) {
+        initFrom = new Date(0, 0, 0, currentFrom.hour, currentFrom.minute);
+      }
+
+      const currentTo = settings[periodToPrefName];
+      if (currentTo && currentTo.hour && currentTo.minute) {
+        initTo = new Date(0, 0, 0, currentTo.hour, currentTo.minute);
+      }
+    }
 
     this.state = {
       from: initFrom,
       to: initTo,
       isTimePeriodOn: initialState,
-      timePeriodHeight: new Animated.Value(initialState ? 75 : 0),
+      isFrom: false,
+      timePeriodHeight: new Animated.Value(
+        initialState ? PERIOD_BLOCK_HEIGHT : 0
+      ),
     };
   }
 
@@ -46,40 +73,69 @@ export default class SwitchableTimePeriodPref extends Component {
     const { timePeriodHeight, isTimePeriodOn } = this.state;
     this.setState({ isTimePeriodOn: !isTimePeriodOn });
 
-    const { onSwitched, settings, checkBox } = this.props;
+    const { onSwitched, settings, switchPrefName } = this.props;
     if (onSwitched) {
       onSwitched();
     }
 
-    settings[checkBox.prefName] = !isTimePeriodOn;
+    settings[switchPrefName] = !isTimePeriodOn;
 
     Animated.timing(timePeriodHeight, {
-      toValue: isTimePeriodOn ? 0 : 75,
+      toValue: isTimePeriodOn ? 0 : PERIOD_BLOCK_HEIGHT,
       duration: 200,
     }).start();
   }
 
+  onTimePicked(date) {
+    const { periodFromPrefName, periodToPrefName, settings } = this.props;
+    const { isFrom } = this.state;
+
+    this.switchTimePicker(isFrom);
+
+    if (isFrom) {
+      // Set from time
+      settings[periodFromPrefName].hour = date.getHours();
+      settings[periodFromPrefName].minutes = date.getMinutes();
+      this.setState({ from: date });
+    } else {
+      // Set to time
+      settings[periodToPrefName].hour = date.getHours();
+      settings[periodToPrefName].minutes = date.getMinutes();
+      this.setState({ to: date });
+    }
+  }
+
+  switchTimePicker(isFrom) {
+    const { isTimePickerOn } = this.state;
+    this.setState({ isFrom, isTimePickerOn: !isTimePickerOn });
+  }
+
   render() {
-    const { checkBox, timePeriod } = this.props;
-    const { timePeriodHeight } = this.state;
+    const {
+      switchTitle,
+      switchIcon,
+      periodTitle,
+      periodIcon,
+    } = this.props;
+
+    const { timePeriodHeight, from, to } = this.state;
     const opacity = timePeriodHeight.interpolate({
-      inputRange: [0, 75],
+      inputRange: [0, PERIOD_BLOCK_HEIGHT],
       outputRange: [0, 1],
     });
 
-    const { settings } = this.props;
-    const initStartHour = settings[timePeriod.from.hour];
-    const initStartMinute = settings[timePeriod.from.minute];
-    const initStopHour = settings[timePeriod.to.hour];
-    const initStopMinute = settings[timePeriod.to.minute];
+    const fromHour = from ? from.getHours() : 0;
+    const fromMinutes = from ? from.getMinutes() : 0;
+    const toHour = to ? to.getHours() : 0;
+    const toMinutes = to ? to.getMinutes() : 0;
 
     return (
       <View style={styles.container}>
         <View style={styles.checkBoxBlock}>
           <View style={styles.titleBlock}>
-            {checkBox.icon &&
-            <Icon style={styles.icon} source={checkBox.icon} />}
-            <Text style={styles.title}>{checkBox.title}</Text>
+            {switchIcon &&
+            <Icon style={styles.icon} source={switchIcon} />}
+            <Text style={styles.title}>{switchTitle}</Text>
           </View>
           <Switch
             value={this.state.isTimePeriodOn}
@@ -95,22 +151,40 @@ export default class SwitchableTimePeriodPref extends Component {
           ]}
         >
           <View style={styles.timePeriodTitleBlock}>
-            {timePeriod.icon &&
-            <Icon style={styles.icon} source={timePeriod.icon} />}
-            <Text style={styles.subTitle}>{timePeriod.title}</Text>
+            {periodIcon &&
+            <Icon style={styles.icon} source={periodIcon} />}
+            <Text style={styles.subTitle}>{periodTitle}</Text>
           </View>
           <View style={styles.pickers}>
-            <View style={styles.timePointPickers}>
-              <Text>Start:</Text>
-              <HourPicker hour={initStartHour} />
-              <MinutePicker minute={initStartMinute} />
-            </View>
+            <TouchableOpacity
+              onPress={this.switchTimePicker.bind(this, true)}
+            >
+              <Text>
+                Start:
+                <Text style={styles.timeText}>
+                  {` ${fromHour}:${fromMinutes}`}
+                </Text>
+              </Text>
+            </TouchableOpacity>
 
-            <View style={styles.timePointPickers}>
-              <Text>Stop:</Text>
-              <HourPicker hour={initStopHour} />
-              <MinutePicker minute={initStopMinute} />
-            </View>
+            <TouchableOpacity
+              onPress={this.switchTimePicker.bind(this, false)}
+            >
+              <Text>
+                Stop:
+                <Text style={styles.timeText}>
+                  {` ${toHour}:${toMinutes}`}
+                </Text>
+              </Text>
+            </TouchableOpacity>
+
+            <DateTimePicker
+              mode="time"
+              isVisible={this.state.isTimePickerOn}
+              date={from}
+              onConfirm={::this.onTimePicked}
+              onCancel={::this.switchTimePicker}
+            />
           </View>
         </Animated.View>
       </View>
@@ -138,12 +212,12 @@ const styles = StyleSheet.create({
   },
 
   timePeriodBlock: {
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     height: 40,
   },
 
   timePeriodTitleBlock: {
-    height: 30,
+    height: 35,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -151,16 +225,10 @@ const styles = StyleSheet.create({
 
   pickers: {
     flexDirection: 'row',
-    height: 45,
+    height: 35,
     padding: 2,
-    justifyContent: 'center',
-  },
-
-  timePointPickers: {
-    height: 40,
-    flexDirection: 'row',
+    justifyContent: 'space-around',
     alignItems: 'center',
-    marginRight: 5,
   },
 
   icon: {
@@ -172,24 +240,8 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 11,
   },
+
+  timeText: {
+    color: '$pe_color_blue',
+  },
 });
-
-type CheckBox = {
-  icon: string;
-  checked?: boolean;
-  title: string;
-  onSwitched: () => {};
-};
-
-type TimePeriod = {
-  from: TimePoint;
-  to: TimePoint;
-  icon: string;
-  title: string;
-};
-
-type TimePoint = {
-  prefName?: string;
-  hour: number;
-  minute: number;
-};
