@@ -88,7 +88,6 @@ export default class WebView extends Component {
   onLoadStart({ nativeEvent }) {
     const { auth } = this.props;
 
-    console.log(nativeEvent);
     if (nativeEvent.url.startsWith('react-js-navigation')) {
       return;
     }
