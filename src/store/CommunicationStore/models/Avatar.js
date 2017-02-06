@@ -1,5 +1,5 @@
 export default class Avatar {
-  type: string;
+  type: 'url' | 'letters';
   value: string;
   valueRetina: string | undefined;
 
