@@ -80,6 +80,18 @@ export default class AuthStore {
       .catch(e => console.error(e));
   }
 
+  async getAccessToken() {
+    const { api } = this.store;
+
+    if (this.accessToken && this.expiresIn > new Date()) {
+      return this.accessToken;
+    }
+    if (!this.refreshToken) {
+      throw new Error('AuthStore: Couldn\'t refresh, refreshToken is null');
+    }
+    return await api.auth.refreshToken(this.refreshToken);
+  }
+
   async deserialize(): Promise<AuthStore> {
     let json;
     try {
