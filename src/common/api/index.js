@@ -58,8 +58,22 @@ export default class PayeverApi {
     requestData: Object = null,
     { format = 'formData' }: { format: DataFormat } = {}
   ): Promise<ApiResp> {
+    const headers = new Headers();
+    headers.append('Accept', 'application/json');
+
+    const contentType = format === 'formData'
+      ? 'multipart/form-data' : 'application/json';
+    headers.append('Content-Type', contentType);
+
+    const token = await this.authStore.getAccessToken();
+    headers.append('Authorization', 'Bearer ' + token);
+
     const options = {
+      headers,
       method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+      cache: 'default',
     };
 
     if (format === 'formData') {
