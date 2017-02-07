@@ -61,7 +61,6 @@ export default class Settings extends Component {
             onPress={::this.onSavePress}
           />
         </NavBar>
-
         <View style={styles.settings}>
           <CheckBoxPref
             prefName="notificationDesktop"
