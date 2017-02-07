@@ -82,10 +82,6 @@ export default class PayeverApi {
       options.body = JSON.stringify(requestData);
     }
 
-    console.log(1111111111111111111111111111111111111111);
-    console.log(options);
-    console.log(1111111111111111111111111111111111111111);
-
     return this.fetch(url, options);
   }
 
