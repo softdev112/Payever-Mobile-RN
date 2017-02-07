@@ -1,7 +1,6 @@
 import { Component, PropTypes } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { TouchableOpacity } from 'react-native';
-import { Container, StyleSheet, Text, View } from 'ui';
+import { NavBar, StyleSheet, View } from 'ui';
 import type { Navigator } from 'react-native-navigation';
 
 import type CommunicationStore
@@ -21,6 +20,10 @@ export default class Settings extends Component {
     navigator: PropTypes.object.isRequired,
   };
 
+  static childContextTypes = {
+    settings: PropTypes.object.isRequired,
+  };
+
   context: {
     navigator: Navigator;
   };
@@ -38,26 +41,37 @@ export default class Settings extends Component {
     this.context.navigator.pop();
   }
 
-  render() {
+  getChildContext() {
     const { userSettings } = this.props.communication.messengerInfo;
 
+    return {
+      settings: userSettings,
+    };
+  }
+
+  render() {
     return (
       <View style={styles.container}>
-        <Container
-          style={styles.settings}
-          contentContainerStyle={styles.settingsContent}
-        >
+        <NavBar popup>
+          <NavBar.Back style={styles.closeBtn} />
+          <NavBar.Title icon="icon-settings-24" title="Settings" />
+          <NavBar.Button
+            style={styles.saveBtnText}
+            title="Save"
+            onPress={::this.onSavePress}
+          />
+        </NavBar>
+
+        <View style={styles.settings}>
           <CheckBoxPref
             prefName="notificationDesktop"
             title="Desktop Notifications"
             icon="icon-mac-24"
-            settings={userSettings}
           />
           <CheckBoxPref
             prefName="notificationPreview"
             title="Message Preview"
             icon="icon-mail-2-16"
-            settings={userSettings}
           />
           <SwitchableSliderPref
             switchPrefName="notificationSound"
@@ -68,7 +82,6 @@ export default class Settings extends Component {
             sliderMax={100}
             sliderTitle="Sound Volume"
             sliderIcon="icon-check2-16"
-            settings={userSettings}
           />
           <SwitchableTimePeriodPref
             switchPrefName="silentPeriodState"
@@ -79,19 +92,7 @@ export default class Settings extends Component {
             periodIcon="icon-check2-16"
             periodFromPrefName="silentPeriodStart"
             periodToPrefName="silentPeriodStop"
-            settings={userSettings}
           />
-        </Container>
-        <View style={styles.buttons}>
-          <TouchableOpacity onPress={::this.onCancelPress}>
-            <Text style={styles.cancelBtnText}>Cancel</Text>
-          </TouchableOpacity>
-
-          <View style={styles.divider} />
-
-          <TouchableOpacity onPress={::this.onSavePress}>
-            <Text style={styles.saveBtnText}>Save</Text>
-          </TouchableOpacity>
         </View>
       </View>
     );
@@ -101,13 +102,13 @@ export default class Settings extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginTop: '22%',
   },
 
   settings: {
+    justifyContent: 'flex-start',
+    marginTop: 20,
     alignSelf: 'stretch',
+    paddingHorizontal: 25,
   },
 
   settingsContent: {
@@ -116,25 +117,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
 
-  buttons: {
-    flexDirection: 'row',
-    width: '40%',
-    padding: 10,
-    justifyContent: 'space-between',
-  },
-
-  cancelBtnText: {
-    fontSize: 18,
+  closeBtn: {
+    color: '$pe_color_light_gray_1',
   },
 
   saveBtnText: {
-    fontSize: 18,
     color: '$pe_color_blue',
-  },
-
-  divider: {
-    alignSelf: 'stretch',
-    backgroundColor: '$pe_color_light_gray_1',
-    width: 1,
   },
 });

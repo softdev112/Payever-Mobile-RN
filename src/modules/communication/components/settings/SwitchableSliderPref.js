@@ -1,11 +1,20 @@
 /**
  * Created by Elf on 30.01.2017.
  */
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import { Animated, Slider, Switch } from 'react-native';
 import { Icon, StyleSheet, Text, View } from 'ui';
 
+import type UserSettings
+  from '../../../../store/CommunicationStore/models/UserSettings';
+
+const SLIDER_BLOCK_HEIGHT = 40;
+
 export default class SwitchableSliderPref extends Component {
+  static contextTypes = {
+    settings: PropTypes.object.isRequired,
+  };
+
   props: {
     switchPrefName: string;
     switchTitle: string;
@@ -15,8 +24,11 @@ export default class SwitchableSliderPref extends Component {
     sliderMax: number;
     sliderTitle: string;
     sliderIcon: string;
-    settings: Object;
     onSwitched: () => void;
+  };
+
+  context: {
+    settings: UserSettings;
   };
 
   state: {
@@ -25,21 +37,23 @@ export default class SwitchableSliderPref extends Component {
     sliderHeight: Object;
   };
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
-    const { settings, switchPrefName, sliderPrefName } = this.props;
+    const { switchPrefName, sliderPrefName } = props;
+    const { settings } = context;
 
     const initialState = !!(settings && settings[switchPrefName]);
     this.state = {
       isSliderOn: initialState,
       value:  settings ? settings[sliderPrefName] : 0,
-      sliderHeight: new Animated.Value(initialState ? 40 : 0),
+      sliderHeight: new Animated.Value(initialState ? SLIDER_BLOCK_HEIGHT : 0),
     };
   }
 
   onSlidingComplete(value) {
-    const { settings, sliderPrefName } = this.props;
+    const { sliderPrefName } = this.props;
+    const { settings } = this.context;
 
     if (settings) {
       settings[sliderPrefName] = value;
@@ -50,15 +64,16 @@ export default class SwitchableSliderPref extends Component {
     const { sliderHeight, isSliderOn } = this.state;
     this.setState({ isSliderOn: !isSliderOn });
 
-    const { onSwitched, settings, switchPrefName } = this.props;
+    const { onSwitched, switchPrefName } = this.props;
     if (onSwitched) {
       onSwitched();
     }
 
+    const { settings } = this.context;
     settings[switchPrefName] = !isSliderOn;
 
     Animated.timing(sliderHeight, {
-      toValue: isSliderOn ? 0 : 40,
+      toValue: isSliderOn ? 0 : SLIDER_BLOCK_HEIGHT,
       duration: 200,
     }).start();
   }
@@ -68,7 +83,9 @@ export default class SwitchableSliderPref extends Component {
   }
 
   render() {
-    const { switchTitle, switchIcon,
+    const {
+      switchTitle,
+      switchIcon,
       sliderTitle,
       sliderIcon,
       sliderMin,
