@@ -20,10 +20,11 @@
 
   "globals": {
     "__DEV__": true,
+    "ApiResp": true,
     "FormData": true,
     "fetch": true,
+    "Headers": true,
     "log": true,
-    "ApiResp": true,
     "WebSocket": true
   },
 
