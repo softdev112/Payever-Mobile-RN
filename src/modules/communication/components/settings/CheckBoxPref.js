@@ -1,34 +1,45 @@
 /**
  * Created by Elf on 30.01.2017.
  */
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import { Switch } from 'react-native';
 import { Icon, StyleSheet, Text, View } from 'ui';
 
+import type UserSettings
+  from '../../../../store/CommunicationStore/models/UserSettings';
+
 export default class CheckBoxPref extends Component {
+  static contextTypes = {
+    settings: PropTypes.object.isRequired,
+  };
+
   props: {
     icon: string;
     checked?: boolean;
-    settings: Object;
     title: string;
     prefName: string;
     onSwitched?: (prefName: string) => {};
+  };
+
+  context: {
+    settings: UserSettings;
   };
 
   state: {
     checked: boolean;
   };
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
 
     this.state = {
-      checked: !!(props.settings && props.settings[props.prefName]),
+      checked: !!(context.settings && context.settings[props.prefName]),
     };
   }
 
   onSwitchPress() {
-    const { onSwitched, prefName, settings } = this.props;
+    const { onSwitched, prefName } = this.props;
+    const { settings } = this.context;
 
     if (onSwitched) {
       onSwitched();

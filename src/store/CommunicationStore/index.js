@@ -3,7 +3,6 @@ import { apiHelper } from 'utils';
 
 import type Store from '../index';
 import MessengerInfo from './models/MessengerInfo';
-import type Contact from './models/Contact';
 import Conversation from './models/Conversation';
 import type BusinessProfile from '../UserProfilesStore/models/BusinessProfile';
 import { MessengerData } from '../../common/api/MessengerApi';
@@ -72,37 +71,16 @@ export default class CommunicationStore {
   }
 
   @action
-  async loadContacts(): Promise<Contact[]> {
-    this.isLoading = true;
-
-    const { api } = this.store;
-    const userId = this.userProfiles.currentProfile.id;
-    console.log(userId);
-
-    apiHelper(api.messenger.getAvailableContacts(), this)
-      .success((resp: ApiResp) => {
-        if (resp.data.length > 0) {
-          this.items = resp.data.map(data => console.log(data));
-        } else {
-          this.error = 'Sorry, we didn\'t find any results, try ' +
-            'searching again';
-          this.items = [];
-        }
-      })
-      .complete(() => this.isLoading = false);
-  }
-
-  @action
   async saveUserSettings() {
-    const { api } = this.store;
+    const { api: { messenger } } = this.store;
     const { messengerUser, userSettings } = this.messengerInfo;
 
     const temp = Object.assign({}, userSettings);
     delete temp.id;
 
-    console.log(messengerUser);
     if (MessengerInfo) {
-      await api.messenger.saveSettings(messengerUser.id, temp);
+      await apiHelper(messenger.saveSettings(messengerUser.id, temp), this)
+        .promise();
     }
   }
 
