@@ -19,36 +19,42 @@ const CONNECTION_TIMEOUT = 7000;
  * Based on https://github.com/Swatinem/wamp
  */
 export default class WampClient extends EventEmitter {
-  static STATE_OFFLINE    = 0;
-  static STATE_CONNECTING = 1;
-  static STATE_ONLINE     = 2;
-  static STATE_TIMEOUT    = 3;
-
   static EVENT_WELCOME = 'socket/welcome';
-  static EVENT_STATE   = 'socket/state';
 
   host: string;
   accessToken: string;
 
   socket: WebSocket;
-  state: number = WampClient.STATE_OFFLINE;
+  state: number = WebSocket.CONNECTING;
 
   listeners = {};
   prefixes = {};
   calls = {};
   omitSubscribe = false;
 
+  checkConnectionInterval = null;
+
   constructor(host, accessToken) {
     super();
+
+    this.connect         = ::this.connect;
+    this.checkConnection = ::this.checkConnection;
+
     this.host = host;
     this.accessToken = accessToken;
-    this.connect();
+    this.connect().catch(log.error);
+    this.checkConnectionInterval = setInterval(this.checkConnection, 2000);
   }
 
-  connect() {
-    this.checkTimeout();
+  get state() {
+    return this.socket ? this.socket.readyState : WebSocket.CONNECTING;
+  }
+
+  async connect() {
+    const accessToken = await this.accessToken;
+
     this.socket = new WebSocket(this.host, 'wamp', {
-      Authorization: `Bearer ${this.accessToken}`,
+      Authorization: `Bearer ${accessToken}`,
     });
     //noinspection JSUnresolvedFunction
     this.socket.onmessage = ::this.onMessage;
@@ -56,26 +62,17 @@ export default class WampClient extends EventEmitter {
     this.socket.onclose   = ::this.onClose;
   }
 
-  checkTimeout() {
-    this.setState(WampClient.STATE_CONNECTING);
-    this.on(
-      WampClient.EVENT_WELCOME,
-      () => this.setState(WampClient.STATE_ONLINE)
-    );
-    setTimeout(() => {
-      if (this.state !== WampClient.STATE_ONLINE) {
-        this.setState(WampClient.STATE_TIMEOUT);
-      }
-    }, CONNECTION_TIMEOUT);
+  checkConnection() {
+    if (!this.checkConnectionInterval) return;
+    if (this.state !== WebSocket.CLOSED) return;
+
+    log.debug('WAMP: Reconnecting in 1 second');
+
+    setTimeout(this.connect, 1000);
   }
 
   on(event, listener, context = null) {
     return this.addListener(event, listener, context);
-  }
-
-  setState(state: number) {
-    this.state = state;
-    this.emit(WampClient.EVENT_STATE, state);
   }
 
   /** @private */
@@ -207,6 +204,8 @@ export default class WampClient extends EventEmitter {
   }
 
   close() {
+    clearInterval(this.checkConnectionInterval);
+    this.checkConnectionInterval = null;
     this.socket.close();
   }
 

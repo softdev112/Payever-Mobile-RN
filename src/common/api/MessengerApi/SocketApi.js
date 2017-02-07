@@ -41,17 +41,17 @@ export default class SocketApi extends EventEmitter {
   async resolveWhenConnected() {
     const client = this.client;
     switch (client.state) {
-      case WampClient.STATE_ONLINE: {
+      case WebSocket.OPEN: {
         return this;
       }
 
-      case WampClient.STATE_CONNECTING: {
+      case WebSocket.CONNECTING: {
         return new Promise((resolve, reject) => {
           setInterval(() => {
-            if (client.state === WampClient.STATE_ONLINE) {
+            if (client.state === WebSocket.OPEN) {
               resolve(this);
             }
-            if (client.state === WampClient.STATE_TIMEOUT) {
+            if (client.state === WebSocket.CLOSED) {
               reject('Couldn\'t connect to WAMP socket (timeout)');
             }
           }, 100);
@@ -74,5 +74,9 @@ export default class SocketApi extends EventEmitter {
 
   close() {
     this.client.close();
+  }
+
+  setAccessToken(token) {
+    this.client.accessToken = token;
   }
 }

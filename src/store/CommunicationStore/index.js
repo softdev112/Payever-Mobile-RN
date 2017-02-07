@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx';
+import { action, autorun, observable } from 'mobx';
 import { apiHelper } from 'utils';
 
 import type Store from '../index';
@@ -17,6 +17,7 @@ export default class CommunicationStore {
 
   store: Store;
   socketHandlers: SocketHandlers;
+  socketObserver: Function;
 
   constructor(store: Store) {
     this.store = store;
@@ -85,8 +86,21 @@ export default class CommunicationStore {
   }
 
   initSocket(url, userId) {
-    const { api: { messenger }, auth } = this.store;
-    const socket = messenger.connectToWebSocket(url, userId, auth.accessToken);
+    const { api, auth } = this.store;
+
+    const socket = api.messenger.connectToWebSocket(
+      url,
+      userId,
+      auth.getAccessToken()
+    );
+
     this.socketHandlers.subscribe(socket);
+
+    if (this.socketObserver) {
+      this.socketObserver();
+    }
+    this.socketObserver = autorun(() => {
+      socket.setAccessToken(auth.getAccessToken());
+    });
   }
 }
