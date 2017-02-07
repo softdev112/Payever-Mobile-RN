@@ -48,7 +48,7 @@ export default class PayeverApi {
   async get(url: string, query: Object = null): Promise<ApiResp> {
     query = {
       ...query,
-      access_token: await this.getAccessToken(),
+      access_token: await this.authStore.getAccessToken(),
     };
     return this.fetch(url, { query });
   }
@@ -131,16 +131,6 @@ export default class PayeverApi {
     }
 
     return response;
-  }
-
-  async getAccessToken() {
-    if (this.authStore.accessToken && this.authStore.expiresIn > new Date()) {
-      return this.authStore.accessToken;
-    }
-    if (!this.authStore.refreshToken) {
-      throw new Error('PayeverApi: refreshToken is null');
-    }
-    return await this.auth.refreshToken(this.authStore.refreshToken);
   }
 
   normalizeUrl(url: string, query: Object = null) {
