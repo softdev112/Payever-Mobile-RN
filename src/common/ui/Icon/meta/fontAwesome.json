@@ -1,0 +1,8648 @@
+{
+  "fa-500px": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf26e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-address-book": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2b9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-address-book-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2ba"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-address-card": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2bb"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-address-card-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2bc"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-adjust": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf042"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-adn": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf170"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-align-center": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf037"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-align-justify": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf039"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-align-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf036"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-align-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf038"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-amazon": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf270"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-ambulance": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0f9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-american-sign-language-interpreting": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2a3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-anchor": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf13d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-android": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf17b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-angellist": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf209"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-angle-double-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf103"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-angle-double-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf100"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-angle-double-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf101"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-angle-double-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf102"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-angle-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf107"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-angle-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf104"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-angle-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf105"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-angle-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf106"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-apple": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf179"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-archive": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf187"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-area-chart": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1fe"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrow-circle-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0ab"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrow-circle-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0a8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrow-circle-o-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf01a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrow-circle-o-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf190"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrow-circle-o-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf18e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrow-circle-o-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf01b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrow-circle-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0a9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrow-circle-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0aa"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrow-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf063"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrow-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf060"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrow-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf061"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrow-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf062"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrows": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf047"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrows-alt": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0b2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrows-h": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf07e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-arrows-v": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf07d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-asl-interpreting": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2a3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-assistive-listening-systems": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2a2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-asterisk": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf069"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-at": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1fa"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-audio-description": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf29e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-automobile": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1b9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-backward": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf04a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-balance-scale": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf24e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-ban": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf05e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bandcamp": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2d5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bank": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf19c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bar-chart": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf080"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bar-chart-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf080"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-barcode": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf02a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bars": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bath": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2cd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bathtub": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2cd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-battery": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf240"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-battery-0": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf244"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-battery-1": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf243"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-battery-2": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf242"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-battery-3": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf241"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-battery-4": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf240"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-battery-empty": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf244"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-battery-full": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf240"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-battery-half": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf242"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-battery-quarter": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf243"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-battery-three-quarters": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf241"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bed": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf236"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-beer": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0fc"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-behance": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1b4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-behance-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1b5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bell": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0f3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bell-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0a2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bell-slash": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1f6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bell-slash-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1f7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bicycle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf206"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-binoculars": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1e5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-birthday-cake": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1fd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bitbucket": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf171"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bitbucket-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf172"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bitcoin": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf15a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-black-tie": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf27e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-blind": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf29d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bluetooth": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf293"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bluetooth-b": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf294"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bold": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf032"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bolt": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0e7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bomb": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1e2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-book": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf02d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bookmark": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf02e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bookmark-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf097"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-braille": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2a1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-briefcase": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0b1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-btc": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf15a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bug": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf188"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-building": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1ad"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-building-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0f7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bullhorn": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0a1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bullseye": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf140"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-bus": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf207"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-buysellads": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf20d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cab": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1ba"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-calculator": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1ec"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-calendar": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf073"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-calendar-check-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf274"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-calendar-minus-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf272"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-calendar-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf133"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-calendar-plus-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf271"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-calendar-times-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf273"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-camera": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf030"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-camera-retro": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf083"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-car": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1b9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-caret-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0d7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-caret-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0d9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-caret-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0da"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-caret-square-o-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf150"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-caret-square-o-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf191"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-caret-square-o-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf152"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-caret-square-o-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf151"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-caret-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0d8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cart-arrow-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf218"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cart-plus": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf217"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cc": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf20a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cc-amex": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1f3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cc-diners-club": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf24c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cc-discover": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1f2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cc-jcb": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf24b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cc-mastercard": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1f1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cc-paypal": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1f4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cc-stripe": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1f5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cc-visa": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1f0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-certificate": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0a3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-chain": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-chain-broken": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf127"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-check": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf00c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-check-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf058"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-check-circle-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf05d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-check-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf14a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-check-square-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf046"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-chevron-circle-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf13a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-chevron-circle-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf137"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-chevron-circle-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf138"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-chevron-circle-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf139"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-chevron-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf078"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-chevron-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf053"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-chevron-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf054"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-chevron-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf077"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-child": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1ae"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-chrome": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf268"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf111"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-circle-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf10c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-circle-o-notch": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1ce"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-circle-thin": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1db"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-clipboard": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0ea"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-clock-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf017"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-clone": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf24d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-close": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf00d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cloud": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cloud-download": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0ed"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cloud-upload": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0ee"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cny": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf157"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-code": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf121"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-code-fork": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf126"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-codepen": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1cb"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-codiepie": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf284"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-coffee": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0f4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cog": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf013"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cogs": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf085"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-columns": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0db"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-comment": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf075"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-comment-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0e5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-commenting": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf27a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-commenting-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf27b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-comments": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf086"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-comments-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0e6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-compass": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf14e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-compress": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf066"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-connectdevelop": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf20e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-contao": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf26d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-copy": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-copyright": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1f9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-creative-commons": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf25e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-credit-card": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf09d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-credit-card-alt": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf283"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-crop": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf125"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-crosshairs": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf05b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-css3": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf13c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cube": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1b2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cubes": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1b3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cut": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-cutlery": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0f5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-dashboard": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0e4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-dashcube": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf210"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-database": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-deaf": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2a4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-deafness": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2a4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-dedent": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf03b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-delicious": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1a5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-desktop": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf108"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-deviantart": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1bd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-diamond": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf219"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-digg": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1a6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-dollar": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf155"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-dot-circle-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf192"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-download": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf019"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-dribbble": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf17d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-drivers-license": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-drivers-license-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-dropbox": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf16b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-drupal": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1a9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-edge": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf282"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-edit": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf044"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-eercast": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2da"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-eject": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf052"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-ellipsis-h": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf141"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-ellipsis-v": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf142"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-empire": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-envelope": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0e0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-envelope-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf003"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-envelope-open": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2b6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-envelope-open-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2b7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-envelope-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf199"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-envira": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf299"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-eraser": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf12d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-etsy": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2d7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-eur": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf153"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-euro": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf153"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-exchange": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0ec"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-exclamation": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf12a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-exclamation-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf06a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-exclamation-triangle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf071"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-expand": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf065"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-expeditedssl": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf23e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-external-link": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf08e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-external-link-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf14c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-eye": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf06e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-eye-slash": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf070"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-eyedropper": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1fb"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-fa": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2b4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-facebook": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf09a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-facebook-f": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf09a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-facebook-official": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf230"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-facebook-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf082"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-fast-backward": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf049"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-fast-forward": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf050"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-fax": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1ac"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-feed": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf09e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-female": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf182"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-fighter-jet": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0fb"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf15b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-archive-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-audio-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-code-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-excel-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-image-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-movie-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf016"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-pdf-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-photo-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-picture-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-powerpoint-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-sound-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-text": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf15c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-text-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0f6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-video-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-word-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-file-zip-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1c6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-files-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-film": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf008"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-filter": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0b0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-fire": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf06d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-fire-extinguisher": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf134"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-firefox": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf269"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-first-order": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2b0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-flag": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf024"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-flag-checkered": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf11e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-flag-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf11d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-flash": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0e7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-flask": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-flickr": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf16e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-floppy-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-folder": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf07b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-folder-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf114"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-folder-open": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf07c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-folder-open-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf115"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-font": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf031"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-font-awesome": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2b4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-fonticons": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf280"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-fort-awesome": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf286"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-forumbee": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf211"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-forward": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf04e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-foursquare": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf180"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-free-code-camp": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-frown-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf119"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-futbol-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1e3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-gamepad": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf11b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-gavel": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0e3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-gbp": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf154"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-ge": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-gear": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf013"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-gears": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf085"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-genderless": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf22d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-get-pocket": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf265"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-gg": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf260"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-gg-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf261"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-gift": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf06b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-git": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-git-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-github": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf09b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-github-alt": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf113"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-github-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf092"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-gitlab": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf296"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-gittip": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf184"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-glass": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf000"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-glide": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2a5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-glide-g": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2a6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-globe": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0ac"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-google": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1a0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-google-plus": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0d5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-google-plus-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2b3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-google-plus-official": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2b3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-google-plus-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0d4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-google-wallet": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1ee"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-graduation-cap": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf19d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-gratipay": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf184"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-grav": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2d6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-group": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-h-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0fd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hacker-news": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hand-grab-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf255"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hand-lizard-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf258"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hand-o-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0a7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hand-o-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0a5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hand-o-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0a4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hand-o-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0a6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hand-paper-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf256"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hand-peace-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf25b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hand-pointer-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf25a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hand-rock-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf255"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hand-scissors-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf257"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hand-spock-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf259"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hand-stop-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf256"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-handshake-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2b5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hard-of-hearing": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2a4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hashtag": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf292"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hdd-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0a0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-header": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1dc"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-headphones": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf025"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-heart": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf004"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-heart-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf08a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-heartbeat": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf21e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-history": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1da"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-home": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf015"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hospital-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0f8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hotel": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf236"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hourglass": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf254"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hourglass-1": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf251"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hourglass-2": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf252"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hourglass-3": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf253"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hourglass-end": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf253"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hourglass-half": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf252"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hourglass-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf250"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-hourglass-start": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf251"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-houzz": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf27c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-html5": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf13b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-i-cursor": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf246"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-id-badge": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-id-card": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-id-card-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-ils": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf20b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-image": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf03e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-imdb": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2d8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-inbox": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf01c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-indent": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf03c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-industry": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf275"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-info": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf129"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-info-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf05a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-inr": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf156"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-instagram": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf16d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-institution": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf19c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-internet-explorer": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf26b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-intersex": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf224"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-ioxhost": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf208"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-italic": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf033"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-joomla": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1aa"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-jpy": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf157"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-jsfiddle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1cc"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-key": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf084"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-keyboard-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf11c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-krw": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf159"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-language": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1ab"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-laptop": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf109"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-lastfm": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf202"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-lastfm-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf203"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-leaf": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf06c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-leanpub": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf212"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-legal": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0e3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-lemon-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf094"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-level-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf149"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-level-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf148"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-life-bouy": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1cd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-life-buoy": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1cd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-life-ring": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1cd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-life-saver": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1cd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-lightbulb-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0eb"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-line-chart": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf201"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-link": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-linkedin": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0e1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-linkedin-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf08c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-linode": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2b8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-linux": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf17c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-list": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf03a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-list-alt": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf022"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-list-ol": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0cb"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-list-ul": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0ca"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-location-arrow": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf124"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-lock": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf023"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-long-arrow-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf175"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-long-arrow-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf177"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-long-arrow-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf178"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-long-arrow-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf176"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-low-vision": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2a8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-magic": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0d0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-magnet": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf076"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-mail-forward": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf064"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-mail-reply": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf112"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-mail-reply-all": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf122"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-male": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf183"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-map": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf279"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-map-marker": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf041"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-map-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf278"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-map-pin": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf276"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-map-signs": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf277"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-mars": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf222"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-mars-double": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf227"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-mars-stroke": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf229"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-mars-stroke-h": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf22b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-mars-stroke-v": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf22a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-maxcdn": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf136"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-meanpath": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf20c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-medium": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf23a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-medkit": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0fa"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-meetup": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2e0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-meh-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf11a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-mercury": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf223"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-microchip": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2db"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-microphone": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf130"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-microphone-slash": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf131"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-minus": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf068"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-minus-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf056"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-minus-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf146"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-minus-square-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf147"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-mixcloud": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf289"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-mobile": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf10b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-mobile-phone": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf10b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-modx": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf285"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-money": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0d6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-moon-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf186"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-mortar-board": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf19d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-motorcycle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf21c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-mouse-pointer": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf245"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-music": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf001"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-navicon": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-neuter": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf22c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-newspaper-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1ea"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-object-group": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf247"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-object-ungroup": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf248"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-odnoklassniki": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf263"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-odnoklassniki-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf264"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-opencart": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf23d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-openid": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf19b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-opera": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf26a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-optin-monster": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf23c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-outdent": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf03b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-pagelines": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf18c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-paint-brush": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1fc"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-paper-plane": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-paper-plane-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-paperclip": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-paragraph": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1dd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-paste": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0ea"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-pause": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf04c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-pause-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf28b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-pause-circle-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf28c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-paw": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1b0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-paypal": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1ed"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-pencil": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf040"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-pencil-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf14b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-pencil-square-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf044"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-percent": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf295"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-phone": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf095"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-phone-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf098"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-photo": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf03e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-picture-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf03e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-pie-chart": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf200"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-pied-piper": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2ae"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-pied-piper-alt": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1a8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-pied-piper-pp": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1a7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-pinterest": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0d2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-pinterest-p": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf231"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-pinterest-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0d3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-plane": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf072"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-play": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf04b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-play-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf144"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-play-circle-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf01d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-plug": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1e6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-plus": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf067"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-plus-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf055"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-plus-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0fe"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-plus-square-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf196"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-podcast": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2ce"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-power-off": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf011"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-print": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf02f"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-product-hunt": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf288"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-puzzle-piece": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf12e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-qq": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-qrcode": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf029"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-question": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf128"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-question-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf059"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-question-circle-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf29c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-quora": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-quote-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf10d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-quote-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf10e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-ra": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-random": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf074"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-ravelry": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2d9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-rebel": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-recycle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1b8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-reddit": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1a1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-reddit-alien": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf281"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-reddit-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1a2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-refresh": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf021"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-registered": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf25d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-remove": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf00d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-renren": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf18b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-reorder": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-repeat": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf01e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-reply": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf112"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-reply-all": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf122"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-resistance": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-retweet": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf079"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-rmb": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf157"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-road": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf018"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-rocket": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf135"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-rotate-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0e2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-rotate-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf01e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-rouble": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf158"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-rss": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf09e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-rss-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf143"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-rub": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf158"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-ruble": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf158"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-rupee": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf156"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-s15": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2cd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-safari": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf267"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-save": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-scissors": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-scribd": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf28a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-search": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf002"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-search-minus": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf010"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-search-plus": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf00e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sellsy": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf213"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-send": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-send-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-server": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf233"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-share": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf064"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-share-alt": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1e0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-share-alt-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1e1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-share-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf14d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-share-square-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf045"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-shekel": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf20b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sheqel": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf20b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-shield": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf132"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-ship": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf21a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-shirtsinbulk": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf214"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-shopping-bag": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf290"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-shopping-basket": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf291"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-shopping-cart": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf07a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-shower": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2cc"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sign-in": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf090"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sign-language": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2a7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sign-out": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf08b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-signal": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf012"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-signing": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2a7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-simplybuilt": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf215"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sitemap": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0e8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-skyatlas": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf216"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-skype": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf17e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-slack": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf198"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sliders": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1de"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-slideshare": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1e7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-smile-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf118"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-snapchat": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2ab"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-snapchat-ghost": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2ac"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-snapchat-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2ad"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-snowflake-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2dc"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-soccer-ball-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1e3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sort": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0dc"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sort-alpha-asc": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf15d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sort-alpha-desc": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf15e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sort-amount-asc": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf160"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sort-amount-desc": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf161"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sort-asc": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0de"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sort-desc": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0dd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sort-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0dd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sort-numeric-asc": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf162"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sort-numeric-desc": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf163"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sort-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0de"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-soundcloud": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1be"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-space-shuttle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf197"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-spinner": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf110"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-spoon": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1b1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-spotify": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1bc"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-square-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf096"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-stack-exchange": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf18d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-stack-overflow": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf16c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-star": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf005"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-star-half": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf089"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-star-half-empty": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf123"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-star-half-full": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf123"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-star-half-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf123"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-star-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf006"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-steam": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1b6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-steam-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1b7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-step-backward": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf048"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-step-forward": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf051"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-stethoscope": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0f1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sticky-note": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf249"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sticky-note-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf24a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-stop": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf04d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-stop-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf28d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-stop-circle-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf28e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-street-view": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf21d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-strikethrough": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0cc"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-stumbleupon": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1a4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-stumbleupon-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1a3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-subscript": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf12c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-subway": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf239"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-suitcase": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0f2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-sun-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf185"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-superpowers": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2dd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-superscript": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf12b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-support": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1cd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-table": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0ce"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-tablet": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf10a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-tachometer": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0e4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-tag": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf02b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-tags": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf02c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-tasks": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0ae"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-taxi": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1ba"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-telegram": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c6"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-television": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf26c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-tencent-weibo": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d5"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-terminal": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf120"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-text-height": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf034"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-text-width": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf035"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-th": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf00a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-th-large": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf009"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-th-list": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf00b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-themeisle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2b2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thermometer": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thermometer-0": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2cb"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thermometer-1": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2ca"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thermometer-2": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thermometer-3": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thermometer-4": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thermometer-empty": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2cb"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thermometer-full": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thermometer-half": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thermometer-quarter": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2ca"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thermometer-three-quarters": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thumb-tack": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf08d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thumbs-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf165"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thumbs-o-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf088"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thumbs-o-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf087"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-thumbs-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf164"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-ticket": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf145"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-times": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf00d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-times-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf057"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-times-circle-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf05c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-times-rectangle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2d3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-times-rectangle-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2d4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-tint": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf043"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-toggle-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf150"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-toggle-left": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf191"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-toggle-off": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf204"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-toggle-on": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf205"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-toggle-right": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf152"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-toggle-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf151"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-trademark": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf25c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-train": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf238"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-transgender": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf224"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-transgender-alt": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf225"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-trash": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1f8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-trash-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf014"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-tree": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1bb"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-trello": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf181"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-tripadvisor": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf262"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-trophy": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf091"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-truck": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0d1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-try": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf195"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-tty": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1e4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-tumblr": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf173"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-tumblr-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf174"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-turkish-lira": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf195"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-tv": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf26c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-twitch": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1e8"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-twitter": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf099"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-twitter-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf081"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-umbrella": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0e9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-underline": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0cd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-undo": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0e2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-universal-access": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf29a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-university": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf19c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-unlink": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf127"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-unlock": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf09c"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-unlock-alt": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf13e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-unsorted": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0dc"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-upload": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf093"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-usb": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf287"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-usd": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf155"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-user": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf007"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-user-circle": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2bd"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-user-circle-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2be"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-user-md": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0f0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-user-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2c0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-user-plus": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf234"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-user-secret": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf21b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-user-times": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf235"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-users": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0c0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-vcard": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2bb"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-vcard-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2bc"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-venus": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf221"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-venus-double": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf226"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-venus-mars": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf228"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-viacoin": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf237"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-viadeo": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2a9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-viadeo-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2aa"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-video-camera": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf03d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-vimeo": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf27d"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-vimeo-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf194"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-vine": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1ca"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-vk": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf189"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-volume-control-phone": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2a0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-volume-down": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf027"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-volume-off": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf026"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-volume-up": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf028"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-warning": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf071"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-wechat": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-weibo": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf18a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-weixin": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d7"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-whatsapp": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf232"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-wheelchair": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf193"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-wheelchair-alt": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf29b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-wifi": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1eb"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-wikipedia-w": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf266"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-window-close": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2d3"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-window-close-o": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2d4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-window-maximize": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2d0"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-window-minimize": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2d1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-window-restore": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2d2"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-windows": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf17a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-won": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf159"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-wordpress": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf19a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-wpbeginner": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf297"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-wpexplorer": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2de"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-wpforms": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf298"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-wrench": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf0ad"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-xing": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf168"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-xing-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf169"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-y-combinator": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf23b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-y-combinator-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-yahoo": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf19e"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-yc": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf23b"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-yc-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1d4"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-yelp": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf1e9"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-yen": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf157"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-yoast": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf2b1"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-youtube": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf167"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-youtube-play": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf16a"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  },
+  "fa-youtube-square": {
+    "component": "vector",
+    "source": {
+      "unicode": "\uf166"
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "FontAwesome",
+      "color": "#b5b9be"
+    }
+  }
+}
