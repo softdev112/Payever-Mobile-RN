@@ -20,9 +20,10 @@ const CONNECTION_TIMEOUT = 7000;
  */
 export default class WampClient extends EventEmitter {
   static EVENT_WELCOME = 'socket/welcome';
+  static EVENT_ERROR   = 'socket/error';
 
   host: string;
-  accessToken: string;
+  accessToken: Promise<string>;
 
   socket: WebSocket;
   state: number = WebSocket.CONNECTING;
@@ -89,7 +90,14 @@ export default class WampClient extends EventEmitter {
 
   /** @private */
   onMessage(event) {
-    const message = JSON.parse(event.data);
+    let message = [];
+    try {
+      message = JSON.parse(event.data);
+    } catch (e) {
+      this.emit(WampClient.EVENT_ERROR, e);
+      return;
+    }
+
     const type = message.shift();
     log.debug('MSG', message);
 
@@ -140,6 +148,7 @@ export default class WampClient extends EventEmitter {
   }
 
   onError(event) {
+    this.emit(WampClient.EVENT_ERROR, event);
     log.warn('WAMP error', event.message);
   }
 
@@ -156,7 +165,7 @@ export default class WampClient extends EventEmitter {
     const server = message[2];
     if (version !== 1) {
       this.emit(
-        'error',
+        WampClient.EVENT_ERROR,
         new Error(
           `Server ${server} uses incompatible protocol version ${version}`
         )
@@ -192,13 +201,13 @@ export default class WampClient extends EventEmitter {
     this.emitHandler(event, data);
     Object.keys(this.prefixes, (prefix) => {
       const expanded = this.prefixes[prefix];
-      prefix += ':';
-      if (event.indexOf(prefix) === 0) {
+      const pref = prefix + ':';
+      if (event.indexOf(pref) === 0) {
         // if the prefix matches, also emit the expanded version
-        this.emitHandler(expanded + event.slice(prefix.length), data);
+        this.emitHandler(expanded + event.slice(pref.length), data);
       } else if (event.indexOf(expanded) === 0) {
         // similarly, also emit the prefixed version if the expanded matches
-        this.emitHandler(prefix + event.slice(expanded.length), data);
+        this.emitHandler(pref + event.slice(expanded.length), data);
       }
     });
   }
@@ -230,7 +239,9 @@ export default class WampClient extends EventEmitter {
       listeners.splice(i, 1);
       if (listeners.length > 0) return;
     }
+
     delete this.listeners[uri];
+
     if (!this.omitSubscribe) {
       this.send([MSG_UNSUBSCRIBE, uri]);
     }
@@ -255,7 +266,7 @@ export default class WampClient extends EventEmitter {
       this.send([MSG_CALL, callId, uri, ...params]);
       setTimeout(() => {
         if (isResolved) return;
-        this.calls[callId] = () => {};
+        delete this.calls[callId];
         reject(`Error Calling ${uri}: Timeout`);
       }, CONNECTION_TIMEOUT);
     });

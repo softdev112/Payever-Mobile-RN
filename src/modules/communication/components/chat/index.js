@@ -56,6 +56,8 @@ export default class Chat extends Component {
   }
 
   scrollToBottom(animated = false) {
+    if (!this.$listView) return;
+
     if (Platform.OS === 'ios') {
       // On IOS you should use a real y offset instead of Number.MAX_VALUE
       return;
@@ -80,7 +82,7 @@ export default class Chat extends Component {
     }
 
     return (
-      <Loader isLoading={!conversation}>
+      <Loader isLoading={!conversation.messages}>
         <View style={styles.container}>
           <Header
             online={status.online}
