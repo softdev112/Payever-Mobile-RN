@@ -6,7 +6,7 @@ import { toggleMenu } from '../../../common/Navigation';
 import { Icon, NavBar, StyleSheet, Text, View } from 'ui';
 import { Navigator } from 'react-native-navigation';
 
-import vector from '../../../common/ui/Icon/vector.json';
+import vector from '../../../common/ui/Icon/meta/vector.json';
 
 @inject('userProfiles')
 @observer
@@ -92,6 +92,8 @@ export default class Debug extends Component {
           <NavBar.Button title="Save Draft" />
           <NavBar.IconButton source="icon-fly-mail-24" title="Send Offer" />
         </NavBar>
+
+        <Icon source="fa-plus" />
 
         <View style={styles.mainContent}>
           <TouchableOpacity onPress={::this.onGoToChat}>

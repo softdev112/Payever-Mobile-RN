@@ -1,11 +1,10 @@
 import { Text } from 'react-native';
-//noinspection JSUnresolvedVariable
-import vector from './vector.json';
+import meta from './meta';
 
 export default function VectorIcon(props: Props) {
   let unicode;
-  if (typeof props.source === 'string' && vector[props.source]) {
-    const glyph = vector[props.source];
+  if (typeof props.source === 'string' && meta[props.source]) {
+    const glyph = meta[props.source];
     unicode = glyph.source.unicode;
     props = {
       ...props,
