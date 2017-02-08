@@ -1,3 +1,4 @@
+import { pickBy } from 'lodash';
 import type PayeverApi from '../index';
 import SocketApi from './SocketApi';
 import WampClient from './WampClient';
@@ -166,16 +167,15 @@ export default class MessengerApi {
     userId: number,
     settings: UserSettingsData
   ): Promise<UserSettingsResp> {
-    const options = { format: 'formData' };
-    const requestData = {
-      userId,
-      user_settings: settings,
-    };
+    // Remove all boolean settings to switch it off
+    // that's how backend works
+    const temp = pickBy({ ...settings }, val => val !== false);
+    delete temp.id;
 
-    return this.client.post('/api/rest/v1/messenger/user/settings',
-      requestData,
-      options
-    );
+    return this.client.post('/api/rest/v1/messenger/user/settings', {
+      userId,
+      user_settings: temp,
+    });
   }
 }
 

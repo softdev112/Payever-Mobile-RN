@@ -76,19 +76,8 @@ export default class CommunicationStore {
     const { api: { messenger } } = this.store;
     const { messengerUser, userSettings } = this.messengerInfo;
 
-    const temp = Object.assign({}, userSettings);
-    delete temp.id;
-
-    // Remove all boolean settings to switch it off
-    // that's how backend works
-    for (const option in temp) {
-      if (typeof temp[option] === 'boolean' && !temp[option]) {
-        delete temp[option];
-      }
-    }
-
     if (MessengerInfo) {
-      await apiHelper(messenger.saveSettings(messengerUser.id, temp), this)
+      await apiHelper(messenger.saveSettings(messengerUser.id, userSettings))
         .promise();
     }
   }
