@@ -76,10 +76,7 @@ export default class CommunicationStore {
     const { api: { messenger } } = this.store;
     const { messengerUser, userSettings } = this.messengerInfo;
 
-    if (MessengerInfo) {
-      await apiHelper(messenger.saveSettings(messengerUser.id, userSettings))
-        .promise();
-    }
+    messenger.saveSettings(messengerUser.id, userSettings);
   }
 
   initSocket(url, userId) {

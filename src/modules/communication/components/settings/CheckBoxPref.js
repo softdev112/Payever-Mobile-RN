@@ -1,7 +1,4 @@
-/**
- * Created by Elf on 30.01.2017.
- */
-import { Component, PropTypes } from 'react';
+import { Component } from 'react';
 import { Switch } from 'react-native';
 import { Icon, StyleSheet, Text, View } from 'ui';
 
@@ -9,40 +6,31 @@ import type UserSettings
   from '../../../../store/CommunicationStore/models/UserSettings';
 
 export default class CheckBoxPref extends Component {
-  static contextTypes = {
-    settings: PropTypes.object.isRequired,
-  };
-
   props: {
-    icon: string;
-    checked?: boolean;
+    icon?: string;
     title: string;
     prefName: string;
-    onSwitched?: (prefName: string) => {};
-  };
-
-  context: {
     settings: UserSettings;
+    onValueChange?: () => {};
   };
 
   state: {
     checked: boolean;
   };
 
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
 
     this.state = {
-      checked: !!(context.settings && context.settings[props.prefName]),
+      checked: !!(props.settings[props.prefName]),
     };
   }
 
   onSwitchPress() {
-    const { onSwitched, prefName } = this.props;
-    const { settings } = this.context;
+    const { onValueChange, prefName, settings } = this.props;
 
-    if (onSwitched) {
-      onSwitched();
+    if (onValueChange) {
+      onValueChange();
     }
 
     settings[prefName] = !this.state.checked;
@@ -50,7 +38,7 @@ export default class CheckBoxPref extends Component {
   }
 
   render() {
-    const { title, icon, checked } = this.props;
+    const { title, icon } = this.props;
 
     return (
       <View style={styles.container}>
@@ -59,7 +47,7 @@ export default class CheckBoxPref extends Component {
           <Text style={styles.title}>{title}</Text>
         </View>
         <Switch
-          value={this.state.checked || checked}
+          value={this.state.checked}
           onValueChange={::this.onSwitchPress}
         />
       </View>

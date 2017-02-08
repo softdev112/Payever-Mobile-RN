@@ -1,33 +1,23 @@
-/**
- * Created by Elf on 30.01.2017.
- */
-import { Component, PropTypes } from 'react';
-import { Animated, Slider, Switch } from 'react-native';
+import { Component } from 'react';
+import { Animated, Slider } from 'react-native';
 import { Icon, StyleSheet, Text, View } from 'ui';
 
 import type UserSettings
   from '../../../../store/CommunicationStore/models/UserSettings';
+import CheckBoxPref from './CheckBoxPref';
 
-const SLIDER_BLOCK_HEIGHT = 40;
+const SLIDER_BLOCK_HEIGHT = 45;
 
 export default class SwitchableSliderPref extends Component {
-  static contextTypes = {
-    settings: PropTypes.object.isRequired,
-  };
-
   props: {
     switchPrefName: string;
     switchTitle: string;
-    switchIcon: string;
+    switchIcon?: string;
     sliderPrefName: string;
     sliderMin: number;
     sliderMax: number;
     sliderTitle: string;
-    sliderIcon: string;
-    onSwitched: () => void;
-  };
-
-  context: {
+    sliderIcon?: string;
     settings: UserSettings;
   };
 
@@ -37,23 +27,21 @@ export default class SwitchableSliderPref extends Component {
     sliderHeight: Object;
   };
 
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
 
-    const { switchPrefName, sliderPrefName } = props;
-    const { settings } = context;
+    const { settings, sliderPrefName, switchPrefName } = props;
 
-    const initialState = !!(settings && settings[switchPrefName]);
+    const initialState = !!(settings[switchPrefName]);
     this.state = {
       isSliderOn: initialState,
-      value:  settings ? settings[sliderPrefName] : 0,
+      value: settings[sliderPrefName],
       sliderHeight: new Animated.Value(initialState ? SLIDER_BLOCK_HEIGHT : 0),
     };
   }
 
   onSlidingComplete(value) {
-    const { sliderPrefName } = this.props;
-    const { settings } = this.context;
+    const { settings, sliderPrefName } = this.props;
 
     if (settings) {
       settings[sliderPrefName] = value;
@@ -61,16 +49,8 @@ export default class SwitchableSliderPref extends Component {
   }
 
   onSwitchPress() {
-    const { sliderHeight, isSliderOn } = this.state;
+    const { isSliderOn, sliderHeight } = this.state;
     this.setState({ isSliderOn: !isSliderOn });
-
-    const { onSwitched, switchPrefName } = this.props;
-    if (onSwitched) {
-      onSwitched();
-    }
-
-    const { settings } = this.context;
-    settings[switchPrefName] = !isSliderOn;
 
     Animated.timing(sliderHeight, {
       toValue: isSliderOn ? 0 : SLIDER_BLOCK_HEIGHT,
@@ -84,7 +64,9 @@ export default class SwitchableSliderPref extends Component {
 
   render() {
     const {
+      settings,
       switchTitle,
+      switchPrefName,
       switchIcon,
       sliderTitle,
       sliderIcon,
@@ -100,17 +82,13 @@ export default class SwitchableSliderPref extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.checkBoxBlock}>
-          <View style={styles.titleBlock}>
-            {switchIcon &&
-            <Icon style={styles.icon} source={switchIcon} />}
-            <Text style={styles.title}>{switchTitle}</Text>
-          </View>
-          <Switch
-            value={this.state.isSliderOn}
-            onValueChange={::this.onSwitchPress}
-          />
-        </View>
+        <CheckBoxPref
+          prefName={switchPrefName}
+          title={switchTitle}
+          icon={switchIcon}
+          onValueChange={::this.onSwitchPress}
+          settings={settings}
+        />
 
         <Animated.View
           style={[
@@ -143,24 +121,13 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     alignSelf: 'stretch',
     paddingVertical: 5,
-    paddingHorizontal: 3,
-  },
-
-  checkBoxBlock: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    height: 40,
-  },
-
-  titleBlock: {
-    flexDirection: 'row',
-    alignItems: 'center',
   },
 
   sliderBlock: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    height: 40,
+    alignItems: 'center',
+    height: SLIDER_BLOCK_HEIGHT,
   },
 
   sliderTitleBlock: {
