@@ -169,12 +169,12 @@ export default class MessengerApi {
   ): Promise<UserSettingsResp> {
     // Remove all boolean settings to switch it off
     // that's how backend works
-    const temp = pickBy({ ...settings }, val => val !== false);
-    delete temp.id;
+    const data = pickBy(settings, val => val !== false);
+    delete data.id;
 
     return this.client.post('/api/rest/v1/messenger/user/settings', {
       userId,
-      user_settings: temp,
+      user_settings: data,
     });
   }
 }
