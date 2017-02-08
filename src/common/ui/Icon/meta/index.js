@@ -1,8 +1,11 @@
 //noinspection JSUnresolvedVariable
 import vector from './vector.json';
+//noinspection JSUnresolvedVariable
+import fontAwesome from './fontAwesome.json';
 
 export default {
   ...vector,
+  ...fontAwesome,
 
   spinner: {
     component: 'stacked',

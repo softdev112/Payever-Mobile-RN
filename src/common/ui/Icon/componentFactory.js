@@ -3,7 +3,7 @@ import VectorIcon from './VectorIcon';
 import BitmapIcon from './BitmapIcon';
 import StackedIcon from './StackedIcon';
 
-import icons from './icons';
+import icons from './meta';
 
 export default function componentFactory(componentInfo, newProps = {}) {
   let meta;
