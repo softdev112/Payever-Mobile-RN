@@ -40,11 +40,10 @@ export default class SwitchableTimePeriodPref extends Component {
       switchPrefName,
     } = this.props;
 
-    let initialState = false; // Period off
-    const initFromTime = new Date(0, 0, 0, 0, 0); // year month day hour minute
+    const initFromTime = new Date(0, 0, 0, 0, 0);
     const initToTime = new Date(0, 0, 0, 0, 0);
 
-    initialState = !!(settings[switchPrefName]);
+    const initialState = !!(settings[switchPrefName]);
 
     const currentFromTime = settings[periodFromPrefName];
     if (currentFromTime && currentFromTime.hour && currentFromTime.minute) {
