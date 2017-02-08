@@ -197,6 +197,7 @@ export default class WampClient extends EventEmitter {
   /** @private */
   onEvent(event, data) {
     this.emit('event', event, data);
+
     // emit the original version straight away
     this.emitHandler(event, data);
     Object.keys(this.prefixes, (prefix) => {
