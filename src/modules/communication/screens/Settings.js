@@ -3,11 +3,11 @@ import { inject, observer } from 'mobx-react/native';
 import { NavBar, StyleSheet, View } from 'ui';
 import type { Navigator } from 'react-native-navigation';
 
-import type CommunicationStore
-  from '../../../../store/CommunicationStore/index';
-import CheckBoxPref from './CheckBoxPref';
-import SwitchableSliderPref from './SwitchableSliderPref';
-import SwitchableTimePeriodPref from './SwitchableTimePeriodPref';
+import type CommunicationStore from '../../../store/CommunicationStore';
+import CheckBoxPref from '../components/settings/CheckBoxPref';
+import SwitchableSliderPref from '../components/settings/SwitchableSliderPref';
+import SwitchableTimePeriodPref
+  from '../components/settings/SwitchableTimePeriodPref';
 
 @inject('communication')
 @observer
@@ -18,10 +18,6 @@ export default class Settings extends Component {
 
   static contextTypes = {
     navigator: PropTypes.object.isRequired,
-  };
-
-  static childContextTypes = {
-    settings: PropTypes.object.isRequired,
   };
 
   context: {
@@ -41,15 +37,9 @@ export default class Settings extends Component {
     this.context.navigator.pop();
   }
 
-  getChildContext() {
+  render() {
     const { userSettings } = this.props.communication.messengerInfo;
 
-    return {
-      settings: userSettings,
-    };
-  }
-
-  render() {
     return (
       <View style={styles.container}>
         <NavBar popup>
@@ -66,11 +56,13 @@ export default class Settings extends Component {
             prefName="notificationDesktop"
             title="Desktop Notifications"
             icon="icon-mac-24"
+            settings={userSettings}
           />
           <CheckBoxPref
             prefName="notificationPreview"
             title="Message Preview"
             icon="icon-mail-2-16"
+            settings={userSettings}
           />
           <SwitchableSliderPref
             switchPrefName="notificationSound"
@@ -81,6 +73,7 @@ export default class Settings extends Component {
             sliderMax={100}
             sliderTitle="Sound Volume"
             sliderIcon="icon-check2-16"
+            settings={userSettings}
           />
           <SwitchableTimePeriodPref
             switchPrefName="silentPeriodState"
@@ -91,6 +84,7 @@ export default class Settings extends Component {
             periodIcon="icon-check2-16"
             periodFromPrefName="silentPeriodStart"
             periodToPrefName="silentPeriodStop"
+            settings={userSettings}
           />
         </View>
       </View>
