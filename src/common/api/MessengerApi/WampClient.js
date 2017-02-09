@@ -149,7 +149,9 @@ export default class WampClient extends EventEmitter {
 
   onError(event) {
     this.emit(WampClient.EVENT_ERROR, event);
-    log.warn('WAMP error', event.message);
+    if (event.message) {
+      log.warn('WAMP error', event.message);
+    }
   }
 
   onClose(event) {
