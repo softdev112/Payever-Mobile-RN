@@ -160,9 +160,8 @@ export default class SwitchableTimePeriodPref extends Component {
 }
 
 function formatTime(time: Date) {
-  const isoTime = new Date(time);
-  isoTime.setMinutes(isoTime.getMinutes() - time.getTimezoneOffset());
-  return isoTime.toISOString().substr(11, 5);
+  const offsetTime = new Date(time - (time.getTimezoneOffset() * 60 * 1000));
+  return offsetTime.toISOString().substr(11, 5);
 }
 
 function makeTime({ hour, minute }) {
