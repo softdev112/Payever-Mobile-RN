@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Animated, TouchableOpacity } from 'react-native';
-import { Icon, StyleSheet, Text, View } from 'ui';
+import { StyleSheet, Text, View } from 'ui';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
 import type UserSettings
@@ -13,9 +13,8 @@ export default class SwitchableTimePeriodPref extends Component {
   props: {
     switchPrefName: string;
     switchTitle: string;
-    switchIcon?: string;
+    switchIcon: string;
     periodTitle: string;
-    periodIcon?: string;
     periodFromPrefName: string;
     periodToPrefName: string;
     settings: UserSettings;
@@ -40,26 +39,11 @@ export default class SwitchableTimePeriodPref extends Component {
       switchPrefName,
     } = this.props;
 
-    const initFromTime = new Date(0, 0, 0, 0, 0);
-    const initToTime = new Date(0, 0, 0, 0, 0);
-
     const initialState = !!(settings[switchPrefName]);
 
-    const currentFromTime = settings[periodFromPrefName];
-    if (currentFromTime && currentFromTime.hour && currentFromTime.minute) {
-      initFromTime.setUTCHours(currentFromTime.hour);
-      initFromTime.setUTCMinutes(currentFromTime.minute);
-    }
-
-    const currentToTime = settings[periodToPrefName];
-    if (currentToTime && currentToTime.hour && currentToTime.minute) {
-      initToTime.setUTCHours(currentToTime.hour);
-      initToTime.setUTCMinutes(currentToTime.minute);
-    }
-
     this.state = {
-      fromTime: initFromTime,
-      toTime: initToTime,
+      fromTime: makeTime(settings[periodFromPrefName]),
+      toTime: makeTime(settings[periodToPrefName]),
       isTimePeriodOn: initialState,
       isFrom: false,
       timePeriodHeight: new Animated.Value(
@@ -79,6 +63,8 @@ export default class SwitchableTimePeriodPref extends Component {
   }
 
   onTimePicked(date) {
+    console.log('DATE', date);
+
     const { periodFromPrefName, periodToPrefName, settings } = this.props;
     const { isFrom } = this.state;
 
@@ -86,13 +72,13 @@ export default class SwitchableTimePeriodPref extends Component {
 
     if (isFrom) {
       // Set from time
-      settings[periodFromPrefName].hour = date.getUTCHours();
-      settings[periodFromPrefName].minute = date.getUTCMinutes();
+      settings[periodFromPrefName].hour = date.getHours();
+      settings[periodFromPrefName].minute = date.getMinutes();
       this.setState({ fromTime: date });
     } else {
       // Set to time
-      settings[periodToPrefName].hour = date.getUTCHours();
-      settings[periodToPrefName].minute = date.getUTCMinutes();
+      settings[periodToPrefName].hour = date.getHours();
+      settings[periodToPrefName].minute = date.getMinutes();
       this.setState({ toTime: date });
     }
   }
@@ -112,7 +98,6 @@ export default class SwitchableTimePeriodPref extends Component {
       switchPrefName,
       switchIcon,
       periodTitle,
-      periodIcon,
     } = this.props;
 
     const { isFrom, timePeriodHeight, fromTime, toTime } = this.state;
@@ -120,18 +105,6 @@ export default class SwitchableTimePeriodPref extends Component {
       inputRange: [0, PERIOD_BLOCK_HEIGHT],
       outputRange: [0, 1],
     });
-
-    const fromHour = fromTime.getUTCHours() > 9
-      ? String(fromTime.getUTCHours()) : `0${fromTime.getUTCHours()}`;
-
-    const fromMinute = fromTime.getUTCMinutes() > 9
-      ? String(fromTime.getUTCMinutes()) : `0${fromTime.getUTCMinutes()}`;
-
-    const toHour = toTime.getUTCHours() > 9
-      ? String(toTime.getUTCHours()) : `0${toTime.getUTCHours()}`;
-
-    const toMinute = toTime.getUTCMinutes() > 9
-      ? String(toTime.getUTCMinutes()) : `0${toTime.getUTCMinutes()}`;
 
     return (
       <View style={styles.container}>
@@ -145,37 +118,29 @@ export default class SwitchableTimePeriodPref extends Component {
 
         <Animated.View
           style={[
-            styles.timePeriodBlock,
+            styles.period,
             { height: timePeriodHeight },
             { opacity },
           ]}
         >
-          <View style={styles.timePeriodTitleBlock}>
-            {periodIcon &&
-            <Icon style={styles.icon} source={periodIcon} />}
-            <Text style={styles.subTitle}>{periodTitle}</Text>
-          </View>
-          <View style={styles.pickers}>
+
+          <Text style={styles.period_title}>{periodTitle}</Text>
+
+          <View style={styles.picker}>
             <TouchableOpacity
-              onPress={this.showTimePicker.bind(this, true)}
+              style={styles.picker_column}
+              onPress={() => this.showTimePicker(true)}
             >
-              <Text>
-                Start:
-                <Text style={styles.timeText}>
-                  {` ${fromHour}:${fromMinute}`}
-                </Text>
-              </Text>
+              <Text>Start: </Text>
+              <Text style={styles.picker_time}>{formatTime(fromTime)}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-              onPress={this.showTimePicker.bind(this, false)}
+              style={styles.picker_column}
+              onPress={() => this.showTimePicker(false)}
             >
-              <Text>
-                Stop:
-                <Text style={styles.timeText}>
-                  {` ${toHour}:${toMinute}`}
-                </Text>
-              </Text>
+              <Text>Stop: </Text>
+              <Text style={styles.picker_time}>{formatTime(toTime)}</Text>
             </TouchableOpacity>
 
             <DateTimePicker
@@ -185,7 +150,6 @@ export default class SwitchableTimePeriodPref extends Component {
               onConfirm={::this.onTimePicked}
               onCancel={::this.hideTimePicker}
               titleIOS="Choose time"
-              timeZoneOffsetInMinutes={0}
               is24Hour
             />
           </View>
@@ -195,26 +159,35 @@ export default class SwitchableTimePeriodPref extends Component {
   }
 }
 
+function formatTime(time: Date) {
+  const isoTime = new Date(time);
+  isoTime.setMinutes(isoTime.getMinutes() - time.getTimezoneOffset());
+  return isoTime.toISOString().substr(11, 5);
+}
+
+function makeTime({ hour, minute }) {
+  return new Date(0, 0, 0, hour, minute, 0);
+}
+
 const styles = StyleSheet.create({
   container: {
     alignItems: 'stretch',
     alignSelf: 'stretch',
-    paddingVertical: 5,
   },
 
-  timePeriodBlock: {
+  period: {
     justifyContent: 'flex-start',
     height: PERIOD_BLOCK_HEIGHT,
   },
 
-  timePeriodTitleBlock: {
+  period_title: {
+    flex: 1,
+    fontSize: 12,
     height: 35,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    paddingLeft: 25,
   },
 
-  pickers: {
+  picker: {
     flexDirection: 'row',
     height: 35,
     padding: 2,
@@ -222,17 +195,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  icon: {
-    marginRight: 8,
-    fontSize: 16,
+  picker_column: {
+    flexDirection: 'row',
   },
 
-  subTitle: {
-    flex: 1,
-    fontSize: 11,
-  },
-
-  timeText: {
+  picker_time: {
     color: '$pe_color_blue',
   },
 });
