@@ -1,4 +1,5 @@
 import type Avatar from './Avatar';
+import Offer from './Offer';
 
 export default class Message {
   avatar: Avatar;
@@ -26,7 +27,7 @@ export default class Message {
   id: number; // Message unique ID
   isSystem: boolean;
   medias: Array<any>;
-  offer: ?Object;
+  offer: Offer;
   offerId: ?number;
   opponentUnread: boolean; // Is unread by any of the chat opponent users
   own: boolean; // Is message own for current user
@@ -42,6 +43,10 @@ export default class Message {
   unread: boolean; // Is unread for requested it user
 
   constructor(data) {
+    if (data.offer) {
+      data.offer = new Offer(data.offer);
+    }
+
     Object.assign(this, data);
   }
 }

@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react/native';
 import { Loader, StyleSheet, View } from 'ui';
 
 import Footer from './Footer';
-import ChatMessage from './ChatMessage';
+import MessageView from './MessageView';
 import Header from './Header';
 import CommunicationStore from '../../../../store/CommunicationStore';
 import type Conversation from
@@ -67,7 +67,7 @@ export default class Chat extends Component {
   }
 
   renderRow(row) {
-    return <ChatMessage message={row} />;
+    return <MessageView message={row} />;
   }
 
   render() {
@@ -108,7 +108,8 @@ const styles = StyleSheet.create({
   },
 
   list: {
-    paddingHorizontal: 28,
+    paddingLeft: 28,
+    paddingRight: 65,
     paddingVertical: 10,
   },
 });
