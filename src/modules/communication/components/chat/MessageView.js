@@ -1,17 +1,18 @@
 import { Component } from 'react';
 import { Linking } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
-import { Icon, StyleSheet, Text, View } from 'ui';
+import { Html, Icon, StyleSheet, Text, View } from 'ui';
 import { log } from 'utils';
 //noinspection JSUnresolvedVariable
 import Hyperlink from 'react-native-hyperlink';
 import type Message from '../../../../store/CommunicationStore/models/Message';
 import { Config } from '../../../../config';
+import Offer from './OfferView';
 
 @inject('config')
 @observer
 // eslint-disable-next-line react/prefer-stateless-function
-export default class ChatMessage extends Component {
+export default class MessageView extends Component {
   props: {
     config?: Config;
     message: Message;
@@ -19,6 +20,26 @@ export default class ChatMessage extends Component {
 
   onLinkOpen(url) {
     Linking.openURL(url).catch(log.warn);
+  }
+
+  renderContent(message: Message) {
+    if (message.deleted) {
+      return <Text style={styles.message_deleted}>(deleted)</Text>;
+    }
+
+    if (message.offer) {
+      return <Offer offer={message.offer} />;
+    }
+
+    if (message.body.startsWith('<')) {
+      return <Html style={styles.message} source={message.body} />;
+    }
+
+    return (
+      <Hyperlink linkStyle={styles.links} onPress={this.onLinkOpen}>
+        <Text style={styles.message}>{message.body}</Text>
+      </Hyperlink>
+    );
   }
 
   render() {
@@ -37,20 +58,7 @@ export default class ChatMessage extends Component {
             <Text style={styles.userName}>{`${message.senderName} `}</Text>
             <Text style={styles.date}>{message.dateFormated}</Text>
           </View>
-
-          {!message.deleted && (
-            <Hyperlink
-              linkStyle={styles.links}
-              onPress={url => Linking.openURL(url)}
-            >
-              <Text style={styles.message}>{message.body}</Text>
-            </Hyperlink>
-          )}
-
-          {message.deleted && (
-            <Text style={styles.message_deleted}>(deleted)</Text>
-          )}
-
+          {this.renderContent(message)}
         </View>
       </View>
     );
@@ -59,7 +67,6 @@ export default class ChatMessage extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     flexDirection: 'row',
     marginBottom: 12,
     minHeight: 50,
