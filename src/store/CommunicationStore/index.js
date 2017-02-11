@@ -76,7 +76,7 @@ export default class CommunicationStore {
     const { api: { messenger } } = this.store;
     const { messengerUser, userSettings } = this.messengerInfo;
 
-    messenger.saveSettings(messengerUser.id, userSettings);
+    return messenger.saveSettings(messengerUser.id, userSettings);
   }
 
   initSocket(url, userId) {

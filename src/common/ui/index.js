@@ -10,6 +10,7 @@ export Container from './Container';
 export Error from './Error';
 export GridView from './GridView';
 export Header from './Header';
+export Html from './Html/index';
 export Icon from './Icon';
 export IconText from './IconText';
 export ImageButton from './ImageButton';

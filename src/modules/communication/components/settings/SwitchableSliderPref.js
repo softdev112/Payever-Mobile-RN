@@ -1,10 +1,11 @@
 import { Component } from 'react';
 import { Animated, Slider } from 'react-native';
-import { Icon, StyleSheet, Text, View } from 'ui';
+import { StyleSheet, View } from 'ui';
 
 import type UserSettings
   from '../../../../store/CommunicationStore/models/UserSettings';
 import CheckBoxPref from './CheckBoxPref';
+import Title from './Title';
 
 const SLIDER_BLOCK_HEIGHT = 45;
 
@@ -97,11 +98,7 @@ export default class SwitchableSliderPref extends Component {
             { opacity },
           ]}
         >
-          <View style={styles.sliderTitleBlock}>
-            {sliderIcon &&
-            <Icon style={styles.icon} source={sliderIcon} />}
-            <Text style={styles.title}>{sliderTitle}</Text>
-          </View>
+          <Title icon={sliderIcon} title={sliderTitle} />
           <Slider
             style={styles.sliderGauge}
             minimumValue={sliderMin}
@@ -120,28 +117,15 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'stretch',
     alignSelf: 'stretch',
-    paddingVertical: 5,
   },
 
   sliderBlock: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
     height: SLIDER_BLOCK_HEIGHT,
   },
 
-  sliderTitleBlock: {
-    flex: 50,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-
   sliderGauge: {
-    flex: 50,
-  },
-
-  icon: {
-    marginRight: 8,
-    fontSize: 16,
+    flex: 1,
   },
 });
