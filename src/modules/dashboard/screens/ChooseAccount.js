@@ -5,7 +5,7 @@ import type { Navigator } from 'react-native-navigation';
 import {
   GridView, Header, IconText, Loader, Text, View, StyleSheet,
 } from 'ui';
-
+import { registerNotifications } from 'utils';
 import type { Config } from '../../../config';
 import type UserProfilesStore from '../../../store/UserProfilesStore';
 import type Profile from '../../../store/UserProfilesStore/models/Profile';
@@ -47,6 +47,11 @@ export default class ChooseAccount extends Component {
         passProps: { message: userProfiles.error },
       });
     }
+
+    const { store, privateProfile } = userProfiles;
+
+    // Register push notifications
+    registerNotifications(store.api.device, privateProfile.user);
   }
 
   onAddNewBusiness() {

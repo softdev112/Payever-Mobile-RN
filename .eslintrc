@@ -8,9 +8,14 @@
   ],
 
   "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".json", ".android.js", ".ios.js"]
+      }
+    },
     "import/core-modules": ["ui", "utils"],
     "import/extensions": [
-      ".js", ".json", ".png"
+      ".js", ".json", ".png", ".android.js", ".ios.js"
     ]
   },
 
