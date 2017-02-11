@@ -2,7 +2,6 @@ import { observable, action, extendObservable } from 'mobx';
 import { now, isDate } from 'lodash';
 import { AsyncStorage } from 'react-native';
 import { apiHelper } from 'utils';
-
 import type Store from './index';
 import type { AuthData } from '../common/api/AuthApi';
 

@@ -8,6 +8,7 @@ import UserApi from './UserApi';
 import ProfilesApi from './ProfilesApi';
 import MenuApi from './MenuApi';
 import MessengerApi from './MessengerApi';
+import DeviceApi from './DeviceApi';
 import { showScreen } from '../Navigation';
 import type { Config } from '../../config';
 
@@ -43,6 +44,7 @@ export default class PayeverApi {
     this.messenger = new MessengerApi(this);
     this.user      = new UserApi(this);
     this.profiles  = new ProfilesApi(this);
+    this.device    = new DeviceApi(this);
   }
 
   async get(url: string, query: Object = null): Promise<ApiResp> {
@@ -56,17 +58,21 @@ export default class PayeverApi {
   async post(
     url: string,
     requestData: Object = null,
-    { format = 'formData' }: { format: DataFormat } = {}
+    requestOptions: RequestOptions = {}
   ): Promise<ApiResp> {
     const headers = new Headers();
     headers.append('Accept', 'application/json');
 
-    const contentType = format === 'formData'
+    const contentType = requestOptions.format === 'formData'
       ? 'multipart/form-data' : 'application/json';
     headers.append('Content-Type', contentType);
 
     const token = await this.authStore.getAccessToken();
     headers.append('Authorization', 'Bearer ' + token);
+
+    if (requestOptions.addTokenToHeaders) {
+      headers.append('access_token', token);
+    }
 
     const options = {
       headers,
@@ -76,7 +82,7 @@ export default class PayeverApi {
       cache: 'default',
     };
 
-    if (format === 'formData') {
+    if (requestOptions.format === 'formData') {
       options.body = objectToFormData(requestData);
     } else {
       options.body = JSON.stringify(requestData);
@@ -89,13 +95,31 @@ export default class PayeverApi {
   async delete(
     url: string,
     requestData: Object = null,
-    { format = 'formData' }: { format: DataFormat } = {}
+    requestOptions: RequestOptions = {}
   ): Promise<ApiResp> {
+    const headers = new Headers();
+    headers.append('Accept', 'application/json');
+
+    const contentType = requestOptions.format === 'formData'
+      ? 'multipart/form-data' : 'application/json';
+    headers.append('Content-Type', contentType);
+
+    const token = await this.authStore.getAccessToken();
+    headers.append('Authorization', 'Bearer ' + token);
+
+    if (requestOptions.addTokenToHeaders) {
+      headers.append('access_token', token);
+    }
+
     const options = {
+      headers,
       method: 'DELETE',
+      mode: 'cors',
+      credentials: 'include',
+      cache: 'default',
     };
 
-    if (format === 'formData') {
+    if (requestOptions.format === 'formData') {
       options.body = objectToFormData(requestData);
     } else {
       options.body = JSON.stringify(requestData);
@@ -197,4 +221,7 @@ function objectToFormData(data: Object) {
   return formData;
 }
 
-type DataFormat = 'json' | 'formData';
+type RequestOptions = {
+  format: 'json' | 'formData';
+  addTokenToHeaders: boolean;
+};
