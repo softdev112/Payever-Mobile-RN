@@ -1,7 +1,9 @@
-import { Component, PropTypes } from 'react';
+import { Component } from 'react';
+import { ScrollView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { NavBar, StyleSheet, View } from 'ui';
 import type { Navigator } from 'react-native-navigation';
+import { log } from 'utils';
 
 import type CommunicationStore from '../../../store/CommunicationStore';
 import CheckBoxPref from '../components/settings/CheckBoxPref';
@@ -16,25 +18,14 @@ export default class Settings extends Component {
     navBarHidden: true,
   };
 
-  static contextTypes = {
-    navigator: PropTypes.object.isRequired,
-  };
-
-  context: {
+  props: {
+    communication: CommunicationStore;
     navigator: Navigator;
   };
 
-  props: {
-    communication: CommunicationStore;
-  };
-
-  onCancelPress() {
-    this.context.navigator.pop();
-  }
-
   onSavePress() {
-    this.props.communication.saveUserSettings();
-    this.context.navigator.pop();
+    this.props.communication.saveUserSettings().catch(log.error);
+    this.props.navigator.pop();
   }
 
   render() {
@@ -43,50 +34,44 @@ export default class Settings extends Component {
     return (
       <View style={styles.container}>
         <NavBar popup>
-          <NavBar.Back style={styles.closeBtn} />
-          <NavBar.Title icon="icon-settings-24" title="Settings" />
-          <NavBar.Button
-            style={styles.saveBtnText}
-            title="Save"
-            onPress={::this.onSavePress}
-          />
+          <NavBar.Back />
+          <NavBar.Button title="Save" onPress={::this.onSavePress} />
         </NavBar>
-        <View style={styles.settings}>
+        <ScrollView contentContainerStyle={styles.settings}>
           <CheckBoxPref
             prefName="notificationDesktop"
             title="Desktop Notifications"
-            icon="icon-mac-24"
+            icon="fa-desktop"
             settings={userSettings}
           />
           <CheckBoxPref
             prefName="notificationPreview"
             title="Message Preview"
-            icon="icon-mail-2-16"
+            icon="fa-envelope-o"
             settings={userSettings}
           />
           <SwitchableSliderPref
             switchPrefName="notificationSound"
             switchTitle="Sound Notifications"
-            switchIcon="icon-check2-16"
+            switchIcon="fa-volume-off"
             sliderPrefName="notificationVolume"
             sliderMin={0}
             sliderMax={100}
             sliderTitle="Sound Volume"
-            sliderIcon="icon-check2-16"
+            sliderIcon="fa-volume-up"
             settings={userSettings}
           />
           <SwitchableTimePeriodPref
             switchPrefName="silentPeriodState"
             switchTitle="Do not disturb period"
-            switchIcon="icon-check2-16"
+            switchIcon="fa-exclamation-triangle"
             periodTitle={'Select time period during which desktop and sound' +
               'notifications will not be shown.'}
-            periodIcon="icon-check2-16"
             periodFromPrefName="silentPeriodStart"
             periodToPrefName="silentPeriodStop"
             settings={userSettings}
           />
-        </View>
+        </ScrollView>
       </View>
     );
   }
@@ -98,23 +83,7 @@ const styles = StyleSheet.create({
   },
 
   settings: {
-    justifyContent: 'flex-start',
-    marginTop: 20,
-    alignSelf: 'stretch',
     paddingHorizontal: 25,
-  },
-
-  settingsContent: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-  },
-
-  closeBtn: {
-    color: '$pe_color_light_gray_1',
-  },
-
-  saveBtnText: {
-    color: '$pe_color_blue',
+    paddingVertical: 15,
   },
 });
