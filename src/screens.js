@@ -5,6 +5,7 @@ export default {
   'communication.Chat': require('./modules/communication/screens/Chat').default,
   'communication.Main': require('./modules/communication/screens/Main').default,
   'communication.Settings': require('./modules/communication/screens/Settings').default,
+  'communication.OfferPreview': require('./modules/communication/screens/OfferPreview').default,
   'core.Debug': require('./modules/core/screens/Debug').default,
   'core.ErrorPage': require('./modules/core/screens/ErrorPage').default,
   'core.SideMenu': require('./modules/core/screens/SideMenu').default,

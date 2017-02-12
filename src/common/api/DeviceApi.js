@@ -16,7 +16,7 @@ export default class DeviceApi {
   ): Promise<ApiResp> {
     const userDeviceInfo: UserDeviceInfo = {
       email: userProfile.email,
-      phone: '+79103330727',
+      phone: '+12345678900',
       pushEnabled: true,
       smsEnabled: false,
       emailEnabled: false,
@@ -24,9 +24,6 @@ export default class DeviceApi {
       label: `${DeviceInfo.getBrand()}-${DeviceInfo.getModel()}`,
       token: deviceToken,
     };
-
-    console.log('ssssssssssssssss');
-    console.log(userDeviceInfo);
 
     return this.client.post('/device/link', userDeviceInfo, {
       format: 'json',

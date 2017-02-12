@@ -9,6 +9,7 @@ import ProfilesApi from './ProfilesApi';
 import MenuApi from './MenuApi';
 import MessengerApi from './MessengerApi';
 import DeviceApi from './DeviceApi';
+import MarketingApi from './MarketingApi';
 import { showScreen } from '../Navigation';
 import type { Config } from '../../config';
 
@@ -45,6 +46,7 @@ export default class PayeverApi {
     this.user      = new UserApi(this);
     this.profiles  = new ProfilesApi(this);
     this.device    = new DeviceApi(this);
+    this.marketing = new MarketingApi(this);
   }
 
   async get(url: string, query: Object = null): Promise<ApiResp> {
