@@ -1,8 +1,9 @@
 /* eslint-disable */
 import { Component } from 'react';
-import { Html, NavBar, StyleSheet, View } from 'ui';
-import { Navigator } from 'react-native-navigation';
-
+import { TouchableOpacity } from 'react-native';
+import { Html, NavBar, StyleSheet, Text, View } from 'ui';
+import { Navigator, Navigation } from 'react-native-navigation';
+import offer from './data';
 
 
 export default class Debug extends Component {
@@ -22,6 +23,17 @@ export default class Debug extends Component {
       <View style={styles.container}>
         <NavBar.Default />
         <Html source={html} />
+        <TouchableOpacity
+          onPress={() => { Navigation.showModal({
+            screen: 'communication.OfferPreview',
+            title: 'Got an Offer:',
+            passProps: {
+              offer,
+            },
+          })}}
+        >
+          <Text>Show Offer</Text>
+        </TouchableOpacity>
       </View>
     )
   }
