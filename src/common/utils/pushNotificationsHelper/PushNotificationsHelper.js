@@ -79,14 +79,14 @@ export default class PushNotificationsHelper {
     // eslint-disable-next-line no-underscore-dangle
     const { subtype, data } =  notification._data.parameters;
     if (subtype === 'offer') {
-      this.openOffer('75369' || data.offer);
+      this.openOffer(data.offer);
     } else {
       log.warn('Unrecognized notification type');
     }
   }
 
   async openOffer(id) {
-    apiHelper(this.api.marketing.getOfferPreviewById(id))
+    apiHelper(this.api.profiles.getOfferById(id))
       .success((offer) => {
         // Go to offer preview
         Navigation.showModal({

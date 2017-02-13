@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Image, ScrollView } from 'react-native';
 import { Navigation } from 'react-native-navigation';
-import { Html, NavBar, StyleSheet, Text, View } from 'ui';
+import { Icon, Html, NavBar, StyleSheet, Text, View } from 'ui';
 
 import defaultAvatar
   from '../../../store/UserProfilesStore/images/no-avatar.png';
@@ -21,50 +21,33 @@ export default class OfferPreview extends Component {
     });
   }
 
-  renderContacts(contacts) {
-    return (
-      <View style={styles.contacts}>
-        {contacts.map(contact => <Text key={contact}>{contact}</Text>)}
-      </View>
-    );
-  }
-
   renderItems(items) {
     return (
-      <View style={styles.contacts}>
-        {items.map((item) => (
-          <View key={item.name}>
-            <Text style={styles.textHeader}>Name: {item.name}</Text>
-            <Text style={styles.textHeader}>{'Description: '}
-              <Text style={styles.textData}>{item.description}</Text>
+      items.map((item) => (
+        <View key={item.name}>
+          <Image
+            style={styles.itemImage}
+            source={{ uri: item.thumbnail }}
+            resizeMode="contain"
+          />
+          <Text style={styles.itemTitle}>{item.name}</Text>
+          <View style={styles.priceBlock}>
+            <Text style={styles.price}>
+              {formatCurrency(item.positions[0].price)}
             </Text>
-            <Text style={styles.textHeader}>
-              Price: {item.price} {item.currency}
-            </Text>
-            <Image
-              style={styles.itemImage}
-              source={{ uri: item.thumbnail }}
+            <Icon
+              style={styles.currencyIcon}
+              source="fa-euro"
             />
           </View>
-        ))}
-      </View>
-    );
-  }
-
-  renderPos(pos) {
-    return pos.map(posId => <Text key={posId}>{posId}</Text>);
-  }
-
-  renderRecipients(recipients) {
-    return (
-      <View>
-        {recipients.map(recipient => <Text key={recipient}>{recipient}</Text>)}
-      </View>
+        </View>
+      ))
     );
   }
 
   render() {
     const { offer } = this.props;
+    const { marketing_channel_set: offerDetails } = offer;
 
     let source;
     if (offer.business_logo_url) {
@@ -73,69 +56,85 @@ export default class OfferPreview extends Component {
       source = defaultAvatar;
     }
 
+    const createDate = new Date(offer.created_at);
+    const diffTime = Math.floor((Date.now() - createDate) / 60000);
+
+    let diffTimeStr;
+    if (diffTime > 60) {
+      diffTimeStr = `created: ${Math.floor(diffTime / 60)} hours ago`;
+    } else {
+      diffTimeStr = `created: ${diffTime} minutes ago`;
+    }
+
     return (
       <View style={styles.container}>
         <NavBar popup>
           <NavBar.Back onPress={::this.onClosePreview} />
           <NavBar.Title title="Got Offer" />
-          <NavBar.Button title="Buy" />
         </NavBar>
         <ScrollView
           contentContainerStyle={styles.mainContent}
         >
+          <Image
+            style={styles.avatar}
+            source={source}
+          />
+          <Text style={styles.storeTitle}>
+            {offerDetails.store.business.name}
+          </Text>
+
+          <View style={styles.offerInfoBlock}>
+            <Text style={styles.offerTitle}>{offer.title}</Text>
+            <View>
+              <Text style={styles.createdTime}>
+                {diffTimeStr}
+              </Text>
+            </View>
+            <Html source={offer.description} />
+          </View>
+
           <View>
-            <Image
-              style={styles.avatar}
-              source={source}
-            />
+            {this.renderItems(offerDetails.store.items)}
           </View>
-
-          <Text style={styles.textHeader}>Receivers: </Text>
-          {this.renderContacts(offer.contacts)}
-
-          <Text style={styles.textHeader}>
-            Ready To Send:
-            <Text style={styles.textData}>
-              {offer.is_redy_to_send ? ' YES' : ' NO' }
-            </Text>
-          </Text>
-
-          <Text style={styles.textHeader}>
-            Type: <Text style={styles.textData}>{offer.type}</Text>
-          </Text>
-
-          <Text style={styles.offerTitle}>
-            {offer.title}
-          </Text>
-          <Html source={offer.description} />
-
-          <Text style={styles.textHeader}>
-            {'Shipping Price: '}
-            <Text style={styles.textData}>
-              {offer.price || '0'} {offer.currency}
-            </Text>
-          </Text>
-
-          <Text style={styles.textHeader}>
-            {'Delivery Time: '}
-            <Text style={styles.textData}>
-              {offer.delivery_time_label || 'unknown'}
-            </Text>
-          </Text>
-
-          <Text style={styles.textHeader}>Payment Systems:</Text>
-
-          <View style={styles.pos}>
-            {this.renderPos(offer.payment_option_ids)}
-          </View>
-
-          <View>{this.renderRecipients(offer.recipients)}</View>
-
-          <View>{this.renderItems(offer.items)}</View>
         </ScrollView>
       </View>
     );
   }
+}
+
+function formatCurrency(value) {
+  if (value === ''
+    || (typeof value !== 'string' && typeof value !== 'number')) {
+    return value;
+  }
+
+  const separator = ',';
+  const dot = '.';
+
+  const inputStr = typeof value === 'number' ? value.toFixed(2) : value;
+  const strValParts = inputStr.split(dot);
+  const valueLength = strValParts[0].length;
+  const mainPartStr = strValParts[0];
+
+  if (valueLength <= 3) {
+    return (
+      mainPartStr + dot + (strValParts.length > 1 ? strValParts[1] : '00')
+    );
+  }
+
+  let outStr = '';
+  let count = 0;
+  for (let i = valueLength - 1; i >= 0; i -= 1) {
+    const current = mainPartStr.charAt(i);
+    outStr = current + outStr;
+    count += 1;
+
+    if (count % 3 === 0 && i !== 0) {
+      outStr = separator + outStr;
+    }
+  }
+
+  return outStr + dot + (strValParts.length > 1 ? strValParts[1] : '00');
 }
 
 const styles = StyleSheet.create({
@@ -145,41 +144,72 @@ const styles = StyleSheet.create({
 
   mainContent: {
     justifyContent: 'flex-start',
-    padding: 8,
+    alignItems: 'center',
+    padding: 15,
   },
 
   avatar: {
-    alignSelf: 'center',
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 10,
   },
 
-  itemImage: {
-    marginTop: 10,
-    width: 300,
-    height: 200,
-    alignSelf: 'center',
-  },
-
-  textHeader: {
-    fontSize: 16,
+  storeTitle: {
+    fontSize: 26,
     fontWeight: '500',
-    marginTop: 10,
+    marginBottom: 20,
   },
 
-  textData: {
-    fontSize: 14,
+  offerInfoBlock: {
+    alignItems: 'flex-start',
   },
 
   offerTitle: {
-    alignSelf: 'center',
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '500',
-    marginVertical: 10,
+    marginBottom: 2,
   },
 
-  pos: {
+  createdTime: {
+    color: '$pe_color_gray',
+    fontSize: 16,
+    marginBottom: 15,
+  },
+
+  $imgWidth: '85%',
+  itemImage: {
+    marginTop: 8,
+    width: '$imgWidth',
+    height: '$imgWidth',
+  },
+
+  timePass: {
+    fontSize: 14,
+    color: '$pe_color_gray',
+  },
+
+  itemTitle: {
+    fontSize: 24,
+    alignSelf: 'center',
+    marginBottom: 8,
+  },
+
+  priceBlock: {
     flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 5,
+  },
+
+  price: {
+    fontSize: 24,
+    color: '$pe_color_gray',
+  },
+
+  currencyIcon: {
+    fontSize: 22,
+    color: '$pe_color_gray',
+    marginLeft: 10,
   },
 });
