@@ -51,7 +51,7 @@ export default class ChooseAccount extends Component {
     const { store, privateProfile } = userProfiles;
 
     // Register push notifications
-    pushNotificationsHelper.createInstance(store.api, privateProfile)
+    pushNotificationsHelper.createInstance(store.api, privateProfile.user)
       .registerNotifications();
   }
 

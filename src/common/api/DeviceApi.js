@@ -25,6 +25,10 @@ export default class DeviceApi {
       token: deviceToken,
     };
 
+    console.log('ssssssssssssssssssssssss');
+    console.log(userDeviceInfo);
+    console.log('ssssssssssssssssssssssss');
+
     return this.client.post('/device/link', userDeviceInfo, {
       format: 'json',
       addTokenToHeaders: true,
