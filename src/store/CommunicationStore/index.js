@@ -1,7 +1,8 @@
-import { action, autorun, observable } from 'mobx';
+import { action, autorun, observable, extendObservable } from 'mobx';
 import { apiHelper } from 'utils';
 
 import type Store from '../index';
+import UserSettings from './models/UserSettings';
 import MessengerInfo from './models/MessengerInfo';
 import Conversation from './models/Conversation';
 import type BusinessProfile from '../UserProfilesStore/models/BusinessProfile';
@@ -72,11 +73,18 @@ export default class CommunicationStore {
   }
 
   @action
-  async saveUserSettings() {
+  async saveUserSettings(settings: UserSettings) {
     const { api: { messenger } } = this.store;
-    const { messengerUser, userSettings } = this.messengerInfo;
+    const { messengerUser } = this.messengerInfo;
 
-    return messenger.saveSettings(messengerUser.id, userSettings);
+    // save to local
+    apiHelper(messenger.saveSettings(messengerUser.id, settings))
+      .success(() => {
+        // Save changes to local
+        extendObservable(this.messengerInfo, {
+          userSettings: new UserSettings(settings),
+        });
+      });
   }
 
   initSocket(url, userId) {
