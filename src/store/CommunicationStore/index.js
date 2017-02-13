@@ -82,7 +82,7 @@ export default class CommunicationStore {
       .success(() => {
         // Save changes to local
         extendObservable(this.messengerInfo, {
-          userSettings: settings,
+          userSettings: new UserSettings(settings),
         });
       });
   }
