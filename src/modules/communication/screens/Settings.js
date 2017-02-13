@@ -6,6 +6,8 @@ import type { Navigator } from 'react-native-navigation';
 import { log } from 'utils';
 
 import type CommunicationStore from '../../../store/CommunicationStore';
+import type UserSettings
+  from '../../../store/CommunicationStore/models/UserSettings';
 import CheckBoxPref from '../components/settings/CheckBoxPref';
 import SwitchableSliderPref from '../components/settings/SwitchableSliderPref';
 import SwitchableTimePeriodPref
@@ -23,13 +25,28 @@ export default class Settings extends Component {
     navigator: Navigator;
   };
 
+  state: {
+    settings: UserSettings;
+  };
+
+  constructor(props) {
+    super(props);
+
+    // Make a local copy off settings to the state
+    const { userSettings } = this.props.communication.messengerInfo;
+    this.state = {
+      settings: Object.assign({}, userSettings),
+    };
+  }
+
   onSavePress() {
-    this.props.communication.saveUserSettings().catch(log.error);
+    const { settings } = this.state;
+    this.props.communication.saveUserSettings(settings).catch(log.error);
     this.props.navigator.pop();
   }
 
   render() {
-    const { userSettings } = this.props.communication.messengerInfo;
+    const { settings } = this.state;
 
     return (
       <View style={styles.container}>
@@ -39,18 +56,19 @@ export default class Settings extends Component {
         </NavBar>
         <ScrollView contentContainerStyle={styles.settings}>
           <CheckBoxPref
+            settings={settings}
             prefName="notificationDesktop"
             title="Desktop Notifications"
             icon="fa-desktop"
-            settings={userSettings}
           />
           <CheckBoxPref
+            settings={settings}
             prefName="notificationPreview"
             title="Message Preview"
             icon="fa-envelope-o"
-            settings={userSettings}
           />
           <SwitchableSliderPref
+            settings={settings}
             switchPrefName="notificationSound"
             switchTitle="Sound Notifications"
             switchIcon="fa-volume-off"
@@ -59,9 +77,9 @@ export default class Settings extends Component {
             sliderMax={100}
             sliderTitle="Sound Volume"
             sliderIcon="fa-volume-up"
-            settings={userSettings}
           />
           <SwitchableTimePeriodPref
+            settings={settings}
             switchPrefName="silentPeriodState"
             switchTitle="Do not disturb period"
             switchIcon="fa-exclamation-triangle"
@@ -69,7 +87,6 @@ export default class Settings extends Component {
               'notifications will not be shown.'}
             periodFromPrefName="silentPeriodStart"
             periodToPrefName="silentPeriodStop"
-            settings={userSettings}
           />
         </ScrollView>
       </View>
