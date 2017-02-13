@@ -46,7 +46,6 @@ export default class Settings extends Component {
   }
 
   render() {
-    // eslint-disable-next-line no-unused-vars
     const { settings } = this.state;
 
     return (
@@ -57,19 +56,19 @@ export default class Settings extends Component {
         </NavBar>
         <ScrollView contentContainerStyle={styles.settings}>
           <CheckBoxPref
-            settings
+            settings={settings}
             prefName="notificationDesktop"
             title="Desktop Notifications"
             icon="fa-desktop"
           />
           <CheckBoxPref
-            settings
+            settings={settings}
             prefName="notificationPreview"
             title="Message Preview"
             icon="fa-envelope-o"
           />
           <SwitchableSliderPref
-            settings
+            settings={settings}
             switchPrefName="notificationSound"
             switchTitle="Sound Notifications"
             switchIcon="fa-volume-off"
@@ -80,7 +79,7 @@ export default class Settings extends Component {
             sliderIcon="fa-volume-up"
           />
           <SwitchableTimePeriodPref
-            settings
+            settings={settings}
             switchPrefName="silentPeriodState"
             switchTitle="Do not disturb period"
             switchIcon="fa-exclamation-triangle"
