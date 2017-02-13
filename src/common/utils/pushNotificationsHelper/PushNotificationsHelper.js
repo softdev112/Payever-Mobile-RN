@@ -32,7 +32,7 @@ export default class PushNotificationsHelper {
     Alert.alert(
       'New Offer Received',
       // eslint-disable-next-line no-underscore-dangle
-      JSON.stringify(notification),  // notification._alert,
+      notification._alert, // JSON.stringify(notification),
       [
         {
           text: 'Show Offer',
@@ -79,7 +79,7 @@ export default class PushNotificationsHelper {
     // eslint-disable-next-line no-underscore-dangle
     const { subtype, data } =  notification._data.parameters;
     if (subtype === 'offer') {
-      this.openOffer(data.offer);
+      this.openOffer('75369' || data.offer);
     } else {
       log.warn('Unrecognized notification type');
     }
