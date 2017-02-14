@@ -200,7 +200,6 @@ const styles = StyleSheet.create({
   cards_container: {
     flexDirection: 'column',
     justifyContent: 'center',
-
   },
 
   cards_scroll: {
@@ -210,25 +209,44 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    width: 100,
     height: 105,
+    width: 100,
   },
 
   icon_image: {
-    width: 50,
-    height: 50,
-    marginBottom: 8,
     borderRadius: 15,
     elevation: 5,
+    height: 50,
+    marginBottom: 8,
     shadowColor: 'rgba(0, 0, 0, .1)',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 1,
     shadowRadius: 5,
+    width: 50,
   },
 
   icon_title: {
     color: '$pe_color_gray_2',
+    backgroundColor: 'transparent',
     fontWeight: '400',
     paddingTop: 0,
+  },
+
+  '@media (min-width: 550)': {
+    icon: {
+      width: 130,
+      height: 135,
+    },
+
+    icon_image: {
+      borderRadius: 18,
+      height: 80,
+      shadowRadius: 10,
+      width: 80,
+    },
+
+    icon_title: {
+      fontSize: 15,
+    },
   },
 });
