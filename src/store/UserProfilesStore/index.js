@@ -18,6 +18,8 @@ export default class UserProfilesStore {
 
   @observable currentProfile: PersonalProfile | BusinessProfile = null;
 
+  @observable offers: Array<any> = {};
+
   @observable error: string     = '';
   @observable isLoading: string = false;
 
@@ -130,6 +132,15 @@ export default class UserProfilesStore {
   @action
   setCurrentProfile(profile: Profile) {
     this.currentProfile = profile;
+  }
+
+  @action
+  getOfferById(id: string) {
+    const { api } = this.store;
+
+    return apiHelper(api.profiles.getOfferById(id), this)
+      .success(offer => this.offers[id] = offer)
+      .promise();
   }
 
   businessById(profileId): BusinessProfile {

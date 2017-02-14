@@ -1,19 +1,30 @@
 import { Component } from 'react';
 import { Image, ScrollView } from 'react-native';
 import { Navigation } from 'react-native-navigation';
-import { Icon, Html, NavBar, StyleSheet, Text, View } from 'ui';
+import { Icon, Html, Loader, NavBar, StyleSheet, Text, View } from 'ui';
+import { observer, inject } from 'mobx-react/native';
 
 import defaultAvatar
   from '../../../store/UserProfilesStore/images/no-avatar.png';
+import type UserProfilesStore from '../../../store/UserProfilesStore';
 
+@inject('userProfiles')
+@observer
 export default class OfferPreview extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
 
   props: {
-    offer: Object;
+    offerId: string;
+    userProfiles: UserProfilesStore;
   };
+
+
+  async componentWillMount() {
+    const { userProfiles, offerId } = this.props;
+    await userProfiles.getOfferById(offerId);
+  }
 
   onClosePreview() {
     Navigation.dismissModal({
@@ -45,8 +56,7 @@ export default class OfferPreview extends Component {
     );
   }
 
-  render() {
-    const { offer } = this.props;
+  renderOffer(offer) {
     const { marketing_channel_set: offerDetails } = offer;
 
     let source;
@@ -67,36 +77,51 @@ export default class OfferPreview extends Component {
     }
 
     return (
+      <ScrollView
+        contentContainerStyle={styles.mainContent}
+      >
+        <Image
+          style={styles.avatar}
+          source={source}
+        />
+        <Text style={styles.storeTitle}>
+          {offerDetails.store.business.name}
+        </Text>
+
+        <View style={styles.offerInfoBlock}>
+          <Text style={styles.offerTitle}>{offer.title}</Text>
+          <View>
+            <Text style={styles.createdTime}>
+              {diffTimeStr}
+            </Text>
+          </View>
+          <Html source={offer.description} />
+        </View>
+
+        <View>
+          {this.renderItems(offerDetails.store.items)}
+        </View>
+      </ScrollView>
+    );
+  }
+
+  render() {
+    const { offerId, userProfiles } = this.props;
+
+    const offer = userProfiles.offers[offerId];
+
+    console.log('ssssssssssssss11111111111111');
+    console.log(offer);
+
+    return (
       <View style={styles.container}>
         <NavBar popup>
           <NavBar.Back onPress={::this.onClosePreview} />
           <NavBar.Title title="Best Offers" />
         </NavBar>
-        <ScrollView
-          contentContainerStyle={styles.mainContent}
-        >
-          <Image
-            style={styles.avatar}
-            source={source}
-          />
-          <Text style={styles.storeTitle}>
-            {offerDetails.store.business.name}
-          </Text>
-
-          <View style={styles.offerInfoBlock}>
-            <Text style={styles.offerTitle}>{offer.title}</Text>
-            <View>
-              <Text style={styles.createdTime}>
-                {diffTimeStr}
-              </Text>
-            </View>
-            <Html source={offer.description} />
-          </View>
-
-          <View>
-            {this.renderItems(offerDetails.store.items)}
-          </View>
-        </ScrollView>
+        <Loader isLoading={userProfiles.isLoading}>
+          {offer && this.renderOffer(offer)}
+        </Loader>
       </View>
     );
   }
