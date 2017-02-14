@@ -9,6 +9,7 @@ export default class Error extends Component {
     message: ?string;
     style?: Object | number;
     duration?: number; // ms
+    onShowEnd?: ?Function;
   };
 
   constructor(props) {
@@ -41,6 +42,9 @@ export default class Error extends Component {
     this.showTimer = setTimeout(() => {
       this.setState({ show: false });
       this.showTimer = null;
+      if (this.props.onShowEnd) {
+        this.props.onShowEnd();
+      }
     }, duration);
   }
 
