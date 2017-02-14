@@ -47,6 +47,7 @@ function OfferItemView({ item }: { item: OfferItem }) {
 const styles = StyleSheet.create({
   item: {
     marginTop: 20,
+    maxWidth: 320,
   },
 
   item_image: {
