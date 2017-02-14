@@ -31,10 +31,6 @@ export default class Debug extends Component {
       </p>
     `;
 
-    console.log(
-      require('htmlclean')(html)
-    )
-
     return (
       <View style={styles.container}>
         <NavBar.Default />
