@@ -180,7 +180,6 @@ const styles = StyleSheet.create({
   },
 
   period_title: {
-    flex: 1,
     fontSize: 12,
     height: 35,
     paddingLeft: 25,
