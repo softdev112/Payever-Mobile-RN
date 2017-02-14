@@ -8,11 +8,10 @@ export async function isConnected() {
 export async function loadFromApi(apiPromise, timeout) {
   const resp = await Promise.race([apiPromise, timeoutPromise(timeout)]);
   if (!resp.ok || resp.error) {
-    let errorMessage = resp.errorDescription || NETWORK_ERROR;
-    if (resp.error) {
-      errorMessage += ` (${resp.error})`;
-    }
-    throw new Error(errorMessage);
+    const errorMessage = resp.errorDescription || NETWORK_ERROR;
+    const error = new Error(errorMessage);
+    error.errorName = resp.error;
+    throw error;
   }
   return resp.data;
 }
