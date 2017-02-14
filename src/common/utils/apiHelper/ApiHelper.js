@@ -179,7 +179,7 @@ async function loadData(apiPromise, cacheId, lifeTime, timeout) {
       }
     } catch (e) {
       error = e.message;
-      log.warn(e);
+      log.warn(e + (e.errorName ? ` (${e.errorName})` : ''));
     }
   }
 

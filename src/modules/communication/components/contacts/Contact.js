@@ -89,5 +89,6 @@ const styles = StyleSheet.create({
     color: '#9ba2b1',
     flex: 1,
     fontSize: 12,
+    fontWeight: '400',
   },
 });
