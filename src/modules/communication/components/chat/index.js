@@ -108,8 +108,7 @@ const styles = StyleSheet.create({
   },
 
   list: {
-    paddingLeft: 28,
-    paddingRight: 65,
+    paddingHorizontal: 28,
     paddingVertical: 10,
   },
 });

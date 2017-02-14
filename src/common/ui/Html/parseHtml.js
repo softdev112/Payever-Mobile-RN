@@ -1,5 +1,5 @@
 //noinspection SpellCheckingInspection
-import htmlparser from './htmlparser2';
+import htmlparser from './vendors/htmlparser2';
 
 const BLOCK_TAGS = [
   'address', 'blockquote', 'dir', 'div', 'dl', 'form', 'h1', 'h2', 'h3', 'h4',
@@ -31,8 +31,14 @@ export default function parseHtml(html): Promise<Array<Node>> {
     },
 
     ontext(text) {
-      text = text.trim();
-      if (!text) return;
+      text = text
+        .replace(/[\s]+/gm, ' ');
+      if (!text.trim()) return;
+
+      if (needToTrimLeft()) {
+        text = text.replace(/^\s/, '');
+      }
+
       push({ text, name: 'text', type: 'inline' }, true);
     },
 
@@ -58,6 +64,20 @@ export default function parseHtml(html): Promise<Array<Node>> {
     if (!text) {
       tagStack.push(parent.children[parent.children.length - 1]);
     }
+  }
+
+  function needToTrimLeft() {
+    const parent: Node = tagStack[tagStack.length - 1];
+    if (!parent.children || parent.children.length < 1) {
+      return true;
+    }
+
+    const siblings = parent.children;
+    const previous = siblings[siblings.length - 1];
+    if (previous.name === 'br') {
+      return true;
+    }
+    return false;
   }
 }
 
