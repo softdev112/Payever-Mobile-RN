@@ -22,11 +22,16 @@ export default class Dock extends Component {
       title = 'Home';
     }
 
+    const imageStyles = [
+      styles.image,
+      item.label === 'dashboard' ? null : styles.image_shadow,
+    ];
+
     return (
       <IconText
         style={styles.icon}
         key={item.label}
-        imageStyle={styles.image}
+        imageStyle={imageStyles}
         textStyle={styles.title}
         onPress={() => onAppClick(item)}
         source={item.logoSource}
@@ -70,6 +75,8 @@ const styles = StyleSheet.create({
     height: 40,
   },
 
+  image_shadow: {},
+
   title: {
     fontSize: 10,
     paddingTop: 5,
@@ -101,12 +108,21 @@ const styles = StyleSheet.create({
     },
 
     icon: {
-      width: 100,
+      width: 105,
     },
 
     image: {
       width: 80,
       height: 80,
+    },
+
+    image_shadow: {
+      borderRadius: 18,
+      elevation: 4,
+      shadowColor: 'rgba(0, 0, 0, .1)',
+      shadowOffset: { width: 0, height: 0 },
+      shadowOpacity: 1,
+      shadowRadius: 5,
     },
 
     title: {
