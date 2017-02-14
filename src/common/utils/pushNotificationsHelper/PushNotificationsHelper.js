@@ -1,7 +1,6 @@
 import NotificationsIOS from 'react-native-notifications';
 import { Navigation } from 'react-native-navigation';
 import { Alert } from 'react-native';
-import { apiHelper } from 'utils';
 
 import type PayeverApi from './../index';
 import type UserAccount
@@ -87,20 +86,17 @@ export default class PushNotificationsHelper {
   }
 
   async openOffer(id) {
-    apiHelper(this.api.profiles.getOfferById(id))
-      .success((offer) => {
-        // Go to offer preview
-        Navigation.showModal({
-          screen: 'communication.OfferPreview',
-          title: 'Got an Offer:',
-          passProps: {
-            offer,
-          },
-          navigatorStyle: {},
-          navigatorButtons: {},
-          animationType: 'slide-up',
-        });
-      });
+    // Go to offer preview
+    Navigation.showModal({
+      screen: 'communication.OfferPreview',
+      title: 'Got an Offer:',
+      passProps: {
+        offerId: id,
+      },
+      navigatorStyle: {},
+      navigatorButtons: {},
+      animationType: 'slide-up',
+    });
   }
 
   registerNotifications() {
