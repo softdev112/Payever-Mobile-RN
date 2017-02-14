@@ -29,13 +29,12 @@ export default class UserInfoHeader extends Component {
             touchStyle={styles.iconSettings_offset}
           />
         </View>
-        {online && (
-          <OnlineStatus isOnline />
-        )}
-
-        {!online && (
-          <Text style={styles.status}>{status}</Text>
-        )}
+        <View style={styles.status}>
+          {online && (
+            <OnlineStatus style={styles.status_led} isOnline />
+          )}
+          <Text style={styles.status_text}>{status}</Text>
+        </View>
       </View>
     );
   }
@@ -75,6 +74,15 @@ const styles = StyleSheet.create({
   },
 
   status: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
+
+  status_led: {
+    marginRight: 8,
+  },
+
+  status_text: {
     color: '#959ba3',
     fontSize: 12,
   },

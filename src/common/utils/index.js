@@ -8,6 +8,7 @@ import * as logExports from './log';
 export const log: Log = logExports; // for autocomplete
 
 export apiHelper from './apiHelper';
+export format from './format';
 
 /* eslint-disable no-undef */
 type Log = {
