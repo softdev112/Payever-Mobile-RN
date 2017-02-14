@@ -122,11 +122,12 @@ const styles = StyleSheet.create({
       shadowColor: 'rgba(0, 0, 0, .1)',
       shadowOffset: { width: 0, height: 0 },
       shadowOpacity: 1,
-      shadowRadius: 5,
+      shadowRadius: 14,
     },
 
     title: {
       fontSize: 15,
+      backgroundColor: 'transparent',
     },
   },
 });
