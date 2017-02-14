@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     height: 55,
     justifyContent: 'flex-end',
     paddingHorizontal: '$padding',
-    '@media ios and (orientation: portrait)': {
+    '@media ios': {
       marginTop: 15,
     },
   },

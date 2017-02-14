@@ -227,7 +227,8 @@ const styles = StyleSheet.create({
   },
 
   icon_title: {
-    paddingTop: 0,
     color: '$pe_color_gray_2',
+    fontWeight: '400',
+    paddingTop: 0,
   },
 });

@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
 
   title1: {
     color: '$pe_color_gray_2',
+    fontWeight: '500',
   },
 
   title1_compact: {
@@ -45,8 +46,9 @@ const styles = StyleSheet.create({
 
   title2: {
     color: '$pe_color_dark_gray',
-    fontSize: 44,
     fontFamily: 'Open Sans_light',
+    fontSize: 44,
+    fontWeight: '200',
     '@media ios': {
       fontFamily: 'HelveticaNeue-UltraLight',
     },

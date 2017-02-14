@@ -84,7 +84,6 @@ export default class Login extends Component {
             </View>
             <View>
               <TextInput
-                inputStyle={StyleSheet.flatten(styles.inputStyle)}
                 ref={f => this.$password = f}
                 label="Your password"
                 secureTextEntry
@@ -113,13 +112,6 @@ const styles = StyleSheet.create({
 
   header: {
     justifyContent: 'flex-start',
-  },
-
-  inputStyle: {
-    '@media android': {
-      paddingBottom: 5,
-      paddingTop: 5,
-    },
   },
 
   form: {

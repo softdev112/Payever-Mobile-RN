@@ -246,7 +246,7 @@ export default class WebView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    '@media ios and (orientation: portrait)': {
+    '@media ios': {
       marginTop: 15,
     },
   },

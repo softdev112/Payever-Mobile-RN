@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 10,
     paddingBottom: 0,
-    '@media ios and (orientation: portrait)': {
+    '@media ios': {
       paddingTop: 30,
     },
   },
