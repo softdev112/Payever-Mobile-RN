@@ -40,7 +40,7 @@ export default class TextInput extends Component {
         ref={f => this.$input = f}
         dense
         highlightColor="#6d6d6d"
-        inputStyle={styles.input}
+        style={styles.input}
         {...this.props}
       />
     );
