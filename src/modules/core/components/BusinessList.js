@@ -23,12 +23,9 @@ export default class BusinessList extends Component {
         onPress={() => onSelect(profile)}
       >
         <Image style={styles.logo} source={profile.logoSource} />
-        <View style={styles.text}>
-          <Text style={styles.title} numberOfLines={1}>
-            {profile.displayName}
-          </Text>
-          <Text style={styles.stores}>{profile.stores} stores</Text>
-        </View>
+        <Text style={styles.title} numberOfLines={1}>
+          {profile.displayName}
+        </Text>
         {profile === userProfiles.currentProfile && (
           <Icon source="icon-checkbox-checked-24" style={styles.imgChecked} />
         )}
@@ -49,45 +46,38 @@ export default class BusinessList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    borderTopWidth: 1,
     borderTopColor: '$border_color',
+    borderTopWidth: 1,
+    flex: 1,
   },
 
   row: {
+    alignItems: 'center',
     flexDirection: 'row',
+    borderBottomColor: '$border_color',
+    borderBottomWidth: 1,
     marginLeft: 16,
-    paddingTop: 15,
-    paddingRight: 19,
     paddingBottom: 15,
     paddingLeft: 8,
-    borderBottomWidth: 1,
-    borderBottomColor: '$border_color',
+    paddingRight: 19,
+    paddingTop: 15,
   },
 
   logo: {
-    width: 32,
-    height: 32,
     borderRadius: 16,
+    height: 32,
+    width: 32,
   },
 
   imgChecked: {
-    marginTop: 4,
     color: '$pe_color_blue',
-  },
-
-  text: {
-    flexDirection: 'column',
-    flex: 1,
-    paddingLeft: 20,
+    marginTop: 4,
   },
 
   title: {
-    paddingRight: 15,
     color: '$pe_color_dark_gray',
-  },
-
-  stores: {
-    color: '$pe_color_gray_2',
+    fontWeight: '400',
+    paddingLeft: 20,
+    paddingRight: 15,
   },
 });

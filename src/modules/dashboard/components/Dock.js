@@ -78,9 +78,10 @@ const styles = StyleSheet.create({
   image_shadow: {},
 
   title: {
-    fontSize: 10,
-    paddingTop: 5,
     color: '$pe_color_gray_2',
+    fontSize: 10,
+    fontWeight: '400',
+    paddingTop: 5,
   },
 
   '@media (min-width: 400)': {

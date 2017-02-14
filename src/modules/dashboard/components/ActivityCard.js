@@ -32,10 +32,10 @@ export default class ActivityCards extends Component {
           <Text style={styles.title}>{activity.title}</Text>
           <Text style={styles.description}>{activity.plainDescription}</Text>
           <Image style={styles.image} source={activity.imageSource} />
-          <Link style={styles.link} onPress={::this.onLinkPress}>
-            {activity.url_label}
-          </Link>
         </View>
+        <Link style={styles.link} onPress={::this.onLinkPress}>
+          {activity.url_label}
+        </Link>
       </View>
     );
   }
@@ -80,13 +80,15 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 24,
+    fontWeight: '100',
     marginBottom: 10,
     color: '$pe_color_dark_gray',
   },
 
   description: {
-    marginBottom: 10,
     color: '$pe_color_gray_2',
+    fontWeight: '400',
+    marginBottom: 10,
   },
 
   image: {
@@ -99,9 +101,10 @@ const styles = StyleSheet.create({
   },
 
   link: {
-    position: 'absolute',
     bottom: 15,
+    fontWeight: '700',
     left: 27,
+    position: 'absolute',
     textShadowColor: '#fff',
     textShadowRadius: 3,
   },
