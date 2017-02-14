@@ -59,15 +59,16 @@ export default class PushNotificationsHelper {
       soundName: 'chime.aiff',
       category: 'SOME_CATEGORY',
       userInfo: notification.getData(),
+    //  fireDate: new Date(Date.now() + (10 * 1000)).toISOString(),
     });
 
     console.log(localNotification);
     // if you want to fire the local notification 10 seconds later,
     // add the following line to the notification payload:
     //      fireDate: new Date(Date.now() + (10 * 1000)).toISOString()
-    // NotificationsIOS.backgroundTimeRemaining(
-    //  time => NotificationsIOS.log("remaining background time: " + time));
-    // NotificationsIOS.cancelLocalNotification(localNotification);
+   // NotificationsIOS.backgroundTimeRemaining(
+  //    time => NotificationsIOS.log('remaining background time: ' + time));
+   // NotificationsIOS.cancelLocalNotification(localNotification);
   }
 
   onNotificationOpened(notification: Notification) {
