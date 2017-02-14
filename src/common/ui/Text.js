@@ -22,6 +22,8 @@ export default class Text extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    color: '$pe_color_dark_gray',
     fontFamily: '$font_family',
+    fontWeight: '200',
   },
 });

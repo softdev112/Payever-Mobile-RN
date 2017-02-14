@@ -1,10 +1,6 @@
 import { Component } from 'react';
-import { Linking } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { Html, Icon, StyleSheet, Text, View } from 'ui';
-import { log } from 'utils';
-//noinspection JSUnresolvedVariable
-import Hyperlink from 'react-native-hyperlink';
 import type Message from '../../../../store/CommunicationStore/models/Message';
 import { Config } from '../../../../config';
 import Offer from './OfferView';
@@ -18,10 +14,6 @@ export default class MessageView extends Component {
     message: Message;
   };
 
-  onLinkOpen(url) {
-    Linking.openURL(url).catch(log.warn);
-  }
-
   renderContent(message: Message) {
     if (message.deleted) {
       return <Text style={styles.message_deleted}>(deleted)</Text>;
@@ -31,15 +23,7 @@ export default class MessageView extends Component {
       return <Offer offer={message.offer} />;
     }
 
-    if (message.body.startsWith('<')) {
-      return <Html style={styles.message} source={message.body} />;
-    }
-
-    return (
-      <Hyperlink linkStyle={styles.links} onPress={this.onLinkOpen}>
-        <Text style={styles.message}>{message.body}</Text>
-      </Hyperlink>
-    );
+    return <Html source={message.body} />;
   }
 
   render() {
@@ -53,12 +37,14 @@ export default class MessageView extends Component {
     return (
       <View style={styles.container}>
         <Icon style={styles.avatar} source={{ uri: avatar }} />
-        <View>
-          <View style={styles.titleRow}>
-            <Text style={styles.userName}>{`${message.senderName} `}</Text>
-            <Text style={styles.date}>{message.dateFormated}</Text>
+        <View style={styles.message}>
+          <View style={styles.header}>
+            <Text style={styles.header_sender}>{`${message.senderName} `}</Text>
+            <Text style={styles.header_date}>{message.dateFormated}</Text>
           </View>
-          {this.renderContent(message)}
+          <View style={styles.body}>
+            {this.renderContent(message)}
+          </View>
         </View>
       </View>
     );
@@ -66,12 +52,6 @@ export default class MessageView extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    marginBottom: 12,
-    minHeight: 50,
-  },
-
   avatar: {
     borderRadius: 16,
     height: 32,
@@ -79,25 +59,44 @@ const styles = StyleSheet.create({
     width: 32,
   },
 
-  titleRow: {
+  body: {
+    overflow: 'scroll',
+  },
+
+  container: {
+    flexDirection: 'row',
+    marginBottom: 12,
+    minHeight: 50,
+  },
+
+  header: {
     alignItems: 'center',
     flexDirection: 'row',
   },
 
-  userName: {
+  header_sender: {
     color: '$pe_color_dark_gray',
     fontSize: 13,
     fontWeight: '500',
   },
 
-  date: {
+  header_date: {
     color: '$pe_color_icon',
     fontSize: 11,
     marginLeft: 5,
   },
 
+  links: {
+    color: '$pe_color_blue',
+  },
+
   message: {
+    flex: 1,
+  },
+
+  message_text: {
     color: '$pe_color_dark_gray',
+    flex: 1,
     fontSize: 13,
     fontWeight: '200',
     marginTop: 2,
@@ -108,9 +107,5 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: '600',
     marginTop: 2,
-  },
-
-  links: {
-    color: '$pe_color_blue',
   },
 });
