@@ -6,12 +6,12 @@ import StyleSheet from './StyleSheet';
 
 export default class Button extends Component {
   props: {
-    title: string;
+    animated?: boolean;
+    disabled?: boolean;
     onPress: () => any;
-    disabled?: ?boolean;
-    animated?: ?boolean;
-    titleStyle?: Object | number;
     style?: Object | number;
+    title: string;
+    titleStyle?: Object | number;
   };
 
   state: {
@@ -91,17 +91,15 @@ const styles = StyleSheet.create({
     padding: 3,
   },
 
-  text: {
-    textAlign: 'center',
-    color: 'white',
-    padding: 8,
-    fontWeight: '400',
+  buttonDisabled: {
+    opacity: 0.4,
   },
 
-  buttonDisabled: {
-    elevation: 0,
-    backgroundColor: '#1dcaff',
-    borderColor: '#1dcaff',
+  text: {
+    color: 'white',
+    fontWeight: '400',
+    padding: 8,
+    textAlign: 'center',
   },
 
   textDisabled: {
