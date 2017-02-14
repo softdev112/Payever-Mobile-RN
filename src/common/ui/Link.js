@@ -19,5 +19,6 @@ export default class Link extends Component {
 const styles = StyleSheet.create({
   component: {
     color: '$pe_color_blue',
+    fontWeight: '400',
   },
 });

@@ -4,17 +4,28 @@ import { TouchableOpacity } from 'react-native';
 import { Html, NavBar, StyleSheet, Text, View } from 'ui';
 import { Navigator, Navigation } from 'react-native-navigation';
 import offer from './data';
+import { observer, inject } from 'mobx-react/native';
+import AuthStore from '../../../store/AuthStore';
 
-
+@inject('auth')
+@observer
 export default class Debug extends Component {
   static navigatorStyle = { navBarHidden: true };
 
   props:{
+    auth: AuthStore;
     navigator: Navigator;
   };
 
   renderNode(node, index, list) {
     console.log([node, index, list]);
+  }
+
+  nullRefreshToken() {
+    const auth = this.props.auth;
+    auth.refreshToken = 'invalid';
+    auth.expiresIn = new Date(0);
+    auth.serialize();
   }
 
   render() {
@@ -50,6 +61,8 @@ export default class Debug extends Component {
         <View style={styles.wrapper}>
           <Html source={html} />
         </View>
+
+        <Button title="Null refreshToken" onPress={::this.nullRefreshToken}/>
       </View>
     )
   }

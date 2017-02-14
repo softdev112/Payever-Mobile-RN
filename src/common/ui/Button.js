@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
     padding: 8,
-    fontWeight: '500',
+    fontWeight: '400',
   },
 
   buttonDisabled: {

@@ -33,13 +33,14 @@ const styles = StyleSheet.create({
     padding: 20,
     borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
-    '@media ios and (orientation: portrait)': {
+    '@media ios': {
       marginTop: 10,
     },
   },
 
   text: {
-    textAlign: 'center',
     color: '$pe_color_dark_gray',
+    fontWeight: '400',
+    textAlign: 'center',
   },
 });

@@ -102,12 +102,12 @@ export default class Dashboard extends Component {
     }).start();
   }
 
-  renderTopRow(item: AppItem) {
+  renderIcon(item: AppItem) {
     return (
       <IconText
-        style={styles.top_item}
-        imageStyle={styles.top_icon}
-        textStyle={styles.top_iconTitle}
+        style={styles.icon}
+        imageStyle={styles.icon_image}
+        textStyle={styles.icon_title}
         onPress={() => this.onAppClick(item)}
         source={{ uri: item.image }}
         title={item.name}
@@ -137,8 +137,8 @@ export default class Dashboard extends Component {
             {showApps && (
               <GridView
                 dataSource={dataSourceTop}
-                renderRow={::this.renderTopRow}
-                contentContainerStyle={styles.top_grid}
+                renderRow={::this.renderIcon}
+                contentContainerStyle={styles.apps}
               />
             )}
 
@@ -193,30 +193,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  top_grid: {
+  apps: {
     paddingTop: 20,
-  },
-
-  top_item: {
-    width: 100,
-    height: 105,
-  },
-
-  top_icon: {
-    width: 50,
-    height: 50,
-    marginBottom: 8,
-    borderRadius: 15,
-    elevation: 5,
-    shadowColor: 'rgba(0, 0, 0, .1)',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 1,
-    shadowRadius: 5,
-  },
-
-  top_iconTitle: {
-    paddingTop: 0,
-    color: '$pe_color_gray_2',
   },
 
   cards_container: {
@@ -229,5 +207,28 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     maxHeight: 500,
+  },
+
+  icon: {
+    width: 100,
+    height: 105,
+  },
+
+  icon_image: {
+    width: 50,
+    height: 50,
+    marginBottom: 8,
+    borderRadius: 15,
+    elevation: 5,
+    shadowColor: 'rgba(0, 0, 0, .1)',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 1,
+    shadowRadius: 5,
+  },
+
+  icon_title: {
+    color: '$pe_color_gray_2',
+    fontWeight: '400',
+    paddingTop: 0,
   },
 });
