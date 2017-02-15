@@ -52,7 +52,7 @@ export default class Debug extends Component {
             screen: 'communication.OfferPreview',
             title: 'Got an Offer:',
             passProps: {
-              offer,
+              offerId: 1511,
             },
           })}}
         >

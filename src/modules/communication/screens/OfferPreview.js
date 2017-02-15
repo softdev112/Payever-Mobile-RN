@@ -66,14 +66,13 @@ export default class OfferPreview extends Component {
       source = defaultAvatar;
     }
 
-    const createDate = new Date(offer.created_at);
-    const diffTime = Math.floor((Date.now() - createDate) / 60000);
+    const sinceTime = Math.floor(offer.since / 60);
 
-    let diffTimeStr;
-    if (diffTime > 60) {
-      diffTimeStr = `created: ${Math.floor(diffTime / 60)} hours ago`;
+    let sinceTimeStr;
+    if (sinceTime > 60) {
+      sinceTimeStr = `created: ${Math.floor(sinceTime / 60)} hours ago`;
     } else {
-      diffTimeStr = `created: ${diffTime} minutes ago`;
+      sinceTimeStr = `created: ${sinceTime} minutes ago`;
     }
 
     return (
@@ -92,7 +91,7 @@ export default class OfferPreview extends Component {
           <Text style={styles.offerTitle}>{offer.title}</Text>
           <View>
             <Text style={styles.createdTime}>
-              {diffTimeStr}
+              {sinceTimeStr}
             </Text>
           </View>
           <Html source={offer.description} />
