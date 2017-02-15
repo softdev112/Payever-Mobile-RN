@@ -1,11 +1,11 @@
 import local from './local';
 
 export default Object.assign({
-  siteUrl: 'https://mein.payever.de',
+  siteUrl: 'https://showroom9.payever.de',
   api: {
-    baseUrl: 'https://mein.payever.de',
-    clientId: '1633_3vi6g4uiwmyow8044o4w0wo4s88cogosw84kw888kw408wok8c',
-    clientSecret: '63nqx0kppzocw4sswok8gg800sk4w4kko4k0oo8gs4ow00wgos',
+    baseUrl: 'https://showroom9.payever.de',
+    clientId: '117_5sd54ii2lyo8sg84g0w4w08wkw4040gks4k0sk0wgc44w48404',
+    clientSecret: '4jsu5lynawsg8g4cs80w4kcsocwcggwo048ogs8c844gk80w80',
   },
   debug: {
     logApiCall: true,
