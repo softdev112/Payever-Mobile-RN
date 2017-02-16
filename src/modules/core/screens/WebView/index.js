@@ -84,7 +84,8 @@ export default class WebView extends Component {
       return;
     }
 
-    let isCustomNavBar = false;
+    this.setState({ isCustomNavBar: false });
+
     if (nativeEvent.url
       && !nativeEvent.url.startsWith(this.props.config.siteUrl)
       && !nativeEvent.url.includes('about:blank')
@@ -94,17 +95,17 @@ export default class WebView extends Component {
         //noinspection JSUnresolvedFunction
         this.$view.stopLoading();
         Linking.openURL(nativeEvent.url).catch(log.error);
-
         return;
       }
 
-      // Switch on custom NavBar for navigation purporse on external sites
-      // if thay open in WebView
-      isCustomNavBar = true;
+      // Switch on custom NavBar for navigation purpose on external sites
+      // if they open in WebView
+      this.setState({ isCustomNavBar: true });
+      return;
     }
 
-    this.setState({ isCustomNavBar });
 
+    // Apply pat
     // Process submit events ONLY iOS UIWebKit there is no such
     // field in android WebKit nativeEvent
     if (nativeEvent.navigationType === 'formsubmit') {

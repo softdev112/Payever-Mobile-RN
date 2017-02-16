@@ -1,7 +1,9 @@
 import { Component } from 'react';
-import { ListView, ListViewDataSource, Platform } from 'react-native';
+import {
+  KeyboardAvoidingView, ListView, ListViewDataSource, Platform,
+} from 'react-native';
 import { inject, observer } from 'mobx-react/native';
-import { Loader, StyleSheet, View } from 'ui';
+import { Loader, StyleSheet } from 'ui';
 
 import Footer from './Footer';
 import MessageView from './MessageView';
@@ -83,7 +85,11 @@ export default class Chat extends Component {
 
     return (
       <Loader isLoading={!conversation.messages}>
-        <View style={styles.container}>
+        <KeyboardAvoidingView
+          style={styles.container}
+          contentContainerStyle={styles.container}
+          behavior={Platform.OS === 'ios' ? 'padding' : null}
+        >
           <Header
             online={status.online}
             status={status.label}
@@ -96,7 +102,7 @@ export default class Chat extends Component {
             renderRow={this.renderRow}
           />
           <Footer conversationId={conversationId} />
-        </View>
+        </KeyboardAvoidingView>
       </Loader>
     );
   }
