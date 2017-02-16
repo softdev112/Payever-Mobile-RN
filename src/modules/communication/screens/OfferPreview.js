@@ -38,6 +38,7 @@ export default class OfferPreview extends Component {
   }
 
   onBuyThisNow({ id, marketing_channel_set: { slug } }) {
+    // Open offer
     this.context.navigator.push({
       title: 'Personal Offer',
       screen: 'core.WebView',
