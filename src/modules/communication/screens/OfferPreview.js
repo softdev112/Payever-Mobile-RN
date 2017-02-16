@@ -1,29 +1,50 @@
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import { Image, ScrollView } from 'react-native';
-import { Navigation } from 'react-native-navigation';
-import { Icon, Html, Loader, NavBar, StyleSheet, Text, View } from 'ui';
+import { Navigation, Navigator } from 'react-native-navigation';
+import {
+  Button, Icon, Html, Loader, NavBar, StyleSheet, Text, View,
+} from 'ui';
 import { observer, inject } from 'mobx-react/native';
 
 import defaultAvatar
   from '../../../store/UserProfilesStore/images/no-avatar.png';
 import type UserProfilesStore from '../../../store/UserProfilesStore';
+import type { Config } from '../../../config';
 
-@inject('userProfiles')
+@inject('userProfiles', 'config')
 @observer
 export default class OfferPreview extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
 
+  static contextTypes = {
+    navigator: PropTypes.object.isRequired,
+  };
+
   props: {
     offerId: string;
     userProfiles: UserProfilesStore;
+    config: Config;
   };
 
+  context: {
+    navigator: Navigator;
+  };
 
   async componentWillMount() {
     const { userProfiles, offerId } = this.props;
     await userProfiles.getOfferById(offerId);
+  }
+
+  onBuyThisNow({ id, marketing_channel_set: { slug } }) {
+    this.context.navigator.push({
+      title: 'Personal Offer',
+      screen: 'core.WebView',
+      passProps: {
+        url: this.props.config.siteUrl + `/store/${slug}#product/${id}`,
+      },
+    });
   }
 
   onClosePreview() {
@@ -60,20 +81,15 @@ export default class OfferPreview extends Component {
     const { marketing_channel_set: offerDetails } = offer;
 
     let source;
-    if (offer.business_logo_url) {
-      source = { usi: offer.business_logo_url };
+    if (offerDetails.store.business.logo) {
+      source = { uri: offerDetails.store.business.logo };
     } else {
       source = defaultAvatar;
     }
 
-    const sinceTime = Math.floor(offer.since / 60);
-
-    let sinceTimeStr;
-    if (sinceTime > 60) {
-      sinceTimeStr = `created: ${Math.floor(sinceTime / 60)} hours ago`;
-    } else {
-      sinceTimeStr = `created: ${sinceTime} minutes ago`;
-    }
+    const createdData = offer.created_at.substr(0, 10);
+    const createdTime = offer.created_at.substr(11, 5);
+    const createdAt = `created at: ${createdData} ${createdTime}`;
 
     return (
       <ScrollView
@@ -91,7 +107,7 @@ export default class OfferPreview extends Component {
           <Text style={styles.offerTitle}>{offer.title}</Text>
           <View>
             <Text style={styles.createdTime}>
-              {sinceTimeStr}
+              {createdAt}
             </Text>
           </View>
           <Html source={offer.description} />
@@ -100,17 +116,17 @@ export default class OfferPreview extends Component {
         <View>
           {this.renderItems(offerDetails.store.items)}
         </View>
+        <Button
+          title="Buy this now"
+          onPress={() => this.onBuyThisNow(offer)}
+        />
       </ScrollView>
     );
   }
 
   render() {
     const { offerId, userProfiles } = this.props;
-
     const offer = userProfiles.offers[offerId];
-
-    console.log('ssssssssssssss11111111111111');
-    console.log(offer);
 
     return (
       <View style={styles.container}>
@@ -227,6 +243,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 5,
+    marginBottom: 10,
   },
 
   price: {
