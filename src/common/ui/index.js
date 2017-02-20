@@ -20,3 +20,4 @@ export NavBar from './NavBar';
 export Text from './Text';
 export TextInput from './TextInput';
 export SpinnerButton from './SpinnerButton';
+export WebView from './WebView';

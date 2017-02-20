@@ -2,6 +2,7 @@ import { Image } from 'react-native';
 import VectorIcon from './VectorIcon';
 import BitmapIcon from './BitmapIcon';
 import StackedIcon from './StackedIcon';
+import config from '../../../config';
 
 import icons from './meta';
 
@@ -16,6 +17,9 @@ export default function componentFactory(componentInfo, newProps = {}) {
     }
     case 'object': {
       if (componentInfo.uri) {
+        if (componentInfo.uri.startsWith('/')) {
+          componentInfo.uri = config.siteUrl + componentInfo.uri;
+        }
         meta = { ...componentInfo, component: 'image' };
       } else {
         meta = componentInfo;

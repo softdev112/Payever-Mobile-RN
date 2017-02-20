@@ -149,7 +149,8 @@ export default class WebView extends Component {
       }
       case 'error': {
         log.warn(
-          `WebView error: ${data.errorMsg} at ${data.url}:${data.lineNumber}`
+          `WebView error: ${object.errorMsg} at ` +
+          `${object.url}:${object.lineNumber}`
         );
         this.props.navigator.pop({ animated: true });
         break;
