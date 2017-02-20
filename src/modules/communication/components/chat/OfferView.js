@@ -21,7 +21,7 @@ export default class OfferView extends Component {
     const slug = offer.marketing_channel_set.slug;
 
     return (
-      <View>
+      <View style={styles.container}>
         <Html source={description} />
         {items.map(item => (
           <OfferItemView key={item.id} item={item} slug={slug} />
@@ -58,6 +58,10 @@ function OfferItemView({ item, slug }: OfferItemProps) {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    marginBottom: 20,
+  },
+
   item: {
     marginTop: 20,
     maxWidth: 320,
@@ -69,6 +73,8 @@ const styles = StyleSheet.create({
   },
 
   item_link: {
+    fontSize: 15,
+    paddingVertical: 6,
     textAlign: 'center',
   },
 
