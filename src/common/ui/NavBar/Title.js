@@ -25,13 +25,11 @@ export default class Title extends Component {
 
   render() {
     const { onPress, source, title } = this.props;
+    const { popup } = this.context;
 
-    const titleStyles = [];
+    const titleStyles = [popup ? styles.title_popup : styles.title];
     if (source) {
       titleStyles.push(styles.title_icon);
-    }
-    if (this.context.popup) {
-      titleStyles.push(styles.title_popup);
     }
 
     return (
@@ -40,9 +38,7 @@ export default class Title extends Component {
           <Icon source={source} style={styles.icon} />
         )}
         {!!title && (
-          <Text numberOfLines={1} style={[styles.title, titleStyles]}>
-            {title}
-          </Text>
+          <Text numberOfLines={1} style={titleStyles}>{title}</Text>
         )}
       </NavBarItem>
     );
@@ -78,7 +74,9 @@ const styles = StyleSheet.create({
 
   title_popup: {
     color: '$pe_color_black',
+    fontSize: 18,
     fontWeight: '300',
+    textAlign: 'center',
     '@media (max-width: 480)': {
       fontSize: 14,
     },

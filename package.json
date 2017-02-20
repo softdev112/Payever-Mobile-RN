@@ -38,7 +38,7 @@
   },
   "jest": {
     "preset": "react-native",
-    "setupTestFrameworkScriptFile": "__tests__/jest-env.js",
+    "setupTestFrameworkScriptFile": "./__tests__/jest-env.js",
     "modulePathIgnorePatterns": [
       "test-data",
       "jest-env.js"
