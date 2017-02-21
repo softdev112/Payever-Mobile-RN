@@ -20,6 +20,7 @@ export default class Offer {
   };
   since: number;
   status: 'DRAFT' | 'SENT';
+  type: 'EMAIL' | 'MESSENGER' | 'SMS' | undefined;
   title: string;
   visibility: 'ALL' | 'FOLLOWERS' | 'JUST-ME';
 

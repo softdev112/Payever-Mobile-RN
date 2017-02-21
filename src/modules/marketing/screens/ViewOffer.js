@@ -1,39 +1,40 @@
-import { Component, PropTypes } from 'react';
+import { Component } from 'react';
 import { Image, ScrollView } from 'react-native';
-import { Navigation, Navigator } from 'react-native-navigation';
+import { Navigation } from 'react-native-navigation';
 import { observer, inject } from 'mobx-react/native';
 import {
   images, Loader, NavBar, StyleSheet, Text, View,
 } from 'ui';
 import { format } from 'utils';
 
-
-import type UserProfilesStore from '../../../store/UserProfilesStore';
 import OfferView from '../components/OfferView';
+import OffersStore from '../../../store/OffersStore/index';
+import Offer from '../../../store/OffersStore/models/Offer';
 
-@inject('userProfiles')
+@inject('offers')
 @observer
 export default class OfferPreview extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
 
-  static contextTypes = {
-    navigator: PropTypes.object.isRequired,
-  };
-
   props: {
     offerId: string;
-    userProfiles: UserProfilesStore;
+    offers?: OffersStore;
   };
 
-  context: {
-    navigator: Navigator;
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      offer: null,
+    };
+  }
 
   async componentWillMount() {
-    const { userProfiles, offerId } = this.props;
-    await userProfiles.getOfferById(offerId);
+    const { offers, offerId } = this.props;
+    this.setState({
+      offer: await offers.getOfferById(offerId),
+    });
   }
 
   onClosePreview() {
@@ -42,7 +43,7 @@ export default class OfferPreview extends Component {
     });
   }
 
-  renderOffer(offer) {
+  renderOffer(offer: Offer) {
     const { marketing_channel_set: offerDetails } = offer;
 
     let source;
@@ -74,8 +75,8 @@ export default class OfferPreview extends Component {
   }
 
   render() {
-    const { offerId, userProfiles } = this.props;
-    const offer = userProfiles.offers[offerId];
+    const { offers } = this.props;
+    const { offer } = this.state;
 
     return (
       <View style={styles.container}>
@@ -83,7 +84,7 @@ export default class OfferPreview extends Component {
           <NavBar.Back onPress={::this.onClosePreview} />
           <NavBar.Title title="Best Offers" />
         </NavBar>
-        <Loader isLoading={userProfiles.isLoading}>
+        <Loader isLoading={offers.isLoading}>
           {offer && this.renderOffer(offer)}
         </Loader>
       </View>
