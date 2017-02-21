@@ -20,6 +20,11 @@ Publish to AppStore
 ----
 
 ## Android
+### android build
+```
+fastlane android build
+```
+Just build
 ### android beta
 ```
 fastlane android beta
