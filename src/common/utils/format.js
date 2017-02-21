@@ -1,14 +1,12 @@
+import moment from 'moment';
+
 export default {
   currency(num, currency = '€') {
-    /* eslint-disable */
-    // Todo: reformat
-    num = parseInt(num) || 0;
-    const [integer, fractional] = num.toFixed(2).split('.');
-    return integer.split('').reverse().reduce(
-      (acc, num, i, orig) => {
-        return  num === '-' ? acc : num + (i && !(i % 3) ? ',' : '') + acc;
-      },
-      ''
-    ) + '.' + fractional + currency;
-  }
-}
+    num = parseFloat(num) || 0;
+    return num.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + currency;
+  },
+
+  timeFromNow(date) {
+    return moment(date).fromNow();
+  },
+};

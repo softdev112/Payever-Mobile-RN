@@ -46,10 +46,9 @@ export default class Debug extends Component {
     return (
       <View style={styles.container}>
         <NavBar.Default />
-        <Html source={html} />
         <TouchableOpacity
           onPress={() => { Navigation.showModal({
-            screen: 'communication.OfferPreview',
+            screen: 'marketing.ViewOffer',
             title: 'Got an Offer:',
             passProps: {
               offerId: 1511,
