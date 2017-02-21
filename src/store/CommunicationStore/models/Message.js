@@ -1,5 +1,5 @@
 import type Avatar from './Avatar';
-import Offer from './Offer';
+import Offer from '../../OffersStore/models/Offer';
 
 export default class Message {
   avatar: Avatar;
