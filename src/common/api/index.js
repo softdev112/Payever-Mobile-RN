@@ -1,26 +1,30 @@
+/* eslint-disable quote-props */
+/** @name ApiResp */
 import { log } from 'utils';
 
 import type AuthStore from '../../store/AuthStore';
+import type { Config } from '../../config';
+
 import AuthApi from './AuthApi';
 import BusinessApi from './BusinessApi';
 import DashboardApi from './DashboardApi';
-import UserApi from './UserApi';
-import ProfilesApi from './ProfilesApi';
-import MenuApi from './MenuApi';
-import MessengerApi from './MessengerApi';
 import DeviceApi from './DeviceApi';
 import MarketingApi from './MarketingApi';
-import { showScreen } from '../Navigation';
-import type { Config } from '../../config';
+import MenuApi from './MenuApi';
+import MessengerApi from './MessengerApi';
+import ProfilesApi from './ProfilesApi';
+import UserApi from './UserApi';
 
 export default class PayeverApi {
-  auth: AuthApi;
-  business: BusinessApi;
-  dashboard: DashboardApi;
-  menu: MenuApi;
-  messenger: MessengerApi;
-  user: UserApi;
-  profiles: ProfilesApi;
+  auth: AuthApi           = new AuthApi(this);
+  business: BusinessApi   = new BusinessApi(this);
+  dashboard: DashboardApi = new DashboardApi(this);
+  device: DeviceApi       = new DeviceApi(this);
+  marketing: MarketingApi = new MarketingApi(this);
+  menu: MenuApi           = new MenuApi(this);
+  messenger: MessengerApi = new MessengerApi(this);
+  profiles: ProfilesApi   = new ProfilesApi(this);
+  user: UserApi           = new UserApi(this);
 
   baseUrl: string;
   clientId: string;
@@ -33,20 +37,6 @@ export default class PayeverApi {
     Object.assign(this, config.api);
     this.authStore = authStore;
     this.logApiCall = config.debug.logApiCall;
-
-    this.registerSubApi();
-  }
-
-  registerSubApi() {
-    this.auth      = new AuthApi(this);
-    this.dashboard = new DashboardApi(this);
-    this.business  = new BusinessApi(this);
-    this.menu      = new MenuApi(this);
-    this.messenger = new MessengerApi(this);
-    this.user      = new UserApi(this);
-    this.profiles  = new ProfilesApi(this);
-    this.device    = new DeviceApi(this);
-    this.marketing = new MarketingApi(this);
   }
 
   async get(url: string, query: Object = null): Promise<ApiResp> {
@@ -59,75 +49,36 @@ export default class PayeverApi {
 
   async post(
     url: string,
-    requestData: Object = null,
-    requestOptions: RequestOptions = {}
+    data: Object = null,
+    options: RequestOptions = {}
   ): Promise<ApiResp> {
-    const headers = new Headers();
-    headers.append('Accept', 'application/json');
+    const isJson = options.format === 'json';
+    delete options.format;
 
-    const contentType = requestOptions.format === 'formData'
-      ? 'multipart/form-data' : 'application/json';
-    headers.append('Content-Type', contentType);
+    const headers = {
+      'Accept':        'application/json',
+      'Authorization': 'Bearer ' + await this.authStore.getAccessToken(),
+      'Content-Type':  isJson ? 'application/json' : 'multipart/form-data',
+    };
 
-    const token = await this.authStore.getAccessToken();
-    headers.append('Authorization', 'Bearer ' + token);
-
-    if (requestOptions.addTokenToHeaders) {
-      headers.append('access_token', token);
-    }
-
-    const options = {
-      headers,
+    return this.fetch(url, {
+      body: isJson ? JSON.stringify(data) : objectToFormData(data),
       method: 'POST',
       mode: 'cors',
       credentials: 'include',
       cache: 'default',
-    };
-
-    if (requestOptions.format === 'formData') {
-      options.body = objectToFormData(requestData);
-    } else {
-      options.body = JSON.stringify(requestData);
-    }
-
-    return this.fetch(url, options);
+      ...options,
+      headers: { ...headers, ...options.headers },
+    });
   }
 
   //noinspection ReservedWordAsName
   async delete(
     url: string,
-    requestData: Object = null,
-    requestOptions: RequestOptions = {}
+    data: Object = null,
+    options: RequestOptions = {}
   ): Promise<ApiResp> {
-    const headers = new Headers();
-    headers.append('Accept', 'application/json');
-
-    const contentType = requestOptions.format === 'formData'
-      ? 'multipart/form-data' : 'application/json';
-    headers.append('Content-Type', contentType);
-
-    const token = await this.authStore.getAccessToken();
-    headers.append('Authorization', 'Bearer ' + token);
-
-    if (requestOptions.addTokenToHeaders) {
-      headers.append('access_token', token);
-    }
-
-    const options = {
-      headers,
-      method: 'DELETE',
-      mode: 'cors',
-      credentials: 'include',
-      cache: 'default',
-    };
-
-    if (requestOptions.format === 'formData') {
-      options.body = objectToFormData(requestData);
-    } else {
-      options.body = JSON.stringify(requestData);
-    }
-
-    return this.fetch(url, options);
+    return this.post(url, data, { ...options, method: 'DELETE' });
   }
 
   //noinspection InfiniteRecursionJS
@@ -145,21 +96,13 @@ export default class PayeverApi {
       response.data = JSON.parse(text);
       if (response.data && response.data.error) {
         response.error = response.data.error;
+        //noinspection JSUnresolvedVariable
         response.errorDescription = response.data.error_description;
       }
     } catch (e) {
       response.data = {};
       response.error = 'json_error';
-      response.errorDescription = 'Wrong server response';
-    }
-
-    if (!options.preventTokenRefresh &&
-      response.error === 'invalid_grant') {
-      const token = await this.auth.refreshToken(this.authStore.refreshToken);
-      if (token) {
-        return await this.fetch(url, { ...options, preventTokenRefresh: true });
-      }
-      showScreen('auth.Login');
+      response.errorDescription = 'Server sent invalid json data.';
     }
 
     if (__DEV__ && this.logApiCall) {
@@ -225,5 +168,18 @@ function objectToFormData(data: Object) {
 
 type RequestOptions = {
   format: 'json' | 'formData';
-  addTokenToHeaders: boolean;
+  query: Object;
+
+  body: any;
+  credentials: 'include' | 'omit' | 'same-origin';
+  cache: 'default' | 'no-store' | 'reload' | 'no-cache' | 'force-cache'
+    | 'only-if-cached';
+  headers: Object;
+  integrity: any;
+  method: 'DELETE' | 'GET' | 'POST' | 'PUT';
+  mode: 'cors' | 'navigate' | 'no-cors' | 'same-origin';
+  redirect: 'follow' | 'error' | 'manual';
+  referrer: 'client' | 'no-referrer' | string;
+  referrerPolicy: 'no-referrer' | 'no-referrer-when-downgrade' | 'origin'
+    | 'origin-when-cross-origin' | 'unsafe-url';
 };
