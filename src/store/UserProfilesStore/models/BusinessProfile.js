@@ -1,12 +1,10 @@
 //noinspection JSUnresolvedVariable
 import { computed, extendObservable, observable, ObservableArray } from 'mobx';
+import { images } from 'ui';
 import type ActivityItem from './ActivityItem';
 import type AppItem from './AppItem';
 import Business from './Business';
 import Profile from './Profile';
-
-//noinspection JSUnresolvedVariable
-import imgNoBusiness from '../images/no-business.png';
 
 export default class BusinessProfile extends Profile {
   @observable business: Business;
@@ -29,7 +27,7 @@ export default class BusinessProfile extends Profile {
     if (this.business.logo) {
       return { uri: this.business.logo };
     }
-    return imgNoBusiness;
+    return images.noBusiness;
   }
 
   @computed get displayName() {

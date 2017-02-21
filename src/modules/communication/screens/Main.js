@@ -1,10 +1,7 @@
 import { Component } from 'react';
-import { NavBar, StyleSheet, View } from 'ui';
+import { images, NavBar, StyleSheet, View } from 'ui';
 
 import Contacts from '../components/contacts';
-
-//noinspection JSUnresolvedVariable
-import imgCommunication from '../images/communication.png';
 
 export default class Main extends Component {
   static navigatorStyle = {
@@ -14,7 +11,7 @@ export default class Main extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <NavBar.Default title="Communication" source={imgCommunication} />
+        <NavBar.Default title="Communication" source={images.communication} />
         <Contacts />
       </View>
     );
