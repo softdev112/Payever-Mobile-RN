@@ -15,6 +15,7 @@ export default class Debug extends Component {
   props:{
     auth: AuthStore;
     navigator: Navigator;
+    inspectObj?: any;
   };
 
   renderNode(node, index, list) {
@@ -42,6 +43,7 @@ export default class Debug extends Component {
         MyOnlineShop
       </p>
     `;
+    const { inspectObj } = this.props;
 
     return (
       <View style={styles.container}>
@@ -57,9 +59,21 @@ export default class Debug extends Component {
         >
           <Text>Show Offer</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => { this.props.navigator.push({
+            screen: 'pos.Terminal',
+            title: 'Terminal',
+            passProps: {
+              url: 'https://showroom9.payever.de/selfterminal/new/media-shop-1/pos/xxxlutz',
+            },
+          })}}
+        >
+          <Text>Terminal</Text>
+        </TouchableOpacity>
         <View style={styles.wrapper}>
           <Html source={html} />
         </View>
+        {inspectObj && <Text>{JSON.stringify(inspectObj)}</Text>}
 
         <Button title="Null refreshToken" onPress={::this.nullRefreshToken}/>
       </View>
