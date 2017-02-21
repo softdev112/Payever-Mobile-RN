@@ -15,4 +15,5 @@ export default {
   'dashboard.Search': require('./modules/dashboard/screens/Search').default,
   'marketing.BuyOffer': require('./modules/marketing/screens/BuyOffer').default,
   'marketing.ViewOffer': require('./modules/marketing/screens/ViewOffer').default,
+  'pos.Terminal': require('./modules/pos/screens/Terminal').default,
 };

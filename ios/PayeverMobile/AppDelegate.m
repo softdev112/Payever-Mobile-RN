@@ -12,6 +12,7 @@
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
 #import "RCCManager.h"
+#import "RCTLinkingManager.h"
 #import "RNNotifications.h"
 
 #import <Fabric/Fabric.h>
@@ -28,12 +29,13 @@
   
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   self.window.backgroundColor = [UIColor whiteColor];
-  [[RCCManager sharedInstance] initBridgeWithBundleURL:jsCodeLocation];
+  [[RCCManager sharedInstance] initBridgeWithBundleURL:jsCodeLocation launchOptions:launchOptions];
   
   return YES;
 }
 
-// PushKit API Example
+// Push Notifications -- START
+// PushKit API
 - (void)pushRegistry:(PKPushRegistry *)registry didUpdatePushCredentials:(PKPushCredentials *)credentials forType:(NSString *)type
 {
   [RNNotifications didUpdatePushCredentials:credentials forType:type];
@@ -79,5 +81,19 @@
 {
   [RNNotifications handleActionWithIdentifier:identifier forRemoteNotification:userInfo withResponseInfo:responseInfo completionHandler:completionHandler];
 }
+// Push Notifications -- END
+
+// Universal links -- START
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler
+{
+  return [RCTLinkingManager application:application continueUserActivity:userActivity restorationHandler:restorationHandler];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+  
+  return [RCTLinkingManager application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+}
+// Universal links -- END
 
 @end

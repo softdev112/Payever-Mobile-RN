@@ -51,7 +51,7 @@ export function registerScreens(screens: Object, store: Store) {
   }
 }
 
-export function showScreen(screenId) {
+export function showScreen(screenId, passProps = {}) {
   Navigation.startSingleScreenApp({
     screen: { screen: screenId },
     appStyle: {
@@ -66,6 +66,7 @@ export function showScreen(screenId) {
       },
       disableOpenGesture: true,
     },
+    passProps,
   });
 }
 

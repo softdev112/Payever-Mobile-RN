@@ -155,7 +155,7 @@ export default class WebView extends Component {
     }
   }
 
-  goBack() {
+  onGoBack() {
     if (!this.$view) return;
     //noinspection JSUnresolvedFunction
     this.$view.goBack();
