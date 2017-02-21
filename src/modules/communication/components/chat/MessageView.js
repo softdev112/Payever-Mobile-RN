@@ -3,11 +3,10 @@ import { inject, observer } from 'mobx-react/native';
 import { Html, Icon, StyleSheet, Text, View } from 'ui';
 import type Message from '../../../../store/CommunicationStore/models/Message';
 import { Config } from '../../../../config';
-import Offer from './OfferView';
+import Offer from '../../../marketing/components/OfferView';
 
 @inject('config')
 @observer
-// eslint-disable-next-line react/prefer-stateless-function
 export default class MessageView extends Component {
   props: {
     config?: Config;

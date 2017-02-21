@@ -62,7 +62,7 @@ export default class PushNotificationsHelper {
   async openOffer(id) {
     // Go to offer preview
     Navigation.showModal({
-      screen: 'communication.OfferPreview',
+      screen: 'marketing.ViewOffer',
       title: 'Got an Offer:',
       passProps: {
         offerId: id,
