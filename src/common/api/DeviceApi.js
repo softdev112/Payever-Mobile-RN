@@ -10,7 +10,7 @@ export default class DeviceApi {
     this.client = client;
   }
 
-  linkDeviceToken(
+  async linkDeviceToken(
     userProfile: UserAccount,
     deviceToken: string
   ): Promise<ApiResp> {
@@ -27,7 +27,9 @@ export default class DeviceApi {
 
     return this.client.post('/device/link', userDeviceInfo, {
       format: 'json',
-      addTokenToHeaders: true,
+      headers: {
+        token: await this.client.authStore.getAccessToken(),
+      },
     });
   }
 }
