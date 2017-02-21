@@ -1,10 +1,7 @@
 import { Component } from 'react';
-import { NavBar, StyleSheet, View } from 'ui';
+import { images, NavBar, StyleSheet, View } from 'ui';
 
 import Chat from '../components/chat';
-
-//noinspection JSUnresolvedVariable
-import imgCommunication from '../images/communication.png';
 
 export default class ChatScreen extends Component {
   static navigatorStyle = {
@@ -19,7 +16,7 @@ export default class ChatScreen extends Component {
     const { conversationId } = this.props;
     return (
       <View style={styles.container}>
-        <NavBar.Default title="Communication" source={imgCommunication} />
+        <NavBar.Default title="Communication" source={images.communication} />
         <Chat conversationId={conversationId} />
       </View>
     );

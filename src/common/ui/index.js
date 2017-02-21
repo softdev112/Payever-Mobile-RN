@@ -13,6 +13,7 @@ export Header from './Header';
 export Html from './Html/index';
 export Icon from './Icon';
 export IconText from './IconText';
+export images from './images';
 export ImageButton from './ImageButton';
 export Link from './Link';
 export Loader from './Loader';
