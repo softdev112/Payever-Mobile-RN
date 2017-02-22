@@ -1,8 +1,8 @@
 import { Component } from 'react';
-import { WebView as ReactWebView, View, Linking } from 'react-native';
+import { View, Linking } from 'react-native';
 import { observer, inject } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
-import { NavBar, StyleSheet } from 'ui';
+import { NavBar, StyleSheet, WebViewEx as ReactWebView } from 'ui';
 import { log } from 'utils';
 
 import injectedCode, { getLoaderHtml } from './injectedCode';
