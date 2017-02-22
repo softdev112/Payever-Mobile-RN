@@ -8,7 +8,8 @@ import Store from './store';
 const store = new Store(config);
 
 Linking.addEventListener('url', async ({ url }) => {
-  if (store.auth.isLoggedIn) {
+  console.log('dddddddddddddddddddddddd');
+  if (store.auth.checkAuth()) {
     const tempUrl = 'https://showroom9.payever.de/' + url.substr(26);
     showScreen('pos.Terminal', { url: tempUrl });
   }
@@ -18,11 +19,12 @@ export default async function startApp() {
   registerScreens(screens, store);
 
   StyleSheet.build();
+  const url1 = await Linking.getInitialURL();
+  console.log('ssssssssssssssssssssssssssss111111', url1);
+  if (!store.auth.checkAuth()) {
+    const url = await Linking.getInitialURL();
+    console.log('ssssssssssssssssssssssssssss1111112', url);
 
-  const auth = await store.auth.deserialize();
-  const url = await Linking.getInitialURL();
-
-  if (auth && auth.isLoggedIn) {
     if (url) {
       showScreen('pos.Terminal', { url });
     } else {

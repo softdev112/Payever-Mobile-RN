@@ -31,7 +31,7 @@
           <category android:name="android.intent.category.DEFAULT" />
           <category android:name="android.intent.category.BROWSABLE" />
           <data android:scheme="https"
-                android:host="*.payever.de"
+                android:host="mein.payever.de"
                 android:pathPrefix="/selfterminal"/>
         </intent-filter>
       </activity>
