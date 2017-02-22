@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { StyleSheet, WebView } from 'ui';
+import { WebView } from 'ui';
 
 /* eslint-disable react/prefer-stateless-function */
 export default class Terminal extends Component {
@@ -10,19 +10,10 @@ export default class Terminal extends Component {
   render() {
     return (
       <WebView
-        style={styles.container}
+        topMarginIos
         source={{ uri: this.props.url }}
         showNavBar="always"
       />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    '@media ios': {
-      marginTop: 15,
-    },
-  },
-});
