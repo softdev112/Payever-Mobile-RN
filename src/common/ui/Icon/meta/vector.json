@@ -32,27 +32,28 @@
       "color": "#002868"
     }
   },
-  "icon-add-address-24": {
+  "flag-santander-se-53": {
     "component": "vector",
     "source": {
       "unicode": ""
+    },
+    "style": {
+      "fontSize": 53,
+      "fontFamily": "payeverIcons",
+      "color": "#ffff00"
+    }
+  },
+  "icon-500px-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-alert-32": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 32,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-arrow-24": {
+  "icon-add-address-24": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -62,7 +63,7 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-arrow-down-16": {
+  "icon-add-people-16": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -72,27 +73,27 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-arrow-down-small-16": {
+  "icon-alert-32": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 16,
+      "fontSize": 32,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-arrow-left-16": {
+  "icon-arrow-24": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 16,
+      "fontSize": 24,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-arrow-left-2-16": {
+  "icon-arrow-down-16": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -102,17 +103,17 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-arrow-left-24": {
+  "icon-arrow-down-small-16": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 24,
+      "fontSize": 16,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-arrow-left-ios-16": {
+  "icon-arrow-left-16": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -122,27 +123,27 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-arrow-left-ios-24": {
+  "icon-arrow-left-2-16": {
     "component": "vector",
     "source": {
       "unicode": ""
-    },
-    "style": {
-      "fontSize": 24,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-arrow-right-16": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
     },
     "style": {
       "fontSize": 16,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-arrow-right-2-16": {
+  "icon-arrow-left-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-arrow-left-ios-16": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -152,17 +153,17 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-arrow-right-3-16": {
+  "icon-arrow-left-ios-24": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 16,
+      "fontSize": 24,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-arrow-right-ios-16": {
+  "icon-arrow-left-small-16": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -172,17 +173,17 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-arrow-right-ios-24": {
+  "icon-arrow-right-16": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 24,
+      "fontSize": 16,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-arrow-sort-asc-16": {
+  "icon-arrow-right-2-16": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -192,7 +193,7 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-arrow-sort-desc-16": {
+  "icon-arrow-right-3-16": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -202,7 +203,7 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-arrow-up-16": {
+  "icon-arrow-right-ios-16": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -212,17 +213,17 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-ascending-16": {
+  "icon-arrow-right-ios-24": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 16,
+      "fontSize": 24,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-ask-16": {
+  "icon-arrow-right-small-16": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -232,7 +233,7 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-ask-solid-16": {
+  "icon-arrow-sort-asc-16": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -242,97 +243,97 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-automotive-industrial-48": {
+  "icon-arrow-sort-desc-16": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 48,
+      "fontSize": 16,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-bag-24": {
+  "icon-arrow-up-16": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 24,
+      "fontSize": 16,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-bag-fill-24": {
+  "icon-ascending-16": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 24,
+      "fontSize": 16,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-background-type-color-32": {
+  "icon-ask-16": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 32,
+      "fontSize": 16,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-background-type-html-32": {
+  "icon-ask-solid-16": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 32,
+      "fontSize": 16,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-background-type-image-32": {
+  "icon-at-alert-24": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 32,
+      "fontSize": 24,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-banner-place-left-32": {
+  "icon-at-comment-24": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 32,
+      "fontSize": 24,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-banner-place-right-32": {
+  "icon-at-offer-24": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 32,
+      "fontSize": 24,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-boxed-48": {
+  "icon-at-purchase-24": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 48,
+      "fontSize": 24,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-bubble-48": {
+  "icon-automotive-industrial-48": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -342,7 +343,7 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-corners-circle-24": {
+  "icon-bag-24": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -352,7 +353,7 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-corners-square-24": {
+  "icon-bag-fill-24": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -362,7 +363,7 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-message-place-side-32": {
+  "icon-banner-background-type-color-32": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -372,7 +373,7 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-message-place-top-32": {
+  "icon-banner-background-type-html-32": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -382,7 +383,7 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-settings-32": {
+  "icon-banner-background-type-image-32": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -392,37 +393,37 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-text-valign-bottom-24": {
+  "icon-banner-banner-place-left-32": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 24,
+      "fontSize": 32,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-text-valign-middle-24": {
+  "icon-banner-banner-place-right-32": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 24,
+      "fontSize": 32,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-banner-text-valign-top-24": {
+  "icon-banner-boxed-48": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 24,
+      "fontSize": 48,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-beauty-health-grocery-48": {
+  "icon-banner-bubble-48": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -432,10 +433,130 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-blob-16": {
+  "icon-banner-corners-circle-24": {
     "component": "vector",
     "source": {
       "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-banner-corners-square-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-banner-message-place-side-32": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-banner-message-place-top-32": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-banner-save_cart-48": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-banner-settings-32": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-banner-text-valign-bottom-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-banner-text-valign-middle-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-banner-text-valign-top-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-banner-upsell-48": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-beauty-health-grocery-48": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-behance-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-blob-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -445,7 +566,7 @@
   "icon-blob-filled-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -455,7 +576,7 @@
   "icon-books-podcasts-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
@@ -465,17 +586,39 @@
   "icon-camera-64": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
       "fontFamily": "payeverIcons"
     }
   },
+  "icon-card-amex-32": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons",
+      "color": "#ffffff"
+    }
+  },
+  "icon-card-mastercard-32": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons",
+      "color": "#ffffff"
+    }
+  },
   "icon-card-mastercard": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 512,
@@ -483,10 +626,21 @@
       "color": "#298DFF"
     }
   },
+  "icon-card-visa-32": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons",
+      "color": "#f6ac1d"
+    }
+  },
   "icon-card-visa": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 512,
@@ -497,7 +651,7 @@
   "icon-case-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -507,7 +661,7 @@
   "icon-case-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
@@ -517,7 +671,7 @@
   "icon-chat-2-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -527,7 +681,7 @@
   "icon-chat-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
@@ -537,7 +691,7 @@
   "icon-chat-fill-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -547,7 +701,7 @@
   "icon-chat-round-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -557,7 +711,7 @@
   "icon-check-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -567,7 +721,7 @@
   "icon-check2-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -577,7 +731,7 @@
   "icon-checkbox-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 20,
@@ -587,7 +741,7 @@
   "icon-checkbox-checked-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -597,7 +751,7 @@
   "icon-checked-64": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
@@ -608,7 +762,7 @@
   "icon-checkmark-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -618,164 +772,14 @@
   "icon-checkmark-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 32,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-clothing-shoes-48": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 48,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-collapse-24": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 24,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-comments-24": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 24,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-csvimport-24": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 24,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-dashboard-24": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 24,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-descending-16": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 16,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-double-arrows-64": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 64,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-download-32": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 32,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-edit-16": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 16,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-edit-user-24": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 24,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-electronics-computers-48": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 48,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-embed-32": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 32,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-error-128": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 128,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-expand-24": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
-    },
-    "style": {
-      "fontSize": 24,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-eye-24": {
-    "component": "vector",
-    "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 24,
+      "fontSize": 32,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-facebook-16": {
+  "icon-clock-16": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -785,27 +789,27 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-facebook-32": {
+  "icon-clothing-shoes-48": {
     "component": "vector",
     "source": {
       "unicode": ""
-    },
-    "style": {
-      "fontSize": 32,
-      "fontFamily": "payeverIcons"
-    }
-  },
-  "icon-facebook-48": {
-    "component": "vector",
-    "source": {
-      "unicode": ""
     },
     "style": {
       "fontSize": 48,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-filters-24": {
+  "icon-collapse-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-columns-24": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -815,17 +819,17 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-finance-express-16": {
+  "icon-comments-24": {
     "component": "vector",
     "source": {
       "unicode": ""
     },
     "style": {
-      "fontSize": 16,
+      "fontSize": 24,
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-fly-mail-24": {
+  "icon-csvimport-24": {
     "component": "vector",
     "source": {
       "unicode": ""
@@ -835,10 +839,330 @@
       "fontFamily": "payeverIcons"
     }
   },
-  "icon-fly-mail-32": {
+  "icon-dashboard-24": {
     "component": "vector",
     "source": {
       "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-descending-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-disconnected-64": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-dots-h-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-dots-v-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-double-arrows-64": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-download-32": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-dribbble-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-edit-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-edit-user-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-electronics-computers-48": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-email-social-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-embed-32": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-ep-bold-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-ep-bullets-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-ep-center-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-ep-heading-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-ep-italic-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-ep-left-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-ep-link-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-ep-numbers-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-ep-right-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-error-128": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 128,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-expand-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-eye-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-facebook-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-facebook-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-facebook-32": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 32,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-facebook-48": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-filters-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-finance-express-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-fly-mail-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-fly-mail-32": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -848,7 +1172,7 @@
   "icon-ga-64": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
@@ -859,7 +1183,7 @@
   "icon-games-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
@@ -869,7 +1193,17 @@
   "icon-geocoder-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-github-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -879,7 +1213,7 @@
   "icon-google-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -890,7 +1224,7 @@
   "icon-google-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
@@ -901,7 +1235,7 @@
   "icon-google-96": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 96,
@@ -912,7 +1246,7 @@
   "icon-gridmode-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -922,7 +1256,7 @@
   "icon-home-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -932,7 +1266,7 @@
   "icon-home-garden-tools-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
@@ -942,17 +1276,37 @@
   "icon-images-128": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 128,
       "fontFamily": "payeverIcons"
     }
   },
+  "icon-info-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-instagram-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
   "icon-invoice-128": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 128,
@@ -962,7 +1316,7 @@
   "icon-jewelry-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
@@ -972,7 +1326,7 @@
   "icon-like-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -982,7 +1336,7 @@
   "icon-like-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -992,7 +1346,7 @@
   "icon-linemode-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1002,7 +1356,7 @@
   "icon-link-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1012,17 +1366,27 @@
   "icon-linkedin-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
       "fontFamily": "payeverIcons"
     }
   },
+  "icon-linkedin-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
   "icon-linkedin-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
@@ -1032,7 +1396,7 @@
   "icon-mac-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1042,7 +1406,7 @@
   "icon-mail-2-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1052,7 +1416,7 @@
   "icon-mail-2-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1062,7 +1426,17 @@
   "icon-mail-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-menu-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1072,7 +1446,17 @@
   "icon-messages-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 16,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-mic-16": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1082,7 +1466,7 @@
   "icon-minus-solid-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1093,7 +1477,7 @@
   "icon-movies-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
@@ -1103,7 +1487,7 @@
   "icon-msgr-add-file-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1113,7 +1497,7 @@
   "icon-msgr-add-img-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 25,
@@ -1123,7 +1507,7 @@
   "icon-music-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
@@ -1133,7 +1517,7 @@
   "icon-offer-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1143,7 +1527,7 @@
   "icon-overlay-options-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1153,7 +1537,7 @@
   "icon-overlay-options-page-chat-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 512,
@@ -1163,7 +1547,7 @@
   "icon-overlay-options-page-contacts-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1173,7 +1557,7 @@
   "icon-overlay-options-page-description-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1183,7 +1567,7 @@
   "icon-overlay-options-page-faq-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1193,7 +1577,7 @@
   "icon-overlay-options-pages-no-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1203,7 +1587,7 @@
   "icon-overlay-options-pages-yes-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1213,7 +1597,7 @@
   "icon-payever-64": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
@@ -1223,7 +1607,7 @@
   "icon-pencil-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1233,7 +1617,17 @@
   "icon-pencil-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-pinterest-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1243,7 +1637,7 @@
   "icon-play-64": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
@@ -1253,7 +1647,7 @@
   "icon-plus-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1263,7 +1657,7 @@
   "icon-plus-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1273,7 +1667,7 @@
   "icon-plus-circle-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1283,7 +1677,7 @@
   "icon-plus-solid-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1294,7 +1688,7 @@
   "icon-plus-solid-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1305,7 +1699,7 @@
   "icon-plus-solid-96": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 96,
@@ -1315,7 +1709,7 @@
   "icon-progress-128": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 128,
@@ -1326,17 +1720,37 @@
   "icon-register-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
       "fontFamily": "payeverIcons"
     }
   },
+  "icon-register-48": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-remote-48": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
+  },
   "icon-reply-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1346,7 +1760,7 @@
   "icon-search-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1356,7 +1770,7 @@
   "icon-security-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1366,7 +1780,7 @@
   "icon-sensor-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
@@ -1376,7 +1790,7 @@
   "icon-sensor-96": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 96,
@@ -1386,7 +1800,7 @@
   "icon-sequence-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1397,7 +1811,7 @@
   "icon-sequence-active-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1408,7 +1822,7 @@
   "icon-settings-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1418,17 +1832,27 @@
   "icon-settings-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
       "fontFamily": "payeverIcons"
     }
   },
+  "icon-settings-48": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
+  },
   "icon-share-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1438,7 +1862,7 @@
   "icon-share-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1448,7 +1872,7 @@
   "icon-shipping-flat_rate-64": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
@@ -1458,7 +1882,7 @@
   "icon-shipping-free-64": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
@@ -1468,7 +1892,7 @@
   "icon-shipping-total_order-64": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
@@ -1478,7 +1902,7 @@
   "icon-shipping-weight-64": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
@@ -1488,7 +1912,7 @@
   "icon-shopping-cart-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1498,7 +1922,7 @@
   "icon-shopping-cart-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1508,7 +1932,17 @@
   "icon-skin-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-skype-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1518,7 +1952,7 @@
   "icon-slack-96": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 96,
@@ -1526,20 +1960,139 @@
       "color": "#443642"
     }
   },
+  "icon-snapchat-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
   "icon-sports-outdoors-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
       "fontFamily": "payeverIcons"
     }
   },
+  "icon-stat-col-96": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 96,
+      "fontFamily": "payeverIcons",
+      "color": "#0084FF"
+    }
+  },
+  "icon-stat-compare-96": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 96,
+      "fontFamily": "payeverIcons",
+      "color": "#E1E1E1"
+    }
+  },
+  "icon-stat-donut-96": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 96,
+      "fontFamily": "payeverIcons",
+      "color": "#0084FF"
+    }
+  },
+  "icon-stat-dot-96": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 96,
+      "fontFamily": "payeverIcons",
+      "color": "#0084FF"
+    }
+  },
+  "icon-stat-line-96": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 96,
+      "fontFamily": "payeverIcons",
+      "color": "#E1E1E1"
+    }
+  },
+  "icon-stat-number-96": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 96,
+      "fontFamily": "payeverIcons",
+      "color": "#E1E1E1"
+    }
+  },
+  "icon-stat-product-96": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 96,
+      "fontFamily": "payeverIcons",
+      "color": "#0084FF"
+    }
+  },
+  "icon-stat-radial-96": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 96,
+      "fontFamily": "payeverIcons",
+      "color": "#E1E1E1"
+    }
+  },
+  "icon-stat-user-96": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 96,
+      "fontFamily": "payeverIcons",
+      "color": "#0084FF"
+    }
+  },
+  "icon-stat-widget-96": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 96,
+      "fontFamily": "payeverIcons"
+    }
+  },
   "icon-storebuilder-add-widget-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1549,7 +2102,7 @@
   "icon-storebuilder-arrow-1-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1559,7 +2112,7 @@
   "icon-storebuilder-arrow-2-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1569,7 +2122,7 @@
   "icon-storebuilder-arrow-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1579,7 +2132,7 @@
   "icon-storebuilder-billboard-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1589,7 +2142,7 @@
   "icon-storebuilder-billboard-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1599,7 +2152,7 @@
   "icon-storebuilder-catalog-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1609,7 +2162,7 @@
   "icon-storebuilder-catalog-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1619,7 +2172,7 @@
   "icon-storebuilder-category-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1629,7 +2182,7 @@
   "icon-storebuilder-category-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1639,7 +2192,7 @@
   "icon-storebuilder-delete-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1649,7 +2202,7 @@
   "icon-storebuilder-dublicate-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1659,7 +2212,7 @@
   "icon-storebuilder-edit-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1669,7 +2222,7 @@
   "icon-storebuilder-embed-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1679,7 +2232,7 @@
   "icon-storebuilder-embed-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1689,7 +2242,7 @@
   "icon-storebuilder-facebook-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1699,7 +2252,7 @@
   "icon-storebuilder-hamburger-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1709,7 +2262,7 @@
   "icon-storebuilder-header-position-1-64": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
@@ -1719,7 +2272,7 @@
   "icon-storebuilder-header-position-2-64": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
@@ -1729,7 +2282,7 @@
   "icon-storebuilder-header-position-3-64": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
@@ -1739,7 +2292,7 @@
   "icon-storebuilder-header-position-4-64": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
@@ -1749,7 +2302,7 @@
   "icon-storebuilder-image-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1759,7 +2312,7 @@
   "icon-storebuilder-image-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1769,7 +2322,7 @@
   "icon-storebuilder-image-grid-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1779,7 +2332,7 @@
   "icon-storebuilder-image-grid-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1789,7 +2342,7 @@
   "icon-storebuilder-map-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1799,7 +2352,7 @@
   "icon-storebuilder-map-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1809,7 +2362,7 @@
   "icon-storebuilder-pinterest-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1819,7 +2372,7 @@
   "icon-storebuilder-slider-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1829,7 +2382,7 @@
   "icon-storebuilder-slider-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1839,7 +2392,7 @@
   "icon-storebuilder-spacer-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1849,7 +2402,7 @@
   "icon-storebuilder-spacer-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1859,7 +2412,7 @@
   "icon-storebuilder-text-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1869,7 +2422,7 @@
   "icon-storebuilder-text-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1879,7 +2432,7 @@
   "icon-storebuilder-transform-to-button-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1889,7 +2442,7 @@
   "icon-storebuilder-turn-left-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1899,7 +2452,7 @@
   "icon-storebuilder-turn-right-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1909,7 +2462,7 @@
   "icon-storebuilder-twitter-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -1919,7 +2472,7 @@
   "icon-storebuilder-two-columns-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -1929,7 +2482,7 @@
   "icon-storebuilder-two-columns-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1939,7 +2492,7 @@
   "icon-storebuilder-unknown-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1949,7 +2502,7 @@
   "icon-storebuilder-zoom-in-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1959,7 +2512,7 @@
   "icon-storebuilder-zoom-out-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1969,7 +2522,7 @@
   "icon-success-128": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 128,
@@ -1977,10 +2530,20 @@
       "color": "#ffffff"
     }
   },
+  "icon-tablet-48": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 48,
+      "fontFamily": "payeverIcons"
+    }
+  },
   "icon-todo-card-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -1990,7 +2553,7 @@
   "icon-toy-kids-baby-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
@@ -2000,7 +2563,7 @@
   "icon-trashcan-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -2010,7 +2573,7 @@
   "icon-trashcan-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -2020,7 +2583,7 @@
   "icon-trust-certificate-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -2030,7 +2593,7 @@
   "icon-trust-docs-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -2040,27 +2603,58 @@
   "icon-trust-help-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
       "fontFamily": "payeverIcons"
     }
   },
+  "icon-tumblr-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-twilio-64": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 64,
+      "fontFamily": "payeverIcons",
+      "color": "#EE3248"
+    }
+  },
   "icon-twitter-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
       "fontFamily": "payeverIcons"
     }
   },
+  "icon-twitter-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
   "icon-twitter-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -2070,7 +2664,7 @@
   "icon-twitter-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
@@ -2080,7 +2674,7 @@
   "icon-unchecked-64": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
@@ -2091,7 +2685,7 @@
   "icon-upload-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -2101,7 +2695,7 @@
   "icon-upload-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -2111,7 +2705,7 @@
   "icon-user-2-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -2121,7 +2715,7 @@
   "icon-user-3-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -2131,7 +2725,7 @@
   "icon-user-32": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 32,
@@ -2141,7 +2735,7 @@
   "icon-user-48": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 48,
@@ -2151,7 +2745,17 @@
   "icon-user-fill-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-vimeo-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -2161,7 +2765,7 @@
   "icon-x-16": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 16,
@@ -2171,7 +2775,7 @@
   "icon-x-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -2181,7 +2785,7 @@
   "icon-x-solid-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -2192,7 +2796,17 @@
   "icon-xls-24": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
+    },
+    "style": {
+      "fontSize": 24,
+      "fontFamily": "payeverIcons"
+    }
+  },
+  "icon-youtube-24": {
+    "component": "vector",
+    "source": {
+      "unicode": ""
     },
     "style": {
       "fontSize": 24,
@@ -2202,7 +2816,7 @@
   "spinner-container": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,
@@ -2212,7 +2826,7 @@
   "spinner-roller": {
     "component": "vector",
     "source": {
-      "unicode": ""
+      "unicode": ""
     },
     "style": {
       "fontSize": 64,

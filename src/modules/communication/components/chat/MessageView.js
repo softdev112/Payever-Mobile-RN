@@ -1,15 +1,11 @@
 import { Component } from 'react';
-import { inject, observer } from 'mobx-react/native';
 import { Html, Icon, StyleSheet, Text, View } from 'ui';
 import type Message from '../../../../store/CommunicationStore/models/Message';
-import { Config } from '../../../../config';
 import Offer from '../../../marketing/components/OfferView';
+import MediaView from './MediaView';
 
-@inject('config')
-@observer
 export default class MessageView extends Component {
   props: {
-    config?: Config;
     message: Message;
   };
 
@@ -22,20 +18,39 @@ export default class MessageView extends Component {
       return <Offer offer={message.offer} />;
     }
 
+    if (message.medias && message.medias.length) {
+      return message.medias.map(media => (
+        <MediaView key={media.url} media={media} />
+      ));
+    }
+
     return <Html source={message.body} />;
+  }
+
+  renderAvatar(avatar) {
+    if (avatar.type === 'url') {
+      const avatarUrl = avatar.valueRetina || avatar.value;
+      return (
+        <Icon style={styles.avatar} source={{ uri: avatarUrl }} />
+      );
+    }
+
+    if (avatar.type === 'letters') {
+      return (
+        <View style={styles.avatar_letters}>
+          <Text style={styles.avatar_text}>{avatar.value}</Text>
+        </View>
+      );
+    }
+
+    return null;
   }
 
   render() {
     const message: Message = this.props.message;
-
-    let avatar = message.avatar.valueRetina || message.avatar.value;
-    if (!avatar.startsWith('http')) {
-      avatar = this.props.config.siteUrl + avatar;
-    }
-
     return (
       <View style={styles.container}>
-        <Icon style={styles.avatar} source={{ uri: avatar }} />
+        {this.renderAvatar(message.avatar)}
         <View style={styles.message}>
           <View style={styles.header}>
             <Text style={styles.header_sender}>{`${message.senderName} `}</Text>
@@ -56,6 +71,22 @@ const styles = StyleSheet.create({
     height: 32,
     marginRight: 22,
     width: 32,
+  },
+
+  avatar_letters: {
+    alignItems: 'center',
+    borderColor: '#666',
+    borderRadius: 16,
+    borderWidth: 1,
+
+    height: 32,
+    justifyContent: 'center',
+    marginRight: 22,
+    width: 32,
+  },
+
+  avatar_text: {
+    fontSize: 16,
   },
 
   body: {
