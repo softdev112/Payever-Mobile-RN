@@ -4,6 +4,7 @@ import { Html, Icon, StyleSheet, Text, View } from 'ui';
 import type Message from '../../../../store/CommunicationStore/models/Message';
 import { Config } from '../../../../config';
 import Offer from '../../../marketing/components/OfferView';
+import MediaView from './MediaView';
 
 @inject('config')
 @observer
@@ -20,6 +21,12 @@ export default class MessageView extends Component {
 
     if (message.offer) {
       return <Offer offer={message.offer} />;
+    }
+
+    if (message.medias && message.medias.length) {
+      return message.medias.map(media => (
+        <MediaView key={media.url} media={media} />
+      ));
     }
 
     return <Html source={message.body} />;
