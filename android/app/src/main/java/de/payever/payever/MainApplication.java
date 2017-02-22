@@ -7,7 +7,8 @@ import com.smixx.fabric.FabricPackage;
 import com.facebook.react.ReactPackage;
 import com.crashlytics.android.Crashlytics;
 import io.fabric.sdk.android.Fabric;
-
+import de.payever.payever.reactwebviewex.ReactWebViewExPackage;
+import de.payever.payever.reactwebviewex.WebViewExActivityCallbacks;
 import com.reactnativenavigation.NavigationApplication;
 
 import java.util.Arrays;
@@ -15,6 +16,8 @@ import java.util.List;
 
 import android.os.Bundle;
 import com.facebook.react.modules.network.ReactCookieJarContainer;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.uimanager.ViewManager;
 import com.facebook.stetho.Stetho;
 import okhttp3.OkHttpClient;
 import com.facebook.react.modules.network.OkHttpClientProvider;
@@ -25,6 +28,8 @@ public class MainApplication extends NavigationApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        setActivityCallbacks(new WebViewExActivityCallbacks());
+
         Fabric.with(this, new Crashlytics());
         if (this.isDebug()) {
             this.initStetho();
@@ -41,7 +46,8 @@ public class MainApplication extends NavigationApplication {
     public List<ReactPackage> createAdditionalReactPackages() {
         return Arrays.<ReactPackage>asList(
             new FabricPackage(),
-            new StethoLoggerReactPackage()
+            new StethoLoggerReactPackage(),
+            new ReactWebViewExPackage()
         );
     }
 
