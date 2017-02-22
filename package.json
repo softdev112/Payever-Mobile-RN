@@ -34,7 +34,7 @@
     "react-native-hyperlink": "0.0.8",
     "react-native-md-textinput": "^2.0.4",
     "react-native-modal-datetime-picker": "^3.0.1",
-    "react-native-navigation": "^2.0.0-experimental.183",
+    "react-native-navigation": "^2.0.0-experimental.223",
     "react-native-notifications": "^1.1.7"
   },
   "jest": {
