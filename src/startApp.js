@@ -21,16 +21,18 @@ export default async function startApp() {
   StyleSheet.build();
   const url1 = await Linking.getInitialURL();
   console.log('ssssssssssssssssssssssssssss111111', url1);
-  if (!store.auth.checkAuth()) {
-    const url = await Linking.getInitialURL();
-    console.log('ssssssssssssssssssssssssssss1111112', url);
 
-    if (url) {
-      showScreen('pos.Terminal', { url });
-    } else {
-      showScreen('dashboard.ChooseAccount');
-    }
-  } else {
+  if (!store.auth.checkAuth()) {
     showScreen('auth.Login');
+    return;
+  }
+
+  const url = await Linking.getInitialURL();
+  console.log('ssssssssssssssssssssssssssss1111112', url);
+
+  if (url) {
+    showScreen('pos.Terminal', { url });
+  } else {
+    showScreen('dashboard.ChooseAccount');
   }
 }
