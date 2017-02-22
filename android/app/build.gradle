@@ -104,8 +104,8 @@ android {
         applicationId "de.payever.payever"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 2001000
-        versionName "2.1.0"
+        versionCode 2001001
+        versionName "2.1.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
