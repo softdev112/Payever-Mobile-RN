@@ -1,7 +1,6 @@
 import { Component } from 'react';
-import { Keyboard } from 'react-native';
+import { Keyboard, Platform } from 'react-native';
 import TextField from 'react-native-md-textinput';
-
 
 export default class TextInput extends Component {
   static defaultProps = { securityTextEntry: false };
@@ -35,8 +34,16 @@ export default class TextInput extends Component {
   }
 
   render() {
+    // Prevent propTypes warning inside md-textinput
+    const inputStyle = Platform.OS === 'android' ? { paddingVertical: 5 } : {};
     return (
-      <TextField ref={f => this.$input = f} dense {...this.props} />
+      <TextField
+        ref={f => this.$input = f}
+        dense
+        highlightColor="#6d6d6d"
+        inputStyle={inputStyle}
+        {...this.props}
+      />
     );
   }
 }

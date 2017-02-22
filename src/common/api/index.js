@@ -1,97 +1,84 @@
-import { merge } from 'lodash';
+/* eslint-disable quote-props */
+/** @name ApiResp */
 import { log } from 'utils';
 
 import type AuthStore from '../../store/AuthStore';
+import type { Config } from '../../config';
+
 import AuthApi from './AuthApi';
 import BusinessApi from './BusinessApi';
 import DashboardApi from './DashboardApi';
-import UserApi from './UserApi';
-import ProfilesApi from './ProfilesApi';
+import DeviceApi from './DeviceApi';
+import MarketingApi from './MarketingApi';
 import MenuApi from './MenuApi';
 import MessengerApi from './MessengerApi';
-import { showScreen } from '../Navigation';
+import ProfilesApi from './ProfilesApi';
+import UserApi from './UserApi';
 
 export default class PayeverApi {
-  auth: AuthApi;
-  business: BusinessApi;
-  dashboard: DashboardApi;
-  menu: MenuApi;
-  messenger: MessengerApi;
-  user: UserApi;
-  profiles: ProfilesApi;
+  auth: AuthApi           = new AuthApi(this);
+  business: BusinessApi   = new BusinessApi(this);
+  dashboard: DashboardApi = new DashboardApi(this);
+  device: DeviceApi       = new DeviceApi(this);
+  marketing: MarketingApi = new MarketingApi(this);
+  menu: MenuApi           = new MenuApi(this);
+  messenger: MessengerApi = new MessengerApi(this);
+  profiles: ProfilesApi   = new ProfilesApi(this);
+  user: UserApi           = new UserApi(this);
 
   baseUrl: string;
   clientId: string;
   clientSecret: string;
+  logApiCall: boolean;
 
   authStore: AuthStore;
 
-  constructor(config: PayeverApiConfig) {
-    this.setConfig(config);
-    this.registerSubApi();
-  }
-
-  registerSubApi() {
-    this.auth      = new AuthApi(this);
-    this.dashboard = new DashboardApi(this);
-    this.business  = new BusinessApi(this);
-    this.menu      = new MenuApi(this);
-    this.messenger = new MessengerApi(this);
-    this.user      = new UserApi(this);
-    this.profiles  = new ProfilesApi(this);
-  }
-
-  setConfig(config: PayeverApiConfig) {
-    if (typeof config.baseUrl === 'string' && config.baseUrl.endsWith('/')) {
-      config.baseUrl = config.baseUrl.slice(0, -1);
-    }
-
-    merge(this, config);
+  constructor(config: Config, authStore: AuthStore) {
+    Object.assign(this, config.api);
+    this.authStore = authStore;
+    this.logApiCall = config.debug.logApiCall;
   }
 
   async get(url: string, query: Object = null): Promise<ApiResp> {
     query = {
       ...query,
-      access_token: await this.getAccessToken(),
+      access_token: await this.authStore.getAccessToken(),
     };
     return this.fetch(url, { query });
   }
 
   async post(
     url: string,
-    requestData: Object = null,
-    { format = 'formData' }: { format: DataFormat } = {}
+    data: Object = null,
+    options: RequestOptions = {}
   ): Promise<ApiResp> {
-    const options = {
-      method: 'POST',
+    const isJson = options.format === 'json';
+    delete options.format;
+
+    const headers = {
+      'Accept':        'application/json',
+      'Authorization': 'Bearer ' + await this.authStore.getAccessToken(),
+      'Content-Type':  isJson ? 'application/json' : 'multipart/form-data',
     };
 
-    if (format === 'formData') {
-      options.body = objectToPhpFormData(requestData);
-    } else {
-      options.body = JSON.stringify(requestData);
-    }
-
-    return this.fetch(url, options);
+    return this.fetch(url, {
+      body: isJson ? JSON.stringify(data) : objectToFormData(data),
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+      cache: 'default',
+      ...options,
+      headers: { ...headers, ...options.headers },
+    });
   }
 
   //noinspection ReservedWordAsName
   async delete(
     url: string,
-    requestData: Object = null,
-    { format = 'formData' }: { format: DataFormat } = {}
+    data: Object = null,
+    options: RequestOptions = {}
   ): Promise<ApiResp> {
-    const options = {
-      method: 'DELETE',
-    };
-
-    if (format === 'formData') {
-      options.body = objectToPhpFormData(requestData);
-    } else {
-      options.body = JSON.stringify(requestData);
-    }
-
-    return this.fetch(url, options);
+    return this.post(url, data, { ...options, method: 'DELETE' });
   }
 
   //noinspection InfiniteRecursionJS
@@ -99,7 +86,7 @@ export default class PayeverApi {
     options.method = options.method || 'GET';
     url = this.normalizeUrl(url, options.query);
 
-    if (__DEV__) {
+    if (__DEV__ && this.logApiCall) {
       log.debug(`${options.method} ${url}`);
     }
 
@@ -109,38 +96,20 @@ export default class PayeverApi {
       response.data = JSON.parse(text);
       if (response.data && response.data.error) {
         response.error = response.data.error;
+        //noinspection JSUnresolvedVariable
         response.errorDescription = response.data.error_description;
       }
     } catch (e) {
       response.data = {};
       response.error = 'json_error';
-      response.errorDescription = 'Wrong server response';
+      response.errorDescription = 'Server sent invalid json data.';
     }
 
-    if (!options.preventTokenRefresh &&
-      response.error === 'invalid_grant') {
-      const token = await this.auth.refreshToken(this.authStore.refreshToken);
-      if (token) {
-        return await this.fetch(url, { ...options, preventTokenRefresh: true });
-      }
-      showScreen('auth.Login');
-    }
-
-    if (__DEV__) {
+    if (__DEV__ && this.logApiCall) {
       log.debug('Response data ', response.data);
     }
 
     return response;
-  }
-
-  async getAccessToken() {
-    if (this.authStore.accessToken && this.authStore.expiresIn > new Date()) {
-      return this.authStore.accessToken;
-    }
-    if (!this.authStore.refreshToken) {
-      throw new Error('PayeverApi: refreshToken is null');
-    }
-    return await this.auth.refreshToken(this.authStore.refreshToken);
   }
 
   normalizeUrl(url: string, query: Object = null) {
@@ -158,7 +127,7 @@ function objectToQueryString(data: Object): string {
   }).join('&');
 }
 
-function objectToPhpFormData(data: Object) {
+function objectToFormData(data: Object) {
   const formData = new FormData();
 
   if (!data || typeof data !== 'object') return formData;
@@ -197,13 +166,20 @@ function objectToPhpFormData(data: Object) {
   return formData;
 }
 
-type PayeverApiConfig = {
-  baseUrl: string;
-  clientId: string;
-  clientSecret: string;
-  accessToken: string;
-  expiresIn: Date;
-  refreshToken: string;
-};
+type RequestOptions = {
+  format: 'json' | 'formData';
+  query: Object;
 
-type DataFormat = 'json' | 'formData';
+  body: any;
+  credentials: 'include' | 'omit' | 'same-origin';
+  cache: 'default' | 'no-store' | 'reload' | 'no-cache' | 'force-cache'
+    | 'only-if-cached';
+  headers: Object;
+  integrity: any;
+  method: 'DELETE' | 'GET' | 'POST' | 'PUT';
+  mode: 'cors' | 'navigate' | 'no-cors' | 'same-origin';
+  redirect: 'follow' | 'error' | 'manual';
+  referrer: 'client' | 'no-referrer' | string;
+  referrerPolicy: 'no-referrer' | 'no-referrer-when-downgrade' | 'origin'
+    | 'origin-when-cross-origin' | 'unsafe-url';
+};

@@ -7,6 +7,9 @@ export class Config {
     clientId: string;
     clientSecret: string;
   };
+  debug: {
+    logApiCall: boolean;
+  };
 
   constructor(data) {
     Object.assign(this, data);

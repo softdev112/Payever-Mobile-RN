@@ -1,10 +1,9 @@
 import { action, computed, observable, runInAction } from 'mobx';
-import { apiHelper } from 'utils';
+import { apiHelper } from '../common/utils';
+import { images } from '../common/ui';
 
 import type Store from './index';
 import type { SearchDataRow } from '../common/api/ProfilesApi';
-//noinspection JSUnresolvedVariable
-import imgNoBusiness from './UserProfilesStore/images/no-business.png';
 
 export default class SearchStore {
   @observable items: Array<SearchRow> = [];
@@ -110,6 +109,6 @@ export class SearchRow {
       return { uri: this.business.logo };
     }
 
-    return imgNoBusiness;
+    return images.noBusiness;
   }
 }

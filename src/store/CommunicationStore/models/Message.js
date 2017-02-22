@@ -1,29 +1,52 @@
 import type Avatar from './Avatar';
-import type Conversation from './Conversation';
+import Offer from '../../OffersStore/models/Offer';
 
 export default class Message {
   avatar: Avatar;
-  body: string;
-  conversation: Conversation;
-  date: string;
+  body: string; // HTML-view of the message
+  conversation: {
+    archived: boolean; // Is the conversation archived by current user
+    id: number;
+    name: string;
+    notification: boolean;
+    type: 'conversation';
+  };
+  date: string; // yyyy-MM-dd'T'HH:mm:ssZZZZZ
+  //noinspection SpellCheckingInspection
   dateFormated: string;
   dateOnly: string;
   deletable: boolean;
   deleted: boolean;
   editable: boolean;
-  editBody: string;
+  editBody: string; // Plain text view of the message to be able to edit it
   edited: boolean;
-  forwardFrom: ?Object;
-  id: number;
+  forwardFrom: ?{
+    id: number;
+    senderName: string;
+  };
+  id: number; // Message unique ID
   isSystem: boolean;
   medias: Array<any>;
-  offer: ?Object;
+  offer: Offer;
   offerId: ?number;
-  opponentUnread: boolean;
-  own: boolean;
+  opponentUnread: boolean; // Is unread by any of the chat opponent users
+  own: boolean; // Is message own for current user
   recipient: string;
-  replyTo: ?Object;
+  replyTo: ?{
+    id: number;
+    senderName: string;
+    body: string;
+    deleted: boolean;
+  };
   senderId: number;
   senderName: string;
-  unread: boolean;
+  unread: boolean; // Is unread for requested it user
+
+  constructor(data) {
+    if (data.offer) {
+      data.offer = new Offer(data.offer);
+    }
+
+    Object.assign(this, data);
+  }
 }

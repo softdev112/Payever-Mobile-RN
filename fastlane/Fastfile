@@ -109,6 +109,12 @@ platform :ios do
 end
 
 platform :android do
+  desc 'Just build'
+  lane :build do |values|
+    gradle(task: 'clean', project_dir: 'android/')
+    gradle(task: 'assemble', build_type: 'Release', project_dir: 'android/')
+  end
+
   desc 'Publish a new Android beta through fabric.io'
   lane :beta do |values|
     gradle(task: 'clean', project_dir: 'android/')

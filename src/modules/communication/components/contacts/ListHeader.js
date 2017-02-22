@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
 
   add: {
-    color: '$pe_icons_color',
+    color: '$pe_color_icon',
     fontSize: 16,
     width: 16,
     height: 17,

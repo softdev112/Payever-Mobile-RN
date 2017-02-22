@@ -23,6 +23,8 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		500362CC13ACEE2AC82B5BBE /* libPods-PayeverMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B0A707613E008DCD2BA07EB /* libPods-PayeverMobile.a */; };
+		5213C497BA5E4BCABFEB802E /* libRNNotifications.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EEE69AF2154345FB91CA90B7 /* libRNNotifications.a */; };
+		53AD6416E647457ABDF258C0 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA441F5AAE8249B285ABE544 /* libRNDeviceInfo.a */; };
 		743052952B6B4C1A8A6075AE /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E9EEEF0999B47CB877BBAD1 /* libReactNativeNavigation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		CE57C5B51E0459C40003D955 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE57C5A01E0454320003D955 /* libRCTAnimation.a */; };
@@ -93,6 +95,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 83CBBA2E1A601D0E00E9B192;
 			remoteInfo = React;
+		};
+		716CA51F1E4E4D55009464BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 022AAFBB494D4B9D8BBFD1FC /* RNDeviceInfo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = DA5891D81BA9A9FC002B4DB2;
+			remoteInfo = RNDeviceInfo;
+		};
+		718296241E4B58EE005CCF67 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 608B81F152F14B0A93AF26F3 /* RNNotifications.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNNotifications;
 		};
 		78C398B81ACF4ADC00677621 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -196,6 +212,7 @@
 		00E356EE1AD99517003FC87E /* PayeverMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PayeverMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* PayeverMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PayeverMobileTests.m; sourceTree = "<group>"; };
+		022AAFBB494D4B9D8BBFD1FC /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		099E733795E546C7A24EE331 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		0E9EEEF0999B47CB877BBAD1 /* libReactNativeNavigation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeNavigation.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
@@ -214,9 +231,13 @@
 		3B0A707613E008DCD2BA07EB /* libPods-PayeverMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PayeverMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E272FA6FCD04EF791C75620 /* libSMXCrashlytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSMXCrashlytics.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		608B81F152F14B0A93AF26F3 /* RNNotifications.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNNotifications.xcodeproj; path = "../node_modules/react-native-notifications/RNNotifications/RNNotifications.xcodeproj"; sourceTree = "<group>"; };
+		718296271E4B66E1005CCF67 /* payever.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = payever.entitlements; path = PayeverMobile/payever.entitlements; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		CE9679E21E09A2BE0061A7C6 /* StaticResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StaticResources; path = PayeverMobile/StaticResources; sourceTree = "<group>"; };
+		EEE69AF2154345FB91CA90B7 /* libRNNotifications.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNNotifications.a; sourceTree = "<group>"; };
+		FA441F5AAE8249B285ABE544 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +267,8 @@
 				D44ACA0BC9084E329F579DA8 /* libSMXCrashlytics.a in Frameworks */,
 				500362CC13ACEE2AC82B5BBE /* libPods-PayeverMobile.a in Frameworks */,
 				743052952B6B4C1A8A6075AE /* libReactNativeNavigation.a in Frameworks */,
+				5213C497BA5E4BCABFEB802E /* libRNNotifications.a in Frameworks */,
+				53AD6416E647457ABDF258C0 /* libRNDeviceInfo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +364,7 @@
 		13B07FAE1A68108700A75B9A /* PayeverMobile */ = {
 			isa = PBXGroup;
 			children = (
+				718296271E4B66E1005CCF67 /* payever.entitlements */,
 				CE9679E21E09A2BE0061A7C6 /* StaticResources */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -378,6 +402,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		716CA51C1E4E4D55009464BB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				716CA5201E4E4D55009464BB /* libRNDeviceInfo.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7182960D1E4B58EE005CCF67 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				718296251E4B58EE005CCF67 /* libRNNotifications.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,6 +443,8 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				1694A4B4B4284D758B40C894 /* SMXCrashlytics.xcodeproj */,
 				099E733795E546C7A24EE331 /* ReactNativeNavigation.xcodeproj */,
+				608B81F152F14B0A93AF26F3 /* RNNotifications.xcodeproj */,
+				022AAFBB494D4B9D8BBFD1FC /* RNDeviceInfo.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -509,11 +551,23 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = NGUZ26BK5M;
+						ProvisioningStyle = Manual;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = NGUZ26BK5M;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -576,6 +630,14 @@
 				{
 					ProductGroup = CE08C98D1DF154C2001BE0A3 /* Products */;
 					ProjectRef = 099E733795E546C7A24EE331 /* ReactNativeNavigation.xcodeproj */;
+				},
+				{
+					ProductGroup = 716CA51C1E4E4D55009464BB /* Products */;
+					ProjectRef = 022AAFBB494D4B9D8BBFD1FC /* RNDeviceInfo.xcodeproj */;
+				},
+				{
+					ProductGroup = 7182960D1E4B58EE005CCF67 /* Products */;
+					ProjectRef = 608B81F152F14B0A93AF26F3 /* RNNotifications.xcodeproj */;
 				},
 				{
 					ProductGroup = CE4CC8961DDDC7A800108305 /* Products */;
@@ -645,6 +707,20 @@
 			fileType = archive.ar;
 			path = libReact.a;
 			remoteRef = 146834031AC3E56700842450 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		716CA5201E4E4D55009464BB /* libRNDeviceInfo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNDeviceInfo.a;
+			remoteRef = 716CA51F1E4E4D55009464BB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		718296251E4B58EE005CCF67 /* libRNNotifications.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNNotifications.a;
+			remoteRef = 718296241E4B58EE005CCF67 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		78C398B91ACF4ADC00677621 /* libRCTLinking.a */ = {
@@ -881,7 +957,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = NGUZ26BK5M;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -889,11 +965,7 @@
 				INFOPLIST_FILE = PayeverMobileTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/payever.app/payever";
@@ -904,16 +976,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = NGUZ26BK5M;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = PayeverMobileTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/payever.app/payever";
@@ -925,8 +994,9 @@
 			baseConfigurationReference = 3A68551BEE310DD7C9723263 /* Pods-PayeverMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = PayeverMobile/payever.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = NGUZ26BK5M;
@@ -936,6 +1006,9 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-notifications/RNNotifications",
+					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/**",
 				);
 				INFOPLIST_FILE = PayeverMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -947,8 +1020,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp;
 				PRODUCT_NAME = payever;
-				PROVISIONING_PROFILE = "4c42a206-23ae-4db5-af30-c525cc277580";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gmbh.payeverapp";
+				PROVISIONING_PROFILE = "e15ed32c-6ad0-438c-9c67-0ce0642ec8af";
+				PROVISIONING_PROFILE_SPECIFIER = payever_new_dev;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -959,8 +1032,9 @@
 			baseConfigurationReference = 2DA7323247CCE458282827DD /* Pods-PayeverMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_ENTITLEMENTS = PayeverMobile/payever.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: payever GmbH (NGUZ26BK5M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NGUZ26BK5M;
 				HEADER_SEARCH_PATHS = (
@@ -969,6 +1043,9 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-notifications/RNNotifications",
+					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
+					"$(SRCROOT)/../node_modules/react-native/Libraries/**",
 				);
 				INFOPLIST_FILE = PayeverMobile/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -980,8 +1057,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp;
 				PRODUCT_NAME = payever;
-				PROVISIONING_PROFILE = "4c42a206-23ae-4db5-af30-c525cc277580";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gmbh.payeverapp";
+				PROVISIONING_PROFILE = "e15ed32c-6ad0-438c-9c67-0ce0642ec8af";
+				PROVISIONING_PROFILE_SPECIFIER = payever_new_dev;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1033,6 +1110,8 @@
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/react-native/ReactCommon/**",
+					"$(SRCROOT)/../node_modules/react-native-notifications/RNNotifications",
+					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -1081,6 +1160,8 @@
 					"$(SRCROOT)/../node_modules/react-native-fabric/ios/SMXCrashlytics",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/react-native/ReactCommon/**",
+					"$(SRCROOT)/../node_modules/react-native-notifications/RNNotifications",
+					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;

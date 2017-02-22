@@ -1,18 +1,18 @@
-/**
- * Created by Elf on 30.01.2017.
- */
 import { Component } from 'react';
 import { Switch } from 'react-native';
-import { Icon, StyleSheet, Text, View } from 'ui';
+import { StyleSheet, View } from 'ui';
+
+import Title from './Title';
+import type UserSettings
+  from '../../../../store/CommunicationStore/models/UserSettings';
 
 export default class CheckBoxPref extends Component {
   props: {
     icon: string;
-    checked?: boolean;
-    settings: Object;
     title: string;
     prefName: string;
-    onSwitched?: (prefName: string) => {};
+    settings: UserSettings;
+    onValueChange?: () => {};
   };
 
   state: {
@@ -23,15 +23,15 @@ export default class CheckBoxPref extends Component {
     super(props);
 
     this.state = {
-      checked: !!(props.settings && props.settings[props.prefName]),
+      checked: !!(props.settings[props.prefName]),
     };
   }
 
   onSwitchPress() {
-    const { onSwitched, prefName, settings } = this.props;
+    const { onValueChange, prefName, settings } = this.props;
 
-    if (onSwitched) {
-      onSwitched();
+    if (onValueChange) {
+      onValueChange();
     }
 
     settings[prefName] = !this.state.checked;
@@ -39,16 +39,13 @@ export default class CheckBoxPref extends Component {
   }
 
   render() {
-    const { title, icon, checked } = this.props;
+    const { title, icon } = this.props;
 
     return (
       <View style={styles.container}>
-        <View style={styles.titleBlock}>
-          {icon && <Icon style={styles.icon} source={icon} />}
-          <Text style={styles.title}>{title}</Text>
-        </View>
+        <Title icon={icon} title={title} />
         <Switch
-          value={this.state.checked || checked}
+          value={this.state.checked}
           onValueChange={::this.onSwitchPress}
         />
       </View>
@@ -58,26 +55,10 @@ export default class CheckBoxPref extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'stretch',
-    justifyContent: 'space-between',
-    paddingVertical: 5,
-    paddingHorizontal: 3,
-    height: 40,
-  },
-
-  titleBlock: {
     flexDirection: 'row',
-    alignItems: 'center',
-  },
-
-  icon: {
-    marginRight: 8,
-    fontSize: 16,
-  },
-
-  title: {
-    fontSize: 14,
+    justifyContent: 'flex-start',
+    height: 40,
   },
 });

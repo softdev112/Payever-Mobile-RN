@@ -1,109 +1,81 @@
 /* eslint-disable */
 import { Component } from 'react';
-import { ListView, TouchableOpacity, requireNativeComponent } from 'react-native';
-import { inject, observer } from 'mobx-react/native';
-import { toggleMenu } from '../../../common/Navigation';
-import { Icon, NavBar, StyleSheet, Text, View, WebViewEx } from 'ui';
-import { Navigator } from 'react-native-navigation';
-import injectedCode from './WebView/injectedCode';
+import { TouchableOpacity } from 'react-native';
+import { Html, NavBar, StyleSheet, Text, View, Button } from 'ui';
+import { Navigator, Navigation } from 'react-native-navigation';
+import offer from './data';
+import { observer, inject } from 'mobx-react/native';
+import AuthStore from '../../../store/AuthStore';
 
-import vector from '../../../common/ui/Icon/vector.json';
-
-@inject('userProfiles')
+@inject('auth')
 @observer
 export default class Debug extends Component {
   static navigatorStyle = { navBarHidden: true };
 
   props:{
+    auth: AuthStore;
     navigator: Navigator;
+    inspectObj?: any;
   };
 
-  constructor(props) {
-    super(props);
-
-    this.ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
-
-    this.injectedCode = injectedCode({
-      isDev: __DEV__,
-      ...props.injectOptions,
-    });
+  renderNode(node, index, list) {
+    console.log([node, index, list]);
   }
 
-  onGoToChat() {
-    this.props.navigator.push({
-      screen: 'communication.Chat',
-    })
-  }
-
-  onShowSideMenu() {
-    toggleMenu(this.props.navigator);
-  }
-
-  showError() {
-    this.props.navigator.push({
-      screen: 'core.WebView',
-      passProps: {
-        url: 'http://site-not-exists.ru'
-      }
-    })
-  }
-
-  renderRow(row) {
-    return (
-      <View style={{flexDirection: 'row'}}>
-        <Icon source={row} />
-        <Text>{row}</Text>
-      </View>
-    );
-  }
-
-  onLoadStart({ nativeEvent }) {
-    console.log(nativeEvent);
+  nullRefreshToken() {
+    const auth = this.props.auth;
+    auth.refreshToken = 'invalid';
+    auth.expiresIn = new Date(0);
+    auth.serialize();
   }
 
   render() {
-    const listData = this.ds.cloneWithRows(Object.keys(vector));
-    const source = { uri: 'http://ya.ru' };
+    const html = `
+      <h1>A special offer. Just for you.</h1>
+      
+      <p>
+        As you previously bought from us we wanted to thank you by
+        showing you this offer below before everyone else sees it.
+      </p>
+      
+      <p>
+        Best,<br />
+        MyOnlineShop
+      </p>
+    `;
+    const { inspectObj } = this.props;
 
     return (
       <View style={styles.container}>
-
-        <NavBar style={styles.navBar}>
-          <NavBar.Back />
-          <NavBar.Title
-            source={{
-              uri: 'https://mein.payever.de/images/dashboard/communication.png'
-            }}
-          />
-          <NavBar.Menu />
-        </NavBar>
-
-        <View style={styles.mainContent}>
-          <TouchableOpacity onPress={::this.onGoToChat}>
-            <Text>ASDDSDA</Text>
-          </TouchableOpacity>
-          <ListView
-            style={{height: 30}}
-            dataSource={listData}
-            renderRow={::this.renderRow}
-          />
-          <WebViewEx
-            style={{height: 800}}
-            source={source}
-            onError={() => {}}
-            onLoadStart={::this.onLoadStart}
-            onMessage={() => {}}
-            javaScriptEnabled
-            domStorageEnabled
-            injectedJavaScript={this.injectedCode}
-            startInLoadingState={false}
-            renderError={() => {}}
-            bounces={false}
-            uploadEnabledAndroid
-          />
+        <NavBar.Default />
+        <TouchableOpacity
+          onPress={() => { Navigation.showModal({
+            screen: 'marketing.ViewOffer',
+            title: 'Got an Offer:',
+            passProps: {
+              offerId: 1511,
+            },
+          })}}
+        >
+          <Text>Show Offer</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => { this.props.navigator.push({
+            screen: 'pos.Terminal',
+            title: 'Terminal',
+            passProps: {
+              url: 'https://showroom9.payever.de/selfterminal/new/media-shop-1/pos/xxxlutz',
+            },
+          })}}
+        >
+          <Text>Terminal</Text>
+        </TouchableOpacity>
+        <View style={styles.wrapper}>
+          <Html source={html} />
         </View>
+        {inspectObj && <Text>{JSON.stringify(inspectObj)}</Text>}
+
+        <Button title="Null refreshToken" onPress={::this.nullRefreshToken}/>
       </View>
     )
   }
@@ -111,29 +83,11 @@ export default class Debug extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: '100%',
+    flex: 1
   },
 
-  row: {
-    flexDirection: 'row'
-  },
-
-  image: {
-    width: 16,
-    height: 16,
-    shadowColor: 'rgba(0,0,0,.15)',
-    shadowRadius: 8,
-    shadowOffset: { width: 2, height: 2 },
-    shadowOpacity: 1,
-    borderRadius: 8,
-  },
-
-  navBar: {
-
-  },
-
-  mainContent: {
-    flex: 1,
-  },
+  wrapper: {
+    borderColor: '#ddd',
+    borderWidth: 1,
+  }
 });

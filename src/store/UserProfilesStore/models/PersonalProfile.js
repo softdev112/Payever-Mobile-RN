@@ -1,9 +1,7 @@
 import { observable, extendObservable, computed } from 'mobx';
+import { images } from 'ui';
 import Profile from './Profile';
 import UserAccount from './UserAccount';
-
-//noinspection JSUnresolvedVariable
-import imgNoAvatar from '../images/no-avatar.png';
 
 export default class PersonalProfile extends Profile {
   @observable user: UserAccount;
@@ -21,7 +19,7 @@ export default class PersonalProfile extends Profile {
     if (this.user && this.user.avatar) {
       return { uri: this.user.avatar };
     }
-    return imgNoAvatar;
+    return images.noAvatar;
   }
 
   @computed get displayName() {

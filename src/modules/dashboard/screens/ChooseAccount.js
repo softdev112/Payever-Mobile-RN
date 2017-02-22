@@ -3,15 +3,12 @@ import { inject, observer } from 'mobx-react/native';
 import { Keyboard, Platform } from 'react-native';
 import type { Navigator } from 'react-native-navigation';
 import {
-  GridView, Header, IconText, Loader, Text, View, StyleSheet,
+  GridView, Header, IconText, images, Loader, Text, View, StyleSheet,
 } from 'ui';
-
+import { pushNotificationsHelper } from 'utils';
 import type { Config } from '../../../config';
 import type UserProfilesStore from '../../../store/UserProfilesStore';
 import type Profile from '../../../store/UserProfilesStore/models/Profile';
-
-//noinspection JSUnresolvedVariable
-import addBusinessIcon from '../images/add-business.png';
 
 @inject('userProfiles', 'config')
 @observer
@@ -46,6 +43,15 @@ export default class ChooseAccount extends Component {
         animated: true,
         passProps: { message: userProfiles.error },
       });
+    }
+
+    if (Platform.OS === 'ios') {
+      // Push notifications ios only yet
+      const { store, privateProfile } = userProfiles;
+
+      // Register push notifications
+      pushNotificationsHelper.createInstance(store.api, privateProfile.user)
+        .registerNotifications();
     }
   }
 
@@ -82,7 +88,7 @@ export default class ChooseAccount extends Component {
         textStyle={styles.iconTitle}
         imageStyle={styles.logo}
         onPress={::this.onAddNewBusiness}
-        source={addBusinessIcon}
+        source={images.addBusiness}
         title="Add New Business"
       />
     );

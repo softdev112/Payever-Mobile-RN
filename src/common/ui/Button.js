@@ -1,17 +1,54 @@
 /* eslint react/prefer-stateless-function: 0 */
 
 import React, { Component } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Animated, Easing, Text, TouchableOpacity } from 'react-native';
 import StyleSheet from './StyleSheet';
 
 export default class Button extends Component {
   props: {
-    title: string;
+    animated?: boolean;
+    disabled?: boolean;
     onPress: () => any;
-    disabled?: ?boolean;
-    titleStyle?: Object | number;
     style?: Object | number;
+    title: string;
+    titleStyle?: Object | number;
   };
+
+  state: {
+    isDisabled: boolean;
+    opacityAnim: Object;
+  };
+
+  constructor(props) {
+    super(props);
+
+    const initBtnDisabled = props.disabled !== undefined && props.disabled;
+
+    this.state = {
+      opacityAnim: new Animated.Value(initBtnDisabled ? 0.4 : 1),
+    };
+  }
+
+  componentWillReceiveProps(props) {
+    const { disabled, animated } = this.props;
+    const { opacityAnim } = this.state;
+
+    if (disabled === undefined || animated === undefined) return;
+
+    if (!disabled && props.disabled) {
+      Animated.timing(opacityAnim, {
+        toValue: 0.4,
+        duration: 350,
+        easing: Easing.easy,
+      }).start();
+    } else if (disabled && !props.disabled) {
+      Animated.timing(opacityAnim, {
+        toValue: 1,
+        duration: 350,
+        easing: Easing.easy,
+      }).start();
+    }
+  }
 
   render() {
     const { onPress, title, disabled, style, titleStyle } = this.props;
@@ -32,15 +69,17 @@ export default class Button extends Component {
     }
 
     return (
-      <TouchableOpacity
-        style={buttonStyles}
-        accessibilityComponentType="button"
-        accessibilityTraits={['button']}
-        disabled={disabled}
-        onPress={onPress}
-      >
-        <Text style={textStyles}>{title}</Text>
-      </TouchableOpacity>
+      <Animated.View style={{ opacity: this.state.opacityAnim }}>
+        <TouchableOpacity
+          style={buttonStyles}
+          accessibilityComponentType="button"
+          accessibilityTraits={['button']}
+          disabled={disabled}
+          onPress={onPress}
+        >
+          <Text style={textStyles}>{title}</Text>
+        </TouchableOpacity>
+      </Animated.View>
     );
   }
 }
@@ -52,20 +91,18 @@ const styles = StyleSheet.create({
     padding: 3,
   },
 
-  text: {
-    textAlign: 'center',
-    color: 'white',
-    padding: 8,
-    fontWeight: '500',
+  buttonDisabled: {
+    opacity: 0.4,
   },
 
-  buttonDisabled: {
-    elevation: 0,
-    backgroundColor: '#dfdfdf',
-    borderColor: '#dfdfdf',
+  text: {
+    color: 'white',
+    fontWeight: '400',
+    padding: 8,
+    textAlign: 'center',
   },
 
   textDisabled: {
-    color: '#a1a1a1',
+    color: '#fff',
   },
 });

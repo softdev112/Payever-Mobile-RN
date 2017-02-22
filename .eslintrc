@@ -8,11 +8,15 @@
   ],
 
   "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".json", ".android.js", ".ios.js"]
+      }
+    },
     "import/core-modules": ["ui", "utils"],
     "import/extensions": [
-      ".js", ".json", ".png"
-    ],
-    "import/resolver": "reactnative"
+      ".js", ".json", ".png", ".android.js", ".ios.js"
+    ]
   },
 
   "env": {
@@ -21,10 +25,12 @@
 
   "globals": {
     "__DEV__": true,
+    "ApiResp": true,
     "FormData": true,
     "fetch": true,
+    "Headers": true,
     "log": true,
-    "ApiResp": true
+    "WebSocket": true
   },
 
   "rules": {

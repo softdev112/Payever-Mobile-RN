@@ -1,16 +1,25 @@
-/**
- * Created by Elf on 30.01.2017.
- */
 import { Component } from 'react';
-import { Animated, Slider, Switch } from 'react-native';
-import { Icon, StyleSheet, Text, View } from 'ui';
+import { Animated, Slider } from 'react-native';
+import { StyleSheet, View } from 'ui';
+
+import type UserSettings
+  from '../../../../store/CommunicationStore/models/UserSettings';
+import CheckBoxPref from './CheckBoxPref';
+import Title from './Title';
+
+const SLIDER_BLOCK_HEIGHT = 45;
 
 export default class SwitchableSliderPref extends Component {
   props: {
-    checkBox: CheckBox;
-    slider: SliderPref;
-    settings: Object;
-    onSwitched: () => {};
+    switchPrefName: string;
+    switchTitle: string;
+    switchIcon?: string;
+    sliderPrefName: string;
+    sliderMin: number;
+    sliderMax: number;
+    sliderTitle: string;
+    sliderIcon?: string;
+    settings: UserSettings;
   };
 
   state: {
@@ -22,37 +31,30 @@ export default class SwitchableSliderPref extends Component {
   constructor(props) {
     super(props);
 
-    const { settings, checkBox, slider } = this.props;
+    const { settings, sliderPrefName, switchPrefName } = props;
 
-    const initialState = !!(settings && settings[checkBox.prefName]);
+    const initialState = !!(settings[switchPrefName]);
     this.state = {
       isSliderOn: initialState,
-      value:  settings ? settings[slider.prefName] : 0,
-      sliderHeight: new Animated.Value(initialState ? 40 : 0),
+      value: settings[sliderPrefName],
+      sliderHeight: new Animated.Value(initialState ? SLIDER_BLOCK_HEIGHT : 0),
     };
   }
 
   onSlidingComplete(value) {
-    const { settings, slider } = this.props;
+    const { settings, sliderPrefName } = this.props;
 
     if (settings) {
-      settings[slider.prefName] = value;
+      settings[sliderPrefName] = value;
     }
   }
 
   onSwitchPress() {
-    const { sliderHeight, isSliderOn } = this.state;
+    const { isSliderOn, sliderHeight } = this.state;
     this.setState({ isSliderOn: !isSliderOn });
 
-    const { onSwitched, settings, checkBox } = this.props;
-    if (onSwitched) {
-      onSwitched();
-    }
-
-    settings[checkBox.prefName] = !isSliderOn;
-
     Animated.timing(sliderHeight, {
-      toValue: isSliderOn ? 0 : 40,
+      toValue: isSliderOn ? 0 : SLIDER_BLOCK_HEIGHT,
       duration: 200,
     }).start();
   }
@@ -62,7 +64,17 @@ export default class SwitchableSliderPref extends Component {
   }
 
   render() {
-    const { checkBox, slider } = this.props;
+    const {
+      settings,
+      switchTitle,
+      switchPrefName,
+      switchIcon,
+      sliderTitle,
+      sliderIcon,
+      sliderMin,
+      sliderMax,
+    } = this.props;
+
     const { sliderHeight, value } = this.state;
     const opacity = sliderHeight.interpolate({
       inputRange: [0, 40],
@@ -71,17 +83,13 @@ export default class SwitchableSliderPref extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.checkBoxBlock}>
-          <View style={styles.titleBlock}>
-            {checkBox.icon &&
-            <Icon style={styles.icon} source={checkBox.icon} />}
-            <Text style={styles.title}>{checkBox.title}</Text>
-          </View>
-          <Switch
-            value={this.state.isSliderOn}
-            onValueChange={::this.onSwitchPress}
-          />
-        </View>
+        <CheckBoxPref
+          prefName={switchPrefName}
+          title={switchTitle}
+          icon={switchIcon}
+          onValueChange={::this.onSwitchPress}
+          settings={settings}
+        />
 
         <Animated.View
           style={[
@@ -90,15 +98,11 @@ export default class SwitchableSliderPref extends Component {
             { opacity },
           ]}
         >
-          <View style={styles.sliderTitleBlock}>
-            {slider.icon &&
-            <Icon style={styles.icon} source={slider.icon} />}
-            <Text style={styles.title}>{slider.title}</Text>
-          </View>
+          <Title icon={sliderIcon} title={sliderTitle} />
           <Slider
             style={styles.sliderGauge}
-            minimumValue={slider.min}
-            maximumValue={slider.max}
+            minimumValue={sliderMin}
+            maximumValue={sliderMax}
             onSlidingComplete={::this.onSlidingComplete}
             onValueChange={::this.onValueChange}
             value={value}
@@ -113,54 +117,15 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'stretch',
     alignSelf: 'stretch',
-    paddingVertical: 5,
-    paddingHorizontal: 3,
-  },
-
-  checkBoxBlock: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    height: 40,
-  },
-
-  titleBlock: {
-    flexDirection: 'row',
-    alignItems: 'center',
   },
 
   sliderBlock: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    height: 40,
-  },
-
-  sliderTitleBlock: {
-    flex: 50,
-    flexDirection: 'row',
     alignItems: 'center',
+    height: SLIDER_BLOCK_HEIGHT,
   },
 
   sliderGauge: {
-    flex: 50,
-  },
-
-  icon: {
-    marginRight: 8,
-    fontSize: 16,
+    flex: 1,
   },
 });
-
-type CheckBox = {
-  icon: string;
-  checked?: boolean;
-  title: string;
-  onSwitched: () => {};
-};
-
-type SliderPref = {
-  icon: string;
-  title: string;
-  prefName: string;
-  min: number;
-  max: number;
-};

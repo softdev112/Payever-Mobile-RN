@@ -21,6 +21,10 @@ export default class ProfilesApi {
     return resp;
   }
 
+  async getOfferById(id): Promise<OfferResp> {
+    return this.client.get(`/api/rest/v1/profiles/offer/${id}`);
+  }
+
   async search(query): Promise<SearchResp> {
     return this.client.get('/api/rest/v1/profiles/search', { k: query, c: 20 });
   }
@@ -37,6 +41,68 @@ export default class ProfilesApi {
 declare class ProfileResp extends ApiResp {
   data: ProfilesData;
 }
+
+/* eslint-disable */
+declare class OfferResp extends ApiResp {
+  since: number;
+  id: number;
+  status: 'DRAFT' | 'SENT';
+  type: 'EMAIL';
+  visibility: 'ALL';
+  marketing_channel_set: {
+    id: number;
+    name: string;
+    slug: string;
+    store: {
+      id: number;
+      business: {
+        name: string;
+        slug: string;
+        logo: string;
+      };
+      items: [
+        {
+          id: number;
+          item_type: 'physical';
+          name: string;
+          description: string;
+          positions: [
+            {
+              id: number;
+              name: string;
+              description: ?string;
+              price: number;
+              quantity: number;
+              barcode: ?string;
+            }
+          ];
+          media: [
+            {
+              id: number;
+              thumbnail: string;
+              is_video: boolean;
+            }
+          ];
+          like_profiles: Array<any>;
+          item_shipping_type: 'general';
+          fixed_shipping_price: ?number;
+          weight: ?number;
+          vat: string;
+          origin_image: string;
+          thumbnail: string;
+          thumbnailList: string;
+          thumbnailGrid: string;
+          market_url: string;
+        }
+      ];
+      logo_url: ?string;
+    };
+  };
+  title: string;
+  description: string;
+  created_at: string;
+};
+/* eslint-enable */
 
 export type ProfilesData = {
   businesses_own: Array<BusinessProfileData>;

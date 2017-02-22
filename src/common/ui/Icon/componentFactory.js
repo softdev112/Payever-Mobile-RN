@@ -2,11 +2,12 @@ import { Image } from 'react-native';
 import VectorIcon from './VectorIcon';
 import BitmapIcon from './BitmapIcon';
 import StackedIcon from './StackedIcon';
+import config from '../../../config';
 
-import icons from './icons';
+import icons from './meta';
 
 export default function componentFactory(componentInfo, newProps = {}) {
-  let meta = componentInfo;
+  let meta;
 
   /* eslint-disable default-case */
   switch (typeof componentInfo) {
@@ -16,12 +17,21 @@ export default function componentFactory(componentInfo, newProps = {}) {
     }
     case 'object': {
       if (componentInfo.uri) {
-        meta.component = 'image';
+        if (componentInfo.uri.startsWith('/')) {
+          componentInfo.uri = config.siteUrl + componentInfo.uri;
+        }
+        meta = { ...componentInfo, component: 'image' };
+      } else {
+        meta = componentInfo;
       }
       break;
     }
     case 'number': {
       meta = { component: 'image', source: componentInfo };
+      break;
+    }
+    default: {
+      meta = componentInfo;
     }
   }
 
