@@ -15,6 +15,10 @@ export default class Conversation {
   }
 
   updateMessage(message: Message) {
+    if (!(message instanceof Message)) {
+      message = new Message(message);
+    }
+
     if (message.conversation.id !== this.id) {
       return;
     }
@@ -25,7 +29,6 @@ export default class Conversation {
       return;
     }
 
-    console.log('PUSH MSG');
     this.messages.push(message);
   }
 }

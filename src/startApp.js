@@ -32,6 +32,6 @@ export default async function startApp() {
       showScreen('dashboard.ChooseAccount');
     }
   } else {
-    showScreen('auth.Login');
+    showScreen('dashboard.ChooseAccount');
   }
 }
