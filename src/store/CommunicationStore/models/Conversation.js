@@ -1,28 +1,38 @@
-import type Avatar from './Avatar';
-import type Message from './Message';
+import { extendObservable, observable } from 'mobx';
+import Message from './Message';
 
 export default class Conversation {
   archived: boolean;
-  avatar: ?Avatar;
-  hasUnread: ?boolean;
   id: number;
-  isBot: ?boolean;
-  latestMessage: ?Message;
+  @observable messages: Array;
   name: string;
-  notification: boolean;
-  recipientId: ?string;
-  status: ?ConversationStatus;
-  type: string;
-  unreadCount: ?number;
+  status: ConversationStatus;
+  type: 'conversation';
 
   constructor(data) {
-    Object.assign(this, data);
+    data.messages = (data.messages || []).map(m => new Message(m));
+    extendObservable(this, data);
+  }
+
+  updateMessage(message: Message) {
+    if (message.conversation.id !== this.id) {
+      return;
+    }
+
+    const existedIdx = this.messages.findIndex(m => m.id === message.id);
+    if (existedIdx !== -1) {
+      this.messages[existedIdx] = message;
+      return;
+    }
+
+    console.log('PUSH MSG');
+    this.messages.push(message);
   }
 }
 
-type ConversationStatus = {
-  label: string;
-  lastVisit: string;
+export type ConversationStatus = {
+  label: ?string;
+  lastVisit: ?string;
   online: boolean;
   userId: number;
 };

@@ -25,18 +25,32 @@ export default class Login extends Component {
 
   $password: TextInput;
 
-  username: string = '';
-  password: string = '';
+  state: {
+    username: string;
+    password: string;
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: '',
+      password: '',
+    };
+  }
 
   async onSignIn() {
     const { auth, navigator } = this.props;
+    const { password, username } = this.state;
 
-    if (this.password === '' || this.username === '') {
+    this.setState({ password: '' });
+
+    if (password.length < 3 || username === '') {
       auth.setError('E-mail and password can\'t be empty!');
       return;
     }
 
-    const signInResult = await auth.signIn(this.username, this.password);
+    const signInResult = await auth.signIn(username, password);
 
     if (signInResult) {
       //noinspection JSUnresolvedFunction
@@ -57,6 +71,8 @@ export default class Login extends Component {
 
   render() {
     const { isLoading, error } = this.props.auth;
+    const { username, password } = this.state;
+
     return (
       <View style={styles.container}>
         <Header style={styles.header}>
@@ -65,6 +81,7 @@ export default class Login extends Component {
         <Loader isLoading={isLoading}>
           <Container contentContainerStyle={styles.form} layout="small">
             <Error
+              onShowEnd={() => this.props.auth.setError('')}
               duration={5000}
               message={error}
             />
@@ -76,27 +93,31 @@ export default class Login extends Component {
                 inputStyle={StyleSheet.flatten(styles.inputStyle)}
                 keyboardType="email-address"
                 label="Your e-mail"
-                onChangeText={username => this.username = username}
+                onChangeText={text => this.setState({ username: text })}
                 onSubmitEditing={() => this.$password.focus()}
                 returnKeyType="next"
-                value={this.username}
+                value={username}
               />
             </View>
             <View>
               <TextInput
-                inputStyle={StyleSheet.flatten(styles.inputStyle)}
                 ref={f => this.$password = f}
                 label="Your password"
                 secureTextEntry
                 returnKeyType="send"
                 autoCapitalize="none"
                 autoCorrect={false}
-                onChangeText={password => this.password = password}
+                onChangeText={text => this.setState({ password: text })}
                 onSubmitEditing={::this.onSignIn}
               />
             </View>
             <View style={styles.submitContainer}>
-              <Button title="Sign In" onPress={::this.onSignIn} />
+              <Button
+                animated
+                disabled={username === '' || password.length < 3}
+                title="Sign In"
+                onPress={::this.onSignIn}
+              />
             </View>
           </Container>
         </Loader>
@@ -113,13 +134,6 @@ const styles = StyleSheet.create({
 
   header: {
     justifyContent: 'flex-start',
-  },
-
-  inputStyle: {
-    '@media android': {
-      paddingBottom: 5,
-      paddingTop: 5,
-    },
   },
 
   form: {

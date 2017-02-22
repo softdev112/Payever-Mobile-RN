@@ -2,13 +2,12 @@ import { Component, PropTypes } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import IconButton from './IconButton';
+import images from '../images';
 import StyleSheet from '../StyleSheet';
 import { toggleMenu } from '../../Navigation';
 import type UserProfilesStore from '../../../store/UserProfilesStore';
 
 //noinspection JSUnresolvedVariable
-import defaultAvatar
-  from '../../../store/UserProfilesStore/images/no-avatar.png';
 
 @inject('userProfiles')
 @observer
@@ -39,7 +38,7 @@ export default class Menu extends Component {
     if (userProfiles.currentProfile) {
       source = userProfiles.currentProfile.logoSource;
     } else {
-      source = defaultAvatar;
+      source = images.noAvatar;
     }
 
     return (

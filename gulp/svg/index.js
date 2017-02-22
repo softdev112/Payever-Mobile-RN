@@ -60,7 +60,7 @@ gulp.task('svg', ['svg:convert'], () => {
 
   const json = JSON.stringify(glyphDictionary, null, '  ');
   const filePath = path.join(
-    __dirname, '..', '..', 'src', 'common', 'ui', 'Icon', 'vector.json'
+    __dirname, '..', '..', 'src', 'common', 'ui', 'Icon', 'meta', 'vector.json'
   );
   fs.writeFileSync(filePath, json);
 });

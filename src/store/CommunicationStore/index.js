@@ -1,33 +1,32 @@
-import { observable, action, computed } from 'mobx';
+import { action, autorun, observable, extendObservable } from 'mobx';
 import { apiHelper } from 'utils';
 
 import type Store from '../index';
+import UserSettings from './models/UserSettings';
 import MessengerInfo from './models/MessengerInfo';
-import type Contact from './models/Contact';
+import Conversation from './models/Conversation';
 import type BusinessProfile from '../UserProfilesStore/models/BusinessProfile';
 import { MessengerData } from '../../common/api/MessengerApi';
+import SocketHandlers from './SocketHandlers';
 
 export default class CommunicationStore {
-  @observable profiles: Object<MessengerInfo> = {};
+  @observable conversations: Object<Conversation> = {};
+  @observable messengerInfo: MessengerInfo;
 
   @observable isLoading: boolean;
   @observable error: string;
 
   store: Store;
+  socketHandlers: SocketHandlers;
+  socketObserver: Function;
 
   constructor(store: Store) {
     this.store = store;
-  }
-
-  @computed get currentMsgrProfile() {
-    const { currentProfile } = this.store.userProfiles;
-    if (!currentProfile) return null;
-
-    return this.profiles[currentProfile.id] || null;
+    this.socketHandlers = new SocketHandlers(this);
   }
 
   @action
-  async loadConversations(profile: BusinessProfile): MessengerInfo {
+  async loadMessengerInfo(profile: BusinessProfile): Promise<MessengerInfo> {
     const { api } = this.store;
 
     let apiPromise;
@@ -38,33 +37,72 @@ export default class CommunicationStore {
     }
 
     return apiHelper(apiPromise, this)
-      .cache('communication:conversation:' + profile.id)
+      .cache('communication:messengerInfo:' + profile.id)
       .success((data: MessengerData) => {
-        const info = new MessengerInfo(data);
-        this.profiles[profile.id] = info;
-        return info;
+        this.initSocket(data.wsUrl, data.messengerUser.id);
+        this.messengerInfo = new MessengerInfo(data);
+        this.conversations = {};
+        return this.messengerInfo;
       })
       .promise();
   }
 
   @action
-  async loadContacts(): Promise<Contact[]> {
-    this.isLoading = true;
+  async loadConversation(id: number): Promise<Conversation> {
+    const socket = await this.store.api.messenger.getSocket();
+    const userId = socket.userId;
 
-    const { api } = this.props.store;
-    const userId = this.userProfiles.currentProfile.id;
-    console.log(userId);
+    if (!id) {
+      throw new Error('loadConversation: id is undefined');
+    }
 
-    apiHelper(api.messenger.getAvailableContacts(), this)
-      .success((resp: ApiResp) => {
-        if (resp.data.length > 0) {
-          this.items = resp.data.map(data => console.log(data));
-        } else {
-          this.error = 'Sorry, we didn\'t find any results, try ' +
-            'searching again';
-          this.items = [];
-        }
+    return apiHelper(socket.getConversation({ id }), this)
+      .cache(`communication:conversations:${userId}:${id}`)
+      .success((data) => {
+        const conversation = new Conversation(data);
+        this.conversations[id] = conversation;
+        return conversation;
       })
-      .complete(() => this.isLoading = false);
+      .promise();
+  }
+
+  @action
+  async sendMessage(conversationId, body) {
+    const socket = await this.store.api.messenger.getSocket();
+    return socket.sendMessage({ conversationId, body });
+  }
+
+  @action
+  async saveUserSettings(settings: UserSettings) {
+    const { api: { messenger } } = this.store;
+    const { messengerUser } = this.messengerInfo;
+
+    // save to local
+    apiHelper(messenger.saveSettings(messengerUser.id, settings))
+      .success(() => {
+        // Save changes to local
+        extendObservable(this.messengerInfo, {
+          userSettings: new UserSettings(settings),
+        });
+      });
+  }
+
+  initSocket(url, userId) {
+    const { api, auth } = this.store;
+
+    const socket = api.messenger.connectToWebSocket(
+      url,
+      userId,
+      auth.getAccessToken()
+    );
+
+    this.socketHandlers.subscribe(socket);
+
+    if (this.socketObserver) {
+      this.socketObserver();
+    }
+    this.socketObserver = autorun(() => {
+      socket.setAccessToken(auth.getAccessToken());
+    });
   }
 }

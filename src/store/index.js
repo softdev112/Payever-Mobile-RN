@@ -1,33 +1,36 @@
 /* eslint no-unused-vars: 0 */
-
 //noinspection ES6UnusedImports
 import { enableLogging } from 'mobx-logger';
 
-import type { Config } from '../config';
 import AuthStore from './AuthStore';
-import UserProfilesStore from './UserProfilesStore';
 import CommunicationStore from './CommunicationStore';
+import OffersStore from './OffersStore';
+import SearchStore from './SearchStore';
+import UserProfilesStore from './UserProfilesStore';
 
 import PayeverApi from '../common/api';
-import SearchStore from './SearchStore';
+import type { Config } from '../config';
+
 
 export default class Store {
   auth: AuthStore;
+  communication: CommunicationStore;
+  offers: OffersStore;
+  search: SearchStore;
   userProfiles: UserProfilesStore;
 
   api: PayeverApi;
   config: Config;
-  search: SearchStore;
-  communication: CommunicationStore;
 
   constructor(config: Config) {
-    this.auth = new AuthStore(this);
-    this.userProfiles = new UserProfilesStore(this);
-    this.search = new SearchStore(this);
+    this.auth          = new AuthStore(this);
     this.communication = new CommunicationStore(this);
+    this.offers        = new OffersStore(this);
+    this.search        = new SearchStore(this);
+    this.userProfiles  = new UserProfilesStore(this);
 
     // Initialize some helper objects
-    this.api = new PayeverApi({ ...config.api, authStore: this.auth });
+    this.api = new PayeverApi(config, this.auth);
     this.config = config;
 
     if (__DEV__) {

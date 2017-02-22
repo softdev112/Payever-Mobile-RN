@@ -60,7 +60,7 @@ export default class NavBar extends Component {
         </View>
 
         <Image style={styles.rightZone} source={bgGradient}>
-          {children.filter(filterByAlign('right'))}
+          {children.filter(filterByRightAlign())}
         </Image>
       </View>
     );
@@ -81,6 +81,15 @@ function filterByAlign(align) {
   return ({ props }) => props.align === align;
 }
 
+/**
+ * Align=right by default. In some cases we can't easily set an align property.
+ * For example, when we wrap a component into decorator.
+ * @return {function({props: Object}): boolean}
+ */
+function filterByRightAlign() {
+  return ({ props }) => props.align !== 'left' && props.align !== 'center';
+}
+
 const styles = StyleSheet.create({
   $padding: 18,
   $paddingPopup: 9,
@@ -93,7 +102,7 @@ const styles = StyleSheet.create({
     height: 55,
     justifyContent: 'flex-end',
     paddingHorizontal: '$padding',
-    '@media ios and (orientation: portrait)': {
+    '@media ios': {
       marginTop: 15,
     },
   },

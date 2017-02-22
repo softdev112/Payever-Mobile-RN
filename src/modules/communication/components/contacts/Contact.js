@@ -3,9 +3,9 @@ import { TouchableOpacity } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import { StyleSheet, Text } from 'ui';
 
-import OnlineStatus from '../common/OnlineStatus';
+import OnlineStatus from '../OnlineStatus';
 import Conversation from
-  '../../../../store/CommunicationStore/models/Conversation';
+  '../../../../store/CommunicationStore/models/ConversationInfo';
 import Group from '../../../../store/CommunicationStore/models/Group';
 
 export default class Contact extends Component {
@@ -26,7 +26,7 @@ export default class Contact extends Component {
     this.context.navigator.push({
       screen: 'communication.Chat',
       passProps: {
-        contactId: item.id,
+        conversationId: item.id,
       },
     });
   }
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
 
   add: {
-    color: '$pe_icons_color',
+    color: '$pe_color_icon',
     fontSize: 16,
     height: 17,
     width: 16,
@@ -89,5 +89,6 @@ const styles = StyleSheet.create({
     color: '#9ba2b1',
     flex: 1,
     fontSize: 12,
+    fontWeight: '400',
   },
 });

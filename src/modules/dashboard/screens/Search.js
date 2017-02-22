@@ -156,13 +156,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
-    '@media ios and (orientation: portrait)': {
+    '@media ios': {
       marginTop: 10,
     },
   },
 
   icon: {
-    color: '$pe_icons_color',
+    color: '$pe_color_icon',
     fontSize: '2.2rem',
   },
 
@@ -208,9 +208,10 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    flex: 1,
-    paddingLeft: 15,
     color: '$pe_color_black',
+    flex: 1,
+    fontWeight: '400',
+    paddingLeft: 15,
   },
 
   followBtnTitle: {

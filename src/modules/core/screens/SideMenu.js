@@ -202,15 +202,17 @@ const styles = StyleSheet.create({
   },
 
   userInfo_name: {
-    paddingTop: 20,
-    fontSize: 15,
     color: '$pe_color_blue',
+    fontSize: 15,
+    fontWeight: '400',
+    paddingTop: 20,
   },
 
   userInfo_accountLink: {
-    paddingTop: 8,
     color: '$pe_color_gray_2',
+    fontWeight: '400',
     fontSize: 13,
+    paddingTop: 8,
   },
 
   userInfo_profile: {
@@ -226,6 +228,7 @@ const styles = StyleSheet.create({
   addBusiness: {
     color: '$pe_color_blue',
     fontSize: 15,
+    fontWeight: '400',
     marginLeft: 24,
     paddingVertical: 12,
   },
@@ -235,13 +238,12 @@ const styles = StyleSheet.create({
   },
 
   bottomMenu_item: {
-    paddingTop: 18,
-    paddingLeft: 24,
-    paddingBottom: 18,
-    paddingRight: 24,
-    fontSize: 15,
     color: '$pe_color_blue',
     borderTopWidth: 1,
     borderTopColor: '$border_color',
+    fontSize: 15,
+    fontWeight: '400',
+    paddingHorizontal: 24,
+    paddingVertical: 18,
   },
 });

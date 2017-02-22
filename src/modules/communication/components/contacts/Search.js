@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
   },
 
   iconSearch: {
-    color: '$pe_icons_color',
+    color: '$pe_color_icon',
     fontSize: 14,
     height: 14,
     width: 14,
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   },
 
   iconSettings: {
-    color: '$pe_icons_color',
+    color: '$pe_color_icon',
     fontSize: 16,
     height: 16,
     width: 16,
