@@ -2,7 +2,7 @@ import type PayeverApi from './../index';
 import type UserAccount
   from '../../../store/UserProfilesStore/models/UserAccount';
 import PushNotificationsHelper from './PushNotificationsHelper';
-import * as log from '../log';
+import { log } from '../index';
 
 let instance: PushNotificationsHelper = null;
 

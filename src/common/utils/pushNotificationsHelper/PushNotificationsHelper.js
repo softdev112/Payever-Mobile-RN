@@ -5,7 +5,7 @@ import { Alert } from 'react-native';
 import type PayeverApi from './../index';
 import type UserAccount
   from '../../../store/UserProfilesStore/models/UserAccount';
-import * as log from '../log';
+import { log } from '../index';
 
 export default class PushNotificationsHelper {
   api: PayeverApi;

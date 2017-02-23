@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native';
-import * as log from '../log';
+import { log } from '../index';
 
 let expireData = {};
 loadExpireData();

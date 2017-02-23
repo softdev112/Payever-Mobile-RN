@@ -1,5 +1,5 @@
 import { runInAction } from 'mobx';
-import * as log from '../log';
+import { log } from '../index';
 import { isConnected, loadFromApi, NETWORK_ERROR } from './network';
 import { isCacheUpToDate, loadFromCache, saveToCache } from './cache';
 
