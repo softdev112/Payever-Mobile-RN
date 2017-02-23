@@ -1,7 +1,6 @@
 import EventEmitter from 'react-native/Libraries/EventEmitter/EventEmitter';
 import WampClient from './WampClient';
 
-
 export default class SocketApi extends EventEmitter {
   client: WampClient;
   userId: number;
@@ -36,6 +35,10 @@ export default class SocketApi extends EventEmitter {
     return this.client.call('messenger/rpc/sendMessage', {
       body, channelSetId, conversationId, forwardFromId, replyToId, userId,
     });
+  }
+
+  async searchMessages({ query, userId = this.userId }) {
+    return this.client.call('messenger/rpc/searchMessages', { query, userId });
   }
 
   async resolveWhenConnected() {

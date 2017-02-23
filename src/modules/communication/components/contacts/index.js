@@ -6,8 +6,7 @@ import { Loader, StyleSheet } from 'ui';
 import Contact from './Contact';
 import ListHeader from './ListHeader';
 import Search from './Search';
-import type MessengerInfo from
-  '../../../../store/CommunicationStore/models/MessengerInfo';
+
 import type CommunicationStore
   from '../../../../store/CommunicationStore/index';
 import type UserProfilesStore
@@ -24,47 +23,32 @@ export default class Contacts extends Component {
     userProfiles?: UserProfilesStore;
   };
 
-  state: {
-    info: MessengerInfo;
-  };
-
-  constructor(props) {
-    super(props);
-
-    const dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-      sectionHeaderHasChanged: (r1, r2) => r1 !== r2,
-    });
-
-    this.state = { dataSource };
-  }
-
-  async componentWillMount() {
+  componentWillMount() {
     const { communication, userProfiles } = this.props;
 
-    const info = await communication.loadMessengerInfo(
-      userProfiles.currentProfile
-    );
-    this.setState({
-      dataSource: this.state.dataSource.cloneWithRowsAndSections({
-        contacts: info.conversations.slice(),
-        groups: info.groups.slice(),
-      }, ['contacts', 'groups']),
-    });
+    //noinspection JSIgnoredPromiseFromCall
+    communication.loadMessengerInfo(userProfiles.currentProfile);
+    communication.search('');
   }
 
   render() {
-    const dataSource: ListViewDataSource = this.state.dataSource;
+    const { communication } = this.props;
+    const ds = communication.contactsDataSource;
 
     return (
-      <Loader isLoading={dataSource.getRowCount() < 1}>
+      <Loader isLoading={communication.isLoading}>
         <ListView
           contentContainerStyle={styles.container}
-          dataSource={dataSource}
+          dataSource={ds}
           enableEmptySections
           renderHeader={() => <Search />}
           renderRow={(item, type) => <Contact item={item} type={type} />}
-          renderSectionHeader={(_, type) => <ListHeader type={type} />}
+          renderSectionHeader={(_, type) => (
+            <ListHeader
+              type={type}
+              hideMessages={communication.foundMessages.length < 1}
+            />
+          )}
         />
       </Loader>
     );
