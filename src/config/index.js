@@ -9,6 +9,7 @@ export class Config {
   };
   debug: {
     logApiCall: boolean;
+    loggerUrl: ?string;
   };
 
   constructor(data) {

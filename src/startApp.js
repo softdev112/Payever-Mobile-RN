@@ -1,4 +1,5 @@
 import { Linking } from 'react-native';
+import log from 'react-native-logging';
 import { registerScreens, showScreen } from './common/Navigation';
 import StyleSheet from './common/ui/StyleSheet';
 import config from './config';
@@ -15,6 +16,8 @@ Linking.addEventListener('url', async ({ url }) => {
 
   showScreen('pos.Terminal', { url });
 });
+
+log.transports.logS.url = config.loggerUrl;
 
 export default async function startApp() {
   registerScreens(screens, store);
