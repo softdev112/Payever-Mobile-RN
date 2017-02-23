@@ -10,14 +10,15 @@ export default class ChatScreen extends Component {
 
   props: {
     conversationId: number;
+    isGroup: boolean;
   };
 
   render() {
-    const { conversationId } = this.props;
+    const { conversationId, isGroup } = this.props;
     return (
       <View style={styles.container}>
         <NavBar.Default title="Communication" source={images.communication} />
-        <Chat conversationId={conversationId} />
+        <Chat conversationId={conversationId} isGroup={isGroup} />
       </View>
     );
   }

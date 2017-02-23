@@ -1,5 +1,6 @@
-import { action, autorun, observable, extendObservable } from 'mobx';
+import { action, autorun, computed, extendObservable, observable } from 'mobx';
 import { apiHelper } from 'utils';
+import { ListView, ListViewDataSource } from 'react-native';
 
 import type Store from '../index';
 import UserSettings from './models/UserSettings';
@@ -8,6 +9,7 @@ import Conversation from './models/Conversation';
 import type BusinessProfile from '../UserProfilesStore/models/BusinessProfile';
 import { MessengerData } from '../../common/api/MessengerApi';
 import SocketHandlers from './SocketHandlers';
+import Message from './models/Message';
 
 export default class CommunicationStore {
   @observable conversations: Object<Conversation> = {};
@@ -16,9 +18,21 @@ export default class CommunicationStore {
   @observable isLoading: boolean;
   @observable error: string;
 
+  @observable foundMessages: Array<Message>;
+  @observable contactsFilter: string = '';
+
   store: Store;
   socketHandlers: SocketHandlers;
   socketObserver: Function;
+
+  contactsDs: ListViewDataSource = new ListView.DataSource({
+    rowHasChanged: (r1, r2) => r1 !== r2,
+    sectionHeaderHasChanged: (r1, r2) => r1 !== r2,
+  });
+
+  searchDs: ListViewDataSource = new ListView.DataSource({
+    rowHasChanged: (r1, r2) => r1 !== r2,
+  });
 
   constructor(store: Store) {
     this.store = store;
@@ -67,9 +81,34 @@ export default class CommunicationStore {
   }
 
   @action
+  search(text) {
+    this.contactsFilter = (text || '').toLowerCase();
+
+    if (!text) {
+      this.foundMessages = [];
+      return;
+    }
+
+    //noinspection JSIgnoredPromiseFromCall
+    this.searchMessages(text);
+  }
+
+  @action
   async sendMessage(conversationId, body) {
     const socket = await this.store.api.messenger.getSocket();
     return socket.sendMessage({ conversationId, body });
+  }
+
+  @action
+  async searchMessages(query) {
+    const socket = await this.store.api.messenger.getSocket();
+    return apiHelper(socket.searchMessages({ query }), this)
+      .success((data) => {
+        const messages = data.messages || [];
+        this.foundMessages = messages.map(m => new Message(m));
+        return this.foundMessages;
+      })
+      .promise();
   }
 
   @action
@@ -85,6 +124,31 @@ export default class CommunicationStore {
           userSettings: new UserSettings(settings),
         });
       });
+  }
+
+  @computed
+  get contactsDataSource() {
+    const filter = this.contactsFilter;
+    const info = this.messengerInfo;
+
+    let contacts = info ? info.conversations.slice() : [];
+    let groups   = info ? info.groups.slice() : [];
+    const foundMessages = this.foundMessages.slice();
+
+    if (filter) {
+      contacts = contacts.filter(c => c.name.toLowerCase().contains(filter));
+      groups = groups.filter(c => c.name.toLowerCase().contains(filter));
+    }
+
+    return this.contactsDs.cloneWithRowsAndSections(
+      { contacts, groups, foundMessages },
+      ['contacts', 'groups', 'foundMessages']
+    );
+  }
+
+  @computed
+  get searchDataSource() {
+    return this.contactsDs.cloneWithRows(this.foundMessages.slice());
   }
 
   initSocket(url, userId) {
