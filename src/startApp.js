@@ -17,7 +17,7 @@ Linking.addEventListener('url', async ({ url }) => {
   showScreen('pos.Terminal', { url });
 });
 
-log.transports.logS.url = config.loggerUrl;
+log.transports.logS.url = config.debug.loggerUrl;
 
 export default async function startApp() {
   registerScreens(screens, store);
