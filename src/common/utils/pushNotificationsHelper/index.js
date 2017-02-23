@@ -4,9 +4,14 @@ import type UserAccount
 import PushNotificationsHelper from './PushNotificationsHelper';
 import { log } from '../index';
 
+export default {
+  createInstance,
+  getInstance,
+};
+
 let instance: PushNotificationsHelper = null;
 
-export function createInstance(
+function createInstance(
   api: PayeverApi,
   userProfile: UserAccount
 ): PushNotificationsHelper {
@@ -15,7 +20,7 @@ export function createInstance(
   return instance;
 }
 
-export function getInstance(): PushNotificationsHelper {
+function getInstance(): PushNotificationsHelper {
   if (!instance) {
     log.error('Push notifications helper error while getting instance');
     throw new Error('Push notifications helper instance was not created');
