@@ -13,8 +13,9 @@
     "reset": "watchman watch-del-all",
     "test": "jest",
     "test:upd": "jest -u",
-    "beta": "npm run env:production && npm run bump && fastlane beta dev:true",
-    "beta:noenv": "npm run bump && fastlane beta dev:true",
+    "beta": "npm run env:production && npm run bump && fastlane beta",
+    "beta:dev": "fastlane beta dev:true",
+    "beta:noenv": "npm run bump && fastlane beta",
     "lint": "eslint src __tests__",
     "install": "gulp install:git-hooks"
   },
