@@ -10,7 +10,7 @@ export default class ApiHelper {
   apiPromise: Promise<ApiResp>;
   fetchPromise: Promise;
   returnValue: any;
-  store: ?Object = null;
+  stateObject: ?Object = null;
 
   cacheId: string = null;
   cacheLifetime: number = 0;
@@ -20,9 +20,9 @@ export default class ApiHelper {
   onError: (error: string) => any;
   onComplete: () => any;
 
-  constructor(apiPromise: Promise<ApiResp>, store: Object = null) {
+  constructor(apiPromise: Promise<ApiResp>, stateObject: Object = null) {
     this.apiPromise = apiPromise;
-    this.store = store;
+    this.stateObject = stateObject;
 
     this.onSuccess  = () => {};
     this.onError    = () => {};
@@ -107,19 +107,19 @@ export default class ApiHelper {
   }
 
   /**
-   * Set error and isLoading fields of a store (if the store is passed)
+   * Set error and isLoading fields of a stateObject
    */
   setState({ error, isLoading }) {
-    if (!this.store) {
+    if (!this.stateObject) {
       return;
     }
 
-    if (this.store.error !== undefined && error !== undefined) {
-      this.store.error = error;
+    if (error !== undefined) {
+      this.stateObject.error = error;
     }
 
-    if (this.store.isLoading !== undefined && isLoading !== undefined) {
-      this.store.isLoading = isLoading;
+    if (isLoading !== undefined) {
+      this.stateObject.isLoading = isLoading;
     }
   }
 
