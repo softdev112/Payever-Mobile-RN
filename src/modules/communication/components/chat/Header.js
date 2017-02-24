@@ -1,5 +1,6 @@
 /* eslint-disable react/no-unused-prop-types */
 import { Component } from 'react';
+import { Observer } from 'mobx-react/native';
 import { Icon, StyleSheet, Text, View } from 'ui';
 
 import OnlineStatus from '../OnlineStatus';
@@ -34,9 +35,11 @@ export default class UserInfoHeader extends Component {
         </View>
         {status && (
           <View style={styles.status}>
-            {status.online && (
-              <OnlineStatus style={styles.status_led} isOnline />
-            )}
+            <Observer>
+              {() => (status.online &&
+                <OnlineStatus style={styles.status_led} isOnline />
+              )}
+            </Observer>
             <Text style={styles.status_text}>{status.label}</Text>
           </View>
         )}

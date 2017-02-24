@@ -3,6 +3,7 @@ import { runInAction } from 'mobx';
 import type CommunicationStore from './index';
 import type Message from './models/Message';
 import type SocketApi from '../../common/api/MessengerApi/SocketApi';
+import type { ConversationStatus } from './models/Conversation';
 
 export default class SocketHandlers {
   store: CommunicationStore;
@@ -18,6 +19,14 @@ export default class SocketHandlers {
     if (conversation) {
       conversation.updateMessage(message);
     }
+  }
+
+  onUpdateUserStatus(status: ConversationStatus) {
+    this.store.updateUserStatus(status);
+  }
+
+  onUpdateTypingStatus(status: ConversationStatus) {
+    console.log('Update typing status ', status);
   }
 
   subscribe(socket: SocketApi) {
