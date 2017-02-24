@@ -7,7 +7,8 @@ import { DataSource } from 'ui';
 import type Store from '../index';
 import UserSettings from './models/UserSettings';
 import MessengerInfo from './models/MessengerInfo';
-import Conversation, { ConversationType } from './models/Conversation';
+import Conversation, { ConversationType, ConversationStatus }
+  from './models/Conversation';
 import type BusinessProfile from '../UserProfilesStore/models/BusinessProfile';
 import { MessengerData } from '../../common/api/MessengerApi';
 import SocketHandlers from './SocketHandlers';
@@ -145,6 +146,18 @@ export default class CommunicationStore {
       { contacts, groups, foundMessages },
       ['contacts', 'groups', 'foundMessages']
     );
+  }
+
+  @action
+  updateUserStatus(status: ConversationStatus) {
+    this.conversations.forEach((conversation: Conversation) => {
+      if (conversation.status.userId !== status.userId) return;
+      conversation.updateStatus(status);
+    });
+    this.messengerInfo.conversations.forEach((conversation: Conversation) => {
+      if (conversation.status.userId !== status.userId) return;
+      conversation.updateStatus(status);
+    });
   }
 
   getConversationDataSource(conversationId, isGroup = false) {

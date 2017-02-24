@@ -1,5 +1,6 @@
 import { Component, PropTypes } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { Observer } from 'mobx-react/native';
 import { Navigator } from 'react-native-navigation';
 import { StyleSheet, Text, View } from 'ui';
 
@@ -40,10 +41,14 @@ export default class Contact extends Component {
         style={styles.container}
         onPress={() => this.onContactClick(item)}
       >
-        <OnlineStatus
-          style={styles.status}
-          isOnline={item.status.online}
-        />
+        <Observer>
+          {() => (
+            <OnlineStatus
+              style={styles.status}
+              isOnline={item.status.online}
+            />
+          )}
+        </Observer>
         <Text style={styles.title}>{item.name}</Text>
       </TouchableOpacity>
     );

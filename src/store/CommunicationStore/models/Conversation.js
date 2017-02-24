@@ -6,7 +6,7 @@ export default class Conversation {
   id: number;
   @observable messages: Array<Message> = [];
   name: string;
-  status: ConversationStatus;
+  @observable status: ConversationStatus;
   type: ConversationType;
 
   constructor(data) {
@@ -31,9 +31,14 @@ export default class Conversation {
 
     this.messages.push(message);
   }
+
+  updateStatus(status) {
+    this.status = status;
+  }
 }
 
 export type ConversationStatus = {
+  conversationId?: number;
   label: ?string;
   lastVisit: ?string;
   online: boolean;
