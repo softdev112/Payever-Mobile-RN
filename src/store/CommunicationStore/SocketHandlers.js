@@ -14,7 +14,7 @@ export default class SocketHandlers {
   }
 
   onUpdateMessage(message: Message) {
-    const conversation = this.store.conversations[message.conversation.id];
+    const conversation = this.store.conversations.get(message.conversation.id);
     if (conversation) {
       conversation.updateMessage(message);
     }

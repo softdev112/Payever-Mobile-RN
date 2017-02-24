@@ -1,6 +1,8 @@
-import { action, autorun, computed, extendObservable, observable } from 'mobx';
+import {
+  action, autorun, computed, extendObservable, observable, ObservableMap,
+} from 'mobx';
 import { apiHelper } from 'utils';
-import { ListView, ListViewDataSource } from 'react-native';
+import { DataSource } from 'ui';
 
 import type Store from '../index';
 import UserSettings from './models/UserSettings';
@@ -12,7 +14,7 @@ import SocketHandlers from './SocketHandlers';
 import Message from './models/Message';
 
 export default class CommunicationStore {
-  @observable conversations: Object<Conversation> = {};
+  @observable conversations: ObservableMap<Conversation> = observable.map();
   @observable messengerInfo: MessengerInfo;
 
   @observable isLoading: boolean;
@@ -25,9 +27,13 @@ export default class CommunicationStore {
   socketHandlers: SocketHandlers;
   socketObserver: Function;
 
-  contactDs: ListViewDataSource = new ListView.DataSource({
+  contactDs: DataSource = new DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
     sectionHeaderHasChanged: (r1, r2) => r1 !== r2,
+  });
+
+  conversationDs: DataSource = new DataSource({
+    rowHasChanged: (r1, r2) => r1 !== r2,
   });
 
   constructor(store: Store) {
@@ -51,7 +57,7 @@ export default class CommunicationStore {
       .success((data: MessengerData) => {
         this.initSocket(data.wsUrl, data.messengerUser.id);
         this.messengerInfo = new MessengerInfo(data);
-        this.conversations = {};
+        this.conversations = observable.map();
         return this.messengerInfo;
       })
       .promise();
@@ -66,11 +72,11 @@ export default class CommunicationStore {
       throw new Error('loadConversation: id is undefined');
     }
 
-    return apiHelper(socket.getConversation({ id }), this)
+    return apiHelper(socket.getConversation({ id }), this.conversationDs)
       .cache(`communication:conversations:${userId}:${id}`)
       .success((data) => {
         const conversation = new Conversation(data);
-        this.conversations[id] = conversation;
+        this.conversations.merge({ [id]: observable(conversation) });
         return conversation;
       })
       .promise();
@@ -140,6 +146,12 @@ export default class CommunicationStore {
       { contacts, groups, foundMessages },
       ['contacts', 'groups', 'foundMessages']
     );
+  }
+
+  getConversationDataSource(conversationId) {
+    const conversation = this.conversations.get(conversationId);
+    const messages = conversation ? conversation.messages : [];
+    return this.conversationDs.cloneWithRows(messages.slice());
   }
 
   initSocket(url, userId) {
