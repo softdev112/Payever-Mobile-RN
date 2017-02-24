@@ -104,7 +104,7 @@ export default class CommunicationStore {
   @action
   async searchMessages(query) {
     const socket = await this.store.api.messenger.getSocket();
-    return apiHelper(socket.searchMessages({ query }), this)
+    return apiHelper(socket.searchMessages({ query }))
       .success((data) => {
         const messages = data.messages || [];
         this.foundMessages = messages.map(m => new Message(m));
