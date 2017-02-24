@@ -1,6 +1,6 @@
 {
   "name": "PayeverMobile",
-  "version": "2.1.1",
+  "version": "2.1.5",
   "private": true,
   "scripts": {
     "start": "npm run env:dev && node node_modules/react-native/local-cli/cli.js start",
@@ -37,7 +37,7 @@
     "react-native-logging": "0.0.3",
     "react-native-md-textinput": "^2.0.4",
     "react-native-modal-datetime-picker": "^3.0.1",
-    "react-native-navigation": "^2.0.0-experimental.223",
+    "react-native-navigation": "2.0.0-experimental.225",
     "react-native-notifications": "^1.1.7"
   },
   "jest": {
