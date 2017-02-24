@@ -7,7 +7,7 @@ export default class Conversation {
   @observable messages: Array<Message> = [];
   name: string;
   status: ConversationStatus;
-  type: 'conversation';
+  type: ConversationType;
 
   constructor(data) {
     data.messages = (data.messages || []).map(m => new Message(m));
@@ -39,3 +39,6 @@ export type ConversationStatus = {
   online: boolean;
   userId: number;
 };
+
+export type ConversationType = 'conversation' | 'chat-group'
+  | 'marketing-group';

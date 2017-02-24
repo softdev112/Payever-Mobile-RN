@@ -17,9 +17,29 @@ export default class SocketApi extends EventEmitter {
     id,
     limit = 30,
     startId = null,
+    type = 'conversation',
     userId = this.userId,
   }) {
-    return this.client.call('messenger/rpc/getConversation', {
+    let method;
+    switch (type) {
+      case 'conversation': {
+        method = 'messenger/rpc/getConversation';
+        break;
+      }
+      case 'chat-group': {
+        method = 'messenger/rpc/getChatGroup';
+        break;
+      }
+      case 'marketing-group': {
+        method = 'messenger/rpc/getMarketingGroup';
+        break;
+      }
+      default: {
+        throw new Error('Unknown conversation type ' + type);
+      }
+    }
+
+    return this.client.call(method, {
       id, startId, direction, limit, userId,
     });
   }

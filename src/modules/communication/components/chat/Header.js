@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 import { Component } from 'react';
 import { Icon, StyleSheet, Text, View } from 'ui';
 
@@ -5,8 +6,10 @@ import OnlineStatus from '../OnlineStatus';
 
 export default class UserInfoHeader extends Component {
   props: {
-    online: boolean;
-    status: string;
+    status: {
+      label: string;
+      online: boolean;
+    };
     userName: string;
   };
 
@@ -15,7 +18,7 @@ export default class UserInfoHeader extends Component {
   }
 
   render() {
-    const { online, status, userName } = this.props;
+    const { status, userName } = this.props;
 
     return (
       <View style={styles.container}>
@@ -29,12 +32,14 @@ export default class UserInfoHeader extends Component {
             touchStyle={styles.iconSettings_offset}
           />
         </View>
-        <View style={styles.status}>
-          {online && (
-            <OnlineStatus style={styles.status_led} isOnline />
-          )}
-          <Text style={styles.status_text}>{status}</Text>
-        </View>
+        {status && (
+          <View style={styles.status}>
+            {status.online && (
+              <OnlineStatus style={styles.status_led} isOnline />
+            )}
+            <Text style={styles.status_text}>{status.label}</Text>
+          </View>
+        )}
       </View>
     );
   }
@@ -42,7 +47,6 @@ export default class UserInfoHeader extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: 70,
     paddingLeft: 30,
     paddingRight: 20,
     paddingTop: 10,
@@ -68,7 +72,6 @@ const styles = StyleSheet.create({
   },
 
   titleRow: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -76,6 +79,7 @@ const styles = StyleSheet.create({
   status: {
     alignItems: 'center',
     flexDirection: 'row',
+    marginTop: 7,
   },
 
   status_led: {

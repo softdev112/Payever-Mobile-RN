@@ -48,6 +48,15 @@ export default class MessageView extends Component {
 
   render() {
     const message: Message = this.props.message;
+
+    if (message.isSystem) {
+      return (
+        <View style={styles.container}>
+          <Text style={styles.message_system}>{message.body}</Text>
+        </View>
+      );
+    }
+
     return (
       <View style={styles.container}>
         {this.renderAvatar(message.avatar)}
@@ -137,5 +146,14 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: '600',
     marginTop: 2,
+  },
+
+  message_system: {
+    alignSelf: 'flex-start',
+    backgroundColor: '$border_color',
+    borderRadius: 18,
+    marginVertical: 5,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
   },
 });

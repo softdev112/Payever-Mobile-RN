@@ -7,6 +7,8 @@ import Footer from './Footer';
 import MessageView from './MessageView';
 import Header from './Header';
 import CommunicationStore from '../../../../store/CommunicationStore';
+import { ConversationType }
+  from '../../../../store/CommunicationStore/models/Conversation';
 
 @inject('communication')
 @observer
@@ -14,15 +16,16 @@ export default class Chat extends Component {
   props: {
     communication?: CommunicationStore;
     conversationId: number;
+    type: ConversationType;
   };
 
   $listView: ListView;
 
   componentWillMount() {
-    const { communication, conversationId } = this.props;
+    const { communication, conversationId, type } = this.props;
 
     //noinspection JSIgnoredPromiseFromCall
-    communication.loadConversation(conversationId);
+    communication.loadConversation(conversationId, type);
   }
 
   renderRow(row) {
@@ -48,14 +51,11 @@ export default class Chat extends Component {
         contentContainerStyle={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : null}
       >
-        <Header
-          online={conversation.status.online}
-          status={conversation.status.label}
-          userName={conversation.name}
-        />
+        <Header status={conversation.status} userName={conversation.name} />
         <ListView
           contentContainerStyle={styles.list}
           dataSource={ds}
+          enableEmptySections
           ref={ref => this.$listView = ref}
           renderRow={this.renderRow}
         />
