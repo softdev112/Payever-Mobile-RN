@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ListView, ListViewDataSource } from 'react-native';
+import { ListView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { Loader, StyleSheet } from 'ui';
 
@@ -16,8 +16,6 @@ import type UserProfilesStore
 @inject('communication', 'userProfiles')
 @observer
 export default class Contacts extends Component {
-  dataSource: ListViewDataSource;
-
   props: {
     communication?: CommunicationStore;
     userProfiles?: UserProfilesStore;

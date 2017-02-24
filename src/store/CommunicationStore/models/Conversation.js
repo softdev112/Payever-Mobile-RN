@@ -4,7 +4,7 @@ import Message from './Message';
 export default class Conversation {
   archived: boolean;
   id: number;
-  @observable messages: Array<Message>;
+  @observable messages: Array<Message> = [];
   name: string;
   status: ConversationStatus;
   type: 'conversation';
