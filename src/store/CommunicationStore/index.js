@@ -7,7 +7,7 @@ import { DataSource } from 'ui';
 import type Store from '../index';
 import UserSettings from './models/UserSettings';
 import MessengerInfo from './models/MessengerInfo';
-import Conversation from './models/Conversation';
+import Conversation, { ConversationType } from './models/Conversation';
 import type BusinessProfile from '../UserProfilesStore/models/BusinessProfile';
 import { MessengerData } from '../../common/api/MessengerApi';
 import SocketHandlers from './SocketHandlers';
@@ -64,15 +64,14 @@ export default class CommunicationStore {
   }
 
   @action
-  async loadConversation(id: number): Promise<Conversation> {
+  async loadConversation(
+    id: number,
+    type: ConversationType
+  ): Promise<Conversation> {
     const socket = await this.store.api.messenger.getSocket();
     const userId = socket.userId;
 
-    if (!id) {
-      throw new Error('loadConversation: id is undefined');
-    }
-
-    return apiHelper(socket.getConversation({ id }), this.conversationDs)
+    return apiHelper(socket.getConversation({ id, type }), this.conversationDs)
       .cache(`communication:conversations:${userId}:${id}`)
       .success((data) => {
         const conversation = new Conversation(data);
@@ -148,8 +147,9 @@ export default class CommunicationStore {
     );
   }
 
-  getConversationDataSource(conversationId) {
-    const conversation = this.conversations.get(conversationId);
+  getConversationDataSource(conversationId, isGroup = false) {
+    const collection = isGroup ? this.groupConversations : this.conversations;
+    const conversation = collection.get(conversationId);
     const messages = conversation ? conversation.messages : [];
     return this.conversationDs.cloneWithRows(messages.slice());
   }

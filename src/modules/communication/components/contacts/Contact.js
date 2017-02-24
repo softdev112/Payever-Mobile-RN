@@ -6,7 +6,6 @@ import { StyleSheet, Text, View } from 'ui';
 import OnlineStatus from '../OnlineStatus';
 import Conversation from
   '../../../../store/CommunicationStore/models/ConversationInfo';
-import Group from '../../../../store/CommunicationStore/models/Group';
 import Message from '../../../../store/CommunicationStore/models/Message';
 
 export default class Contact extends Component {
@@ -23,15 +22,14 @@ export default class Contact extends Component {
     type: 'contacts' | 'groups' | 'foundMessages';
   };
 
-  onContactClick(item: Conversation | Group | Message) {
-    console.log('TYPE', item.type);
+  onContactClick(item: Conversation | Message) {
     const conversationId = item.conversation ? item.conversation.id : item.id;
 
     this.context.navigator.push({
       screen: 'communication.Chat',
       passProps: {
         conversationId,
-        isGroup: item.type && item.type.indexOf('group') !== -1,
+        type: item.conversation ? item.conversation.type : item.type,
       },
     });
   }
@@ -51,7 +49,7 @@ export default class Contact extends Component {
     );
   }
 
-  renderGroup(item: Group) {
+  renderGroup(item: Conversation) {
     return (
       <TouchableOpacity
         style={styles.container}
@@ -111,7 +109,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     paddingHorizontal: 10,
-    paddingVertical: 4,
+    paddingVertical: 7,
   },
 
   message: {
@@ -125,7 +123,7 @@ const styles = StyleSheet.create({
   },
 
   message_date: {
-    fontSize: 11,
+    fontSize: 12,
     color: '$pe_color_icon',
   },
 
@@ -135,19 +133,19 @@ const styles = StyleSheet.create({
 
   message_name: {
     color: '$pe_color_blue',
-    fontSize: 12,
+    fontSize: 13,
   },
 
   message_sender: {
     color: '#9ba2b1',
     flex: 1,
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '700',
   },
 
   message_text: {
     color: '#9ba2b1',
-    fontSize: 12,
+    fontSize: 13,
   },
 
   status: {
@@ -157,7 +155,7 @@ const styles = StyleSheet.create({
   title: {
     color: '#9ba2b1',
     flex: 1,
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '400',
   },
 });
