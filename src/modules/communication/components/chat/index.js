@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { KeyboardAvoidingView, ListView, Platform } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
-import { Loader, StyleSheet, Text } from 'ui';
+import { ErrorBox, Loader, StyleSheet } from 'ui';
 
 import Footer from './Footer';
 import MessageView from './MessageView';
@@ -37,7 +37,7 @@ export default class Chat extends Component {
     if (!conversation) {
       return (
         <Loader isLoading={ds.isLoading}>
-          <Text>{ds.error}</Text>
+          <ErrorBox message={ds.error} />
         </Loader>
       );
     }
