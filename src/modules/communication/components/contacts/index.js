@@ -33,10 +33,10 @@ export default class Contacts extends Component {
 
   render() {
     const { communication } = this.props;
-    const ds = communication.contactsDataSource;
+    const ds = communication.contactDataSource;
 
     return (
-      <Loader isLoading={communication.isLoading}>
+      <Loader isLoading={ds.isLoading}>
         <ListView
           contentContainerStyle={styles.container}
           dataSource={ds}

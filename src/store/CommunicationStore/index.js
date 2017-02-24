@@ -25,13 +25,9 @@ export default class CommunicationStore {
   socketHandlers: SocketHandlers;
   socketObserver: Function;
 
-  contactsDs: ListViewDataSource = new ListView.DataSource({
+  contactDs: ListViewDataSource = new ListView.DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
     sectionHeaderHasChanged: (r1, r2) => r1 !== r2,
-  });
-
-  searchDs: ListViewDataSource = new ListView.DataSource({
-    rowHasChanged: (r1, r2) => r1 !== r2,
   });
 
   constructor(store: Store) {
@@ -50,7 +46,7 @@ export default class CommunicationStore {
       apiPromise = api.messenger.getPrivate();
     }
 
-    return apiHelper(apiPromise, this)
+    return apiHelper(apiPromise, this.contactDs)
       .cache('communication:messengerInfo:' + profile.id)
       .success((data: MessengerData) => {
         this.initSocket(data.wsUrl, data.messengerUser.id);
@@ -127,7 +123,7 @@ export default class CommunicationStore {
   }
 
   @computed
-  get contactsDataSource() {
+  get contactDataSource() {
     const filter = this.contactsFilter;
     const info = this.messengerInfo;
 
@@ -140,15 +136,10 @@ export default class CommunicationStore {
       groups = groups.filter(c => c.name.toLowerCase().contains(filter));
     }
 
-    return this.contactsDs.cloneWithRowsAndSections(
+    return this.contactDs.cloneWithRowsAndSections(
       { contacts, groups, foundMessages },
       ['contacts', 'groups', 'foundMessages']
     );
-  }
-
-  @computed
-  get searchDataSource() {
-    return this.contactsDs.cloneWithRows(this.foundMessages.slice());
   }
 
   initSocket(url, userId) {
