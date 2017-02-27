@@ -1,11 +1,13 @@
-import NotificationsIOS from 'react-native-notifications';
-import { Navigation } from 'react-native-navigation';
-import { Alert } from 'react-native';
+import NotificationsIOS, {
+  NotificationsAndroid, PendingNotifications,
+} from 'react-native-notifications';
+import { AppState, Platform } from 'react-native';
 
 import type PayeverApi from './../index';
 import type UserAccount
   from '../../../store/UserProfilesStore/models/UserAccount';
 import * as log from '../log';
+import handleNotification from './notificationHandlers';
 
 export default class PushNotificationsHelper {
   api: PayeverApi;
@@ -16,96 +18,70 @@ export default class PushNotificationsHelper {
     this.userProfile = userProfile;
   }
 
-  async onPushRegistered(deviceToken) {
+  async onPushNotificationsRegistered(deviceToken) {
     // Send device token to server along side with device name
+    const notif = await PendingNotifications.getInitialNotification();
+    console.log('Init Notification', notif);
+    log.debug('Device token received:', deviceToken);
     await this.api.device.linkDeviceToken(this.userProfile, deviceToken);
   }
 
   onNotificationReceivedForeground(notification) {
-    Alert.alert(
-      'New Offer Received',
-      // eslint-disable-next-line no-underscore-dangle
-      notification._alert,
-      [
-        {
-          text: 'Show Offer',
-          onPress: () => this.handlePushNotification(notification),
-        },
-        {
-          text: 'Cancel',
-          onPress: () => {},
-          style: 'cancel',
-        },
-      ],
-      { cancelable: false }
-    );
+    log.debug('Receive foreground notification: ', notification);
+    handleNotification(notification, { isBackground: false });
   }
 
-  onNotificationReceivedBackground(notification: Notification) {
-    console.log('Receive background notification: ', notification);
+  onNotificationReceivedBackground(notification) {
+    log.debug('Receive background notification: ', notification);
+    handleNotification(notification, { isBackground: true });
   }
 
-  onNotificationOpened(notification: Notification) {
-    this.handlePushNotification(notification);
+  onNotificationOpened(notification) {
+    log.debug('On notification opened: ', notification);
+    // handleNotification(notification, { opened: true });
   }
 
-  handlePushNotification(notification: Notification) {
-    // eslint-disable-next-line no-underscore-dangle
-    const { subtype, data } =  notification._data.parameters;
-    if (subtype === 'offer') {
-      this.openOffer(data.offer);
+  onNotificationReceivedAndroid(notification) {
+    log.debug('Receive Android notification:', AppState.currentState);
+    if (AppState.currentState === 'active') {
+      this.onNotificationReceivedForeground(notification);
     } else {
-      log.warn('Unrecognized notification type');
+      this.onNotificationReceivedBackground(notification);
     }
   }
 
-  async openOffer(id) {
-    // Go to offer preview
-    Navigation.showModal({
-      screen: 'marketing.ViewOffer',
-      title: 'Got an Offer:',
-      passProps: {
-        offerId: id,
-      },
-      navigatorStyle: {},
-      navigatorButtons: {},
-      animationType: 'slide-up',
-    });
-  }
+  async registerNotifications() {
+    if (Platform.OS === 'ios') {
+      NotificationsIOS.addEventListener(
+        'remoteNotificationsRegistered',
+        ::this.onPushNotificationsRegistered
+      );
+      NotificationsIOS.requestPermissions();
+      NotificationsIOS.consumeBackgroundQueue();
 
-  registerNotifications() {
-    NotificationsIOS.addEventListener(
-      'remoteNotificationsRegistered',
-      ::this.onPushRegistered
-    );
-    NotificationsIOS.requestPermissions();
-    NotificationsIOS.consumeBackgroundQueue();
-
-    NotificationsIOS.addEventListener(
-      'notificationReceivedForeground',
-      ::this.onNotificationReceivedForeground
-    );
-    NotificationsIOS.addEventListener(
-      'notificationReceivedBackground',
-      ::this.onNotificationReceivedBackground
-    );
-    NotificationsIOS.addEventListener(
-      'notificationOpened',
-      ::this.onNotificationOpened
-    );
+      NotificationsIOS.addEventListener(
+        'notificationReceivedForeground',
+        ::this.onNotificationReceivedForeground
+      );
+      NotificationsIOS.addEventListener(
+        'notificationReceivedBackground',
+        ::this.onNotificationReceivedBackground
+      );
+      NotificationsIOS.addEventListener(
+        'notificationOpened',
+        ::this.onNotificationOpened
+      );
+    } else {
+      NotificationsAndroid.setRegistrationTokenUpdateListener(
+        ::this.onPushNotificationsRegistered
+      );
+      NotificationsAndroid.setNotificationOpenedListener(
+        ::this.onNotificationOpened
+      );
+      NotificationsAndroid.setNotificationReceivedListener(
+        ::this.onNotificationReceivedAndroid
+      );
+      NotificationsAndroid.refreshToken();
+    }
   }
 }
-
-type Notification = {
-  _data: {
-    parameters: {
-      type: string;
-      subtype: string;
-      data: Object;
-    };
-  };
-  _badge: number;
-  _alert: string;
-  _sound: string;
-  _type: string;
-};

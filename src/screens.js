@@ -9,6 +9,7 @@ export default {
   'core.ErrorPage': require('./modules/core/screens/ErrorPage').default,
   'core.SideMenu': require('./modules/core/screens/SideMenu').default,
   'core.WebView': require('./modules/core/screens/WebView').default,
+  'core.PushNotification': require('./modules/core/screens/PushNotification').default,
   'dashboard.ChooseAccount': require('./modules/dashboard/screens/ChooseAccount').default,
   'dashboard.Dashboard': require('./modules/dashboard/screens/Dashboard').default,
   'dashboard.Private': require('./modules/dashboard/screens/Private').default,

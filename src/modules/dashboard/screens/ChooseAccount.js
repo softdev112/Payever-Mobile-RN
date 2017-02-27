@@ -45,14 +45,10 @@ export default class ChooseAccount extends Component {
       });
     }
 
-    if (Platform.OS === 'ios') {
-      // Push notifications ios only yet
-      const { store, privateProfile } = userProfiles;
-
-      // Register push notifications
-      pushNotificationsHelper.createInstance(store.api, privateProfile.user)
-        .registerNotifications();
-    }
+    // Register push notifications
+    const { store, privateProfile } = userProfiles;
+    pushNotificationsHelper.createInstance(store.api, privateProfile.user)
+      .registerNotifications();
   }
 
   onAddNewBusiness() {

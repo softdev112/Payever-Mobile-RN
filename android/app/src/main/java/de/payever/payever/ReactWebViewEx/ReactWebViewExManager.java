@@ -1,8 +1,6 @@
 package de.payever.payever.reactwebviewex;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
@@ -12,10 +10,7 @@ import android.webkit.JsResult;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.ConsoleMessage;
 import android.webkit.PermissionRequest;
-import android.webkit.WebStorage.QuotaUpdater;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Message;
@@ -29,8 +24,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.lang.ref.WeakReference;
 
-import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
+import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.views.webview.ReactWebViewManager;
 import com.reactnativenavigation.controllers.NavigationActivity;
 import com.reactnativenavigation.NavigationApplication;
@@ -39,14 +34,14 @@ public class ReactWebViewExManager extends ReactWebViewManager {
 	private static final String LOG_TAG = "ReactNativeJS ReactWebViewExManager";
 	private static final String PICTURES_DIR_NAME = "de.payever.pictures";
 	private static final int REQUEST_FILE_CODE = 51426;
-	public static final String REACT_CLASS = "RCTWebViewEx";
+	private static final String REACT_CLASS = "RCTWebViewEx";
 
 	private ReactApplicationContext mContext;
     private String mUploadableFileTypes = "image/*";
     private WeakReference<NavigationActivity> mActivity;
 	private WebViewExActivityCallbacks mActivityCallbacks;
 
-	public ReactWebViewExManager(ReactApplicationContext context){
+	public ReactWebViewExManager(ReactApplicationContext context) {
     	super();
     	mContext = context;
     }
@@ -91,48 +86,40 @@ public class ReactWebViewExManager extends ReactWebViewManager {
 
                         mActivityCallbacks.setFileUploadCallbackBefore5(uploadMsg);
 
-						File photoStorageDir = null;
-						File photoFile = null;
-
 						// Create picture folder and file
-						photoStorageDir = new File(
+						File photoStorageDir = new File(
 							Environment.getExternalStoragePublicDirectory(
 								Environment.DIRECTORY_PICTURES
 							),
 							PICTURES_DIR_NAME
 						);
 
-						if (photoStorageDir != null) {
-							if (!photoStorageDir.exists()) {
-								photoStorageDir.mkdirs();
-							}
+    					if (!photoStorageDir.exists()) {
+	    					photoStorageDir.mkdirs();
+		    			}
 
-							photoFile = new File(
-								photoStorageDir + File.separator + "IMG_"
-								+ String.valueOf(System.currentTimeMillis())
-								+ ".jpg");
-						}
+						File photoFile = new File(
+							photoStorageDir + File.separator + "IMG_"
+    						+ String.valueOf(System.currentTimeMillis())
+							+ ".jpg");
 
-						Intent takePictureIntent = null;
-						if (photoStorageDir != null && photoFile != null) {
-	                        // Take photo from camera
-                            takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            ActivityInfo activityInfo = takePictureIntent.resolveActivityInfo(
-                               	mActivity.get().getPackageManager(),
-                               	takePictureIntent.getFlags()
+                        // Take photo from camera
+                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        ActivityInfo activityInfo = takePictureIntent.resolveActivityInfo(
+                          	mActivity.get().getPackageManager(),
+                           	takePictureIntent.getFlags()
+                        );
+
+                        if (activityInfo.exported) {
+                          	// Create file for photo
+                       		takePictureIntent.putExtra(
+                       			MediaStore.EXTRA_OUTPUT,
+                              	Uri.fromFile(photoFile)
                             );
-
-                            if (activityInfo.exported) {
-                               	// Create file for photo
-                           		takePictureIntent.putExtra(
-                           			MediaStore.EXTRA_OUTPUT,
-                                 	Uri.fromFile(photoFile)
-                                );
-                                mActivityCallbacks.setCapturedFileName(photoFile.getAbsolutePath());
-                           	} else {
-                           		takePictureIntent = null;
-                           	}
-						}
+                           mActivityCallbacks.setCapturedFileName(photoFile.getAbsolutePath());
+                      	} else {
+                       		takePictureIntent = null;
+                       	}
 
                         // Take file from gallery
                         Intent pictureSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
@@ -222,32 +209,7 @@ public class ReactWebViewExManager extends ReactWebViewManager {
              		}
              	}
 
-             	@Override
-             	public void onProgressChanged(WebView view, int newProgress) {
-   					super.onProgressChanged(view, newProgress);
-       			}
-
-       			@Override
-       			public void onReceivedTitle(WebView view, String title) {
-   					super.onReceivedTitle(view, title);
-       			}
-
-       			@Override
-       			public void onReceivedIcon(WebView view, Bitmap icon) {
-  					super.onReceivedIcon(view, icon);
-   				}
-
-       			@Override
-       			public void onReceivedTouchIconUrl(WebView view, String url, boolean precomposed) {
-   					super.onReceivedTouchIconUrl(view, url, precomposed);
-       			}
-
-       			@Override
-       			public void onShowCustomView(View view, CustomViewCallback callback) {
-   					super.onShowCustomView(view, callback);
-       			}
-
-       			@SuppressWarnings("all")
+             	@SuppressWarnings("all")
        			public void onShowCustomView(
        				View view,
        				int requestedOrientation,
@@ -341,74 +303,12 @@ public class ReactWebViewExManager extends ReactWebViewManager {
    						super.onPermissionRequestCanceled(request);
              		}
 				}
-
-             	@Override
-             	public boolean onJsTimeout() {
-   					return super.onJsTimeout();
-       			}
-
-       			@Override
-       			public void onConsoleMessage(String message, int lineNumber, String sourceID) {
-   					super.onConsoleMessage(message, lineNumber, sourceID);
-       			}
-
-       			@Override
-      			public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
-   					return super.onConsoleMessage(consoleMessage);
-       			}
-
-       			@Override
-       			public Bitmap getDefaultVideoPoster() {
-   					return super.getDefaultVideoPoster();
-       			}
-
-       			@Override
-       			public View getVideoLoadingProgressView() {
-   					return super.getVideoLoadingProgressView();
-       			}
-
-       			@Override
-       			public void getVisitedHistory(ValueCallback<String[]> callback) {
-   					super.getVisitedHistory(callback);
-       			}
-
-      			@Override
-       			public void onExceededDatabaseQuota(
-       				String url,
-       				String databaseIdentifier,
-       				long quota,
-       				long estimatedDatabaseSize,
-       				long totalQuota,
-       				QuotaUpdater quotaUpdater
-       			) {
-  					super.onExceededDatabaseQuota(
-  						url,
-  						databaseIdentifier,
-  						quota,
-  						estimatedDatabaseSize,
-  						totalQuota,
-  						quotaUpdater
-  					);
-       			}
-
-       			@Override
-       			public void onReachedMaxAppCacheSize(
-       				long requiredStorage,
-       				long quota,
-       				QuotaUpdater quotaUpdater
-       			) {
-   					super.onReachedMaxAppCacheSize(requiredStorage, quota, quotaUpdater);
-       			}
             });
 	    }
     }
 
-    /**
-     * @return the label for the file upload prompts as a string
-     */
     private String getFileUploadPromptLabel() {
-      	// return English translation by default
-       	return "Choose a picture";
+    	return "Choose a picture";
     }
 
     /**
@@ -424,8 +324,7 @@ public class ReactWebViewExManager extends ReactWebViewManager {
        	File storageDir = Environment.getExternalStoragePublicDirectory(
        		Environment.DIRECTORY_PICTURES
        	);
-       	File imageFile = File.createTempFile(imageFileName,	".jpg", storageDir);
 
-       	return imageFile;
+		return File.createTempFile(imageFileName,	".jpg", storageDir);
     }
 }

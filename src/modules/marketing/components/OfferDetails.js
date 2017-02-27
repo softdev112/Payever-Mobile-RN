@@ -8,7 +8,7 @@ import type Offer, { OfferItem }
 
 @inject('config')
 @observer
-export default class OfferView extends Component {
+export default class OfferDetails extends Component {
   static defaultProps = {
     mode: 'chat',
   };
