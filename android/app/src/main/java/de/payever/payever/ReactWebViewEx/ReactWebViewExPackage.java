@@ -6,11 +6,9 @@ import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Arrays;
 import java.util.Collections;
-import android.util.Log;
+import java.util.List;
 
 public class ReactWebViewExPackage implements ReactPackage {
 

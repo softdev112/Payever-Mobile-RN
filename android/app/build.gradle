@@ -111,6 +111,11 @@ android {
         }
     }
 
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "4g"
+    }
+
     signingConfigs {
 		release {
 			storeFile file(RELEASE_STORE_FILE)

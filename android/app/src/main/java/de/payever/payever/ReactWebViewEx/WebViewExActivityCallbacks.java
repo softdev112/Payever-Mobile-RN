@@ -1,15 +1,13 @@
 package de.payever.payever.reactwebviewex;
 
-import com.reactnativenavigation.controllers.ActivityCallbacks;
 import android.annotation.TargetApi;
+import com.reactnativenavigation.controllers.ActivityCallbacks;
 import android.app.Activity;
 import android.content.Intent;
 import android.webkit.ValueCallback;
-import android.webkit.WebView;
 import android.content.ClipData;
 import android.os.Build;
 import android.net.Uri;
-import android.util.Log;
 
 import java.io.File;
 

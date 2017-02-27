@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { Html, Icon, StyleSheet, Text, View } from 'ui';
 import type Message from '../../../../store/CommunicationStore/models/Message';
-import Offer from '../../../marketing/components/OfferView';
+import Offer from '../../../marketing/components/OfferDetails';
 import MediaView from './MediaView';
 
 export default class MessageView extends Component {

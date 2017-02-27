@@ -7,13 +7,13 @@ import {
 } from 'ui';
 import { format } from 'utils';
 
-import OfferView from '../components/OfferView';
+import OfferDetails from '../components/OfferDetails';
 import OffersStore from '../../../store/OffersStore/index';
 import Offer from '../../../store/OffersStore/models/Offer';
 
 @inject('offers')
 @observer
-export default class OfferPreview extends Component {
+export default class ViewOffer extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
@@ -68,7 +68,7 @@ export default class OfferPreview extends Component {
         </View>
 
         <View style={styles.offerDetails}>
-          <OfferView mode="full" offer={offer} />
+          <OfferDetails mode="full" offer={offer} />
         </View>
       </ScrollView>
     );
