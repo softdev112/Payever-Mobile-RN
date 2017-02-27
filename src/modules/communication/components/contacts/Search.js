@@ -1,8 +1,14 @@
 import { Component, PropTypes } from 'react';
 import { TextInput } from 'react-native';
+import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import { Icon, StyleSheet, View } from 'ui';
 
+import type CommunicationStore
+  from '../../../../store/CommunicationStore/index';
+
+@inject('communication')
+@observer
 export default class Search extends Component {
   static contextTypes = {
     navigator: PropTypes.object.isRequired,
@@ -12,6 +18,10 @@ export default class Search extends Component {
 
   context: {
     navigator: Navigator;
+  };
+
+  props: {
+    communication?: CommunicationStore;
   };
 
   onSearchPress() {
@@ -25,7 +35,7 @@ export default class Search extends Component {
   }
 
   onTextChange(text) {
-    console.log(text);
+    this.props.communication.search(text);
   }
 
   render() {

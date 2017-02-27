@@ -4,10 +4,10 @@ import Message from './Message';
 export default class Conversation {
   archived: boolean;
   id: number;
-  @observable messages: Array;
+  @observable messages: Array<Message> = [];
   name: string;
-  status: ConversationStatus;
-  type: 'conversation';
+  @observable status: ConversationStatus;
+  type: ConversationType;
 
   constructor(data) {
     data.messages = (data.messages || []).map(m => new Message(m));
@@ -31,11 +31,19 @@ export default class Conversation {
 
     this.messages.push(message);
   }
+
+  updateStatus(status) {
+    this.status = status;
+  }
 }
 
 export type ConversationStatus = {
+  conversationId?: number;
   label: ?string;
   lastVisit: ?string;
   online: boolean;
   userId: number;
 };
+
+export type ConversationType = 'conversation' | 'chat-group'
+  | 'marketing-group';

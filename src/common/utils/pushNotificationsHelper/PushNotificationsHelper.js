@@ -2,11 +2,11 @@ import NotificationsIOS, {
   NotificationsAndroid, PendingNotifications,
 } from 'react-native-notifications';
 import { AppState, Platform } from 'react-native';
+import { log } from 'utils';
 
 import type PayeverApi from './../index';
 import type UserAccount
   from '../../../store/UserProfilesStore/models/UserAccount';
-import * as log from '../log';
 import handleNotification from './notificationHandlers';
 
 export default class PushNotificationsHelper {

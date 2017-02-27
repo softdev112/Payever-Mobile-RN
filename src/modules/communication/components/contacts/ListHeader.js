@@ -3,16 +3,21 @@ import { Icon, StyleSheet, Text, View } from 'ui';
 const TITLES = {
   contacts: 'DIRECT MESSAGES',
   groups:   'GROUPS',
+  foundMessages: 'FOUND MESSAGES',
 };
 
-export default function ListHeader({ type }: PropTypes) {
+export default function ListHeader({ type, hideMessages }: PropTypes) {
+  if (type === 'foundMessages' && hideMessages) {
+    //noinspection JSConstructorReturnsPrimitive
+    return null;
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{TITLES[type]}</Text>
-      <Icon
-        style={styles.add}
-        source="icon-plus-circle-24"
-      />
+      {type !== 'foundMessages' && (
+        <Icon style={styles.add} source="icon-plus-circle-24" />
+      )}
     </View>
   );
 }
@@ -39,5 +44,6 @@ const styles = StyleSheet.create({
 });
 
 type PropTypes = {
-  type: 'contacts' | 'groups';
+  type: 'contacts' | 'groups' | 'foundMessages';
+  hideMessages: boolean;
 };

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.util.Log;
-import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -60,18 +59,7 @@ public class ReactWebViewExManager extends ReactWebViewManager {
 
          if(enabled) {
              view.setWebChromeClient(new WebChromeClient() {
- 	  			// file upload callback (Android 2.2 API 8) - Android 2.3 (API 10)
-       			@SuppressWarnings("unused")
-       			public void openFileChooser(ValueCallback<Uri> uploadMsg) {
-       				openFileChooser(uploadMsg, "");
-       			}
-
-       			// file upload callback (Android 3.0 API 11) - (Android 4.0 API 15)
-       			public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
-       				openFileChooser(uploadMsg, acceptType, "");
-       			}
-
-       			// file upload callback (Android 4.1 API 16) - (Android 4.3 API 18)
+ 	  			// file upload callback (Android 4.1 API 16) - (Android 4.3 API 18)
        			@SuppressWarnings("unused")
       			public void openFileChooser(
       				ValueCallback<Uri> uploadMsg,
@@ -209,43 +197,7 @@ public class ReactWebViewExManager extends ReactWebViewManager {
              		}
              	}
 
-             	@SuppressWarnings("all")
-       			public void onShowCustomView(
-       				View view,
-       				int requestedOrientation,
-       				CustomViewCallback callback
-       			) {
-       				if (Build.VERSION.SDK_INT >= 14) {
-  						super.onShowCustomView(view, requestedOrientation, callback);
-  					}
-				}
-
-             	@Override
-             	public void onHideCustomView() {
-   					super.onHideCustomView();
-       			}
-
-       			@Override
-       			public boolean onCreateWindow(
-       				WebView view,
-       				boolean isDialog,
-       				boolean isUserGesture,
-       				Message resultMsg
-       			) {
-   					return super.onCreateWindow(view, isDialog, isUserGesture, resultMsg);
-       			}
-
-       			@Override
-       			public void onRequestFocus(WebView view) {
-  					super.onRequestFocus(view);
-      			}
-
-       			@Override
-       			public void onCloseWindow(WebView window) {
-   					super.onCloseWindow(window);
-       			}
-
-       			@Override
+               	@Override
        			public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
        				if (Build.VERSION.SDK_INT < 21
        					&& mActivity != null
@@ -263,46 +215,6 @@ public class ReactWebViewExManager extends ReactWebViewManager {
 
    					return super.onJsAlert(view, url, message, result);
        			}
-
-       			@Override
-      			public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
-  					return super.onJsConfirm(view, url, message, result);
-       			}
-
-       			@Override
-       			public boolean onJsPrompt(
-       				WebView view,
-       				String url,
-       				String message,
-       				String defaultValue,
-       				JsPromptResult result
-       			) {
-   					return super.onJsPrompt(view, url, message, defaultValue, result);
-       			}
-
-       			@Override
-       			public boolean onJsBeforeUnload(
-       				WebView view,
-       				String url,
-       				String message,
-       				JsResult result
-       			) {
-   					return super.onJsBeforeUnload(view, url, message, result);
-       			}
-
-       			@SuppressWarnings("all")
-       			public void onPermissionRequest(PermissionRequest request) {
-      				if (Build.VERSION.SDK_INT >= 21) {
-   						super.onPermissionRequest(request);
-       				}
-       			}
-
-             	@SuppressWarnings("all")
-             	public void onPermissionRequestCanceled(PermissionRequest request) {
-             		if (Build.VERSION.SDK_INT >= 21) {
-   						super.onPermissionRequestCanceled(request);
-             		}
-				}
             });
 	    }
     }

@@ -11,7 +11,7 @@ export default class Group {
   name: string;
   participantsCount: string;
   recipient_id: string;
-  type: string;
+  type: 'chat-group' | 'marketing-group';
   unreadCount: number;
 
   constructor(data) {
