@@ -17,8 +17,8 @@ export default function handleNotification(
     return;
   }
 
-  if (options.isBackground) {
-    // processNotificationData(parameters);
+  if (options.isOpened) {
+    processNotificationData(parameters);
     return;
   }
 
@@ -70,6 +70,7 @@ function openOffer(id) {
 
 type Options = {
   isBackground: boolean;
+  isOpened: boolean;
 };
 
 type NotificationParams = {
