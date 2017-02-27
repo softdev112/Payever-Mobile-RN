@@ -1,6 +1,6 @@
 import { formatSource, isExternalUrl, redirectOnUrl } from '../index';
 
-describe('ui/WebView', () => {
+describe('ui.WebView', () => {
   describe('formatSource', () => {
     it('should return html code on a simple url', () => {
       const source = formatSource({ uri: 'http://example.com' });

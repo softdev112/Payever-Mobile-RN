@@ -1,6 +1,6 @@
 import format from '../format';
 
-describe('utils/format', () => {
+describe('utils.format', () => {
   describe('currency', () => {
     it('should format currency correctly', () => {
       expect(format.currency(1000)).toEqual('1,000.00€');

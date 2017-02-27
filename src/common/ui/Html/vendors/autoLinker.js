@@ -1,5 +1,5 @@
 import autoLinker from 'autolinker';
-import * as log from '../../../utils/log';
+import { log } from '../../../utils';
 
 export default autoLinker;
 

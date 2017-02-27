@@ -1,3 +1,4 @@
+import { extendObservable, observable } from 'mobx';
 import type Avatar from './Avatar';
 import type Message from './Message';
 import type { ConversationStatus } from './Conversation';
@@ -12,11 +13,15 @@ export default class ConversationInfo {
   name: string;
   notification: boolean;
   recipientId: ?string;
-  status: ?ConversationStatus;
+  @observable status: ?ConversationStatus;
   type: string;
   unreadCount: ?number;
 
   constructor(data) {
-    Object.assign(this, data);
+    extendObservable(this, data);
+  }
+
+  updateStatus(status) {
+    this.status = status;
   }
 }

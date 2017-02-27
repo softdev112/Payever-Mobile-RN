@@ -16,7 +16,7 @@ import {
 import resolveAssetSource from 'resolveAssetSource';
 import keyMirror from 'fbjs/lib/keyMirror';
 
-import * as log from '../../utils/log';
+import { log } from '../../utils';
 import StyleSheet from '../StyleSheet';
 
 const RCT_WEBVIEW_REF = 'webview';

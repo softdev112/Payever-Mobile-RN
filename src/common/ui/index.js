@@ -7,7 +7,9 @@ export StyleSheet from './StyleSheet';
 
 export Button from './Button';
 export Container from './Container';
+export DataSource from './DataSource';
 export Error from './Error';
+export ErrorBox from './ErrorBox';
 export GridView from './GridView';
 export Header from './Header';
 export Html from './Html/index';

@@ -1,6 +1,6 @@
 import { Navigation } from 'react-native-navigation';
 import { Platform } from 'react-native';
-import * as log from '../log';
+import { log } from 'utils';
 
 export default function handleNotification(
   notification: NotifIOS | NotifAndroid,
