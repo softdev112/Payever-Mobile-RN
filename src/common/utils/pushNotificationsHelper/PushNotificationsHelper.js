@@ -20,8 +20,6 @@ export default class PushNotificationsHelper {
 
   async onPushNotificationsRegistered(deviceToken) {
     // Send device token to server along side with device name
-    const notif = await PendingNotifications.getInitialNotification();
-    console.log('Init Notification', notif);
     log.debug('Device token received:', deviceToken);
     await this.api.device.linkDeviceToken(this.userProfile, deviceToken);
   }
@@ -38,7 +36,7 @@ export default class PushNotificationsHelper {
 
   onNotificationOpened(notification) {
     log.debug('On notification opened: ', notification);
-    // handleNotification(notification, { opened: true });
+    handleNotification(notification, { isOpened: true });
   }
 
   onNotificationReceivedAndroid(notification) {
@@ -82,6 +80,8 @@ export default class PushNotificationsHelper {
         ::this.onNotificationReceivedAndroid
       );
       NotificationsAndroid.refreshToken();
+      const initNotification = await PendingNotifications.getInitialNotification();
+      console.log('Init Notification', initNotification);
     }
   }
 }

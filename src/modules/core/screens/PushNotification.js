@@ -27,7 +27,8 @@ export default function PushNotification(
 
 const styles = StyleSheet.create({
   container: {
-    height: 55,
+    height: 60,
+    width: '100%',
     justifyContent: 'center',
     paddingHorizontal: 8,
     backgroundColor: 'yellowgreen',
