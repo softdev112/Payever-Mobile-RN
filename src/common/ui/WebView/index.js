@@ -8,12 +8,13 @@ import { showScreen } from '../../Navigation';
 import NavBar from '../NavBar';
 import StyleSheet from '../StyleSheet';
 import getLoaderHtml from './getLoaderHtml';
+import WebViewLoader from './WebViewLoader';
 import WebViewError from './WebViewError';
 import getInjectedJs from './getInjectedJs';
 
 const REDIRECT_ON_URLS = [
   { match: '/home',    screen: 'dashboard.Dashboard' },
-  { match: '/private', screen: 'dashboard.Private' },
+  { match: /private^/, screen: 'dashboard.Private' },
   { match: '/login',   screen: 'auth.Login' },
 ];
 
@@ -22,6 +23,7 @@ const REDIRECT_ON_URLS = [
 export default class WebView extends Component {
   static defaultProps = {
     enableExternalBrowser: false,
+    showLoader: false,
     showNavBar: 'external',
     topMarginIos: false,
   };
@@ -48,6 +50,7 @@ export default class WebView extends Component {
      */
     redirectOn?: UrlMatch | Array<UrlMatch>;
     renderNavBar: (url: string, title: NavTitle, webView: WebView) => any;
+    showLoader?: boolean;
     showNavBar?: 'never' | 'external' | 'always';
     source: Source;
     style: Object | number;
@@ -56,7 +59,10 @@ export default class WebView extends Component {
 
   state: {
     externalUrl: boolean;
+    error: ?string;
+    latestUrl: ?string;
     navTitle: ?NavTitle;
+    showLoader: boolean;
   };
 
   $view: ReactWebView;
@@ -66,8 +72,10 @@ export default class WebView extends Component {
     super(props);
     this.state = {
       externalUrl: false,
-      navTitle: null,
+      error: null,
       latestUrl: null,
+      navTitle: null,
+      showLoader: props.showLoader,
     };
     this.internalInjectedJs = getInjectedJs({
       isDev: __DEV__,
@@ -137,13 +145,29 @@ export default class WebView extends Component {
     }
 
     switch (data.command) {
+      case 'back': {
+        this.context.navigator.pop();
+        break;
+      }
+
       case 'error': {
+        delete data.command;
         log.warn('WebView js error', data);
+        break;
+      }
+
+      case 'hide-loader': {
+        this.setState({ showLoader: false });
         break;
       }
 
       case 'set-title': {
         this.setState({ navTitle: data });
+        break;
+      }
+
+      case 'show-error': {
+        this.setState({ error: data.message });
         break;
       }
 
@@ -162,7 +186,10 @@ export default class WebView extends Component {
   }
 
   renderError(domain, code, description) {
-    log.error('WebView error', domain, code, description);
+    if (domain || code) {
+      log.error('WebView error', domain, code, description);
+    }
+
     return (
       <WebViewError message={description} />
     );
@@ -170,10 +197,14 @@ export default class WebView extends Component {
 
   renderNavBar() {
     const { showNavBar } = this.props;
-    const { externalUrl, navTitle } = this.state;
+    const { externalUrl, navTitle, showLoader } = this.state;
+
+    if (showLoader) {
+      return null;
+    }
 
     if (this.props.renderNavBar) {
-      this.props.renderNavBar(
+      return this.props.renderNavBar(
         this.this.latestUrl,
         navTitle,
         this
@@ -199,9 +230,15 @@ export default class WebView extends Component {
 
   render() {
     const { config, injectJs, style, topMarginIos } = this.props;
+    const { error, showLoader } = this.state;
+
+    if (error) {
+      return this.renderError(null, null, error);
+    }
+
     const source = formatSource(this.props.source, config.siteUrl);
 
-    const injectJsCode = this.internalInjectedJs + injectJs;
+    const injectJsCode = this.internalInjectedJs + ';' + injectJs;
 
     const containerStyle = [
       styles.container,
@@ -224,6 +261,7 @@ export default class WebView extends Component {
           source={source}
           startInLoadingState={false}
         />
+        {showLoader && <WebViewLoader />}
       </View>
     );
   }
@@ -256,6 +294,8 @@ export function formatSource(source: Source, baseUrl: string) {
 }
 
 export function redirectOnUrl(url: string, matches: Array<UrlMatch>): Redirect {
+  url = url.split('#')[0];
+
   const matchResult = matches.find((match) => {
     if (match && typeof match === 'object' && match.match) {
       match = match.match;
