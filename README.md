@@ -50,20 +50,14 @@
 
 ### Release publishing
 
-- Make an internal build for members in developers group:
-`fastlane beta dev:true`
-or shortcut (with automatic version increasing):
+- Make an internal release, publish to fabric.io and send a notification
+to payever MOBILE and DESKTOP telegram chat
 `npm run beta`
+or make a release for developers ony without notification:
+`npm run beta:dev`
 
-- Build for all members with telegram notification:
-`fastlane beta`
+For more options see [Fastlane readme](blob/master/fastlane/README.md)
 
 ### Rebuild vector icons
 
     gulp svg
-
-## Useful information:
- 
-### Show In-App Debug menu in the latest android emulator:
-
-Ctrl(Cmd)+M
