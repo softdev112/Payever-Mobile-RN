@@ -80,11 +80,14 @@ loaded only for dev environment (when dev.js config is active)
 
 ### Release publishing
 
-- Make an internal release, publish to fabric.io and send a notification
+Make an internal release, publish to fabric.io and send a notification
 to payever MOBILE and DESKTOP telegram chat
-`npm run beta`
+
+    npm run beta
+
 or make a release for developers ony without notification:
-`npm run beta:dev`
+
+    npm run beta:dev
 
 For more options see [Fastlane readme](blob/master/fastlane/README.md)
 
