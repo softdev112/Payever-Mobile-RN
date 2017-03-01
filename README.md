@@ -42,6 +42,36 @@
  - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
  - [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
 
+## Useful information
+
+### Logging
+
+If you want to read logs using more convenient tool than log-android/ios
+install [log-s-desktop](https://github.com/megahertz/log-s-desktop)
+
+    git clone git@github.com:megahertz/log-s-desktop.git
+    cd log-s-desktop
+    npm i
+    npm start
+
+Then configure payever-mobile to use this log server in
+src/config/local.js:
+
+    export default {
+      debug: {
+        consoleLevel: 'silly',
+        logApiCall: 1,
+        logMobx: 0,
+        logSLevel: 'silly',
+        logSUrl: 'http://192.168.1.2:8085/log',
+        logWampCall: 1,
+      },
+    };
+
+where 192.168.1.2 is your working station ip address (which is
+accessible from simulator/device). Please be aware that local.js is
+loaded only for dev environment (when dev.js config is active)
+
 ## Build tools
 
 ### Increase version:
@@ -50,20 +80,17 @@
 
 ### Release publishing
 
-- Make an internal build for members in developers group:
-`fastlane beta dev:true`
-or shortcut (with automatic version increasing):
-`npm run beta`
+Make an internal release, publish to fabric.io and send a notification
+to payever MOBILE and DESKTOP telegram chat
 
-- Build for all members with telegram notification:
-`fastlane beta`
+    npm run beta
+
+or make a release for developers ony without notification:
+
+    npm run beta:dev
+
+For more options see [Fastlane readme](blob/master/fastlane/README.md)
 
 ### Rebuild vector icons
 
     gulp svg
-
-## Useful information:
- 
-### Show In-App Debug menu in the latest android emulator:
-
-Ctrl(Cmd)+M

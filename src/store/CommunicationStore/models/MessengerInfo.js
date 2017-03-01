@@ -39,4 +39,27 @@ export default class MessengerInfo {
   @computed get isBusiness() {
     return this.messengerUser.user_type === 'business';
   }
+
+  getDefaultConversation(): ConversationInfo | Group {
+    if (this.conversations[0]) {
+      return this.conversations[0];
+    }
+
+    if (this.groups[0]) {
+      return this.groups[0];
+    }
+
+    return null;
+  }
+
+  find(callback): ConversationInfo {
+    return this.conversations.find(callback)
+      || this.groups.find(callback)
+      || this.marketingGroups(callback);
+  }
+
+  getConversationType(conversationId) {
+    const conversation = this.find(c => c.id === conversationId);
+    return conversation ? conversation.type : null;
+  }
 }

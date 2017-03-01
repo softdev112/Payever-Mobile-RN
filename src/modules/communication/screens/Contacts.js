@@ -1,9 +1,8 @@
 import { Component } from 'react';
 import { images, NavBar, StyleSheet, View } from 'ui';
+import Contacts from '../components/contacts';
 
-import Chat from '../components/chat';
-
-export default class ChatScreen extends Component {
+export default class ContactsScreen extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
@@ -12,7 +11,7 @@ export default class ChatScreen extends Component {
     return (
       <View style={styles.container}>
         <NavBar.Default title="Communication" source={images.communication} />
-        <Chat />
+        <Contacts phoneView />
       </View>
     );
   }

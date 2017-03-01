@@ -1,4 +1,6 @@
+import { Component, PropTypes } from 'react';
 import { Icon, StyleSheet, Text, View } from 'ui';
+import type { Navigator } from 'react-native-navigation';
 
 const TITLES = {
   contacts: 'DIRECT MESSAGES',
@@ -6,20 +8,50 @@ const TITLES = {
   foundMessages: 'FOUND MESSAGES',
 };
 
-export default function ListHeader({ type, hideMessages }: PropTypes) {
-  if (type === 'foundMessages' && hideMessages) {
-    //noinspection JSConstructorReturnsPrimitive
-    return null;
+export default class ListHeader extends Component {
+  static contextTypes = {
+    navigator: PropTypes.object.isRequired,
+  };
+
+  context: {
+    navigator: Navigator;
+  };
+
+  props: {
+    type: 'contacts' | 'groups' | 'foundMessages';
+    hideMessages: boolean;
+  };
+
+  onPlusClick() {
+    const { navigator } = this.context;
+    const { type } = this.props;
+
+    if (type === 'contacts') {
+      navigator.push({ screen: 'communication.AddContact' });
+    }
   }
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{TITLES[type]}</Text>
-      {type !== 'foundMessages' && (
-        <Icon style={styles.add} source="icon-plus-circle-24" />
-      )}
-    </View>
-  );
+  render() {
+    const { hideMessages, type } = this.props;
+
+    if (type === 'foundMessages' && hideMessages) {
+      //noinspection JSConstructorReturnsPrimitive
+      return null;
+    }
+
+    return (
+      <View style={styles.container}>
+        <Text style={styles.title}>{TITLES[type]}</Text>
+        {type !== 'foundMessages' && (
+          <Icon
+            style={styles.add}
+            source="icon-plus-circle-24"
+            onPress={::this.onPlusClick}
+          />
+        )}
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -42,8 +74,3 @@ const styles = StyleSheet.create({
     height: 17,
   },
 });
-
-type PropTypes = {
-  type: 'contacts' | 'groups' | 'foundMessages';
-  hideMessages: boolean;
-};

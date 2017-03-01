@@ -12,7 +12,7 @@ export default class ConversationInfo {
   latestMessage: ?Message;
   name: string;
   notification: boolean;
-  recipientId: ?string;
+  recipient_id: ?string;
   @observable status: ?ConversationStatus;
   type: string;
   unreadCount: ?number;

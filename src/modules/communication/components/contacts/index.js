@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { ListView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
-import { Loader, StyleSheet } from 'ui';
+import { ErrorBox, Loader, StyleSheet, View } from 'ui';
 
 import Contact from './Contact';
 import ListHeader from './ListHeader';
@@ -12,12 +12,17 @@ import type CommunicationStore
 import type UserProfilesStore
   from '../../../../store/UserProfilesStore/index';
 
-
 @inject('communication', 'userProfiles')
 @observer
 export default class Contacts extends Component {
+  static defaultProps = {
+    phoneView: true,
+  };
+
   props: {
     communication?: CommunicationStore;
+    phoneView: boolean;
+    style?: Object | number;
     userProfiles?: UserProfilesStore;
   };
 
@@ -30,17 +35,30 @@ export default class Contacts extends Component {
   }
 
   render() {
-    const { communication } = this.props;
+    const { communication, phoneView, style } = this.props;
     const ds = communication.contactDataSource;
+    const info = communication.messengerInfo;
+
+    if (!info) {
+      return (
+        <View style={style}>
+          <Loader isLoading={ds.isLoading}>
+            <ErrorBox message={ds.error} />
+          </Loader>
+        </View>
+      );
+    }
 
     return (
-      <Loader isLoading={ds.isLoading}>
+      <View style={style}>
         <ListView
-          contentContainerStyle={styles.container}
+          contentContainerStyle={styles.contentContainer}
           dataSource={ds}
           enableEmptySections
           renderHeader={() => <Search />}
-          renderRow={(item, type) => <Contact item={item} type={type} />}
+          renderRow={(item, type) => (
+            <Contact item={item} phoneView={phoneView} type={type} />
+          )}
           renderSectionHeader={(_, type) => (
             <ListHeader
               type={type}
@@ -48,13 +66,13 @@ export default class Contacts extends Component {
             />
           )}
         />
-      </Loader>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  contentContainer: {
     paddingHorizontal: 37,
     paddingVertical: 30,
   },

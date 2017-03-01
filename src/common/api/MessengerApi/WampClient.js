@@ -24,18 +24,18 @@ export default class WampClient extends EventEmitter {
 
   host: string;
   accessToken: Promise<string>;
+  enableLogging: boolean;
 
   socket: WebSocket;
-  state: number = WebSocket.CONNECTING;
 
-  listeners = {};
-  prefixes = {};
-  calls = {};
-  omitSubscribe = false;
+  internalListeners = {};
+  prefixes          = {};
+  calls             = {};
+  omitSubscribe     = false;
 
   checkConnectionInterval = null;
 
-  constructor(host, accessToken) {
+  constructor(host, accessToken, enableLogging) {
     super();
 
     this.connect         = ::this.connect;
@@ -43,6 +43,8 @@ export default class WampClient extends EventEmitter {
 
     this.host = host;
     this.accessToken = accessToken;
+    this.enableLogging = enableLogging;
+
     this.connect().catch(log.error);
     this.checkConnectionInterval = setInterval(this.checkConnection, 2000);
   }
@@ -53,6 +55,10 @@ export default class WampClient extends EventEmitter {
 
   async connect() {
     const accessToken = await this.accessToken;
+
+    if (this.enableLogging) {
+      log.debug(`Connecting to wamp ${this.host} with token ${accessToken}`);
+    }
 
     this.socket = new WebSocket(this.host, 'wamp', {
       Authorization: `Bearer ${accessToken}`,
@@ -78,13 +84,16 @@ export default class WampClient extends EventEmitter {
 
   /** @private */
   send(data) {
-    log.debug('SEND', data);
+    if (this.enableLogging) {
+      log.debug('WAMP SEND', data);
+    }
+
     this.socket.send(JSON.stringify(data));
   }
 
   /** @private */
   emitHandler(event, data) {
-    (this.listeners[event] || [])
+    (this.internalListeners[event] || [])
       .forEach(fn => fn(data));
   }
 
@@ -99,7 +108,10 @@ export default class WampClient extends EventEmitter {
     }
 
     const type = message.shift();
-    log.debug('MSG', message);
+
+    if (this.enableLogging) {
+      log.debug('WAMP MSG', message);
+    }
 
     // eslint-disable-next-line default-case
     switch (type) {
@@ -181,7 +193,7 @@ export default class WampClient extends EventEmitter {
         this.send([MSG_PREFIX, prefix, expanded]);
       });
       if (!this.omitSubscribe) {
-        Object.keys(this.listeners).forEach((uri) => {
+        Object.keys(this.internalListeners).forEach((uri) => {
           this.send([MSG_SUBSCRIBE, uri]);
         });
       }
@@ -227,23 +239,23 @@ export default class WampClient extends EventEmitter {
   }
 
   subscribe(uri, fn) {
-    this.listeners[uri] = this.listeners[uri] || [];
-    this.listeners[uri].push(fn);
+    this.internalListeners[uri] = this.internalListeners[uri] || [];
+    this.internalListeners[uri].push(fn);
 
-    if (this.listeners[uri].length === 1 && !this.omitSubscribe) {
+    if (this.internalListeners[uri].length === 1 && !this.omitSubscribe) {
       this.send([MSG_SUBSCRIBE, uri]);
     }
   }
 
   unsubscribe(uri, fn) {
-    const listeners = this.listeners[uri];
+    const listeners = this.internalListeners[uri];
     if (fn) {
       const i = listeners.indexOf(fn);
       listeners.splice(i, 1);
       if (listeners.length > 0) return;
     }
 
-    delete this.listeners[uri];
+    delete this.internalListeners[uri];
 
     if (!this.omitSubscribe) {
       this.send([MSG_UNSUBSCRIBE, uri]);

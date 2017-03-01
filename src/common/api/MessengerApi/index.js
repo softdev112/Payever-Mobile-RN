@@ -23,7 +23,10 @@ export default class MessengerApi {
     if (this.socket) {
       this.socket.close();
     }
-    const client = new WampClient(wsUrl, accessToken);
+
+    const enableLog = this.client.config.debug.logWampCall;
+
+    const client = new WampClient(wsUrl, accessToken, enableLog);
     this.socket = new SocketApi(client, userId);
     return this.socket;
   }

@@ -1,7 +1,5 @@
-import { computed, observable, ObservableArray } from 'mobx';
+import { computed, observable } from 'mobx';
 
-import type AppItem from './AppItem';
-import type ActivityItem from './ActivityItem';
 import type Store from '../index';
 
 export default class Profile {
@@ -17,10 +15,6 @@ export default class Profile {
   @observable sells: number;
   @observable type: string;
 
-  @observable appList: ObservableArray<AppItem> = [];
-  @observable activityList: ObservableArray<ActivityItem> = [];
-  @observable todoList: ObservableArray<ActivityItem> = [];
-
   @computed get isBusiness() {
     return this.type === 'business';
   }
@@ -31,5 +25,15 @@ export default class Profile {
 
   get displayName() {
     throw new Error('Abstract getter');
+  }
+
+  getCommunicationUrl() {
+    if (this.isBusiness) {
+      //noinspection JSUnresolvedVariable
+      const app = this.applications.find(a => a.label === 'communication');
+      return app ? app.url : null;
+    }
+
+    return '/private/network/app/communication';
   }
 }
