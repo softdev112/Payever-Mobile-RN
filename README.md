@@ -42,6 +42,35 @@
  - [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
  - [Airbnb React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react)
 
+## Useful information
+
+### Logging
+
+If you want to read logs using more convenient tool than log-android/ios
+install [log-s-desktop](https://github.com/megahertz/log-s-desktop)
+
+    git clone git@github.com:megahertz/log-s-desktop.git
+    cd log-s-desktop
+    npm i
+    npm start
+
+Then configure payever-mobile to use this log server in
+src/config/local.js:
+
+    export default {
+      debug: {
+        consoleLevel: 'silly',
+        logApiCall: 1,
+        logMobx: 0,
+        logSLevel: 'silly',
+        logSUrl: 'http://192.168.1.2:8085/log',
+        logWampCall: 1,
+      },
+    };
+
+where 192.168.1.2 is your working station ip address (which is
+ accessible from simulator/device)
+
 ## Build tools
 
 ### Increase version:
