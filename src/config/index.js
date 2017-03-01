@@ -8,11 +8,16 @@ export class Config {
     clientSecret: string;
   };
   debug: {
+    consoleLevel: boolean;
     logApiCall: boolean;
-    loggerUrl: ?string;
+    logMobx: boolean;
+    logSLevel: boolean;
+    logSUrl: string;
+    logWampCall: boolean;
   };
 
   constructor(data) {
+    data.debug = data.debug || {};
     Object.assign(this, data);
   }
 }

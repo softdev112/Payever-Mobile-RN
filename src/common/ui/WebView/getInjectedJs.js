@@ -11,6 +11,7 @@ function injectedBody(options: InjectOptions) {
 
   function init(options) {
     window.__DEV__ = options.isDev;
+    window.callWebViewOnMessage = callWebViewOnMessage;
 
     patchMenuButtonPress();
 
@@ -74,22 +75,16 @@ function injectedBody(options: InjectOptions) {
   function attachErrorHandler() {
     window.addEventListener('error', onError);
 
-    function onError(message, sourceUrl, line, column, error) {
-      if (message && message.message && !error) {
-        error = message;
-        message = null;
-      }
-
-      if (!error || !error.message) {
-        error = {};
-      }
+    function onError(event) {
+      var error = event.error;
 
       callWebViewOnMessage({
-        message:   message   || error.message,
-        sourceUrl: sourceUrl || error.sourceUrl,
-        line:      line      || error.line,
-        column:    column    || error.column,
-        trace:     error.trace
+        column:    error.column    || event.colno,
+        command:   'error',
+        line:      error.line      || event.lineno,
+        message:   error.message   || event.message,
+        sourceUrl: error.sourceUrl || event.filename,
+        stack:     error.stack
       });
     }
   }

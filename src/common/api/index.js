@@ -32,10 +32,13 @@ export default class PayeverApi {
   logApiCall: boolean;
 
   authStore: AuthStore;
+  config: Config;
 
   constructor(config: Config, authStore: AuthStore) {
     Object.assign(this, config.api);
-    this.authStore = authStore;
+
+    this.config     = config;
+    this.authStore  = authStore;
     this.logApiCall = config.debug.logApiCall;
   }
 

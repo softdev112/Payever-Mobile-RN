@@ -80,7 +80,8 @@ export default class PushNotificationsHelper {
         ::this.onNotificationReceivedAndroid
       );
       NotificationsAndroid.refreshToken();
-      const initNotification = await PendingNotifications.getInitialNotification();
+      const initNotification = await PendingNotifications
+        .getInitialNotification();
       console.log('Init Notification', initNotification);
     }
   }

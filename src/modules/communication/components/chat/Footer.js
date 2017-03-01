@@ -1,12 +1,21 @@
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import { Keyboard, TextInput } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
+import type { Navigator } from 'react-native-navigation';
 import { Icon, StyleSheet, View } from 'ui';
 import CommunicationStore from '../../../../store/CommunicationStore/index';
 
 @inject('communication')
 @observer
 export default class Footer extends Component {
+  static contextTypes = {
+    navigator: PropTypes.object.isRequired,
+  };
+
+  context: {
+    navigator: Navigator;
+  };
+
   $input: TextInput;
 
   props: {
@@ -27,7 +36,12 @@ export default class Footer extends Component {
   }
 
   onActionPress() {
-    console.log('Upload message');
+    const { conversationId } = this.props;
+
+    this.context.navigator.push({
+      screen: 'marketing.CreateOffer',
+      passProps: { conversationId },
+    });
   }
 
   onSend() {
@@ -45,20 +59,29 @@ export default class Footer extends Component {
   }
 
   render() {
+    const { communication } = this.props;
+
+    let isBusiness = false;
+    if (communication.messengerInfo) {
+      isBusiness = communication.messengerInfo.isBusiness;
+    }
+
     return (
       <View style={styles.container}>
-        <Icon
-          style={styles.icon}
-          onPress={::this.onActionPress}
-          source="icon-plus-24"
-          touchStyle={styles.icon_touch}
-        />
+        {isBusiness && (
+          <Icon
+            style={styles.icon}
+            onPress={::this.onActionPress}
+            source="icon-plus-24"
+            touchStyle={styles.icon_action_touch}
+          />
+        )}
         <TextInput
           style={styles.input}
           ref={i => this.$input = i}
           onChangeText={text => this.setState({ text })}
           onSubmitEditing={::this.onSend}
-          placeholder="Enter message"
+          placeholder="Send message"
           returnKeyType="send"
           underlineColorAndroid="transparent"
           value={this.state.text}
@@ -90,6 +113,14 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
+  icon_action_touch: {
+    borderRightColor: '$pe_color_light_gray_1',
+    borderRightWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 12,
+  },
+
   icon_touch: {
     alignItems: 'center',
     justifyContent: 'center',
@@ -98,8 +129,6 @@ const styles = StyleSheet.create({
 
   input: {
     flex: 1,
-    paddingHorizontal: 8,
-    borderLeftColor: '$pe_color_light_gray_1',
-    borderLeftWidth: 1,
+    paddingHorizontal: 22,
   },
 });

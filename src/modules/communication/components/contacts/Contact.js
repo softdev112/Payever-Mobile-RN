@@ -1,14 +1,18 @@
 import { Component, PropTypes } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Observer } from 'mobx-react/native';
-import { Navigator } from 'react-native-navigation';
+import { inject, observer, Observer } from 'mobx-react/native';
+import type { Navigator } from 'react-native-navigation';
 import { StyleSheet, Text, View } from 'ui';
 
 import OnlineStatus from '../OnlineStatus';
-import Conversation from
+import type Conversation from
   '../../../../store/CommunicationStore/models/ConversationInfo';
-import Message from '../../../../store/CommunicationStore/models/Message';
+import type Message from '../../../../store/CommunicationStore/models/Message';
+import type CommunicationStore
+  from '../../../../store/CommunicationStore/index';
 
+@inject('communication')
+@observer
 export default class Contact extends Component {
   static contextTypes = {
     navigator: PropTypes.object.isRequired,
@@ -19,27 +23,30 @@ export default class Contact extends Component {
   };
 
   props: {
+    communication?: CommunicationStore;
     item: Object;
+    phoneView: boolean;
     type: 'contacts' | 'groups' | 'foundMessages';
   };
 
-  onContactClick(item: Conversation | Message) {
+  onContactSelect(item: Conversation | Message) {
+    const { communication, phoneView } = this.props;
     const conversationId = item.conversation ? item.conversation.id : item.id;
+    communication.setSelectedConversationId(conversationId);
 
-    this.context.navigator.push({
-      screen: 'communication.Chat',
-      passProps: {
-        conversationId,
-        type: item.conversation ? item.conversation.type : item.type,
-      },
-    });
+    if (phoneView) {
+      this.context.navigator.push({ screen: 'communication.Chat' });
+    }
   }
 
   renderContact(item: Conversation) {
+    const current = this.props.communication.selectedConversationId === item.id;
+    const style = current ? styles.current : null;
+
     return (
       <TouchableOpacity
-        style={styles.container}
-        onPress={() => this.onContactClick(item)}
+        style={[styles.container, style]}
+        onPress={() => this.onContactSelect(item)}
       >
         <Observer>
           {() => (
@@ -55,10 +62,13 @@ export default class Contact extends Component {
   }
 
   renderGroup(item: Conversation) {
+    const current = this.props.communication.selectedConversationId === item.id;
+    const style = current ? styles.current : null;
+
     return (
       <TouchableOpacity
-        style={styles.container}
-        onPress={() => this.onContactClick(item)}
+        style={[styles.container, style]}
+        onPress={() => this.onContactSelect(item)}
       >
         <Text style={styles.title}>{item.name}</Text>
       </TouchableOpacity>
@@ -69,10 +79,13 @@ export default class Contact extends Component {
     const name = item.own ? 'You' : item.senderName.split(' ')[0];
     const text = item.editBody.replace(/\s+/g, ' ');
 
+    const current = this.props.communication.selectedConversationId === item.id;
+    const style = current ? styles.current : null;
+
     return (
       <TouchableOpacity
-        style={styles.message}
-        onPress={() => this.onContactClick(item)}
+        style={[styles.message, style]}
+        onPress={() => this.onContactSelect(item)}
       >
         <View style={styles.message_header}>
           <Text style={styles.message_sender} numberOfLines={1}>
@@ -115,6 +128,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 10,
     paddingVertical: 7,
+  },
+
+  current: {
+    backgroundColor: '#f3f3f3',
+    borderRadius: 5,
   },
 
   message: {
