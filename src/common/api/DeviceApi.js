@@ -1,4 +1,5 @@
 import DeviceInfo from 'react-native-device-info';
+import { Platform } from 'react-native';
 
 import type PayeverApi from './index';
 import type UserAccount from '../../store/UserProfilesStore/models/UserAccount';
@@ -22,6 +23,7 @@ export default class DeviceApi {
       emailEnabled: false,
       udid: DeviceInfo.getUniqueID(),
       label: `${DeviceInfo.getBrand()}-${DeviceInfo.getModel()}`,
+      platform: Platform.OS,
       token: deviceToken,
     };
 
@@ -41,6 +43,7 @@ type UserDeviceInfo = {
   smsEnabled: boolean;
   emailEnabled: boolean;
   udid: boolean;
-  token: boolean;
   label: string;
+  platform: string;
+  token: boolean;
 };
