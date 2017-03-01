@@ -1,12 +1,21 @@
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import { Keyboard, TextInput } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
+import type { Navigator } from 'react-native-navigation';
 import { Icon, StyleSheet, View } from 'ui';
 import CommunicationStore from '../../../../store/CommunicationStore/index';
 
 @inject('communication')
 @observer
 export default class Footer extends Component {
+  static contextTypes = {
+    navigator: PropTypes.object.isRequired,
+  };
+
+  context: {
+    navigator: Navigator;
+  };
+
   $input: TextInput;
 
   props: {
@@ -26,6 +35,15 @@ export default class Footer extends Component {
     };
   }
 
+  onActionPress() {
+    const { conversationId } = this.props;
+
+    this.context.navigator.push({
+      screen: 'marketing.CreateOffer',
+      passProps: { conversationId },
+    });
+  }
+
   onSend() {
     const { text } = this.state;
     const { communication, conversationId } = this.props;
@@ -41,8 +59,23 @@ export default class Footer extends Component {
   }
 
   render() {
+    const { communication } = this.props;
+
+    let isBusiness = false;
+    if (communication.messengerInfo) {
+      isBusiness = communication.messengerInfo.isBusiness;
+    }
+
     return (
       <View style={styles.container}>
+        {isBusiness && (
+          <Icon
+            style={styles.icon}
+            onPress={::this.onActionPress}
+            source="icon-plus-24"
+            touchStyle={styles.icon_action_touch}
+          />
+        )}
         <TextInput
           style={styles.input}
           ref={i => this.$input = i}
@@ -78,6 +111,14 @@ const styles = StyleSheet.create({
   icon: {
     color: '$pe_color_icon',
     fontSize: 24,
+  },
+
+  icon_action_touch: {
+    borderRightColor: '$pe_color_light_gray_1',
+    borderRightWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 12,
   },
 
   icon_touch: {
