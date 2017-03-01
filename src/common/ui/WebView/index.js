@@ -14,7 +14,7 @@ import getInjectedJs from './getInjectedJs';
 
 const REDIRECT_ON_URLS = [
   { match: '/home',    screen: 'dashboard.Dashboard' },
-  { match: /private^/, screen: 'dashboard.Private' },
+  { match: /private$/, screen: 'dashboard.Private' },
   { match: '/login',   screen: 'auth.Login' },
 ];
 
