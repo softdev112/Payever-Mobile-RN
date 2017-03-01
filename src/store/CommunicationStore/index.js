@@ -166,7 +166,7 @@ export default class CommunicationStore {
   }
 
   @computed
-  get selectedConversation() {
+  get selectedConversation(): Conversation {
     return this.conversations.get(this.selectedConversationId);
   }
 

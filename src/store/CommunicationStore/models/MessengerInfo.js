@@ -52,22 +52,14 @@ export default class MessengerInfo {
     return null;
   }
 
+  find(callback): ConversationInfo {
+    return this.conversations.find(callback)
+      || this.groups.find(callback)
+      || this.marketingGroups(callback);
+  }
+
   getConversationType(conversationId) {
-    let conversation = this.conversations.find(c => c.id === conversationId);
-    if (conversation) {
-      return conversation.type;
-    }
-
-    conversation = this.groups.find(c => c.id === conversationId);
-    if (conversation) {
-      return conversation.type;
-    }
-
-    conversation = this.marketingGroups.find(c => c.id === conversationId);
-    if (conversation) {
-      return conversation.type;
-    }
-
-    return null;
+    const conversation = this.find(c => c.id === conversationId);
+    return conversation ? conversation.type : null;
   }
 }

@@ -12,11 +12,12 @@ export default {
   'core.PushNotification': require('./modules/core/screens/PushNotification').default,
   'core.SideMenu': require('./modules/core/screens/SideMenu').default,
   'core.WebView': require('./modules/core/screens/WebView').default,
-  'marketing.BuyOffer': require('./modules/marketing/screens/BuyOffer').default,
   'dashboard.ChooseAccount': require('./modules/dashboard/screens/ChooseAccount').default,
   'dashboard.Dashboard': require('./modules/dashboard/screens/Dashboard').default,
   'dashboard.Private': require('./modules/dashboard/screens/Private').default,
   'dashboard.Search': require('./modules/dashboard/screens/Search').default,
+  'marketing.BuyOffer': require('./modules/marketing/screens/BuyOffer').default,
+  'marketing.CreateOffer': require('./modules/marketing/screens/CreateOffer').default,
   'marketing.ViewOffer': require('./modules/marketing/screens/ViewOffer').default,
   'pos.Terminal': require('./modules/pos/screens/Terminal').default,
 };
