@@ -69,7 +69,8 @@ src/config/local.js:
     };
 
 where 192.168.1.2 is your working station ip address (which is
- accessible from simulator/device)
+accessible from simulator/device). Please be aware that local.js is
+loaded only for dev environment (when dev.js config is active)
 
 ## Build tools
 
