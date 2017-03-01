@@ -7,35 +7,26 @@ import Footer from './Footer';
 import MessageView from './MessageView';
 import Header from './Header';
 import CommunicationStore from '../../../../store/CommunicationStore';
-import { ConversationType }
-  from '../../../../store/CommunicationStore/models/Conversation';
 
 @inject('communication')
 @observer
 export default class Chat extends Component {
   props: {
     communication?: CommunicationStore;
-    conversationId: number;
-    type: ConversationType;
+    style?: Object | number;
   };
 
   $listView: ListView;
-
-  componentWillMount() {
-    const { communication, conversationId, type } = this.props;
-
-    //noinspection JSIgnoredPromiseFromCall
-    communication.loadConversation(conversationId, type);
-  }
 
   renderRow(row) {
     return <MessageView message={row} />;
   }
 
   render() {
-    const { communication, conversationId } = this.props;
-    const conversation = communication.conversations.get(conversationId);
-    const ds = communication.getConversationDataSource(conversationId);
+    const { communication, style } = this.props;
+
+    const conversation = communication.selectedConversation;
+    const ds = communication.selectedConversationDataSource;
 
     if (!conversation) {
       return (
@@ -47,7 +38,7 @@ export default class Chat extends Component {
 
     return (
       <KeyboardAvoidingView
-        style={styles.container}
+        style={[styles.container, style]}
         contentContainerStyle={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : null}
       >
@@ -59,7 +50,7 @@ export default class Chat extends Component {
           ref={ref => this.$listView = ref}
           renderRow={this.renderRow}
         />
-        <Footer conversationId={conversationId} />
+        <Footer conversationId={conversation.id} />
       </KeyboardAvoidingView>
     );
   }

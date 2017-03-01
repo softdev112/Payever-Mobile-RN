@@ -59,6 +59,8 @@ export default class AuthStore {
   async getAccessToken() {
     const { api } = this.store;
 
+    log.debug('Expires value', this.expiresIn);
+
     if (this.accessToken && this.expiresIn > new Date()) {
       return this.accessToken;
     }

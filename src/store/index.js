@@ -1,5 +1,3 @@
-/* eslint no-unused-vars: 0 */
-//noinspection ES6UnusedImports
 import { enableLogging } from 'mobx-logger';
 
 import AuthStore from './AuthStore';
@@ -10,6 +8,7 @@ import UserProfilesStore from './UserProfilesStore';
 
 import PayeverApi from '../common/api';
 import type { Config } from '../config';
+import { log } from '../common/utils';
 
 
 export default class Store {
@@ -33,13 +32,13 @@ export default class Store {
     this.api = new PayeverApi(config, this.auth);
     this.config = config;
 
-    if (__DEV__) {
-      // If chrome is not attached
+    if (config.debug.logMobx) {
+      // If chrome is not attached we should set a group polyfill
       if (!console.groupCollapsed) {
-        console.groupCollapsed = console.log;
+        console.groupCollapsed = log.info;
         console.groupEnd = () => {};
       }
-      // enableLogging();
+      enableLogging();
     }
   }
 }

@@ -26,10 +26,6 @@ export default class Footer extends Component {
     };
   }
 
-  onActionPress() {
-    console.log('Upload message');
-  }
-
   onSend() {
     const { text } = this.state;
     const { communication, conversationId } = this.props;
@@ -47,18 +43,12 @@ export default class Footer extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Icon
-          style={styles.icon}
-          onPress={::this.onActionPress}
-          source="icon-plus-24"
-          touchStyle={styles.icon_touch}
-        />
         <TextInput
           style={styles.input}
           ref={i => this.$input = i}
           onChangeText={text => this.setState({ text })}
           onSubmitEditing={::this.onSend}
-          placeholder="Enter message"
+          placeholder="Send message"
           returnKeyType="send"
           underlineColorAndroid="transparent"
           value={this.state.text}
@@ -98,8 +88,6 @@ const styles = StyleSheet.create({
 
   input: {
     flex: 1,
-    paddingHorizontal: 8,
-    borderLeftColor: '$pe_color_light_gray_1',
-    borderLeftWidth: 1,
+    paddingHorizontal: 22,
   },
 });
