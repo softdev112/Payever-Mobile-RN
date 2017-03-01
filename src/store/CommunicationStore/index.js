@@ -7,12 +7,13 @@ import { DataSource } from 'ui';
 import type Store from '../index';
 import UserSettings from './models/UserSettings';
 import MessengerInfo from './models/MessengerInfo';
-import Conversation, { ConversationType, ConversationStatus }
+import Conversation, { ConversationStatus }
   from './models/Conversation';
 import type BusinessProfile from '../UserProfilesStore/models/BusinessProfile';
 import { MessengerData } from '../../common/api/MessengerApi';
 import SocketHandlers from './SocketHandlers';
 import Message from './models/Message';
+import type SocketApi from '../../common/api/MessengerApi/SocketApi';
 
 export default class CommunicationStore {
   @observable conversations: ObservableMap<Conversation> = observable.map();
@@ -21,10 +22,13 @@ export default class CommunicationStore {
   @observable isLoading: boolean;
   @observable error: string;
 
+  @observable selectedConversationId: number;
+
   @observable foundMessages: Array<Message>;
   @observable contactsFilter: string = '';
 
   store: Store;
+  socket: SocketApi;
   socketHandlers: SocketHandlers;
   socketObserver: Function;
 
@@ -43,7 +47,7 @@ export default class CommunicationStore {
   }
 
   @action
-  async loadMessengerInfo(profile: BusinessProfile): Promise<MessengerInfo> {
+  async loadMessengerInfo(profile: BusinessProfile) {
     const { api } = this.store;
 
     let apiPromise;
@@ -53,24 +57,28 @@ export default class CommunicationStore {
       apiPromise = api.messenger.getPrivate();
     }
 
+    this.conversationDs.isLoading = true;
+
     return apiHelper(apiPromise, this.contactDs)
       .cache('communication:messengerInfo:' + profile.id)
       .success((data: MessengerData) => {
         this.initSocket(data.wsUrl, data.messengerUser.id);
         this.messengerInfo = new MessengerInfo(data);
+
         this.conversations = observable.map();
+        const conversation = this.messengerInfo.getDefaultConversation();
+        this.setSelectedConversationId(conversation.id);
+
         return this.messengerInfo;
       })
       .promise();
   }
 
   @action
-  async loadConversation(
-    id: number,
-    type: ConversationType
-  ): Promise<Conversation> {
+  async loadConversation(id: number) {
     const socket = await this.store.api.messenger.getSocket();
     const userId = socket.userId;
+    const type = this.messengerInfo.getConversationType(id);
 
     return apiHelper(socket.getConversation({ id, type }), this.conversationDs)
       .cache(`communication:conversations:${userId}:${id}`)
@@ -80,6 +88,15 @@ export default class CommunicationStore {
         return conversation;
       })
       .promise();
+  }
+
+  @action
+  setSelectedConversationId(id) {
+    this.selectedConversationId = id;
+    if (!this.conversations.get(id)) {
+      //noinspection JSIgnoredPromiseFromCall
+      this.loadConversation(id);
+    }
   }
 
   @action
@@ -148,6 +165,18 @@ export default class CommunicationStore {
     );
   }
 
+  @computed
+  get selectedConversation() {
+    return this.conversations.get(this.selectedConversationId);
+  }
+
+  @computed
+  get selectedConversationDataSource() {
+    const conversation = this.selectedConversation;
+    const messages = conversation ? conversation.messages : [];
+    return this.conversationDs.cloneWithRows(messages.slice());
+  }
+
   @action
   updateUserStatus(status: ConversationStatus) {
     this.conversations.forEach((conversation: Conversation) => {
@@ -160,29 +189,27 @@ export default class CommunicationStore {
     });
   }
 
-  getConversationDataSource(conversationId, isGroup = false) {
-    const collection = isGroup ? this.groupConversations : this.conversations;
-    const conversation = collection.get(conversationId);
-    const messages = conversation ? conversation.messages : [];
-    return this.conversationDs.cloneWithRows(messages.slice());
-  }
 
   initSocket(url, userId) {
     const { api, auth } = this.store;
 
-    const socket = api.messenger.connectToWebSocket(
+    if (this.socket && this.socket.userId === userId) {
+      return;
+    }
+
+    this.socket = api.messenger.connectToWebSocket(
       url,
       userId,
       auth.getAccessToken()
     );
 
-    this.socketHandlers.subscribe(socket);
+    this.socketHandlers.subscribe(this.socket);
 
     if (this.socketObserver) {
       this.socketObserver();
     }
     this.socketObserver = autorun(() => {
-      socket.setAccessToken(auth.getAccessToken());
+      this.socket.setAccessToken(auth.getAccessToken());
     });
   }
 }
