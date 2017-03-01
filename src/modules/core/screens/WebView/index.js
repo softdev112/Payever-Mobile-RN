@@ -84,10 +84,12 @@ export default class WebView extends Component {
       return;
     }
 
+    console.log(nativeEvent);
     this.setState({ isCustomNavBar: false });
 
+    const tempUrl = this.convertHttpsToHttpUrl(nativeEvent.url);
     if (nativeEvent.url
-      && !nativeEvent.url.startsWith(this.props.config.siteUrl)
+      && !tempUrl.startsWith(this.props.config.siteUrl)
       && !nativeEvent.url.includes('about:blank')
       && !nativeEvent.url.startsWith('data:text')) {
       if (this.props.enableExternalBrowser) {
@@ -103,7 +105,6 @@ export default class WebView extends Component {
       this.setState({ isCustomNavBar: true });
       return;
     }
-
 
     // Apply pat
     // Process submit events ONLY iOS UIWebKit there is no such
@@ -137,8 +138,9 @@ export default class WebView extends Component {
   }
 
   onMessage({ nativeEvent }) {
-    const siteUrl = this.props.config.siteUrl;
-    if (nativeEvent.url && !nativeEvent.url.startsWith(siteUrl)) return;
+    const { siteUrl } = this.props.config;
+    const tempUrl = this.convertHttpsToHttpUrl(nativeEvent.url);
+    if (nativeEvent.url && !tempUrl.startsWith(siteUrl)) return;
 
     const data = nativeEvent.data;
     const object = JSON.parse(data);
@@ -180,6 +182,10 @@ export default class WebView extends Component {
     }
   }
 
+  convertHttpsToHttpUrl(url) {
+    return url.substr(0, 4) + url.substr(5);
+  }
+
   refreshBusinessesWithTimeout() {
     if (!this.refreshTimer) {
       this.refreshTimer = setTimeout(() => {
@@ -215,6 +221,8 @@ export default class WebView extends Component {
       source = { html: getLoaderHtml(url) };
     }
 
+    // source = { uri: 'http://localhost:8000/index.htm' };
+
     const titleImgSource = titleImgUrl ? { uri: titleImgUrl } : null;
 
     return (
@@ -239,6 +247,8 @@ export default class WebView extends Component {
           injectedJavaScript={this.injectedCode}
           renderError={::this.renderError}
           bounces={false}
+          scrollEnabled
+          scalesPageToFit
         />
       </View>
     );

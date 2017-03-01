@@ -26,7 +26,31 @@ function injectedBody(options) {
       patchPostMessage();
     }
 
+    patchBaseUrl();
+    // patchModalsScroll();
     getNavBarInfo();
+  }
+
+  function patchModalsScroll() {
+    setTimeout(() => {
+      const $modals = document.querySelectorAll('.modal');
+      if ($modals.length > 0) {
+        for (let i = 0; i < $modals.length; i++) {
+          alert(1);
+          $modals.item(i).classList.add('modal-touch');
+        }
+      }
+    }, 1000);
+  }
+
+  function patchBaseUrl() {
+    const $anchors = document.querySelectorAll('a[href="#new"]');
+
+    if ($anchors.length > 0) {
+      for (let i = 0; i < $anchors.length; i++) {
+        $anchors.item(i).href = `${window.location.origin}${window.location.pathname}#new`;
+      }
+    }
   }
 
   function replaceHeaderButtons() {
@@ -45,8 +69,6 @@ function injectedBody(options) {
       $btnMenu.parentNode.replaceChild($replace, $btnMenu);
     }
   }
-
-  
 
   function replaceSearchWithBackBtn({ title }) {
     //noinspection ES6ConvertVarToLetConst

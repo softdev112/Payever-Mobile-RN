@@ -85,6 +85,7 @@ export default class PayeverApi {
   async fetch(url: string, options: Object = {}): Promise<ApiResp> {
     options.method = options.method || 'GET';
     url = this.normalizeUrl(url, options.query);
+    console.log('ssssssssssss', url);
 
     if (__DEV__ && this.logApiCall) {
       log.debug(`${options.method} ${url}`);
