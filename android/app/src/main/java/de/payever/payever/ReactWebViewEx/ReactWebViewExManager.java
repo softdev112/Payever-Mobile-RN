@@ -4,239 +4,253 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.os.Parcelable;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.webkit.JsResult;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.PermissionRequest;
-import android.os.Build;
-import android.os.Environment;
-import android.os.Message;
-import android.os.Parcelable;
-import android.view.View;
-import android.provider.MediaStore;
+
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.annotations.ReactProp;
+import com.facebook.react.views.webview.ReactWebViewManager;
+import com.reactnativenavigation.NavigationApplication;
+import com.reactnativenavigation.controllers.NavigationActivity;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.lang.ref.WeakReference;
-
-import com.facebook.react.uimanager.annotations.ReactProp;
-import com.facebook.react.bridge.ReactApplicationContext;
-import com.facebook.react.views.webview.ReactWebViewManager;
-import com.reactnativenavigation.controllers.NavigationActivity;
-import com.reactnativenavigation.NavigationApplication;
 
 public class ReactWebViewExManager extends ReactWebViewManager {
-	private static final String LOG_TAG = "ReactNativeJS ReactWebViewExManager";
-	private static final String PICTURES_DIR_NAME = "de.payever.pictures";
-	private static final int REQUEST_FILE_CODE = 51426;
-	private static final String REACT_CLASS = "RCTWebViewEx";
+  private static final String LOG_TAG = "ReactNativeJS ReactWebViewExManager";
+  private static final String FILE_CHOOSER_TITLE = "Choose Picture";
+  private static final String PICTURES_DIR_NAME = "de.payever.pictures";
+  private static final String REACT_CLASS = "RCTWebViewEx";
+  private static final int REQUEST_FILE_CODE = 51426;
 
-	private ReactApplicationContext mContext;
-    private String mUploadableFileTypes = "image/*";
-    private WeakReference<NavigationActivity> mActivity;
-	private WebViewExActivityCallbacks mActivityCallbacks;
+  private ReactApplicationContext mContext;
+  private String mUploadableFileTypes = "image/*";
+  private WeakReference<NavigationActivity> mActivity;
+  private WebViewExActivityCallbacks mActivityCallbacks;
+  private Boolean mUploadEnabled = false;
 
-	public ReactWebViewExManager(ReactApplicationContext context) {
-    	super();
-    	mContext = context;
-    }
+  public ReactWebViewExManager(ReactApplicationContext context) {
+    super();
+    mContext = context;
+    mActivity = new WeakReference<>((NavigationActivity) mContext.getCurrentActivity());
+    mActivityCallbacks = (WebViewExActivityCallbacks) NavigationApplication
+      .instance
+      .getActivityCallbacks();
+  }
 
-	@Override
-	public String getName() {
-		return REACT_CLASS;
-	}
+  @Override
+  public String getName() {
+    return REACT_CLASS;
+  }
 
-	@ReactProp(name = "uploadEnabledAndroid", defaultBoolean = true)
-    public void uploadEnabledAndroid(WebView view, boolean enabled) {
-         mActivity = new WeakReference<>((NavigationActivity) mContext.getCurrentActivity());
-		 mActivityCallbacks = (WebViewExActivityCallbacks) NavigationApplication
-		 	.instance
-		 	.getActivityCallbacks();
+  @Override
+  protected WebView createViewInstance(ThemedReactContext reactContext) {
+    WebView webView = super.createViewInstance(reactContext);
 
-         if(enabled) {
-             view.setWebChromeClient(new WebChromeClient() {
- 	  			// file upload callback (Android 4.1 API 16) - (Android 4.3 API 18)
-       			@SuppressWarnings("unused")
-      			public void openFileChooser(
-      				ValueCallback<Uri> uploadMsg,
-      				String acceptType,
-      				String capture
-      			) {
-       				if (Build.VERSION.SDK_INT >= 11
-       					&& Build.VERSION.SDK_INT < 21
-                        && mActivity != null
-                        && mActivity.get() != null
-                        && mActivityCallbacks != null) {
+    webView.setWebChromeClient(new WebChromeClient() {
+      // file upload callback (Android 4.1 API 16) - (Android 4.3 API 18)
+      @SuppressWarnings("unused")
+      public void openFileChooser(
+        ValueCallback<Uri> uploadMsg,
+        String acceptType,
+        String capture
+      ) {
+        if (!mUploadEnabled) return;
 
-                        mActivityCallbacks.setFileUploadCallbackBefore5(uploadMsg);
+        if (Build.VERSION.SDK_INT >= 11
+          && Build.VERSION.SDK_INT < 21
+          && mActivity != null
+          && mActivity.get() != null
+          && mActivityCallbacks != null) {
 
-						// Create picture folder and file
-						File photoStorageDir = new File(
-							Environment.getExternalStoragePublicDirectory(
-								Environment.DIRECTORY_PICTURES
-							),
-							PICTURES_DIR_NAME
-						);
+          mActivityCallbacks.setFileUploadCallbackBefore5(uploadMsg);
 
-    					if (!photoStorageDir.exists()) {
-	    					photoStorageDir.mkdirs();
-		    			}
+          // Create picture folder and file
+          File photoStorageDir = new File(
+            Environment.getExternalStoragePublicDirectory(
+              Environment.DIRECTORY_PICTURES
+            ),
+            PICTURES_DIR_NAME
+          );
 
-						File photoFile = new File(
-							photoStorageDir + File.separator + "IMG_"
-    						+ String.valueOf(System.currentTimeMillis())
-							+ ".jpg");
+          Boolean isDirCreated = true;
+          if (!photoStorageDir.exists()) {
+            isDirCreated = photoStorageDir.mkdirs();
+          }
 
-                        // Take photo from camera
-                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        ActivityInfo activityInfo = takePictureIntent.resolveActivityInfo(
-                          	mActivity.get().getPackageManager(),
-                           	takePictureIntent.getFlags()
-                        );
+          File photoFile = new File(
+            (isDirCreated ? photoStorageDir : "")
+              + File.separator + "IMG_"
+              + String.valueOf(System.currentTimeMillis())
+              + ".jpg");
 
-                        if (activityInfo.exported) {
-                          	// Create file for photo
-                       		takePictureIntent.putExtra(
-                       			MediaStore.EXTRA_OUTPUT,
-                              	Uri.fromFile(photoFile)
-                            );
-                           mActivityCallbacks.setCapturedFileName(photoFile.getAbsolutePath());
-                      	} else {
-                       		takePictureIntent = null;
-                       	}
+          // Take photo from camera
+          Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+          ActivityInfo activityInfo = takePictureIntent.resolveActivityInfo(
+            mActivity.get().getPackageManager(),
+            takePictureIntent.getFlags()
+          );
 
-                        // Take file from gallery
-                        Intent pictureSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                        pictureSelectionIntent.setType(mUploadableFileTypes);
-                        pictureSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
+          if (activityInfo.exported) {
+            // Create file for photo
+            takePictureIntent.putExtra(
+              MediaStore.EXTRA_OUTPUT,
+              Uri.fromFile(photoFile)
+            );
+            mActivityCallbacks.setCapturedFileName(photoFile.getAbsolutePath());
+          } else {
+            takePictureIntent = null;
+          }
 
-		  				Intent chooserIntent = Intent.createChooser(
-		  					pictureSelectionIntent,
-		  					getFileUploadPromptLabel()
-		  				);
+          // Take file from gallery
+          Intent pictureSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
+          pictureSelectionIntent.setType(mUploadableFileTypes);
+          pictureSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
 
-		  				if (takePictureIntent != null) {
-		  				   	chooserIntent.putExtra(
-                           		Intent.EXTRA_INITIAL_INTENTS,
-                           		new Parcelable[] { takePictureIntent }
-                           	);
-                        }
+          Intent chooserIntent = Intent.createChooser(
+            pictureSelectionIntent,
+            FILE_CHOOSER_TITLE
+          );
 
-                        mActivity.get().startActivityForResult(chooserIntent, REQUEST_FILE_CODE);
-       				}
-       			}
+          if (takePictureIntent != null) {
+            chooserIntent.putExtra(
+              Intent.EXTRA_INITIAL_INTENTS,
+              new Parcelable[]{takePictureIntent}
+            );
+          }
 
-       			// file upload callback (Android 5.0 (API level 21) -- current) (public method)
-      			@SuppressWarnings("all")
-       			public boolean onShowFileChooser(WebView webView, ValueCallback<Uri[]> filePathCallback, WebChromeClient.FileChooserParams fileChooserParams) {
-       				if (Build.VERSION.SDK_INT >= 21
-       					&& mActivity != null
-                        && mActivity.get() != null
-                        && mActivityCallbacks != null) {
+          mActivity.get().startActivityForResult(chooserIntent, REQUEST_FILE_CODE);
+        }
+      }
 
-                        mActivityCallbacks.setFileUploadCallback(filePathCallback);
+      // file upload callback (Android 5.0 (API level 21) -- current) (public method)
+      @SuppressWarnings("all")
+      public boolean onShowFileChooser(
+        WebView webView,
+        ValueCallback<Uri[]> filePathCallback,
+        WebChromeClient.FileChooserParams fileChooserParams
+      ) {
+        if (!mUploadEnabled) return false;
 
-                        // Take photo from camera
-                        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        ActivityInfo activityInfo = takePictureIntent.resolveActivityInfo(
-                        	mActivity.get().getPackageManager(),
-                        	takePictureIntent.getFlags()
-                        );
+        if (Build.VERSION.SDK_INT >= 21
+          && mActivity != null
+          && mActivity.get() != null
+          && mActivityCallbacks != null) {
 
-                        if (activityInfo.exported) {
-                        	// Create file for photo
-                        	File photoFile = null;
-                        	try {
-                        		photoFile = createImageFile();
-                        	} catch (IOException ex) {
-                        		Log.e(LOG_TAG, "Enable to create file for photo", ex);
-                        	}
+          mActivityCallbacks.setFileUploadCallback(filePathCallback);
 
-                        	if (photoFile != null) {
-                        		takePictureIntent.putExtra(
-                        			MediaStore.EXTRA_OUTPUT,
-                        			Uri.fromFile(photoFile)
-                        		);
-                        		mActivityCallbacks.setCapturedFileName(photoFile.getAbsolutePath());
-                        	} else {
-                        		takePictureIntent = null;
-                        	}
-                        }
+          // Take photo from camera
+          Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+          ActivityInfo activityInfo = takePictureIntent.resolveActivityInfo(
+            mActivity.get().getPackageManager(),
+            takePictureIntent.getFlags()
+          );
 
-                        // Take file from gallery
-                        Intent pictureSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                        pictureSelectionIntent.setType(mUploadableFileTypes);
-                        pictureSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
+          if (activityInfo.exported) {
+            // Create file for photo
+            File photoFile = null;
+            try {
+              photoFile = createImageFile();
+            } catch (IOException ex) {
+              Log.e(LOG_TAG, "Enable to create file for photo", ex);
+            }
 
-                        boolean allowMultiple =
-                        	fileChooserParams.getMode() == FileChooserParams.MODE_OPEN_MULTIPLE;
-                        if (allowMultiple) {
-                       		pictureSelectionIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-                     	}
+            if (photoFile != null) {
+              takePictureIntent.putExtra(
+                MediaStore.EXTRA_OUTPUT,
+                Uri.fromFile(photoFile)
+              );
+              mActivityCallbacks.setCapturedFileName(photoFile.getAbsolutePath());
+            } else {
+              takePictureIntent = null;
+            }
+          }
 
-       					Intent chooserIntent = new Intent(Intent.ACTION_CHOOSER);
-       					chooserIntent.putExtra(Intent.EXTRA_INTENT, pictureSelectionIntent);
-       					chooserIntent.putExtra(Intent.EXTRA_TITLE, getFileUploadPromptLabel());
+          // Take file from gallery
+          Intent pictureSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
+          pictureSelectionIntent.setType(mUploadableFileTypes);
+          pictureSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
 
-                    	if (takePictureIntent != null) {
-       						chooserIntent.putExtra(
-       							Intent.EXTRA_INITIAL_INTENTS,
-       							new Intent[]{ takePictureIntent }
-       						);
-						}
+          boolean allowMultiple =
+            fileChooserParams.getMode() == FileChooserParams.MODE_OPEN_MULTIPLE;
+          if (allowMultiple) {
+            pictureSelectionIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+          }
 
-                   		mActivity.get().startActivityForResult(chooserIntent, REQUEST_FILE_CODE);
+          Intent chooserIntent = new Intent(Intent.ACTION_CHOOSER);
+          chooserIntent.putExtra(Intent.EXTRA_INTENT, pictureSelectionIntent);
+          chooserIntent.putExtra(Intent.EXTRA_TITLE, FILE_CHOOSER_TITLE);
 
-       					return true;
-       				} else {
-             			return false;
-             		}
-             	}
+          if (takePictureIntent != null) {
+            chooserIntent.putExtra(
+              Intent.EXTRA_INITIAL_INTENTS,
+              new Intent[]{takePictureIntent}
+            );
+          }
 
-               	@Override
-       			public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
-       				if (Build.VERSION.SDK_INT < 21
-       					&& mActivity != null
-       					&& mActivity.get() != null) {
-       					new AlertDialog.Builder(mActivity.get())
-                        	.setTitle("Message")
-                            .setMessage(message)
-                            .setPositiveButton(android.R.string.ok, null)
-                            .setCancelable(false)
-                            .create()
-                            .show();
+          mActivity.get().startActivityForResult(chooserIntent, REQUEST_FILE_CODE);
+          return true;
+        } else {
+          return false;
+        }
+      }
 
-                    	return false;
-					}
+      @Override
+      public boolean onJsAlert(WebView view, String url, String message, JsResult result) {
+        if (Build.VERSION.SDK_INT < 21
+          && mActivity != null
+          && mActivity.get() != null) {
+          new AlertDialog.Builder(mActivity.get())
+            .setTitle("Message")
+            .setMessage(message)
+            .setPositiveButton(android.R.string.ok, null)
+            .setCancelable(false)
+            .create()
+            .show();
 
-   					return super.onJsAlert(view, url, message, result);
-       			}
-            });
-	    }
-    }
+          return false;
+        }
 
-    private String getFileUploadPromptLabel() {
-    	return "Choose a picture";
-    }
+        return super.onJsAlert(view, url, message, result);
+      }
 
-    /**
-     * Create file for photo from the camera
-     *
-     * @return the File for photo
-     */
-    private File createImageFile() throws IOException {
-      	// Create image file name for photo from camera
-       	String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-       	String imageFileName = "JPEG_" + timeStamp + "_";
+      /**
+       * Create file for photo from the camera
+       *
+       * @return the File for photo
+       *
+       * @throws IOException
+       */
+      private File createImageFile() throws IOException {
+        // Create image file name for photo from camera
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
 
-       	File storageDir = Environment.getExternalStoragePublicDirectory(
-       		Environment.DIRECTORY_PICTURES
-       	);
+        File storageDir = Environment.getExternalStoragePublicDirectory(
+          Environment.DIRECTORY_PICTURES
+        );
 
-		return File.createTempFile(imageFileName,	".jpg", storageDir);
-    }
+        return File.createTempFile(imageFileName, ".jpg", storageDir);
+      }
+    });
+
+    return webView;
+  }
+
+  @SuppressWarnings("unused")
+  @ReactProp(name = "uploadEnabledAndroid", defaultBoolean = true)
+  public void uploadEnabledAndroid(WebView view, boolean enabled) {
+    mUploadEnabled = enabled;
+  }
 }
