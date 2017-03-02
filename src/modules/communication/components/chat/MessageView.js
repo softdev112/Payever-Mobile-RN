@@ -1,13 +1,61 @@
 import { Component } from 'react';
+import { Alert } from 'react-native';
+import Swipeable from 'react-native-swipeable';
 import { Html, Icon, StyleSheet, Text, View } from 'ui';
+import { inject, observer } from 'mobx-react/native';
+
 import type Message from '../../../../store/CommunicationStore/models/Message';
 import Offer from '../../../marketing/components/OfferDetails';
 import MediaView from './MediaView';
+import CommunicationStore from '../../../../store/CommunicationStore';
 
+@inject('communication')
+@observer
 export default class MessageView extends Component {
   props: {
     message: Message;
+    communication?: CommunicationStore;
   };
+
+  onDeleteMessage() {
+    Alert.alert(
+      'Attention!',
+      'Delete message?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => this.deleteAndSaveMessage(),
+        },
+      ],
+      { cancelable: false }
+    );
+  }
+
+  deleteAndSaveMessage() {
+    const { communication, message } = this.props;
+
+    message.deleted = true;
+    communication.updateMessage(message);
+  }
+
+  getSwipeButtons() {
+    return ([
+      <Icon
+        onPress={::this.onDeleteMessage}
+        style={styles.actionIcon}
+        source="icon-storebuilder-delete-16"
+      />,
+      <Icon
+        onPress={() => {}}
+        style={styles.actionIcon}
+        source="icon-storebuilder-edit-16"
+      />,
+    ]);
+  }
 
   renderContent(message: Message) {
     if (message.deleted) {
@@ -58,23 +106,34 @@ export default class MessageView extends Component {
     }
 
     return (
-      <View style={styles.container}>
-        {this.renderAvatar(message.avatar)}
-        <View style={styles.message}>
-          <View style={styles.header}>
-            <Text style={styles.header_sender}>{`${message.senderName} `}</Text>
-            <Text style={styles.header_date}>{message.dateFormated}</Text>
-          </View>
-          <View style={styles.body}>
-            {this.renderContent(message)}
+      <Swipeable
+        style={styles.swipeContainer}
+        rightButtons={this.getSwipeButtons()}
+        onRightButtonsOpenRelease={() => this.setState({ isRowShift: true })}
+        onRightButtonsCloseRelease={() => this.setState({ isRowShift: false })}
+      >
+        <View style={styles.container}>
+          {this.renderAvatar(message.avatar)}
+          <View style={styles.message}>
+            <View style={styles.header}>
+              <Text style={styles.header_sender}>{`${message.senderName} `}</Text>
+              <Text style={styles.header_date}>{message.dateFormated}</Text>
+            </View>
+            <View style={styles.body}>
+              {this.renderContent(message)}
+            </View>
           </View>
         </View>
-      </View>
+      </Swipeable>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  actionIcon: {
+    fontSize: 24,
+  },
+
   avatar: {
     borderRadius: 16,
     height: 32,
@@ -106,6 +165,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 12,
     minHeight: 50,
+    width: '90%',
   },
 
   header: {
@@ -155,5 +215,9 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     paddingHorizontal: 12,
     paddingVertical: 5,
+  },
+
+  swipeContainer: {
+    width: '100%',
   },
 });
