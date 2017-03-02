@@ -35,6 +35,12 @@ export default class Conversation {
   updateStatus(status) {
     this.status = status;
   }
+
+  getUnreadIds() {
+    return this.messages
+      .filter((message: Message) => message.unread)
+      .map((message: Message) => message.id);
+  }
 }
 
 export type ConversationStatus = {

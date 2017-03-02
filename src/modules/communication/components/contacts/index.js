@@ -61,8 +61,9 @@ export default class Contacts extends Component {
           )}
           renderSectionHeader={(_, type) => (
             <ListHeader
-              type={type}
+              conversationInfo={info}
               hideMessages={communication.foundMessages.length < 1}
+              type={type}
             />
           )}
         />

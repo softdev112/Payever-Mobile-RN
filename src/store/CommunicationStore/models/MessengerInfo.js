@@ -40,6 +40,16 @@ export default class MessengerInfo {
     return this.messengerUser.user_type === 'business';
   }
 
+  @computed
+  get unreadCount() {
+    return this.conversations.reduce((res, c) => res + +c.unreadCount, 0);
+  }
+
+  @computed
+  get unreadGroupCount() {
+    return this.groups.reduce((res, c) => res + +c.unreadCount, 0);
+  }
+
   getDefaultConversation(): ConversationInfo | Group {
     if (this.conversations[0]) {
       return this.conversations[0];
@@ -58,7 +68,7 @@ export default class MessengerInfo {
       || this.marketingGroups.find(callback);
   }
 
-  byId(conversationId) {
+  byId(conversationId): ConversationInfo {
     return this.find(c => c.id === conversationId);
   }
 

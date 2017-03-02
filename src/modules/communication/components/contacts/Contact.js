@@ -5,7 +5,8 @@ import type { Navigator } from 'react-native-navigation';
 import { StyleSheet, Text, View } from 'ui';
 
 import OnlineStatus from '../OnlineStatus';
-import type Conversation from
+import CountBadge from './CountBadge';
+import type ConversationInfo from
   '../../../../store/CommunicationStore/models/ConversationInfo';
 import type Message from '../../../../store/CommunicationStore/models/Message';
 import type CommunicationStore
@@ -29,7 +30,7 @@ export default class Contact extends Component {
     type: 'contacts' | 'groups' | 'foundMessages';
   };
 
-  onContactSelect(item: Conversation | Message) {
+  onContactSelect(item: ConversationInfo | Message) {
     const { communication, phoneView } = this.props;
     const conversationId = item.conversation ? item.conversation.id : item.id;
     communication.setSelectedConversationId(conversationId);
@@ -39,7 +40,7 @@ export default class Contact extends Component {
     }
   }
 
-  renderContact(item: Conversation) {
+  renderContact(item: ConversationInfo) {
     const current = this.props.communication.selectedConversationId === item.id;
     const style = current ? styles.current : null;
 
@@ -50,18 +51,16 @@ export default class Contact extends Component {
       >
         <Observer>
           {() => (
-            <OnlineStatus
-              style={styles.status}
-              isOnline={item.status.online}
-            />
+            <OnlineStatus style={styles.status} isOnline={item.status.online} />
           )}
         </Observer>
         <Text style={styles.title}>{item.name}</Text>
+        <CountBadge value={item.unreadCount} />
       </TouchableOpacity>
     );
   }
 
-  renderGroup(item: Conversation) {
+  renderGroup(item: ConversationInfo) {
     const current = this.props.communication.selectedConversationId === item.id;
     const style = current ? styles.current : null;
 
@@ -71,6 +70,7 @@ export default class Contact extends Component {
         onPress={() => this.onContactSelect(item)}
       >
         <Text style={styles.title}>{item.name}</Text>
+        <CountBadge value={item.unreadCount} />
       </TouchableOpacity>
     );
   }
