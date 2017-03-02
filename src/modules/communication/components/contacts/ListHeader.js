@@ -1,6 +1,11 @@
 import { Component, PropTypes } from 'react';
+import { inject, observer } from 'mobx-react/native';
 import { Icon, StyleSheet, Text, View } from 'ui';
 import type { Navigator } from 'react-native-navigation';
+import type CommunicationStore
+  from '../../../../store/CommunicationStore/index';
+
+import CountBadge from './CountBadge';
 
 const TITLES = {
   contacts: 'DIRECT MESSAGES',
@@ -8,6 +13,8 @@ const TITLES = {
   foundMessages: 'FOUND MESSAGES',
 };
 
+@inject('communication')
+@observer
 export default class ListHeader extends Component {
   static contextTypes = {
     navigator: PropTypes.object.isRequired,
@@ -18,8 +25,9 @@ export default class ListHeader extends Component {
   };
 
   props: {
-    type: 'contacts' | 'groups' | 'foundMessages';
+    communication: CommunicationStore;
     hideMessages: boolean;
+    type: 'contacts' | 'groups' | 'foundMessages';
   };
 
   onPlusClick() {
@@ -36,16 +44,23 @@ export default class ListHeader extends Component {
   }
 
   render() {
-    const { hideMessages, type } = this.props;
+    const { communication, hideMessages, type } = this.props;
 
     if (type === 'foundMessages' && hideMessages) {
       //noinspection JSConstructorReturnsPrimitive
       return null;
     }
 
+    const inf = communication.messengerInfo;
+    const count = type === 'contacts' ? inf.unreadCount : inf.unreadGroupCount;
+
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>{TITLES[type]}</Text>
+        <View style={styles.title}>
+          <Text style={styles.title_text}>{TITLES[type]}</Text>
+          <CountBadge value={count} />
+        </View>
+
         {type !== 'foundMessages' && (
           <Icon
             style={styles.add}
@@ -59,22 +74,27 @@ export default class ListHeader extends Component {
 }
 
 const styles = StyleSheet.create({
+  add: {
+    color: '$pe_color_icon',
+    fontSize: 16,
+    height: 17,
+    width: 16,
+  },
+
   container: {
     flexDirection: 'row',
     margin: 10,
   },
 
   title: {
-    color: '#959ba3',
+    alignItems: 'center',
     flex: 1,
-    fontSize: 10,
-    fontWeight: '200',
+    flexDirection: 'row',
   },
 
-  add: {
-    color: '$pe_color_icon',
-    fontSize: 16,
-    width: 16,
-    height: 17,
+  title_text: {
+    color: '#959ba3',
+    fontSize: 10,
+    fontWeight: '200',
   },
 });

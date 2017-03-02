@@ -1,3 +1,5 @@
+import { extendObservable, observable } from 'mobx';
+
 import type Avatar from './Avatar';
 import Offer from '../../OffersStore/models/Offer';
 import Media from './Media';
@@ -41,7 +43,7 @@ export default class Message {
   };
   senderId: number;
   senderName: string;
-  unread: boolean; // Is unread for requested it user
+  @observable unread: boolean; // Is unread for requested it user
 
   constructor(data) {
     if (data.offer) {
@@ -51,6 +53,6 @@ export default class Message {
       data.medias = data.medias.map(m => new Media(m));
     }
 
-    Object.assign(this, data);
+    extendObservable(this, data);
   }
 }

@@ -61,6 +61,16 @@ export default class SocketApi extends EventEmitter {
     return this.client.call('messenger/rpc/searchMessages', { query, userId });
   }
 
+  async updateMessagesReadStatus(messageIds, userId = this.userId) {
+    if (!Array.isArray(messageIds)) {
+      messageIds = [messageIds];
+    }
+
+    return this.client.call('messenger/rpc/updateMessagesReadStatus', {
+      messageIds, userId,
+    });
+  }
+
   async resolveWhenConnected() {
     const client = this.client;
     switch (client.state) {

@@ -15,7 +15,7 @@ export default class ConversationInfo {
   recipient_id: ?string;
   @observable status: ?ConversationStatus;
   type: string;
-  unreadCount: ?number;
+  @observable unreadCount: ?number;
 
   constructor(data) {
     extendObservable(this, data);

@@ -1,7 +1,7 @@
 import {
   action, autorun, computed, extendObservable, observable, ObservableMap,
 } from 'mobx';
-import { apiHelper } from 'utils';
+import { apiHelper, log } from 'utils';
 import { DataSource } from 'ui';
 
 import type Store from '../index';
@@ -91,11 +91,35 @@ export default class CommunicationStore {
   }
 
   @action
-  setSelectedConversationId(id) {
+  async setSelectedConversationId(id) {
     this.selectedConversationId = id;
-    if (!this.conversations.get(id)) {
+    const conversation = this.conversations.get(id);
+    if (!conversation) {
       //noinspection JSIgnoredPromiseFromCall
-      this.loadConversation(id);
+      await this.loadConversation(id);
+    }
+
+    return await this.markConversationAsRead(id);
+  }
+
+  @action
+  async markConversationAsRead(id) {
+    const conversation: Conversation = this.conversations.get(id);
+    const unreadIds = conversation.getUnreadIds();
+
+    if (conversation) {
+      conversation.messages.forEach(m => m.unread = false);
+    }
+    if (this.messengerInfo) {
+      const info = this.messengerInfo.byId(id);
+      if (info) {
+        info.unreadCount = 0;
+      }
+    }
+
+    if (unreadIds.length > 0) {
+      const socket = await this.store.api.messenger.getSocket();
+      await socket.updateMessagesReadStatus(unreadIds);
     }
   }
 
@@ -193,20 +217,27 @@ export default class CommunicationStore {
 
   @action
   updateMessage(message: Message) {
+    const conversationId = message.conversation.id;
+
     // Update a conversation if it's opened
-    const conversation = this.conversations.get(message.conversation.id);
+    const conversation = this.conversations.get(conversationId);
     if (conversation) {
       conversation.updateMessage(message);
+    }
+
+    const info = this.messengerInfo.byId(conversationId);
+
+    // Reload messengerInfo if it's new conversation
+    if (!info) {
+      //noinspection JSIgnoredPromiseFromCall
+      this.loadMessengerInfo(this.store.userProfiles.currentProfile);
       return;
     }
 
-    // Exit if messages's conversation exists
-    if (this.messengerInfo.byId(message.conversation.id)) {
-      return;
+    if (message.unread) {
+      info.unreadCount = +info.unreadCount + 1;
+      log.info('Increase count', info);
     }
-
-    //noinspection JSIgnoredPromiseFromCall
-    this.loadMessengerInfo(this.store.userProfiles.currentProfile);
   }
 
   initSocket(url, userId) {
