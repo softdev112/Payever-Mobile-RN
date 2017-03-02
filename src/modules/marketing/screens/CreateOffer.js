@@ -35,9 +35,7 @@ export default class CreateOffer extends Component {
 
     const recipients = [];
     if (conversationId && communication.messengerInfo) {
-      const conversation = communication.messengerInfo
-        .find(c => c.id === conversationId);
-
+      const conversation = communication.messengerInfo.byId(conversationId);
       if (conversation) {
         recipients.push({
           id: conversation.recipient_id,
