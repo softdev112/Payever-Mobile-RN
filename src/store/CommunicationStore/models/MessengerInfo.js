@@ -55,11 +55,15 @@ export default class MessengerInfo {
   find(callback): ConversationInfo {
     return this.conversations.find(callback)
       || this.groups.find(callback)
-      || this.marketingGroups(callback);
+      || this.marketingGroups.find(callback);
+  }
+
+  byId(conversationId) {
+    return this.find(c => c.id === conversationId);
   }
 
   getConversationType(conversationId) {
-    const conversation = this.find(c => c.id === conversationId);
+    const conversation = this.byId(conversationId);
     return conversation ? conversation.type : null;
   }
 }

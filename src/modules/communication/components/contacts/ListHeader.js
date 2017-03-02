@@ -29,6 +29,10 @@ export default class ListHeader extends Component {
     if (type === 'contacts') {
       navigator.push({ screen: 'communication.AddContact' });
     }
+
+    if (type === 'groups') {
+      navigator.push({ screen: 'communication.AddGroup' });
+    }
   }
 
   render() {

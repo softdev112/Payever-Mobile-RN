@@ -180,7 +180,9 @@ export default class CommunicationStore {
   @action
   updateUserStatus(status: ConversationStatus) {
     this.conversations.forEach((conversation: Conversation) => {
+      if (!conversation || !conversation.status) return;
       if (conversation.status.userId !== status.userId) return;
+
       conversation.updateStatus(status);
     });
     this.messengerInfo.conversations.forEach((conversation: Conversation) => {
@@ -189,6 +191,23 @@ export default class CommunicationStore {
     });
   }
 
+  @action
+  updateMessage(message: Message) {
+    // Update a conversation if it's opened
+    const conversation = this.conversations.get(message.conversation.id);
+    if (conversation) {
+      conversation.updateMessage(message);
+      return;
+    }
+
+    // Exit if messages's conversation exists
+    if (this.messengerInfo.byId(message.conversation.id)) {
+      return;
+    }
+
+    //noinspection JSIgnoredPromiseFromCall
+    this.loadMessengerInfo(this.store.userProfiles.currentProfile);
+  }
 
   initSocket(url, userId) {
     const { api, auth } = this.store;
