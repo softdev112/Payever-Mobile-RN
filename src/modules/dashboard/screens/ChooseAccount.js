@@ -5,7 +5,7 @@ import type { Navigator } from 'react-native-navigation';
 import {
   GridView, Header, IconText, images, Loader, Text, View, StyleSheet,
 } from 'ui';
-import { pushNotificationsHelper } from 'utils';
+import { log, pushNotificationsHelper } from 'utils';
 import type { Config } from '../../../config';
 import type UserProfilesStore from '../../../store/UserProfilesStore';
 import type Profile from '../../../store/UserProfilesStore/models/Profile';
@@ -35,6 +35,7 @@ export default class ChooseAccount extends Component {
   async componentWillMount() {
     const { userProfiles, navigator } = this.props;
 
+    //noinspection JSUnresolvedFunction
     Keyboard.dismiss();
 
     if (!await userProfiles.load()) {
@@ -48,7 +49,8 @@ export default class ChooseAccount extends Component {
     // Register push notifications
     const { store, privateProfile } = userProfiles;
     pushNotificationsHelper.createInstance(store.api, privateProfile.user)
-      .registerNotifications();
+      .registerNotifications()
+      .catch(log.warn);
   }
 
   onAddNewBusiness() {
@@ -133,7 +135,7 @@ export default class ChooseAccount extends Component {
 
     return (
       <View style={styles.container}>
-        <Header>Welcome back. Please choose buying or selling account.</Header>
+        <Header textStyle={styles.header}>Welcome!</Header>
         <Loader isLoading={userProfiles.isLoading}>
           {this.renderProfiles(dataSource)}
         </Loader>
@@ -150,13 +152,7 @@ const styles = StyleSheet.create({
 
   error: {
     alignItems: 'center',
-    justifyContent: 'center',
     flex: 1,
-  },
-
-  gridWrapper: {
-    flex: 1,
-    flexDirection: 'row',
     justifyContent: 'center',
   },
 
@@ -167,27 +163,37 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
 
-  item: {
+  gridWrapper: {
+    flex: 1,
+    flexDirection: 'row',
     justifyContent: 'center',
-    margin: 10,
-    width: 200,
-    height: 200,
-    borderWidth: 1,
-    borderColor: '$border_color',
   },
 
-  logo: {
-    marginBottom: 20,
-    width: 120,
-    height: 120,
-    borderWidth: 1,
-    borderColor: '$border_color',
-    borderRadius: 60,
+  header: {
+    fontWeight: 'bold',
   },
 
   iconTitle: {
-    marginTop: 0,
-    fontSize: 14,
     color: 'black',
+    fontSize: 14,
+    marginTop: 0,
+  },
+
+  item: {
+    borderColor: '$border_color',
+    borderWidth: 1,
+    height: 200,
+    justifyContent: 'center',
+    margin: 10,
+    width: 200,
+  },
+
+  logo: {
+    borderColor: '$border_color',
+    borderRadius: 60,
+    borderWidth: 1,
+    height: 120,
+    marginBottom: 20,
+    width: 120,
   },
 });
