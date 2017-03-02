@@ -32,18 +32,17 @@ public class ReactWebViewExManager extends ReactWebViewManager {
   private static final String FILE_CHOOSER_TITLE = "Choose Picture";
   private static final String PICTURES_DIR_NAME = "de.payever.pictures";
   private static final String REACT_CLASS = "RCTWebViewEx";
+  private static final String mUploadableFileTypes = "image/*";
   private static final int REQUEST_FILE_CODE = 51426;
 
-  private ReactApplicationContext mContext;
-  private String mUploadableFileTypes = "image/*";
   private WeakReference<NavigationActivity> mActivity;
   private WebViewExActivityCallbacks mActivityCallbacks;
   private Boolean mUploadEnabled = false;
 
   public ReactWebViewExManager(ReactApplicationContext context) {
     super();
-    mContext = context;
-    mActivity = new WeakReference<>((NavigationActivity) mContext.getCurrentActivity());
+
+    mActivity = new WeakReference<>((NavigationActivity) context.getCurrentActivity());
     mActivityCallbacks = (WebViewExActivityCallbacks) NavigationApplication
       .instance
       .getActivityCallbacks();
