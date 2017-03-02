@@ -12,7 +12,7 @@ export default class ChatScreen extends Component {
     return (
       <View style={styles.container}>
         <NavBar.Default title="Communication" source={images.communication} />
-        <Chat />
+        <Chat style={styles.chat} />
       </View>
     );
   }
@@ -20,6 +20,10 @@ export default class ChatScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+
+  chat: {
     flex: 1,
   },
 });

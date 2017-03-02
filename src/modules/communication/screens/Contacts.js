@@ -11,7 +11,7 @@ export default class ContactsScreen extends Component {
     return (
       <View style={styles.container}>
         <NavBar.Default title="Communication" source={images.communication} />
-        <Contacts phoneView />
+        <Contacts style={styles.contacts} phoneView />
       </View>
     );
   }
@@ -19,6 +19,10 @@ export default class ContactsScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+
+  contacts: {
     flex: 1,
   },
 });
