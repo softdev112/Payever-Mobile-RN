@@ -10,12 +10,14 @@ export default class Header extends Component {
   props: {
     children: any;
     style?: Object | number;
+    textStyle?: Object | number;
   };
 
   render() {
     let { children } = this.props;
+    const { textStyle } = this.props;
     if (typeof children === 'string') {
-      children = <Text style={styles.text}>{children}</Text>;
+      children = <Text style={[styles.text, textStyle]}>{children}</Text>;
     }
 
     return (
