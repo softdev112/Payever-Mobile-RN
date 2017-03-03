@@ -71,6 +71,14 @@ export default class SocketApi extends EventEmitter {
     });
   }
 
+  async deleteMessage(messageId, userId = this.userId) {
+    if (!messageId) return false;
+
+    return this.client.call('messenger/rpc/deleteMessage', {
+      id: messageId, userId,
+    });
+  }
+
   async resolveWhenConnected() {
     const client = this.client;
     switch (client.state) {

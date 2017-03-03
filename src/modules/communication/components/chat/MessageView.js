@@ -17,7 +17,9 @@ export default class MessageView extends Component {
     communication?: CommunicationStore;
   };
 
-  onDeleteMessage() {
+  onDeleteMessagePress() {
+    if (this.props.message.deleted) return;
+
     Alert.alert(
       'Attention!',
       'Delete message?',
@@ -28,24 +30,22 @@ export default class MessageView extends Component {
         },
         {
           text: 'OK',
-          onPress: () => this.deleteAndSaveMessage(),
+          onPress: () => this.deleteMessage(),
         },
       ],
       { cancelable: false }
     );
   }
 
-  deleteAndSaveMessage() {
+  deleteMessage() {
     const { communication, message } = this.props;
-
-    message.deleted = true;
-    communication.updateMessage(message);
+    communication.deleteMessage(message.id);
   }
 
   getSwipeButtons() {
     return ([
       <Icon
-        onPress={::this.onDeleteMessage}
+        onPress={::this.onDeleteMessagePress}
         style={styles.actionIcon}
         source="icon-storebuilder-delete-16"
       />,
