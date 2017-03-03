@@ -41,6 +41,12 @@ export default class Conversation {
       .filter((message: Message) => message.unread)
       .map((message: Message) => message.id);
   }
+
+  setReadStatus(messageId) {
+    this.messages
+      .filter((message: Message) => message.id === messageId)
+      .forEach((message: Message) => message.opponentUnread = false);
+  }
 }
 
 export type ConversationStatus = {

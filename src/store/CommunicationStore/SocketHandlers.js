@@ -14,6 +14,17 @@ export default class SocketHandlers {
     this.onEvent = ::this.onEvent;
   }
 
+  onReadMessage(readMessages: Array<ReadMessage>) {
+    if (!readMessages.forEach) {
+      readMessages = [];
+    }
+
+    readMessages.forEach((rm: ReadMessage) => {
+      const conversation = this.store.conversations.get(rm.conversationId);
+      conversation.setReadStatus(rm.id);
+    });
+  }
+
   onUpdateMessage(message: Message) {
     this.store.updateMessage(message);
   }
@@ -48,3 +59,9 @@ export default class SocketHandlers {
     });
   }
 }
+
+type ReadMessage = {
+  conversationId: number;
+  id: number;
+  userId: number;
+};

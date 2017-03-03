@@ -1,11 +1,16 @@
 import { Component } from 'react';
 import { Html, Icon, StyleSheet, Text, View } from 'ui';
+import { inject, observer } from 'mobx-react/native';
 import type Message from '../../../../store/CommunicationStore/models/Message';
 import Offer from '../../../marketing/components/OfferDetails';
 import MediaView from './MediaView';
+import type CommunicationStore from '../../../../store/CommunicationStore';
 
+@inject('communication')
+@observer
 export default class MessageView extends Component {
   props: {
+    communication: CommunicationStore;
     message: Message;
   };
 
@@ -48,6 +53,10 @@ export default class MessageView extends Component {
 
   render() {
     const message: Message = this.props.message;
+    const communication: CommunicationStore = this.props.communication;
+
+    const isSeen = !message.opponentUnread
+      && communication.messengerInfo.messengerUser.id === message.senderId;
 
     if (message.isSystem) {
       return (
@@ -64,6 +73,9 @@ export default class MessageView extends Component {
           <View style={styles.header}>
             <Text style={styles.header_sender}>{`${message.senderName} `}</Text>
             <Text style={styles.header_date}>{message.dateFormated}</Text>
+            {isSeen && (
+              <Text style={styles.header_date}>seen</Text>
+            )}
           </View>
           <View style={styles.body}>
             {this.renderContent(message)}
