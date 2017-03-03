@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { IconText, StyleSheet, View } from 'ui';
 
-import type AppItem from '../../../store/UserProfilesStore/models/AppItem';
+import type AppItem from '../../../store/profiles/models/AppItem';
 
 export default class Dock extends Component {
   static defaultProps = {

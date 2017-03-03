@@ -5,9 +5,9 @@ import { NavBar, StyleSheet, View } from 'ui';
 import type { Navigator } from 'react-native-navigation';
 import { log } from 'utils';
 
-import type CommunicationStore from '../../../store/CommunicationStore';
+import type CommunicationStore from '../../../store/communication';
 import type UserSettings
-  from '../../../store/CommunicationStore/models/UserSettings';
+  from '../../../store/communication/models/UserSettings';
 import CheckBoxPref from '../components/settings/CheckBoxPref';
 import SwitchableSliderPref from '../components/settings/SwitchableSliderPref';
 import SwitchableTimePeriodPref

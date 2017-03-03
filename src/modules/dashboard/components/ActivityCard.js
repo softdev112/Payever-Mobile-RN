@@ -5,7 +5,7 @@ import { Image, Link, StyleSheet, Text, View } from 'ui';
 import type { Navigator } from 'react-native-navigation';
 
 import type ActivityItem from
-  '../../../store/UserProfilesStore/models/ActivityItem';
+  '../../../store/profiles/models/ActivityItem';
 
 export default class ActivityCards extends Component {
   props: {

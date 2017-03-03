@@ -3,19 +3,19 @@ import { TouchableOpacity } from 'react-native';
 import { observer } from 'mobx-react/native';
 import { Icon, Image, StyleSheet, Text, View } from 'ui';
 
-import type UserProfilesStore from '../../../store/UserProfilesStore/index';
+import type ProfilesStore from '../../../store/profiles';
 import type BusinessProfile
-  from '../../../store/UserProfilesStore/models/BusinessProfile';
+  from '../../../store/profiles/models/BusinessProfile';
 
 @observer
 export default class BusinessList extends Component {
   props: {
     onSelect: (profile: BusinessProfile) => {};
-    userProfiles: UserProfilesStore;
+    profiles: ProfilesStore;
   };
 
   renderRow(profile: BusinessProfile) {
-    const { userProfiles, onSelect } = this.props;
+    const { profiles, onSelect } = this.props;
     return (
       <TouchableOpacity
         style={styles.row}
@@ -26,7 +26,7 @@ export default class BusinessList extends Component {
         <Text style={styles.title} numberOfLines={1}>
           {profile.displayName}
         </Text>
-        {profile === userProfiles.currentProfile && (
+        {profile === profiles.currentProfile && (
           <Icon source="icon-checkbox-checked-24" style={styles.imgChecked} />
         )}
       </TouchableOpacity>
@@ -34,11 +34,10 @@ export default class BusinessList extends Component {
   }
 
   render() {
-    const { userProfiles } = this.props;
-    const profiles = userProfiles.toArray(false);
+    const { profiles } = this.props;
     return (
       <View style={styles.container}>
-        {profiles.map(::this.renderRow)}
+        {profiles.toArray(false).map(::this.renderRow)}
       </View>
     );
   }

@@ -7,12 +7,10 @@ import Contact from './Contact';
 import ListHeader from './ListHeader';
 import Search from './Search';
 
-import type CommunicationStore
-  from '../../../../store/CommunicationStore/index';
-import type UserProfilesStore
-  from '../../../../store/UserProfilesStore/index';
+import type CommunicationStore from '../../../../store/communication';
+import type ProfilesStore from '../../../../store/profiles';
 
-@inject('communication', 'userProfiles')
+@inject('communication', 'profiles')
 @observer
 export default class Contacts extends Component {
   static defaultProps = {
@@ -23,14 +21,14 @@ export default class Contacts extends Component {
     communication?: CommunicationStore;
     phoneView: boolean;
     style?: Object | number;
-    userProfiles?: UserProfilesStore;
+    profiles?: ProfilesStore;
   };
 
   componentWillMount() {
-    const { communication, userProfiles } = this.props;
+    const { communication, profiles } = this.props;
 
     //noinspection JSIgnoredPromiseFromCall
-    communication.loadMessengerInfo(userProfiles.currentProfile);
+    communication.loadMessengerInfo(profiles.currentProfile);
     communication.search('');
   }
 

@@ -4,7 +4,7 @@ import { StyleSheet, View } from 'ui';
 
 import Title from './Title';
 import type UserSettings
-  from '../../../../store/CommunicationStore/models/UserSettings';
+  from '../../../../store/communication/models/UserSettings';
 
 export default class CheckBoxPref extends Component {
   props: {

@@ -3,9 +3,8 @@ import { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Html, NavBar, StyleSheet, Text, View, Button } from 'ui';
 import { Navigator, Navigation } from 'react-native-navigation';
-import offer from './data';
 import { observer, inject } from 'mobx-react/native';
-import AuthStore from '../../../store/AuthStore';
+import AuthStore from '../../../store/auth';
 
 @inject('auth')
 @observer

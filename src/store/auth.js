@@ -6,7 +6,6 @@ import type Store from './index';
 import type { AuthData } from '../common/api/AuthApi';
 import { showScreen } from '../common/Navigation';
 
-
 const STORE_NAME = 'store.auth';
 
 export default class AuthStore {

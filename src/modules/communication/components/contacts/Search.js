@@ -5,7 +5,7 @@ import type { Navigator } from 'react-native-navigation';
 import { Icon, StyleSheet, View } from 'ui';
 
 import type CommunicationStore
-  from '../../../../store/CommunicationStore/index';
+  from '../../../../store/communication';
 
 @inject('communication')
 @observer

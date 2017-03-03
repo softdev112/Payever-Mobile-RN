@@ -10,7 +10,7 @@ import UserSettings from './models/UserSettings';
 import MessengerInfo from './models/MessengerInfo';
 import Conversation, { ConversationStatus }
   from './models/Conversation';
-import type BusinessProfile from '../UserProfilesStore/models/BusinessProfile';
+import type BusinessProfile from '../profiles/models/BusinessProfile';
 import { MessengerData } from '../../common/api/MessengerApi';
 import SocketHandlers from './SocketHandlers';
 import Message from './models/Message';
@@ -243,7 +243,7 @@ export default class CommunicationStore {
     // Reload messengerInfo if it's new conversation
     if (!info) {
       //noinspection JSIgnoredPromiseFromCall
-      this.loadMessengerInfo(this.store.userProfiles.currentProfile);
+      this.loadMessengerInfo(this.store.profiles.currentProfile);
       return;
     }
 
