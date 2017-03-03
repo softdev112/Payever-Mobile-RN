@@ -32,7 +32,7 @@ export default class Message {
   medias: Array<Media>;
   offer: Offer;
   offerId: ?number;
-  opponentUnread: boolean; // Is unread by any of the chat opponent users
+  @observable opponentUnread: boolean; // Is unread by any of the chat opponent users
   own: boolean; // Is message own for current user
   recipient: string;
   replyTo: ?{
