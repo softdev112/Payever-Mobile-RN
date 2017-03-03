@@ -1,15 +1,15 @@
 /* eslint-disable react/no-unused-prop-types */
 import { Component } from 'react';
-import { Observer } from 'mobx-react/native';
 import { Icon, StyleSheet, Text, View } from 'ui';
 
-import OnlineStatus from '../OnlineStatus';
+import Status from './Status';
 
 export default class UserInfoHeader extends Component {
   props: {
     status: {
       label: string;
       online: boolean;
+      typing: boolean;
     };
     userName: string;
   };
@@ -34,14 +34,7 @@ export default class UserInfoHeader extends Component {
           />
         </View>
         {status && (
-          <View style={styles.status}>
-            <Observer>
-              {() => (status.online &&
-                <OnlineStatus style={styles.status_led} isOnline />
-              )}
-            </Observer>
-            <Text style={styles.status_text}>{status.label}</Text>
-          </View>
+          <Status status={status} />
         )}
       </View>
     );

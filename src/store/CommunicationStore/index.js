@@ -3,6 +3,7 @@ import {
 } from 'mobx';
 import { apiHelper, log } from 'utils';
 import { DataSource } from 'ui';
+import { throttle } from 'lodash';
 
 import type Store from '../index';
 import UserSettings from './models/UserSettings';
@@ -14,6 +15,7 @@ import { MessengerData } from '../../common/api/MessengerApi';
 import SocketHandlers from './SocketHandlers';
 import Message from './models/Message';
 import type SocketApi from '../../common/api/MessengerApi/SocketApi';
+import type ConversationInfo from './models/ConversationInfo';
 
 export default class CommunicationStore {
   @observable conversations: ObservableMap<Conversation> = observable.map();
@@ -44,6 +46,9 @@ export default class CommunicationStore {
   constructor(store: Store) {
     this.store = store;
     this.socketHandlers = new SocketHandlers(this);
+
+    // Allow to send typingStatus only once per 5s
+    this.updateTypingStatus = this::throttle(this.updateTypingStatus, 5000);
   }
 
   @action
@@ -67,6 +72,8 @@ export default class CommunicationStore {
 
         this.conversations = observable.map();
         const conversation = this.messengerInfo.getDefaultConversation();
+
+        //noinspection JSIgnoredPromiseFromCall
         this.setSelectedConversationId(conversation.id);
 
         return this.messengerInfo;
@@ -145,7 +152,7 @@ export default class CommunicationStore {
   @action
   async searchMessages(query) {
     const socket = await this.store.api.messenger.getSocket();
-    return apiHelper(socket.searchMessages({ query }))
+    return apiHelper(socket.searchMessages(query))
       .success((data) => {
         const messages = data.messages || [];
         this.foundMessages = messages.map(m => new Message(m));
@@ -167,6 +174,12 @@ export default class CommunicationStore {
           userSettings: new UserSettings(settings),
         });
       });
+  }
+
+  @action
+  async updateTypingStatus(conversationId) {
+    const socket = await this.store.api.messenger.getSocket();
+    return await socket.updateTypingStatus(conversationId);
   }
 
   @computed
@@ -202,16 +215,16 @@ export default class CommunicationStore {
   }
 
   @action
-  updateUserStatus(status: ConversationStatus) {
+  updateUserStatus(status: ConversationStatus, typing = false) {
     this.conversations.forEach((conversation: Conversation) => {
       if (!conversation || !conversation.status) return;
       if (conversation.status.userId !== status.userId) return;
 
-      conversation.updateStatus(status);
+      conversation.updateStatus(status, typing);
     });
-    this.messengerInfo.conversations.forEach((conversation: Conversation) => {
-      if (conversation.status.userId !== status.userId) return;
-      conversation.updateStatus(status);
+    this.messengerInfo.conversations.forEach((info: ConversationInfo) => {
+      if (info.status.userId !== status.userId) return;
+      info.updateStatus(status);
     });
   }
 

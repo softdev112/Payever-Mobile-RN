@@ -1,4 +1,5 @@
 import { extendObservable, observable } from 'mobx';
+import { debounce } from 'lodash';
 import Message from './Message';
 
 export default class Conversation {
@@ -11,7 +12,17 @@ export default class Conversation {
 
   constructor(data) {
     data.messages = (data.messages || []).map(m => new Message(m));
+
+    if (data.status) {
+      data.status.typing = false;
+    }
+
     extendObservable(this, data);
+
+    this.updateTypingStatusLazily = this::debounce(
+      this.updateTypingStatusLazily,
+      6000
+    );
   }
 
   updateMessage(message: Message) {
@@ -32,8 +43,27 @@ export default class Conversation {
     this.messages.push(message);
   }
 
-  updateStatus(status) {
-    this.status = status;
+  updateStatus(status, typing = false) {
+    if (!typing) {
+      extendObservable(this.status, status);
+      return;
+    }
+
+    extendObservable(this.status, {
+      typing: true,
+      online: true,
+      lastVisit: status.lastVisit,
+    });
+
+    this.updateTypingStatusLazily();
+  }
+
+  /**
+   * This method will be called only in 6s seconds. If it's called again the
+   * timer is reset.
+   */
+  updateTypingStatusLazily() {
+    this.status.typing = false;
   }
 
   getUnreadIds() {
@@ -54,6 +84,7 @@ export type ConversationStatus = {
   label: ?string;
   lastVisit: ?string;
   online: boolean;
+  typing: boolean;
   userId: number;
 };
 

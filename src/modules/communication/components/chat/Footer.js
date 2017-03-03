@@ -3,7 +3,7 @@ import { Keyboard, TextInput } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import { Icon, StyleSheet, View } from 'ui';
-import CommunicationStore from '../../../../store/CommunicationStore/index';
+import CommunicationStore from '../../../../store/CommunicationStore';
 
 @inject('communication')
 @observer
@@ -33,6 +33,7 @@ export default class Footer extends Component {
     this.state = {
       text: '',
     };
+    this.onType = ::this.onType;
   }
 
   onActionPress() {
@@ -58,6 +59,12 @@ export default class Footer extends Component {
     this.setState({ text: '' });
   }
 
+  onType(text) {
+    this.setState({ text });
+    const { communication, conversationId } = this.props;
+    communication.updateTypingStatus(conversationId);
+  }
+
   render() {
     const { communication } = this.props;
 
@@ -79,7 +86,7 @@ export default class Footer extends Component {
         <TextInput
           style={styles.input}
           ref={i => this.$input = i}
-          onChangeText={text => this.setState({ text })}
+          onChangeText={this.onType}
           onSubmitEditing={::this.onSend}
           placeholder="Send message"
           returnKeyType="send"
