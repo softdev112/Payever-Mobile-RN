@@ -34,7 +34,7 @@ export default class SocketHandlers {
   }
 
   onUpdateTypingStatus(status: ConversationStatus) {
-    console.log('Update typing status ', status);
+    this.store.updateUserStatus(status, true);
   }
 
   subscribe(socket: SocketApi) {
