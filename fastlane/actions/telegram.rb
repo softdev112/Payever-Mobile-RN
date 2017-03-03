@@ -31,20 +31,20 @@ module Fastlane
             is_string: true,
             default_value: ''
           ),
-		  FastlaneCore::ConfigItem.new(
-		    key: :bot_token,
-		    env_name: 'FL_TELEGRAM_BOT_TOKEN',
-		    description: 'Telegram bot token',
-		    is_string: true,
-		    default_value: ''
-		  ),
-		  FastlaneCore::ConfigItem.new(
-		    key: :chat_id,
-		    env_name: 'FL_TELEGRAM_CHAT_ID',
-		    description: 'Telegram chat id',
-		    is_string: true,
-		    default_value: ''
-		  )
+          FastlaneCore::ConfigItem.new(
+            key: :bot_token,
+            env_name: 'FL_TELEGRAM_BOT_TOKEN',
+            description: 'Telegram bot token',
+            is_string: true,
+            default_value: ''
+          ),
+          FastlaneCore::ConfigItem.new(
+            key: :chat_id,
+            env_name: 'FL_TELEGRAM_CHAT_ID',
+            description: 'Telegram chat id',
+            is_string: true,
+            default_value: ''
+          )
         ]
       end
 
