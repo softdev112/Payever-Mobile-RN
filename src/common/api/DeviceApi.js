@@ -2,7 +2,7 @@ import DeviceInfo from 'react-native-device-info';
 import { Platform } from 'react-native';
 
 import type PayeverApi from './index';
-import type UserAccount from '../../store/UserProfilesStore/models/UserAccount';
+import type UserAccount from '../../store/profiles/models/UserAccount';
 
 export default class DeviceApi {
   client: PayeverApi;

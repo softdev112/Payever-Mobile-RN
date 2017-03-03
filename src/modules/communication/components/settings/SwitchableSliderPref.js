@@ -3,7 +3,7 @@ import { Animated, Slider } from 'react-native';
 import { StyleSheet, View } from 'ui';
 
 import type UserSettings
-  from '../../../../store/CommunicationStore/models/UserSettings';
+  from '../../../../store/communication/models/UserSettings';
 import CheckBoxPref from './CheckBoxPref';
 import Title from './Title';
 

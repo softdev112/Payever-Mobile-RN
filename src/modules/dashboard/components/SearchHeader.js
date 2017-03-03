@@ -3,16 +3,16 @@ import { inject, observer } from 'mobx-react/native';
 import { Icon, ImageButton, StyleSheet, View, Text } from 'ui';
 import type { Navigator } from 'react-native-navigation';
 
-import type UserProfilesStore from '../../../store/UserProfilesStore';
+import type ProfilesStore from '../../../store/profiles';
 import { toggleMenu } from '../../../common/Navigation';
 
-@inject('userProfiles')
+@inject('profiles')
 @observer
 export default class SearchHeader extends Component {
   props: {
     navigator: Navigator;
     title?: string;
-    userProfiles?: UserProfilesStore;
+    profiles?: ProfilesStore;
   };
 
   onProfilePress() {
@@ -29,9 +29,9 @@ export default class SearchHeader extends Component {
   }
 
   render() {
-    const { userProfiles, title } = this.props;
+    const { profiles, title } = this.props;
 
-    if (!userProfiles.privateProfile) {
+    if (!profiles.privateProfile) {
       return null;
     }
 
@@ -46,7 +46,7 @@ export default class SearchHeader extends Component {
         <ImageButton
           hitSlop={{ top: 7, right: 7, bottom: 7, left: 0 }}
           onPress={::this.onProfilePress}
-          source={userProfiles.currentProfile.logoSource}
+          source={profiles.currentProfile.logoSource}
           style={styles.profile}
         />
       </View>

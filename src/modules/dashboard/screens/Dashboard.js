@@ -4,16 +4,16 @@ import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import { GridView, IconText, Loader, StyleSheet, View } from 'ui';
 
-import type UserProfilesStore from '../../../store/UserProfilesStore/index';
+import type ProfilesStore from '../../../store/profiles';
 import type ActivityItem from
-  '../../../store/UserProfilesStore/models/ActivityItem';
-import type AppItem from '../../../store/UserProfilesStore/models/AppItem';
+  '../../../store/profiles/models/ActivityItem';
+import type AppItem from '../../../store/profiles/models/AppItem';
 import ActivityCard from '../components/ActivityCard';
 import Dock from '../components/Dock';
 import DashboardTitle from '../components/DashboardTitle';
 import SearchHeader from '../components/SearchHeader';
 
-@inject('userProfiles', 'config')
+@inject('profiles', 'config')
 @observer
 export default class Dashboard extends Component {
   static navigatorStyle = {
@@ -22,7 +22,7 @@ export default class Dashboard extends Component {
 
   props: {
     navigator: Navigator;
-    userProfiles: UserProfilesStore;
+    profiles: ProfilesStore;
   };
 
   state: {
@@ -53,15 +53,15 @@ export default class Dashboard extends Component {
   }
 
   async componentWillMount() {
-    const { userProfiles } = this.props;
-    const profile = userProfiles.currentProfile;
+    const { profiles } = this.props;
+    const profile = profiles.currentProfile;
 
-    const apps = await userProfiles.loadApplications(profile.id);
+    const apps = await profiles.loadApplications(profile.id);
     this.setState({
       appsTop:    apps.filter(a => a.location === 'top'),
       appsBottom: apps.filter(a => a.location === 'bottom'),
-      activities: await userProfiles.loadActivities(profile.id),
-      todos:      await userProfiles.loadTodos(profile.id),
+      activities: await profiles.loadActivities(profile.id),
+      todos:      await profiles.loadTodos(profile.id),
     });
   }
 
@@ -119,9 +119,9 @@ export default class Dashboard extends Component {
     const {
       appearAnimation, appsTop, appsBottom, showApps, activities, todos,
     } = this.state;
-    const { navigator, userProfiles } = this.props;
+    const { navigator, profiles } = this.props;
     const dataSourceTop = this.dataSource.cloneWithRows(appsTop);
-    const businessName = userProfiles.currentProfile.displayName;
+    const businessName = profiles.currentProfile.displayName;
 
     return (
       <Loader isLoading={appsTop.length < 1}>

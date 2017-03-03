@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { ErrorBox, NavBar, StyleSheet, View, WebView } from 'ui';
-import type CommunicationStore from '../../../store/CommunicationStore';
-import type UserProfilesStore from '../../../store/UserProfilesStore';
+import type CommunicationStore from '../../../store/communication';
+import type ProfilesStore from '../../../store/profiles';
 
-@inject('userProfiles', 'communication')
+@inject('profiles', 'communication')
 @observer
 export default class CreateOffer extends Component {
   static navigatorStyle = {
@@ -14,7 +14,7 @@ export default class CreateOffer extends Component {
   props: {
     communication?: CommunicationStore;
     conversationId: string;
-    userProfiles?: UserProfilesStore;
+    profiles?: ProfilesStore;
   };
 
   renderWrongProfile() {
@@ -30,7 +30,7 @@ export default class CreateOffer extends Component {
   }
 
   render() {
-    const profile = this.props.userProfiles.currentProfile;
+    const profile = this.props.profiles.currentProfile;
     const { communication, conversationId } = this.props;
 
     const recipients = [];

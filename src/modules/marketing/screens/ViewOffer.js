@@ -8,8 +8,8 @@ import {
 import { format } from 'utils';
 
 import OfferDetails from '../components/OfferDetails';
-import OffersStore from '../../../store/OffersStore/index';
-import Offer from '../../../store/OffersStore/models/Offer';
+import OffersStore from '../../../store/offers';
+import Offer from '../../../store/offers/models/Offer';
 
 @inject('offers')
 @observer

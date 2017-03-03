@@ -12,7 +12,7 @@ export Error from './Error';
 export ErrorBox from './ErrorBox';
 export GridView from './GridView';
 export Header from './Header';
-export Html from './Html/index';
+export Html from './Html';
 export Icon from './Icon';
 export IconText from './IconText';
 export images from './images';

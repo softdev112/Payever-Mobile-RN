@@ -6,8 +6,8 @@ import type { Navigator } from 'react-native-navigation';
 import DashboardTitle from '../components/DashboardTitle';
 import Dock from '../components/Dock';
 import SearchHeader from '../components/SearchHeader';
-import type UserProfilesStore from '../../../store/UserProfilesStore/index';
-import AppItem from '../../../store/UserProfilesStore/models/AppItem';
+import type ProfilesStore from '../../../store/profiles';
+import AppItem from '../../../store/profiles/models/AppItem';
 import type { Config } from '../../../config';
 
 const APPS: Array<Object> = [
@@ -30,7 +30,7 @@ const APPS: Array<Object> = [
   },
 ];
 
-@inject('config', 'userProfiles')
+@inject('config', 'profiles')
 @observer
 export default class Private extends Component {
   static navigatorStyle = {
@@ -39,7 +39,7 @@ export default class Private extends Component {
 
   props: {
     navigator: Navigator;
-    userProfiles: UserProfilesStore;
+    profiles: ProfilesStore;
     config: Config;
   };
 
@@ -48,12 +48,12 @@ export default class Private extends Component {
   constructor(params) {
     super(params);
 
-    const { config, userProfiles } = this.props;
+    const { config, profiles } = this.props;
 
     this.apps = APPS.map((app) => {
       let url = config.siteUrl + app.url;
       if (app.label === 'account') {
-        url = userProfiles.privateProfile.settingsUrl;
+        url = profiles.privateProfile.settingsUrl;
       }
       return new AppItem({
         url,
@@ -86,8 +86,8 @@ export default class Private extends Component {
   }
 
   render() {
-    const { userProfiles, navigator } = this.props;
-    const userName = userProfiles.privateProfile.displayName;
+    const { profiles, navigator } = this.props;
+    const userName = profiles.privateProfile.displayName;
     return (
       <View style={styles.container}>
         <SearchHeader navigator={navigator} />

@@ -8,8 +8,8 @@ import { log } from 'utils';
 import injectedCode, { getLoaderHtml } from './injectedCode';
 import WebViewError from './WebViewError';
 import { showScreen, toggleMenu } from '../../../../common/Navigation';
-import type AuthStore from '../../../../store/AuthStore';
-import type UserProfilesStore from '../../../../store/UserProfilesStore';
+import type AuthStore from '../../../../store/auth';
+import type ProfilesStore from '../../../../store/profiles';
 import type { Config } from '../../../../config';
 
 const BACK_ON_URLS = [
@@ -18,7 +18,7 @@ const BACK_ON_URLS = [
   { urlMask: '/login',   screen: 'auth.Login' },
 ];
 
-@inject('auth', 'userProfiles', 'config')
+@inject('auth', 'profiles', 'config')
 @observer
 export default class WebView extends Component {
   static defaultProps = {
@@ -37,7 +37,7 @@ export default class WebView extends Component {
     navigator: Navigator;
     referer?: string;
     url: string;
-    userProfiles?: UserProfilesStore;
+    profiles?: ProfilesStore;
   };
 
   state: {
@@ -185,7 +185,7 @@ export default class WebView extends Component {
       this.refreshTimer = setTimeout(() => {
         // Reload businesses with some delay
         //noinspection JSIgnoredPromiseFromCall
-        this.props.userProfiles.load();
+        this.props.profiles.load();
       }, 1200);
     }
   }
