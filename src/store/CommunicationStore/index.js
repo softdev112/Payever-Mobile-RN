@@ -253,6 +253,12 @@ export default class CommunicationStore {
     }
   }
 
+  @action
+  async deleteMessage(messageId) {
+    const socket = await this.store.api.messenger.getSocket();
+    return socket.deleteMessage(messageId);
+  }
+
   initSocket(url, userId) {
     const { api, auth } = this.store;
 

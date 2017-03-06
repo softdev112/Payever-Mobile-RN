@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="SvgjsSvg1015" xmlns:svgjs="http://svgjs.com/svgjs"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="75px" height="74px"
+	 viewBox="0 0 75 74" enable-background="new 0 0 75 74" xml:space="preserve">
+	<defs>
+		<linearGradient id="contacts-icon-gradient" gradientUnits="userSpaceOnUse" x1="-658.5137" y1="103.6396" x2="-658.5137" y2="103.0327" gradientTransform="matrix(197.261 0 0 204.2703 129935.4844 -21067.1562)">
+			<stop  offset="0" style="stop-color:#BC44DB"/>
+			<stop  offset="1" style="stop-color:#0DDBF3"/>
+		</linearGradient>
+	</defs>
+	<path fill="url(#contacts-icon-gradient)" d="M41.659,34.062c0.806-0.801,1.681-1.788,1.929-3.019
+		c0.331-1.637-0.343-1.846-0.343-2.411c0-1.186-0.011-3.132-0.374-4.396c-0.02-1.667-0.289-2.393-0.854-3.017
+		c-0.531-0.584-1.84-0.446-2.521-0.832c-1.056-0.597-1.925-0.823-3.033-0.853c-0.031-0.006-0.064-0.003-0.096-0.002
+		c-0.055-0.001-0.107-0.004-0.163-0.004c-2.696,0.114-5.567,1.846-6.555,4.631c-0.366,1.034-0.226,3.287-0.226,4.473
+		c0,0.565-0.674,0.774-0.343,2.411c0.249,1.231,1.123,2.218,1.928,3.019c0.569,0.567,0.786,2.137,1.406,2.758
+		c0.135,0.912,0.151,0.653,0.146,1.489c-0.001,0.281,0.007,0.721-0.436,1.152c-0.839,0.816-0.338,1.355-1.918,2.047
+		c-2.084,0.91-5.472,2.367-6.252,2.775c-0.781,0.409-2.858,1.521-2.844,2.23c0.064,3.29,1.278,4.554,1.278,4.554h13.752h0.399h13.769
+		c0,0,1.262-1.375,1.262-4.554c0-0.709-2.062-1.821-2.844-2.23c-0.781-0.408-4.168-1.865-6.252-2.775
+		c-1.539-0.674-0.978-1.137-1.849-1.979c-0.296-0.284-0.504-0.582-0.507-1.306c-0.003-0.843,0.016-0.521,0.146-1.403
+		C40.874,36.197,41.09,34.627,41.659,34.062z"/>
+	<polygon fill="#DFDFDF" points="62.008,23.726 72.43,23.726 72.648,23.726 72.648,23.291 72.43,23.291 
+		62.008,23.291 61.791,23.291 61.791,23.726 "/>
+	<polygon fill="#DFDFDF" points="62.008,37.188 72.43,37.188 72.648,37.188 72.648,36.753 72.43,36.753 
+		62.008,36.753 61.791,36.753 61.791,37.188 "/>
+	<polygon fill="#DFDFDF" points="62.008,50.65 72.43,50.65 72.648,50.65 72.648,50.217 72.43,50.217 
+		62.008,50.217 61.791,50.217 61.791,50.65 "/>
+	<text transform="matrix(1 0 0 1 62.957 20.001)" fill="#DFDFDF" font-family="'Arial-BoldMT'" font-size="6.1539">A</text>
+	<text transform="matrix(1 0 0 1 62.957 33.207)" fill="#DFDFDF" font-family="'Arial-BoldMT'" font-size="6.1539">B</text>
+	<text transform="matrix(1 0 0 1 62.957 46.2891)" fill="#DFDFDF" font-family="'Arial-BoldMT'" font-size="6.1539">C</text>
+	<text transform="matrix(1 0 0 1 62.957 59.334)" fill="#DFDFDF" font-family="'Arial-BoldMT'" font-size="6.1539">D</text>
+</svg>

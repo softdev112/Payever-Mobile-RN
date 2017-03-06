@@ -21,7 +21,10 @@ export default class PushNotificationsHelper {
   async onPushNotificationsRegistered(deviceToken) {
     // Send device token to server along side with device name
     log.debug('Device token received:', deviceToken);
-    await this.api.device.linkDeviceToken(this.userProfile, deviceToken);
+    const res = await this.api.device.linkDeviceToken(this.userProfile, deviceToken);
+    console.log('sssssssssssssssssssssssss');
+    console.log(res);
+    console.log('sssssssssssssssssssssssss');
   }
 
   onNotificationReceivedForeground(notification) {
