@@ -21,10 +21,7 @@ export default class PushNotificationsHelper {
   async onPushNotificationsRegistered(deviceToken) {
     // Send device token to server along side with device name
     log.debug('Device token received:', deviceToken);
-    const res = await this.api.device.linkDeviceToken(this.userProfile, deviceToken);
-    console.log('sssssssssssssssssssssssss');
-    console.log(res);
-    console.log('sssssssssssssssssssssssss');
+    await this.api.device.linkDeviceToken(this.userProfile, deviceToken);
   }
 
   onNotificationReceivedForeground(notification) {
@@ -44,6 +41,10 @@ export default class PushNotificationsHelper {
 
   onNotificationReceivedAndroid(notification) {
     log.debug('Receive Android notification:', AppState.currentState);
+    console.log('ddddddddddddddddddd1');
+    console.log(notification);
+    console.log('ddddddddddddddddddd2');
+
     if (AppState.currentState === 'active') {
       this.onNotificationReceivedForeground(notification);
     } else {
@@ -82,10 +83,10 @@ export default class PushNotificationsHelper {
       NotificationsAndroid.setNotificationReceivedListener(
         ::this.onNotificationReceivedAndroid
       );
-      NotificationsAndroid.refreshToken();
       const initNotification = await PendingNotifications
         .getInitialNotification();
-      console.log('Init Notification', initNotification);
+      console.log('ReactNativeNotif Init Notification', initNotification);
+      NotificationsAndroid.refreshToken();
     }
   }
 }

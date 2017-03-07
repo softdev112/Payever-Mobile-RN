@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.hardware.camera.flash"/>
 
     <uses-feature android:name="android.hardware.camera" android:required="false" />
@@ -47,7 +48,7 @@
         android:name="io.fabric.ApiKey"
         android:value="48b58dc9c7da86d72ed314088b46e42f1a0b78ff"
       />
-      <meta-data android:name="com.wix.reactnativenotifications.gcmSenderId" android:value="105458702408\0" />
+      <meta-data android:name="com.wix.reactnativenotifications.gcmSenderId" android:value="463919467171\0" />
     </application>
 
 </manifest>

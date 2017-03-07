@@ -1,51 +1,63 @@
-/* eslint-disable */
 import { Component } from 'react';
-import { ART, WebView } from 'react-native';
+import { ART } from 'react-native';
 import { NavBar, View, StyleSheet, Button } from 'ui';
 import { Navigator } from 'react-native-navigation';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import * as Morph from 'art/morph/path';
 
 import svgIcons from './icons';
 
 const {
   Surface,
-  Group,
-  Rectangle,
-  ClippingRectangle,
-  LinearGradient,
   Shape,
 } = ART;
 
-var Morph = require('art/morph/path');
-var pathsChannel0 = svgIcons.map((svg) => Morph.Path(svg[0].path));
-var pathsChannel1 = svgIcons.map((svg) => Morph.Path(svg[1].path));
-var pathsChannel2 = svgIcons.map((svg) => Morph.Path(svg[2].path));
+const emptyPath = 'M 50, 50';
+
+const NUMBER_OF_CHANNELS = 9;
+
+const animationPaths = [];
+const pathsAtributes = [];
+svgIcons.forEach((icon, iconIndex) => {
+  for (let i = 0; i < NUMBER_OF_CHANNELS; i += 1) {
+    if (!animationPaths[i]) animationPaths[i] = [];
+    animationPaths[i][iconIndex] = Morph.Path(
+      icon[i] ? icon[i].path : emptyPath
+    );
+
+    if (!pathsAtributes[i]) pathsAtributes[i] = [];
+    pathsAtributes[i][iconIndex] = {
+      fill: icon[i] ? icon[i].fill : undefined,
+      stroke: icon[i] ? icon[i].stroke : undefined,
+      opacity: icon[i] ? icon[i].opacity : undefined,
+    };
+  }
+});
 
 export default class Debug extends Component {
   static navigatorStyle = { navBarHidden: true };
 
-  props:{
+  props: {
     navigator: Navigator;
   };
 
   state: {
-    transition0: Object;
-    transition1: Object;
-    transition2: Object;
+    transitions: Array<Object>;
   };
 
   constructor(props) {
     super(props);
 
     this.nextAnimation = this.nextAnimation.bind(this);
+
     this.state = {
-      transition0: Morph.Tween(pathsChannel0[0], pathsChannel0[1]),
-      transition1: Morph.Tween(pathsChannel1[0], pathsChannel1[1]),
-      transition2: Morph.Tween(pathsChannel2[0], pathsChannel2[1]),
+      transitions: this.getTransitionsForIndex(0),
     };
   }
 
   componentWillMount() {
-    this._current = 1;
+    this.currentIcon = 1;
+    this.currentIconColor = 0;
   }
 
   componentDidMount() {
@@ -53,74 +65,72 @@ export default class Debug extends Component {
   }
 
   onPlayAgain() {
-    this._current = 1;
-    this.setState({
-      transition0: Morph.Tween(pathsChannel0[0], pathsChannel0[1]),
-      transition1: Morph.Tween(pathsChannel1[0], pathsChannel1[1]),
-      transition2: Morph.Tween(pathsChannel2[0], pathsChannel2[1]),
-    });
+    this.currentIcon = 1;
+    this.currentIconColor = 0;
+
+    this.state = {
+      transitions: this.getTransitionsForIndex(0),
+    };
 
     this.animate(null, this.nextAnimation);
   }
 
+  getTransitionsForIndex(fromIndex) {
+    const transitions = [];
+    for (let i = 0; i < NUMBER_OF_CHANNELS; i += 1) {
+      transitions[i] = Morph.Tween(
+        animationPaths[i][fromIndex], animationPaths[i][fromIndex + 1]
+      );
+    }
+
+    return transitions;
+  }
+
   nextAnimation() {
-    this._current += 1;
-    if (this._current >= pathsChannel0.length) return;
+    this.currentIcon += 1;
+    // All paths were morphed
+    if (this.currentIcon >= animationPaths[0].length) return;
     this.setState({
-      transition0: Morph.Tween(pathsChannel0[this._current - 1], pathsChannel0[this._current]),
-      transition1: Morph.Tween(pathsChannel1[this._current - 1], pathsChannel1[this._current]),
-      transition2: Morph.Tween(pathsChannel2[this._current - 1], pathsChannel2[this._current])
-    }, () => this.animate(null, this.nextAnimation))
+      transitions: this.getTransitionsForIndex(this.currentIcon - 1),
+    }, () => this.animate(null, this.nextAnimation));
   }
 
   animate(start, cb) {
+    // eslint-disable-next-line consistent-return
     requestAnimationFrame((timestamp) => {
       if (!start) start = timestamp;
-      var delta = (timestamp - start) / 1000;
-      if (delta > 1) return cb();
-      this.state.transition0.tween(delta);
-      this.state.transition1.tween(delta);
-      this.state.transition2.tween(delta);
+      const delta = (timestamp - start) / 1000;
+
+      if (delta > 1) return setTimeout(cb, 200);
+
+      this.state.transitions.forEach(transition => transition.tween(delta));
       this.setState(this.state);
       this.animate(start, cb);
     });
   }
 
-  render() {
-    const { inspectObj } = this.props;
+  renderTransitions() {
+    return this.state.transitions.map((transition, index) => {
+      return (
+        <Shape
+          key={index}
+          scale={3}
+          x={70}
+          y={70}
+          d={transition}
+          {...pathsAtributes[index][this.currentIcon]}
+        />
+      );
+    });
+  }
 
+  render() {
     return (
       <View style={styles.container}>
         <NavBar.Default />
-        <View style={styles.svgContainer}>
+        <View>
           <Surface width={400} height={300}>
-            <Shape
-              scale={3}
-              x={70}
-              y={70}
-              d={this.state.transition0}
-              fill={svgIcons[this._current][0].fill}
-              stroke={svgIcons[this._current][0].stroke}
-              opacity={svgIcons[this._current][0].opacity}
-            />
-            <Shape
-              scale={3}
-              x={70}
-              y={70}
-              d={this.state.transition1}
-              fill={svgIcons[this._current][1].fill}
-              stroke={svgIcons[this._current][1].stroke}
-              opacity={svgIcons[this._current][1].opacity}
-            />
-            <Shape
-              scale={3}
-              x={70}
-              y={70}
-              d={this.state.transition2}
-              fill={svgIcons[this._current][2].fill}
-              stroke={svgIcons[this._current][2].stroke}
-              opacity={svgIcons[this._current][2].opacity}
-            />
+            {this.renderTransitions()}
           </Surface>
           <Button
             style={styles.button}
@@ -129,7 +139,7 @@ export default class Debug extends Component {
           />
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -140,11 +150,6 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    flex: 1
+    flex: 1,
   },
-
-  svgContainer: {
-  },
-
-
 });

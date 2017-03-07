@@ -93,9 +93,6 @@ export default class PayeverApi {
       log.debug(`${options.method} ${url}`);
     }
 
-    console.log('tttttttttttttttttttttttt');
-    console.log(options);
-    console.log('tttttttttttttttttttttttt');
     const response: ApiResp = await fetch(url, options);
     const text = await response.text();
     try {
