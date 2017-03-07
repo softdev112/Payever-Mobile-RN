@@ -4,15 +4,15 @@ import { inject, observer } from 'mobx-react/native';
 import { Icon, ImageButton, StyleSheet, Text, View } from 'ui';
 import { Navigator } from 'react-native-navigation';
 
-import type UserProfilesStore from '../../../store/UserProfilesStore/index';
+import type ProfilesStore from '../../../store/profiles';
 import type BusinessProfile
-  from '../../../store/UserProfilesStore/models/BusinessProfile';
+  from '../../../store/profiles/models/BusinessProfile';
 import { hideMenu, showScreen } from '../../../common/Navigation';
 import BusinessList from '../components/BusinessList';
-import type AuthStore from '../../../store/AuthStore';
+import type AuthStore from '../../../store/auth';
 import type { Config } from '../../../config';
 
-@inject('userProfiles', 'auth', 'config')
+@inject('profiles', 'auth', 'config')
 @observer
 export default class SideMenu extends Component {
   static navigatorStyle = {
@@ -23,7 +23,7 @@ export default class SideMenu extends Component {
     auth: AuthStore;
     config: Config;
     navigator: Navigator;
-    userProfiles?: UserProfilesStore;
+    profiles?: ProfilesStore;
   };
 
   onAddNewBusiness() {
@@ -47,26 +47,26 @@ export default class SideMenu extends Component {
   }
 
   onProfileSelect(profile: BusinessProfile) {
-    const { userProfiles } = this.props;
+    const { profiles } = this.props;
 
     this.onClose();
-    userProfiles.setCurrentProfile(profile);
+    profiles.setCurrentProfile(profile);
     showScreen('dashboard.Dashboard');
   }
 
   onUserPress() {
-    const { userProfiles } = this.props;
-    userProfiles.setCurrentProfile(userProfiles.privateProfile);
+    const { profiles } = this.props;
+    profiles.setCurrentProfile(profiles.privateProfile);
     // todo: replace to navigator.push
     showScreen('dashboard.Private');
   }
 
   onProfileSettingsPress() {
-    const { navigator, userProfiles } = this.props;
+    const { navigator, profiles } = this.props;
     this.onClose();
     navigator.push({
       screen: 'core.WebView',
-      passProps: { url: userProfiles.privateProfile.settingsUrl },
+      passProps: { url: profiles.privateProfile.settingsUrl },
     });
   }
 
@@ -98,9 +98,9 @@ export default class SideMenu extends Component {
   }
 
   render() {
-    const { userProfiles } = this.props;
+    const { profiles } = this.props;
 
-    if (!userProfiles.privateProfile) {
+    if (!profiles.privateProfile) {
       return null;
     }
 
@@ -116,11 +116,11 @@ export default class SideMenu extends Component {
             <View style={styles.userInfo}>
               <ImageButton
                 style={styles.userInfo_avatar}
-                source={userProfiles.privateProfile.logoSource}
+                source={profiles.privateProfile.logoSource}
                 onPress={::this.onUserPress}
               />
               <Text style={styles.userInfo_name} onPress={::this.onUserPress}>
-                {userProfiles.privateProfile.displayName}
+                {profiles.privateProfile.displayName}
               </Text>
               <View>
                 <Text
@@ -140,7 +140,7 @@ export default class SideMenu extends Component {
             </View>
             <BusinessList
               onSelect={::this.onProfileSelect}
-              userProfiles={userProfiles}
+              profiles={profiles}
             />
             <Text
               style={styles.addBusiness}

@@ -3,7 +3,7 @@ import { Keyboard, TextInput } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import { Icon, StyleSheet, View } from 'ui';
-import CommunicationStore from '../../../../store/CommunicationStore';
+import CommunicationStore from '../../../../store/communication';
 
 @inject('communication')
 @observer

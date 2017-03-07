@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react/native';
 import { Html, Link, StyleSheet, Text, View } from 'ui';
 import { format } from 'utils';
 import type Offer, { OfferItem }
-  from '../../../store/OffersStore/models/Offer';
+  from '../../../store/offers/models/Offer';
 
 @inject('config')
 @observer

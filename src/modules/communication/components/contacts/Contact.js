@@ -7,10 +7,10 @@ import { StyleSheet, Text, View } from 'ui';
 import OnlineStatus from '../OnlineStatus';
 import CountBadge from './CountBadge';
 import type ConversationInfo from
-  '../../../../store/CommunicationStore/models/ConversationInfo';
-import type Message from '../../../../store/CommunicationStore/models/Message';
+  '../../../../store/communication/models/ConversationInfo';
+import type Message from '../../../../store/communication/models/Message';
 import type CommunicationStore
-  from '../../../../store/CommunicationStore/index';
+  from '../../../../store/communication';
 
 @inject('communication')
 @observer

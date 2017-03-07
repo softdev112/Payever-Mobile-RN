@@ -6,7 +6,7 @@ import { Icon, Loader, SpinnerButton, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 
-import type SearchStore, { SearchRow } from '../../../store/SearchStore';
+import type SearchStore, { SearchRow } from '../../../store/search';
 
 @inject('search')
 @observer

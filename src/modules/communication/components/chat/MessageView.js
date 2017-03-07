@@ -3,11 +3,10 @@ import { Alert } from 'react-native';
 import Swipeable from 'react-native-swipeable';
 import { Html, Icon, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
-
-import type Message from '../../../../store/CommunicationStore/models/Message';
+import type Message from '../../../../store/communication/models/Message';
 import Offer from '../../../marketing/components/OfferDetails';
 import MediaView from './MediaView';
-import CommunicationStore from '../../../../store/CommunicationStore';
+import type CommunicationStore from '../../../../store/communication';
 
 @inject('communication')
 @observer

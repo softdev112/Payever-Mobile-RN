@@ -7,10 +7,10 @@ import {
 } from 'ui';
 import { log, pushNotificationsHelper } from 'utils';
 import type { Config } from '../../../config';
-import type UserProfilesStore from '../../../store/UserProfilesStore';
-import type Profile from '../../../store/UserProfilesStore/models/Profile';
+import type ProfilesStore from '../../../store/profiles';
+import type Profile from '../../../store/profiles/models/Profile';
 
-@inject('userProfiles', 'config')
+@inject('profiles', 'config')
 @observer
 export default class ChooseAccount extends Component {
   static navigatorStyle = {
@@ -20,7 +20,7 @@ export default class ChooseAccount extends Component {
   props: {
     config: Config;
     navigator: Navigator;
-    userProfiles: UserProfilesStore;
+    profiles: ProfilesStore;
   };
 
   dataSource: GridView.DataSource;
@@ -33,21 +33,21 @@ export default class ChooseAccount extends Component {
   }
 
   async componentWillMount() {
-    const { userProfiles, navigator } = this.props;
+    const { profiles, navigator } = this.props;
 
     //noinspection JSUnresolvedFunction
     Keyboard.dismiss();
 
-    if (!await userProfiles.load()) {
+    if (!await profiles.load()) {
       navigator.push({
         screen: 'core.ErrorPage',
         animated: true,
-        passProps: { message: userProfiles.error },
+        passProps: { message: profiles.error },
       });
     }
 
     // Register push notifications
-    const { store, privateProfile } = userProfiles;
+    const { store, privateProfile } = profiles;
     pushNotificationsHelper.createInstance(store.api, privateProfile.user)
       .registerNotifications()
       .catch(log.warn);
@@ -70,8 +70,8 @@ export default class ChooseAccount extends Component {
   }
 
   onProfileClick(profile: Profile) {
-    const { userProfiles, navigator } = this.props;
-    userProfiles.setCurrentProfile(profile);
+    const { profiles, navigator } = this.props;
+    profiles.setCurrentProfile(profile);
     navigator.resetTo({
       screen: profile.isBusiness ? 'dashboard.Dashboard' : 'dashboard.Private',
       title: 'Home',
@@ -128,15 +128,15 @@ export default class ChooseAccount extends Component {
   }
 
   render() {
-    const { userProfiles } = this.props;
+    const { profiles } = this.props;
 
     //noinspection JSUnresolvedFunction
-    const dataSource = this.dataSource.cloneWithRows(userProfiles.toArray());
+    const dataSource = this.dataSource.cloneWithRows(profiles.toArray());
 
     return (
       <View style={styles.container}>
         <Header textStyle={styles.header}>Welcome!</Header>
-        <Loader isLoading={userProfiles.isLoading}>
+        <Loader isLoading={profiles.isLoading}>
           {this.renderProfiles(dataSource)}
         </Loader>
       </View>

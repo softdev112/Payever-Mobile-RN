@@ -1,7 +1,7 @@
 import { extendObservable, observable } from 'mobx';
 
 import type Avatar from './Avatar';
-import Offer from '../../OffersStore/models/Offer';
+import Offer from '../../offers/models/Offer';
 import Media from './Media';
 
 export default class Message {
