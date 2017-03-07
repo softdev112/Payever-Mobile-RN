@@ -6,7 +6,7 @@ import { ErrorBox, Loader, StyleSheet } from 'ui';
 import Footer from './Footer';
 import MessageView from './MessageView';
 import Header from './Header';
-import CommunicationStore from '../../../../store/CommunicationStore';
+import CommunicationStore from '../../../../store/communication';
 
 @inject('communication')
 @observer

@@ -2,7 +2,7 @@
  * Created by Elf on 12.01.2017.
  */
 import startApp from '../../src/startApp';
-import AuthStore from '../../src/store/AuthStore';
+import AuthStore from '../../src/store/auth';
 import { showScreen } from '../../src/common/Navigation';
 
 jest.mock('../../src/common/Navigation');

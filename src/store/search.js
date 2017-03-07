@@ -1,9 +1,9 @@
 import { action, computed, observable, runInAction } from 'mobx';
-import { apiHelper } from '../common/utils';
-import { images } from '../common/ui';
+import { apiHelper } from 'utils';
+import { images } from 'ui';
 
-import type Store from './index';
 import type { SearchDataRow } from '../common/api/ProfilesApi';
+import type Store from './index';
 
 export default class SearchStore {
   @observable items: Array<SearchRow> = [];

@@ -2,7 +2,7 @@
 /** @name ApiResp */
 import { log } from 'utils';
 
-import type AuthStore from '../../store/AuthStore';
+import type AuthStore from '../../store/auth';
 import type { Config } from '../../config';
 
 import AuthApi from './AuthApi';

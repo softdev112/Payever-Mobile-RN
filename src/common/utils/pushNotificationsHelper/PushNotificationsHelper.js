@@ -6,7 +6,7 @@ import { log } from 'utils';
 
 import type PayeverApi from './../index';
 import type UserAccount
-  from '../../../store/UserProfilesStore/models/UserAccount';
+  from '../../../store/profiles/models/UserAccount';
 import handleNotification from './notificationHandlers';
 
 export default class PushNotificationsHelper {

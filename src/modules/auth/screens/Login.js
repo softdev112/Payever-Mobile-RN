@@ -7,8 +7,8 @@ import {
 } from 'ui';
 import type { Navigator } from 'react-native-navigation';
 
-import type AuthStore from '../../../store/AuthStore';
-import type { Config } from '../../../config/index';
+import type AuthStore from '../../../store/auth';
+import type { Config } from '../../../config';
 
 @inject('auth', 'config')
 @observer

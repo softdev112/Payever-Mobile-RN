@@ -4,8 +4,8 @@ import { Image, Dimensions, Linking, TouchableOpacity } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { Icon, StyleSheet, Text, View } from 'ui';
 import { format } from 'utils';
-import Media from '../../../../store/CommunicationStore/models/Media';
-import { Config } from '../../../../config/index';
+import Media from '../../../../store/communication/models/Media';
+import { Config } from '../../../../config';
 
 @inject('config')
 @observer

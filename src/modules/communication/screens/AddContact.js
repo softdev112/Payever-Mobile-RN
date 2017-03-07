@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { NavBar, StyleSheet, View, WebView } from 'ui';
-import UserProfilesStore from '../../../store/UserProfilesStore';
+import ProfilesStore from '../../../store/profiles';
 
-@inject('userProfiles')
+@inject('profiles')
 @observer
 export default class AddContact extends Component {
   static navigatorStyle = {
@@ -11,11 +11,11 @@ export default class AddContact extends Component {
   };
 
   props: {
-    userProfiles?: UserProfilesStore;
+    profiles?: ProfilesStore;
   };
 
   render() {
-    const profile = this.props.userProfiles.currentProfile;
+    const profile = this.props.profiles.currentProfile;
 
     const uri = profile.getCommunicationUrl() + '#new/message';
     const js = `(${injectedJs.toString()})()`;

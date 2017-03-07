@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'ui';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
 import type UserSettings
-  from '../../../../store/CommunicationStore/models/UserSettings';
+  from '../../../../store/communication/models/UserSettings';
 import CheckBoxPref from './CheckBoxPref';
 
 const PERIOD_BLOCK_HEIGHT = 70;

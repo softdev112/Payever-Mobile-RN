@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react/native';
 import { Icon, StyleSheet, Text, View } from 'ui';
 import type { Navigator } from 'react-native-navigation';
 import type CommunicationStore
-  from '../../../../store/CommunicationStore/index';
+  from '../../../../store/communication';
 
 import CountBadge from './CountBadge';
 

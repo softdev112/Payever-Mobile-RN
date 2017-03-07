@@ -11,7 +11,7 @@ import BusinessProfile from './models/BusinessProfile';
 import PersonalProfile from './models/PersonalProfile';
 import Profile from './models/Profile';
 
-export default class UserProfilesStore {
+export default class ProfilesStore {
   @observable ownBusinesses: Array<BusinessProfile>   = [];
   @observable staffBusinesses: Array<BusinessProfile> = [];
   @observable privateProfile: PersonalProfile         = null;

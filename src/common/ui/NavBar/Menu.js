@@ -5,11 +5,11 @@ import IconButton from './IconButton';
 import images from '../images';
 import StyleSheet from '../StyleSheet';
 import { toggleMenu } from '../../Navigation';
-import type UserProfilesStore from '../../../store/UserProfilesStore';
+import type ProfilesStore from '../../../store/profiles';
 
 //noinspection JSUnresolvedVariable
 
-@inject('userProfiles')
+@inject('profiles')
 @observer
 export default class Menu extends Component {
   static contextTypes = {
@@ -25,7 +25,7 @@ export default class Menu extends Component {
   };
 
   props: {
-    userProfiles: UserProfilesStore;
+    profiles: ProfilesStore;
   };
 
   onPress() {
@@ -33,10 +33,10 @@ export default class Menu extends Component {
   }
 
   render() {
-    const { userProfiles } = this.props;
+    const { profiles } = this.props;
     let source;
-    if (userProfiles.currentProfile) {
-      source = userProfiles.currentProfile.logoSource;
+    if (profiles.currentProfile) {
+      source = profiles.currentProfile.logoSource;
     } else {
       source = images.noAvatar;
     }
