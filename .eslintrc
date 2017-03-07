@@ -30,7 +30,8 @@
     "fetch": true,
     "Headers": true,
     "log": true,
-    "WebSocket": true
+    "WebSocket": true,
+    "requestAnimationFrame": true
   },
 
   "rules": {

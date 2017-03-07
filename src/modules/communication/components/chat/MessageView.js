@@ -116,7 +116,9 @@ export default class MessageView extends Component {
           {this.renderAvatar(message.avatar)}
           <View style={styles.message}>
             <View style={styles.header}>
-              <Text style={styles.header_sender}>{`${message.senderName} `}</Text>
+              <Text style={styles.header_sender}>
+                {`${message.senderName} `}
+              </Text>
               <Text style={styles.header_date}>{message.dateFormated}</Text>
             </View>
             <View style={styles.body}>
