@@ -25,7 +25,7 @@ export default function handleNotification(
   // Foreground show notification to user with
   // question does he want to see it
   const message = Platform.OS === 'ios'
-    ? notification._alert : 'Receive Notification';
+    ? notification._alert : notification.data.body;
 
   Navigation.showInAppNotification({
     screen: 'core.PushNotification',
