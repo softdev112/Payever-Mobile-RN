@@ -42,23 +42,52 @@ export default class MessageView extends Component {
   }
 
   getSwipeButtons() {
-    return ([
-      <Icon
-        onPress={::this.onDeleteMessagePress}
-        style={styles.actionIcon}
-        source="icon-storebuilder-delete-16"
-      />,
-      <Icon
-        onPress={() => {}}
-        style={styles.actionIcon}
-        source="icon-storebuilder-edit-16"
-      />,
-    ]);
+    const { message } = this.props;
+
+    if (message.deleted) return null;
+
+    const rightButtons = [];
+    if (!message.own) {
+      rightButtons.splice(0, 0,
+        <Icon
+          onPress={() => {}}
+          style={styles.actionIcon}
+          source="icon-reply-16"
+        />,
+        <Icon
+          onPress={() => {}}
+          style={styles.actionIcon}
+          source="icon-arrow-right-3-16"
+        />
+      );
+    } else {
+      if (message.editable) {
+        rightButtons.push(
+          <Icon
+            onPress={() => {}}
+            style={styles.actionIcon}
+            source="icon-edit-16"
+          />
+        );
+      }
+
+      if (message.deletable) {
+        rightButtons.push(
+          <Icon
+            onPress={::this.onDeleteMessagePress}
+            style={styles.actionIcon}
+            source="icon-trashcan-16"
+          />
+        );
+      }
+    }
+
+    return rightButtons;
   }
 
   renderContent(message: Message) {
     if (message.deleted) {
-      return <Text style={styles.message_deleted}>(deleted)</Text>;
+      return <Text style={styles.messageDeleted}>(deleted)</Text>;
     }
 
     if (message.offer) {
@@ -84,8 +113,8 @@ export default class MessageView extends Component {
 
     if (avatar.type === 'letters') {
       return (
-        <View style={styles.avatar_letters}>
-          <Text style={styles.avatar_text}>{avatar.value}</Text>
+        <View style={styles.avatarLetters}>
+          <Text style={styles.avatarText}>{avatar.value}</Text>
         </View>
       );
     }
@@ -99,7 +128,7 @@ export default class MessageView extends Component {
     if (message.isSystem) {
       return (
         <View style={styles.container}>
-          <Text style={styles.message_system}>{message.body}</Text>
+          <Text style={styles.messageSystem}>{message.body}</Text>
         </View>
       );
     }
@@ -108,6 +137,10 @@ export default class MessageView extends Component {
       <Swipeable
         style={styles.swipeContainer}
         rightButtons={this.getSwipeButtons()}
+        rightButtonWidth={50}
+        rightActionActivationDistance={80}
+        contentContainerStyle={styles.swipeContainerInside}
+        rightButtonContainerStyle={styles.actionIconContainer}
         onRightButtonsOpenRelease={() => this.setState({ isRowShift: true })}
         onRightButtonsCloseRelease={() => this.setState({ isRowShift: false })}
       >
@@ -115,10 +148,10 @@ export default class MessageView extends Component {
           {this.renderAvatar(message.avatar)}
           <View style={styles.message}>
             <View style={styles.header}>
-              <Text style={styles.header_sender}>
+              <Text style={styles.headerSender}>
                 {`${message.senderName} `}
               </Text>
-              <Text style={styles.header_date}>{message.dateFormated}</Text>
+              <Text style={styles.headerDate}>{message.dateFormated}</Text>
             </View>
             <View style={styles.body}>
               {this.renderContent(message)}
@@ -135,6 +168,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
 
+  actionIconContainer: {
+    alignSelf: 'center',
+  },
+
   avatar: {
     borderRadius: 16,
     height: 32,
@@ -142,19 +179,18 @@ const styles = StyleSheet.create({
     width: 32,
   },
 
-  avatar_letters: {
+  avatarLetters: {
     alignItems: 'center',
     borderColor: '#666',
     borderRadius: 16,
     borderWidth: 1,
-
     height: 32,
     justifyContent: 'center',
     marginRight: 22,
     width: 32,
   },
 
-  avatar_text: {
+  avatarText: {
     fontSize: 16,
   },
 
@@ -174,13 +210,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 
-  header_sender: {
+  headerSender: {
     color: '$pe_color_dark_gray',
     fontSize: 13,
     fontWeight: '500',
   },
 
-  header_date: {
+  headerDate: {
     color: '$pe_color_icon',
     fontSize: 11,
     marginLeft: 5,
@@ -194,7 +230,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  message_text: {
+  messageText: {
     color: '$pe_color_dark_gray',
     flex: 1,
     fontSize: 13,
@@ -202,14 +238,14 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
 
-  message_deleted: {
+  messageDeleted: {
     color: '$pe_color_icon',
     fontSize: 11,
     fontWeight: '600',
     marginTop: 2,
   },
 
-  message_system: {
+  messageSystem: {
     alignSelf: 'flex-start',
     backgroundColor: '$border_color',
     borderRadius: 18,
@@ -219,6 +255,10 @@ const styles = StyleSheet.create({
   },
 
   swipeContainer: {
-    width: '100%',
+    width: '95%',
+  },
+
+  swipeContainerInside: {
+    padding: 2,
   },
 });
