@@ -101,7 +101,7 @@ export default class Debug extends Component {
       if (!start) start = timestamp;
       const delta = (timestamp - start) / 1000;
 
-      if (delta > 1) return setTimeout(cb, 200);
+      if (delta > 1) return cb();
 
       this.state.transitions.forEach(transition => transition.tween(delta));
       this.setState(this.state);

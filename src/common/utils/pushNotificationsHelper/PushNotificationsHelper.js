@@ -83,10 +83,13 @@ export default class PushNotificationsHelper {
       NotificationsAndroid.setNotificationReceivedListener(
         ::this.onNotificationReceivedAndroid
       );
+      NotificationsAndroid.refreshToken();
       const initNotification = await PendingNotifications
         .getInitialNotification();
       console.log('ReactNativeNotif Init Notification', initNotification);
-      NotificationsAndroid.refreshToken();
+      if (initNotification) {
+        this.onNotificationOpened(initNotification);
+      }
     }
   }
 }
