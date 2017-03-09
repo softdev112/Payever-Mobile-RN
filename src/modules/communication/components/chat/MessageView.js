@@ -14,6 +14,7 @@ export default class MessageView extends Component {
   props: {
     message: Message;
     communication?: CommunicationStore;
+    onRedirectMessage: (message: Message, pageY: number) => void;
   };
 
   onDeleteMessagePress() {
@@ -41,6 +42,10 @@ export default class MessageView extends Component {
     communication.deleteMessage(message.id);
   }
 
+  prepareForRedirectMessage({ nativeEvent: { pageY } }) {
+    this.props.onRedirectMessage(this.props.message, pageY);
+  }
+
   getSwipeButtons() {
     const { message } = this.props;
 
@@ -48,38 +53,41 @@ export default class MessageView extends Component {
 
     const rightButtons = [];
     if (!message.own) {
-      rightButtons.splice(0, 0,
+      rightButtons.push(
         <Icon
           onPress={() => {}}
           style={styles.actionIcon}
           source="icon-reply-16"
-        />,
+        />
+      );
+    }
+
+    rightButtons.push(
+      <Icon
+        onPress={(e) => this.prepareForRedirectMessage(e)}
+        style={styles.actionIcon}
+        source="icon-arrow-right-3-16"
+      />
+    );
+
+    if (message.editable) {
+      rightButtons.push(
         <Icon
           onPress={() => {}}
           style={styles.actionIcon}
-          source="icon-arrow-right-3-16"
+          source="icon-edit-16"
         />
       );
-    } else {
-      if (message.editable) {
-        rightButtons.push(
-          <Icon
-            onPress={() => {}}
-            style={styles.actionIcon}
-            source="icon-edit-16"
-          />
-        );
-      }
+    }
 
-      if (message.deletable) {
-        rightButtons.push(
-          <Icon
-            onPress={::this.onDeleteMessagePress}
-            style={styles.actionIcon}
-            source="icon-trashcan-16"
-          />
-        );
-      }
+    if (message.deletable) {
+      rightButtons.push(
+        <Icon
+          onPress={::this.onDeleteMessagePress}
+          style={styles.actionIcon}
+          source="icon-trashcan-16"
+        />
+      );
     }
 
     return rightButtons;
@@ -133,6 +141,10 @@ export default class MessageView extends Component {
       );
     }
 
+    const { forwardFrom } = message;
+    const msgHeader = forwardFrom
+      ? `Forwarded From ${forwardFrom.senderName}` : `${message.senderName} `;
+
     return (
       <Swipeable
         style={styles.swipeContainer}
@@ -148,9 +160,7 @@ export default class MessageView extends Component {
           {this.renderAvatar(message.avatar)}
           <View style={styles.message}>
             <View style={styles.header}>
-              <Text style={styles.headerSender}>
-                {`${message.senderName} `}
-              </Text>
+              <Text style={styles.headerSender}>{msgHeader}</Text>
               <Text style={styles.headerDate}>{message.dateFormated}</Text>
             </View>
             <View style={styles.body}>

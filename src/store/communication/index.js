@@ -29,6 +29,8 @@ export default class CommunicationStore {
   @observable foundMessages: Array<Message>;
   @observable contactsFilter: string = '';
 
+  @observable messagesForRedirect: Array<Message> = [];
+
   store: Store;
   socket: SocketApi;
   socketHandlers: SocketHandlers;
@@ -150,6 +152,16 @@ export default class CommunicationStore {
   }
 
   @action
+  async forwardMessage(body, forwardFromId) {
+    console.log(forwardFromId);
+    const socket = await this.store.api.messenger.getSocket();
+    return socket.sendMessage({
+      body,
+      conversationId: this.selectedConversationId,
+    });
+  }
+
+  @action
   async searchMessages(query) {
     const socket = await this.store.api.messenger.getSocket();
     return apiHelper(socket.searchMessages(query))
@@ -214,6 +226,10 @@ export default class CommunicationStore {
     return this.conversationDs.cloneWithRows(messages.slice());
   }
 
+  @computed get isMsgsForRedirectAvailable() {
+    return this.messagesForRedirect.length > 0;
+  }
+
   @action
   updateUserStatus(status: ConversationStatus, typing = false) {
     this.conversations.forEach((conversation: Conversation) => {
@@ -257,6 +273,17 @@ export default class CommunicationStore {
   async deleteMessage(messageId) {
     const socket = await this.store.api.messenger.getSocket();
     return socket.deleteMessage(messageId);
+  }
+
+  @action
+  addMessageForRedirect(message: Message) {
+    this.messagesForRedirect.push(message);
+  }
+
+  @action
+  removeMessageFromRedirect(messageId: string) {
+    this.messagesForRedirect =
+      this.messagesForRedirect.filter(message => message.id !== messageId);
   }
 
   initSocket(url, userId) {
