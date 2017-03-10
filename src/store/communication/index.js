@@ -152,11 +152,10 @@ export default class CommunicationStore {
   }
 
   @action
-  async forwardMessage(body, forwardFromId) {
-    console.log(forwardFromId);
+  async forwardMessage(forwardFromId) {
     const socket = await this.store.api.messenger.getSocket();
     return socket.sendMessage({
-      body,
+      forwardFromId,
       conversationId: this.selectedConversationId,
     });
   }

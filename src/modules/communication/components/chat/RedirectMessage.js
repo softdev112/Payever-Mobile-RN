@@ -31,11 +31,6 @@ export default class RedirectMessage extends Component {
       isWideOpen: false,
       animWidth: new Animated.Value(MIN_WIDTH),
     };
-
-    console.log('ssssssssssssss1');
-    console.log(props.message.id);
-    console.log(props.message.senderId);
-    console.log('ssssssssssssss2');
   }
 
   onResizeTap() {
@@ -51,9 +46,9 @@ export default class RedirectMessage extends Component {
   }
 
   redirectMessage() {
-    const { communication, message: { body, id, senderId } } = this.props;
+    const { communication, message: { id } } = this.props;
 
-    communication.forwardMessage(body, senderId);
+    communication.forwardMessage(id);
     communication.removeMessageFromRedirect(id);
   }
 
@@ -105,7 +100,7 @@ const styles = StyleSheet.create({
     minWidth: MIN_WIDTH,
     width: MIN_WIDTH,
     backgroundColor: '#FFF',
-    borderColor: 'yellowgreen',
+    borderColor: '$pe_color_twitter',
     borderWidth: 2,
     borderRadius: 22,
     paddingVertical: 5,
