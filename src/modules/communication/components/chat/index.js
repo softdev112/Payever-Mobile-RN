@@ -54,7 +54,7 @@ export default class Chat extends Component {
     Animated.timing(animMsgValue, {
       toValue: 10,
       duration: 300,
-      easing: Easing.inOut(Easing.quad),
+      easing: Easing.back(2),
     }).start(() => {
       this.setState({
         animMsgPosY: 0,
@@ -104,6 +104,11 @@ export default class Chat extends Component {
       outputRange: [1, 0],
     });
 
+    const width = animMsgValue.interpolate({
+      inputRange: [0, 10],
+      outputRange: [300, 150],
+    });
+
     return (
       <KeyboardAvoidingView
         style={[styles.container, style]}
@@ -124,6 +129,7 @@ export default class Chat extends Component {
           <Animated.View
             style={[styles.animRedirectMsg, {
               opacity,
+              width,
               transform: [
                 {
                   translateY,
@@ -160,8 +166,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 20,
     height: 40,
-    width: 300,
-    borderColor: 'yellowgreen',
+    width: 200,
+    borderColor: '$pe_color_twitter',
     borderWidth: 2,
     borderRadius: 20,
     paddingVertical: 10,

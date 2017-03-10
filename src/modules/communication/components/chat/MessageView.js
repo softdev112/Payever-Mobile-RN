@@ -143,7 +143,7 @@ export default class MessageView extends Component {
 
     const { forwardFrom } = message;
     const msgHeader = forwardFrom
-      ? `Forwarded From ${forwardFrom.senderName}` : `${message.senderName} `;
+      ? `Forwarded From ${forwardFrom.senderName} ` : `${message.senderName} `;
 
     return (
       <Swipeable
