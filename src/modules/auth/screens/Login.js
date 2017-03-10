@@ -2,8 +2,7 @@ import { Component } from 'react';
 import { Keyboard } from 'react-native';
 import { observer, inject } from 'mobx-react/native';
 import {
-  Button, Container, Error, Header, Link, Loader, StyleSheet,
-  TextInput, View,
+  Button, Container, Error, Loader, NavBar, StyleSheet, TextInput, View,
 } from 'ui';
 import type { Navigator } from 'react-native-navigation';
 
@@ -75,9 +74,10 @@ export default class Login extends Component {
 
     return (
       <View style={styles.container}>
-        <Header style={styles.header}>
-          <Link onPress={::this.onSignUp}>Sign up for free</Link>
-        </Header>
+        <NavBar>
+          <NavBar.Back title="Back" />
+          <NavBar.Title title="Login" />
+        </NavBar>
         <Loader isLoading={isLoading}>
           <Container contentContainerStyle={styles.form} layout="small">
             <Error

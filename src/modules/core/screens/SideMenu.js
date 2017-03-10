@@ -87,16 +87,6 @@ export default class SideMenu extends Component {
     showScreen('auth.Login');
   }
 
-  onShowMorphIcons() {
-    const { navigator } = this.props;
-    this.onClose();
-    navigator.push({
-      screen: 'core.SVGMorph',
-      title: 'SVG Icons',
-      animated: true,
-    });
-  }
-
   render() {
     const { profiles } = this.props;
 
@@ -152,12 +142,6 @@ export default class SideMenu extends Component {
         </View>
 
         <View style={styles.bottomMenu}>
-          <Text
-            style={styles.bottomMenu_item}
-            onPress={::this.onShowMorphIcons}
-          >
-            Show Morph Icons
-          </Text>
           {__DEV__ && (
             <Text
               style={styles.bottomMenu_item}

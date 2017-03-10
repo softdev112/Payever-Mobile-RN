@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { ART } from 'react-native';
-import { NavBar, View, StyleSheet, Button } from 'ui';
-import { Navigator } from 'react-native-navigation';
+import { View, StyleSheet } from 'ui';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as Morph from 'art/morph/path';
 
@@ -12,33 +11,45 @@ const {
   Shape,
 } = ART;
 
-const emptyPath = 'M 50, 50';
+const PATH_END_MORPH_KOEF = 0.98;
+const TRANSITION_DURATION = 1200;
+const ICON_FREEZ_TIME = 200;
 
+const emptyPath = 'M 50, 50';
 const NUMBER_OF_CHANNELS = 9;
+const DEFAULT_PATH_X = 10;
+const DEFAULT_PATH_Y = 10;
 
 const animationPaths = [];
-const pathsAtributes = [];
-svgIcons.forEach((icon, iconIndex) => {
-  for (let i = 0; i < NUMBER_OF_CHANNELS; i += 1) {
-    if (!animationPaths[i]) animationPaths[i] = [];
-    animationPaths[i][iconIndex] = Morph.Path(
-      icon[i] ? icon[i].path : emptyPath
-    );
+const pathsAttributes = [];
 
-    if (!pathsAtributes[i]) pathsAtributes[i] = [];
-    pathsAtributes[i][iconIndex] = {
-      fill: icon[i] ? icon[i].fill : undefined,
-      stroke: icon[i] ? icon[i].stroke : undefined,
-      opacity: icon[i] ? icon[i].opacity : undefined,
-    };
-  }
-});
+for (let i = 0; i < NUMBER_OF_CHANNELS; i += 1) {
+  animationPaths[i] = [];
+  pathsAttributes[i] = [];
 
-export default class Debug extends Component {
-  static navigatorStyle = { navBarHidden: true };
+  svgIcons.forEach((icon, iconIndex) => {
+    if (icon[i]) {
+      animationPaths[i][iconIndex] = Morph.Path(icon[i].path);
+      pathsAttributes[i][iconIndex] = {
+        fill: icon[i].fill,
+        stroke: icon[i].stroke,
+        opacity: icon[i].opacity,
+        x: icon[i].x || DEFAULT_PATH_X,
+        y: icon[i].y || DEFAULT_PATH_Y,
+      };
+    } else {
+      animationPaths[i][iconIndex] = Morph.Path(emptyPath);
+      pathsAttributes[i][iconIndex] = {
+        x: DEFAULT_PATH_X,
+        y: DEFAULT_PATH_Y,
+      };
+    }
+  });
+}
 
+export default class SvgIconsShow extends Component {
   props: {
-    navigator: Navigator;
+    style: Object;
   };
 
   state: {
@@ -55,24 +66,17 @@ export default class Debug extends Component {
     };
   }
 
-  componentWillMount() {
+  async componentWillMount() {
     this.currentIcon = 1;
-    this.currentIconColor = 0;
   }
 
   componentDidMount() {
     this.animate(null, this.nextAnimation);
   }
 
-  onPlayAgain() {
-    this.currentIcon = 1;
-    this.currentIconColor = 0;
-
-    this.state = {
-      transitions: this.getTransitionsForIndex(0),
-    };
-
-    this.animate(null, this.nextAnimation);
+  shouldComponentUpdate() {
+    // If animation end do not update component
+    return this.currentIcon !== svgIcons.length;
   }
 
   getTransitionsForIndex(fromIndex) {
@@ -99,12 +103,14 @@ export default class Debug extends Component {
     // eslint-disable-next-line consistent-return
     requestAnimationFrame((timestamp) => {
       if (!start) start = timestamp;
-      const delta = (timestamp - start) / 1000;
-
-      if (delta > 1) return cb();
+      const delta = (timestamp - start) / TRANSITION_DURATION;
 
       this.state.transitions.forEach(transition => transition.tween(delta));
       this.setState(this.state);
+
+      if (delta > PATH_END_MORPH_KOEF) {
+        return setTimeout(() => cb(), ICON_FREEZ_TIME);
+      }
       this.animate(start, cb);
     });
   }
@@ -115,40 +121,27 @@ export default class Debug extends Component {
         <Shape
           key={index}
           scale={3}
-          x={70}
-          y={70}
           d={transition}
-          {...pathsAtributes[index][this.currentIcon]}
+          {...pathsAttributes[index][this.currentIcon]}
         />
       );
     });
   }
 
   render() {
+    const { style } = this.props;
+
     return (
-      <View style={styles.container}>
-        <NavBar.Default />
-        <View>
-          <Surface width={400} height={300}>
-            {this.renderTransitions()}
-          </Surface>
-          <Button
-            style={styles.button}
-            title="Play Again"
-            onPress={::this.onPlayAgain}
-          />
-        </View>
+      <View style={[styles.container, style]}>
+        <Surface width={250} height={250}>
+          {this.renderTransitions()}
+        </Surface>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  button: {
-    width: 200,
-    alignSelf: 'center',
-  },
-
   container: {
     flex: 1,
   },
