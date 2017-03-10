@@ -280,9 +280,14 @@ export default class CommunicationStore {
   }
 
   @action
-  removeMessageFromRedirect(messageId: string) {
+  removeMessageFromRedirect(messageId: number) {
     this.messagesForRedirect =
       this.messagesForRedirect.filter(message => message.id !== messageId);
+  }
+
+  @action
+  isMsgInForRedirectMsgs(messageId: number) {
+    return !!this.messagesForRedirect.find(message => message.id === messageId);
   }
 
   initSocket(url, userId) {
