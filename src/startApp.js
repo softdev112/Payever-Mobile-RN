@@ -10,7 +10,7 @@ const store = new Store(config);
 
 Linking.addEventListener('url', async ({ url }) => {
   if (!await store.auth.checkAuth()) {
-    showScreen('auth.Login');
+    showScreen('core.LaunchScreen');
     return;
   }
 
@@ -27,7 +27,7 @@ export default async function startApp() {
   StyleSheet.build();
 
   if (!await store.auth.checkAuth()) {
-    showScreen('auth.Login');
+    showScreen('core.LaunchScreen');
     return;
   }
 
