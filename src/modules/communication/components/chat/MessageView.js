@@ -3,6 +3,8 @@ import { Alert } from 'react-native';
 import Swipeable from 'react-native-swipeable';
 import { Html, Icon, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
+import * as Animatable from 'react-native-animatable';
+
 import type Message from '../../../../store/communication/models/Message';
 import Offer from '../../../marketing/components/OfferDetails';
 import MediaView from './MediaView';
@@ -16,6 +18,18 @@ export default class MessageView extends Component {
     communication?: CommunicationStore;
     onRedirectMessage: (message: Message, pageY: number) => void;
   };
+
+  state: {
+    isShake: boolean;
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isShake: false,
+    };
+  }
 
   onDeleteMessagePress() {
     if (this.props.message.deleted) return;
@@ -43,6 +57,13 @@ export default class MessageView extends Component {
   }
 
   prepareForRedirectMessage({ nativeEvent: { pageY } }) {
+    const { communication, message } = this.props;
+
+    if (communication.isMsgInForRedirectMsgs(message.id)) {
+      this.setState({ isShake: true });
+      return;
+    }
+
     this.props.onRedirectMessage(this.props.message, pageY);
   }
 
@@ -145,6 +166,8 @@ export default class MessageView extends Component {
     const msgHeader = forwardFrom
       ? `Forwarded From ${forwardFrom.senderName} ` : `${message.senderName} `;
 
+    const { isShake } = this.state;
+
     return (
       <Swipeable
         style={styles.swipeContainer}
@@ -156,7 +179,12 @@ export default class MessageView extends Component {
         onRightButtonsOpenRelease={() => this.setState({ isRowShift: true })}
         onRightButtonsCloseRelease={() => this.setState({ isRowShift: false })}
       >
-        <View style={styles.container}>
+        <Animatable.View
+          style={styles.container}
+          animation={isShake ? 'shake' : ''}
+          duration={300}
+          onAnimationEnd={() => this.setState({ isShake: false })}
+        >
           {this.renderAvatar(message.avatar)}
           <View style={styles.message}>
             <View style={styles.header}>
@@ -167,7 +195,7 @@ export default class MessageView extends Component {
               {this.renderContent(message)}
             </View>
           </View>
-        </View>
+        </Animatable.View>
       </Swipeable>
     );
   }

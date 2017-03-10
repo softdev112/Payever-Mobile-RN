@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
   },
 
   welcomeText: {
-    fontSize: 32,
+    fontSize: '3.8rem',
     fontWeight: '400',
     alignSelf: 'center',
   },
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
   },
 
   authBtnText: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '400',
     color: '$pe_color_blue',
   },
