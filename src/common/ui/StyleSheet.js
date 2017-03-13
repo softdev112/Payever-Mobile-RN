@@ -7,7 +7,7 @@ const styleSheet = new Api();
 // Set values from
 // https://github.com/payeverworldwide/ui-kit/blob/master/scss/pe_variables.scss
 styleSheet.build({
-  rem: (ScreenParams.height * PixelRatio.get() > 1280) ? 8 : 8,
+  rem: (ScreenParams.height * PixelRatio.get() > 1280) ? 10 : 8,
   pe_color_twitter: '#50abf1',
   pe_color_black: '#000',
   pe_color_blue: '#0084ff',
