@@ -84,7 +84,7 @@ export default class SideMenu extends Component {
     const { auth } = this.props;
     auth.logout()
       .catch(e => console.warn(e));
-    showScreen('auth.Login');
+    showScreen('core.LaunchScreen');
   }
 
   render() {

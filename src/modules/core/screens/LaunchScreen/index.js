@@ -145,9 +145,12 @@ export default class LaunchScreen extends Component {
                   Privacy Policy
                 </Text>
               </Text>
-              <TouchableOpacity onPress={::this.onAgreedPress}>
-                <Text style={styles.agreeBtn}>Agree & Continue</Text>
-              </TouchableOpacity>
+              <Text
+                style={styles.agreeBtn}
+                onPress={::this.onAgreedPress}
+              >
+                Agree & Continue
+              </Text>
             </Animatable.View>
           )}
         </View>
@@ -162,14 +165,14 @@ const styles = StyleSheet.create({
   },
 
   animContainer: {
-    flex: 65,
+    flex: 60,
     minHeight: 300,
     alignItems: 'center',
     justifyContent: 'center',
   },
 
   infoContainer: {
-    flex: 35,
+    flex: 40,
   },
 
   welcome: {
@@ -178,20 +181,20 @@ const styles = StyleSheet.create({
   },
 
   welcomeText: {
-    fontSize: '3.8rem',
+    fontSize: '3.7rem',
     fontWeight: '400',
     alignSelf: 'center',
   },
 
   termsAndPolicyText: {
     marginTop: 20,
-    fontSize: 16,
+    fontSize: '1.7rem',
     fontWeight: '400',
     textAlign: 'center',
   },
 
   termsAndPolicyLinks: {
-    fontSize: 16,
+    fontSize: '1.7rem',
     fontWeight: '400',
     color: '$pe_color_blue',
     textAlign: 'center',
@@ -199,7 +202,7 @@ const styles = StyleSheet.create({
 
   agreeBtn: {
     marginTop: '7%',
-    fontSize: 24,
+    fontSize: '2.6rem',
     fontWeight: '400',
     color: '$pe_color_blue',
   },
@@ -218,7 +221,7 @@ const styles = StyleSheet.create({
   },
 
   authBtnText: {
-    fontSize: 18,
+    fontSize: '2.2rem',
     fontWeight: '400',
     color: '$pe_color_blue',
   },
