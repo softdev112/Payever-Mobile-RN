@@ -184,6 +184,12 @@ const styles = StyleSheet.create({
     fontSize: '3.7rem',
     fontWeight: '400',
     alignSelf: 'center',
+    '@media ios': {
+      fontFamily: 'Helvetica Neue',
+    },
+    '@media android': {
+      fontFamily: 'Roboto',
+    },
   },
 
   termsAndPolicyText: {
@@ -191,6 +197,12 @@ const styles = StyleSheet.create({
     fontSize: '1.7rem',
     fontWeight: '400',
     textAlign: 'center',
+    '@media ios': {
+      fontFamily: 'Helvetica Neue',
+    },
+    '@media android': {
+      fontFamily: 'Roboto',
+    },
   },
 
   termsAndPolicyLinks: {
@@ -198,6 +210,12 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: '$pe_color_blue',
     textAlign: 'center',
+    '@media ios': {
+      fontFamily: 'Helvetica Neue',
+    },
+    '@media android': {
+      fontFamily: 'Roboto',
+    },
   },
 
   agreeBtn: {
@@ -224,6 +242,7 @@ const styles = StyleSheet.create({
     fontSize: '2.2rem',
     fontWeight: '400',
     color: '$pe_color_blue',
+
   },
 
   divider: {
