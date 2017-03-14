@@ -120,7 +120,7 @@ export default class SearchForm extends Component {
                 renderRow={::this.renderRow}
                 contentContainerStyle={styles.results}
                 enableEmptySections
-                keyboardShouldPersistTaps
+                keyboardShouldPersistTaps="always"
                 initialListSize={20}
               />
             </Loader>
