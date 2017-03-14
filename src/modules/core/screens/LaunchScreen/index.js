@@ -92,7 +92,7 @@ export default class LaunchScreen extends Component {
           <Text style={styles.welcomeText}>Welcome to Payever</Text>
           { isAgreed ? (
             <Animatable.View
-              style={styles.signInSignUp}
+              style={styles.signInSignUpCont}
               animation={isSwitchToAgreed ? 'zoomIn' : ''}
               duration={400}
               delay={400}
@@ -121,7 +121,7 @@ export default class LaunchScreen extends Component {
             </Animatable.View>
           ) : (
             <Animatable.View
-              style={styles.welcome}
+              style={styles.termsAgreedCont}
               animation={isSwitchToAgreed ? 'zoomOut' : ''}
               duration={400}
               easing="ease-in-out-cubic"
@@ -165,8 +165,8 @@ const styles = StyleSheet.create({
   },
 
   animContainer: {
+    flexBasis: 40,
     flex: 60,
-    minHeight: 300,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     flex: 40,
   },
 
-  welcome: {
+  termsAgreedCont: {
     flex: 1,
     alignItems: 'center',
   },
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     color: '$pe_color_blue',
   },
 
-  signInSignUp: {
+  signInSignUpCont: {
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 35,
