@@ -71,6 +71,12 @@ export default class SocketApi extends EventEmitter {
     });
   }
 
+  async updateTypingStatus(conversationId, userId = this.userId) {
+    return this.client.call('messenger/rpc/updateTypingStatus', {
+      conversationId, userId,
+    });
+  }
+
   async deleteMessage(messageId, userId = this.userId) {
     if (!messageId) return false;
 
