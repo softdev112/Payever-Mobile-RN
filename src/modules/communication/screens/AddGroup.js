@@ -55,6 +55,8 @@ function injectedJs() {
 
   function showDialog() {
     callWebViewOnMessage({ command: 'hide-loader' });
+
+    // Hide Cancel btn
     var $btnCancel = document.querySelector('.btn-default');
     if ($btnCancel) {
       $btnCancel.style.display = 'none';

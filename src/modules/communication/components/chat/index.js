@@ -15,7 +15,7 @@ import CommunicationStore from '../../../../store/communication';
 
 const ANIM_DURATION_KOEF = 0.4;
 const ANIM_POSITION_ADJUST = 65;
-const MAX_SCREEN_HEIGHT = ScreenParams.height - 130;
+const MAX_SCREEN_HEIGHT = ScreenParams.height - 160;
 
 @inject('communication')
 @observer
