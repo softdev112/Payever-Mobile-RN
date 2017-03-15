@@ -14,6 +14,14 @@ export default class RedirectDock extends Component {
     communication?: CommunicationStore;
   };
 
+  $scrollView: ScrollView;
+
+  onScrollContentSizeChange() {
+    if (!this.$scrollView) return;
+
+    this.$scrollView.scrollToEnd({ animated: true });
+  }
+
   renderMessagesForRedirect() {
     const { communication } = this.props;
 
@@ -41,6 +49,8 @@ export default class RedirectDock extends Component {
           contentContainerStyle={styles.scrollContainer}
           horizontal
           showsHorizontalScrollIndicator={false}
+          ref={(ref) => this.$scrollView = ref}
+          onContentSizeChange={::this.onScrollContentSizeChange}
         >
           {this.renderMessagesForRedirect()}
         </ScrollView>
@@ -51,9 +61,13 @@ export default class RedirectDock extends Component {
 
 const styles = StyleSheet.create({
   $maxHeight: '82%',
+
   container: {
     position: 'absolute',
     top: '$maxHeight - 60',
+    '@media (max-height: 620):': {
+      top: '$maxHeight - 80',
+    },
     backgroundColor: 'transparent',
     height: 60,
   },

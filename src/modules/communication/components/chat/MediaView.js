@@ -1,9 +1,9 @@
 /* eslint-disable react/prefer-stateless-function */
 import { Component } from 'react';
-import { Image, Dimensions, Linking, TouchableOpacity } from 'react-native';
+import { Image, Linking, TouchableOpacity } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { Icon, StyleSheet, Text, View } from 'ui';
-import { format } from 'utils';
+import { format, ScreenParams } from 'utils';
 import Media from '../../../../store/communication/models/Media';
 import { Config } from '../../../../config';
 
@@ -66,7 +66,7 @@ export function calcImageDimensions(imageProperties) {
   const OFFSET = 130;
   const MAX = 300;
 
-  const { width: wndWidth, height: wndHeight } = Dimensions.get('window');
+  const { width: wndWidth, height: wndHeight } = ScreenParams;
   const {
     width: srcWidth = MAX,
     height: srcHeight = MAX,

@@ -59,8 +59,10 @@ export default class RedirectMessage extends Component {
   }
 
   render() {
-    const { style } = this.props;
+    const { style, message } = this.props;
     const { animWidth } = this.state;
+
+    const messageStr = message.offer ? message.offer.title : message.editBody;
 
     return (
       <Animated.View style={[styles.container, style, { width: animWidth }]}>
@@ -71,7 +73,7 @@ export default class RedirectMessage extends Component {
               numberOfLines={1}
               ellipsizeMode="tail"
             >
-              {this.props.message.editBody}
+              {messageStr}
             </Text>
             <View style={styles.btnsContainer}>
               <Icon

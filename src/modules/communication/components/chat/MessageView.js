@@ -19,17 +19,7 @@ export default class MessageView extends Component {
     onRedirectMessage: (message: Message, pageY: number) => void;
   };
 
-  state: {
-    isShake: boolean;
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isShake: false,
-    };
-  }
+  $animMessageView: Animatable.View;
 
   onDeleteMessagePress() {
     if (this.props.message.deleted) return;
@@ -60,7 +50,7 @@ export default class MessageView extends Component {
     const { communication, message } = this.props;
 
     if (communication.isMsgInForRedirectMsgs(message.id)) {
-      this.setState({ isShake: true });
+      this.$animMessageView.shake(300);
       return;
     }
 
@@ -166,8 +156,6 @@ export default class MessageView extends Component {
     const msgHeader = forwardFrom
       ? `Forwarded From ${forwardFrom.senderName} ` : `${message.senderName} `;
 
-    const { isShake } = this.state;
-
     return (
       <Swipeable
         style={styles.swipeContainer}
@@ -181,9 +169,7 @@ export default class MessageView extends Component {
       >
         <Animatable.View
           style={styles.container}
-          animation={isShake ? 'shake' : ''}
-          duration={300}
-          onAnimationEnd={() => this.setState({ isShake: false })}
+          ref={ref => this.$animMessageView = ref}
         >
           {this.renderAvatar(message.avatar)}
           <View style={styles.message}>

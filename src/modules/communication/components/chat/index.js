@@ -5,7 +5,7 @@ import {
 import { inject, observer } from 'mobx-react/native';
 import { ErrorBox, Loader, StyleSheet, Text } from 'ui';
 import { ScreenParams } from 'utils';
-import * as _ from 'lodash';
+import { last } from 'lodash';
 
 import Footer from './Footer';
 import MessageView from './MessageView';
@@ -13,8 +13,9 @@ import Header from './Header';
 import RedirectDock from './RedirectDock';
 import CommunicationStore from '../../../../store/communication';
 
+const ANIM_DURATION_KOEF = 0.4;
 const ANIM_POSITION_ADJUST = 65;
-const MAX_SCREEN_HEIGHT = ScreenParams.height - 130;
+const MAX_SCREEN_HEIGHT = ScreenParams.height - 150;
 
 @inject('communication')
 @observer
@@ -42,6 +43,12 @@ export default class Chat extends Component {
     };
   }
 
+  onListContentSizeChange() {
+    if (this.$listView) {
+      this.$listView.scrollToEnd({ animated: true });
+    }
+  }
+
   onRedirectMessage(message, posY) {
     const { communication } = this.props;
     const { animMsgValue } = this.state;
@@ -53,8 +60,8 @@ export default class Chat extends Component {
 
     Animated.timing(animMsgValue, {
       toValue: 10,
-      duration: 300,
-      easing: Easing.back(2),
+      duration: this.getDurationOnRowYPos(posY),
+      easing: Easing.linear,
     }).start(() => {
       this.setState({
         animMsgPosY: 0,
@@ -66,6 +73,11 @@ export default class Chat extends Component {
       // on other screens
       communication.addMessageForRedirect(message);
     });
+  }
+
+  getDurationOnRowYPos(posY: number) {
+    // duration = ANIM_DURATION_KOEF * (screenHeight - Y)
+    return ANIM_DURATION_KOEF * (ScreenParams.height - posY);
   }
 
   renderRow(row) {
@@ -122,6 +134,7 @@ export default class Chat extends Component {
           enableEmptySections
           ref={ref => this.$listView = ref}
           renderRow={::this.renderRow}
+          onContentSizeChange={::this.onListContentSizeChange}
         />
         <Footer conversationId={conversation.id} />
 
@@ -141,7 +154,7 @@ export default class Chat extends Component {
               numberOfLines={1}
               ellipsizeMode="tail"
             >
-              {_.last(msgsForRedirect) && _.last(msgsForRedirect).body}
+              {last(msgsForRedirect) && last(msgsForRedirect).body}
             </Text>
           </Animated.View>
         )}
