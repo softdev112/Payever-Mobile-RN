@@ -26,27 +26,29 @@ export default class LaunchScreen extends Component {
 
   state: {
     isAgreed: boolean;
-    isSwitchToAgreed: boolean;
   };
+
+  $animAgreeView: Animatable.View;
+  $animSignView: Animatable.View;
 
   constructor(props) {
     super(props);
 
     this.state = {
-      isAgreed: false,
-      isSwitchToAgreed: false,
+      isAgreed: true,
     };
   }
 
   async componentWillMount() {
+    let isAgreed = false;
     try {
-      const isAgreed = await AsyncStorage.getItem(IS_AGREED_TAG);
-      if (isAgreed !== null) {
-        this.setState({ isAgreed: JSON.parse(isAgreed) });
-      }
+      const storeItem = await AsyncStorage.getItem(IS_AGREED_TAG);
+      isAgreed = storeItem ? !!JSON.parse(storeItem) : false;
     } catch (error) {
       log.error(error);
     }
+
+    this.setState({ isAgreed });
   }
 
   async onAgreedPress() {
@@ -56,7 +58,14 @@ export default class LaunchScreen extends Component {
       log.error(error);
     }
 
-    this.setState({ isSwitchToAgreed: true });
+    if (this.$animAgreeView) {
+      await this.$animAgreeView.zoomOut(300);
+    }
+
+    this.setState({ isAgreed: true });
+    if (this.$animSignView) {
+      await this.$animSignView.zoomIn(300);
+    }
   }
 
   onCreateAccountPress() {
@@ -83,7 +92,7 @@ export default class LaunchScreen extends Component {
   }
 
   render() {
-    const { isAgreed, isSwitchToAgreed } = this.state;
+    const { isAgreed } = this.state;
 
     return (
       <View style={styles.container}>
@@ -93,11 +102,10 @@ export default class LaunchScreen extends Component {
           { isAgreed ? (
             <Animatable.View
               style={styles.signInSignUpCont}
-              animation={isSwitchToAgreed ? 'zoomIn' : ''}
-              duration={400}
-              delay={400}
+              animation="zoomIn"
+              duration={300}
+              ref={ref => this.$animSignView = ref}
               easing="ease-in-out-cubic"
-              onAnimationEnd={() => this.setState({ isSwitchToAgreed: false })}
             >
               <TouchableOpacity onPress={::this.onSignInPress}>
                 <View style={styles.authBtn}>
@@ -122,10 +130,10 @@ export default class LaunchScreen extends Component {
           ) : (
             <Animatable.View
               style={styles.termsAgreedCont}
-              animation={isSwitchToAgreed ? 'zoomOut' : ''}
-              duration={400}
+              animation="zoomIn"
+              duration={300}
+              ref={ref => this.$animAgreeView = ref}
               easing="ease-in-out-cubic"
-              onAnimationEnd={() => this.setState({ isAgreed: true })}
             >
               <Text style={styles.termsAndPolicyText}>
                 {'Tap "Agree & Continue" to accept the Payever'}

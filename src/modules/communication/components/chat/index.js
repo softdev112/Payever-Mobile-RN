@@ -15,7 +15,7 @@ import CommunicationStore from '../../../../store/communication';
 
 const ANIM_DURATION_KOEF = 0.4;
 const ANIM_POSITION_ADJUST = 65;
-const MAX_SCREEN_HEIGHT = ScreenParams.height - 150;
+const MAX_SCREEN_HEIGHT = ScreenParams.height - 130;
 
 @inject('communication')
 @observer
@@ -28,6 +28,9 @@ export default class Chat extends Component {
   state: {
     animMsgPosY: number;
     animMsgValue: Object;
+    isAnimScroll: boolean;
+    listHeight: number;
+    listContentHeight: number;
     showRedirectAnim: boolean;
   };
 
@@ -39,14 +42,47 @@ export default class Chat extends Component {
     this.state = {
       animMsgPosY: 0,
       animMsgValue: new Animated.Value(0),
+      isAnimScroll: false,
+      listHeight: 0,
+      listContentHeight: 0,
       showRedirectAnim: false,
     };
   }
 
-  onListContentSizeChange() {
-    if (this.$listView) {
-      this.$listView.scrollToEnd({ animated: true });
+  onListContentSizeChange(listContentHeight) {
+    const { isAnimScroll, listHeight } = this.state;
+
+    if (this.$listView && listHeight !== 0 && listContentHeight > listHeight) {
+      this.$listView.scrollToEnd({ animated: this.state.isAnimScroll });
     }
+
+    // After first render of list switch scrollToEnd animated param to true
+    // if listHeight === 0 we didn't scroll onListLayout will scrollToEnd first time
+    if (!isAnimScroll) {
+      this.setState({
+        listContentHeight,
+        isAnimScroll: listHeight > 0,
+      });
+    }
+  }
+
+  onListLayout({ nativeEvent: { layout } }) {
+    const { listContentHeight, listHeight } = this.state;
+
+    if (listHeight !== 0) return;
+
+    // Test if it runs after onContentChange and onContentChange
+    // didn't has listHeight and do not scrollToEnd yet because of this
+    if (listContentHeight !== 0 && listContentHeight > layout.height) {
+      this.$listView.scrollToEnd({ animated: false });
+    }
+
+    // If listContentHeight === 0 we didn't scroll onContentChange will
+    // scrollToEnd first time else it sets scrollToEnd animated param to true
+    this.setState({
+      listHeight: layout.height,
+      isAnimScroll: listContentHeight > 0,
+    });
   }
 
   onRedirectMessage(message, posY) {
@@ -134,7 +170,9 @@ export default class Chat extends Component {
           enableEmptySections
           ref={ref => this.$listView = ref}
           renderRow={::this.renderRow}
-          onContentSizeChange={::this.onListContentSizeChange}
+          initialListSize={conversation.messages.length}
+          onContentSizeChange={(w, h) => this.onListContentSizeChange(h)}
+          onLayout={::this.onListLayout}
         />
         <Footer conversationId={conversation.id} />
 
