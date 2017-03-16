@@ -75,7 +75,7 @@ export default class Login extends Component {
     return (
       <View style={styles.container}>
         <NavBar>
-          <NavBar.Back title="Back" />
+          <NavBar.Back title="Back" showTitle="always" />
           <NavBar.Title title="Login" />
         </NavBar>
         <Loader isLoading={isLoading}>

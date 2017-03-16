@@ -7,6 +7,7 @@ import StyleSheet from '../StyleSheet';
 export default class IconButton extends Component {
   static defaultProps = {
     align: 'right',
+    showTitle: 'size-dep',
   };
 
   props: {
@@ -16,11 +17,12 @@ export default class IconButton extends Component {
     source: Object | number | string;
     title?: string;
     titleStyle?: Object | number;
+    showTitle?: 'size-dep' | 'always' | 'never';
   };
 
   render() {
     const {
-      align, imageStyle, onPress, source, titleStyle, title,
+      align, imageStyle, onPress, source, showTitle, titleStyle, title,
     } = this.props;
 
     let iconStyle;
@@ -28,10 +30,26 @@ export default class IconButton extends Component {
       iconStyle = styles.icon;
     }
 
+    const titleFinalStyle = [styles.title, titleStyle];
+    let isShowTitle = !!title;
+
+    switch (showTitle) {
+      case 'size-dep':
+        titleFinalStyle.push(styles.titleSizeDepDisable);
+        break;
+
+      case 'never':
+        isShowTitle = false;
+        break;
+
+      default:
+        break;
+    }
+
     return (
       <NavBarItem onPress={onPress} align={align}>
         <Icon source={source} style={[styles.image, iconStyle, imageStyle]} />
-        {!!title && (
+        {isShowTitle && (
           <Text numberOfLines={1} style={[styles.title, titleStyle]}>
             {title}
           </Text>
@@ -53,8 +71,11 @@ const styles = StyleSheet.create({
 
   title: {
     color: '$pe_color_blue',
-    fontSize: 15,
-    marginLeft: 6,
+    fontSize: 16,
+    marginLeft: 2,
+  },
+
+  titleSizeDepDisable: {
     '@media (max-width: 991)': {
       width: 0,
       height: 0,

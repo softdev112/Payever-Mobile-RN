@@ -14,11 +14,13 @@ styleSheet.build({
   pe_color_dark_gray: '#3d3d3d',
   pe_color_dark_red: '#c02f1d',
   pe_color_gray: '#6d6d6d',
+  pe_color_gray_7d: '#7d7d7d',
   pe_color_gray_2: '#b3b3b3',
   pe_color_icon: '#b5b9be',
   pe_color_light_gray_1: '#e1e1e1',
   pe_color_red: '#ff3c30',
   pe_color_white: '#fff',
+  pe_color_apple_div: '#f0eff5',
   border_color: '#f4f4f4',
   font_family: Platform.OS === 'ios' ? 'Helvetica Neue' : 'Open Sans',
 });

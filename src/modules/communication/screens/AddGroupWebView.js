@@ -5,7 +5,7 @@ import ProfilesStore from '../../../store/profiles';
 
 @inject('profiles')
 @observer
-export default class AddGroup extends Component {
+export default class AddGroupWebView extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
@@ -13,10 +13,6 @@ export default class AddGroup extends Component {
   props: {
     profiles?: ProfilesStore;
   };
-
-  onAddGroup() {
-    console.log('sssssssssssssssssss save');
-  }
 
   render() {
     const profile = this.props.profiles.currentProfile;
@@ -29,7 +25,6 @@ export default class AddGroup extends Component {
         <NavBar popup>
           <NavBar.Back />
           <NavBar.Title title="Create New Group" />
-          <NavBar.Button title="Save" onPress={this.onAddGroup} />
         </NavBar>
         <WebView
           injectJs={js}

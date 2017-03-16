@@ -4,6 +4,7 @@
 export default {
   'auth.Login': require('./modules/auth/screens/Login').default,
   'communication.AddContact': require('./modules/communication/screens/AddContact').default,
+  'communication.AddGroupWebView': require('./modules/communication/screens/AddGroupWebView').default,
   'communication.AddGroup': require('./modules/communication/screens/AddGroup').default,
   'communication.Chat': require('./modules/communication/screens/Chat').default,
   'communication.Main': require('./modules/communication/screens/Main').default,

@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     fontWeight: '300',
     textAlign: 'center',
     '@media (max-width: 480)': {
-      fontSize: 14,
+      fontSize: 16,
     },
   },
 });

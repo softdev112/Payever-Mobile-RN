@@ -74,16 +74,18 @@ export default class ListHeader extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    marginVertical: 8,
+    padding: 5,
+    backgroundColor: '#FFF',
+  },
+
   add: {
     color: '$pe_color_icon',
     fontSize: 16,
     height: 17,
     width: 16,
-  },
-
-  container: {
-    flexDirection: 'row',
-    margin: 10,
   },
 
   title: {
