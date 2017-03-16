@@ -57,7 +57,8 @@ export default class Chat extends Component {
     }
 
     // After first render of list switch scrollToEnd animated param to true
-    // if listHeight === 0 we didn't scroll onListLayout will scrollToEnd first time
+    // if listHeight === 0 we didn't scroll onListLayout will scrollToEnd
+    // first time
     if (!isAnimScroll) {
       this.setState({
         listContentHeight,

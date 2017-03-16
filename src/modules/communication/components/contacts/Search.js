@@ -14,6 +14,10 @@ export default class Search extends Component {
     navigator: PropTypes.object.isRequired,
   };
 
+  static defaultProps = {
+    showSettings: true,
+  };
+
   $input: TextInput;
 
   context: {
@@ -22,6 +26,11 @@ export default class Search extends Component {
 
   props: {
     communication?: CommunicationStore;
+    showSettings?: boolean;
+    onSearchAction?: Function;
+    style?: Object;
+    inputStyle?: Object;
+    iconStyle?: Object;
   };
 
   onSearchPress() {
@@ -35,21 +44,29 @@ export default class Search extends Component {
   }
 
   onTextChange(text) {
-    this.props.communication.search(text);
+    const { onSearchAction } = this.props;
+
+    if (onSearchAction) {
+      onSearchAction(text);
+    } else {
+      this.props.communication.search(text);
+    }
   }
 
   render() {
+    const { iconStyle, inputStyle, showSettings, style } = this.props;
+
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, style]}>
         <View style={styles.searchBox}>
           <Icon
-            style={styles.iconSearch}
+            style={[styles.iconSearch, iconStyle]}
             onPress={::this.onSearchPress}
             source="icon-search-16"
             touchStyle={styles.iconSearch_offset}
           />
           <TextInput
-            style={styles.input}
+            style={[styles.input, inputStyle]}
             ref={i => this.$input = i}
             onChangeText={t => this.onTextChange(t)}
             autoCorrect={false}
@@ -59,13 +76,15 @@ export default class Search extends Component {
             underlineColorAndroid="transparent"
           />
         </View>
-        <Icon
-          style={styles.iconSettings}
-          hitSlop={14}
-          onPress={::this.onSettingsPress}
-          source="icon-settings-24"
-          touchStyle={styles.iconSettings_offset}
-        />
+        {showSettings && (
+          <Icon
+            style={styles.iconSettings}
+            hitSlop={14}
+            onPress={::this.onSettingsPress}
+            source="icon-settings-24"
+            touchStyle={styles.iconSettings_offset}
+          />
+        )}
       </View>
     );
   }
@@ -80,9 +99,9 @@ const styles = StyleSheet.create({
 
   iconSearch: {
     color: '$pe_color_icon',
-    fontSize: 14,
-    height: 14,
-    width: 14,
+    fontSize: 15,
+    height: 15,
+    width: 15,
   },
 
   iconSearch_offset: {
@@ -92,9 +111,9 @@ const styles = StyleSheet.create({
 
   iconSettings: {
     color: '$pe_color_icon',
-    fontSize: 16,
-    height: 16,
-    width: 16,
+    fontSize: 17,
+    height: 17,
+    width: 17,
   },
 
   iconSettings_offset: {
@@ -105,7 +124,7 @@ const styles = StyleSheet.create({
   input: {
     color: '$pe_color_dark_gray',
     flex: 1,
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '200',
     marginLeft: 12,
     padding: 0,
