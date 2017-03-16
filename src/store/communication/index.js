@@ -31,10 +31,16 @@ export default class CommunicationStore {
 
   @observable messagesForRedirect: Array<Message> = [];
 
+  @observable contactsAutocomplete: Array<any> = [];
+
   store: Store;
   socket: SocketApi;
   socketHandlers: SocketHandlers;
   socketObserver: Function;
+
+  contactsAutocompleteDs: DataSource = new DataSource({
+    rowHasChanged: (r1, r2) => r1 !== r2,
+  });
 
   contactDs: DataSource = new DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
@@ -146,6 +152,21 @@ export default class CommunicationStore {
   }
 
   @action
+  searchContactsAutocomplete(query) {
+    const { api: { messenger } } = this.store;
+    const { messengerUser } = this.messengerInfo;
+
+    return apiHelper(messenger.getAvailableContacts(messengerUser.id, query))
+      .success((data) => {
+        this.contactsAutocomplete = data;
+        console.log('tttttttttttttttt');
+        console.log(data);
+        console.log('ttttttttttttttttt');
+      })
+      .promise();
+  }
+
+  @action
   async sendMessage(conversationId, body) {
     const socket = await this.store.api.messenger.getSocket();
     return socket.sendMessage({ conversationId, body });
@@ -191,6 +212,13 @@ export default class CommunicationStore {
   async updateTypingStatus(conversationId) {
     const socket = await this.store.api.messenger.getSocket();
     return await socket.updateTypingStatus(conversationId);
+  }
+
+  @computed
+  get contactsAutocompDataSource() {
+    return this.contactsAutocompleteDs.cloneWithRows(
+      this.contactsAutocomplete.slice()
+    );
   }
 
   @computed

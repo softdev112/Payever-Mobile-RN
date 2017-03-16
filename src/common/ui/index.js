@@ -10,6 +10,7 @@ export Container from './Container';
 export DataSource from './DataSource';
 export Error from './Error';
 export ErrorBox from './ErrorBox';
+export FlatTextInput from './FlatTextInput';
 export GridView from './GridView';
 export Header from './Header';
 export Html from './Html';
