@@ -12,6 +12,7 @@ export default class Back extends Component {
   static defaultProps = {
     align: 'left',
     source: 'icon-arrow-left-ios-24',
+    showTitle: 'size-dep',
   };
 
   context: {
@@ -24,6 +25,7 @@ export default class Back extends Component {
     source: Object | string;
     style?: Object | number;
     title?: string;
+    showTitle?: 'size-dep' | 'always' | 'never';
   };
 
   onPress() {
@@ -31,22 +33,25 @@ export default class Back extends Component {
   }
 
   render() {
-    let { source, style } = this.props;
+    const { source, style, onPress, showTitle, title } = this.props;
 
+    let iconSource = source;
+    let iconStyle = style;
     if (this.context.popup) {
       if (source === Back.defaultProps.source) {
-        source = 'icon-x-24';
+        iconSource = 'icon-x-24';
       }
-      style = [style, styles.title_popup];
+      iconStyle = [style, styles.title_popup];
     }
 
-    const onPress = this.props.onPress || ::this.onPress;
+    const onPressAction = onPress || ::this.onPress;
     return (
       <IconButton
-        imageStyle={style}
-        onPress={onPress}
-        source={source}
-        title={this.props.title}
+        imageStyle={iconStyle}
+        onPress={onPressAction}
+        source={iconSource}
+        title={title}
+        showTitle={showTitle}
         titleStyle={styles.title}
       />
     );
@@ -55,9 +60,9 @@ export default class Back extends Component {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: '400',
-    marginLeft: 12,
+    marginLeft: 2,
   },
 
   title_popup: {

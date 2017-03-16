@@ -30,6 +30,6 @@ export default class Button extends Component {
 const styles = StyleSheet.create({
   title: {
     color: '$pe_color_blue',
-    fontSize: 15,
+    fontSize: 16,
   },
 });

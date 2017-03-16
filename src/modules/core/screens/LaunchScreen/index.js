@@ -28,9 +28,6 @@ export default class LaunchScreen extends Component {
     isAgreed: boolean;
   };
 
-  $animAgreeView: Animatable.View;
-  $animSignView: Animatable.View;
-
   constructor(props) {
     super(props);
 
@@ -58,14 +55,7 @@ export default class LaunchScreen extends Component {
       log.error(error);
     }
 
-    if (this.$animAgreeView) {
-      await this.$animAgreeView.zoomOut(300);
-    }
-
     this.setState({ isAgreed: true });
-    if (this.$animSignView) {
-      await this.$animSignView.zoomIn(300);
-    }
   }
 
   onCreateAccountPress() {
@@ -97,16 +87,42 @@ export default class LaunchScreen extends Component {
     return (
       <View style={styles.container}>
         <SvgIconsShow style={styles.animContainer} />
-        <View style={styles.infoContainer}>
-          <Text style={styles.welcomeText}>Welcome to Payever</Text>
+        <View style={styles.contentContainer}>
+          <View style={styles.textContainer}>
+            <Text style={styles.welcomeText}>Welcome to payever</Text>
+            { isAgreed ? (
+              <Text style={styles.termsAndPolicyText}>
+                {'Start, run and grow your business or get personal offers'}
+              </Text>
+            ) : (
+              <View>
+                <Text style={styles.termsAndPolicyText}>
+                  {'Tap "Agree & Continue" to accept the payever'}
+                </Text>
+                <Text
+                  style={styles.termsAndPolicyLinks}
+                  onPress={::this.onTermsPress}
+                >
+                  Terms of Service
+                  <Text style={styles.termsAndPolicyText}>{' and '}</Text>
+                  <Text
+                    style={styles.termsAndPolicyLinks}
+                    onPress={::this.onPolicyPress}
+                  >
+                    Privacy Policy
+                  </Text>
+                </Text>
+              </View>
+            )}
+          </View>
           { isAgreed ? (
             <Animatable.View
               style={styles.signInSignUpCont}
               animation="zoomIn"
               duration={300}
-              ref={ref => this.$animSignView = ref}
               easing="ease-in-out-cubic"
             >
+              <View style={styles.bigDivider} />
               <TouchableOpacity onPress={::this.onSignInPress}>
                 <View style={styles.authBtn}>
                   <Text style={styles.authBtnText}>Sign In</Text>
@@ -116,7 +132,7 @@ export default class LaunchScreen extends Component {
                   />
                 </View>
               </TouchableOpacity>
-              <View style={styles.divider} />
+              <View style={styles.smallDivider} />
               <TouchableOpacity onPress={::this.onCreateAccountPress}>
                 <View style={styles.authBtn}>
                   <Text style={styles.authBtnText}>Create Account</Text>
@@ -126,40 +142,16 @@ export default class LaunchScreen extends Component {
                   />
                 </View>
               </TouchableOpacity>
+              <View style={styles.bigDivider} />
             </Animatable.View>
           ) : (
-            <Animatable.View
-              style={styles.termsAgreedCont}
-              animation="zoomIn"
-              duration={300}
-              ref={ref => this.$animAgreeView = ref}
-              easing="ease-in-out-cubic"
-            >
-              <Text style={styles.termsAndPolicyText}>
-                {'Tap "Agree & Continue" to accept the Payever'}
-              </Text>
-              <Text>
-                <Text
-                  style={styles.termsAndPolicyLinks}
-                  onPress={::this.onTermsPress}
-                >
-                  Terms of Service
+            <View style={styles.agreeBtnCont}>
+              <TouchableOpacity onPress={::this.onAgreedPress}>
+                <Text style={styles.agreeBtn}>
+                  Agree & Continue
                 </Text>
-                <Text style={styles.termsAndPolicyText}>{' and '}</Text>
-                <Text
-                  style={styles.termsAndPolicyLinks}
-                  onPress={::this.onPolicyPress}
-                >
-                  Privacy Policy
-                </Text>
-              </Text>
-              <Text
-                style={styles.agreeBtn}
-                onPress={::this.onAgreedPress}
-              >
-                Agree & Continue
-              </Text>
-            </Animatable.View>
+              </TouchableOpacity>
+            </View>
           )}
         </View>
       </View>
@@ -179,38 +171,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  infoContainer: {
+  contentContainer: {
     flex: 40,
   },
 
-  termsAgreedCont: {
+  textContainer: {
+    paddingHorizontal: 10,
+  },
+
+  agreeBtnCont: {
     flex: 1,
     alignItems: 'center',
   },
 
   welcomeText: {
-    fontSize: '3.7rem',
-    fontWeight: '400',
+    fontSize: '3.1rem',
     alignSelf: 'center',
-    '@media ios': {
-      fontFamily: 'Helvetica Neue',
-    },
-    '@media android': {
-      fontFamily: 'Roboto',
-    },
+    fontWeight: '300',
+    fontFamily: '$font_family',
   },
 
   termsAndPolicyText: {
     marginTop: 20,
+    '@media (max-height: 620):': {
+      marginTop: 10,
+    },
     fontSize: '1.7rem',
     fontWeight: '400',
     textAlign: 'center',
-    '@media ios': {
-      fontFamily: 'Helvetica Neue',
-    },
-    '@media android': {
-      fontFamily: 'Roboto',
-    },
+    color: '$pe_color_gray_7d',
+    fontFamily: '$font_family',
   },
 
   termsAndPolicyLinks: {
@@ -218,17 +208,12 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: '$pe_color_blue',
     textAlign: 'center',
-    '@media ios': {
-      fontFamily: 'Helvetica Neue',
-    },
-    '@media android': {
-      fontFamily: 'Roboto',
-    },
+    fontFamily: '$font_family',
   },
 
   agreeBtn: {
     marginTop: '7%',
-    fontSize: '2.6rem',
+    fontSize: '2.4rem',
     fontWeight: '400',
     color: '$pe_color_blue',
   },
@@ -236,25 +221,31 @@ const styles = StyleSheet.create({
   signInSignUpCont: {
     flex: 1,
     justifyContent: 'center',
-    paddingHorizontal: 35,
   },
 
   authBtn: {
-    height: 50,
+    height: 40,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingHorizontal: 35,
   },
 
   authBtnText: {
-    fontSize: '2.2rem',
+    fontSize: '2rem',
     fontWeight: '400',
     color: '$pe_color_blue',
 
   },
 
-  divider: {
+  smallDivider: {
     height: 1,
-    backgroundColor: '$pe_color_light_gray_1',
+    backgroundColor: '$pe_color_apple_div',
+    marginLeft: 35,
+  },
+
+  bigDivider: {
+    height: 24,
+    backgroundColor: '$pe_color_apple_div',
   },
 });
