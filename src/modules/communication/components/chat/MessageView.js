@@ -5,9 +5,10 @@ import { Html, Icon, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
 import * as Animatable from 'react-native-animatable';
 
+import MediaView from './MediaView';
+import Avatar from '../contacts/Avatar';
 import type Message from '../../../../store/communication/models/Message';
 import Offer from '../../../marketing/components/OfferDetails';
-import MediaView from './MediaView';
 import type CommunicationStore from '../../../../store/communication';
 
 @inject('communication')
@@ -16,7 +17,7 @@ export default class MessageView extends Component {
   props: {
     message: Message;
     communication?: CommunicationStore;
-    onRedirectMessage: (message: Message, pageY: number) => void;
+    onForwardMessage: (message: Message, pageY: number) => void;
   };
 
   $animMessageView: Animatable.View;
@@ -46,15 +47,15 @@ export default class MessageView extends Component {
     communication.deleteMessage(message.id);
   }
 
-  prepareForRedirectMessage({ nativeEvent: { pageY } }) {
+  prepareForForward({ nativeEvent: { pageY } }) {
     const { communication, message } = this.props;
 
-    if (communication.isMsgInForRedirectMsgs(message.id)) {
+    if (communication.checkMsgInForForward(message.id)) {
       this.$animMessageView.shake(300);
       return;
     }
 
-    this.props.onRedirectMessage(this.props.message, pageY);
+    this.props.onForwardMessage(this.props.message, pageY);
   }
 
   getSwipeButtons() {
@@ -75,7 +76,7 @@ export default class MessageView extends Component {
 
     rightButtons.push(
       <Icon
-        onPress={(e) => this.prepareForRedirectMessage(e)}
+        onPress={(e) => this.prepareForForward(e)}
         style={styles.actionIcon}
         source="icon-arrow-right-3-16"
       />
@@ -122,25 +123,6 @@ export default class MessageView extends Component {
     return <Html source={message.body} />;
   }
 
-  renderAvatar(avatar) {
-    if (avatar.type === 'url') {
-      const avatarUrl = avatar.valueRetina || avatar.value;
-      return (
-        <Icon style={styles.avatar} source={{ uri: avatarUrl }} />
-      );
-    }
-
-    if (avatar.type === 'letters') {
-      return (
-        <View style={styles.avatarLetters}>
-          <Text style={styles.avatarText}>{avatar.value}</Text>
-        </View>
-      );
-    }
-
-    return null;
-  }
-
   render() {
     const message: Message = this.props.message;
 
@@ -171,7 +153,7 @@ export default class MessageView extends Component {
           style={styles.container}
           ref={ref => this.$animMessageView = ref}
         >
-          {this.renderAvatar(message.avatar)}
+          <Avatar avatar={message.avatar} />
           <View style={styles.message}>
             <View style={styles.header}>
               <Text style={styles.headerSender}>{msgHeader}</Text>
@@ -194,28 +176,6 @@ const styles = StyleSheet.create({
 
   actionIconContainer: {
     alignSelf: 'center',
-  },
-
-  avatar: {
-    borderRadius: 16,
-    height: 32,
-    marginRight: 22,
-    width: 32,
-  },
-
-  avatarLetters: {
-    alignItems: 'center',
-    borderColor: '#666',
-    borderRadius: 16,
-    borderWidth: 1,
-    height: 32,
-    justifyContent: 'center',
-    marginRight: 22,
-    width: 32,
-  },
-
-  avatarText: {
-    fontSize: 16,
   },
 
   body: {

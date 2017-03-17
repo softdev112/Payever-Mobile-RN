@@ -90,18 +90,17 @@ export default class MessengerApi {
     userId: number,
     name: string,
     recipients: string,
-    chatType: string
+    chatType: boolean
   ): Promise<GroupResp> {
     return this.client.post('/api/rest/v1/messenger/new/group', {
-      format: 'formData',
-      data: {
-        userId,
-        new_group: {
-          name,
-          recipients,
-          chatType,
-        },
+      userId,
+      new_group: {
+        name,
+        recipients,
+        chatType,
       },
+    }, {
+      format: 'formData',
     });
   }
 

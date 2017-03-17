@@ -1,17 +1,15 @@
 import { Component } from 'react';
-import { inject, observer } from 'mobx-react/native';
 import { ScrollView } from 'react-native';
-import { StyleSheet } from 'ui';
 import * as Animatable from 'react-native-animatable';
 
-import CommunicationStore from '../../../../store/communication';
-import RedirectMessage from './ForwardMessage';
+import StyleSheet from './StyleSheet';
 
-@inject('communication')
-@observer
-export default class RedirectDock extends Component {
+export default class BottomDock extends Component {
   props: {
-    communication?: CommunicationStore;
+    items: Array<any>;
+    style?: Object;
+    scrollStyle?: Object;
+    renderItem: (any, number) => Component;
   };
 
   $scrollView: ScrollView;
@@ -22,37 +20,29 @@ export default class RedirectDock extends Component {
     this.$scrollView.scrollToEnd({ animated: true });
   }
 
-  renderMessagesForRedirect() {
-    const { communication } = this.props;
+  renderContent() {
+    const { items, renderItem } = this.props;
 
-    if (!communication.isMsgsForRedirectAvailable) return [];
-
-    return communication.messagesForRedirect.map((message) => {
-      return (
-        <RedirectMessage
-          style={styles.message}
-          key={message.id}
-          message={message}
-        />
-      );
-    });
+    return items.map((item, index) => renderItem(item, index));
   }
 
   render() {
+    const { style, scrollStyle } = this.props;
+
     return (
       <Animatable.View
-        style={styles.container}
+        style={[styles.container, style]}
         animation="fadeIn"
         duration={300}
       >
         <ScrollView
-          contentContainerStyle={styles.scrollContainer}
+          contentContainerStyle={[styles.scrollContainer, scrollStyle]}
           horizontal
           showsHorizontalScrollIndicator={false}
           ref={(ref) => this.$scrollView = ref}
           onContentSizeChange={::this.onScrollContentSizeChange}
         >
-          {this.renderMessagesForRedirect()}
+          {this.renderContent()}
         </ScrollView>
       </Animatable.View>
     );
@@ -75,9 +65,5 @@ const styles = StyleSheet.create({
   scrollContainer: {
     alignItems: 'center',
     paddingHorizontal: 8,
-  },
-
-  message: {
-    marginRight: 10,
   },
 });

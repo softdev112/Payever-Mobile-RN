@@ -5,6 +5,7 @@
 export { Image, View } from 'react-native';
 export StyleSheet from './StyleSheet';
 
+export BottomDock from './BottomDock';
 export Button from './Button';
 export Container from './Container';
 export DataSource from './DataSource';
@@ -20,6 +21,7 @@ export images from './images';
 export ImageButton from './ImageButton';
 export Link from './Link';
 export Loader from './Loader';
+export MoveYAnimElement from './MoveYAnimElement';
 export NavBar from './NavBar';
 export WebViewEx from './WebViewEx';
 export Text from './Text';

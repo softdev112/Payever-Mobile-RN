@@ -12,7 +12,7 @@ const MAX_WIDTH = ScreenParams.width * 0.8; // 80% screen width
 
 @inject('communication')
 @observer
-export default class RedirectMessage extends Component {
+export default class FrowardMessage extends Component {
   props: {
     communication: CommunicationStore;
     message: Message;
@@ -45,17 +45,17 @@ export default class RedirectMessage extends Component {
     }));
   }
 
-  redirectMessage() {
+  forwardMessage() {
     const { communication, message: { id } } = this.props;
 
     communication.forwardMessage(id);
-    communication.removeMessageFromRedirect(id);
+    communication.removeMessageFromForward(id);
   }
 
-  removeMessageFromRedirect() {
+  removeMessageFromForward() {
     const { communication, message: { id } } = this.props;
 
-    communication.removeMessageFromRedirect(id);
+    communication.removeMessageFromForward(id);
   }
 
   render() {
@@ -77,13 +77,13 @@ export default class RedirectMessage extends Component {
             </Text>
             <View style={styles.btnsContainer}>
               <Icon
-                onPress={::this.removeMessageFromRedirect}
+                onPress={::this.removeMessageFromForward}
                 touchStyle={styles.actionIcon}
                 source="icon-trashcan-24"
                 hitSlope={{ top: 8, left: 8, bottom: 8, right: 8 }}
               />
               <Icon
-                onPress={::this.redirectMessage}
+                onPress={::this.forwardMessage}
                 touchStyle={styles.actionIcon}
                 source="icon-arrow-right-ios-24"
                 hitSlope={{ top: 8, left: 8, bottom: 8, right: 8 }}
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     borderColor: '$pe_color_twitter',
     borderWidth: 2,
-    borderRadius: 22,
+    borderRadius: 5,
     paddingVertical: 5,
   },
 
