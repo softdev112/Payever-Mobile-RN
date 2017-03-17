@@ -8,6 +8,7 @@ import { throttle } from 'lodash';
 import type Store from '../index';
 import UserSettings from './models/UserSettings';
 import MessengerInfo from './models/MessengerInfo';
+import Contact from './models/Contact';
 import Conversation, { ConversationStatus }
   from './models/Conversation';
 import type BusinessProfile from '../profiles/models/BusinessProfile';
@@ -29,9 +30,10 @@ export default class CommunicationStore {
   @observable foundMessages: Array<Message>;
   @observable contactsFilter: string = '';
 
-  @observable messagesForRedirect: Array<Message> = [];
+  @observable msgsForForward: Array<Message> = [];
 
   @observable contactsAutocomplete: Array<any> = [];
+  @observable contactsForGroup: Array<Contact> = [];
 
   store: Store;
   socket: SocketApi;
@@ -159,9 +161,6 @@ export default class CommunicationStore {
     return apiHelper(messenger.getAvailableContacts(messengerUser.id, query))
       .success((data) => {
         this.contactsAutocomplete = data;
-        console.log('tttttttttttttttt');
-        console.log(data);
-        console.log('ttttttttttttttttt');
       })
       .promise();
   }
@@ -253,8 +252,12 @@ export default class CommunicationStore {
     return this.conversationDs.cloneWithRows(messages.slice());
   }
 
-  @computed get isMsgsForRedirectAvailable() {
-    return this.messagesForRedirect.length > 0;
+  @computed get isMsgsForForwardAvailable() {
+    return this.msgsForForward.length > 0;
+  }
+
+  @computed get isContactsForGroupAvailable() {
+    return this.contactsForGroup.length > 0;
   }
 
   @action
@@ -303,19 +306,62 @@ export default class CommunicationStore {
   }
 
   @action
-  addMessageForRedirect(message: Message) {
-    this.messagesForRedirect.push(message);
+  addMessageForForward(message: Message) {
+    this.msgsForForward.push(message);
   }
 
   @action
-  removeMessageFromRedirect(messageId: number) {
-    this.messagesForRedirect =
-      this.messagesForRedirect.filter(message => message.id !== messageId);
+  removeMessageFromForward(messageId: number) {
+    this.msgsForForward =
+      this.msgsForForward.filter(message => message.id !== messageId);
   }
 
   @action
-  isMsgInForRedirectMsgs(messageId: number) {
-    return !!this.messagesForRedirect.find(message => message.id === messageId);
+  checkMsgInForForward(messageId: number) {
+    return !!this.msgsForForward.find(message => message.id === messageId);
+  }
+
+  @action
+  addContactForGroup(contact: Contact) {
+    this.contactsForGroup.push(contact);
+  }
+
+  @action
+  removeContactForGroup(contactId: number) {
+    this.contactsForGroup =
+      this.contactsForGroup.filter(contact => contact.id !== contactId);
+  }
+
+  @action
+  checkContactAddedForGroup(contactId: number) {
+    return !!this.contactsForGroup.find(contact => contact.id === contactId);
+  }
+
+  @action
+  clearAddForGroupContacts() {
+    this.contactsForGroup = [];
+  }
+
+  @action
+  createNewGroup(groupName: string, isAllowGroupChat: boolean) {
+    const { api: { messenger } } = this.store;
+    const { messengerUser } = this.messengerInfo;
+
+    const recipients = this.contactsForGroup.slice()
+      .reduce((result, contact, index, contacts) => {
+        return result + contact.id +
+          (contacts.length - 1 !== index ? ',' : '');
+      }, '');
+
+    apiHelper(messenger.createNewGroup(
+       messengerUser.id,
+       groupName,
+       recipients,
+       isAllowGroupChat
+    )).success(() => {
+      // Save changes to local
+      // messengerUser.groups.push(group);
+    });
   }
 
   initSocket(url, userId) {

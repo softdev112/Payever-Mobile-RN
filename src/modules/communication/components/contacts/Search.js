@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
 
   iconSearch_offset: {
     marginLeft: 10,
-    marginTop: 7,
+    marginTop: 5,
   },
 
   iconSettings: {
@@ -136,6 +136,6 @@ const styles = StyleSheet.create({
     borderColor: '$border_color',
     flex: 1,
     flexDirection: 'row',
-    marginRight: 9,
+    marginHorizontal: 9,
   },
 });

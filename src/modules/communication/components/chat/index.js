@@ -1,21 +1,18 @@
 import { Component } from 'react';
-import {
-  Animated, Easing, KeyboardAvoidingView, ListView, Platform,
-} from 'react-native';
+import { KeyboardAvoidingView, ListView, Platform } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
-import { ErrorBox, Loader, StyleSheet, Text } from 'ui';
-import { ScreenParams } from 'utils';
-import { last } from 'lodash';
+import {
+  BottomDock, ErrorBox, Loader, MoveYAnimElement, StyleSheet,
+} from 'ui';
 
 import Footer from './Footer';
 import MessageView from './MessageView';
 import Header from './Header';
-import RedirectDock from './RedirectDock';
+import ForwardMessage from './ForwardMessage';
 import CommunicationStore from '../../../../store/communication';
+import Message from '../../../../store/communication/models/Message';
 
-const ANIM_DURATION_KOEF = 0.4;
 const ANIM_POSITION_ADJUST = 65;
-const MAX_SCREEN_HEIGHT = ScreenParams.height - 160;
 
 @inject('communication')
 @observer
@@ -26,12 +23,11 @@ export default class Chat extends Component {
   };
 
   state: {
-    animMsgPosY: number;
-    animMsgValue: Object;
     isAnimScroll: boolean;
     listHeight: number;
     listContentHeight: number;
-    showRedirectAnim: boolean;
+    showForwardAnim: boolean;
+    messageForForward: Message;
   };
 
   $listView: ListView;
@@ -40,12 +36,11 @@ export default class Chat extends Component {
     super(props);
 
     this.state = {
-      animMsgPosY: 0,
-      animMsgValue: new Animated.Value(0),
       isAnimScroll: false,
       listHeight: 0,
       listContentHeight: 0,
-      showRedirectAnim: false,
+      showForwardAnim: false,
+      messageForForward: null,
     };
   }
 
@@ -86,50 +81,52 @@ export default class Chat extends Component {
     });
   }
 
-  onRedirectMessage(message, posY) {
-    const { communication } = this.props;
-    const { animMsgValue } = this.state;
-
+  onForwardMessageStart(message, posY) {
     this.setState({
-      animMsgPosY: posY - ANIM_POSITION_ADJUST,
-      showRedirectAnim: true,
-    });
-
-    Animated.timing(animMsgValue, {
-      toValue: 10,
-      duration: this.getDurationOnRowYPos(posY),
-      easing: Easing.linear,
-    }).start(() => {
-      this.setState({
-        animMsgPosY: 0,
-        showRedirectAnim: false,
-      });
-      animMsgValue.setValue(0);
-
-      // Add message to messages for redirect to show it in dock
-      // on other screens
-      communication.addMessageForRedirect(message);
+      startPosY: posY - ANIM_POSITION_ADJUST,
+      showForwardAnim: true,
+      messageForForward: message,
     });
   }
 
-  getDurationOnRowYPos(posY: number) {
-    // duration = ANIM_DURATION_KOEF * (screenHeight - Y)
-    return ANIM_DURATION_KOEF * (ScreenParams.height - posY);
+  onForwardMessageEnd() {
+    const { messageForForward } = this.state;
+    const { communication } = this.props;
+
+    // Add message to messages for forward to show it in dock
+    // on other screens
+    communication.addMessageForForward(messageForForward);
+    this.setState({ showForwardAnim: false });
+  }
+
+  renderMessageForForward(message) {
+    return (
+      <ForwardMessage
+        style={styles.forwardMessage}
+        key={message.id}
+        message={message}
+      />
+    );
   }
 
   renderRow(row) {
     return (
       <MessageView
         message={row}
-        onRedirectMessage={::this.onRedirectMessage}
+        onForwardMessage={::this.onForwardMessageStart}
       />
     );
   }
 
   render() {
     const { communication, style } = this.props;
-    const conversation = communication.selectedConversation;
-    const ds = communication.selectedConversationDataSource;
+    const { showForwardAnim, startPosY, messageForForward } = this.state;
+    const {
+      isMsgsForForwardAvailable,
+      msgsForForward,
+      selectedConversation: conversation,
+      selectedConversationDataSource: ds,
+    } = communication;
 
     if (!conversation) {
       return (
@@ -138,25 +135,6 @@ export default class Chat extends Component {
         </Loader>
       );
     }
-
-    const {
-      animMsgValue, animMsgPosY, showRedirectAnim, msgsForRedirect,
-    } = this.state;
-    const translateY = animMsgValue.interpolate({
-      inputRange: [0, 10],
-      outputRange: [animMsgPosY, MAX_SCREEN_HEIGHT],
-      extrapolate: 'clamp',
-    });
-
-    const opacity = animMsgValue.interpolate({
-      inputRange: [0, 10],
-      outputRange: [1, 0],
-    });
-
-    const width = animMsgValue.interpolate({
-      inputRange: [0, 10],
-      outputRange: [300, 150],
-    });
 
     return (
       <KeyboardAvoidingView
@@ -177,28 +155,20 @@ export default class Chat extends Component {
         />
         <Footer conversationId={conversation.id} />
 
-        {showRedirectAnim && (
-          <Animated.View
-            style={[styles.animRedirectMsg, {
-              opacity,
-              width,
-              transform: [
-                {
-                  translateY,
-                },
-              ],
-            }]}
-          >
-            <Text
-              numberOfLines={1}
-              ellipsizeMode="tail"
-            >
-              {last(msgsForRedirect) && last(msgsForRedirect).body}
-            </Text>
-          </Animated.View>
+        {showForwardAnim && (
+          <MoveYAnimElement
+            startPosY={startPosY}
+            message={messageForForward ? messageForForward.body : ''}
+            onAnimationEnd={::this.onForwardMessageEnd}
+          />
         )}
 
-        {communication.isMsgsForRedirectAvailable && <RedirectDock />}
+        {isMsgsForForwardAvailable && (
+          <BottomDock
+            items={msgsForForward.slice()}
+            renderItem={::this.renderMessageForForward}
+          />
+        )}
       </KeyboardAvoidingView>
     );
   }
@@ -214,16 +184,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 
-  animRedirectMsg: {
-    position: 'absolute',
-    left: 20,
-    height: 40,
-    width: 200,
-    borderColor: '$pe_color_twitter',
-    borderWidth: 2,
-    borderRadius: 20,
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    backgroundColor: '#FFF',
+  forwardMessage: {
+    marginLeft: 10,
   },
 });
