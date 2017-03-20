@@ -32,7 +32,7 @@ export default class CommunicationStore {
 
   @observable msgsForForward: Array<Message> = [];
 
-  @observable contactsAutocomplete: Array<any> = [];
+  @observable contactsAutocomplete: Array = [];
   @observable contactsForGroup: Array<Contact> = [];
 
   store: Store;
@@ -340,6 +340,11 @@ export default class CommunicationStore {
   @action
   clearAddForGroupContacts() {
     this.contactsForGroup = [];
+  }
+
+  @action
+  clearAtocomleteContactsSearch() {
+    this.contactsAutocomplete = [];
   }
 
   @action

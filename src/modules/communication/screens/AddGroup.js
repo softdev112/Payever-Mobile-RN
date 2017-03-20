@@ -46,7 +46,10 @@ export default class AddGroup extends Component {
   }
 
   componentWillUnmount() {
-    this.props.communication.clearAddForGroupContacts();
+    const { communication } = this.props;
+
+    communication.clearAddForGroupContacts();
+    communication.clearAtocomleteContactsSearch();
   }
 
   onAllowGroupChatsChange() {
@@ -190,6 +193,7 @@ export default class AddGroup extends Component {
 
         {communication.isContactsForGroupAvailable && (
           <BottomDock
+            style={styles.bottomDock}
             items={communication.contactsForGroup.slice()}
             renderItem={::this.renderContactForAddToGroup}
           />
@@ -258,5 +262,10 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     paddingHorizontal: 5,
     alignItems: 'center',
+  },
+
+  bottomDock: {
+    $maxTopHeight: '94%',
+    top: '$maxTopHeight - 60',
   },
 });
