@@ -41,6 +41,7 @@ export default class BottomDock extends Component {
           showsHorizontalScrollIndicator={false}
           ref={(ref) => this.$scrollView = ref}
           onContentSizeChange={::this.onScrollContentSizeChange}
+          keyboardShouldPersistTaps="always"
         >
           {this.renderContent()}
         </ScrollView>
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
     },
     backgroundColor: 'transparent',
     height: 60,
+    minWidth: '100%',
   },
 
   scrollContainer: {
