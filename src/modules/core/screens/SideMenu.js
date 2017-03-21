@@ -3,6 +3,7 @@ import { ScrollView, Platform } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { Icon, ImageButton, StyleSheet, Text, View } from 'ui';
 import { Navigator } from 'react-native-navigation';
+import { log } from 'utils';
 
 import type ProfilesStore from '../../../store/profiles';
 import type BusinessProfile
@@ -83,7 +84,7 @@ export default class SideMenu extends Component {
   onLogoutPress() {
     const { auth } = this.props;
     auth.logout()
-      .catch(e => console.warn(e));
+      .catch(log.error);
     showScreen('core.LaunchScreen');
   }
 

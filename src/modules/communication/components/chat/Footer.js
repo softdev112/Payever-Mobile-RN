@@ -2,7 +2,7 @@ import { Component, PropTypes } from 'react';
 import { Keyboard, TextInput } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
-import { Icon, StyleSheet, View } from 'ui';
+import { Icon, StyleSheet, Text, View } from 'ui';
 import CommunicationStore from '../../../../store/communication';
 
 @inject('communication')
@@ -21,6 +21,7 @@ export default class Footer extends Component {
   props: {
     communication?: CommunicationStore;
     conversationId: number;
+    textValue?: string;
   };
 
   state: {
@@ -31,7 +32,7 @@ export default class Footer extends Component {
     super(props);
 
     this.state = {
-      text: '',
+      text: props.textValue || '',
     };
     this.onType = ::this.onType;
   }
@@ -75,6 +76,11 @@ export default class Footer extends Component {
 
     return (
       <View style={styles.container}>
+        { communication.messageForReply && (
+          <Text style={{ position: 'absolute', top: -30 }}>
+            Replay to: {communication.messageForReply.body}
+          </Text>
+        )}
         {isBusiness && (
           <Icon
             style={styles.icon}

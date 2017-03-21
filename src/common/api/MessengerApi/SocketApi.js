@@ -57,6 +57,16 @@ export default class SocketApi extends EventEmitter {
     });
   }
 
+  async editMessage({
+    messageBody,
+    messageId,
+    userId = this.userId,
+  }) {
+    return this.client.call('messenger/rpc/editMessage', {
+      messageBody, messageId, userId,
+    });
+  }
+
   async searchMessages({ query, userId = this.userId }) {
     return this.client.call('messenger/rpc/searchMessages', { query, userId });
   }

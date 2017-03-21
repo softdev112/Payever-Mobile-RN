@@ -42,6 +42,11 @@ export default class MessageView extends Component {
     );
   }
 
+  onReplyToMessage() {
+    const { communication, message } = this.props;
+    communication.setMessageForReply(message);
+  }
+
   deleteMessage() {
     const { communication, message } = this.props;
     communication.deleteMessage(message.id);
@@ -64,15 +69,13 @@ export default class MessageView extends Component {
     if (message.deleted) return null;
 
     const rightButtons = [];
-    if (!message.own) {
-      rightButtons.push(
-        <Icon
-          onPress={() => {}}
-          style={styles.actionIcon}
-          source="icon-reply-16"
-        />
-      );
-    }
+    rightButtons.push(
+      <Icon
+        onPress={::this.onReplyToMessage}
+        style={styles.actionIcon}
+        source="icon-reply-16"
+      />
+    );
 
     rightButtons.push(
       <Icon
@@ -134,7 +137,7 @@ export default class MessageView extends Component {
       );
     }
 
-    const { forwardFrom } = message;
+    const { forwardFrom, replyTo } = message;
     const msgHeader = forwardFrom
       ? `Forwarded From ${forwardFrom.senderName} ` : `${message.senderName} `;
 
@@ -159,6 +162,14 @@ export default class MessageView extends Component {
               <Text style={styles.headerSender}>{msgHeader}</Text>
               <Text style={styles.headerDate}>{message.dateFormated}</Text>
             </View>
+            {replyTo && (
+              <View style={styles.replayContainer}>
+                <Text style={styles.replySender}>{replyTo.senderName}</Text>
+                <Text style={styles.replyBody}>
+                  {replyTo.deleted ? 'deleted' : replyTo.body}
+                </Text>
+              </View>
+            )}
             <View style={styles.body}>
               {this.renderContent(message)}
             </View>
@@ -236,6 +247,25 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     paddingHorizontal: 12,
     paddingVertical: 5,
+  },
+
+  replayContainer: {
+    borderLeftColor: '$pe_color_dark_gray',
+    borderLeftWidth: 1,
+    paddingLeft: 10,
+    paddingVertical: 2,
+  },
+
+  replySender: {
+    color: '$pe_color_dark_gray',
+    fontSize: 11,
+    fontWeight: '500',
+  },
+
+  replyBody: {
+    color: '$pe_color_gray',
+    fontSize: 11,
+    fontWeight: '200',
   },
 
   swipeContainer: {
