@@ -1,10 +1,12 @@
-import { observable, action } from 'mobx';
+import { computed, observable, action } from 'mobx';
 import { apiHelper } from 'utils';
+import { DataSource } from 'ui';
 
 import type { ProfilesData } from '../../common/api/ProfilesApi';
 import type { MenuItemData } from '../../common/api/MenuApi';
 import type { ActivityItemData } from '../../common/api/BusinessApi';
 import type Store from './index';
+import type SavedContact from './models/SavedContact';
 import ActivityItem from './models/ActivityItem';
 import AppItem from './models/AppItem';
 import BusinessProfile from './models/BusinessProfile';
@@ -17,14 +19,24 @@ export default class ProfilesStore {
   @observable privateProfile: PersonalProfile         = null;
 
   @observable currentProfile: PersonalProfile | BusinessProfile = null;
+  @observable contacts: Array<SavedContact> = [];
 
   @observable error: string     = '';
   @observable isLoading: string = false;
+
+  allContactsDs: DataSource = new DataSource({
+    rowHasChanged: (r1, r2) => r1 !== r2,
+  });
 
   store: Store;
 
   constructor(store: Store) {
     this.store = store;
+  }
+
+  @computed
+  get allContactsDataSource() {
+    return this.allContactsDs.cloneWithRows(this.contacts.slice());
   }
 
   toArray(includePrivate = true) {
@@ -59,6 +71,18 @@ export default class ProfilesStore {
         this.privateProfile = new PersonalProfile(data.private, this.store);
       })
       .promise();
+  }
+
+  @action
+  loadAllContacts(): Promise<SavedContact> {
+    const { api } = this.store;
+
+    return apiHelper(
+      api.profiles.getAllContacts(this.currentProfile.business.slug),
+      this.allContactsDs
+    ).success((data) => {
+      this.contacts = data.contact_models;
+    }).promise();
   }
 
   @action

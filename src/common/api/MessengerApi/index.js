@@ -60,7 +60,7 @@ export default class MessengerApi {
     return this.client.get(`/api/rest/v1/messenger/contact-group/${id}`);
   }
 
-  getAvailableContacts(
+  async getAvailableContacts(
     messengerId: number,
     query: string,
     limit: number = 50
@@ -72,7 +72,7 @@ export default class MessengerApi {
     });
   }
 
-  getContactData(id): Promise<ContactResp> {
+  async getContactData(id): Promise<ContactMessengerDataResp> {
     return this.client.get(`/api/rest/v1/messenger/contacts/${id}`);
   }
 
@@ -189,8 +189,13 @@ declare class AllContactsResp extends ApiResp {
   data: Array<ContactData>;
 }
 
+/* eslint-disable no-unused-vars */
 declare class ContactResp extends ApiResp {
   data: ContactData;
+}
+
+declare class ContactMessengerDataResp extends ApiResp {
+  data: ContactMessengerData;
 }
 
 declare class MessageResp extends ApiResp {
@@ -302,6 +307,16 @@ type ContactData = {
   email: string;
   id: string;
   name: string;
+};
+
+type ContactMessengerData = {
+  contactId: number;
+  avatar: AvatarData;
+  messengerUser: {
+    id: number;
+    name: string;
+    user_type: string;
+  };
 };
 
 type GroupData = {

@@ -20,9 +20,6 @@ export default class MessengerInfo {
   @observable wsUrl: string;
 
   constructor(data: MessengerData) {
-    console.log('ddddddddddddddddddd');
-    console.log(data.groups);
-    console.log('dddddddddddddddddddd');
     data.conversations = (data.conversations || [])
       .map(c => new ConversationInfo(c));
 

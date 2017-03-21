@@ -158,10 +158,20 @@ export default class CommunicationStore {
     const { api: { messenger } } = this.store;
     const { messengerUser } = this.messengerInfo;
 
-    return apiHelper(messenger.getAvailableContacts(messengerUser.id, query))
-      .success((data) => {
-        this.contactsAutocomplete = data;
-      })
+    return apiHelper(
+      messenger.getAvailableContacts(messengerUser.id, query),
+      this.contactsAutocompleteDs
+    ).success((data) => {
+      this.contactsAutocomplete = data;
+    })
+    .promise();
+  }
+
+  @action
+  getContactData(contactId: number) {
+    const { api: { messenger } } = this.store;
+    return apiHelper(messenger.getContactData(contactId))
+      .success(data => data)
       .promise();
   }
 
@@ -327,14 +337,19 @@ export default class CommunicationStore {
   }
 
   @action
-  removeContactForGroup(contactId: number) {
+  removeContactForGroup(contactId: string) {
     this.contactsForGroup =
       this.contactsForGroup.filter(contact => contact.id !== contactId);
   }
 
   @action
   checkContactAddedForGroup(contactId: number) {
-    return !!this.contactsForGroup.find(contact => contact.id === contactId);
+    // savedId - it's id which might be manually added when converting
+    // saved contact to general contact (getContactData - gets general data
+    // for contact by savedContact Id
+    return !!this.contactsForGroup.find(
+      contact => contact.id === contactId || contact.savedId === contactId
+    );
   }
 
   @action
@@ -364,8 +379,7 @@ export default class CommunicationStore {
        recipients,
        isAllowGroupChat
     )).success(() => {
-      // Save changes to local
-      // messengerUser.groups.push(group);
+      // Do not need to save locally it comeback from WebSockets
     });
   }
 

@@ -21,20 +21,24 @@ export default class ProfilesApi {
     return resp;
   }
 
-  async getOfferById(id): Promise<OfferResp> {
+  getOfferById(id): Promise<OfferResp> {
     return this.client.get(`/api/rest/v1/profiles/offer/${id}`);
   }
 
-  async search(query): Promise<SearchResp> {
+  search(query): Promise<SearchResp> {
     return this.client.get('/api/rest/v1/profiles/search', { k: query, c: 20 });
   }
 
-  async follow(businessId): Promise<ApiResp> {
+  follow(businessId): Promise<ApiResp> {
     return this.client.post(`/api/rest/v1/profiles/${businessId}/follow`);
   }
 
-  async unfollow(businessId): Promise<ApiResp> {
+  unfollow(businessId): Promise<ApiResp> {
     return this.client.delete(`/api/rest/v1/profiles/${businessId}/unfollow`);
+  }
+
+  async getAllContacts(businessId) {
+    return this.client.get(`/api/rest/v1/contact/business/${businessId}`);
   }
 }
 

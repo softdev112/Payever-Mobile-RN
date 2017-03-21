@@ -41,9 +41,6 @@ export default class PushNotificationsHelper {
 
   onNotificationReceivedAndroid(notification) {
     log.debug('Receive Android notification:', AppState.currentState);
-    console.log('ddddddddddddddddddd1');
-    console.log(notification);
-    console.log('ddddddddddddddddddd2');
 
     if (AppState.currentState === 'active') {
       this.onNotificationReceivedForeground(notification);
@@ -84,9 +81,9 @@ export default class PushNotificationsHelper {
         ::this.onNotificationReceivedAndroid
       );
       NotificationsAndroid.refreshToken();
+
       const initNotification = await PendingNotifications
         .getInitialNotification();
-      console.log('ReactNativeNotif Init Notification', initNotification);
       if (initNotification) {
         this.onNotificationOpened(initNotification);
       }

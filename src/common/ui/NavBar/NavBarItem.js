@@ -7,13 +7,31 @@ import StyleSheet from '../StyleSheet';
 const DEFAULT_HIT_SLOP = 10;
 
 export default class NavBarItem extends Component {
+  static defaultProps = {
+    align: 'moddle',
+  };
+
   props: {
     onPress?: () => any;
     children: any;
+    align?: 'left' | 'right' | 'middle';
   };
 
+  getAlignStyles(align: 'left' | 'right' | 'middle') {
+    switch (align) {
+      case 'left':
+        return styles.alignLeft;
+      case 'right':
+        return styles.alignRight;
+      case 'middle':
+        return styles.alignMiddle;
+      default:
+        return styles.alignMiddle;
+    }
+  }
+
   render() {
-    const { children, onPress } = this.props;
+    const { align, children, onPress } = this.props;
 
     const hitSlop = {
       top: DEFAULT_HIT_SLOP,
@@ -22,26 +40,39 @@ export default class NavBarItem extends Component {
       right: DEFAULT_HIT_SLOP,
     };
 
+    const touchElementStyle = [styles.container, this.getAlignStyles(align)];
+
     return (
       <TouchableOpacity
+        style={touchElementStyle}
         accessibilityComponentType="button"
         accessibilityTraits={['button']}
         disabled={!onPress}
         hitSlop={hitSlop}
         onPress={onPress}
-        style={style.container}
       >
         {children}
-
       </TouchableOpacity>
     );
   }
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     flexDirection: 'row',
     padding: 6,
+  },
+
+  alignMiddle: {
+    justifyContent: 'center',
+  },
+
+  alignLeft: {
+    justifyContent: 'flex-start',
+  },
+
+  alignRight: {
+    justifyContent: 'flex-end',
   },
 });

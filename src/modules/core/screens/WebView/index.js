@@ -170,7 +170,6 @@ export default class WebView extends Component {
           title: object.title,
           titleImgUrl: siteUrl + object.titleImgUrl,
         });
-        console.log(siteUrl + object.titleImgUrl);
         break;
       }
 
