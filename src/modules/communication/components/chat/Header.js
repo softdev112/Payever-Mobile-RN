@@ -15,7 +15,6 @@ export default class UserInfoHeader extends Component {
   };
 
   onSettingsPress() {
-    console.log('Settings settings');
   }
 
   render() {

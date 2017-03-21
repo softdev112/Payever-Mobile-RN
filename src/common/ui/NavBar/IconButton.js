@@ -11,7 +11,7 @@ export default class IconButton extends Component {
   };
 
   props: {
-    align: 'left' | 'right' | 'middle';
+    align?: 'left' | 'right' | 'middle';
     imageStyle?: Object | number;
     onPress: () => any;
     source: Object | number | string;
@@ -43,12 +43,17 @@ export default class IconButton extends Component {
         break;
 
       default:
+        isShowTitle = false;
         break;
     }
 
     return (
       <NavBarItem onPress={onPress} align={align}>
-        <Icon source={source} style={[styles.image, iconStyle, imageStyle]} />
+        <Icon
+          style={[styles.image, iconStyle, imageStyle]}
+          source={source}
+          touchStyle={styles.iconTouchElement}
+        />
         {isShowTitle && (
           <Text numberOfLines={1} style={[styles.title, titleStyle]}>
             {title}
@@ -67,6 +72,13 @@ const styles = StyleSheet.create({
   image: {
     height: 24,
     width: 24,
+  },
+
+  iconTouchElement: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: 'blue',
+    borderWidth: 1,
   },
 
   title: {

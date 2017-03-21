@@ -3,12 +3,13 @@ import { inject, observer } from 'mobx-react/native';
 import { ListView, Switch, TouchableOpacity } from 'react-native';
 import type { Navigator } from 'react-native-navigation';
 import {
-  BottomDock, Icon, FlatTextInput, Loader,
-  MoveYAnimElement, NavBar, StyleSheet, Text, View,
+  BottomDock, FlatTextInput, Loader, MoveYAnimElement, NavBar,
+  StyleSheet, Text, View,
 } from 'ui';
 
 import Search from '../components/contacts/Search';
 import ContactPreview from '../components/contacts/ContactPreview';
+import AddedContact from '../components/contacts/AddedContact';
 import Contact from '../../../store/communication/models/Contact';
 import type CommunicationStore
   from '../../../store/communication';
@@ -84,6 +85,15 @@ export default class AddGroup extends Component {
     communication.removeContactForGroup(contactId);
   }
 
+  onShowContactList() {
+    const { navigator } = this.props;
+
+    navigator.push({
+      screen: 'communication.AddContactToGroup',
+      animated: true,
+    });
+  }
+
   onCreateNewGroup() {
     const { communication, navigator } = this.props;
     const { isAllowGroupChat, groupName } = this.state;
@@ -103,19 +113,7 @@ export default class AddGroup extends Component {
   }
 
   renderContactForAddToGroup(contact) {
-    return (
-      <View style={styles.addedContact} key={contact.id}>
-        <ContactPreview
-          contact={contact}
-        />
-        <Icon
-          onPress={() => this.onRemoveContactFromAdded(contact.id)}
-          touchStyle={styles.actionIcon}
-          source="icon-trashcan-24"
-          hitSlope={{ top: 8, left: 8, bottom: 8, right: 8 }}
-        />
-      </View>
-    );
+    return <AddedContact contact={contact} key={contact.id} />;
   }
 
   renderRow(contact) {
@@ -168,6 +166,14 @@ export default class AddGroup extends Component {
               onValueChange={::this.onAllowGroupChatsChange}
             />
           </View>
+          <TouchableOpacity
+            style={styles.addFromContactsBtn}
+            onPress={::this.onShowContactList}
+          >
+            <Text style={styles.addFromContactsBtnText}>
+              Add From Contacts
+            </Text>
+          </TouchableOpacity>
           <Search
             style={styles.search}
             showSettings={false}
@@ -183,6 +189,7 @@ export default class AddGroup extends Component {
             />
           </Loader>
         </View>
+
         {showAddContactAnim && (
           <MoveYAnimElement
             startPosY={startPosY}
@@ -250,18 +257,15 @@ const styles = StyleSheet.create({
     color: '$pe_color_blue',
   },
 
-  addedContact: {
-    flexDirection: 'row',
-    width: 300,
-    marginLeft: 10,
-    height: 60,
-    backgroundColor: '#FFF',
-    borderColor: '$pe_color_twitter',
-    borderWidth: 2,
-    borderRadius: 5,
-    paddingVertical: 5,
-    paddingHorizontal: 5,
-    alignItems: 'center',
+  addFromContactsBtn: {
+    alignSelf: 'stretch',
+    marginBottom: 14,
+  },
+
+  addFromContactsBtnText: {
+    fontSize: 16,
+    fontWeight: '400',
+    color: '$pe_color_blue',
   },
 
   bottomDock: {

@@ -102,7 +102,7 @@ export default class AuthStore {
       refreshToken: this.refreshToken,
       expiresIn: this.expiresIn,
     }))
-      .catch(e => console.error(e));
+      .catch(log.error);
   }
 
   @action
@@ -112,7 +112,7 @@ export default class AuthStore {
       const json = await AsyncStorage.getItem(STORE_NAME);
       data = JSON.parse(json || '{}');
     } catch (e) {
-      console.error(e);
+      log.error(e);
       data = {};
     }
 

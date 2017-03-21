@@ -1,4 +1,6 @@
 import { Text } from 'ui';
+import { log } from 'util';
+
 import htmlToElements from '../htmlToElements';
 
 describe('ui.Html htmlToElements', () => {
@@ -24,7 +26,8 @@ describe('ui.Html htmlToElements', () => {
   it('should parse numbers', async () => {
     const html = '<a>link</a> text';
     const children = await htmlToElements(html);
-    console.dir(children, { depth: 6 });
+    log.debug(children, { depth: 6 });
+    // console.dir(children, { depth: 6 });
   });
 });
 

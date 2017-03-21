@@ -10,6 +10,7 @@ import OffersStore from './offers';
 import ProfilesStore from './profiles';
 import SearchStore from './search';
 
+/* eslint-disable no-console */
 export default class Store {
   auth: AuthStore                   = new AuthStore(this);
   communication: CommunicationStore = new CommunicationStore(this);

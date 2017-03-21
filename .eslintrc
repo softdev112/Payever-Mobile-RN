@@ -65,7 +65,7 @@
       "mode": "minimum"
     }],
     "max-len": [1, 80],
-    "no-console": 0,
+    "no-console": 1,
     "no-multi-spaces": [2, { "exceptions": {
       "Property": true,
       "VariableDeclarator": true,

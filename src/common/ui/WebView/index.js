@@ -89,10 +89,6 @@ export default class WebView extends Component {
     const { navigator } = this.context;
     const payeverUrl = this.props.config.siteUrl;
 
-    console.log('ttttttttttttttt');
-    console.log(nativeEvent);
-    console.log('ttttttttttttttt');
-
     if (!url) return;
 
     if (url.startsWith('react-js-navigation')) {
