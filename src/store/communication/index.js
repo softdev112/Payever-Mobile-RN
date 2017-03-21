@@ -35,6 +35,8 @@ export default class CommunicationStore {
   @observable contactsAutocomplete: Array = [];
   @observable contactsForGroup: Array<Contact> = [];
 
+  @observable messageForReply: Message = null;
+
   store: Store;
   socket: SocketApi;
   socketHandlers: SocketHandlers;
@@ -178,7 +180,18 @@ export default class CommunicationStore {
   @action
   async sendMessage(conversationId, body) {
     const socket = await this.store.api.messenger.getSocket();
-    return socket.sendMessage({ conversationId, body });
+
+    const options = {
+      conversationId,
+      body,
+    };
+
+    if (this.messageForReply) {
+      options.replyToId = this.messageForReply.id;
+      this.messageForReply = null;
+    }
+
+    return socket.sendMessage(options);
   }
 
   @action
@@ -200,6 +213,11 @@ export default class CommunicationStore {
         return this.foundMessages;
       })
       .promise();
+  }
+
+  @action
+  setMessageForReply(message: Message) {
+    this.messageForReply = message;
   }
 
   @action
@@ -313,6 +331,16 @@ export default class CommunicationStore {
   async deleteMessage(messageId) {
     const socket = await this.store.api.messenger.getSocket();
     return socket.deleteMessage(messageId);
+  }
+
+  @action
+  async editMessage(messageId, messageBody) {
+    const socket = await this.store.api.messenger.getSocket();
+
+    return socket.editMessage({
+      messageBody,
+      messageId,
+    });
   }
 
   @action

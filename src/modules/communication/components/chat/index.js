@@ -28,9 +28,11 @@ export default class Chat extends Component {
     listContentHeight: number;
     showForwardAnim: boolean;
     messageForForward: Message;
+    messageToReplay: Message;
   };
 
   $listView: ListView;
+  $thisInputElement: Footer;
 
   constructor(props) {
     super(props);
@@ -41,6 +43,7 @@ export default class Chat extends Component {
       listContentHeight: 0,
       showForwardAnim: false,
       messageForForward: null,
+      messageToReplay: null,
     };
   }
 
@@ -153,7 +156,10 @@ export default class Chat extends Component {
           onContentSizeChange={(w, h) => this.onListContentSizeChange(h)}
           onLayout={::this.onListLayout}
         />
-        <Footer conversationId={conversation.id} />
+        <Footer
+          ref={ref => this.$thisInputElement = ref}
+          conversationId={conversation.id}
+        />
 
         {showForwardAnim && (
           <MoveYAnimElement

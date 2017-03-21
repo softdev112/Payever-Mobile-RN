@@ -171,7 +171,7 @@ export default class AddGroup extends Component {
             onPress={::this.onShowContactList}
           >
             <Text style={styles.addFromContactsBtnText}>
-              Add From Contacts
+              Add Contacts
             </Text>
           </TouchableOpacity>
           <Search

@@ -63,8 +63,6 @@ export default class SwitchableTimePeriodPref extends Component {
   }
 
   onTimePicked(date) {
-    console.log('DATE', date);
-
     const { periodFromPrefName, periodToPrefName, settings } = this.props;
     const { isFrom } = this.state;
 
