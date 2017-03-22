@@ -1,10 +1,14 @@
 /* eslint-disable react/no-unused-prop-types */
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import { Icon, StyleSheet, Text, View } from 'ui';
-
+import { Navigator } from 'react-native-navigation';
 import Status from './Status';
 
-export default class UserInfoHeader extends Component {
+export default class Header extends Component {
+  static contextTypes = {
+    navigator: PropTypes.object.isRequired,
+  };
+
   props: {
     status: {
       label: string;
@@ -14,7 +18,15 @@ export default class UserInfoHeader extends Component {
     userName: string;
   };
 
+  context: {
+    navigator: Navigator;
+  };
+
   onSettingsPress() {
+    this.context.navigator.push({
+      screen: 'communication.ConversationSettings',
+      animated: true,
+    });
   }
 
   render() {

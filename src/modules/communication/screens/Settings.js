@@ -52,6 +52,7 @@ export default class Settings extends Component {
       <View style={styles.container}>
         <NavBar popup>
           <NavBar.Back />
+          <NavBar.Title title="User Settings" />
           <NavBar.Button title="Save" onPress={::this.onSavePress} />
         </NavBar>
         <ScrollView contentContainerStyle={styles.settings}>
