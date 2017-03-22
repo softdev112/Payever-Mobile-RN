@@ -1,6 +1,7 @@
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import { Alert } from 'react-native';
 import Swipeable from 'react-native-swipeable';
+import type { Navigator } from 'react-native-navigation';
 import { Html, Icon, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
 import * as Animatable from 'react-native-animatable';
@@ -14,10 +15,18 @@ import type CommunicationStore from '../../../../store/communication';
 @inject('communication')
 @observer
 export default class MessageView extends Component {
+  static contextTypes = {
+    navigator: PropTypes.object.isRequired,
+  };
+
   props: {
     message: Message;
     communication?: CommunicationStore;
     onForwardMessage: (message: Message, pageY: number) => void;
+  };
+
+  context: {
+    navigator: Navigator;
   };
 
   $animMessageView: Animatable.View;
@@ -40,6 +49,18 @@ export default class MessageView extends Component {
       ],
       { cancelable: false }
     );
+  }
+
+  onEditMessage() {
+    const { message } = this.props;
+
+    this.context.navigator.push({
+      screen: 'communication.EditMessage',
+      animated: true,
+      passProps: {
+        message,
+      },
+    });
   }
 
   onReplyToMessage() {
@@ -88,7 +109,7 @@ export default class MessageView extends Component {
     if (message.editable) {
       rightButtons.push(
         <Icon
-          onPress={() => {}}
+          onPress={::this.onEditMessage}
           style={styles.actionIcon}
           source="icon-edit-16"
         />
@@ -160,7 +181,9 @@ export default class MessageView extends Component {
           <View style={styles.message}>
             <View style={styles.header}>
               <Text style={styles.headerSender}>{msgHeader}</Text>
-              <Text style={styles.headerDate}>{message.dateFormated}</Text>
+              <Text style={styles.headerDate}>
+                {message.dateFormated} {message.edited && '(edited)'}
+              </Text>
             </View>
             {replyTo && (
               <View style={styles.replayContainer}>

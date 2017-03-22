@@ -26,16 +26,16 @@ export default class HtmlView extends Component {
     this.startHtmlRender().catch(log.warn);
   }
 
-  componentWillReceiveProps() {
-    this.startHtmlRender().catch(log.warn);
+  componentWillReceiveProps(newProps) {
+    this.startHtmlRender(newProps.source).catch(log.warn);
   }
 
   onLinkPress(url) {
     Linking.openURL(url).catch(log.warn);
   }
 
-  async startHtmlRender() {
-    const { source } = this.props;
+  async startHtmlRender(newSource) {
+    const source = newSource || this.props.source;
 
     if (!source) return;
     if (this.renderingHtml) return;

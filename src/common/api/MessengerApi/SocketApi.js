@@ -58,12 +58,12 @@ export default class SocketApi extends EventEmitter {
   }
 
   async editMessage({
-    messageBody,
-    messageId,
+    id,
+    newValue,
     userId = this.userId,
   }) {
     return this.client.call('messenger/rpc/editMessage', {
-      messageBody, messageId, userId,
+      id, newValue, userId,
     });
   }
 

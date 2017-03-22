@@ -59,7 +59,7 @@ export default class CommunicationStore {
     this.store = store;
     this.socketHandlers = new SocketHandlers(this);
 
-    // Allow to send typingStatus only once per 5s
+    // Allow to send typingStatus only once per 5sec
     this.updateTypingStatus = this::throttle(this.updateTypingStatus, 5000);
   }
 
@@ -339,13 +339,10 @@ export default class CommunicationStore {
   }
 
   @action
-  async editMessage(messageId, messageBody) {
+  async editMessage(id, newValue) {
     const socket = await this.store.api.messenger.getSocket();
 
-    return socket.editMessage({
-      messageBody,
-      messageId,
-    });
+    return socket.editMessage({ id, newValue });
   }
 
   @action
