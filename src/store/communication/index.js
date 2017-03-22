@@ -221,6 +221,11 @@ export default class CommunicationStore {
   }
 
   @action
+  removeMessageForReply() {
+    this.messageForReply = null;
+  }
+
+  @action
   async saveUserSettings(settings: UserSettings) {
     const { api: { messenger } } = this.store;
     const { messengerUser } = this.messengerInfo;
