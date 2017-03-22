@@ -8,6 +8,7 @@ export default {
   'communication.AddGroup': require('./modules/communication/screens/AddGroup').default,
   'communication.AddContactToGroup': require('./modules/communication/screens/AddContactToGroup').default,
   'communication.Chat': require('./modules/communication/screens/Chat').default,
+  'communication.EditMessage': require('./modules/communication/screens/EditMessage').default,
   'communication.Main': require('./modules/communication/screens/Main').default,
   'communication.Settings': require('./modules/communication/screens/Settings').default,
   'core.Debug': require('./modules/core/screens/Debug').default,
