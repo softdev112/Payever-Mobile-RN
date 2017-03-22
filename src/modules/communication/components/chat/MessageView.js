@@ -161,6 +161,8 @@ export default class MessageView extends Component {
     const { forwardFrom, replyTo } = message;
     const msgHeader = forwardFrom
       ? `Forwarded From ${forwardFrom.senderName} ` : `${message.senderName} `;
+    const messageEdited = message.edited ? '(edited)' : '';
+    const messageSeen = message.unread ? '' : 'Seen';
 
     return (
       <Swipeable
@@ -182,7 +184,7 @@ export default class MessageView extends Component {
             <View style={styles.header}>
               <Text style={styles.headerSender}>{msgHeader}</Text>
               <Text style={styles.headerDate}>
-                {message.dateFormated} {message.edited && '(edited)'}
+                {message.dateFormated} {messageEdited} {messageSeen}
               </Text>
             </View>
             {replyTo && (
@@ -277,6 +279,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 1,
     paddingLeft: 10,
     paddingVertical: 2,
+    marginVertical: 4,
   },
 
   replySender: {
