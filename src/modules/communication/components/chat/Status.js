@@ -25,6 +25,12 @@ export default class Status extends Component {
     };
   }
 
+  componentWillUnmount() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+  }
+
   updateTypingText() {
     const dots = this.state.dots;
     this.setState({

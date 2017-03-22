@@ -3,7 +3,6 @@ import { TouchableOpacity } from 'react-native';
 import { observer, inject } from 'mobx-react/native';
 import { Icon, View, Text, StyleSheet } from 'ui';
 import { Navigator } from 'react-native-navigation';
-import * as Animatable from 'react-native-animatable';
 
 import SvgIconsShow from './SvgIconsShow';
 import type { Config } from '../../../../config';
@@ -42,12 +41,7 @@ export default class LaunchScreen extends Component {
           <Text style={styles.subWelcomeText}>
             Start, run and grow your business or get personal offers
           </Text>
-          <Animatable.View
-            style={styles.signInSignUpCont}
-            animation="zoomIn"
-            duration={300}
-            easing="ease-in-out-cubic"
-          >
+          <View style={styles.signInSignUpCont}>
             <TouchableOpacity onPress={::this.onSignInPress}>
               <View style={styles.authBtn}>
                 <Text style={styles.authBtnText}>Sign In</Text>
@@ -67,7 +61,7 @@ export default class LaunchScreen extends Component {
                 />
               </View>
             </TouchableOpacity>
-          </Animatable.View>
+          </View>
         </View>
       </View>
     );
