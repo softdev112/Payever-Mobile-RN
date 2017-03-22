@@ -1,18 +1,29 @@
 import { Icon, StyleSheet, Text, View } from 'ui';
 import type Avatar from '../../../../store/communication/models/Avatar';
 
-export default function ({ avatar }: { avatar: Avatar }) {
+export default function ({ avatar, style }: AvatarPropTypes) {
   if (avatar.type === 'url') {
     const avatarUrl = avatar.valueRetina || avatar.value;
     return (
-      <Icon style={styles.avatar} source={{ uri: avatarUrl }} />
+      <Icon style={[styles.avatar, style]} source={{ uri: avatarUrl }} />
     );
+  }
+
+  let fontSize = 16;
+  let propsStyle;
+  if (style) {
+    propsStyle = StyleSheet.flatten(style);
+
+    if (propsStyle.fontSize) {
+      fontSize = propsStyle.fontSize;
+      delete propsStyle.fontSize;
+    }
   }
 
   if (avatar.type === 'letters') {
     return (
-      <View style={styles.avatarLetters}>
-        <Text style={styles.avatarText}>{avatar.value}</Text>
+      <View style={[styles.avatarLetters, propsStyle]}>
+        <Text style={{ fontSize }}>{avatar.value}</Text>
       </View>
     );
   }
@@ -38,8 +49,9 @@ const styles = StyleSheet.create({
     marginRight: 22,
     width: 32,
   },
-
-  avatarText: {
-    fontSize: 16,
-  },
 });
+
+type AvatarPropTypes = {
+  avatar: Avatar;
+  style: Object;
+};
