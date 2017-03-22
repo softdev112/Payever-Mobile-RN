@@ -77,9 +77,24 @@ export default class Footer extends Component {
     return (
       <View style={styles.container}>
         { communication.messageForReply && (
-          <Text style={{ position: 'absolute', top: -30 }}>
-            Replay to: {communication.messageForReply.body}
-          </Text>
+          <View style={styles.replyMsgCont}>
+            <Icon
+              style={styles.replyMsgIcons}
+              source="icon-reply-16"
+            />
+            <Text
+              style={styles.replyMsgText}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              Reply to: {communication.messageForReply.body}
+            </Text>
+            <Icon
+              touchStyle={styles.replyMsgIcons}
+              onPress={() => communication.removeMessageForReply()}
+              source="icon-trashcan-16"
+            />
+          </View>
         )}
         {isBusiness && (
           <Icon
@@ -143,5 +158,22 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     paddingHorizontal: 22,
+  },
+
+  replyMsgCont: {
+    position: 'absolute',
+    top: -40,
+    flexDirection: 'row',
+    backgroundColor: '#FFF',
+    paddingVertical: 5,
+  },
+
+  replyMsgIcons: {
+    paddingHorizontal: 8,
+  },
+
+  replyMsgText: {
+    flex: 1,
+    maxWidth: '80%',
   },
 });
