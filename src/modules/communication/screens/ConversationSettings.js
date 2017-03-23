@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { NavBar, StyleSheet, Text, View } from 'ui';
-import type { Navigator } from 'react-native-navigation';
+import { ErrorBox, Loader, NavBar, StyleSheet, Text, View } from 'ui';
 
 import type CommunicationStore from '../../../store/communication';
 import Avatar from '../components/contacts/Avatar';
@@ -16,54 +15,52 @@ export default class ConversationSettings extends Component {
 
   props: {
     communication: CommunicationStore;
-    navigator: Navigator;
   };
 
-  state: {
-    conversationSettings: ConversationSettingsData;
-  };
-
-  constructor(props) {
-    super(props);
-
-    const { messengerInfo, selectedConversationId } = this.props.communication;
-    const conversationInfo = messengerInfo.byId(selectedConversationId);
-
-    this.state = {
-      conversationSettings: {
-        notification: conversationInfo.notification,
-      },
-    };
+  componentWillMount() {
+    const { communication } = this.props;
+    communication.getConversationSettings();
   }
 
-  onSavePress() {
-    this.props.navigator.pop({ animated: true });
+  onConvNotificationPropChange(value) {
+    this.props.communication.changeConvNotificationProp(value);
   }
 
   render() {
-    const { messengerInfo, selectedConversationId } = this.props.communication;
-    const conversationInfo = messengerInfo.byId(selectedConversationId);
-    const { conversationSettings } = this.state;
+    const {
+      isLoading,
+      error,
+      selectedConversationSettings,
+    } = this.props.communication;
 
     return (
       <View style={styles.container}>
         <NavBar popup>
           <NavBar.Back />
           <NavBar.Title title="Conversation Settings" />
-          <NavBar.Button title="Save" onPress={::this.onSavePress} />
         </NavBar>
-        <View style={styles.userInfo}>
-          <Avatar style={styles.avatar} avatar={conversationInfo.avatar} />
-          <Text style={styles.name}>{conversationInfo.name}</Text>
-        </View>
-        <View style={styles.settings}>
-          <CheckBoxPref
-            settings={conversationSettings}
-            prefName="notification"
-            title="Notifications"
-            icon="fa-bell-o"
-          />
-        </View>
+        <Loader isLoading={isLoading || !selectedConversationSettings}>
+          {error || !selectedConversationSettings ? (
+            <ErrorBox message={error} />
+          ) : (
+            <View style={styles.userInfo}>
+              <Avatar
+                style={styles.avatar}
+                lettersStyle={styles.avatarLetters}
+                avatar={selectedConversationSettings.avatar}
+              />
+              <Text style={styles.name}>
+                {selectedConversationSettings.name}
+              </Text>
+              <CheckBoxPref
+                initValue={selectedConversationSettings.notification}
+                title="Notifications"
+                icon="fa-bell-o"
+                onValueChange={::this.onConvNotificationPropChange}
+              />
+            </View>
+          )}
+        </Loader>
       </View>
     );
   }
@@ -81,22 +78,25 @@ const styles = StyleSheet.create({
 
   userInfo: {
     paddingVertical: 20,
-    justifyContent: 'center',
+    paddingHorizontal: 15,
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
 
   avatar: {
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 70,
     marginBottom: 10,
+    marginRight: 0,
+  },
+
+  avatarLetters: {
+    fontSize: 34,
   },
 
   name: {
     fontSize: 24,
     fontWeight: '300',
+    marginBottom: 20,
   },
 });
-
-type ConversationSettingsData = {
-  notification: boolean;
-};

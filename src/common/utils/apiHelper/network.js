@@ -7,6 +7,7 @@ export async function isConnected() {
 
 export async function loadFromApi(apiPromise, timeout) {
   const resp = await Promise.race([apiPromise, timeoutPromise(timeout)]);
+
   if (!resp.ok || resp.error) {
     const errorMessage = resp.errorDescription || NETWORK_ERROR;
     const error = new Error(errorMessage);

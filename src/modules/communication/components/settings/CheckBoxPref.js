@@ -10,9 +10,10 @@ export default class CheckBoxPref extends Component {
   props: {
     icon: string;
     title: string;
-    prefName: string;
-    settings: UserSettings;
-    onValueChange?: () => {};
+    prefName?: string;
+    initValue?: boolean;
+    settings?: UserSettings | Object;
+    onValueChange?: (value: boolean) => {};
   };
 
   state: {
@@ -22,20 +23,26 @@ export default class CheckBoxPref extends Component {
   constructor(props) {
     super(props);
 
+    const { initValue, prefName, settings } = props;
+
     this.state = {
-      checked: !!(props.settings[props.prefName]),
+      checked: settings ? settings[prefName] : initValue,
     };
   }
 
   onSwitchPress() {
     const { onValueChange, prefName, settings } = this.props;
+    const checked = !this.state.checked;
 
     if (onValueChange) {
-      onValueChange();
+      onValueChange(checked);
     }
 
-    settings[prefName] = !this.state.checked;
-    this.setState({ checked: !this.state.checked });
+    if (settings) {
+      settings[prefName] = checked;
+    }
+
+    this.setState({ checked });
   }
 
   render() {

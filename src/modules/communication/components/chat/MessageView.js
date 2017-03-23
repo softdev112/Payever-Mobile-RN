@@ -179,7 +179,7 @@ export default class MessageView extends Component {
           style={styles.container}
           ref={ref => this.$animMessageView = ref}
         >
-          <Avatar avatar={message.avatar} />
+          <Avatar style={styles.avatar} avatar={message.avatar} />
           <View style={styles.message}>
             <View style={styles.header}>
               <Text style={styles.headerSender}>{msgHeader}</Text>
@@ -223,6 +223,10 @@ const styles = StyleSheet.create({
     marginBottom: 12,
     minHeight: 50,
     width: '90%',
+  },
+
+  avatar: {
+    marginRight: 22,
   },
 
   header: {
