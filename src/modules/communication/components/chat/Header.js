@@ -3,6 +3,8 @@ import { Component, PropTypes } from 'react';
 import { Icon, StyleSheet, Text, View } from 'ui';
 import { Navigator } from 'react-native-navigation';
 import Status from './Status';
+import type { ConversationType } from
+  '../../../../store/communication/models/Conversation';
 
 export default class Header extends Component {
   static contextTypes = {
@@ -16,6 +18,7 @@ export default class Header extends Component {
       typing: boolean;
     };
     userName: string;
+    conversationType: ConversationType;
   };
 
   context: {
@@ -23,10 +26,20 @@ export default class Header extends Component {
   };
 
   onSettingsPress() {
-    this.context.navigator.push({
-      screen: 'communication.ConversationSettings',
-      animated: true,
-    });
+    const { conversationType } = this.props;
+    console.log('conversssss converssss', conversationType);
+    if (conversationType === 'conversation') {
+      this.context.navigator.push({
+        screen: 'communication.ConversationSettings',
+        animated: true,
+      });
+    } else if (conversationType === 'chat-group'
+               || conversationType === 'marketing-group') {
+      this.context.navigator.push({
+        screen: 'communication.GroupSettings',
+        animated: true,
+      });
+    }
   }
 
   render() {

@@ -11,6 +11,7 @@ import Contact from './models/Contact';
 import Conversation, { ConversationStatus }
   from './models/Conversation';
 import ConversationSettingsData from './models/ConversationSettingsData';
+import ChatGroupSettingsData from './models/ChatGroupSettingsData';
 import { MessengerData } from '../../common/api/MessengerApi';
 import SocketHandlers from './SocketHandlers';
 import Message from './models/Message';
@@ -39,12 +40,18 @@ export default class CommunicationStore {
 
   @observable messageForReply: Message = null;
 
+  @observable selectedChatGroupSettings: ChatGroupSettingsData = null;
+
   store: Store;
   socket: SocketApi;
   socketHandlers: SocketHandlers;
   socketObserver: Function;
 
   contactsAutocompleteDs: DataSource = new DataSource({
+    rowHasChanged: (r1, r2) => r1 !== r2,
+  });
+
+  groupMembersDs: DataSource = new DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
   });
 
@@ -256,6 +263,16 @@ export default class CommunicationStore {
   }
 
   @computed
+  get groupMembersDataSource() {
+    let chatGroupMembers = [];
+    if (this.selectedChatGroupSettings) {
+      chatGroupMembers = this.selectedChatGroupSettings.members.slice();
+    }
+
+    return this.groupMembersDs.cloneWithRows(chatGroupMembers);
+  }
+
+  @computed
   get contactDataSource() {
     const filter = this.contactsFilter;
     const info = this.messengerInfo;
@@ -431,6 +448,15 @@ export default class CommunicationStore {
     apiHelper(socket.changeConvNotificationProp(
       this.selectedConversationId, state
     )).success(() => {});
+  }
+
+  @action
+  async getChatGroupSettings() {
+    const socket = await this.store.api.messenger.getSocket();
+    apiHelper(socket.getChatGroupSettings(this.selectedConversationId), this)
+      .success((data) => {
+        this.selectedChatGroupSettings = new ChatGroupSettingsData(data);
+      });
   }
 
   initSocket(url, userId) {

@@ -26,5 +26,6 @@ export NavBar from './NavBar';
 export WebViewEx from './WebViewEx';
 export Text from './Text';
 export TextInput from './TextInput';
+export TextButton from './TextButton';
 export SpinnerButton from './SpinnerButton';
 export WebView from './WebView';

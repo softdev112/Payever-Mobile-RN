@@ -4,7 +4,7 @@ import { ListView, Switch, TouchableOpacity } from 'react-native';
 import type { Navigator } from 'react-native-navigation';
 import {
   BottomDock, FlatTextInput, Loader, MoveYAnimElement, NavBar,
-  StyleSheet, Text, View,
+  StyleSheet, Text, TextButton, View,
 } from 'ui';
 
 import Search from '../components/contacts/Search';
@@ -166,14 +166,11 @@ export default class AddGroup extends Component {
               onValueChange={::this.onAllowGroupChatsChange}
             />
           </View>
-          <TouchableOpacity
-            style={styles.addFromContactsBtn}
+          <TextButton
+            style={styles.addContactsBtn}
+            title="Add Contacts"
             onPress={::this.onShowContactList}
-          >
-            <Text style={styles.addFromContactsBtnText}>
-              Add Contacts
-            </Text>
-          </TouchableOpacity>
+          />
           <Search
             style={styles.search}
             showSettings={false}
@@ -257,15 +254,8 @@ const styles = StyleSheet.create({
     color: '$pe_color_blue',
   },
 
-  addFromContactsBtn: {
-    alignSelf: 'stretch',
+  addContactsBtn: {
     marginBottom: 14,
-  },
-
-  addFromContactsBtnText: {
-    fontSize: 16,
-    fontWeight: '400',
-    color: '$pe_color_blue',
   },
 
   bottomDock: {
