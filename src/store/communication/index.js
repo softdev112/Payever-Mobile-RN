@@ -5,27 +5,29 @@ import { apiHelper, log } from 'utils';
 import { DataSource } from 'ui';
 import { throttle } from 'lodash';
 
-import type Store from '../index';
 import UserSettings from './models/UserSettings';
 import MessengerInfo from './models/MessengerInfo';
 import Contact from './models/Contact';
 import Conversation, { ConversationStatus }
   from './models/Conversation';
-import type BusinessProfile from '../profiles/models/BusinessProfile';
+import ConversationSettingsData from './models/ConversationSettingsData';
 import { MessengerData } from '../../common/api/MessengerApi';
 import SocketHandlers from './SocketHandlers';
 import Message from './models/Message';
 import type SocketApi from '../../common/api/MessengerApi/SocketApi';
 import type ConversationInfo from './models/ConversationInfo';
+import type BusinessProfile from '../profiles/models/BusinessProfile';
+import type Store from '../index';
 
 export default class CommunicationStore {
   @observable conversations: ObservableMap<Conversation> = observable.map();
   @observable messengerInfo: MessengerInfo;
 
-  @observable isLoading: boolean;
-  @observable error: string;
+  @observable isLoading: boolean = false;
+  @observable error: string = '';
 
   @observable selectedConversationId: number;
+  @observable selectedConversationSettings: ConversationSettingsData;
 
   @observable foundMessages: Array<Message>;
   @observable contactsFilter: string = '';
@@ -411,6 +413,24 @@ export default class CommunicationStore {
     )).success(() => {
       // Do not need to save locally it comeback from WebSockets
     });
+  }
+
+  @action
+  async getConversationSettings() {
+    const socket = await this.store.api.messenger.getSocket();
+    apiHelper(socket.getConversationSettings(this.selectedConversationId), this)
+      .success((data) => {
+        this.selectedConversationSettings = new ConversationSettingsData(data);
+      });
+  }
+
+  @action
+  async changeConvNotificationProp(state) {
+    const socket = await this.store.api.messenger.getSocket();
+
+    apiHelper(socket.changeConvNotificationProp(
+      this.selectedConversationId, state
+    )).success(() => {});
   }
 
   initSocket(url, userId) {

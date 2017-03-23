@@ -95,6 +95,22 @@ export default class SocketApi extends EventEmitter {
     });
   }
 
+  async getConversationSettings(id, userId = this.userId) {
+    return this.client.call('messenger/rpc/getConversationSettings', {
+      id, userId,
+    });
+  }
+
+  async changeConvNotificationProp(
+    conversationId,
+    state,
+    userId = this.userId
+  ) {
+    return this.client.call('messenger/rpc/conversationNotification', {
+      conversationId, state, userId,
+    });
+  }
+
   async resolveWhenConnected() {
     const client = this.client;
     switch (client.state) {
