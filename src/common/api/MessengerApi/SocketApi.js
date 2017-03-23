@@ -12,7 +12,7 @@ export default class SocketApi extends EventEmitter {
     client.on(WampClient.EVENT_WELCOME, ::this.subscribeChannel);
   }
 
-  async getConversation({
+  getConversation({
     direction = 'before',
     id,
     limit = 30,
@@ -44,7 +44,7 @@ export default class SocketApi extends EventEmitter {
     });
   }
 
-  async sendMessage({
+  sendMessage({
     body,
     channelSetId = '',
     conversationId,
@@ -57,7 +57,7 @@ export default class SocketApi extends EventEmitter {
     });
   }
 
-  async editMessage({
+  editMessage({
     id,
     newValue,
     userId = this.userId,
@@ -67,11 +67,11 @@ export default class SocketApi extends EventEmitter {
     });
   }
 
-  async searchMessages({ query, userId = this.userId }) {
+  searchMessages({ query, userId = this.userId }) {
     return this.client.call('messenger/rpc/searchMessages', { query, userId });
   }
 
-  async updateMessagesReadStatus(messageIds, userId = this.userId) {
+  updateMessagesReadStatus(messageIds, userId = this.userId) {
     if (!Array.isArray(messageIds)) {
       messageIds = [messageIds];
     }
@@ -81,13 +81,13 @@ export default class SocketApi extends EventEmitter {
     });
   }
 
-  async updateTypingStatus(conversationId, userId = this.userId) {
+  updateTypingStatus(conversationId, userId = this.userId) {
     return this.client.call('messenger/rpc/updateTypingStatus', {
       conversationId, userId,
     });
   }
 
-  async deleteMessage(messageId, userId = this.userId) {
+  deleteMessage(messageId, userId = this.userId) {
     if (!messageId) return false;
 
     return this.client.call('messenger/rpc/deleteMessage', {
@@ -95,13 +95,13 @@ export default class SocketApi extends EventEmitter {
     });
   }
 
-  async getConversationSettings(id, userId = this.userId) {
+  getConversationSettings(id, userId = this.userId) {
     return this.client.call('messenger/rpc/getConversationSettings', {
       id, userId,
     });
   }
 
-  async changeConvNotificationProp(
+  changeConvNotificationProp(
     conversationId,
     state,
     userId = this.userId
@@ -111,7 +111,13 @@ export default class SocketApi extends EventEmitter {
     });
   }
 
-  async resolveWhenConnected() {
+  getChatGroupSettings(id: number, userId = this.userId) {
+    return this.client.call('messenger/rpc/getChatGroupSettings', {
+      id, userId,
+    });
+  }
+
+  resolveWhenConnected() {
     const client = this.client;
     switch (client.state) {
       case WebSocket.OPEN: {

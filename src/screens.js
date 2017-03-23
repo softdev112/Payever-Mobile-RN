@@ -11,6 +11,7 @@ export default {
   'communication.EditMessage': require('./modules/communication/screens/EditMessage').default,
   'communication.Main': require('./modules/communication/screens/Main').default,
   'communication.ConversationSettings': require('./modules/communication/screens/ConversationSettings').default,
+  'communication.GroupSettings': require('./modules/communication/screens/GroupSettings').default,
   'communication.Settings': require('./modules/communication/screens/Settings').default,
   'core.Debug': require('./modules/core/screens/Debug').default,
   'core.ErrorPage': require('./modules/core/screens/ErrorPage').default,

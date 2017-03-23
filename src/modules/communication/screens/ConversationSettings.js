@@ -39,7 +39,7 @@ export default class ConversationSettings extends Component {
           <NavBar.Back />
           <NavBar.Title title="Conversation Settings" />
         </NavBar>
-        <Loader isLoading={isLoading || !selectedConversationSettings}>
+        <Loader isLoading={isLoading}>
           {error || !selectedConversationSettings ? (
             <ErrorBox message={error} />
           ) : (

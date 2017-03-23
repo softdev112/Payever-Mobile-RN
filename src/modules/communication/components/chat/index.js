@@ -145,7 +145,11 @@ export default class Chat extends Component {
         contentContainerStyle={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : null}
       >
-        <Header status={conversation.status} userName={conversation.name} />
+        <Header
+          status={conversation.status}
+          userName={conversation.name}
+          conversationType={communication.selectedConversation.type}
+        />
         <ListView
           contentContainerStyle={styles.list}
           dataSource={ds}
