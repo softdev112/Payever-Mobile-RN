@@ -73,6 +73,7 @@ export default class Search extends Component {
             multiline={false}
             placeholder="Search"
             returnKeyType="search"
+            autoCapitalize="none"
             underlineColorAndroid="transparent"
           />
         </View>

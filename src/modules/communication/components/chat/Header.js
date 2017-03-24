@@ -27,7 +27,7 @@ export default class Header extends Component {
 
   onSettingsPress() {
     const { conversationType } = this.props;
-    console.log('conversssss converssss', conversationType);
+
     if (conversationType === 'conversation') {
       this.context.navigator.push({
         screen: 'communication.ConversationSettings',

@@ -9,7 +9,9 @@ export default function ({ contact }: { contact: Contact }) {
       <Avatar avatar={contact.avatar} />
       <View style={styles.textContainer}>
         <Text style={styles.text} numberOfLines={1}>{contact.name}</Text>
-        <Text style={styles.text} numberOfLines={1}>{contact.email}</Text>
+        {contact.email && (
+          <Text style={styles.text} numberOfLines={1}>{contact.email}</Text>
+        )}
       </View>
     </View>
   );
@@ -27,6 +29,8 @@ const styles = StyleSheet.create({
 
   textContainer: {
     flex: 1,
+    paddingLeft: 10,
+    paddingRight: 5,
   },
 
   text: {

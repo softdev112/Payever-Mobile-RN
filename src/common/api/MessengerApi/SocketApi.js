@@ -117,6 +117,24 @@ export default class SocketApi extends EventEmitter {
     });
   }
 
+  addGroupMember(groupId: number, memberAlias: string, userId = this.userId) {
+    return this.client.call('messenger/rpc/addGroupMember', {
+      groupId, memberAlias, userId,
+    });
+  }
+
+  removeGroupMember(groupId: number, memberId: number, userId = this.userId) {
+    return this.client.call('messenger/rpc/removeGroupMember', {
+      groupId, memberId, userId,
+    });
+  }
+
+  deleteGroup(groupId: number, userId = this.userId) {
+    return this.client.call('messenger/rpc/deleteGroup', {
+      groupId, userId,
+    });
+  }
+
   resolveWhenConnected() {
     const client = this.client;
     switch (client.state) {

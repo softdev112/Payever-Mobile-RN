@@ -18,6 +18,7 @@ import Message from './models/Message';
 import type SocketApi from '../../common/api/MessengerApi/SocketApi';
 import type ConversationInfo from './models/ConversationInfo';
 import type BusinessProfile from '../profiles/models/BusinessProfile';
+import type GroupMember from './models/GroupMember';
 import type Store from '../index';
 
 export default class CommunicationStore {
@@ -457,6 +458,42 @@ export default class CommunicationStore {
       .success((data) => {
         this.selectedChatGroupSettings = new ChatGroupSettingsData(data);
       });
+  }
+
+  @action
+  async removeGroupMember(groupId: number, memberId: number) {
+    const socket = await this.store.api.messenger.getSocket();
+    apiHelper(socket.removeGroupMember(groupId, memberId))
+      .success(() => {
+        this.selectedChatGroupSettings.removeMember(memberId);
+      });
+  }
+
+  @action
+  async addGroupMember(groupId: number, memberAlias: string) {
+    const socket = await this.store.api.messenger.getSocket();
+    return apiHelper(socket.addGroupMember(groupId, memberAlias))
+      .success((data) => {
+        // Add message to group settings members
+        this.selectedChatGroupSettings.addMember(data);
+      })
+      .promise();
+  }
+
+  @action
+  addAllMembersToGroup(groupId: number) {
+    const members = this.contactsForGroup.slice();
+    members.forEach(async (member: GroupMember) => {
+      await this.addGroupMember(groupId, member.id);
+    });
+  }
+
+  @action
+  async deleteGroup(groupId: number) {
+    const socket = await this.store.api.messenger.getSocket();
+    apiHelper(socket.deleteGroup(groupId))
+      .success(() => {})
+      .error(log.debug);
   }
 
   initSocket(url, userId) {

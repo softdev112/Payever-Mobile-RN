@@ -29,12 +29,11 @@ const styles = StyleSheet.create({
 
   avatarLetters: {
     alignItems: 'center',
+    justifyContent: 'center',
     borderColor: '#666',
     borderRadius: 16,
     borderWidth: 1,
     height: 32,
-    justifyContent: 'center',
-    marginRight: 22,
     width: 32,
   },
 

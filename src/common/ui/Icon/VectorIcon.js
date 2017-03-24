@@ -18,8 +18,10 @@ export default function VectorIcon(props: Props) {
     );
   }
 
+  delete props.onPress;
+
   return (
-    <Text {...props} style={[props.style]}>
+    <Text {...props} style={props.style}>
       {unicode}
     </Text>
   );
