@@ -46,6 +46,7 @@ export default class FlatTextInput extends Component {
           ref={ref => this.$textInput = ref}
           placeholder={placeholder}
           autoCorrect={autoCorrect}
+          autoCapitalize="none"
           securityTextEntry={securityTextEntry}
           value={value}
           onChangeText={onChangeText}

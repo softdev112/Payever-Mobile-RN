@@ -34,8 +34,13 @@ export default class IconButton extends Component {
     let isShowTitle = !!title;
 
     switch (showTitle) {
+      case 'always':
+        isShowTitle = true;
+        break;
+
       case 'size-dep':
         titleFinalStyle.push(styles.titleSizeDepDisable);
+        isShowTitle = true;
         break;
 
       case 'never':

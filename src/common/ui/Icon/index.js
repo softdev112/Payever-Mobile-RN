@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import componentFactory from './componentFactory';
 
 const MIN_TOUCHABLE_SIZE = 44;
@@ -38,7 +38,7 @@ export default class Icon extends Component {
           onPress={onPress}
           style={touchStyle}
         >
-          <Text>{iconNode}</Text>
+          {iconNode}
         </TouchableOpacity>
       );
     }
