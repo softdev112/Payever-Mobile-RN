@@ -127,7 +127,6 @@ export default class CommunicationStore {
       if (!conversation) {
         //noinspection JSIgnoredPromiseFromCall
         await this.loadConversation(id);
-        console.log('mark mark mark mark mark');
         await this.markConversationAsRead(id);
       }
     }
@@ -504,9 +503,6 @@ export default class CommunicationStore {
         // Add message to group settings members
         this.selectedGroupSettings.addMember(data);
       })
-      .error((error) => {
-        console.log(error);
-      })
       .promise();
   }
 
@@ -514,7 +510,6 @@ export default class CommunicationStore {
   addAllMembersToGroup(groupId: number) {
     const members = this.contactsForGroup.slice();
     members.forEach(async (member: GroupMember) => {
-      console.log('member member ', member.id);
       await this.addGroupMember(groupId, member.id);
     });
   }
@@ -539,7 +534,9 @@ export default class CommunicationStore {
           this.setSelectedConversationId(null);
         }
 
-        this.messengerInfo.groups = groups.filter(group => group.id !== groupId);
+        this.messengerInfo.groups = groups.filter(
+          group => group.id !== groupId
+        );
       })
       .error(log.debug);
   }
