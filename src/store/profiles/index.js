@@ -81,6 +81,9 @@ export default class ProfilesStore {
       api.profiles.getAllContacts(this.currentProfile.business.slug),
       this.allContactsDs
     ).success((data) => {
+      console.log('ssssssssssss1');
+      console.log(data);
+      console.log('ssssssssssss2');
       this.contacts = data.contact_models;
     }).promise();
   }

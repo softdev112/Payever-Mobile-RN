@@ -1,7 +1,7 @@
 import { observable, extendObservable } from 'mobx';
 import type GroupMember from './GroupMember';
 
-export default class ConversationSettingsData {
+export default class GroupSettingsData {
   id: number;
   name: string;
   members: Array<GroupMember>;

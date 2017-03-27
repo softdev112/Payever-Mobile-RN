@@ -34,18 +34,31 @@ export default class SavedContactView extends Component {
   render() {
     const { contact } = this.props;
     const { switchValue } = this.state;
+    const { first_name, last_name, email, country, city, street } = contact;
 
     return (
       <View style={styles.container}>
         <View style={styles.textContainer}>
-          <Text style={styles.text} numberOfLines={1}>
-            {contact.first_name}
-          </Text>
-          <Text style={styles.text} numberOfLines={1}>{contact.last_name}</Text>
-          <Text style={styles.text} numberOfLines={1}>{contact.email}</Text>
-          <Text style={styles.text} numberOfLines={1}>
-            {contact.country} {contact.city} {contact.street}
-          </Text>
+          {!!first_name && (
+            <Text style={styles.text} numberOfLines={1}>
+              {first_name}
+            </Text>
+          )}
+          {!!last_name && (
+            <Text style={styles.text} numberOfLines={1}>
+              {last_name}
+            </Text>
+          )}
+          {!!email && (
+            <Text style={styles.text} numberOfLines={1}>
+              {email}
+            </Text>
+          )}
+          {(!!city || !!country || !!street) && (
+            <Text style={styles.text} numberOfLines={1}>
+              {country} {city} {street}
+            </Text>
+          )}
         </View>
         <Switch
           value={switchValue}
@@ -62,8 +75,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
+    minHeight: 70,
   },
 
   textContainer: {

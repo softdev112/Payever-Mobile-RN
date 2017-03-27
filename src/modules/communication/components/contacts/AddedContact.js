@@ -6,7 +6,7 @@ import type Contact from '../../../../store/communication/models/Contact';
 import type CommunicationStore from '../../../../store/communication';
 
 export default observer(['communication'], (
-  { communication, contact }: { communication: CommStore; contact: Contact }
+  { communication, contact }: PropTypes
 ) => {
   return (
     <View style={styles.container}>
@@ -37,4 +37,7 @@ const styles = StyleSheet.create({
   },
 });
 
-type CommStore = CommunicationStore;
+type PropTypes = {
+  communication: CommunicationStore;
+  contact: Contact;
+};

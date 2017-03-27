@@ -117,6 +117,12 @@ export default class SocketApi extends EventEmitter {
     });
   }
 
+  getMarketingGroupSettings(id: number, userId = this.userId) {
+    return this.client.call('messenger/rpc/getMarketingGroupSettings', {
+      id, userId,
+    });
+  }
+
   addGroupMember(groupId: number, memberAlias: string, userId = this.userId) {
     return this.client.call('messenger/rpc/addGroupMember', {
       groupId, memberAlias, userId,

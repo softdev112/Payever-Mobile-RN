@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { Switch } from 'react-native';
+import { Navigator } from 'react-native-navigation';
 import { FlatTextInput, NavBar, StyleSheet, Text, View } from 'ui';
 
 import AddContactBlock from '../components/contacts/AddContactBlock';
@@ -15,6 +16,7 @@ export default class AddGroup extends Component {
 
   props: {
     communication: CommunicationStore;
+    navigator: Navigator;
   };
 
   state: {
@@ -40,15 +42,16 @@ export default class AddGroup extends Component {
   }
 
   onCreateNewGroup() {
-    const { communication } = this.props;
+    const { communication, navigator } = this.props;
     const { isAllowGroupChat, groupName } = this.state;
 
     if (groupName === '') {
-      this.$groupNameTextInput.shakeElementAndSetFoucs();
+      this.$groupNameTextInput.shakeElementAndSetFocus();
       return;
     }
 
     communication.createNewGroup(groupName, isAllowGroupChat);
+    navigator.pop({ animated: true });
   }
 
   render() {

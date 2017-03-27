@@ -11,7 +11,7 @@ import Contact from './models/Contact';
 import Conversation, { ConversationStatus }
   from './models/Conversation';
 import ConversationSettingsData from './models/ConversationSettingsData';
-import ChatGroupSettingsData from './models/ChatGroupSettingsData';
+import GroupSettingsData from './models/GroupSettingsData';
 import { MessengerData } from '../../common/api/MessengerApi';
 import SocketHandlers from './SocketHandlers';
 import Message from './models/Message';
@@ -41,7 +41,7 @@ export default class CommunicationStore {
 
   @observable messageForReply: Message = null;
 
-  @observable selectedChatGroupSettings: ChatGroupSettingsData = null;
+  @observable selectedGroupSettings: GroupSettingsData = null;
 
   store: Store;
   socket: SocketApi;
@@ -122,13 +122,15 @@ export default class CommunicationStore {
   @action
   async setSelectedConversationId(id) {
     this.selectedConversationId = id;
-    const conversation = this.conversations.get(id);
-    if (!conversation) {
-      //noinspection JSIgnoredPromiseFromCall
-      await this.loadConversation(id);
+    if (id) {
+      const conversation = this.conversations.get(id);
+      if (!conversation) {
+        //noinspection JSIgnoredPromiseFromCall
+        await this.loadConversation(id);
+        console.log('mark mark mark mark mark');
+        await this.markConversationAsRead(id);
+      }
     }
-
-    return await this.markConversationAsRead(id);
   }
 
   @action
@@ -266,8 +268,8 @@ export default class CommunicationStore {
   @computed
   get groupMembersDataSource() {
     let chatGroupMembers = [];
-    if (this.selectedChatGroupSettings) {
-      chatGroupMembers = this.selectedChatGroupSettings.members.slice();
+    if (this.selectedGroupSettings) {
+      chatGroupMembers = this.selectedGroupSettings.members.slice();
     }
 
     return this.groupMembersDs.cloneWithRows(chatGroupMembers);
@@ -367,6 +369,8 @@ export default class CommunicationStore {
 
   @action
   addMessageForForward(message: Message) {
+    if (this.checkMsgInForForward(message.id)) return;
+
     this.msgsForForward.push(message);
   }
 
@@ -383,6 +387,8 @@ export default class CommunicationStore {
 
   @action
   addContactForGroup(contact: Contact) {
+    if (this.checkContactAddedForGroup(contact.id)) return;
+
     this.contactsForGroup.push(contact);
   }
 
@@ -452,12 +458,33 @@ export default class CommunicationStore {
   }
 
   @action
-  async getChatGroupSettings() {
+  async getChatGroupSettings(groupId: number) {
     const socket = await this.store.api.messenger.getSocket();
-    apiHelper(socket.getChatGroupSettings(this.selectedConversationId), this)
-      .success((data) => {
-        this.selectedChatGroupSettings = new ChatGroupSettingsData(data);
-      });
+    return apiHelper(socket.getChatGroupSettings(groupId), this)
+      .success(data => data)
+      .promise();
+  }
+
+  @action
+  async getMarketingGroupSettings(groupId: number) {
+    const socket = await this.store.api.messenger.getSocket();
+    return apiHelper(socket.getMarketingGroupSettings(groupId), this)
+      .success(data => data)
+      .promise();
+  }
+
+  @action
+  async getSelectedGroupSettings() {
+    const groupId = this.selectedConversationId;
+    let currentGroupSettings = null;
+
+    if (this.selectedConversation.type === 'chat-group') {
+      currentGroupSettings = await this.getChatGroupSettings(groupId);
+    } else if (this.selectedConversation.type === 'marketing-group') {
+      currentGroupSettings = await this.getMarketingGroupSettings(groupId);
+    }
+
+    this.selectedGroupSettings = new GroupSettingsData(currentGroupSettings);
   }
 
   @action
@@ -465,7 +492,7 @@ export default class CommunicationStore {
     const socket = await this.store.api.messenger.getSocket();
     apiHelper(socket.removeGroupMember(groupId, memberId))
       .success(() => {
-        this.selectedChatGroupSettings.removeMember(memberId);
+        this.selectedGroupSettings.removeMember(memberId);
       });
   }
 
@@ -475,7 +502,10 @@ export default class CommunicationStore {
     return apiHelper(socket.addGroupMember(groupId, memberAlias))
       .success((data) => {
         // Add message to group settings members
-        this.selectedChatGroupSettings.addMember(data);
+        this.selectedGroupSettings.addMember(data);
+      })
+      .error((error) => {
+        console.log(error);
       })
       .promise();
   }
@@ -484,6 +514,7 @@ export default class CommunicationStore {
   addAllMembersToGroup(groupId: number) {
     const members = this.contactsForGroup.slice();
     members.forEach(async (member: GroupMember) => {
+      console.log('member member ', member.id);
       await this.addGroupMember(groupId, member.id);
     });
   }
@@ -492,7 +523,24 @@ export default class CommunicationStore {
   async deleteGroup(groupId: number) {
     const socket = await this.store.api.messenger.getSocket();
     apiHelper(socket.deleteGroup(groupId))
-      .success(() => {})
+      .success(() => {
+        // Remove group locally
+        const { groups } = this.messengerInfo;
+        const delGroupIndex = groups.findIndex(group => group.id === groupId);
+
+        let newIndex = -1;
+        if (groups.length > 1) {
+          newIndex = delGroupIndex > 0 ? delGroupIndex - 1 : delGroupIndex + 1;
+        }
+
+        if (newIndex !== -1) {
+          this.setSelectedConversationId(groups[newIndex].id);
+        } else {
+          this.setSelectedConversationId(null);
+        }
+
+        this.messengerInfo.groups = groups.filter(group => group.id !== groupId);
+      })
       .error(log.debug);
   }
 

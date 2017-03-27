@@ -28,7 +28,7 @@ export default class AddMemberToGroup extends Component {
           <NavBar.Back title="Settings" showTitle="always" />
           <NavBar.Title title="Add Member" />
           <NavBar.Button
-            title="Add"
+            title="Save"
             onPress={::this.onAddMembersToGroup}
             unwind
           />

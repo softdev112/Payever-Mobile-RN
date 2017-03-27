@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { images, NavBar, StyleSheet, View } from 'ui';
-
 import Chat from '../components/chat';
 
 export default class ChatScreen extends Component {
