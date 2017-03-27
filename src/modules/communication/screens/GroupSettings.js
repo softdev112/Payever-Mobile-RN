@@ -22,7 +22,7 @@ export default class GroupSettings extends Component {
   };
 
   componentWillMount() {
-    this.props.communication.getChatGroupSettings();
+    this.props.communication.getSelectedGroupSettings();
   }
 
   onAddMember() {
@@ -44,10 +44,7 @@ export default class GroupSettings extends Component {
     } = this.props;
     this.props.communication.deleteGroup(group.id);
 
-    navigator.push({
-      screen: 'communication.Main',
-      animated: true,
-    });
+    navigator.pop({ animated: true });
   }
 
   renderMemberRow(member) {
@@ -61,7 +58,7 @@ export default class GroupSettings extends Component {
 
   render() {
     const { communication } = this.props;
-    const { isLoading, error, selectedChatGroupSettings } = communication;
+    const { isLoading, error, selectedGroupSettings } = communication;
     const ds = communication.groupMembersDataSource;
 
     return (
@@ -71,12 +68,12 @@ export default class GroupSettings extends Component {
           <NavBar.Title title="Group Settings" />
         </NavBar>
         <Loader isLoading={isLoading}>
-          {error || !selectedChatGroupSettings ? (
+          {error || !selectedGroupSettings ? (
             <ErrorBox message={error} />
           ) : (
             <View style={styles.userInfo}>
               <Text style={styles.name}>
-                {selectedChatGroupSettings.name}
+                {selectedGroupSettings.name}
               </Text>
               <View style={styles.btnsContainer}>
                 <TextButton
@@ -92,7 +89,6 @@ export default class GroupSettings extends Component {
               </View>
               <Text style={styles.membersTitle}>Members:</Text>
               <ListView
-                contentContainerStyle={styles.contentContainer}
                 dataSource={ds}
                 enableEmptySections
                 renderRow={::this.renderMemberRow}
@@ -111,6 +107,7 @@ const styles = StyleSheet.create({
   },
 
   userInfo: {
+    flex: 1,
     paddingVertical: 10,
     paddingHorizontal: 15,
     justifyContent: 'flex-start',
@@ -119,7 +116,7 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 24,
     fontWeight: '300',
-    marginBottom: 5,
+    marginBottom: 8,
   },
 
   btnsContainer: {

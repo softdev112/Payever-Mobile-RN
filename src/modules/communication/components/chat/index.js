@@ -1,5 +1,6 @@
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import { KeyboardAvoidingView, ListView, Platform } from 'react-native';
+import { Navigator } from 'react-native-navigation';
 import { inject, observer } from 'mobx-react/native';
 import {
   BottomDock, ErrorBox, Loader, MoveYAnimElement, StyleSheet,
@@ -17,9 +18,17 @@ const ANIM_POSITION_ADJUST = 65;
 @inject('communication')
 @observer
 export default class Chat extends Component {
+  static contextTypes = {
+    navigator: PropTypes.object.isRequired,
+  };
+
   props: {
     communication?: CommunicationStore;
     style?: Object | number;
+  };
+
+  context: {
+    navigator: Navigator;
   };
 
   state: {
@@ -129,7 +138,15 @@ export default class Chat extends Component {
       msgsForForward,
       selectedConversation: conversation,
       selectedConversationDataSource: ds,
+      selectedConversationId,
     } = communication;
+
+    // This is hack to go to contacts list if we delete group we set
+    // selectedConversationId = null. We need it because RNN doesn't have popTo
+    if (!selectedConversationId) {
+      this.context.navigator.pop({ animated: false });
+      return null;
+    }
 
     if (!conversation) {
       return (

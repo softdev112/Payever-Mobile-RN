@@ -72,7 +72,8 @@ export default class SavedContactsList extends Component {
   getContactForAdding(contact: SavedContact, contactData: Object): ?Contact {
     if (!contact || !contactData) return null;
 
-    const { id, name, user_type } = contactData.messengerUser;
+    const { name, user_type } = contactData.messengerUser;
+    const { id } = contact;
 
     let contactId = '';
     switch (user_type) {
@@ -81,8 +82,8 @@ export default class SavedContactsList extends Component {
         break;
       }
 
-      case 'contacts': {
-        contactId = `user-${id}`;
+      case 'contact': {
+        contactId = `contact-${id}`;
         break;
       }
 
@@ -94,8 +95,8 @@ export default class SavedContactsList extends Component {
 
     return Object.assign({}, {
       name,
-      savedId: contact.id,
       id: contactId,
+      savedId: contact.id,
       avatar: contactData.avatar,
       email: contact.email,
       blockName: user_type + 's',

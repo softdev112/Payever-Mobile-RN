@@ -25,7 +25,7 @@ export default class FlatTextInput extends Component {
   $textInput: TextInput;
   $animContainer: Animatable.View;
 
-  async shakeElementAndSetFoucs() {
+  async shakeElementAndSetFocus() {
     await this.$animContainer.shake(300);
     this.$textInput.focus();
   }
