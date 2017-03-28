@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
 
   bottomDock: {
     $topHeight: '52%',
-    left: -15,
     top: '$topHeight',
+    left: -15,
   },
 });
