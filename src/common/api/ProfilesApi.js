@@ -37,7 +37,7 @@ export default class ProfilesApi {
     return this.client.delete(`/api/rest/v1/profiles/${businessId}/unfollow`);
   }
 
-  async getAllContacts(businessId) {
+  getAllContacts(businessId) {
     return this.client.get(`/api/rest/v1/contact/business/${businessId}`);
   }
 }

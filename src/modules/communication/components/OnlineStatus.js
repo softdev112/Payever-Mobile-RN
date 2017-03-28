@@ -43,4 +43,6 @@ const styles = StyleSheet.create({
 
 type PropTypes = {
   isOnline: boolean;
+  size: number;
+  style: Object;
 };

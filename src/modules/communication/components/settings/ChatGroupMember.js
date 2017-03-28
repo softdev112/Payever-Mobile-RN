@@ -5,21 +5,36 @@ import type GroupMember
 import Avatar from '../contacts/Avatar';
 
 export default function ({ member, onRemove }: PropTypes) {
+  const statusLabelStyle = [styles.labelText];
+  if (member.status.online) {
+    statusLabelStyle.push(styles.onlineLabel);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.memberInfo}>
         <Avatar avatar={member.avatar} />
         <View style={styles.textContainer}>
-          <Text style={styles.nameText} numberOfLines={1}>{member.name}</Text>
-          <Text style={styles.labelText} numberOfLines={1}>
+          <View style={styles.statusRow}>
+            <Text style={styles.nameText} numberOfLines={1}>{member.name}</Text>
+            {member.isOwner && (
+              <Icon
+                style={styles.ownStar}
+                source="fa-star"
+              />
+            )}
+          </View>
+          <Text style={statusLabelStyle} numberOfLines={1}>
             {member.status.label}
           </Text>
         </View>
       </View>
-      <Icon
-        onPress={() => onRemove(member.id)}
-        source="icon-trashcan-24"
-      />
+      {onRemove && (
+        <Icon
+          onPress={() => onRemove(member.id)}
+          source="icon-trashcan-24"
+        />
+      )}
     </View>
   );
 }
@@ -45,16 +60,31 @@ const styles = StyleSheet.create({
     width: '68%',
   },
 
+  statusRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
   nameText: {
     fontSize: 16,
     fontWeight: '300',
     fontFamily: '$font_family',
+    marginRight: 5,
   },
 
   labelText: {
     fontSize: 12,
     color: '$pe_color_gray',
     fontFamily: '$font_family',
+  },
+
+  ownStar: {
+    color: '$pe_color_twitter',
+    fontSize: 12,
+  },
+
+  onlineLabel: {
+    color: '$pe_color_twitter',
   },
 });
 
