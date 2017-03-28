@@ -49,7 +49,7 @@ export default class Status extends Component {
 
     return (
       <View style={styles.container}>
-        <OnlineStatus style={styles.led} isOnline />
+        <OnlineStatus style={styles.led} isOnline={status.online} />
         <Text style={styles.text}>
           {status.typing ? 'typing' + '.'.repeat(dots) : status.label}
         </Text>

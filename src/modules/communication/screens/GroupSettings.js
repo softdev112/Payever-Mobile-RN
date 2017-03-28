@@ -3,7 +3,7 @@ import { inject, observer } from 'mobx-react/native';
 import { ListView } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import {
-  ErrorBox, Loader, NavBar, StyleSheet, Text, TextButton, View,
+  Icon, ErrorBox, Loader, NavBar, StyleSheet, Text, TextButton, View,
 } from 'ui';
 
 import ChatGroupMember from '../components/settings/ChatGroupMember';
@@ -48,10 +48,13 @@ export default class GroupSettings extends Component {
   }
 
   renderMemberRow(member) {
+    const { communication } = this.props;
+    const { selectedGroupSettings } = communication;
+
     return (
       <ChatGroupMember
         member={member}
-        onRemove={::this.onRemoveMember}
+        onRemove={selectedGroupSettings.isOwner ? ::this.onRemoveMember : null}
       />
     );
   }
@@ -72,21 +75,31 @@ export default class GroupSettings extends Component {
             <ErrorBox message={error} />
           ) : (
             <View style={styles.userInfo}>
-              <Text style={styles.name}>
-                {selectedGroupSettings.name}
-              </Text>
-              <View style={styles.btnsContainer}>
-                <TextButton
-                  titleStyle={styles.btnTitle}
-                  title="Delete Group"
-                  onPress={::this.onDeleteGroup}
-                />
-                <TextButton
-                  titleStyle={styles.btnTitle}
-                  title="Add Member"
-                  onPress={::this.onAddMember}
-                />
+              <View style={styles.nameContainer}>
+                <Text style={styles.name}>
+                  {selectedGroupSettings.name}
+                </Text>
+                {selectedGroupSettings.isOwner && (
+                  <Icon
+                    style={styles.ownStar}
+                    source="fa-star"
+                  />
+                )}
               </View>
+              {selectedGroupSettings.isOwner && (
+                <View style={styles.btnsContainer}>
+                  <TextButton
+                    titleStyle={styles.btnTitle}
+                    title="Delete Group"
+                    onPress={::this.onDeleteGroup}
+                  />
+                  <TextButton
+                    titleStyle={styles.btnTitle}
+                    title="Add Member"
+                    onPress={::this.onAddMember}
+                  />
+                </View>
+              )}
               <Text style={styles.membersTitle}>Members:</Text>
               <ListView
                 dataSource={ds}
@@ -113,10 +126,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
 
+  nameContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+
   name: {
     fontSize: 24,
     fontWeight: '300',
-    marginBottom: 8,
   },
 
   btnsContainer: {
@@ -133,6 +151,12 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '400',
     fontFamily: '$font_family',
-    marginBottom: 10,
+    marginBottom: 8,
+  },
+
+  ownStar: {
+    color: '$pe_color_twitter',
+    fontSize: 12,
+    marginLeft: 5,
   },
 });

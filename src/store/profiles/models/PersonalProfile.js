@@ -12,6 +12,7 @@ export default class PersonalProfile extends Profile {
     if (data.user) {
       data.user = new UserAccount(data.user, store);
     }
+
     extendObservable(this, data);
   }
 
@@ -19,6 +20,7 @@ export default class PersonalProfile extends Profile {
     if (this.user && this.user.avatar) {
       return { uri: this.user.avatar };
     }
+
     return images.noAvatar;
   }
 

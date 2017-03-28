@@ -15,8 +15,10 @@ import AddedContact from './AddedContact';
 import Contact from '../../../../store/communication/models/Contact';
 import type CommunicationStore
   from '../../../../store/communication';
+import type ProfilesStore
+  from '../../../../store/profiles';
 
-@inject('communication')
+@inject('communication', 'profiles')
 @observer
 export default class AddContactBlock extends Component {
   static navigatorStyle = {
@@ -29,6 +31,7 @@ export default class AddContactBlock extends Component {
 
   props: {
     communication: CommunicationStore;
+    profiles: ProfilesStore;
     style?: Object;
     bottomDockStyle?: Object;
   };
@@ -126,16 +129,18 @@ export default class AddContactBlock extends Component {
   }
 
   render() {
-    const { communication, style, bottomDockStyle } = this.props;
+    const { communication, style, bottomDockStyle, profiles } = this.props;
     const { contactForAdd, showAddContactAnim, startPosY } = this.state;
 
     return (
       <View style={[styles.container, style]}>
-        <TextButton
-          style={styles.addContactsBtn}
-          title="Add From Contacts"
-          onPress={::this.onShowContactList}
-        />
+        {profiles.currentProfile.isBusiness && (
+          <TextButton
+            style={styles.addContactsBtn}
+            title="Add From Contacts"
+            onPress={::this.onShowContactList}
+          />
+        )}
         <Search
           style={styles.search}
           showSettings={false}

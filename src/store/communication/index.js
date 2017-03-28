@@ -127,8 +127,9 @@ export default class CommunicationStore {
       if (!conversation) {
         //noinspection JSIgnoredPromiseFromCall
         await this.loadConversation(id);
-        await this.markConversationAsRead(id);
       }
+
+      await this.markConversationAsRead(id);
     }
   }
 
@@ -136,10 +137,10 @@ export default class CommunicationStore {
   async markConversationAsRead(id) {
     const conversation: Conversation = this.conversations.get(id);
     const unreadIds = conversation.getUnreadIds();
-
     if (conversation) {
       conversation.messages.forEach(m => m.unread = false);
     }
+
     if (this.messengerInfo) {
       const info = this.messengerInfo.byId(id);
       if (info) {
@@ -489,10 +490,13 @@ export default class CommunicationStore {
   @action
   async removeGroupMember(groupId: number, memberId: number) {
     const socket = await this.store.api.messenger.getSocket();
+    this.selectedGroupSettings.removeMember(memberId);
+
     apiHelper(socket.removeGroupMember(groupId, memberId))
       .success(() => {
-        this.selectedGroupSettings.removeMember(memberId);
-      });
+        this.markConversationAsRead(this.selectedConversationId);
+      })
+      .error(log.error);
   }
 
   @action
@@ -500,8 +504,10 @@ export default class CommunicationStore {
     const socket = await this.store.api.messenger.getSocket();
     return apiHelper(socket.addGroupMember(groupId, memberAlias))
       .success((data) => {
-        // Add message to group settings members
         this.selectedGroupSettings.addMember(data);
+
+        // Mark conversation as read to avoid badge appearance
+        this.markConversationAsRead(this.selectedConversationId);
       })
       .promise();
   }
@@ -538,7 +544,7 @@ export default class CommunicationStore {
           group => group.id !== groupId
         );
       })
-      .error(log.debug);
+      .error(log.error);
   }
 
   initSocket(url, userId) {
