@@ -104,20 +104,22 @@ export default class MessengerApi {
     });
   }
 
-  sendSimpleMessage(
+  sendInviteMessage(
     userId: number,
     recipients: string,
     message: string
   ): Promise<MessageResp> {
+    console.log('tttttttttttttttt');
+    console.log(userId, recipients, message);
+    console.log('tttttttttttttttt');
     return this.client.post('/api/rest/v1/messenger/new/message', {
-      format: 'formData',
-      data: {
-        userId,
-        new_message: {
-          recipients,
-          body: message,
-        },
+      userId,
+      new_message: {
+        recipients,
+        body: message,
       },
+    }, {
+      format: 'formData',
     });
   }
 
@@ -142,7 +144,7 @@ export default class MessengerApi {
     });
   }
 
-  async sendInvitationMessage(
+  async sendInviteMessageFromSupport(
     userId: number,
     messengerId: number
   ): Promise<MessageResp> {

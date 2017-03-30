@@ -57,19 +57,19 @@ export default class AddContactBlock extends Component {
   componentWillUnmount() {
     const { communication } = this.props;
 
-    communication.clearAddForGroupContacts();
+    communication.clearAddForActionContacts();
     communication.clearAtocomleteContactsSearch();
   }
 
   onAddContact() {
     const { communication } = this.props;
-    communication.addContactForGroup(this.state.contactForAdd);
+    communication.addContactForAction(this.state.contactForAdd);
     this.setState({ showAddContactAnim: false });
   }
 
   onContactBtnPress({ nativeEvent: { pageY } }, contact) {
     const { communication } = this.props;
-    const isContactAdded = communication.checkContactAddedForGroup(contact.id);
+    const isContactAdded = communication.checkContactAddedForAction(contact.id);
 
     if (isContactAdded) {
       this.onRemoveContactFromAdded(contact.id);
@@ -84,7 +84,7 @@ export default class AddContactBlock extends Component {
 
   onRemoveContactFromAdded(contactId) {
     const { communication } = this.props;
-    communication.removeContactForGroup(contactId);
+    communication.removeContactForAction(contactId);
   }
 
   onShowContactList() {
@@ -107,7 +107,7 @@ export default class AddContactBlock extends Component {
 
   renderRow(contact) {
     const { communication } = this.props;
-    const isContactAdded = communication.checkContactAddedForGroup(contact.id);
+    const isContactAdded = communication.checkContactAddedForAction(contact.id);
 
     return (
       <View style={styles.listRow} key={contact.id}>
@@ -164,10 +164,10 @@ export default class AddContactBlock extends Component {
           />
         )}
 
-        {communication.isContactsForGroupAvailable && (
+        {communication.isContactsForActionAvailable && (
           <BottomDock
             style={[styles.bottomDock, bottomDockStyle]}
-            items={communication.contactsForGroup.slice()}
+            items={communication.contactsForAction.slice()}
             renderItem={::this.renderContactForAddToGroup}
           />
         )}

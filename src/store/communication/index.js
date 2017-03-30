@@ -37,7 +37,7 @@ export default class CommunicationStore {
   @observable msgsForForward: Array<Message> = [];
 
   @observable contactsAutocomplete: Array = [];
-  @observable contactsForGroup: Array<Contact> = [];
+  @observable contactsForAction: Array<Contact> = [];
 
   @observable messageForReply: Message = null;
 
@@ -190,12 +190,13 @@ export default class CommunicationStore {
   }
 
   @action
-  async sendMessage(conversationId, body) {
+  async sendMessage(conversationId, body, channelSetId = '') {
     const socket = await this.store.api.messenger.getSocket();
 
     const options = {
       conversationId,
       body,
+      channelSetId,
     };
 
     if (this.messageForReply) {
@@ -311,8 +312,8 @@ export default class CommunicationStore {
     return this.msgsForForward.length > 0;
   }
 
-  @computed get isContactsForGroupAvailable() {
-    return this.contactsForGroup.length > 0;
+  @computed get isContactsForActionAvailable() {
+    return this.contactsForAction.length > 0;
   }
 
   @action
@@ -386,31 +387,31 @@ export default class CommunicationStore {
   }
 
   @action
-  addContactForGroup(contact: Contact) {
-    if (this.checkContactAddedForGroup(contact.id)) return;
+  addContactForAction(contact: Contact) {
+    if (this.checkContactAddedForAction(contact.id)) return;
 
-    this.contactsForGroup.push(contact);
+    this.contactsForAction.push(contact);
   }
 
   @action
-  removeContactForGroup(contactId: string) {
-    this.contactsForGroup =
-      this.contactsForGroup.filter(contact => contact.id !== contactId);
+  removeContactForAction(contactId: string) {
+    this.contactsForAction =
+      this.contactsForAction.filter(contact => contact.id !== contactId);
   }
 
   @action
-  checkContactAddedForGroup(contactId: number) {
+  checkContactAddedForAction(contactId: number) {
     // savedId - it's id which might be manually added when converting
     // saved contact to general contact (getContactData - gets general data
     // for contact by savedContact Id
-    return !!this.contactsForGroup.find(
+    return !!this.contactsForAction.find(
       contact => contact.id === contactId || contact.savedId === contactId
     );
   }
 
   @action
-  clearAddForGroupContacts() {
-    this.contactsForGroup = [];
+  clearAddForActionContacts() {
+    this.contactsForAction = [];
   }
 
   @action
@@ -423,7 +424,7 @@ export default class CommunicationStore {
     const { api: { messenger } } = this.store;
     const { messengerUser } = this.messengerInfo;
 
-    const recipients = this.contactsForGroup.slice()
+    const recipients = this.contactsForAction.slice()
       .reduce((result, contact, index, contacts) => {
         return result + contact.id +
           (contacts.length - 1 !== index ? ',' : '');
@@ -514,7 +515,7 @@ export default class CommunicationStore {
 
   @action
   addAllMembersToGroup(groupId: number) {
-    const members = this.contactsForGroup.slice();
+    const members = this.contactsForAction.slice();
     members.forEach(async (member: GroupMember) => {
       await this.addGroupMember(groupId, member.id);
     });
@@ -545,6 +546,27 @@ export default class CommunicationStore {
         );
       })
       .error(log.error);
+  }
+
+  @action
+  sendInviteMsgToContacts(message: string) {
+    const recipients = this.contactsForAction.slice()
+      .reduce((result, contact, index, contacts) => {
+        return result + contact.id +
+          (contacts.length - 1 !== index ? ',' : '');
+      }, '');
+
+    const { api } = this.store;
+    const { messengerUser } = this.messengerInfo;
+
+    apiHelper(api.messenger.sendInviteMessage(
+      messengerUser.id,
+      recipients,
+      message
+    )).success((data) => {
+      console.log('sssdsdsdsdsdsdsds');
+      console.log(data);
+    }).error(error => console.log('sssssddfdsfsdf', error));
   }
 
   initSocket(url, userId) {

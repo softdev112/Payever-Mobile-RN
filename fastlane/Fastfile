@@ -36,8 +36,8 @@ def publish_to_fabric(values, options = {})
   text += get_build_info
 
   defaults = {
-    api_token: '48b58dc9c7da86d72ed314088b46e42f1a0b78ff',
-    build_secret: 'd81977fd8d8dd7e21bfac54c7952d0136b24603cf554084ed78b9cafed2d9aed',
+    api_token: 'c039b811a5a0a7cb526d6dd241e32211d1708c2a',
+    build_secret: '5ccfe8f2848bd74351160714cd40fe996914a16f823720984e71e633015b9187',
     emails: emails,
     groups: groups,
     notes: text,

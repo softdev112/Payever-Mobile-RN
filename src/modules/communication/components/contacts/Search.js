@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     height: 27,
-    marginBottom: 20,
+    marginBottom: 15,
   },
 
   iconSearch: {

@@ -301,7 +301,7 @@
 		1257C8C2F50A49849F994500 /* ReactNativeNavigation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeNavigation.xcodeproj; path = "../node_modules/react-native-navigation/ios/ReactNativeNavigation.xcodeproj"; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* PayeverMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PayeverMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07F961A680F5B00A75B9A /* payever.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = payever.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = PayeverMobile/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = PayeverMobile/AppDelegate.m; sourceTree = "<group>"; };
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -318,8 +318,8 @@
 		6D601891749588E71889A1FB /* Pods-PayeverMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PayeverMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-PayeverMobile/Pods-PayeverMobile.release.xcconfig"; sourceTree = "<group>"; };
 		7124B6E31E7895B2008EE544 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		716C68E21E7892E1003D5C31 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
+		7175C69D1E8BF756007B1316 /* payever.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = payever.entitlements; path = PayeverMobile/payever.entitlements; sourceTree = "<group>"; };
 		719091D21E79260800DE48E0 /* StaticResources */ = {isa = PBXFileReference; lastKnownFileType = folder; name = StaticResources; path = PayeverMobile/StaticResources; sourceTree = "<group>"; };
-		71C9BF351E792BBF00F70130 /* PayeverMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PayeverMobile.entitlements; path = PayeverMobile/PayeverMobile.entitlements; sourceTree = "<group>"; };
 		751119A52E00430FACC37615 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -468,7 +468,7 @@
 		13B07FAE1A68108700A75B9A /* PayeverMobile */ = {
 			isa = PBXGroup;
 			children = (
-				71C9BF351E792BBF00F70130 /* PayeverMobile.entitlements */,
+				7175C69D1E8BF756007B1316 /* payever.entitlements */,
 				719091D21E79260800DE48E0 /* StaticResources */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -613,7 +613,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* PayeverMobile.app */,
+				13B07F961A680F5B00A75B9A /* payever.app */,
 				00E356EE1AD99517003FC87E /* PayeverMobileTests.xctest */,
 				2D02E47B1E0B4A5D006451C7 /* PayeverMobile-tvOS.app */,
 				2D02E4901E0B4A5D006451C7 /* PayeverMobile-tvOSTests.xctest */,
@@ -678,7 +678,7 @@
 			);
 			name = PayeverMobile;
 			productName = "Hello World";
-			productReference = 13B07F961A680F5B00A75B9A /* PayeverMobile.app */;
+			productReference = 13B07F961A680F5B00A75B9A /* payever.app */;
 			productType = "com.apple.product-type.application";
 		};
 		2D02E47A1E0B4A5D006451C7 /* PayeverMobile-tvOS */ = {
@@ -734,7 +734,7 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = NGUZ26BK5M;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.SafariKeychain = {
 								enabled = 1;
@@ -1175,7 +1175,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 48b58dc9c7da86d72ed314088b46e42f1a0b78ff d81977fd8d8dd7e21bfac54c7952d0136b24603cf554084ed78b9cafed2d9aed";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" c039b811a5a0a7cb526d6dd241e32211d1708c2a 5ccfe8f2848bd74351160714cd40fe996914a16f823720984e71e633015b9187";
 		};
 		D436AE7FB2E104289E1C7C48 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1331,8 +1331,8 @@
 			baseConfigurationReference = 575C59FF71F0921C69515A86 /* Pods-PayeverMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = PayeverMobile/PayeverMobile.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = PayeverMobile/payever.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = NGUZ26BK5M;
@@ -1351,9 +1351,9 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp;
-				PRODUCT_NAME = PayeverMobile;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_NAME = payever;
+				PROVISIONING_PROFILE = "414aa0d2-ad7d-475f-b4ed-ac68494071c6";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gmbh.payeverapp";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1364,8 +1364,8 @@
 			baseConfigurationReference = 6D601891749588E71889A1FB /* Pods-PayeverMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = PayeverMobile/PayeverMobile.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = PayeverMobile/payever.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NGUZ26BK5M;
 				HEADER_SEARCH_PATHS = (
@@ -1383,9 +1383,9 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp;
-				PRODUCT_NAME = PayeverMobile;
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PRODUCT_NAME = payever;
+				PROVISIONING_PROFILE = "414aa0d2-ad7d-475f-b4ed-ac68494071c6";
+				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gmbh.payeverapp";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};

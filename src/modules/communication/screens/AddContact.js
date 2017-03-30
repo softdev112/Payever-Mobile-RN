@@ -1,13 +1,19 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { FlatTextInput, NavBar, StyleSheet, View } from 'ui';
+
 import AddContactBlock from '../components/contacts/AddContactBlock';
+import CommunicationStore from '../../../store/communication';
 
 @inject('communication')
 @observer
 export default class AddContact extends Component {
   static navigatorStyle = {
     navBarHidden: true,
+  };
+
+  props: {
+    communication: CommunicationStore;
   };
 
   $messageTextInput: FlatTextInput;
@@ -25,7 +31,13 @@ export default class AddContact extends Component {
   }
 
   onAddContacts() {
-    // communication.sendMsgToSelectedContacts(this.state.message);
+    const { message } = this.state;
+    if (!message) {
+      this.$messageTextInput.shakeElementAndSetFocus();
+      return;
+    }
+
+    this.props.communication.sendInviteMsgToContacts(message);
   }
 
   render() {
@@ -64,11 +76,11 @@ const styles = StyleSheet.create({
   },
 
   addContactBlock: {
-    marginTop: 10,
+    marginTop: 12,
   },
 
   bottomDockStyle: {
-    $topHeight: '64%',
+    $topHeight: '63%',
     top: '$topHeight',
   },
 });

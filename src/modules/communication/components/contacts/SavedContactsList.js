@@ -27,7 +27,7 @@ export default class SavedContactsList extends Component {
     super(props);
 
     this.state = {
-      selectedContacts: props.communication.contactsForGroup.slice(),
+      selectedContacts: props.communication.contactsForAction.slice(),
     };
   }
 
@@ -117,7 +117,7 @@ export default class SavedContactsList extends Component {
     const { selectedContacts } = this.state;
 
     selectedContacts.forEach(contact =>
-      communication.addContactForGroup(contact));
+      communication.addContactForAction(contact));
   }
 
   renderRow(contact) {
