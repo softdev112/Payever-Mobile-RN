@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
+import { Navigator } from 'react-native-navigation';
 import { FlatTextInput, NavBar, StyleSheet, View } from 'ui';
 
 import AddContactBlock from '../components/contacts/AddContactBlock';
@@ -14,6 +15,7 @@ export default class AddContact extends Component {
 
   props: {
     communication: CommunicationStore;
+    navigator: Navigator;
   };
 
   $messageTextInput: FlatTextInput;
@@ -32,12 +34,14 @@ export default class AddContact extends Component {
 
   onAddContacts() {
     const { message } = this.state;
+    const { communication, navigator } = this.props;
     if (!message) {
       this.$messageTextInput.shakeElementAndSetFocus();
       return;
     }
 
-    this.props.communication.sendInviteMsgToContacts(message);
+    communication.sendInviteMsgToContacts(message);
+    navigator.pop({ animated: true });
   }
 
   render() {
