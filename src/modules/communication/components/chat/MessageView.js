@@ -30,6 +30,7 @@ export default class MessageView extends Component {
   };
 
   $animMessageView: Animatable.View;
+  $swipeRow: Swipeable;
 
   onDeleteMessagePress() {
     if (this.props.message.deleted) return;
@@ -53,6 +54,10 @@ export default class MessageView extends Component {
 
   onEditMessage() {
     const { message } = this.props;
+
+    if (this.$swipeRow) {
+      this.$swipeRow.recenter();
+    }
 
     this.context.navigator.push({
       screen: 'communication.EditMessage',
@@ -174,6 +179,7 @@ export default class MessageView extends Component {
         rightButtonContainerStyle={styles.actionIconContainer}
         onRightButtonsOpenRelease={() => this.setState({ isRowShift: true })}
         onRightButtonsCloseRelease={() => this.setState({ isRowShift: false })}
+        onRef={ref => this.$swipeRow = ref}
       >
         <Animatable.View
           style={styles.container}
