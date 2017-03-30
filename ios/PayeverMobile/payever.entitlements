@@ -6,8 +6,8 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:stage.payever.de</string>
 		<string>applinks:mein.payever.de</string>
+		<string>applinks:stage.payever.de</string>
 	</array>
 </dict>
 </plist>
