@@ -95,7 +95,7 @@ export default class CommunicationStore {
         this.conversations = observable.map();
         const conversation = this.messengerInfo.getDefaultConversation();
 
-        //noinspection JSIgnoredPromiseFromCall
+        // noinspection JSIgnoredPromiseFromCall
         this.setSelectedConversationId(conversation.id);
 
         return this.messengerInfo;
@@ -155,7 +155,7 @@ export default class CommunicationStore {
   }
 
   @action
-  search(text) {
+  async search(text) {
     this.contactsFilter = (text || '').toLowerCase();
 
     if (!text) {
@@ -164,7 +164,7 @@ export default class CommunicationStore {
     }
 
     //noinspection JSIgnoredPromiseFromCall
-    this.searchMessages(text);
+    await this.searchMessages(text);
   }
 
   @action
@@ -286,8 +286,8 @@ export default class CommunicationStore {
     const foundMessages = this.foundMessages.slice();
 
     if (filter) {
-      contacts = contacts.filter(c => c.name.toLowerCase().contains(filter));
-      groups = groups.filter(c => c.name.toLowerCase().contains(filter));
+      contacts = contacts.filter(c => c.name.toLowerCase().includes(filter));
+      groups = groups.filter(c => c.name.toLowerCase().includes(filter));
     }
 
     return this.contactDs.cloneWithRowsAndSections(

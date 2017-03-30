@@ -109,9 +109,6 @@ export default class MessengerApi {
     recipients: string,
     message: string
   ): Promise<MessageResp> {
-    console.log('tttttttttttttttt');
-    console.log(userId, recipients, message);
-    console.log('tttttttttttttttt');
     return this.client.post('/api/rest/v1/messenger/new/message', {
       userId,
       new_message: {
