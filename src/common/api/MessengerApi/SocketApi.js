@@ -67,7 +67,7 @@ export default class SocketApi extends EventEmitter {
     });
   }
 
-  searchMessages({ query, userId = this.userId }) {
+  searchMessages(query, userId = this.userId) {
     return this.client.call('messenger/rpc/searchMessages', { query, userId });
   }
 
