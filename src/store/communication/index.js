@@ -563,10 +563,7 @@ export default class CommunicationStore {
       messengerUser.id,
       recipients,
       message
-    )).success((data) => {
-      console.log('sssdsdsdsdsdsdsds');
-      console.log(data);
-    }).error(error => console.log('sssssddfdsfsdf', error));
+    )).success(() => {});
   }
 
   initSocket(url, userId) {
