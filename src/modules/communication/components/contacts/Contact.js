@@ -94,8 +94,10 @@ export default class Contact extends Component {
           <Text style={styles.message_date}>{item.dateOnly}</Text>
         </View>
         <View style={styles.message_body}>
-          <Text style={styles.message_name} numberOfLines={1}>{name}</Text>
-          <Text style={styles.message_text} source={item.body}>: {text}</Text>
+          <Text style={styles.message_name} numberOfLines={1}>
+            {name}:
+            <Text style={styles.message_text} source={item.body}> {text}</Text>
+          </Text>
         </View>
       </TouchableOpacity>
     );

@@ -182,9 +182,11 @@ export default class MessageView extends Component {
           <Avatar style={styles.avatar} avatar={message.avatar} />
           <View style={styles.message}>
             <View style={styles.header}>
-              <Text style={styles.headerSender}>{msgHeader}</Text>
-              <Text style={styles.headerDate}>
-                {message.dateFormated} {messageEdited} {messageSeen}
+              <Text style={styles.headerSender}>
+                {msgHeader}
+                <Text style={styles.headerDate}>
+                  {message.dateFormated} {messageEdited} {messageSeen}
+                </Text>
               </Text>
             </View>
             {replyTo && (
@@ -206,6 +208,14 @@ export default class MessageView extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    marginBottom: 12,
+    minHeight: 50,
+    width: '90%',
+    paddingRight: 5,
+  },
+
   actionIcon: {
     fontSize: 24,
   },
@@ -216,13 +226,6 @@ const styles = StyleSheet.create({
 
   body: {
     overflow: 'scroll',
-  },
-
-  container: {
-    flexDirection: 'row',
-    marginBottom: 12,
-    minHeight: 50,
-    width: '90%',
   },
 
   avatar: {
