@@ -1,5 +1,7 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
+import { ScrollView, TouchableOpacity } from 'react-native';
+import { Navigator } from 'react-native-navigation';
 import { ErrorBox, Loader, NavBar, StyleSheet, Text, View } from 'ui';
 
 import type CommunicationStore from '../../../store/communication';
@@ -15,6 +17,7 @@ export default class ConversationSettings extends Component {
 
   props: {
     communication: CommunicationStore;
+    navigator: Navigator;
   };
 
   componentWillMount() {
@@ -24,6 +27,30 @@ export default class ConversationSettings extends Component {
 
   onConvNotificationPropChange(value) {
     this.props.communication.changeConvNotificationProp(value);
+  }
+
+  onOfferLinkPress(offerId: number) {
+    this.props.navigator.push({
+      screen: 'marketing.ViewOffer',
+      animated: true,
+      passProps: {
+        offerId,
+      },
+    });
+  }
+
+  renderOffers(offers: OfferRow) {
+    return offers.map((offer) => {
+      return (
+        <TouchableOpacity
+          style={styles.offerBtn}
+          key={offer.id}
+          onPress={() => this.onOfferLinkPress(offer.id)}
+        >
+          <Text style={styles.offerText}>{offer.created_at} #{offer.id}</Text>
+        </TouchableOpacity>
+      );
+    });
   }
 
   render() {
@@ -58,6 +85,17 @@ export default class ConversationSettings extends Component {
                 icon="fa-bell-o"
                 onValueChange={::this.onConvNotificationPropChange}
               />
+              {selectedConversationSettings.offers.length > 0 && (
+                <View style={styles.offersContainer}>
+                  <Text style={styles.sentOffersText}>Sent Offers:</Text>
+                  <ScrollView
+                    style={styles.offersData}
+                    showsVerticalScrollIndicator={false}
+                  >
+                    {this.renderOffers(selectedConversationSettings.offers)}
+                  </ScrollView>
+                </View>
+              )}
             </View>
           )}
         </Loader>
@@ -71,13 +109,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  settings: {
-    paddingHorizontal: 25,
-    paddingVertical: 15,
-  },
-
   userInfo: {
-    paddingVertical: 20,
+    paddingTop: 20,
+    paddingBottom: 8,
     paddingHorizontal: 15,
     justifyContent: 'flex-start',
     alignItems: 'center',
@@ -97,6 +131,32 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 24,
     fontWeight: '300',
-    marginBottom: 20,
+    marginBottom: 15,
+  },
+
+  sentOffersText: {
+    alignSelf: 'flex-start',
+    fontSize: 18,
+    marginBottom: 4,
+  },
+
+  offersContainer: {
+    flex: 1,
+    alignSelf: 'stretch',
+    paddingHorizontal: 8,
+  },
+
+  offerBtn: {
+    padding: 3,
+  },
+
+  offerText: {
+    color: '$pe_color_blue',
   },
 });
+
+type OfferRow = {
+  id: number;
+  created_at: string;
+  slug: string;
+};

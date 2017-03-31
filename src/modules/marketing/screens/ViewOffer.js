@@ -38,7 +38,7 @@ export default class ViewOffer extends Component {
   }
 
   onClosePreview() {
-    Navigation.dismissModal({
+    Navigation.dismissAllModals({
       animationType: 'slide-down',
     });
   }
@@ -81,7 +81,7 @@ export default class ViewOffer extends Component {
     return (
       <View style={styles.container}>
         <NavBar popup>
-          <NavBar.Back onPress={::this.onClosePreview} />
+          <NavBar.Back nPress={::this.onClosePreview} />
           <NavBar.Title title="Best Offers" />
         </NavBar>
         <Loader isLoading={offers.isLoading}>

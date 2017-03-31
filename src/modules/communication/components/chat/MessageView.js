@@ -55,9 +55,7 @@ export default class MessageView extends Component {
   onEditMessage() {
     const { message } = this.props;
 
-    if (this.$swipeRow) {
-      this.$swipeRow.recenter();
-    }
+    this.swipeBack();
 
     this.context.navigator.push({
       screen: 'communication.EditMessage',
@@ -71,21 +69,24 @@ export default class MessageView extends Component {
   onReplyToMessage() {
     const { communication, message } = this.props;
     communication.setMessageForReply(message);
+    this.swipeBack();
   }
 
   deleteMessage() {
     const { communication, message } = this.props;
     communication.deleteMessage(message.id);
+    this.swipeBack();
   }
 
   prepareForForward({ nativeEvent: { pageY } }) {
     const { communication, message } = this.props;
 
     if (communication.checkMsgInForForward(message.id)) {
-      this.$animMessageView.shake(300);
+      this.$animMessageView.shake(300).then(() => this.swipeBack());
       return;
     }
 
+    this.swipeBack();
     this.props.onForwardMessage(this.props.message, pageY);
   }
 
@@ -132,6 +133,12 @@ export default class MessageView extends Component {
     }
 
     return rightButtons;
+  }
+
+  swipeBack() {
+    if (this.$swipeRow) {
+      this.$swipeRow.recenter();
+    }
   }
 
   renderContent(message: Message) {

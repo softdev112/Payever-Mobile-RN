@@ -358,6 +358,15 @@ export default class CommunicationStore {
   @action
   async deleteMessage(messageId) {
     const socket = await this.store.api.messenger.getSocket();
+
+    if (this.checkMsgInForForward(messageId)) {
+      this.removeMessageFromForward(messageId);
+    }
+
+    if (this.messageForReply && this.messageForReply.id === messageId) {
+      this.messageForReply = null;
+    }
+
     return socket.deleteMessage(messageId);
   }
 
