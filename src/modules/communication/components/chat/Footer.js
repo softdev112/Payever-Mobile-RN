@@ -51,11 +51,9 @@ export default class Footer extends Component {
     const { communication, conversationId } = this.props;
 
     if (text) {
-      //noinspection JSIgnoredPromiseFromCall
       communication.sendMessage(conversationId, text);
     }
 
-    //noinspection JSUnresolvedFunction
     Keyboard.dismiss();
     this.setState({ text: '' });
   }
