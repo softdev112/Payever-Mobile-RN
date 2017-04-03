@@ -26,7 +26,10 @@ export default class ProfilesApi {
   }
 
   search(query): Promise<SearchResp> {
-    return this.client.get('/api/rest/v1/profiles/search', { k: query, c: 20 });
+    return this.client.get(
+      '/api/rest/v1/profiles/search',
+      { k: query, c: 20 }
+    );
   }
 
   follow(businessId): Promise<ApiResp> {
@@ -37,8 +40,10 @@ export default class ProfilesApi {
     return this.client.delete(`/api/rest/v1/profiles/${businessId}/unfollow`);
   }
 
-  getAllContacts(businessId) {
-    return this.client.get(`/api/rest/v1/contact/business/${businessId}`);
+  getAllContacts(businessId, page): Promise<ProfileContactsResp> {
+    return this.client.get(
+      `/api/rest/v1/contact/business/${businessId}?page=${page}`
+    );
   }
 }
 
@@ -105,7 +110,7 @@ declare class OfferResp extends ApiResp {
   title: string;
   description: string;
   created_at: string;
-};
+}
 /* eslint-enable */
 
 export type ProfilesData = {
@@ -193,4 +198,51 @@ export type SearchDataRow = {
     logo: ?string;
   };
   is_following: boolean;
+};
+
+declare class ProfileContactsResp extends ApiResp {
+  pagination_data: ContactsPaginationData;
+  contact_models: Array<ProfileContact>;
+}
+
+export type ContactsPaginationData = {
+  last: number;
+  current: string;
+  numItemsPerPage: number;
+  first: number;
+  pageCount: number;
+  totalCount: number;
+  pageRange: number;
+  startPage: number;
+  endPage: number;
+  pagesInRange: Array<number>;
+  firstPageInRange: number;
+  lastPageInRange: number;
+  currentItemCount: number;
+  firstItemNumber: number;
+  lastItemNumber: number;
+};
+
+export type ProfileContact = {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  country: ?string;
+  city: ?string;
+  zip_code: ?string;
+  street: ?string;
+  phone: ?string;
+  total_spent: number;
+  avatar_url: ?string;
+  payment_types: Array<any>;
+  channels: Array<any>;
+  last_purchase: ?number;
+  count_purchases: number;
+  birthday: ?string;
+  country_name: ?string;
+  invitation_date: ?string;
+  invitation_available: boolean;
+  registered: boolean;
+  last_active: string;
 };

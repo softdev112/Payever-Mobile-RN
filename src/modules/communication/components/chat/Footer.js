@@ -4,6 +4,8 @@ import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import { Icon, StyleSheet, Text, View } from 'ui';
 import CommunicationStore from '../../../../store/communication';
+import type { ConversationType } from
+  '../../../../store/communication/models/Conversation';
 
 @inject('communication')
 @observer
@@ -22,6 +24,7 @@ export default class Footer extends Component {
     communication?: CommunicationStore;
     conversationId: number;
     textValue?: string;
+    conversationType: ConversationType;
   };
 
   state: {
@@ -48,10 +51,16 @@ export default class Footer extends Component {
 
   onSend() {
     const { text } = this.state;
-    const { communication, conversationId } = this.props;
-
+    const { communication, conversationId, conversationType } = this.props;
     if (text) {
-      communication.sendMessage(conversationId, text);
+      if (conversationType === 'marketing-group') {
+        communication.sendMsgToMarketingGroup(
+          `marketing-group-${conversationId}`,
+          text
+        );
+      } else {
+        communication.sendMessage(conversationId, text);
+      }
     }
 
     Keyboard.dismiss();
@@ -60,8 +69,12 @@ export default class Footer extends Component {
 
   onType(text) {
     this.setState({ text });
-    const { communication, conversationId } = this.props;
-    communication.updateTypingStatus(conversationId);
+    const { communication, conversationId, conversationType } = this.props;
+
+    // Update conversation typing status only for chat group and contacts
+    if (conversationType !== 'marketing-group') {
+      communication.updateTypingStatus(conversationId);
+    }
   }
 
   render() {
@@ -85,7 +98,7 @@ export default class Footer extends Component {
               numberOfLines={1}
               ellipsizeMode="tail"
             >
-              Reply to: {communication.messageForReply.body}
+              Reply to: {communication.messageForReply.editBody}
             </Text>
             <Icon
               touchStyle={styles.delReplyMsgIcon}

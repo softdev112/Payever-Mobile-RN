@@ -104,7 +104,7 @@ export default class MessengerApi {
     });
   }
 
-  sendInviteMessage(
+  sendMessage(
     userId: number,
     recipients: string,
     message: string
