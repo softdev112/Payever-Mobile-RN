@@ -39,16 +39,17 @@ export default class ProfilesStore {
     return this.allContactsDs.cloneWithRows(this.contacts.slice());
   }
 
-  toArray(includePrivate = true) {
+  getAllProfiles(includePrivate = true): Array<Object> {
     let result = [];
     if (includePrivate && this.privateProfile) {
       result.push(this.privateProfile);
     }
 
-    if (this.ownBusinesses.length) {
+    if (this.ownBusinesses.length > 0) {
       result = result.concat(this.ownBusinesses.slice());
     }
-    if (this.staffBusinesses.length) {
+
+    if (this.staffBusinesses.length > 0) {
       result = result.concat(this.staffBusinesses.slice());
     }
 
@@ -157,10 +158,11 @@ export default class ProfilesStore {
   }
 
   businessById(profileId): BusinessProfile {
-    const profile = this.toArray().filter(p => p.id === profileId)[0];
+    const profile = this.getAllProfiles().filter(p => p.id === profileId)[0];
     if (!profile || !profile.business) {
       throw new Error(`Couldn't find business with id = ${profileId}`);
     }
+
     return profile;
   }
 }

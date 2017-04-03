@@ -37,7 +37,7 @@ export default class BusinessList extends Component {
     const { profiles } = this.props;
     return (
       <View style={styles.container}>
-        {profiles.toArray(false).map(::this.renderRow)}
+        {profiles.getAllProfiles(false).map(::this.renderRow)}
       </View>
     );
   }

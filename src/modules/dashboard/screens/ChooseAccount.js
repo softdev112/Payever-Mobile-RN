@@ -131,7 +131,7 @@ export default class ChooseAccount extends Component {
     const { profiles } = this.props;
 
     //noinspection JSUnresolvedFunction
-    const dataSource = this.dataSource.cloneWithRows(profiles.toArray());
+    const dataSource = this.dataSource.cloneWithRows(profiles.getAllProfiles());
 
     return (
       <View style={styles.container}>
