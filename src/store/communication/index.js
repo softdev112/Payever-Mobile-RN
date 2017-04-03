@@ -568,9 +568,21 @@ export default class CommunicationStore {
     const { api } = this.store;
     const { messengerUser } = this.messengerInfo;
 
-    apiHelper(api.messenger.sendInviteMessage(
+    apiHelper(api.messenger.sendMessage(
       messengerUser.id,
       recipients,
+      message
+    )).success(() => {});
+  }
+
+  @action
+  sendMsgToMarketingGroup(groupRecipientId, message: string) {
+    const { api } = this.store;
+    const { messengerUser } = this.messengerInfo;
+
+    apiHelper(api.messenger.sendMessage(
+      messengerUser.id,
+      groupRecipientId,
       message
     )).success(() => {});
   }

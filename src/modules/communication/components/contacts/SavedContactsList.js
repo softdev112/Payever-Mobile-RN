@@ -31,10 +31,14 @@ export default class SavedContactsList extends Component {
     };
   }
 
-  async componentWillMount() {
+  componentWillMount() {
     const { profiles } = this.props;
+    profiles.loadAllContacts();
+  }
 
-    await profiles.loadAllContacts();
+  onEndReached() {
+    const { profiles } = this.props;
+    profiles.loadAllContacts();
   }
 
   onSelectedContactChange(contact) {
@@ -135,9 +139,22 @@ export default class SavedContactsList extends Component {
     return <View key={rowId} style={styles.smallDivider} />;
   }
 
+  renderFooter() {
+    const { profiles } = this.props;
+    const ds = profiles.contactsDataSource;
+
+    if (!ds.isLoading) return null;
+
+    return (
+      <View style={styles.footer}>
+        <Loader isLoading={ds.isLoading} />
+      </View>
+    );
+  }
+
   render() {
     const { profiles, style } = this.props;
-    const ds = profiles.allContactsDataSource;
+    const ds = profiles.contactsDataSource;
 
     if (ds.isLoading || ds.error) {
       return (
@@ -157,6 +174,9 @@ export default class SavedContactsList extends Component {
           keyboardShouldPersistTaps="always"
           renderRow={::this.renderRow}
           renderSeparator={::this.renderSeparator}
+          renderFooter={::this.renderFooter}
+          onEndReached={::this.onEndReached}
+          onEndReachedThreshold={80}
         />
       </View>
     );
@@ -196,5 +216,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
     color: '$pe_color_blue',
+  },
+
+  footer: {
+    paddingVertical: 5,
   },
 });

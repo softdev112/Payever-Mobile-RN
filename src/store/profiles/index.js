@@ -2,7 +2,9 @@ import { computed, observable, action } from 'mobx';
 import { apiHelper } from 'utils';
 import { DataSource } from 'ui';
 
-import type { ProfilesData } from '../../common/api/ProfilesApi';
+import type {
+  ProfilesData, ContactsPaginationData,
+} from '../../common/api/ProfilesApi';
 import type { MenuItemData } from '../../common/api/MenuApi';
 import type { ActivityItemData } from '../../common/api/BusinessApi';
 import type Store from './index';
@@ -20,11 +22,12 @@ export default class ProfilesStore {
 
   @observable currentProfile: PersonalProfile | BusinessProfile = null;
   @observable contacts: Array<SavedContact> = [];
+  contactsPaginationData: ContactsPaginationData;
 
   @observable error: string     = '';
   @observable isLoading: string = false;
 
-  allContactsDs: DataSource = new DataSource({
+  contactsDs: DataSource = new DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
   });
 
@@ -35,8 +38,8 @@ export default class ProfilesStore {
   }
 
   @computed
-  get allContactsDataSource() {
-    return this.allContactsDs.cloneWithRows(this.contacts.slice());
+  get contactsDataSource() {
+    return this.contactsDs.cloneWithRows(this.contacts.slice());
   }
 
   getAllProfiles(includePrivate = true): Array<Object> {
@@ -70,20 +73,43 @@ export default class ProfilesStore {
           return new BusinessProfile(profile, this.store);
         });
         this.privateProfile = new PersonalProfile(data.private, this.store);
+
+        this.contactsPaginationData = null;
+        this.contacts = [];
       })
       .promise();
   }
 
   @action
-  loadAllContacts(): Promise<SavedContact> {
+  loadAllContacts() {
     const { api } = this.store;
+    let pageCount = 0;
+    let currentPage = 0;
 
-    return apiHelper(
-      api.profiles.getAllContacts(this.currentProfile.business.slug),
-      this.allContactsDs
-    ).success((data) => {
-      this.contacts = data.contact_models;
-    }).promise();
+    if (this.contactsPaginationData) {
+      // pageCount - number, current - string
+      pageCount = this.contactsPaginationData.pageCount;
+      currentPage = +this.contactsPaginationData.current;
+    }
+
+    if (currentPage !== 0 && pageCount === currentPage) {
+      return;
+    }
+
+    apiHelper(
+      api.profiles.getAllContacts(
+        this.currentProfile.business.slug,
+        currentPage + 1
+      ),
+      this.contactsDs
+    ).cache(`profile:contacts:${this.currentProfile.id}`, { lifetime: 3600 })
+      .success((data) => {
+        // console.log('ttttttttttttt');
+        // console.log(data);
+        // console.log('tttttttttttttt');
+        this.contactsPaginationData = data.pagination_data;
+        this.contacts = this.contacts.concat(data.contact_models);
+      });
   }
 
   @action

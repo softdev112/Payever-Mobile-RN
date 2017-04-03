@@ -180,6 +180,7 @@ export default class Chat extends Component {
         <Footer
           ref={ref => this.$thisInputElement = ref}
           conversationId={conversation.id}
+          conversationType={communication.selectedConversation.type}
         />
 
         {showForwardAnim && (
