@@ -77,7 +77,7 @@ export default class Footer extends Component {
         { communication.messageForReply && (
           <View style={styles.replyMsgCont}>
             <Icon
-              style={styles.replyMsgIcons}
+              style={styles.replyIcon}
               source="icon-reply-16"
             />
             <Text
@@ -88,7 +88,7 @@ export default class Footer extends Component {
               Reply to: {communication.messageForReply.body}
             </Text>
             <Icon
-              touchStyle={styles.replyMsgIcons}
+              touchStyle={styles.delReplyMsgIcon}
               onPress={() => communication.removeMessageForReply()}
               source="icon-trashcan-16"
             />
@@ -160,13 +160,18 @@ const styles = StyleSheet.create({
 
   replyMsgCont: {
     position: 'absolute',
-    top: -40,
+    top: -35,
     flexDirection: 'row',
     backgroundColor: '#FFF',
     paddingVertical: 5,
   },
 
-  replyMsgIcons: {
+  replyIcon: {
+    paddingHorizontal: 8,
+    color: '$pe_color_gray_7d',
+  },
+
+  delReplyMsgIcon: {
     paddingHorizontal: 8,
   },
 
