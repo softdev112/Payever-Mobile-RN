@@ -21,7 +21,9 @@ export default class SocketHandlers {
 
     readMessages.forEach((rm: ReadMessage) => {
       const conversation = this.store.conversations.get(rm.conversationId);
-      conversation.setReadStatus(rm.id);
+      if (conversation) {
+        conversation.setReadStatus(rm.id);
+      }
     });
   }
 
