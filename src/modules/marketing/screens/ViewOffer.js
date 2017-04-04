@@ -81,7 +81,7 @@ export default class ViewOffer extends Component {
     return (
       <View style={styles.container}>
         <NavBar popup>
-          <NavBar.Back nPress={::this.onClosePreview} />
+          <NavBar.Back onPress={::this.onClosePreview} />
           <NavBar.Title title="Best Offers" />
         </NavBar>
         <Loader isLoading={offers.isLoading}>

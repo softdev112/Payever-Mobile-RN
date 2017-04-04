@@ -14,7 +14,7 @@ export default observer(['communication'], (
         contact={contact}
       />
       <Icon
-        onPress={() => communication.removeContactForGroup(contact.id)}
+        onPress={() => communication.removeContactForAction(contact.id)}
         source="icon-trashcan-24"
       />
     </View>

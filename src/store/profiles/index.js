@@ -92,7 +92,8 @@ export default class ProfilesStore {
       currentPage = +this.contactsPaginationData.current;
     }
 
-    if (currentPage !== 0 && pageCount === currentPage) {
+    if (this.contactsDs.isLoading
+      || (currentPage !== 0 && currentPage === pageCount)) {
       return;
     }
 
@@ -102,14 +103,10 @@ export default class ProfilesStore {
         currentPage + 1
       ),
       this.contactsDs
-    ).cache(`profile:contacts:${this.currentProfile.id}`, { lifetime: 3600 })
-      .success((data) => {
-        // console.log('ttttttttttttt');
-        // console.log(data);
-        // console.log('tttttttttttttt');
-        this.contactsPaginationData = data.pagination_data;
-        this.contacts = this.contacts.concat(data.contact_models);
-      });
+    ).success((data) => {
+      this.contactsPaginationData = data.pagination_data;
+      this.contacts = this.contacts.concat(data.contact_models);
+    });
   }
 
   @action

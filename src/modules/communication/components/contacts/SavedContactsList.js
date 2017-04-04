@@ -156,7 +156,7 @@ export default class SavedContactsList extends Component {
     const { profiles, style } = this.props;
     const ds = profiles.contactsDataSource;
 
-    if (ds.isLoading || ds.error) {
+    if ((ds.isLoading || ds.error) && ds.getRowCount() === 0) {
       return (
         <View style={[styles.container, style]}>
           <Loader isLoading={ds.isLoading}>

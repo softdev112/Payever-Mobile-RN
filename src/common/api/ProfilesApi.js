@@ -42,7 +42,8 @@ export default class ProfilesApi {
 
   getAllContacts(businessId, page): Promise<ProfileContactsResp> {
     return this.client.get(
-      `/api/rest/v1/contact/business/${businessId}?page=${page}`
+      `/api/rest/v1/contact/business/${businessId}`,
+      { page }
     );
   }
 }
