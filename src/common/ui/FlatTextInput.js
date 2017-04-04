@@ -20,6 +20,9 @@ export default class FlatTextInput extends Component {
     autoCorrect?: boolean;
     value?: string;
     onChangeText?: Function;
+    onFocus?: Function;
+    onLayout?: Function;
+    onBlur?: Function;
   };
 
   $textInput: TextInput;
@@ -33,7 +36,7 @@ export default class FlatTextInput extends Component {
   render() {
     const {
       autoCorrect, inputStyle, placeholder, securityTextEntry, style,
-      value, onChangeText,
+      value, onChangeText, onFocus, onLayout, onBlur,
     } = this.props;
 
     return (
@@ -50,6 +53,9 @@ export default class FlatTextInput extends Component {
           securityTextEntry={securityTextEntry}
           value={value}
           onChangeText={onChangeText}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          onLayout={onLayout}
         />
       </Animatable.View>
     );
