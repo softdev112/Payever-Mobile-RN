@@ -1,16 +1,15 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { Keyboard, Platform } from 'react-native';
+import { Keyboard } from 'react-native';
 import type { Navigator } from 'react-native-navigation';
 import {
   GridView, Header, IconText, images, Loader, Text, View, StyleSheet,
 } from 'ui';
 import { log, pushNotificationsHelper } from 'utils';
-import type { Config } from '../../../config';
 import type ProfilesStore from '../../../store/profiles';
 import type Profile from '../../../store/profiles/models/Profile';
 
-@inject('profiles', 'config')
+@inject('profiles')
 @observer
 export default class ChooseAccount extends Component {
   static navigatorStyle = {
@@ -18,7 +17,6 @@ export default class ChooseAccount extends Component {
   };
 
   props: {
-    config: Config;
     navigator: Navigator;
     profiles: ProfilesStore;
   };
@@ -54,18 +52,11 @@ export default class ChooseAccount extends Component {
   }
 
   onAddNewBusiness() {
-    const { navigator, config } = this.props;
+    const { navigator } = this.props;
 
     navigator.push({
-      screen: 'core.WebView',
-      passProps: {
-        url: config.siteUrl + '/private/create-business',
-        injectOptions: {
-          isAddBusiness: true,
-          title: 'Add New Business',
-          platform: Platform.OS,
-        },
-      },
+      screen: 'dashboard.AddNewBusiness',
+      animated: true,
     });
   }
 

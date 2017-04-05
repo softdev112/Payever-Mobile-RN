@@ -6,6 +6,7 @@ import StyleSheet from './StyleSheet';
 
 export default class FlatTextInput extends Component {
   static defaultProps = {
+    keyboardType: 'default',
     securityTextEntry: false,
     placeholder: 'Enter text',
     autoCorrect: false,
@@ -18,6 +19,7 @@ export default class FlatTextInput extends Component {
     style?: Object;
     inputStyle?: Object;
     autoCorrect?: boolean;
+    keyboardType?: string;
     value?: string;
     onChangeText?: Function;
     onFocus?: Function;
@@ -36,7 +38,7 @@ export default class FlatTextInput extends Component {
   render() {
     const {
       autoCorrect, inputStyle, placeholder, securityTextEntry, style,
-      value, onChangeText, onFocus, onLayout, onBlur,
+      value, onChangeText, onFocus, onLayout, onBlur, keyboardType,
     } = this.props;
 
     return (
@@ -53,6 +55,7 @@ export default class FlatTextInput extends Component {
           securityTextEntry={securityTextEntry}
           value={value}
           onChangeText={onChangeText}
+          keyboardType={keyboardType}
           onFocus={onFocus}
           onBlur={onBlur}
           onLayout={onLayout}

@@ -20,6 +20,7 @@ export default class BusinessProfile extends Profile {
     if (data.business) {
       data.business = new Business(data.business, store);
     }
+
     extendObservable(this, data);
   }
 
@@ -27,6 +28,7 @@ export default class BusinessProfile extends Profile {
     if (this.business.logo) {
       return { uri: this.business.logo };
     }
+
     return images.noBusiness;
   }
 

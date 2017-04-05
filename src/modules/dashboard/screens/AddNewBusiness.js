@@ -2,9 +2,12 @@ import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { findNodeHandle, ScrollView } from 'react-native';
 import { FlatPicker, FlatTextInput, NavBar, StyleSheet, View } from 'ui';
+import { Navigator } from 'react-native-navigation';
+
 import ProfilesStore from '../../../store/profiles';
 
 const KEYBOARD_SCROLL_ADJUST = 80;
+const FORM_ELEMENTS_COUNT = 7;
 
 @inject('profiles')
 @observer
@@ -15,28 +18,64 @@ export default class AddNewBusiness extends Component {
 
   props: {
     profiles?: ProfilesStore;
+    navigator: Navigator;
   };
 
   state: {
-    name: string;
-    scrollEnabled: boolean;
+    formElementsData: Array<string>;
     inputNodeId: number;
   };
 
-  $nameTextInput: FlatTextInput;
+  /**
+   * Form Inputs indexes
+   * 0 - Business Name
+   * 1 - Legal Form
+   * 2 - Phone Number
+   * 3 - Country
+   * 4 - City
+   * 5 - Zip Code
+   * 6 - Address
+   */
+  $formInputs: Array<FlatTextInput | FlatPicker> = [];
   $scrollView: ScrollView;
 
   constructor(props) {
     super(props);
 
     this.state = {
-      name: '',
-      scrollEnabled: false,
+      formElementsData: Array(FORM_ELEMENTS_COUNT).fill(''),
       inputNodeId: -1,
     };
   }
 
-  onCreateBusiness() {
+  async onCreateBusiness() {
+    const { profiles, navigator } = this.props;
+    const { formElementsData } = this.state;
+
+    const notValidIdx = formElementsData.findIndex(element => element === '');
+    if (notValidIdx !== -1) {
+      if (this.$formInputs[notValidIdx]) {
+        this.$formInputs[notValidIdx].shakeElementAndSetFocus();
+      }
+      return;
+    }
+
+    const newBusiness = {
+      companyName: formElementsData[0],
+      legalForm: formElementsData[1],
+      businessLogo: '',
+      address: {
+        phone: formElementsData[2],
+        country: formElementsData[3],
+        city: formElementsData[4],
+        zipCode: formElementsData[5],
+        street: formElementsData[6],
+      },
+    };
+
+    navigator.pop({ animated: true });
+    await profiles.createNewBusiness(newBusiness);
+    await profiles.load({ noCache: true });
   }
 
   onInputInFocus({ nativeEvent }) {
@@ -68,9 +107,14 @@ export default class AddNewBusiness extends Component {
     this.setState({ inputNodeId: -1 });
   }
 
+  onInputValueChange(index, value) {
+    const { formElementsData } = this.state;
+    formElementsData[index] = value;
+    this.setState({ formElementsData });
+  }
+
   render() {
-    // const profile = this.props.profiles.currentProfile;
-    const { scrollEnabled } = this.state;
+    const { formElementsData } = this.state;
 
     return (
       <View style={styles.container}>
@@ -80,63 +124,69 @@ export default class AddNewBusiness extends Component {
           <NavBar.Button title="Save" onPress={::this.onCreateBusiness} />
         </NavBar>
         <ScrollView
-          scrollEnabled={scrollEnabled}
+          scrollEnabled={false}
           contentContainerStyle={styles.content}
           ref={ref => this.$scrollView = ref}
         >
           <FlatTextInput
-            ref={ref => this.$nameTextInput = ref}
+            ref={ref => this.$formInputs[0] = ref}
             placeholder="Company Name"
-            onChangeText={text => this.setState({ name: text })}
+            onChangeText={text => this.onInputValueChange(0, text)}
             onFocus={::this.onInputInFocus}
             onBlur={::this.onInputBlur}
-            value={this.state.name}
+            value={formElementsData[0]}
           />
-          <FlatPicker />
+          <FlatPicker
+            placeholder="Legal Form"
+            placeholderStyle={styles.subFieldsText}
+            ref={ref => this.$formInputs[1] = ref}
+            onValueChange={value => this.onInputValueChange(1, value)}
+            type="legal-forms"
+          />
           <FlatTextInput
             inputStyle={styles.subFieldsText}
-            ref={ref => this.$nameTextInput = ref}
+            ref={ref => this.$formInputs[2] = ref}
             placeholder="Phone"
-            onChangeText={text => this.setState({ name: text })}
+            keyboardType="phone-pad"
+            onChangeText={text => this.onInputValueChange(2, text)}
             onFocus={::this.onInputInFocus}
             onBlur={::this.onInputBlur}
-            value={this.state.name}
+            value={formElementsData[2]}
           />
-          <FlatTextInput
-            inputStyle={styles.subFieldsText}
-            ref={ref => this.$nameTextInput = ref}
+          <FlatPicker
             placeholder="Country"
-            onChangeText={text => this.setState({ name: text })}
-            onFocus={::this.onInputInFocus}
-            onBlur={::this.onInputBlur}
-            value={this.state.name}
+            ref={ref => this.$formInputs[3] = ref}
+            placeholderStyle={styles.subFieldsText}
+            onValueChange={value => this.onInputValueChange(3, value)}
+            type="countries"
           />
           <FlatTextInput
             inputStyle={styles.subFieldsText}
-            ref={ref => this.$nameTextInput = ref}
+            ref={ref => this.$formInputs[4] = ref}
             placeholder="City"
-            onChangeText={text => this.setState({ name: text })}
+            onChangeText={text => this.onInputValueChange(4, text)}
             onFocus={::this.onInputInFocus}
             onBlur={::this.onInputBlur}
-            value={this.state.name}
+            value={formElementsData[4]}
           />
           <FlatTextInput
             inputStyle={styles.subFieldsText}
-            ref={ref => this.$nameTextInput = ref}
+            ref={ref => this.$formInputs[5] = ref}
             placeholder="Zip Code"
-            onChangeText={text => this.setState({ name: text })}
+            keyboardType="numbers-and-punctuation"
+            onChangeText={text => this.onInputValueChange(5, text)}
             onFocus={::this.onInputInFocus}
             onBlur={::this.onInputBlur}
-            value={this.state.name}
+            value={formElementsData[5]}
           />
           <FlatTextInput
             inputStyle={styles.subFieldsText}
-            ref={ref => this.$nameTextInput = ref}
-            placeholder="Address"
-            onChangeText={text => this.setState({ name: text })}
+            ref={ref => this.$formInputs[6] = ref}
+            placeholder="Street"
+            onChangeText={text => this.onInputValueChange(6, text)}
             onFocus={::this.onInputInFocus}
             onBlur={::this.onInputBlur}
-            value={this.state.name}
+            value={formElementsData[6]}
           />
         </ScrollView>
       </View>
@@ -151,7 +201,7 @@ const styles = StyleSheet.create({
 
   content: {
     flex: 1,
-    paddingHorizontal: 8,
+    paddingHorizontal: 12,
     justifyContent: 'flex-start',
     overflow: 'hidden',
   },
