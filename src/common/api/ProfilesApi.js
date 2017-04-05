@@ -11,7 +11,7 @@ export default class ProfilesApi {
     const resp: ProfileResp = await this.client.get(
       '/api/rest/v1/profiles/accessible-list'
     );
-    const data              = resp.data;
+    const data = resp.data;
 
     if (!resp.ok) return resp;
 

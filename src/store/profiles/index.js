@@ -60,11 +60,11 @@ export default class ProfilesStore {
   }
 
   @action
-  async load(): Promise<boolean> {
+  async load(options = {}): Promise<boolean> {
     const { api } = this.store;
 
     return apiHelper(api.profiles.getAccessibleList(), this)
-      .cache('profiles', { lifetime: 3600 })
+      .cache('profiles', { lifetime: 3600, noCache: !!options.noCache })
       .success((data: ProfilesData) => {
         this.ownBusinesses = data.businesses_own.map((profile) => {
           return new BusinessProfile(profile, this.store);
@@ -178,6 +178,15 @@ export default class ProfilesStore {
   @action
   setCurrentProfile(profile: Profile) {
     this.currentProfile = profile;
+  }
+
+  @action
+  createNewBusiness(business) {
+    const { api } = this.store;
+
+    return apiHelper(api.business.createNewBusiness(business))
+      .success()
+      .promise();
   }
 
   businessById(profileId): BusinessProfile {

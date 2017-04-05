@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ScrollView, Platform } from 'react-native';
+import { ScrollView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { Icon, ImageButton, StyleSheet, Text, View } from 'ui';
 import { Navigator } from 'react-native-navigation';
@@ -11,9 +11,8 @@ import type BusinessProfile
 import { hideMenu, showScreen } from '../../../common/Navigation';
 import BusinessList from '../components/BusinessList';
 import type AuthStore from '../../../store/auth';
-import type { Config } from '../../../config';
 
-@inject('profiles', 'auth', 'config')
+@inject('profiles', 'auth')
 @observer
 export default class SideMenu extends Component {
   static navigatorStyle = {
@@ -22,24 +21,16 @@ export default class SideMenu extends Component {
 
   props: {
     auth: AuthStore;
-    config: Config;
     navigator: Navigator;
     profiles?: ProfilesStore;
   };
 
   onAddNewBusiness() {
-    const { navigator, config } = this.props;
+    const { navigator } = this.props;
 
     navigator.push({
-      screen: 'core.WebView',
-      passProps: {
-        url: config.siteUrl + '/private/create-business',
-        injectOptions: {
-          isAddBusiness: true,
-          title: 'Add New Business',
-          platform: Platform.OS,
-        },
-      },
+      screen: 'dashboard.AddNewBusiness',
+      animated: true,
     });
   }
 

@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "value": "",
+      "label": "Legal Form"
+    },
+    {
+      "value": "LEGAL_FORM_AG",
+      "label": "Public Limited Company"
+    },
+    {
+      "value": "LEGAL_FORM_EINZELUNTERN",
+      "label": "Individual Enterprise"
+    },
+    {
+      "value": "LEGAL_FORM_GBR",
+      "label": "Civil Law Partnership"
+    },
+    {
+      "value": "LEGAL_FORM_GMBH",
+      "label": "Limited Liability Company"
+    },
+    {
+      "value": "LEGAL_FORM_KG",
+      "label": "Limited Partnership"
+    },
+    {
+      "value": "LEGAL_FORM_OHG",
+      "label": "General Partnership"
+    },
+    {
+      "value": "LEGAL_FORM_SONSTIGES",
+      "label": "Other"
+    },
+    {
+      "value": "LEGAL_FORM_UG",
+      "label": "Limited"
+    },
+    {
+      "value": "LEGAL_FORM_EK",
+      "label": "Sole Trader"
+    },
+    {
+      "value": "LEGAL_FORM_EV",
+      "label": "Registered Association"
+    },
+    {
+      "value": "LEGAL_FORM_EG",
+      "label": "Registered Cooperative"
+    }
+  ]
+}

@@ -464,7 +464,7 @@ export default class CommunicationStore {
 
     apiHelper(socket.changeConvNotificationProp(
       this.selectedConversationId, state
-    )).success(() => {});
+    )).success();
   }
 
   @action
@@ -572,7 +572,7 @@ export default class CommunicationStore {
       messengerUser.id,
       recipients,
       message
-    )).success(() => {});
+    )).success();
   }
 
   @action
@@ -584,7 +584,7 @@ export default class CommunicationStore {
       messengerUser.id,
       groupRecipientId,
       message
-    )).success(() => {});
+    )).success();
   }
 
   initSocket(url, userId) {

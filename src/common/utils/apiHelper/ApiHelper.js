@@ -15,6 +15,7 @@ export default class ApiHelper {
   cacheId: string = null;
   cacheLifetime: number = 0;
   timeout: number = 7000;
+  noCache: boolean = false;
 
   onSuccess: (data: Object) => any;
   onError: (error: string) => any;
@@ -33,7 +34,7 @@ export default class ApiHelper {
    * Call this callback if API promise has been resolved
    * Returned value is saved and can be returned in a promise through promise()
    */
-  success(callback: (data: Object) => any): ApiHelper {
+  success(callback: (data: Object) => any = () => {}): ApiHelper {
     this.startFetch();
     this.onSuccess = callback;
     return this;
@@ -43,7 +44,7 @@ export default class ApiHelper {
    * Call this callback if API promise has been rejected or an error occurred
    * Returned value is saved and can be returned in a promise through promise()
    */
-  error(callback: (error: string) => any): ApiHelper {
+  error(callback: (error: string) => any = () => {}): ApiHelper {
     this.onError = callback;
     return this;
   }
@@ -53,7 +54,7 @@ export default class ApiHelper {
    * If the callback returns a value it'll overwrite a value returned from
    * success or error callback.
    */
-  complete(callback: () => any): ApiHelper {
+  complete(callback: () => any = () => {}): ApiHelper {
     this.onComplete = callback;
     return this;
   }
@@ -67,6 +68,10 @@ export default class ApiHelper {
 
     if (options.timeout) {
       this.timeout = options.timeout;
+    }
+
+    if (options.noCache) {
+      this.noCache = options.noCache;
     }
 
     return this;
@@ -134,7 +139,8 @@ export default class ApiHelper {
       this.apiPromise,
       this.cacheId,
       this.cacheLifetime,
-      this.timeout
+      this.timeout,
+      this.noCache
     );
 
     if (data) {
@@ -159,13 +165,13 @@ export default class ApiHelper {
   }
 }
 
-async function loadData(apiPromise, cacheId, lifeTime, timeout) {
+async function loadData(apiPromise, cacheId, lifeTime, timeout, noCache) {
   let cacheWasUsed = false;
   let data;
   let error;
 
-  // Try to load cache if a value isn't expired
-  if (cacheId && isCacheUpToDate(cacheId, lifeTime)) {
+  // Try to load cache if a value isn't expired and noCache = false
+  if (!noCache && cacheId && isCacheUpToDate(cacheId, lifeTime)) {
     data = await loadFromCache(cacheId);
     cacheWasUsed = true;
   }
@@ -184,6 +190,7 @@ async function loadData(apiPromise, cacheId, lifeTime, timeout) {
   }
 
   // If there is still no data try to load cache even if it's expired
+  // and even if noCache = true
   if (cacheId && !data && !cacheWasUsed) {
     data = await loadFromCache(cacheId);
   }
@@ -198,4 +205,5 @@ async function loadData(apiPromise, cacheId, lifeTime, timeout) {
 type CacheOptions = {
   lifetime: number;
   timeout: number;
+  noCache: boolean;
 };
