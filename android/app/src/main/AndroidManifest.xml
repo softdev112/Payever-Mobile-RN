@@ -46,7 +46,7 @@
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
       <meta-data
         android:name="io.fabric.ApiKey"
-        android:value="48b58dc9c7da86d72ed314088b46e42f1a0b78ff"
+        android:value="c039b811a5a0a7cb526d6dd241e32211d1708c2a"
       />
       <meta-data android:name="com.wix.reactnativenotifications.gcmSenderId" android:value="463919467171\0" />
     </application>

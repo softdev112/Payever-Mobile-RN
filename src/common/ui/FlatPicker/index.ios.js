@@ -179,6 +179,7 @@ export default class FlatPicker extends Component {
             <Picker
               selectedValue={this.state.value}
               onValueChange={::this.onPickerValueChange}
+              mode="dropdown"
             >
               {this.renderPickerOptions()}
             </Picker>
@@ -228,7 +229,7 @@ const styles = StyleSheet.create({
   icon: {
     alignSelf: 'center',
     fontSize: 18,
-    opacity: 0.7,
+    opacity: 0.6,
     color: '#000',
   },
 });

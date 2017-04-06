@@ -10,11 +10,6 @@ function injectedBody(options) {
   function init(options) {
     window.__DEV__ = options.isDev;
 
-    if (options.isAddBusiness) {
-      replaceSearchWithBackBtn(options);
-      attachListenerOnSubmit(businessAddedListener);
-    }
-
     if (options.platform === 'android') {
       patchSelectElementsForAndroid();
     }
@@ -43,33 +38,6 @@ function injectedBody(options) {
         sendData({ command: 'show-menu' });
       });
       $btnMenu.parentNode.replaceChild($replace, $btnMenu);
-    }
-  }
-
-  
-
-  function replaceSearchWithBackBtn({ title }) {
-    //noinspection ES6ConvertVarToLetConst
-    const $rootNode = document.querySelector('.main-search');
-
-    if ($rootNode) {
-      $rootNode.style.display = 'none';
-      const containerStyle = '\"padding-top: 5px; display: flex;' +
-        'flex-direction: row; justify-content: space-between\"';
-
-      //noinspection HtmlUnknownAttribute
-      $rootNode.outerHTML =
-        `<div style=${containerStyle}>
-          <a class="back-selling-link" style="align-self: center" href="#">
-            <svg class="icon icon-24">
-              <use xlink:href="#icon-arrow-left-ios-24"></use>
-            </svg>
-          </a>
-          <h4 style="">${title}</h4>
-        </div>`;
-
-      const $backA = document.querySelector('.back-selling-link');
-      $backA.addEventListener('click', goBackListener);
     }
   }
 
@@ -102,15 +70,6 @@ function injectedBody(options) {
     };
 
     window.postMessage = patchedPostMessage;
-  }
-
-  function attachListenerOnSubmit(listener) {
-    // Find submit button
-    const $btn = document.querySelector('button[type="submit"]');
-    
-    if (!$btn) return;
-
-    $btn.addEventListener('click', listener);
   }
 
   function attachOnError() {
@@ -153,16 +112,6 @@ function injectedBody(options) {
         command: 'navbar-info',
       });
     }
-  }
-
-  function goBackListener(e) {
-    e.preventDefault();
-    e.stopImmediatePropagation();
-    sendData({ command: 'go-back' });
-  }
-
-  function businessAddedListener() {
-    sendData({ command: 'add-business' });
   }
 }
 
@@ -230,6 +179,5 @@ export function getLoaderHtml(url: string) {
 
 type InjectOptions = {
   isDev: boolean;
-  isAddBusiness: boolean;
   platform: string;
 };

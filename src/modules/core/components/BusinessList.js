@@ -16,6 +16,9 @@ export default class BusinessList extends Component {
 
   renderRow(profile: BusinessProfile) {
     const { profiles, onSelect } = this.props;
+    const isSelected = !!(profiles.currentProfile
+      && profiles.currentProfile.id === profile.id);
+
     return (
       <TouchableOpacity
         style={styles.row}
@@ -26,7 +29,7 @@ export default class BusinessList extends Component {
         <Text style={styles.title} numberOfLines={1}>
           {profile.displayName}
         </Text>
-        {profile === profiles.currentProfile && (
+        {isSelected && (
           <Icon source="icon-checkbox-checked-24" style={styles.imgChecked} />
         )}
       </TouchableOpacity>
