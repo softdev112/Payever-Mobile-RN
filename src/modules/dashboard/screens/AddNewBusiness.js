@@ -173,7 +173,7 @@ export default class AddNewBusiness extends Component {
             inputStyle={styles.subFieldsText}
             ref={ref => this.$formInputs[5] = ref}
             placeholder="Zip Code"
-            keyboardType="numbers-and-punctuation"
+            keyboardType="numeric"
             onChangeText={text => this.onInputValueChange(5, text)}
             onFocus={::this.onInputInFocus}
             onBlur={::this.onInputBlur}
@@ -200,7 +200,6 @@ const styles = StyleSheet.create({
   },
 
   content: {
-    flex: 1,
     paddingHorizontal: 12,
     justifyContent: 'flex-start',
     overflow: 'hidden',

@@ -2,7 +2,8 @@ import { Component, PropTypes } from 'react';
 import { Keyboard, TextInput } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
-import { Icon, StyleSheet, Text, View } from 'ui';
+import { Icon, StyleSheet, View } from 'ui';
+
 import CommunicationStore from '../../../../store/communication';
 import type { ConversationType } from
   '../../../../store/communication/models/Conversation';
@@ -87,26 +88,6 @@ export default class Footer extends Component {
 
     return (
       <View style={styles.container}>
-        { communication.messageForReply && (
-          <View style={styles.replyMsgCont}>
-            <Icon
-              style={styles.replyIcon}
-              source="icon-reply-16"
-            />
-            <Text
-              style={styles.replyMsgText}
-              numberOfLines={1}
-              ellipsizeMode="tail"
-            >
-              Reply to: {communication.messageForReply.editBody}
-            </Text>
-            <Icon
-              touchStyle={styles.delReplyMsgIcon}
-              onPress={() => communication.removeMessageForReply()}
-              source="icon-trashcan-16"
-            />
-          </View>
-        )}
         {isBusiness && (
           <Icon
             style={styles.icon}
@@ -169,27 +150,5 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     paddingHorizontal: 22,
-  },
-
-  replyMsgCont: {
-    position: 'absolute',
-    top: -35,
-    flexDirection: 'row',
-    backgroundColor: '#FFF',
-    paddingVertical: 5,
-  },
-
-  replyIcon: {
-    paddingHorizontal: 8,
-    color: '$pe_color_gray_7d',
-  },
-
-  delReplyMsgIcon: {
-    paddingHorizontal: 8,
-  },
-
-  replyMsgText: {
-    flex: 1,
-    maxWidth: '80%',
   },
 });

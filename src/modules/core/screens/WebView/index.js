@@ -9,7 +9,6 @@ import injectedCode, { getLoaderHtml } from './injectedCode';
 import WebViewError from './WebViewError';
 import { showScreen, toggleMenu } from '../../../../common/Navigation';
 import type AuthStore from '../../../../store/auth';
-import type ProfilesStore from '../../../../store/profiles';
 import type { Config } from '../../../../config';
 
 const BACK_ON_URLS = [
@@ -18,7 +17,7 @@ const BACK_ON_URLS = [
   { urlMask: '/login',   screen: 'auth.Login' },
 ];
 
-@inject('auth', 'profiles', 'config')
+@inject('auth', 'config')
 @observer
 export default class WebView extends Component {
   static defaultProps = {
@@ -37,7 +36,6 @@ export default class WebView extends Component {
     navigator: Navigator;
     referer?: string;
     url: string;
-    profiles?: ProfilesStore;
   };
 
   state: {
@@ -104,24 +102,6 @@ export default class WebView extends Component {
       return;
     }
 
-
-    // Apply pat
-    // Process submit events ONLY iOS UIWebKit there is no such
-    // field in android WebKit nativeEvent
-    if (nativeEvent.navigationType === 'formsubmit') {
-      if (nativeEvent.url.endsWith('/create-business')) {
-        this.refreshBusinessesWithTimeout();
-      }
-
-      // After create-business it goes to business home just block
-      if (nativeEvent.url.endsWith('/home')) {
-        //noinspection JSUnresolvedFunction
-        this.$view.stopLoading();
-        this.props.navigator.pop({ animated: true });
-        return;
-      }
-    }
-
     BACK_ON_URLS.forEach((url) => {
       if (nativeEvent.url.endsWith(url.urlMask)) {
         //noinspection JSUnresolvedFunction
@@ -147,6 +127,7 @@ export default class WebView extends Component {
         toggleMenu(this.props.navigator);
         break;
       }
+
       case 'error': {
         log.warn(
           `WebView error: ${object.errorMsg} at ` +
@@ -155,15 +136,6 @@ export default class WebView extends Component {
         this.props.navigator.pop({ animated: true });
         break;
       }
-
-      case 'add-business':
-        this.props.navigator.pop({ animated: true });
-        this.refreshBusinessesWithTimeout();
-        break;
-
-      case 'go-back':
-        this.props.navigator.pop({ animated: true });
-        break;
 
       case 'navbar-info': {
         this.setState({
@@ -176,16 +148,6 @@ export default class WebView extends Component {
       default: {
         log.warn(`Unknown webview command ${object.command}`);
       }
-    }
-  }
-
-  refreshBusinessesWithTimeout() {
-    if (!this.refreshTimer) {
-      this.refreshTimer = setTimeout(() => {
-        // Reload businesses with some delay
-        //noinspection JSIgnoredPromiseFromCall
-        this.props.profiles.load();
-      }, 1200);
     }
   }
 

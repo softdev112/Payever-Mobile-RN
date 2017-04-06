@@ -3,7 +3,7 @@ import { KeyboardAvoidingView, ListView, Platform } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import { inject, observer } from 'mobx-react/native';
 import {
-  BottomDock, ErrorBox, Loader, MoveYAnimElement, StyleSheet,
+  BottomDock, ErrorBox, Icon, Loader, MoveYAnimElement, StyleSheet, Text, View,
 } from 'ui';
 
 import Footer from './Footer';
@@ -37,7 +37,6 @@ export default class Chat extends Component {
     listContentHeight: number;
     showForwardAnim: boolean;
     messageForForward: Message;
-    messageToReplay: Message;
   };
 
   $listView: ListView;
@@ -52,7 +51,6 @@ export default class Chat extends Component {
       listContentHeight: 0,
       showForwardAnim: false,
       messageForForward: null,
-      messageToReplay: null,
     };
   }
 
@@ -136,6 +134,7 @@ export default class Chat extends Component {
     const {
       isMsgsForForwardAvailable,
       msgsForForward,
+      messageForReply,
       selectedConversation: conversation,
       selectedConversationDataSource: ds,
       selectedConversationId,
@@ -183,6 +182,27 @@ export default class Chat extends Component {
           conversationType={communication.selectedConversation.type}
         />
 
+        {messageForReply && (
+          <View style={styles.replyMsgCont}>
+            <Icon
+              style={styles.replyIcon}
+              source="icon-reply-16"
+            />
+            <Text
+              style={styles.replyMsgText}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              Reply to: {communication.messageForReply.editBody}
+            </Text>
+            <Icon
+              touchStyle={styles.delReplyMsgIcon}
+              onPress={() => communication.removeMessageForReply()}
+              source="icon-trashcan-16"
+            />
+          </View>
+        )}
+
         {showForwardAnim && (
           <MoveYAnimElement
             startPosY={startPosY}
@@ -214,5 +234,35 @@ const styles = StyleSheet.create({
 
   forwardMessage: {
     marginLeft: 10,
+  },
+
+  replyMsgCont: {
+    '@media ios': {
+      top: 76,
+    },
+    '@media android': {
+      top: 75,
+    },
+    position: 'absolute',
+    flexDirection: 'row',
+    backgroundColor: '#FFF',
+    paddingVertical: 8,
+    borderBottomColor: '$pe_color_twitter',
+    borderBottomWidth: 1,
+    borderRightColor: '$pe_color_twitter',
+    borderRightWidth: 1,
+  },
+
+  replyIcon: {
+    paddingHorizontal: 8,
+    color: '$pe_color_gray_7d',
+  },
+
+  delReplyMsgIcon: {
+    paddingHorizontal: 8,
+  },
+
+  replyMsgText: {
+    maxWidth: '78%',
   },
 });

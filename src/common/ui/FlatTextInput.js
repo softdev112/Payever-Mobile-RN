@@ -59,6 +59,7 @@ export default class FlatTextInput extends Component {
           onFocus={onFocus}
           onBlur={onBlur}
           onLayout={onLayout}
+          underlineColorAndroid="transparent"
         />
       </Animatable.View>
     );
