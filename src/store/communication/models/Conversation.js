@@ -1,4 +1,4 @@
-import { extendObservable, observable, computed } from 'mobx';
+import { action, extendObservable, observable, computed } from 'mobx';
 import { debounce } from 'lodash';
 import Message from './Message';
 
@@ -9,6 +9,8 @@ export default class Conversation {
   name: string;
   @observable status: ConversationStatus;
   type: ConversationType = '';
+  allMessagesFetched: boolean = false;
+  isNewMessageAdded: boolean = false;
 
   constructor(data) {
     data.messages = (data.messages || []).map(m => new Message(m));
@@ -30,6 +32,11 @@ export default class Conversation {
     return this.type.endsWith('group');
   }
 
+  @action
+  clearNewMessageFlag() {
+    this.isNewMessageAdded = false;
+  }
+
   updateMessage(message: Message) {
     if (!(message instanceof Message)) {
       message = new Message(message);
@@ -45,6 +52,7 @@ export default class Conversation {
       return;
     }
 
+    this.isNewMessageAdded = true;
     this.messages.push(message);
   }
 
