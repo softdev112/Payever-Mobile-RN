@@ -38,7 +38,7 @@ export default class ViewOffer extends Component {
   }
 
   onClosePreview() {
-    Navigation.dismissAllModals({
+    Navigation.dismissModal({
       animationType: 'slide-down',
     });
   }

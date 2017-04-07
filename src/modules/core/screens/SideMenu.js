@@ -222,7 +222,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '400',
     marginLeft: 24,
-    paddingVertical: 12,
+    paddingVertical: 16,
   },
 
   bottomMenu: {

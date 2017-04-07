@@ -84,5 +84,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     fontFamily: '$font_family',
+    justifyContent: 'flex-start',
   },
 });
