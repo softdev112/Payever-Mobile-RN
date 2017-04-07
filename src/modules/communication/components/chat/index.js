@@ -4,7 +4,7 @@ import { Navigator } from 'react-native-navigation';
 import { inject, observer } from 'mobx-react/native';
 import * as Animatable from 'react-native-animatable';
 import {
-  BottomDock, ErrorBox, Icon, Loader, MoveYAnimElement, StyleSheet, Text,
+  BottomDock, ErrorBox, Icon, Loader, MoveYAnimElement, StyleSheet, Text, View,
 } from 'ui';
 
 import Footer from './Footer';
@@ -64,9 +64,18 @@ export default class Chat extends Component {
 
   onListContentSizeChange(listContentHeight) {
     const { isAnimScroll, listHeight } = this.state;
+    const { selectedConversation } = this.props.communication;
 
-    if (this.$listView && listHeight !== 0 && listContentHeight > listHeight) {
-      this.$listView.scrollToEnd({ animated: this.state.isAnimScroll });
+    // isAnimScroll = false - only then we show chat first time
+    if (isAnimScroll) {
+      if (this.$listView && selectedConversation.isNewMessageAdded) {
+        this.$listView.scrollToEnd({ animated: true });
+        selectedConversation.clearNewMessageFlag();
+      }
+    } else if (this.$listView && listHeight !== 0
+        && listContentHeight > listHeight) {
+      // First time scrolling
+      this.$listView.scrollToEnd({ animated: false });
     }
 
     // After first render of list switch scrollToEnd animated param to true
@@ -126,6 +135,13 @@ export default class Chat extends Component {
     communication.removeMessageForReply();
   }
 
+  onScroll({ nativeEvent }) {
+    const { communication } = this.props;
+    if (nativeEvent.contentOffset.y <= 0) {
+      communication.loadOlderMessages(communication.selectedConversationId);
+    }
+  }
+
   renderMessageForForward(message) {
     return (
       <ForwardMessage
@@ -133,6 +149,19 @@ export default class Chat extends Component {
         key={message.id}
         message={message}
       />
+    );
+  }
+
+  renderHeader() {
+    const { communication } = this.props;
+    const ds = communication.conversationDs;
+
+    if (!ds.isLoading) return null;
+
+    return (
+      <View style={styles.footer}>
+        <Loader isLoading={ds.isLoading} />
+      </View>
     );
   }
 
@@ -190,10 +219,12 @@ export default class Chat extends Component {
           dataSource={ds}
           enableEmptySections
           ref={ref => this.$listView = ref}
+          renderHeader={::this.renderHeader}
           renderRow={::this.renderRow}
           initialListSize={conversation.messages.length}
           onContentSizeChange={(w, h) => this.onListContentSizeChange(h)}
           onLayout={::this.onListLayout}
+          onScroll={::this.onScroll}
         />
         <Footer
           ref={ref => this.$thisInputElement = ref}
@@ -261,12 +292,6 @@ const styles = StyleSheet.create({
   },
 
   replyMsgCont: {
-    '@media ios': {
-      top: 76,
-    },
-    '@media android': {
-      top: 75,
-    },
     position: 'absolute',
     flexDirection: 'row',
     backgroundColor: '#FFF',
@@ -288,5 +313,9 @@ const styles = StyleSheet.create({
 
   replyMsgText: {
     maxWidth: '78%',
+  },
+
+  footer: {
+    paddingVertical: 5,
   },
 });

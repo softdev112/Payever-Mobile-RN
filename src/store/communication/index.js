@@ -21,6 +21,8 @@ import type BusinessProfile from '../profiles/models/BusinessProfile';
 import type GroupMember from './models/GroupMember';
 import type Store from '../index';
 
+const MSGS_REQUEST_LIMIT = 30;
+
 export default class CommunicationStore {
   @observable conversations: ObservableMap<Conversation> = observable.map();
   @observable messengerInfo: MessengerInfo;
@@ -42,6 +44,8 @@ export default class CommunicationStore {
   @observable messageForReply: Message = null;
 
   @observable selectedGroupSettings: GroupSettingsData = null;
+
+  allMsgsForConvFetched: boolean = false;
 
   store: Store;
   socket: SocketApi;
@@ -113,8 +117,33 @@ export default class CommunicationStore {
       .cache(`communication:conversations:${userId}:${id}`)
       .success((data) => {
         const conversation = new Conversation(data);
+        conversation.allMessagesFetched =
+          data.messages.length < MSGS_REQUEST_LIMIT;
         this.conversations.merge({ [id]: observable(conversation) });
         return conversation;
+      })
+      .promise();
+  }
+
+  @action
+  async loadOlderMessages(id: number) {
+    const conversation = this.conversations.get(id);
+    if (!conversation || conversation.allMessagesFetched) return null;
+
+    const socket = await this.store.api.messenger.getSocket();
+    const userId = socket.userId;
+    const newMsgsLimit = conversation.messages.length + MSGS_REQUEST_LIMIT;
+
+    return apiHelper(socket.getConversation(
+      { id, type: conversation.type, limit: newMsgsLimit }
+    ), this.conversationDs)
+      .cache(`communication:conversations:${userId}:${id}`)
+      .success((data) => {
+        const newConversation = new Conversation(data);
+        newConversation.allMessagesFetched =
+          data.messages.length < newMsgsLimit;
+        this.conversations.merge({ [id]: observable(newConversation) });
+        return newConversation;
       })
       .promise();
   }
