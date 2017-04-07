@@ -2,8 +2,9 @@ import { Component, PropTypes } from 'react';
 import { KeyboardAvoidingView, ListView, Platform } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import { inject, observer } from 'mobx-react/native';
+import * as Animatable from 'react-native-animatable';
 import {
-  BottomDock, ErrorBox, Icon, Loader, MoveYAnimElement, StyleSheet, Text, View,
+  BottomDock, ErrorBox, Icon, Loader, MoveYAnimElement, StyleSheet, Text,
 } from 'ui';
 
 import Footer from './Footer';
@@ -14,6 +15,8 @@ import CommunicationStore from '../../../../store/communication';
 import Message from '../../../../store/communication/models/Message';
 
 const ANIM_POSITION_ADJUST = 65;
+const REPLY_TOP = Platform.OS === 'ios' ? 76 : 75;
+const REPLY_TOP_GROUP = Platform.OS === 'ios' ? 54 : 53;
 
 @inject('communication')
 @observer
@@ -41,6 +44,7 @@ export default class Chat extends Component {
 
   $listView: ListView;
   $thisInputElement: Footer;
+  $msgForReply: Animatable.View;
 
   constructor(props) {
     super(props);
@@ -52,6 +56,10 @@ export default class Chat extends Component {
       showForwardAnim: false,
       messageForForward: null,
     };
+  }
+
+  componentWillUnmount() {
+    this.props.communication.removeMessageForReply();
   }
 
   onListContentSizeChange(listContentHeight) {
@@ -109,6 +117,15 @@ export default class Chat extends Component {
     this.setState({ showForwardAnim: false });
   }
 
+  async onRemoveMsgForReply() {
+    const { communication } = this.props;
+    if (this.$msgForReply) {
+      await this.$msgForReply.slideOutLeft(100);
+    }
+
+    communication.removeMessageForReply();
+  }
+
   renderMessageForForward(message) {
     return (
       <ForwardMessage
@@ -155,6 +172,8 @@ export default class Chat extends Component {
       );
     }
 
+    const replyMsgTop = conversation.isGroup ? REPLY_TOP_GROUP : REPLY_TOP;
+
     return (
       <KeyboardAvoidingView
         style={[styles.container, style]}
@@ -183,7 +202,12 @@ export default class Chat extends Component {
         />
 
         {messageForReply && (
-          <View style={styles.replyMsgCont}>
+          <Animatable.View
+            style={[styles.replyMsgCont, { top: replyMsgTop }]}
+            animation="slideInLeft"
+            duration={150}
+            ref={ref => this.$msgForReply = ref}
+          >
             <Icon
               style={styles.replyIcon}
               source="icon-reply-16"
@@ -197,10 +221,10 @@ export default class Chat extends Component {
             </Text>
             <Icon
               touchStyle={styles.delReplyMsgIcon}
-              onPress={() => communication.removeMessageForReply()}
+              onPress={::this.onRemoveMsgForReply}
               source="icon-trashcan-16"
             />
-          </View>
+          </Animatable.View>
         )}
 
         {showForwardAnim && (

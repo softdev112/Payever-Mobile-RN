@@ -30,7 +30,7 @@ export default class ConversationSettings extends Component {
   }
 
   onOfferLinkPress(offerId: number) {
-    this.props.navigator.push({
+    this.props.navigator.showModal({
       screen: 'marketing.ViewOffer',
       animated: true,
       passProps: {
@@ -88,10 +88,7 @@ export default class ConversationSettings extends Component {
               {selectedConversationSettings.offers.length > 0 && (
                 <View style={styles.offersContainer}>
                   <Text style={styles.sentOffersText}>Sent Offers:</Text>
-                  <ScrollView
-                    style={styles.offersData}
-                    showsVerticalScrollIndicator={false}
-                  >
+                  <ScrollView showsVerticalScrollIndicator={false}>
                     {this.renderOffers(selectedConversationSettings.offers)}
                   </ScrollView>
                 </View>
@@ -110,6 +107,7 @@ const styles = StyleSheet.create({
   },
 
   userInfo: {
+    flex: 1,
     paddingTop: 20,
     paddingBottom: 8,
     paddingHorizontal: 15,

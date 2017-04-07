@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
   },
 
   contactBtn: {
-    width: 60,
+    width: 65,
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',

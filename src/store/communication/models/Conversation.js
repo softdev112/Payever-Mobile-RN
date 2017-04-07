@@ -1,4 +1,4 @@
-import { extendObservable, observable } from 'mobx';
+import { extendObservable, observable, computed } from 'mobx';
 import { debounce } from 'lodash';
 import Message from './Message';
 
@@ -8,7 +8,7 @@ export default class Conversation {
   @observable messages: Array<Message> = [];
   name: string;
   @observable status: ConversationStatus;
-  type: ConversationType;
+  type: ConversationType = '';
 
   constructor(data) {
     data.messages = (data.messages || []).map(m => new Message(m));
@@ -23,6 +23,11 @@ export default class Conversation {
       this.updateTypingStatusLazily,
       6000
     );
+  }
+
+  @computed
+  get isGroup() {
+    return this.type.endsWith('group');
   }
 
   updateMessage(message: Message) {
