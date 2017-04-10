@@ -49,7 +49,7 @@ export default class Loader extends Component {
         <Animated.View
           style={[styles.animatedElement, { transform: [{ rotate: spin }] }]}
         >
-          <Icon source="spinner" style={styles.spinner} />
+          <Icon source="spinner" />
         </Animated.View>
       </View>
     );

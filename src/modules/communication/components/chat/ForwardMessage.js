@@ -54,8 +54,15 @@ export default class FrowardMessage extends Component {
 
   removeMessageFromForward() {
     const { communication, message: { id } } = this.props;
+    const { animWidth } = this.state;
 
-    communication.removeMessageFromForward(id);
+    Animated.timing(animWidth, {
+      toValue: 5,
+      duration: 300,
+      easing: Easing.inOut,
+    }).start(() => {
+      communication.removeMessageFromForward(id);
+    });
   }
 
   render() {

@@ -128,7 +128,14 @@ export default class CommunicationStore {
   @action
   async loadOlderMessages(id: number) {
     const conversation = this.conversations.get(id);
-    if (!conversation || conversation.allMessagesFetched) return null;
+    if (!conversation || conversation.allMessagesFetched
+      || this.conversationDs.isLoading) {
+      if (conversation.allMessagesFetched && this.conversationDs.isLoading) {
+        this.conversationDs.isLoading = false;
+      }
+
+      return null;
+    }
 
     const socket = await this.store.api.messenger.getSocket();
     const userId = socket.userId;
@@ -143,6 +150,7 @@ export default class CommunicationStore {
         newConversation.allMessagesFetched =
           data.messages.length < newMsgsLimit;
         this.conversations.merge({ [id]: observable(newConversation) });
+
         return newConversation;
       })
       .promise();
