@@ -1,12 +1,10 @@
 import { Component } from 'react';
-import { Dimensions } from 'react-native';
 import { images, NavBar, StyleSheet, View } from 'ui';
+import { ScreenParams } from 'utils';
 
 import Chat from '../components/chat';
 import Contacts from '../components/contacts';
 import ContactsScreen from './Contacts';
-
-const TABLET_MIN_WIDTH = 700;
 
 export default class Main extends Component {
   static navigatorStyle = {
@@ -14,7 +12,7 @@ export default class Main extends Component {
   };
 
   render() {
-    if (Dimensions.get('window').width < TABLET_MIN_WIDTH) {
+    if (!ScreenParams.isTabletLayout()) {
       return <ContactsScreen />;
     }
 
@@ -42,13 +40,15 @@ const styles = StyleSheet.create({
 
   chat_component: {
     flex: 1,
+    borderLeftColor: '$pe_color_light_gray_1',
+    borderLeftWidth: 1,
   },
 
   chat_shadow: {
     backgroundColor: '#d6d6d6',
     bottom: 0,
     elevation: 5,
-    left: 0,
+    right: 0,
     position: 'absolute',
     shadowColor: 'rgba(0, 0, 0, .1)',
     shadowRadius: 7,
