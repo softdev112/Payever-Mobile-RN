@@ -7,7 +7,8 @@ import StyleSheet from './StyleSheet';
 
 const ANIM_DURATION_KOEF = 0.4;
 const MAX_ANIM_HEIGHT = ScreenParams.height - 160;
-const MID_X_POSITION = ScreenParams.width / 2;
+const MID_X_POSITION = ScreenParams.isTabletLayout()
+  ? 140 : ScreenParams.width / 2;
 const START_WIDTH = 300;
 const END_WIDTH = 150;
 

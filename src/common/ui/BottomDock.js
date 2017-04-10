@@ -60,9 +60,9 @@ const styles = StyleSheet.create({
       top: '$maxHeight - 80',
     },
     left: 0,
+    right: 0,
     backgroundColor: 'transparent',
     height: 60,
-    minWidth: '100%',
   },
 
   scrollContainer: {

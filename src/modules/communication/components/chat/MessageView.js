@@ -5,6 +5,7 @@ import type { Navigator } from 'react-native-navigation';
 import { Html, Icon, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
 import * as Animatable from 'react-native-animatable';
+import { ScreenParams } from 'utils';
 
 import MediaView from './MediaView';
 import Avatar from '../contacts/Avatar';
@@ -222,10 +223,11 @@ export default class MessageView extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'row',
     marginBottom: 12,
     minHeight: 50,
-    width: '90%',
+    width: ScreenParams.isTabletLayout() ? '94% - 350' : '70%',
     paddingRight: 5,
   },
 
@@ -315,7 +317,7 @@ const styles = StyleSheet.create({
   },
 
   swipeContainer: {
-    width: '95%',
+    width: ScreenParams.isTabletLayout() ? '98% - 350' : '95%',
   },
 
   swipeContainerInside: {

@@ -7,7 +7,7 @@ const styleSheet = new Api();
 // Set values from
 // https://github.com/payeverworldwide/ui-kit/blob/master/scss/pe_variables.scss
 styleSheet.build({
-  rem: (ScreenParams.height * PixelRatio.get() > 1280) ? 10 : 8,
+  rem: getRemKoef(),
   pe_color_twitter: '#50abf1',
   pe_color_black: '#000',
   pe_color_blue: '#0084ff',
@@ -26,5 +26,21 @@ styleSheet.build({
 });
 
 styleSheet.flatten = StyleSheet.flatten;
+
+function getRemKoef(): number {
+  if (ScreenParams.width * PixelRatio.get() <= 640) {
+    return 8;
+  }
+
+  if (ScreenParams.width * PixelRatio.get() <= 1250) {
+    return 10;
+  }
+
+  if (ScreenParams.width * PixelRatio.get() <= 2000) {
+    return 14;
+  }
+
+  return 8;
+}
 
 export default styleSheet;

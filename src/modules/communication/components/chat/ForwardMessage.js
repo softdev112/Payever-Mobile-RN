@@ -8,7 +8,9 @@ import CommunicationStore from '../../../../store/communication';
 import type Message from '../../../../store/communication/models/Message';
 
 const MIN_WIDTH = 160;
-const MAX_WIDTH = ScreenParams.width * 0.8; // 80% screen width
+// 80% screen width if it is not a tablet
+const MAX_WIDTH =
+  ScreenParams.isTabletLayout() ? 300 : ScreenParams.width * 0.8;
 
 @inject('communication')
 @observer
@@ -57,9 +59,9 @@ export default class FrowardMessage extends Component {
     const { animWidth } = this.state;
 
     Animated.timing(animWidth, {
-      toValue: 5,
-      duration: 300,
-      easing: Easing.inOut,
+      toValue: 10,
+      duration: 100,
+      easing: Easing.linear,
     }).start(() => {
       communication.removeMessageFromForward(id);
     });
@@ -105,7 +107,7 @@ export default class FrowardMessage extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: 45,
+    height: 48,
     minWidth: MIN_WIDTH,
     width: MIN_WIDTH,
     backgroundColor: '#FFF',
@@ -113,6 +115,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 5,
     paddingVertical: 5,
+    zIndex: 100,
   },
 
   insideContainer: {
@@ -130,6 +133,7 @@ const styles = StyleSheet.create({
 
   btnsContainer: {
     flexDirection: 'row',
+    zIndex: 101,
   },
 
   actionIcon: {

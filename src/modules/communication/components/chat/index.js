@@ -6,6 +6,7 @@ import * as Animatable from 'react-native-animatable';
 import {
   BottomDock, ErrorBox, Icon, Loader, MoveYAnimElement, StyleSheet, Text, View,
 } from 'ui';
+import { ScreenParams } from 'utils';
 
 import Footer from './Footer';
 import MessageView from './MessageView';
@@ -15,8 +16,8 @@ import CommunicationStore from '../../../../store/communication';
 import Message from '../../../../store/communication/models/Message';
 
 const ANIM_POSITION_ADJUST = 65;
-const REPLY_TOP = Platform.OS === 'ios' ? 76 : 75;
-const REPLY_TOP_GROUP = Platform.OS === 'ios' ? 54 : 53;
+const REPLY_TOP = Platform.OS === 'ios' ? 75 : 74;
+const REPLY_TOP_GROUP = Platform.OS === 'ios' ? 53 : 52;
 
 @inject('communication')
 @observer
@@ -129,7 +130,11 @@ export default class Chat extends Component {
   async onRemoveMsgForReply() {
     const { communication } = this.props;
     if (this.$msgForReply) {
-      await this.$msgForReply.slideOutLeft(100);
+      if (ScreenParams.isTabletLayout()) {
+        await this.$msgForReply.slideOutRight(100);
+      } else {
+        await this.$msgForReply.slideOutLeft(100);
+      }
     }
 
     communication.removeMessageForReply();
@@ -210,7 +215,12 @@ export default class Chat extends Component {
       );
     }
 
+    const isTablet = ScreenParams.isTabletLayout();
     const replyMsgTop = conversation.isGroup ? REPLY_TOP_GROUP : REPLY_TOP;
+    const replyMsgContStyle = [
+      isTablet ? styles.replyMsgContFromRight : styles.replyMsgContFromLeft,
+      { top: replyMsgTop },
+    ];
 
     return (
       <KeyboardAvoidingView
@@ -243,8 +253,8 @@ export default class Chat extends Component {
 
         {messageForReply && (
           <Animatable.View
-            style={[styles.replyMsgCont, { top: replyMsgTop }]}
-            animation="slideInLeft"
+            style={replyMsgContStyle}
+            animation={isTablet ? 'slideInRight' : 'slideInLeft'}
             duration={150}
             ref={ref => this.$msgForReply = ref}
           >
@@ -277,6 +287,7 @@ export default class Chat extends Component {
 
         {isMsgsForForwardAvailable && (
           <BottomDock
+            style={isTablet ? styles.bottomDockTablet : null}
             items={msgsForForward.slice()}
             renderItem={::this.renderMessageForForward}
           />
@@ -300,7 +311,23 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
 
-  replyMsgCont: {
+  replyMsgContFromRight: {
+    height: 38,
+    right: 0,
+    position: 'absolute',
+    flexDirection: 'row',
+    backgroundColor: '#FFF',
+    paddingVertical: 8,
+    borderBottomColor: '$pe_color_twitter',
+    borderBottomWidth: 1,
+    borderLeftColor: '$pe_color_twitter',
+    borderLeftWidth: 1,
+    alignItems: 'center',
+  },
+
+  replyMsgContFromLeft: {
+    height: 38,
+    left: 0,
     position: 'absolute',
     flexDirection: 'row',
     backgroundColor: '#FFF',
@@ -309,6 +336,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderRightColor: '$pe_color_twitter',
     borderRightWidth: 1,
+    alignItems: 'center',
   },
 
   replyIcon: {
@@ -317,7 +345,7 @@ const styles = StyleSheet.create({
   },
 
   delReplyMsgIcon: {
-    paddingHorizontal: 8,
+    paddingHorizontal: 16,
   },
 
   replyMsgText: {
@@ -326,5 +354,10 @@ const styles = StyleSheet.create({
 
   header: {
     paddingVertical: 5,
+  },
+
+  bottomDockTablet: {
+    $topHeight: '80%',
+    top: '$topHeight',
   },
 });
