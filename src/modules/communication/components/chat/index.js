@@ -135,11 +135,16 @@ export default class Chat extends Component {
     communication.removeMessageForReply();
   }
 
-  onScroll({ nativeEvent }) {
+  async onScroll({ nativeEvent }) {
     const { communication } = this.props;
+
     if (nativeEvent.contentOffset.y <= 0) {
-      communication.loadOlderMessages(communication.selectedConversationId);
+      await communication.loadOlderMessages(
+        communication.selectedConversationId
+      );
     }
+
+    this.setState({});
   }
 
   renderMessageForForward(message) {
@@ -154,13 +159,17 @@ export default class Chat extends Component {
 
   renderHeader() {
     const { communication } = this.props;
-    const ds = communication.conversationDs;
+    const { conversationDs: ds, selectedConversation } = communication;
 
-    if (!ds.isLoading) return null;
+    if (selectedConversation.allMsgsForConvFetched) {
+      return null;
+    }
 
     return (
-      <View style={styles.footer}>
-        <Loader isLoading={ds.isLoading} />
+      <View style={styles.header}>
+        <Loader
+          isLoading={ds.isLoading}
+        />
       </View>
     );
   }
@@ -315,7 +324,7 @@ const styles = StyleSheet.create({
     maxWidth: '78%',
   },
 
-  footer: {
+  header: {
     paddingVertical: 5,
   },
 });

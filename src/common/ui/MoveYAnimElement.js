@@ -7,6 +7,7 @@ import StyleSheet from './StyleSheet';
 
 const ANIM_DURATION_KOEF = 0.4;
 const MAX_ANIM_HEIGHT = ScreenParams.height - 160;
+const MID_X_POSITION = ScreenParams.width / 2;
 const START_WIDTH = 300;
 const END_WIDTH = 150;
 
@@ -71,7 +72,10 @@ export default class MoveYAnimElement extends Component {
     });
 
     const containerStyle = [styles.container, { opacity }, { width }, style];
-    containerStyle.push({ transform: [{ translateY }] });
+    containerStyle.push({ transform: [
+      { translateY },
+      { translateX: MID_X_POSITION },
+    ] });
 
     return (
       <Animated.View style={containerStyle}>
