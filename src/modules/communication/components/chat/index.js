@@ -4,7 +4,7 @@ import { Navigator } from 'react-native-navigation';
 import { inject, observer } from 'mobx-react/native';
 import * as Animatable from 'react-native-animatable';
 import {
-  BottomDock, ErrorBox, Icon, Loader, MoveYAnimElement, StyleSheet, Text, View,
+  BottomDock, ErrorBox, Icon, Loader, MoveYAnimElement, StyleSheet, Text,
 } from 'ui';
 import { ScreenParams } from 'utils';
 
@@ -16,8 +16,8 @@ import CommunicationStore from '../../../../store/communication';
 import Message from '../../../../store/communication/models/Message';
 
 const ANIM_POSITION_ADJUST = 65;
-const REPLY_TOP = Platform.OS === 'ios' ? 75 : 74;
-const REPLY_TOP_GROUP = Platform.OS === 'ios' ? 53 : 52;
+const REPLY_TOP = Platform.OS === 'ios' ? 76 : 75;
+const REPLY_TOP_GROUP = Platform.OS === 'ios' ? 54 : 53;
 
 @inject('communication')
 @observer
@@ -29,6 +29,7 @@ export default class Chat extends Component {
   props: {
     communication?: CommunicationStore;
     style?: Object | number;
+    currentConversationId?: number;
   };
 
   context: {
@@ -51,7 +52,7 @@ export default class Chat extends Component {
     super(props);
 
     this.state = {
-      isAnimScroll: false,
+      isInitRun: true,
       listHeight: 0,
       listContentHeight: 0,
       showForwardAnim: false,
@@ -59,35 +60,42 @@ export default class Chat extends Component {
     };
   }
 
+  componentWillReceiveProps(newProps) {
+    const { currentConversationId } = this.props;
+    if (currentConversationId !== newProps.currentConversationId) {
+      this.setState({
+        isInitRun: true,
+        listContentHeight: 0,
+      });
+    }
+  }
+
   componentWillUnmount() {
     this.props.communication.removeMessageForReply();
   }
 
   onListContentSizeChange(listContentHeight) {
-    const { isAnimScroll, listHeight } = this.state;
+    const { isInitRun, listHeight } = this.state;
     const { selectedConversation } = this.props.communication;
 
-    // isAnimScroll = false - only then we show chat first time
-    if (isAnimScroll) {
-      if (this.$listView && selectedConversation.isNewMessageAdded) {
+    if (listContentHeight > listHeight && listHeight !== 0) {
+      if (isInitRun && this.$listView) {
+        this.$listView.scrollToEnd({ animated: false });
+      } else if (this.$listView && selectedConversation.isNewMessageAdded) {
         this.$listView.scrollToEnd({ animated: true });
         selectedConversation.clearNewMessageFlag();
       }
-    } else if (this.$listView && listHeight !== 0
-        && listContentHeight > listHeight) {
-      // First time scrolling
-      this.$listView.scrollToEnd({ animated: false });
+    } else if (this.$listView) {
+      this.$listView.scrollTo({ x: 0, y: 0, animated: true });
     }
 
     // After first render of list switch scrollToEnd animated param to true
     // if listHeight === 0 we didn't scroll onListLayout will scrollToEnd
     // first time
-    if (!isAnimScroll) {
-      this.setState({
-        listContentHeight,
-        isAnimScroll: listHeight > 0,
-      });
-    }
+    this.setState({
+      listContentHeight,
+      isInitRun: listHeight === 0,
+    });
   }
 
   onListLayout({ nativeEvent: { layout } }) {
@@ -105,7 +113,7 @@ export default class Chat extends Component {
     // scrollToEnd first time else it sets scrollToEnd animated param to true
     this.setState({
       listHeight: layout.height,
-      isAnimScroll: listContentHeight > 0,
+      isInitRun: listContentHeight === 0,
     });
   }
 
@@ -162,23 +170,6 @@ export default class Chat extends Component {
     );
   }
 
-  renderHeader() {
-    const { communication } = this.props;
-    const { conversationDs: ds, selectedConversation } = communication;
-
-    if (selectedConversation.allMsgsForConvFetched) {
-      return null;
-    }
-
-    return (
-      <View style={styles.header}>
-        <Loader
-          isLoading={ds.isLoading}
-        />
-      </View>
-    );
-  }
-
   renderRow(row) {
     return (
       <MessageView
@@ -202,7 +193,9 @@ export default class Chat extends Component {
 
     // This is hack to go to contacts list if we delete group we set
     // selectedConversationId = null. We need it because RNN doesn't have popTo
-    if (!selectedConversationId) {
+    // only for phone layout
+    const isTablet = ScreenParams.isTabletLayout();
+    if (!selectedConversationId && !isTablet) {
       this.context.navigator.pop({ animated: false });
       return null;
     }
@@ -210,12 +203,12 @@ export default class Chat extends Component {
     if (!conversation) {
       return (
         <Loader isLoading={ds.isLoading}>
-          <ErrorBox message={ds.error} />
+          {ds.isError && <ErrorBox message={ds.error} />}
         </Loader>
       );
     }
 
-    const isTablet = ScreenParams.isTabletLayout();
+
     const replyMsgTop = conversation.isGroup ? REPLY_TOP_GROUP : REPLY_TOP;
     const replyMsgContStyle = [
       isTablet ? styles.replyMsgContFromRight : styles.replyMsgContFromLeft,
@@ -238,7 +231,6 @@ export default class Chat extends Component {
           dataSource={ds}
           enableEmptySections
           ref={ref => this.$listView = ref}
-          renderHeader={::this.renderHeader}
           renderRow={::this.renderRow}
           initialListSize={conversation.messages.length}
           onContentSizeChange={(w, h) => this.onListContentSizeChange(h)}

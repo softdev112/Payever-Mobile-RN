@@ -123,6 +123,8 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     borderTopColor: '$pe_color_light_gray_1',
     borderTopWidth: 1,
+    borderBottomColor: '$pe_color_light_gray_1',
+    borderBottomWidth: 1,
     flexDirection: 'row',
     height: 50,
     justifyContent: 'space-between',

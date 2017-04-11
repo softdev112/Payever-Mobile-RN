@@ -1,17 +1,30 @@
 import { Component } from 'react';
+import { inject, observer } from 'mobx-react/native';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import { images, NavBar, StyleSheet, View } from 'ui';
 import { ScreenParams } from 'utils';
 
 import Chat from '../components/chat';
+import ChatSkeleton from '../components/chat/ChatSkeleton';
 import Contacts from '../components/contacts';
 import ContactsScreen from './Contacts';
+import CommunicationStore from '../../../store/communication';
 
+@inject('communication')
+@observer
 export default class Main extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
 
+  props: {
+    communication: CommunicationStore;
+  };
+
   render() {
+    const { communication } = this.props;
+    const { contactDataSource } = communication;
+
     if (!ScreenParams.isTabletLayout()) {
       return <ContactsScreen />;
     }
@@ -21,10 +34,22 @@ export default class Main extends Component {
         <NavBar.Default title="Communication" source={images.communication} />
         <View style={styles.main}>
           <Contacts style={styles.contacts} phoneView={false} />
-          <View style={styles.chat}>
+          <KeyboardAvoidingView
+            style={styles.chat}
+            contentContainerStyle={styles.chat}
+            behavior={Platform.OS === 'ios' ? 'padding' : null}
+            keyboardVerticalOffset={-170}
+          >
             <View style={styles.chat_shadow} />
-            <Chat style={styles.chat_component} />
-          </View>
+            {contactDataSource.isLoading ? (
+              <ChatSkeleton />
+            ) : (
+              <Chat
+                style={styles.chat_component}
+                currentConversationId={communication.selectedConversationId}
+              />
+            )}
+          </KeyboardAvoidingView>
         </View>
       </View>
     );
@@ -40,8 +65,6 @@ const styles = StyleSheet.create({
 
   chat_component: {
     flex: 1,
-    borderLeftColor: '$pe_color_light_gray_1',
-    borderLeftWidth: 1,
   },
 
   chat_shadow: {
@@ -64,6 +87,8 @@ const styles = StyleSheet.create({
   contacts: {
     width: 350,
     zIndex: 2,
+    borderRightColor: '$pe_color_light_gray_1',
+    borderRightWidth: 1,
   },
 
   container: {

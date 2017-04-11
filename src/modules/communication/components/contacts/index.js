@@ -24,7 +24,7 @@ export default class Contacts extends Component {
     profiles?: ProfilesStore;
   };
 
-  componentWillMount() {
+  componentDidMount() {
     const { communication, profiles } = this.props;
 
     //noinspection JSIgnoredPromiseFromCall
@@ -41,7 +41,7 @@ export default class Contacts extends Component {
       return (
         <View style={style}>
           <Loader isLoading={ds.isLoading}>
-            <ErrorBox message={ds.error} />
+            {ds.isError && <ErrorBox message={ds.error} />}
           </Loader>
         </View>
       );
