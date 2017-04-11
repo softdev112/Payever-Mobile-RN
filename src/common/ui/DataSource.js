@@ -4,8 +4,8 @@ import { computed, observable } from 'mobx';
 export default class DataSource extends ListView.DataSource {
   rootParent: DataSource;
 
-  @observable rootIsLoading = false;
-  @observable rootError = false;
+  @observable rootIsLoading: boolean = false;
+  @observable rootError: string  = '';
 
   cloneWithRowsAndSections(dataBlob, sectionIdentities, rowIdentities) {
     const newDs = super.cloneWithRowsAndSections(
@@ -39,5 +39,10 @@ export default class DataSource extends ListView.DataSource {
   set error(value) {
     const inst = this.rootParent || this;
     inst.rootError = value;
+  }
+
+  @computed get isError() {
+    const inst = this.rootParent || this;
+    return inst.rootError !== '';
   }
 }

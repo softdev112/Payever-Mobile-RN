@@ -33,7 +33,7 @@ export default class CommunicationStore {
   @observable selectedConversationId: number;
   @observable selectedConversationSettings: ConversationSettingsData;
 
-  @observable foundMessages: Array<Message>;
+  @observable foundMessages: Array<Message> = [];
   @observable contactsFilter: string = '';
 
   @observable msgsForForward: Array<Message> = [];
@@ -101,6 +101,7 @@ export default class CommunicationStore {
 
         // noinspection JSIgnoredPromiseFromCall
         this.setSelectedConversationId(conversation.id);
+        this.conversationDs.isLoading = false;
 
         return this.messengerInfo;
       })
@@ -481,9 +482,7 @@ export default class CommunicationStore {
        groupName,
        recipients,
        isAllowGroupChat
-    )).success(() => {
-      // Do not need to save locally it comeback from WebSockets
-    });
+    )).success();
   }
 
   @action

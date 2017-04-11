@@ -25,7 +25,7 @@ export default class ProfilesStore {
   contactsPaginationData: ContactsPaginationData;
 
   @observable error: string     = '';
-  @observable isLoading: string = false;
+  @observable isLoading: boolean = false;
 
   contactsDs: DataSource = new DataSource({
     rowHasChanged: (r1, r2) => r1 !== r2,
