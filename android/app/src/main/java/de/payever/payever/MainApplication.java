@@ -8,6 +8,7 @@ import io.fabric.sdk.android.Fabric;
 import de.payever.payever.reactwebviewex.ReactWebViewExPackage;
 import de.payever.payever.reactwebviewex.WebViewExActivityCallbacks;
 import com.reactnativenavigation.NavigationApplication;
+import com.zmxv.RNSound.RNSoundPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +36,8 @@ public class MainApplication extends NavigationApplication {
             new FabricPackage(),
             new ReactWebViewExPackage(),
             new RNNotificationsPackage(MainApplication.this),
-            new RNDeviceInfo()
+            new RNDeviceInfo(),
+            new RNSoundPackage()
         );
     }
 }

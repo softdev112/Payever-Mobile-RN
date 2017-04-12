@@ -4177,12 +4177,16 @@ react-native-navigation@next:
   optionalDependencies:
     react-redux "*"
 
-react-native-notifications@^1.1.8:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/react-native-notifications/-/react-native-notifications-1.1.8.tgz#012d98ff5e20a9f3a967961345cadb81c5bc2ecd"
+react-native-notifications@^1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/react-native-notifications/-/react-native-notifications-1.1.9.tgz#d582790b3451bdb63c1298a3758fd5bbef65d395"
   dependencies:
     core-js "^1.0.0"
     uuid "^2.0.3"
+
+react-native-sound@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/react-native-sound/-/react-native-sound-0.9.1.tgz#b14c1bc89ab3ce07655c152a3752355e389dc6e1"
 
 react-native-swipeable@^0.4.0:
   version "0.4.0"
