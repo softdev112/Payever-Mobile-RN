@@ -90,7 +90,6 @@ export default class Login extends Component {
                 autoCapitalize="none"
                 autoCorrect={false}
                 autoFocus
-                inputStyle={StyleSheet.flatten(styles.inputStyle)}
                 keyboardType="email-address"
                 label="Your e-mail"
                 onChangeText={text => this.setState({ username: text })}
