@@ -4,7 +4,7 @@ import { Navigator } from 'react-native-navigation';
 import { inject, observer } from 'mobx-react/native';
 import * as Animatable from 'react-native-animatable';
 import {
-  BottomDock, ErrorBox, Icon, Loader, MoveYAnimElement, StyleSheet, Text,
+  BottomDock, ErrorBox, Icon, Loader, MoveYAnimElement, StyleSheet, Text, View,
 } from 'ui';
 import { ScreenParams } from 'utils';
 
@@ -37,7 +37,8 @@ export default class Chat extends Component {
   };
 
   state: {
-    isAnimScroll: boolean;
+    showOlderMsgsLoader: boolean;
+    isInitRun: boolean;
     listHeight: number;
     listContentHeight: number;
     showForwardAnim: boolean;
@@ -47,11 +48,13 @@ export default class Chat extends Component {
   $listView: ListView;
   $thisInputElement: Footer;
   $msgForReply: Animatable.View;
+  spinnerLoader: Object;
 
   constructor(props) {
     super(props);
 
     this.state = {
+      showOlderMsgsLoader: false,
       isInitRun: true,
       listHeight: 0,
       listContentHeight: 0,
@@ -72,6 +75,9 @@ export default class Chat extends Component {
 
   componentWillUnmount() {
     this.props.communication.removeMessageForReply();
+    if (this.loaderTimer) {
+      clearTimeout(this.loaderTimer);
+    }
   }
 
   onListContentSizeChange(listContentHeight) {
@@ -85,7 +91,7 @@ export default class Chat extends Component {
         this.$listView.scrollToEnd({ animated: true });
         selectedConversation.clearNewMessageFlag();
       }
-    } else if (this.$listView) {
+    } else if (this.$listView && listHeight !== 0) {
       this.$listView.scrollTo({ x: 0, y: 0, animated: true });
     }
 
@@ -152,12 +158,21 @@ export default class Chat extends Component {
     const { communication } = this.props;
 
     if (nativeEvent.contentOffset.y <= 0) {
+      if (!this.state.showOlderMsgsLoader) {
+        this.setState({ showOlderMsgsLoader: true });
+      }
+
+      if (!this.loaderTimer) {
+        this.loaderTimer = setTimeout(() => {
+          this.setState({ showOlderMsgsLoader: false });
+          this.loaderTimer = null;
+        }, 3000);
+      }
+
       await communication.loadOlderMessages(
         communication.selectedConversationId
       );
     }
-
-    this.setState({});
   }
 
   renderMessageForForward(message) {
@@ -176,6 +191,14 @@ export default class Chat extends Component {
         message={row}
         onForwardMessage={::this.onForwardMessageStart}
       />
+    );
+  }
+
+  renderHeader() {
+    return (
+      <View style={styles.listHeader}>
+        <Loader isLoading={this.state.showOlderMsgsLoader} />
+      </View>
     );
   }
 
@@ -231,6 +254,7 @@ export default class Chat extends Component {
           dataSource={ds}
           enableEmptySections
           ref={ref => this.$listView = ref}
+          renderHeader={::this.renderHeader}
           renderRow={::this.renderRow}
           initialListSize={conversation.messages.length}
           onContentSizeChange={(w, h) => this.onListContentSizeChange(h)}
@@ -344,7 +368,7 @@ const styles = StyleSheet.create({
     maxWidth: '78%',
   },
 
-  header: {
+  listHeader: {
     paddingVertical: 5,
   },
 
