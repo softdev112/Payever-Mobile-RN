@@ -48,10 +48,9 @@ export default class Debug extends Component {
       <View style={styles.container}>
         <NavBar.Default />
         <TouchableOpacity
-          onPress={() => this.props.navigator.push({
-              screen: 'dashboard.AddNewBusiness',
-            }
-          )}
+          onPress={() => {
+             
+          }}
         >
           <Text>Add New Business</Text>
         </TouchableOpacity>

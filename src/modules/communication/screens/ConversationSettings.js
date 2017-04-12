@@ -20,13 +20,34 @@ export default class ConversationSettings extends Component {
     navigator: Navigator;
   };
 
-  componentWillMount() {
+  state: {
+    notificationOn: boolean;
+  };
+
+  constructor(props) {
+    super(props);
+
+    const { communication: { selectedConversation } } = this.props;
+    this.state = {
+      notificationOn: selectedConversation.settings.notification,
+    };
+  }
+
+  async componentWillMount() {
     const { communication } = this.props;
-    communication.getConversationSettings();
+    const { selectedConversation } = communication;
+
+    // Reload settings
+    const conversationSettings =
+      await communication.getConversationSettings(selectedConversation.id);
+    selectedConversation.setConversationSettings(conversationSettings);
+
+    this.setState({ notificationOn: conversationSettings.notification });
   }
 
   onConvNotificationPropChange(value) {
-    this.props.communication.changeConvNotificationProp(value);
+    const { communication } = this.props;
+    communication.changeConvNotificationProp(value);
   }
 
   onOfferLinkPress(offerId: number) {
@@ -57,7 +78,7 @@ export default class ConversationSettings extends Component {
     const {
       isLoading,
       error,
-      selectedConversationSettings,
+      selectedConversation: { settings },
     } = this.props.communication;
 
     return (
@@ -67,29 +88,29 @@ export default class ConversationSettings extends Component {
           <NavBar.Title title="Conversation Settings" />
         </NavBar>
         <Loader isLoading={isLoading}>
-          {error || !selectedConversationSettings ? (
+          {error || !settings ? (
             <ErrorBox message={error} />
           ) : (
             <View style={styles.userInfo}>
               <Avatar
                 style={styles.avatar}
                 lettersStyle={styles.avatarLetters}
-                avatar={selectedConversationSettings.avatar}
+                avatar={settings.avatar}
               />
               <Text style={styles.name}>
-                {selectedConversationSettings.name}
+                {settings.name}
               </Text>
               <CheckBoxPref
-                initValue={selectedConversationSettings.notification}
+                value={settings.notification}
                 title="Notifications"
                 icon="fa-bell-o"
                 onValueChange={::this.onConvNotificationPropChange}
               />
-              {selectedConversationSettings.offers.length > 0 && (
+              {settings.offers.length > 0 && (
                 <View style={styles.offersContainer}>
                   <Text style={styles.sentOffersText}>Sent Offers:</Text>
                   <ScrollView showsVerticalScrollIndicator={false}>
-                    {this.renderOffers(selectedConversationSettings.offers)}
+                    {this.renderOffers(settings.offers)}
                   </ScrollView>
                 </View>
               )}

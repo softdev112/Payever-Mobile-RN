@@ -4,6 +4,7 @@ import {
 import { apiHelper, log } from 'utils';
 import { DataSource } from 'ui';
 import { throttle } from 'lodash';
+import Sound from 'react-native-sound';
 
 import UserSettings from './models/UserSettings';
 import MessengerInfo from './models/MessengerInfo';
@@ -21,6 +22,8 @@ import type BusinessProfile from '../profiles/models/BusinessProfile';
 import type GroupMember from './models/GroupMember';
 import type Store from '../index';
 
+const sendMessage = require('./resources/sounds/send_msg.aiff');
+
 const MSGS_REQUEST_LIMIT = 30;
 
 export default class CommunicationStore {
@@ -31,7 +34,6 @@ export default class CommunicationStore {
   @observable error: string = '';
 
   @observable selectedConversationId: number;
-  @observable selectedConversationSettings: ConversationSettingsData;
 
   @observable foundMessages: Array<Message> = [];
   @observable contactsFilter: string = '';
@@ -44,8 +46,6 @@ export default class CommunicationStore {
   @observable messageForReply: Message = null;
 
   @observable selectedGroupSettings: GroupSettingsData = null;
-
-  allMsgsForConvFetched: boolean = false;
 
   store: Store;
   socket: SocketApi;
@@ -161,10 +161,12 @@ export default class CommunicationStore {
   async setSelectedConversationId(id) {
     this.selectedConversationId = id;
     if (id) {
-      const conversation = this.conversations.get(id);
+      let conversation = this.conversations.get(id);
       if (!conversation) {
         //noinspection JSIgnoredPromiseFromCall
-        await this.loadConversation(id);
+        conversation = await this.loadConversation(id);
+        const settings = await this.getConversationSettings(id);
+        conversation.setConversationSettings(settings);
       }
 
       await this.markConversationAsRead(id);
@@ -173,6 +175,7 @@ export default class CommunicationStore {
 
   @action
   async markConversationAsRead(id) {
+    if (!id) return;
     const conversation: Conversation = this.conversations.get(id);
     const unreadIds = conversation.getUnreadIds();
     if (conversation) {
@@ -240,6 +243,17 @@ export default class CommunicationStore {
     if (this.messageForReply) {
       options.replyToId = this.messageForReply.id;
       this.messageForReply = null;
+    }
+
+    const { settings } = this.selectedConversation;
+    if (settings && settings.notification) {
+      const sound = new Sound(sendMessage, (err) => {
+        if (err) {
+          log.error(err);
+        } else {
+          sound.play(() => sound.release());
+        }
+      });
     }
 
     return socket.sendMessage(options);
@@ -486,12 +500,12 @@ export default class CommunicationStore {
   }
 
   @action
-  async getConversationSettings() {
+  async getConversationSettings(id) {
     const socket = await this.store.api.messenger.getSocket();
-    apiHelper(socket.getConversationSettings(this.selectedConversationId), this)
-      .success((data) => {
-        this.selectedConversationSettings = new ConversationSettingsData(data);
-      });
+
+    return apiHelper(socket.getConversationSettings(id), this)
+      .success((data) => new ConversationSettingsData(data))
+      .promise();
   }
 
   @action
@@ -501,6 +515,7 @@ export default class CommunicationStore {
     apiHelper(socket.changeConvNotificationProp(
       this.selectedConversationId, state
     )).success();
+    this.selectedConversation.setNotificationSetting(state);
   }
 
   @action
