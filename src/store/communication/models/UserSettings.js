@@ -9,11 +9,21 @@ export default class UserSettings {
   silentPeriodStop: TimePoint;
 
   constructor(data) {
+    if (data) {
+      const { hour: fromHour, minute: fromMinute } = data.silentPeriodStart;
+      const { hour: toHour, minute: toMinute } = data.silentPeriodStop;
+
+      data.silentPeriodStart.hour = +fromHour;
+      data.silentPeriodStart.minute = +fromMinute;
+      data.silentPeriodStop.hour = +toHour;
+      data.silentPeriodStop.minute = +toMinute;
+    }
+
     Object.assign(this, data);
   }
 }
 
-type TimePoint = {
+export type TimePoint = {
   hour: number;
   minute: number;
 };

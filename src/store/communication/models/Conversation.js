@@ -1,11 +1,8 @@
 import { action, extendObservable, observable, computed } from 'mobx';
 import { debounce } from 'lodash';
-import Sound from 'react-native-sound';
-import { log } from 'utils';
+import { soundHelper } from 'utils';
 import Message from './Message';
 import ConversationSettingsData from './ConversationSettingsData';
-
-const receiveMessage = require('../resources/sounds/receive_msg.mp3');
 
 export default class Conversation {
   archived: boolean;
@@ -62,15 +59,7 @@ export default class Conversation {
     this.messages.push(message);
 
     if (this.settings && this.settings.notification && !message.own) {
-      const sound = new Sound(receiveMessage, Sound.MAIN_BUNDLE, (err) => {
-        // console.log('ssssssssssssssssssss');
-        if (err) {
-          // console.log('ssssssssssssssss', err);
-          log.error(err);
-        } else {
-          sound.play(() => sound.release());
-        }
-      });
+      soundHelper.playMsgReceive();
     }
   }
 

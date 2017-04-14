@@ -12,7 +12,7 @@ export default {
   'communication.EditMessage': require('./modules/communication/screens/EditMessage').default,
   'communication.GroupSettings': require('./modules/communication/screens/GroupSettings').default,
   'communication.Main': require('./modules/communication/screens/Main').default,
-  'communication.Settings': require('./modules/communication/screens/Settings').default,
+  'communication.GeneralSettings': require('./modules/communication/screens/GeneralSettings').default,
   'core.Debug': require('./modules/core/screens/Debug').default,
   'core.ErrorPage': require('./modules/core/screens/ErrorPage').default,
   'core.PushNotification': require('./modules/core/screens/PushNotification').default,

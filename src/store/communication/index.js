@@ -1,10 +1,9 @@
 import {
   action, autorun, computed, extendObservable, observable, ObservableMap,
 } from 'mobx';
-import { apiHelper, log } from 'utils';
+import { apiHelper, log, soundHelper } from 'utils';
 import { DataSource } from 'ui';
 import { throttle } from 'lodash';
-import Sound from 'react-native-sound';
 
 import UserSettings from './models/UserSettings';
 import MessengerInfo from './models/MessengerInfo';
@@ -21,8 +20,6 @@ import type ConversationInfo from './models/ConversationInfo';
 import type BusinessProfile from '../profiles/models/BusinessProfile';
 import type GroupMember from './models/GroupMember';
 import type Store from '../index';
-
-const sendMessage = require('./resources/sounds/send_msg.aiff');
 
 const MSGS_REQUEST_LIMIT = 30;
 
@@ -247,13 +244,7 @@ export default class CommunicationStore {
 
     const { settings } = this.selectedConversation;
     if (settings && settings.notification) {
-      const sound = new Sound(sendMessage, (err) => {
-        if (err) {
-          log.error(err);
-        } else {
-          sound.play(() => sound.release());
-        }
-      });
+      soundHelper.playMsgSent();
     }
 
     return socket.sendMessage(options);
@@ -295,14 +286,14 @@ export default class CommunicationStore {
     const { api: { messenger } } = this.store;
     const { messengerUser } = this.messengerInfo;
 
-    // save to local
     apiHelper(messenger.saveSettings(messengerUser.id, settings))
       .success(() => {
-        // Save changes to local
-        extendObservable(this.messengerInfo, {
-          userSettings: new UserSettings(settings),
-        });
-      });
+        const userSettings = new UserSettings(settings);
+        soundHelper.setUserSettings(userSettings);
+
+        extendObservable(this.messengerInfo, { userSettings });
+      })
+      .error(log.error);
   }
 
   @action

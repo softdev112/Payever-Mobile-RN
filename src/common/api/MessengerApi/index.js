@@ -120,7 +120,7 @@ export default class MessengerApi {
     });
   }
 
-  async sendMessageWithMedias(
+  sendMessageWithMedias(
     userId: number,
     conversationId: number,
     recipients: string,
@@ -141,7 +141,7 @@ export default class MessengerApi {
     });
   }
 
-  async sendInviteMessageFromSupport(
+  sendInviteMessageFromSupport(
     userId: number,
     messengerId: number
   ): Promise<MessageResp> {
@@ -154,7 +154,7 @@ export default class MessengerApi {
     });
   }
 
-  async sendVoiceMessage(userId: number, file: string): Promise<MessageResp> {
+  sendVoiceMessage(userId: number, file: string): Promise<MessageResp> {
     return this.client.post('/api/rest/v1/messenger/send/voice-message', {
       format: 'json',
       data: {
@@ -173,7 +173,7 @@ export default class MessengerApi {
     const data = pickBy(settings, val => val !== false);
     delete data.id;
 
-    return this.client.post('/api/rest/v1/messenger/user/settings', {
+    return await this.client.post('/api/rest/v1/messenger/user/settings', {
       userId,
       user_settings: data,
     });

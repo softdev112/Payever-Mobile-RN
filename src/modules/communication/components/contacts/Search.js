@@ -39,7 +39,7 @@ export default class Search extends Component {
 
   onSettingsPress() {
     this.context.navigator.push({
-      screen: 'communication.Settings',
+      screen: 'communication.GeneralSettings',
     });
   }
 

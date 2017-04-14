@@ -3,8 +3,11 @@ import { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Html, NavBar, StyleSheet, Text, View, Button } from 'ui';
 import { Navigator, Navigation } from 'react-native-navigation';
+import { soundHelper } from 'utils';
 import { observer, inject } from 'mobx-react/native';
 import AuthStore from '../../../store/auth';
+
+const testSound = require('../../../store/communication/resources/sounds/receive_msg.mp3');
 
 @inject('auth')
 @observer
@@ -49,7 +52,9 @@ export default class Debug extends Component {
         <NavBar.Default />
         <TouchableOpacity
           onPress={() => {
-             
+            soundHelper.playMsgSent();
+           //soundHelper.playMsgReceive();
+            //soundHelper.playNotification();
           }}
         >
           <Text>Add New Business</Text>
