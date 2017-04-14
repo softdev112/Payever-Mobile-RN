@@ -1,4 +1,5 @@
 import { computed, extendObservable, observable } from 'mobx';
+import { soundHelper } from 'utils';
 
 import ConversationInfo from './ConversationInfo';
 import UserSettings from './UserSettings';
@@ -32,6 +33,7 @@ export default class MessengerInfo {
     data.messengerUser.avatar = new Avatar(data.messengerUser.avatar);
 
     data.userSettings = new UserSettings(data.userSettings);
+    soundHelper.setUserSettings(data.userSettings);
 
     extendObservable(this, data);
   }

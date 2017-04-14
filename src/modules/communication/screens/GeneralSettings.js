@@ -3,7 +3,6 @@ import { ScrollView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { NavBar, StyleSheet, View } from 'ui';
 import type { Navigator } from 'react-native-navigation';
-import { log } from 'utils';
 
 import type CommunicationStore from '../../../store/communication';
 import type UserSettings
@@ -15,7 +14,7 @@ import SwitchableTimePeriodPref
 
 @inject('communication')
 @observer
-export default class Settings extends Component {
+export default class GeneralSettings extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
@@ -41,7 +40,7 @@ export default class Settings extends Component {
 
   onSavePress() {
     const { settings } = this.state;
-    this.props.communication.saveUserSettings(settings).catch(log.error);
+    this.props.communication.saveUserSettings(settings);
     this.props.navigator.pop();
   }
 
@@ -56,12 +55,6 @@ export default class Settings extends Component {
           <NavBar.Button title="Save" onPress={::this.onSavePress} />
         </NavBar>
         <ScrollView contentContainerStyle={styles.settings}>
-          <CheckBoxPref
-            settings={settings}
-            prefName="notificationDesktop"
-            title="Desktop Notifications"
-            icon="fa-desktop"
-          />
           <CheckBoxPref
             settings={settings}
             prefName="notificationPreview"
