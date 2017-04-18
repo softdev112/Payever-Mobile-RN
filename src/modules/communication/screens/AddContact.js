@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { Navigator } from 'react-native-navigation';
-import { FlatTextInput, NavBar, StyleSheet, View } from 'ui';
+import { Icon, FlatTextInput, NavBar, StyleSheet, View } from 'ui';
 
 import AddContactBlock from '../components/contacts/AddContactBlock';
 import CommunicationStore from '../../../store/communication';
@@ -21,26 +21,48 @@ export default class AddContact extends Component {
   $messageTextInput: FlatTextInput;
 
   state: {
-    message: string;
+    messageText: string;
+    messageHtml: string;
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      message: '',
+      messageText: '',
+      messageHtml: '',
     };
   }
 
+  onMessageEdited(messageHtml: string = '') {
+    // Remove all html tags
+    const messageText = messageHtml.replace(/<(.|\n)*?>/g, '');
+    this.setState({ messageText, messageHtml  });
+  }
+
+  onOpenMessageEditor() {
+    const { messageHtml, messageText } = this.state;
+
+    this.props.navigator.push({
+      screen: 'communication.EditMessage',
+      animated: true,
+      passProps: {
+        message: messageHtml || messageText,
+        onSave: this.onMessageEdited.bind(this),
+        fullEditorMode: true,
+      },
+    });
+  }
+
   onAddContacts() {
-    const { message } = this.state;
+    const { messageHtml, messageText } = this.state;
     const { communication, navigator } = this.props;
-    if (!message) {
+    if (!messageText) {
       this.$messageTextInput.shakeElementAndSetFocus();
       return;
     }
 
-    communication.sendInviteMsgToContacts(message);
+    communication.sendInviteMsgToContacts(messageHtml || messageText);
     navigator.pop({ animated: true });
   }
 
@@ -53,12 +75,19 @@ export default class AddContact extends Component {
           <NavBar.Button title="Send" onPress={::this.onAddContacts} />
         </NavBar>
         <View style={styles.content}>
-          <FlatTextInput
-            ref={ref => this.$messageTextInput = ref}
-            placeholder="Message"
-            onChangeText={text => this.setState({ message: text })}
-            value={this.state.message}
-          />
+          <View style={styles.messageRow}>
+            <FlatTextInput
+              ref={ref => this.$messageTextInput = ref}
+              placeholder="Message"
+              onChangeText={text => this.setState({ messageText: text })}
+              value={this.state.messageText}
+            />
+            <Icon
+              onPress={::this.onOpenMessageEditor}
+              style={styles.actionIcon}
+              source="icon-edit-16"
+            />
+          </View>
           <AddContactBlock
             style={styles.addContactBlock}
             bottomDockStyle={styles.bottomDockStyle}
@@ -77,6 +106,16 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 15,
+  },
+
+  messageRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  actionIcon: {
+    fontSize: 24,
   },
 
   addContactBlock: {

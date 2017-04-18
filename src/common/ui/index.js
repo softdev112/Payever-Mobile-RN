@@ -30,3 +30,4 @@ export TextInput from './TextInput';
 export TextButton from './TextButton';
 export SpinnerButton from './SpinnerButton';
 export WebView from './WebView';
+export ZssRichTextEditor from './ZssRichTextEditor';

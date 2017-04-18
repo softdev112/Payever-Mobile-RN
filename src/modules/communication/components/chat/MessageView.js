@@ -63,8 +63,15 @@ export default class MessageView extends Component {
       animated: true,
       passProps: {
         message,
+        onSave: this.onSendEditedMessage.bind(this),
+        fullEditorMode: false,
       },
     });
+  }
+
+  onSendEditedMessage(messageText) {
+    const { communication, message } = this.props;
+    communication.editMessage(message.id, messageText);
   }
 
   onReplyToMessage() {

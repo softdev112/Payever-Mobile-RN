@@ -20,7 +20,6 @@ public class MainApplication extends NavigationApplication {
     public void onCreate() {
         super.onCreate();
         setActivityCallbacks(new WebViewExActivityCallbacks());
-
         Fabric.with(this, new Crashlytics());
     }
 

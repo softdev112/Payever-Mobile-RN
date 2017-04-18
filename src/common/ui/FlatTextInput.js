@@ -68,6 +68,7 @@ export default class FlatTextInput extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
   },
