@@ -149,9 +149,8 @@ const styles = StyleSheet.create({
 
   grid: {
     alignSelf: 'center',
-    justifyContent: 'flex-start',
-    paddingTop: 20,
-    paddingBottom: 20,
+    justifyContent: 'center',
+    paddingVertical: 20,
   },
 
   gridWrapper: {

@@ -51,11 +51,9 @@ export default class Debug extends Component {
       <View style={styles.container}>
         <NavBar.Default />
         <TouchableOpacity
-          onPress={() => {
-            soundHelper.playMsgSent();
-           //soundHelper.playMsgReceive();
-            //soundHelper.playNotification();
-          }}
+          onPress={() => { this.props.navigator.push({
+            screen: 'communication.EditMessage',
+          })}}
         >
           <Text>Add New Business</Text>
         </TouchableOpacity>

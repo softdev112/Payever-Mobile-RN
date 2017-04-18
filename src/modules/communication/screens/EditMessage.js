@@ -1,51 +1,38 @@
 import { Component } from 'react';
-import { KeyboardAvoidingView, TextInput, Platform } from 'react-native';
-import { inject, observer } from 'mobx-react/native';
 import { Navigator } from 'react-native-navigation';
-import { NavBar, StyleSheet, View } from 'ui';
+import { NavBar, StyleSheet, View, ZssRichTextEditor } from 'ui';
 
 import type Message from '../../../store/communication/models/Message';
-import type CommunicationStore from '../../../store/communication';
 
-@inject('communication')
-@observer
 export default class EditMessage extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
 
   props: {
-    communication: CommunicationStore;
-    message: Message;
+    message: Message | string;
     navigator: Navigator;
+    fullEditorMode: boolean;
+    onSave: (message: string) => void;
   };
 
-  state: {
-    text: string;
-  };
+  $richEditor: ZssRichTextEditor;
 
-  $textInput: TextInput;
+  async onSaveMessage() {
+    const { onSave, navigator } = this.props;
 
-  constructor(props) {
-    super(props);
+    if (onSave) {
+      const messageHtml = await this.$richEditor.getContentHtml();
+      onSave(messageHtml);
+    }
 
-    this.state = {
-      text: props.message.editBody,
-    };
-  }
-
-  componentDidMount() {
-    // To avoid blinking while screen appearing animation is going on
-    setTimeout(() => this.$textInput && this.$textInput.focus(), 600);
-  }
-
-  onSaveMessage() {
-    const { communication, message, navigator } = this.props;
-    communication.editMessage(message.id, this.state.text);
     navigator.pop({ animated: true });
   }
 
   render() {
+    const { fullEditorMode, message } = this.props;
+    const initMsgValue = typeof message === 'string' ? message : message.body;
+
     return (
       <View style={styles.container}>
         <NavBar popup>
@@ -53,18 +40,13 @@ export default class EditMessage extends Component {
           <NavBar.Title title="Edit Message" />
           <NavBar.Button title="Save" onPress={::this.onSaveMessage} />
         </NavBar>
-        <KeyboardAvoidingView
-          style={styles.content}
-          behavior={Platform.OS === 'ios' ? 'padding' : null}
-        >
-          <TextInput
-            multiline
-            style={styles.textInput}
-            ref={ref => this.$textInput = ref}
-            onChangeText={text => this.setState({ text })}
-            value={this.state.text}
-          />
-        </KeyboardAvoidingView>
+        <ZssRichTextEditor
+          ref={ref => this.$richEditor = ref}
+          style={styles.richText}
+          hiddenTitle
+          initialContentHTML={initMsgValue || ' '}
+          showToolbar={fullEditorMode}
+        />
       </View>
     );
   }

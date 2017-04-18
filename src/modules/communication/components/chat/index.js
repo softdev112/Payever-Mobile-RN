@@ -156,9 +156,11 @@ export default class Chat extends Component {
 
   async onScroll({ nativeEvent }) {
     const { communication } = this.props;
+    const { selectedConversation } = communication;
 
     if (nativeEvent.contentOffset.y <= 0) {
-      if (!this.state.showOlderMsgsLoader) {
+      if (!this.state.showOlderMsgsLoader
+        && !selectedConversation.allMessagesFetched) {
         this.setState({ showOlderMsgsLoader: true });
       }
 
