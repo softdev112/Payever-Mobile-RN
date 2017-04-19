@@ -1,27 +1,21 @@
 import { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { observer, inject } from 'mobx-react/native';
 import { Icon, View, Text, StyleSheet } from 'ui';
 import { Navigator } from 'react-native-navigation';
 
 import SvgIconsShow from './SvgIconsShow';
-import type { Config } from '../../../../config';
 
-@inject('config')
-@observer
 export default class LaunchScreen extends Component {
   static navigatorStyle = { navBarHidden: true };
 
   props: {
     navigator: Navigator;
-    config: Config;
   };
 
   onCreateAccountPress() {
-    const { config, navigator } = this.props;
-    navigator.push({
-      screen: 'core.WebView',
-      passProps: { url: config.siteUrl + '/register' },
+    this.props.navigator.push({
+      screen: 'auth.Register',
+      animated: true,
     });
   }
 
@@ -37,16 +31,18 @@ export default class LaunchScreen extends Component {
       <View style={styles.container}>
         <SvgIconsShow style={styles.animContainer} />
         <View style={styles.contentContainer}>
-          <Text style={styles.welcomeText}>Welcome to payever</Text>
-          <Text style={styles.subWelcomeText}>
-            Start, run and grow your business or get personal offers
-          </Text>
+          <View style={styles.textContainer}>
+            <Text style={styles.welcomeText}>Welcome to payever</Text>
+            <Text style={styles.subWelcomeText}>
+              Start, run and grow your business or get personal offers
+            </Text>
+          </View>
           <View style={styles.signInSignUpCont}>
             <TouchableOpacity onPress={::this.onSignInPress}>
               <View style={styles.authBtn}>
                 <Text style={styles.authBtnText}>Sign In</Text>
                 <Icon
-                  style={styles.authBtnText}
+                  style={styles.authBtnIcon}
                   source="icon-arrow-right-ios-16"
                 />
               </View>
@@ -56,7 +52,7 @@ export default class LaunchScreen extends Component {
               <View style={styles.authBtn}>
                 <Text style={styles.authBtnText}>Create Account</Text>
                 <Icon
-                  style={styles.authBtnText}
+                  style={styles.authBtnIcon}
                   source="icon-arrow-right-ios-16"
                 />
               </View>
@@ -82,7 +78,10 @@ const styles = StyleSheet.create({
 
   contentContainer: {
     flex: 40,
-    paddingHorizontal: 10,
+  },
+
+  textContainer: {
+    paddingHorizontal: 16,
   },
 
   welcomeText: {
@@ -107,15 +106,15 @@ const styles = StyleSheet.create({
   signInSignUpCont: {
     flex: 1,
     justifyContent: 'flex-end',
-    marginBottom: 20,
   },
 
   authBtn: {
-    height: 50,
+    height: 45,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 35,
+    paddingLeft: 20,
+    paddingRight: 10,
   },
 
   authBtnText: {
@@ -125,9 +124,15 @@ const styles = StyleSheet.create({
 
   },
 
+  authBtnIcon: {
+    fontSize: '1.5rem',
+    fontWeight: '300',
+    color: '$pe_color_light_gray_1',
+  },
+
   smallDivider: {
     height: 1,
     backgroundColor: '$pe_color_apple_div',
-    marginHorizontal: 35,
+    marginLeft: 20,
   },
 });

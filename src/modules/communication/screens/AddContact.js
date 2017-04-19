@@ -77,6 +77,7 @@ export default class AddContact extends Component {
         <View style={styles.content}>
           <View style={styles.messageRow}>
             <FlatTextInput
+              style={styles.messageInput}
               ref={ref => this.$messageTextInput = ref}
               placeholder="Message"
               onChangeText={text => this.setState({ messageText: text })}
@@ -112,6 +113,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+
+  messageInput: {
+    flex: 1,
   },
 
   actionIcon: {

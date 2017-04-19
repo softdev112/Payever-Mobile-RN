@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
   },
 
   buttonDisabled: {
-    opacity: 0.4,
   },
 
   text: {
@@ -100,9 +99,11 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     padding: 8,
     textAlign: 'center',
+    fontSize: 16,
   },
 
   textDisabled: {
-    color: '#fff',
+    color: 'white',
+    fontSize: 16,
   },
 });

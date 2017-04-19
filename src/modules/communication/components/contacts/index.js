@@ -72,7 +72,7 @@ export default class Contacts extends Component {
 
 const styles = StyleSheet.create({
   contentContainer: {
-    paddingHorizontal: 37,
+    paddingHorizontal: 10,
     paddingVertical: 10,
   },
 });

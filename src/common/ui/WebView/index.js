@@ -55,6 +55,7 @@ export default class WebView extends Component {
     source: Source;
     style: Object | number;
     topMarginIos: boolean;
+    contentInset?: Object;
   };
 
   state: {
@@ -229,7 +230,7 @@ export default class WebView extends Component {
   }
 
   render() {
-    const { config, injectJs, style, topMarginIos } = this.props;
+    const { config, injectJs, style, contentInset, topMarginIos } = this.props;
     const { error, showLoader } = this.state;
 
     if (error) {
@@ -260,6 +261,7 @@ export default class WebView extends Component {
           renderError={this.renderError}
           source={source}
           startInLoadingState={false}
+          contentInset={contentInset}
         />
         {showLoader && <WebViewLoader />}
       </View>

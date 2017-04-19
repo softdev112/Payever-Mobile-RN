@@ -13,9 +13,9 @@ const ICON_SHOW_TIME = 450;
 const ICON_CHANGE_DURATION = 700;
 const START_PAYEVER_ICON_DURATION = 3000;
 
-const DEFAULT_PATH_X = 15;
-const DEFAULT_PATH_Y = 15;
-const DEFAULT_SCALE = 3;
+const DEFAULT_PATH_X = 52;
+const DEFAULT_PATH_Y = 40;
+const DEFAULT_SCALE = 2;
 
 export default class SvgIconsShow extends Component {
   props: {
