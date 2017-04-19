@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
   },
 
   list: {
-    paddingHorizontal: 28,
+    paddingHorizontal: 16,
     paddingVertical: 10,
   },
 

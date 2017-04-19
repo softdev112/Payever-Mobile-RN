@@ -63,7 +63,11 @@ export default class IconText extends Component {
       >
         <View style={buttonStyles}>
           <View style={flatStyle}>
-            <Image style={imgStyle} source={source} />
+            <Image
+              style={imgStyle}
+              source={source}
+              resizeMode="contain"
+            />
           </View>
           {textNode}
         </View>

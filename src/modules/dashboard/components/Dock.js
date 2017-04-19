@@ -1,5 +1,7 @@
 import { Component } from 'react';
+import { ScrollView } from 'react-native';
 import { IconText, StyleSheet, View } from 'ui';
+import { ScreenParams } from 'utils';
 
 import type AppItem from '../../../store/profiles/models/AppItem';
 
@@ -13,6 +15,23 @@ export default class Dock extends Component {
     onAppClick: (item: AppItem) => any;
     showApps?: boolean;
   };
+
+  state: {
+    btnsOffset: number;
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      btnsOffset: 0,
+    };
+  }
+
+  onContentSizeChanges(width) {
+    const btnsOffset = (width - ScreenParams.width) / 2;
+    this.setState({ btnsOffset });
+  }
 
   renderIcon(item: AppItem) {
     const { showApps, onAppClick } = this.props;
@@ -42,9 +61,18 @@ export default class Dock extends Component {
 
   render() {
     const { apps } = this.props;
+    const { btnsOffset } = this.state;
+
     return (
-      <View style={styles.container}>
-        {apps.map(::this.renderIcon)}
+      <View style={[styles.container, { paddingLeft: -btnsOffset }]}>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          scrollEnabled={btnsOffset > 0}
+          onContentSizeChange={::this.onContentSizeChanges}
+        >
+          {apps.map(::this.renderIcon)}
+        </ScrollView>
       </View>
     );
   }
@@ -57,7 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 2,
-    height: 80,
+    height: 55,
     backgroundColor: '#fff',
     shadowColor: 'rgba(0, 0, 0, .06)',
     shadowOpacity: 1,
@@ -67,68 +95,56 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    width: 63,
+    width: 80,
   },
 
   image: {
     width: 40,
-    height: 40,
+    height: 35,
   },
 
   image_shadow: {},
 
   title: {
     color: '$pe_color_gray_2',
-    fontSize: 10,
+    fontSize: 11,
+    padding: 0,
     fontWeight: '400',
-    paddingTop: 5,
   },
 
   '@media (min-width: 400)': {
-    container: {
-      height: 105,
-    },
-
     icon: {
-      width: 70,
+      width: 90,
     },
 
     image: {
-      width: 60,
-      height: 60,
+      width: 40,
+      height: 35,
     },
 
     title: {
       fontSize: 12,
+      padding: 0,
     },
   },
 
   '@media (min-width: 550)': {
     container: {
-      height: 135,
+      height: 62,
     },
 
     icon: {
-      width: 105,
+      width: 110,
     },
 
     image: {
-      width: 80,
-      height: 80,
-    },
-
-    image_shadow: {
-      borderRadius: 18,
-      elevation: 4,
-      shadowColor: 'rgba(0, 0, 0, .1)',
-      shadowOffset: { width: 0, height: 0 },
-      shadowOpacity: 1,
-      shadowRadius: 14,
+      width: 45,
+      height: 40,
     },
 
     title: {
-      fontSize: 15,
-      backgroundColor: 'transparent',
+      fontSize: 14,
+      padding: 0,
     },
   },
 });

@@ -22,6 +22,7 @@ export default class Login extends Component {
     config: Config;
   };
 
+  $usernameInput: TextInput;
   $password: TextInput;
 
   state: {
@@ -36,6 +37,16 @@ export default class Login extends Component {
       username: '',
       password: '',
     };
+  }
+
+  componentDidMount() {
+    // To avoid blinking when keyboard and screen animation
+    // go simultaneously
+    setTimeout(() => {
+      if (this.$usernameInput) {
+        this.$usernameInput.focus();
+      }
+    }, 550);
   }
 
   async onSignIn() {
@@ -87,9 +98,9 @@ export default class Login extends Component {
             />
             <View>
               <TextInput
+                ref={ref => this.$usernameInput = ref}
                 autoCapitalize="none"
                 autoCorrect={false}
-                autoFocus
                 keyboardType="email-address"
                 label="Your e-mail"
                 onChangeText={text => this.setState({ username: text })}
@@ -100,7 +111,7 @@ export default class Login extends Component {
             </View>
             <View>
               <TextInput
-                ref={f => this.$password = f}
+                ref={ref => this.$password = ref}
                 label="Your password"
                 secureTextEntry
                 returnKeyType="send"

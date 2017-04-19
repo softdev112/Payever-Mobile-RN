@@ -1,4 +1,4 @@
-git_url "git@github.com:payeverworldwide/payever-mobile-match.git"
+git_url "http://gitlab.devpayever.com/mobile/payever-mobile-match.git"
 
 type "adhoc" # The default type, can be: appstore, adhoc or development
 

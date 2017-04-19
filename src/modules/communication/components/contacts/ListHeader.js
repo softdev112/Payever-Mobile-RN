@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
 
   title_text: {
     color: '#959ba3',
-    fontSize: 10,
+    fontSize: 14,
     fontWeight: '200',
   },
 });

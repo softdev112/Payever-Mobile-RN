@@ -19,6 +19,7 @@ export default class ZssRichTextEditor extends Component {
     contentInset: {},
     style: {},
     showToolbar: true,
+    contentPlaceholder: 'Enter Message',
   };
 
   static Toolbar = RichTextToolbar;
@@ -178,7 +179,7 @@ export default class ZssRichTextEditor extends Component {
           this.setContentPlaceholder(contentPlaceholder);
 
           // To avoid undefined the '' passing
-          this.setTitleHTML(initialTitleHTML || ' ');
+          this.setTitleHTML(initialTitleHTML);
           this.setContentHTML(initialContentHTML);
 
           /* eslint-disable no-unused-expressions */
