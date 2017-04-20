@@ -75,7 +75,7 @@ export default class AuthStore {
       })
       .error((e) => {
         log.warn('Could not refresh token', e);
-        showScreen('auth.Login');
+        showScreen('core.LaunchScreen');
       })
       .promise();
   }

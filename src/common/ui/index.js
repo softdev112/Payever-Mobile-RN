@@ -31,3 +31,4 @@ export TextButton from './TextButton';
 export SpinnerButton from './SpinnerButton';
 export WebView from './WebView';
 export ZssRichTextEditor from './ZssRichTextEditor';
+export ValidationInformer from './ValidationInformer';
