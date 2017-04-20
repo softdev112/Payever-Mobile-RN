@@ -8,7 +8,7 @@ import countries from './data/countries.json';
 import legalForms from './data/legal-forms.json';
 
 const COLLAPSED_HEIGHT = 50;
-const EXPANDED_HEIGHT = 250;
+const EXPANDED_HEIGHT = 260;
 
 export default class FlatPicker extends Component {
   static defaultProps = {
@@ -23,6 +23,7 @@ export default class FlatPicker extends Component {
     values?: Array<any>;
     labels?: Array<any>;
     onValueChange?: (value: string) => void;
+    renderValidator?: Function;
   };
 
   state: {
@@ -103,6 +104,9 @@ export default class FlatPicker extends Component {
 
   async shakeElementAndSetFocus() {
     await this.$animContainer.shake(300);
+    if (this.state.collapsed) {
+      this.onExpand();
+    }
   }
 
   renderPickerOptions() {
@@ -153,6 +157,16 @@ export default class FlatPicker extends Component {
     });
   }
 
+  renderValidator() {
+    const { renderValidator } = this.props;
+
+    if (renderValidator) {
+      return renderValidator();
+    }
+
+    return null;
+  }
+
   render() {
     const { placeholderStyle, style } = this.props;
     const { collapsed, value } = this.state;
@@ -167,6 +181,7 @@ export default class FlatPicker extends Component {
         style={[styles.container, style]}
         ref={ref => this.$animContainer = ref}
       >
+        {!collapsed && this.renderValidator()}
         {collapsed ? (
           <TouchableWithoutFeedback onPress={this.onExpand}>
             <View style={styles.collapsedView}>

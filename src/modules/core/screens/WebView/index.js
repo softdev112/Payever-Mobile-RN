@@ -14,7 +14,7 @@ import type { Config } from '../../../../config';
 const BACK_ON_URLS = [
   { urlMask: '/home',    screen: 'dashboard.Dashboard', authRequired: true },
   { urlMask: '/private', screen: 'dashboard.Private',   authRequired: true },
-  { urlMask: '/login',   screen: 'auth.Login' },
+  { urlMask: '/login',   screen: 'core.LaunchScreen' },
 ];
 
 @inject('auth', 'config')
