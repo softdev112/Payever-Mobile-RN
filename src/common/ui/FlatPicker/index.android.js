@@ -17,6 +17,7 @@ export default class FlatPicker extends Component {
     values?: Array<any>;
     labels?: Array<any>;
     onValueChange?: (value: string) => void;
+    renderValidator?: Function;
   };
 
   state: {
@@ -45,6 +46,16 @@ export default class FlatPicker extends Component {
 
   async shakeElementAndSetFocus() {
     await this.$animContainer.shake(300);
+  }
+
+  renderValidator() {
+    const { renderValidator } = this.props;
+
+    if (renderValidator) {
+      return renderValidator();
+    }
+
+    return null;
   }
 
   renderPickerOptions() {
@@ -105,6 +116,7 @@ export default class FlatPicker extends Component {
         style={[styles.container, style]}
         ref={ref => this.$animContainer = ref}
       >
+        {this.renderValidator()}
         <Picker
           selectedValue={this.state.value}
           onValueChange={::this.onPickerValueChange}
@@ -119,8 +131,9 @@ export default class FlatPicker extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
-    height: 50,
+    height: 65,
   },
 });

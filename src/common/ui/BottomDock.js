@@ -59,6 +59,9 @@ const styles = StyleSheet.create({
     '@media (max-height: 620):': {
       top: '$maxHeight - 80',
     },
+    '@media (max-height: 620) && android:': {
+      top: '$maxHeight - 95',
+    },
     left: 0,
     right: 0,
     backgroundColor: 'transparent',

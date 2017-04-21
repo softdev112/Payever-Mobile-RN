@@ -97,7 +97,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 25
     buildToolsVersion '25.0.0'
 
     defaultConfig {
@@ -172,4 +172,9 @@ dependencies {
 task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
+}
+
+project.afterEvaluate {
+    apply from: '../../src/common/ui/ZssRichTextEditor/htmlCopy.gradle';
+    copyEditorHtmlToAppAssets(file('../../src/common/ui/ZssRichTextEditor'))
 }

@@ -96,6 +96,9 @@ const styles = StyleSheet.create({
 
   icon: {
     width: 80,
+    '@media android': {
+      width: 85,
+    },
   },
 
   image: {
