@@ -707,6 +707,9 @@ const styles = StyleSheet.create({
 
   webView: {
     width: Dimensions.get('window').width,
+    paddingTop: 5,
+    borderColor: 'red',
+    borderWidth: 2,
   },
 
   modal: {

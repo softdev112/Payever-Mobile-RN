@@ -74,7 +74,7 @@ export default class ValidationInformer extends Component {
         duration={300}
       >
         <Animatable.Text
-          style={[currentValidatorState.textStyle]}
+          style={currentValidatorState.textStyle}
           ref={ref => this.$animText = ref}
         >
           {currentValidatorState.message}
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
 
   neutralText: {
-    color: '$pe_color_dark_gray',
+    color: '$pe_color_twitter',
     fontSize: 12,
   },
 

@@ -57,9 +57,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  content: {
+  richText: {
     flex: 1,
-    padding: 8,
+    paddingTop: 8,
   },
 
   textInput: {

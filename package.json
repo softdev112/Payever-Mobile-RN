@@ -39,7 +39,7 @@
     "react-native-logging": "0.0.6",
     "react-native-md-textinput": "^2.0.4",
     "react-native-modal-datetime-picker": "^3.0.1",
-    "react-native-navigation": "next",
+    "react-native-navigation": "2.0.0",
     "react-native-notifications": "^1.1.9",
     "react-native-sound": "^0.9.1",
     "react-native-swipeable": "^0.4.0",
