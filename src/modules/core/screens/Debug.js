@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, WebView } from 'react-native';
 import { Html, NavBar, StyleSheet, Text, View, Button } from 'ui';
 import { Navigator, Navigation } from 'react-native-navigation';
 import { soundHelper } from 'utils';
@@ -50,30 +50,14 @@ export default class Debug extends Component {
     return (
       <View style={styles.container}>
         <NavBar.Default />
-        <TouchableOpacity
-          onPress={() => { this.props.navigator.push({
-            screen: 'communication.EditMessage',
-          })}}
-        >
-          <Text>Add New Business</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => { this.props.navigator.push({
-            screen: 'pos.Terminal',
-            title: 'Terminal',
-            passProps: {
-              url: 'https://showroom9.payever.de/selfterminal/new/media-shop-1/pos/xxxlutz',
-            },
-          })}}
-        >
-          <Text>Terminal</Text>
-        </TouchableOpacity>
-        <View style={styles.wrapper}>
-          <Html source={html} />
-        </View>
-        {inspectObj && <Text>{JSON.stringify(inspectObj)}</Text>}
-
-        <Button title="Null refreshToken" onPress={::this.nullRefreshToken}/>
+        <WebView
+          contentInset={{ top: 20, left: 0, bottom: 0, right: 0 }}
+          source={{ uri: 'https://www.getpayever.com'}}
+          javaScriptEnabled
+          domStorageEnabled
+          startInLoadingState={false}
+          bounces={false}
+        />
       </View>
     )
   }
