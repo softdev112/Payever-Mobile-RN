@@ -134,15 +134,13 @@ export default class Dashboard extends Component {
               { transform: [{ scale: appearAnimation }] },
             ]}
           >
-            {showApps && (
+            {showApps ? (
               <GridView
                 dataSource={dataSourceTop}
                 renderRow={::this.renderIcon}
                 contentContainerStyle={styles.apps}
               />
-            )}
-
-            {!showApps && (
+            ) : (
               <View style={styles.cards_container}>
                 <DashboardTitle
                   title1={businessName}

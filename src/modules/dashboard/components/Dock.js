@@ -37,8 +37,10 @@ export default class Dock extends Component {
     const { showApps, onAppClick } = this.props;
 
     let title = item.name;
+    const logoSource = item.logoSource;
     if (item.label === 'dashboard' && showApps) {
       title = 'Home';
+      logoSource.uri = logoSource.uri.replace('dashboard.png', 'home.png');
     }
 
     const imageStyles = [
@@ -53,7 +55,7 @@ export default class Dock extends Component {
         imageStyle={imageStyles}
         textStyle={styles.title}
         onPress={() => onAppClick(item)}
-        source={item.logoSource}
+        source={logoSource}
         title={title}
       />
     );
