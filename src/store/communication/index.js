@@ -188,7 +188,9 @@ export default class CommunicationStore {
 
     if (unreadIds.length > 0) {
       const socket = await this.store.api.messenger.getSocket();
-      await socket.updateMessagesReadStatus(unreadIds);
+      await apiHelper(socket.updateMessagesReadStatus(unreadIds))
+        .error(log.error)
+        .promise();
     }
   }
 

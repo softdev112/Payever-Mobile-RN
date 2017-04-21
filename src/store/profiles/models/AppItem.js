@@ -45,6 +45,7 @@ export default class AppItem {
     if (typeof this.image === 'string') {
       return { uri: this.image };
     }
+
     return this.image;
   }
 

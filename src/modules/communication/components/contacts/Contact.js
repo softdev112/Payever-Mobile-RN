@@ -2,7 +2,7 @@ import { Component, PropTypes } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { inject, observer, Observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
-import { StyleSheet, Text, View } from 'ui';
+import { Icon, StyleSheet, Text, View } from 'ui';
 
 import OnlineStatus from '../OnlineStatus';
 import CountBadge from './CountBadge';
@@ -92,9 +92,16 @@ export default class Contact extends Component {
       >
         <Avatar avatar={item.avatar} />
         <View style={styles.contactInfo}>
-          <View style={styles.nameBadgeGroup}>
-            <Text style={styles.title} numberOfLines={1}>{item.name}</Text>
-            <CountBadge value={item.unreadCount} />
+          <View style={styles.nameAndStatusRow}>
+            <View style={styles.nameBadgeGroup}>
+              <Text style={styles.title} numberOfLines={1}>{item.name}</Text>
+              <CountBadge value={item.unreadCount} />
+            </View>
+            <Icon
+              style={styles.groupTypeIcon}
+              source={item.type === 'chat-group'
+                ? 'icon-settings-16' : 'icon-pencil-24'}
+            />
           </View>
           <Text numberOfLines={1}>{latestMessage}</Text>
         </View>
@@ -203,7 +210,7 @@ const styles = StyleSheet.create({
 
   contactInfo: {
     flex: 1,
-    paddingHorizontal: 8,
+    paddingLeft: 8,
     justifyContent: 'space-around',
   },
 
@@ -215,7 +222,12 @@ const styles = StyleSheet.create({
   },
 
   nameBadgeGroup: {
+    flex: 1,
     flexDirection: 'row',
+  },
+
+  groupTypeIcon: {
+    fontSize: 16,
   },
 
   title: {
