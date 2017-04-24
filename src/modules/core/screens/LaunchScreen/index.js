@@ -38,6 +38,7 @@ export default class LaunchScreen extends Component {
             </Text>
           </View>
           <View style={styles.signInSignUpCont}>
+            <View style={styles.smallDivider} />
             <TouchableOpacity onPress={::this.onSignInPress}>
               <View style={styles.authBtn}>
                 <Text style={styles.authBtnText}>Sign In</Text>
@@ -118,14 +119,14 @@ const styles = StyleSheet.create({
   },
 
   authBtnText: {
-    fontSize: '2rem',
+    fontSize: 16,
     fontWeight: '400',
     color: '$pe_color_blue',
 
   },
 
   authBtnIcon: {
-    fontSize: '1.5rem',
+    fontSize: 16,
     fontWeight: '300',
     color: '$pe_color_light_gray_1',
   },

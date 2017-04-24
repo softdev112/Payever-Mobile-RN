@@ -10,7 +10,6 @@ import { ScreenParams } from 'utils';
 
 import Footer from './Footer';
 import MessageView from './MessageView';
-import Header from './Header';
 import ForwardMessage from './ForwardMessage';
 import CommunicationStore from '../../../../store/communication';
 import Message from '../../../../store/communication/models/Message';
@@ -48,7 +47,6 @@ export default class Chat extends Component {
   $listView: ListView;
   $thisInputElement: Footer;
   $msgForReply: Animatable.View;
-  spinnerLoader: Object;
 
   constructor(props) {
     super(props);
@@ -246,11 +244,6 @@ export default class Chat extends Component {
         contentContainerStyle={styles.container}
         behavior={Platform.OS === 'ios' ? 'padding' : null}
       >
-        <Header
-          status={conversation.status}
-          userName={conversation.name}
-          conversationType={communication.selectedConversation.type}
-        />
         <ListView
           contentContainerStyle={styles.list}
           dataSource={ds}

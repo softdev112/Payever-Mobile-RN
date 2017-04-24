@@ -1,6 +1,7 @@
 import { Component } from 'react';
-import { images, NavBar, StyleSheet, View } from 'ui';
+import { NavBar, StyleSheet, View } from 'ui';
 import Chat from '../components/chat';
+import Header from '../components/chat/Header';
 
 export default class ChatScreen extends Component {
   static navigatorStyle = {
@@ -10,7 +11,17 @@ export default class ChatScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <NavBar.Default title="Communication" source={images.communication} />
+        <NavBar>
+          <NavBar.Back />
+          <NavBar.ComplexTitle>
+            <Header />
+          </NavBar.ComplexTitle>
+          <NavBar.IconButton
+            imageStyle={styles.settingsIcon}
+            onPress={() => {}}
+            source="icon-settings-24"
+          />
+        </NavBar>
         <Chat style={styles.chat} />
       </View>
     );
@@ -20,6 +31,16 @@ export default class ChatScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+
+  header: {
+    borderColor: 'red',
+    borderWidth: 1,
+  },
+
+  settingsIcon: {
+    color: '$pe_color_icon',
+    fontSize: 20,
   },
 
   chat: {

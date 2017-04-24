@@ -1,7 +1,5 @@
 import { Component } from 'react';
-import { ScrollView } from 'react-native';
 import { IconText, StyleSheet, View } from 'ui';
-import { ScreenParams } from 'utils';
 
 import type AppItem from '../../../store/profiles/models/AppItem';
 
@@ -16,23 +14,6 @@ export default class Dock extends Component {
     showApps?: boolean;
   };
 
-  state: {
-    btnsOffset: number;
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      btnsOffset: 0,
-    };
-  }
-
-  onContentSizeChanges(width) {
-    const btnsOffset = (width - ScreenParams.width) / 2;
-    this.setState({ btnsOffset });
-  }
-
   renderIcon(item: AppItem) {
     const { showApps, onAppClick } = this.props;
 
@@ -41,6 +22,10 @@ export default class Dock extends Component {
     if (item.label === 'dashboard' && showApps) {
       title = 'Home';
       logoSource.uri = logoSource.uri.replace('dashboard.png', 'home.png');
+    }
+
+    if (item.label === 'communication') {
+      title = 'Chat';
     }
 
     const imageStyles = [
@@ -63,18 +48,10 @@ export default class Dock extends Component {
 
   render() {
     const { apps } = this.props;
-    const { btnsOffset } = this.state;
 
     return (
-      <View style={[styles.container, { paddingLeft: -btnsOffset }]}>
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          scrollEnabled={btnsOffset > 0}
-          onContentSizeChange={::this.onContentSizeChanges}
-        >
-          {apps.map(::this.renderIcon)}
-        </ScrollView>
+      <View style={styles.container}>
+        {apps.map(::this.renderIcon)}
       </View>
     );
   }
@@ -97,9 +74,9 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    width: 80,
+    width: 63,
     '@media android': {
-      width: 85,
+      width: 63,
     },
   },
 
@@ -119,7 +96,7 @@ const styles = StyleSheet.create({
 
   '@media (min-width: 400)': {
     icon: {
-      width: 90,
+      width: 70,
     },
 
     image: {
@@ -139,7 +116,7 @@ const styles = StyleSheet.create({
     },
 
     icon: {
-      width: 110,
+      width: 85,
     },
 
     image: {

@@ -7,6 +7,7 @@ import Button from './Button';
 import IconButton from './IconButton';
 import Menu from './Menu';
 import Title from './Title';
+import ComplexTitle from './ComplexTitle';
 
 //noinspection JSUnresolvedVariable
 import bgGradient from './images/gradient.png';
@@ -18,6 +19,7 @@ export default class NavBar extends Component {
   static IconButton = IconButton;
   static Menu       = Menu;
   static Title      = Title;
+  static ComplexTitle = ComplexTitle;
 
   static childContextTypes = {
     popup: PropTypes.bool,
