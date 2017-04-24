@@ -7,6 +7,10 @@ import StyleSheet from './StyleSheet';
 import Text from './Text';
 
 export default class IconText extends Component {
+  static defaultProps = {
+    titleNumberOfLines: 2,
+  };
+
   props: {
     title?: string;
     source: Object | number;
@@ -15,11 +19,13 @@ export default class IconText extends Component {
     style?: Object;
     imageStyle?: Object;
     textStyle?: Object;
+    titleNumberOfLines?: number;
   };
 
   render() {
     const {
       onPress, source, title, disabled, imageStyle, textStyle, style,
+      titleNumberOfLines,
     } = this.props;
     const buttonStyles = [styles.button, style];
     const imageStyles = [styles.image, imageStyle];
@@ -35,7 +41,7 @@ export default class IconText extends Component {
     if (title) {
       textNode = (
         <Text
-          numberOfLines={1}
+          numberOfLines={titleNumberOfLines}
           ellipsizeMode="tail"
           style={textStyles}
         >

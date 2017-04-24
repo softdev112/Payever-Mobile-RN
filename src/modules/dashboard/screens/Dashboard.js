@@ -3,6 +3,7 @@ import { Animated, ListViewDataSource, ScrollView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import { GridView, IconText, Loader, StyleSheet, View } from 'ui';
+import { ScreenParams } from 'utils';
 
 import type ProfilesStore from '../../../store/profiles';
 import type ActivityItem from
@@ -12,6 +13,9 @@ import ActivityCard from '../components/ActivityCard';
 import Dock from '../components/Dock';
 import DashboardTitle from '../components/DashboardTitle';
 import SearchHeader from '../components/SearchHeader';
+
+const APP_ICON_WIDTH_PHONE = 90;
+const APP_ICON_WIDTH_TABLET = 130;
 
 @inject('profiles', 'config')
 @observer
@@ -123,6 +127,11 @@ export default class Dashboard extends Component {
     const dataSourceTop = this.dataSource.cloneWithRows(appsTop);
     const businessName = profiles.currentProfile.displayName;
 
+    const iconWidth = ScreenParams.isTabletLayout()
+      ? APP_ICON_WIDTH_TABLET : APP_ICON_WIDTH_PHONE;
+    const iconsPerRow = Math.floor(ScreenParams.width / iconWidth);
+    const iconsPadding = (ScreenParams.width - (iconsPerRow * iconWidth)) / 2;
+
     return (
       <Loader isLoading={appsTop.length < 1}>
         <View style={styles.container}>
@@ -138,7 +147,10 @@ export default class Dashboard extends Component {
               <GridView
                 dataSource={dataSourceTop}
                 renderRow={::this.renderIcon}
-                contentContainerStyle={styles.apps}
+                contentContainerStyle={[
+                  styles.apps,
+                  { paddingLeft: iconsPadding },
+                ]}
               />
             ) : (
               <View style={styles.cards_container}>
@@ -207,8 +219,9 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    height: 105,
-    width: 100,
+    height: 93,
+    width: APP_ICON_WIDTH_PHONE,
+    marginBottom: 8,
   },
 
   icon_image: {
@@ -232,7 +245,7 @@ const styles = StyleSheet.create({
 
   '@media (min-width: 550)': {
     icon: {
-      width: 130,
+      width: APP_ICON_WIDTH_TABLET,
       height: 135,
     },
 

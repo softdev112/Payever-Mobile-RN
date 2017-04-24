@@ -47,11 +47,14 @@ export default class Status extends Component {
       this.interval = setInterval(::this.updateTypingText, 300);
     }
 
+    const statusLabel =
+      (status.online && status.label === '') ? 'online' : status.label;
+
     return (
       <View style={styles.container}>
         <OnlineStatus style={styles.led} isOnline={status.online} />
         <Text style={styles.text}>
-          {status.typing ? 'typing' + '.'.repeat(dots) : status.label}
+          {status.typing ? 'typing' + '.'.repeat(dots) : statusLabel}
         </Text>
       </View>
     );
@@ -62,7 +65,6 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     flexDirection: 'row',
-    marginTop: 7,
   },
 
   led: {

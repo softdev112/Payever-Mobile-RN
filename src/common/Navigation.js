@@ -67,6 +67,7 @@ export function showScreen(screenId, passProps = {}) {
       disableOpenGesture: true,
     },
     passProps,
+    animationType: 'none',
   });
 }
 

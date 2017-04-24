@@ -324,7 +324,7 @@ const styles = StyleSheet.create({
   },
 
   swipeContainer: {
-    width: ScreenParams.isTabletLayout() ? '98% - 350' : '95%',
+    width: ScreenParams.isTabletLayout() ? '98% - 350' : '98%',
   },
 
   swipeContainerInside: {

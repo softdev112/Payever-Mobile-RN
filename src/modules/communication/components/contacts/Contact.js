@@ -228,6 +228,7 @@ const styles = StyleSheet.create({
 
   groupTypeIcon: {
     fontSize: 16,
+    color: '$pe_color_icon',
   },
 
   title: {

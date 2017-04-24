@@ -76,7 +76,7 @@ export default class WebView extends Component {
   }
 
   onLoadStart({ nativeEvent }) {
-    const { auth } = this.props;
+    const { auth, navigator } = this.props;
 
     if (nativeEvent.url.startsWith('react-js-navigation')) {
       return;
@@ -111,7 +111,8 @@ export default class WebView extends Component {
           showScreen('auth.Login');
           return;
         }
-        showScreen(url.screen);
+
+        navigator.pop({ animated: true });
       }
     });
   }

@@ -1,113 +1,39 @@
-/* eslint-disable react/no-unused-prop-types */
-import { Component, PropTypes } from 'react';
-import { Icon, StyleSheet, Text, View } from 'ui';
-import { Navigator } from 'react-native-navigation';
+import { StyleSheet, Text, View } from 'ui';
+import { observer } from 'mobx-react/native';
 import Status from './Status';
-import type { ConversationType } from
-  '../../../../store/communication/models/Conversation';
+import type CommunicationStore from '../../../../store/communication';
 
-export default class Header extends Component {
-  static contextTypes = {
-    navigator: PropTypes.object.isRequired,
-  };
+export default observer(['communication'], (
+  { communication }: CommunicationStore
+) => {
+  const { selectedConversation: conversation } = communication;
 
-  props: {
-    status: {
-      label: string;
-      online: boolean;
-      typing: boolean;
-    };
-    userName: string;
-    conversationType: ConversationType;
-  };
+  if (!conversation) return null;
 
-  context: {
-    navigator: Navigator;
-  };
-
-  onSettingsPress() {
-    const { conversationType } = this.props;
-
-    if (conversationType === 'conversation') {
-      this.context.navigator.push({
-        screen: 'communication.ConversationSettings',
-        animated: true,
-      });
-    } else if (conversationType === 'chat-group'
-               || conversationType === 'marketing-group') {
-      this.context.navigator.push({
-        screen: 'communication.GroupSettings',
-        animated: true,
-      });
-    }
-  }
-
-  render() {
-    const { status, userName } = this.props;
-
-    return (
-      <View style={styles.container}>
-        <View style={styles.titleRow}>
-          <Text style={styles.userName} numberOfLines={1}>{userName}</Text>
-          <Icon
-            style={styles.iconSettings}
-            hitSlop={14}
-            onPress={::this.onSettingsPress}
-            source="icon-settings-24"
-            touchStyle={styles.iconSettings_offset}
-          />
-        </View>
-        {status && (
-          <Status status={status} />
-        )}
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.container}>
+      <Text style={styles.userName} numberOfLines={1}>
+        {conversation.name}
+      </Text>
+      {conversation.status && (
+        <Status status={conversation.status} />
+      )}
+    </View>
+  );
+});
 
 const styles = StyleSheet.create({
   container: {
-    paddingLeft: 30,
-    paddingRight: 20,
-    paddingTop: 10,
-    paddingBottom: 14,
-    borderBottomColor: '$pe_color_light_gray_1',
-    borderBottomWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    paddingTop: 5,
   },
 
   userName: {
     color: '$pe_color_dark_gray',
-    fontSize: 24,
+    fontSize: 22,
+    padding: 0,
     fontWeight: '200',
-  },
-
-  iconSettings: {
-    color: '$pe_color_icon',
-    fontSize: 20,
-  },
-
-  iconSettings_offset: {
-    marginTop: 3,
-    marginRight: 10,
-  },
-
-  titleRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-
-  status: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    marginTop: 7,
-  },
-
-  status_led: {
-    marginRight: 8,
-  },
-
-  status_text: {
-    color: '#959ba3',
-    fontSize: 12,
+    maxWidth: '60%',
   },
 });
