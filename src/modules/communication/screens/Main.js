@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { KeyboardAvoidingView, Platform } from 'react-native';
+import type { Navigator } from 'react-native-navigation';
 import { images, NavBar, StyleSheet, View } from 'ui';
 import { ScreenParams } from 'utils';
 
@@ -19,7 +20,27 @@ export default class Main extends Component {
 
   props: {
     communication: CommunicationStore;
+    navigator: Navigator;
   };
+
+  onSettingsPress() {
+    const { communication, navigator } = this.props;
+    const { selectedConversation: conversation } = communication;
+
+    if (!conversation) return;
+
+    if (conversation.isGroup) {
+      navigator.push({
+        screen: 'communication.GroupSettings',
+        animated: true,
+      });
+    } else {
+      navigator.push({
+        screen: 'communication.ConversationSettings',
+        animated: true,
+      });
+    }
+  }
 
   render() {
     const { communication } = this.props;
@@ -31,7 +52,16 @@ export default class Main extends Component {
 
     return (
       <View style={styles.container}>
-        <NavBar.Default title="Communication" source={images.communication} />
+        <NavBar>
+          <NavBar.Back title="Back" />
+          <NavBar.Title title="Communication" source={images.communication} />
+          <NavBar.IconButton
+            imageStyle={styles.settingsIcon}
+            onPress={::this.onSettingsPress}
+            source="icon-settings-24"
+          />
+          <NavBar.Menu />
+        </NavBar>
         <View style={styles.main}>
           <Contacts style={styles.contacts} phoneView={false} />
           <KeyboardAvoidingView
@@ -99,5 +129,10 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     flex: 1,
     flexDirection: 'row',
+  },
+
+  settingsIcon: {
+    color: '$pe_color_icon',
+    fontSize: 20,
   },
 });

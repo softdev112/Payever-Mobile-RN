@@ -3,6 +3,7 @@ import { debounce } from 'lodash';
 import { soundHelper } from 'utils';
 import Message from './Message';
 import ConversationSettingsData from './ConversationSettingsData';
+import GroupSettingsData from './GroupSettingsData';
 
 export default class Conversation {
   archived: boolean;
@@ -13,7 +14,7 @@ export default class Conversation {
   type: ConversationType = '';
   allMessagesFetched: boolean = false;
   isNewMessageAdded: boolean = false;
-  settings: ConversationSettingsData = null;
+  @observable settings: ConversationSettingsData | GroupSettingsData = null;
 
   constructor(data) {
     data.messages = (data.messages || []).map(m => new Message(m));
@@ -98,12 +99,16 @@ export default class Conversation {
       .forEach((message: Message) => message.opponentUnread = false);
   }
 
-  setConversationSettings(settings: ConversationSettingsData) {
-    this.settings = settings;
+  setConversationSettings(
+    settings: ConversationSettingsData | GroupSettingsData
+  ) {
+    extendObservable(this, { settings });
   }
 
   setNotificationSetting(value) {
-    this.settings.notification = value;
+    extendObservable(this.settings, {
+      notification: value,
+    });
   }
 }
 

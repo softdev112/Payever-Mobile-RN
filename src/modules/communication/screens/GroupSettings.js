@@ -6,7 +6,7 @@ import {
   Icon, ErrorBox, Loader, NavBar, StyleSheet, Text, TextButton, View,
 } from 'ui';
 
-import ChatGroupMember from '../components/settings/ChatGroupMember';
+import GroupMember from '../components/settings/GroupMember';
 import type CommunicationStore from '../../../store/communication';
 
 @inject('communication')
@@ -21,8 +21,14 @@ export default class GroupSettings extends Component {
     navigator: Navigator;
   };
 
-  componentWillMount() {
-    this.props.communication.getSelectedGroupSettings();
+  async componentWillMount() {
+    const { communication } = this.props;
+    const { selectedConversation } = communication;
+
+    // Reload settings
+    const conversationSettings =
+      await communication.getGroupSettings(selectedConversation.id);
+    selectedConversation.setConversationSettings(conversationSettings);
   }
 
   onAddMember() {
@@ -48,21 +54,29 @@ export default class GroupSettings extends Component {
   }
 
   renderMemberRow(member) {
-    const { communication } = this.props;
-    const { selectedGroupSettings } = communication;
+    const { selectedConversation: conversation } = this.props.communication;
+
+    if (!conversation) {
+      return null;
+    }
+
+    const { settings } = conversation;
 
     return (
-      <ChatGroupMember
+      <GroupMember
         member={member}
-        onRemove={selectedGroupSettings.isOwner ? ::this.onRemoveMember : null}
+        onRemove={settings.isOwner ? ::this.onRemoveMember : null}
       />
     );
   }
 
   render() {
     const { communication } = this.props;
-    const { isLoading, error, selectedGroupSettings } = communication;
+    const { isLoading, error, selectedConversation } = communication;
+    const { settings } = selectedConversation;
     const ds = communication.groupMembersDataSource;
+
+    const memberCount = settings ? settings.members.length : 0;
 
     return (
       <View style={styles.container}>
@@ -71,22 +85,22 @@ export default class GroupSettings extends Component {
           <NavBar.Title title="Group Settings" />
         </NavBar>
         <Loader isLoading={isLoading}>
-          {error || !selectedGroupSettings ? (
+          {error || !settings ? (
             <ErrorBox message={error} />
           ) : (
             <View style={styles.userInfo}>
               <View style={styles.nameContainer}>
                 <Text style={styles.name}>
-                  {selectedGroupSettings.name}
+                  {settings.name}
                 </Text>
-                {selectedGroupSettings.isOwner && (
+                {settings.isOwner && (
                   <Icon
                     style={styles.ownStar}
                     source="fa-star"
                   />
                 )}
               </View>
-              {selectedGroupSettings.isOwner && (
+              {settings.isOwner && (
                 <View style={styles.btnsContainer}>
                   <TextButton
                     titleStyle={styles.btnTitle}
@@ -100,8 +114,11 @@ export default class GroupSettings extends Component {
                   />
                 </View>
               )}
-              <Text style={styles.membersTitle}>Members:</Text>
+              <Text style={styles.membersTitle}>
+                {`${memberCount} ${memberCount === 1 ? 'Member' : 'Members'}:`}
+              </Text>
               <ListView
+                style={styles.membersList}
                 dataSource={ds}
                 enableEmptySections
                 renderRow={::this.renderMemberRow}
@@ -122,13 +139,13 @@ const styles = StyleSheet.create({
   userInfo: {
     flex: 1,
     paddingVertical: 10,
-    paddingHorizontal: 15,
     justifyContent: 'flex-start',
   },
 
   nameContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingHorizontal: 15,
     marginBottom: 8,
   },
 
@@ -140,6 +157,7 @@ const styles = StyleSheet.create({
   btnsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingHorizontal: 15,
     marginBottom: 20,
   },
 
@@ -147,11 +165,19 @@ const styles = StyleSheet.create({
     fontWeight: '200',
   },
 
+  membersList: {
+    paddingHorizontal: 15,
+  },
+
   membersTitle: {
     fontSize: 18,
     fontWeight: '400',
     fontFamily: '$font_family',
-    marginBottom: 8,
+    color: '$pe_color_gray',
+    paddingTop: 8,
+    paddingBottom: 2,
+    paddingHorizontal: 16,
+    backgroundColor: '$pe_color_apple_div',
   },
 
   ownStar: {
