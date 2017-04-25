@@ -100,7 +100,9 @@ export default class ConversationSettings extends Component {
               <Text style={styles.name}>
                 {settings.name}
               </Text>
+              <View style={styles.grayDivider} />
               <CheckBoxPref
+                style={styles.switchBoxCont}
                 value={settings.notification}
                 title="Notifications"
                 icon="fa-bell-o"
@@ -108,8 +110,11 @@ export default class ConversationSettings extends Component {
               />
               {settings.offers.length > 0 && (
                 <View style={styles.offersContainer}>
-                  <Text style={styles.sentOffersText}>Sent Offers:</Text>
-                  <ScrollView showsVerticalScrollIndicator={false}>
+                  <Text style={styles.offersTitle}>Sent Offers:</Text>
+                  <ScrollView
+                    showsVerticalScrollIndicator={false}
+                    contentContainerStyle={styles.offersInsideCont}
+                  >
                     {this.renderOffers(settings.offers)}
                   </ScrollView>
                 </View>
@@ -131,7 +136,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 20,
     paddingBottom: 8,
-    paddingHorizontal: 15,
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
@@ -150,19 +154,38 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 24,
     fontWeight: '300',
-    marginBottom: 15,
+    marginBottom: 8,
   },
 
-  sentOffersText: {
-    alignSelf: 'flex-start',
-    fontSize: 18,
-    marginBottom: 4,
+  grayDivider: {
+    height: 28,
+    width: '100%',
+    backgroundColor: '$pe_color_apple_div',
+  },
+
+  switchBoxCont: {
+    paddingHorizontal: 15,
   },
 
   offersContainer: {
     flex: 1,
     alignSelf: 'stretch',
-    paddingHorizontal: 8,
+  },
+
+  offersInsideCont: {
+    paddingTop: 8,
+    paddingHorizontal: 15,
+  },
+
+  offersTitle: {
+    fontSize: 18,
+    fontWeight: '400',
+    fontFamily: '$font_family',
+    color: '$pe_color_gray',
+    paddingTop: 6,
+    paddingBottom: 2,
+    paddingHorizontal: 16,
+    backgroundColor: '$pe_color_apple_div',
   },
 
   offerBtn: {

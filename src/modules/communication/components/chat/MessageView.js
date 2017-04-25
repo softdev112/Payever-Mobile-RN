@@ -5,7 +5,6 @@ import type { Navigator } from 'react-native-navigation';
 import { Html, Icon, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
 import * as Animatable from 'react-native-animatable';
-import { ScreenParams } from 'utils';
 
 import MediaView from './MediaView';
 import Avatar from '../contacts/Avatar';
@@ -232,10 +231,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'row',
-    marginBottom: 12,
     minHeight: 50,
-    width: ScreenParams.isTabletLayout() ? '94% - 350' : '70%',
-    paddingRight: 5,
+    paddingBottom: 8,
+  },
+
+  swipeContainer: {
+    overflow: 'hidden',
+  },
+
+  swipeContainerInside: {
+    padding: 2,
   },
 
   actionIcon: {
@@ -321,13 +326,5 @@ const styles = StyleSheet.create({
     color: '$pe_color_gray',
     fontSize: 11,
     fontWeight: '200',
-  },
-
-  swipeContainer: {
-    width: ScreenParams.isTabletLayout() ? '98% - 350' : '98%',
-  },
-
-  swipeContainerInside: {
-    padding: 2,
   },
 });

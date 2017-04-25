@@ -14,6 +14,7 @@ export default class CheckBoxPref extends Component {
     value?: boolean;
     settings?: UserSettings | Object;
     onValueChange?: (value: boolean) => {};
+    style?: Object;
   };
 
   state: {
@@ -54,10 +55,10 @@ export default class CheckBoxPref extends Component {
   }
 
   render() {
-    const { title, icon } = this.props;
+    const { title, icon, style } = this.props;
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, style]}>
         <Title icon={icon} title={title} />
         <Switch
           value={this.state.checked}

@@ -18,7 +18,7 @@ import Message from './models/Message';
 import type SocketApi from '../../common/api/MessengerApi/SocketApi';
 import type ConversationInfo from './models/ConversationInfo';
 import type BusinessProfile from '../profiles/models/BusinessProfile';
-import type GroupMember from './models/GroupMember';
+import type GroupMemberData from './models/GroupMemberData';
 import type Store from '../index';
 
 const MSGS_REQUEST_LIMIT = 30;
@@ -41,8 +41,6 @@ export default class CommunicationStore {
   @observable contactsForAction: Array<Contact> = [];
 
   @observable messageForReply: Message = null;
-
-  @observable selectedGroupSettings: GroupSettingsData = null;
 
   store: Store;
   socket: SocketApi;
@@ -118,6 +116,7 @@ export default class CommunicationStore {
         conversation.allMessagesFetched =
           data.messages.length < MSGS_REQUEST_LIMIT;
         this.conversations.merge({ [id]: observable(conversation) });
+
         return conversation;
       })
       .promise();
@@ -162,11 +161,20 @@ export default class CommunicationStore {
       if (!conversation) {
         //noinspection JSIgnoredPromiseFromCall
         conversation = await this.loadConversation(id);
-        const settings = await this.getConversationSettings(id);
-        conversation.setConversationSettings(settings);
       }
 
-      await this.markConversationAsRead(id);
+      if (conversation) {
+        await this.markConversationAsRead(id);
+
+        let settings = null;
+        if (conversation.isGroup) {
+          settings = await this.getGroupSettings(id);
+        } else {
+          settings = await this.getConversationSettings(id);
+        }
+
+        conversation.setConversationSettings(settings);
+      }
     }
   }
 
@@ -313,9 +321,10 @@ export default class CommunicationStore {
 
   @computed
   get groupMembersDataSource() {
+    const { settings } = this.selectedConversation;
     let chatGroupMembers = [];
-    if (this.selectedGroupSettings) {
-      chatGroupMembers = this.selectedGroupSettings.members.slice();
+    if (settings) {
+      chatGroupMembers = settings.members.slice();
     }
 
     return this.groupMembersDs.cloneWithRows(chatGroupMembers);
@@ -528,17 +537,15 @@ export default class CommunicationStore {
   }
 
   @action
-  async getSelectedGroupSettings() {
-    const groupId = this.selectedConversationId;
+  async getGroupSettings(groupId) {
     let currentGroupSettings = null;
-
     if (this.selectedConversation.type === 'chat-group') {
       currentGroupSettings = await this.getChatGroupSettings(groupId);
     } else if (this.selectedConversation.type === 'marketing-group') {
       currentGroupSettings = await this.getMarketingGroupSettings(groupId);
     }
 
-    this.selectedGroupSettings = new GroupSettingsData(currentGroupSettings);
+    return new GroupSettingsData(currentGroupSettings);
   }
 
   @action
@@ -569,7 +576,7 @@ export default class CommunicationStore {
   @action
   addAllMembersToGroup(groupId: number) {
     const members = this.contactsForAction.slice();
-    members.forEach(async (member: GroupMember) => {
+    members.forEach(async (member: GroupMemberData) => {
       await this.addGroupMember(groupId, member.id);
     });
   }

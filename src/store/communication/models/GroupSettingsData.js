@@ -1,5 +1,5 @@
 import { observable, extendObservable } from 'mobx';
-import type GroupMember from './GroupMember';
+import type GroupMember from './GroupMemberData';
 
 export default class GroupSettingsData {
   id: number;
