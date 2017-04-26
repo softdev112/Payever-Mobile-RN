@@ -71,7 +71,7 @@ export default class GroupMember extends Component {
               )}
             </View>
             <Text style={statusLabelStyle} numberOfLines={1}>
-              {member.status.label}
+              {member.status.online ? 'online' : member.status.label}
             </Text>
           </View>
         </View>
