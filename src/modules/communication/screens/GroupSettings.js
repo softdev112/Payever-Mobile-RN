@@ -26,8 +26,10 @@ export default class GroupSettings extends Component {
     const { selectedConversation } = communication;
 
     // Reload settings
-    const conversationSettings =
-      await communication.getGroupSettings(selectedConversation.id);
+    const conversationSettings = await communication.getGroupSettings(
+      selectedConversation.id,
+      selectedConversation.type
+    );
     selectedConversation.setConversationSettings(conversationSettings);
   }
 
@@ -76,7 +78,7 @@ export default class GroupSettings extends Component {
     const { settings } = selectedConversation;
     const ds = communication.groupMembersDataSource;
 
-    const memberCount = settings ? settings.members.length : 0;
+    const memberCount = selectedConversation.membersCount;
 
     return (
       <View style={styles.container}>
@@ -166,7 +168,7 @@ const styles = StyleSheet.create({
   },
 
   membersList: {
-    paddingHorizontal: 15,
+    paddingLeft: 15,
   },
 
   membersTitle: {

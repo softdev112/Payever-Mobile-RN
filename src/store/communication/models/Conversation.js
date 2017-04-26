@@ -36,6 +36,21 @@ export default class Conversation {
     return this.type.endsWith('group');
   }
 
+  @computed
+  get membersCount() {
+    if (!this.isGroup) return 0;
+
+    return this.settings ? this.settings.members.length : 0;
+  }
+
+  @computed
+  get membersOnlineCount() {
+    if (!this.isGroup) return 0;
+
+    return this.settings
+      ? this.settings.members.filter(m => m.status.online).length : 0;
+  }
+
   @action
   clearNewMessageFlag() {
     this.isNewMessageAdded = false;

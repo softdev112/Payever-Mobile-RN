@@ -16,24 +16,15 @@ export default class Header extends Component {
 
     if (!conversation) return null;
 
-    let membersCount = 0;
-    let membersOnlineCount = 0;
-
-    if (conversation.isGroup && conversation.settings) {
-      membersCount = conversation.settings.members.length;
-      membersOnlineCount = conversation.settings.members
-        .slice()
-        .filter(m => m.status.online).length;
-    }
-
     return (
       <View style={styles.container}>
         <Text style={styles.userName} numberOfLines={1}>
           {conversation.name}
         </Text>
         {conversation.isGroup ? (
-          <Text>
-            {`Members: ${membersCount}, Online: ${membersOnlineCount}`}
+          <Text style={styles.membersCountText}>
+            {`members: ${conversation.membersCount} ` +
+             `online: ${conversation.membersOnlineCount}`}
           </Text>
         ) : (
           <Status status={conversation.status} />
@@ -49,9 +40,13 @@ const styles = StyleSheet.create({
   },
 
   userName: {
-    color: '$pe_color_dark_gray',
-    fontSize: 22,
-    fontWeight: '200',
+    color: '$pe_color_black',
+    fontSize: 15,
+    fontWeight: '400',
     maxWidth: '60%',
+  },
+
+  membersCountText: {
+    fontSize: 12,
   },
 });

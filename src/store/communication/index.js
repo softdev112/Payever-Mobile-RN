@@ -104,17 +104,29 @@ export default class CommunicationStore {
   }
 
   @action
-  async loadConversation(id: number) {
+  async loadConversation(id: number, limit: number = MSGS_REQUEST_LIMIT) {
     const socket = await this.store.api.messenger.getSocket();
     const userId = socket.userId;
     const type = this.messengerInfo.getConversationType(id);
 
-    return apiHelper(socket.getConversation({ id, type }), this.conversationDs)
-      .cache(`communication:conversations:${userId}:${id}`)
-      .success((data) => {
+    return apiHelper(
+      socket.getConversation({ id, type, limit }),
+      this.conversationDs
+    ).cache(`communication:conversations:${userId}:${id}`)
+      .success(async (data) => {
         const conversation = new Conversation(data);
         conversation.allMessagesFetched =
-          data.messages.length < MSGS_REQUEST_LIMIT;
+          data.messages.length < limit;
+
+        // Load settings
+        let settings = null;
+        if (conversation.isGroup) {
+          settings = await this.getGroupSettings(id, conversation.type);
+        } else {
+          settings = await this.getConversationSettings(id);
+        }
+
+        conversation.setConversationSettings(settings);
         this.conversations.merge({ [id]: observable(conversation) });
 
         return conversation;
@@ -125,32 +137,14 @@ export default class CommunicationStore {
   @action
   async loadOlderMessages(id: number) {
     const conversation = this.conversations.get(id);
-    if (!conversation || conversation.allMessagesFetched
-      || this.conversationDs.isLoading) {
-      if (conversation.allMessagesFetched && this.conversationDs.isLoading) {
-        this.conversationDs.isLoading = false;
-      }
+    if (!conversation) return null;
 
+    if (conversation.allMessagesFetched || this.conversationDs.isLoading) {
       return null;
     }
 
-    const socket = await this.store.api.messenger.getSocket();
-    const userId = socket.userId;
     const newMsgsLimit = conversation.messages.length + MSGS_REQUEST_LIMIT;
-
-    return apiHelper(socket.getConversation(
-      { id, type: conversation.type, limit: newMsgsLimit }
-    ), this.conversationDs)
-      .cache(`communication:conversations:${userId}:${id}`)
-      .success((data) => {
-        const newConversation = new Conversation(data);
-        newConversation.allMessagesFetched =
-          data.messages.length < newMsgsLimit;
-        this.conversations.merge({ [id]: observable(newConversation) });
-
-        return newConversation;
-      })
-      .promise();
+    return await this.loadConversation(id, newMsgsLimit);
   }
 
   @action
@@ -165,15 +159,6 @@ export default class CommunicationStore {
 
       if (conversation) {
         await this.markConversationAsRead(id);
-
-        let settings = null;
-        if (conversation.isGroup) {
-          settings = await this.getGroupSettings(id);
-        } else {
-          settings = await this.getConversationSettings(id);
-        }
-
-        conversation.setConversationSettings(settings);
       }
     }
   }
@@ -537,11 +522,11 @@ export default class CommunicationStore {
   }
 
   @action
-  async getGroupSettings(groupId) {
+  async getGroupSettings(groupId, type: 'chat-group' | 'marketing-group') {
     let currentGroupSettings = null;
-    if (this.selectedConversation.type === 'chat-group') {
+    if (type === 'chat-group') {
       currentGroupSettings = await this.getChatGroupSettings(groupId);
-    } else if (this.selectedConversation.type === 'marketing-group') {
+    } else if (type === 'marketing-group') {
       currentGroupSettings = await this.getMarketingGroupSettings(groupId);
     }
 
