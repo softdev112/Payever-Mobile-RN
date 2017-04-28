@@ -38,6 +38,9 @@ export default class ChatScreen extends Component {
   }
 
   render() {
+    const { messengerInfo, selectedConversationId } = this.props.communication;
+    const { avatar } = messengerInfo.byId(selectedConversationId);
+
     return (
       <View style={styles.container}>
         <NavBar>
@@ -45,10 +48,9 @@ export default class ChatScreen extends Component {
           <NavBar.ComplexTitle>
             <Header />
           </NavBar.ComplexTitle>
-          <NavBar.IconButton
-            imageStyle={styles.settingsIcon}
+          <NavBar.Avatar
+            avatar={avatar}
             onPress={::this.onSettingsPress}
-            source="icon-settings-24"
           />
         </NavBar>
         <Chat style={styles.chat} />
@@ -65,11 +67,6 @@ const styles = StyleSheet.create({
   header: {
     borderColor: 'red',
     borderWidth: 1,
-  },
-
-  settingsIcon: {
-    color: '$pe_color_icon',
-    fontSize: 20,
   },
 
   chat: {

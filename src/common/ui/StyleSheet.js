@@ -19,6 +19,7 @@ styleSheet.build({
   pe_color_gray_7d: '#7d7d7d',
   pe_color_gray_2: '#b3b3b3',
   pe_color_icon: '#b5b9be',
+  pe_color_light_gray: '#f7f7f7',
   pe_color_light_gray_1: '#e1e1e1',
   pe_color_red: '#ff3c30',
   pe_color_white: '#fff',

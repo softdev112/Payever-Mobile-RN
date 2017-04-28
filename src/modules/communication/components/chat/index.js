@@ -1,22 +1,17 @@
 import { Component, PropTypes } from 'react';
-import { KeyboardAvoidingView, ListView, Platform } from 'react-native';
+import {
+  Alert, Keyboard, KeyboardAvoidingView, ListView, Platform,
+} from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import { inject, observer } from 'mobx-react/native';
-import * as Animatable from 'react-native-animatable';
-import {
-  BottomDock, ErrorBox, Icon, Loader, MoveYAnimElement, StyleSheet, Text, View,
-} from 'ui';
+import { ErrorBox, Loader, PopupMenu, StyleSheet, View } from 'ui';
 import { ScreenParams } from 'utils';
 
 import Footer from './Footer';
 import MessageView from './MessageView';
-import ForwardMessage from './ForwardMessage';
+import ReplyMessage from './ReplyMessage';
 import CommunicationStore from '../../../../store/communication';
 import Message from '../../../../store/communication/models/Message';
-
-const ANIM_POSITION_ADJUST = 65;
-const REPLY_TOP = Platform.OS === 'ios' ? 76 : 75;
-const REPLY_TOP_GROUP = Platform.OS === 'ios' ? 54 : 53;
 
 @inject('communication')
 @observer
@@ -37,28 +32,58 @@ export default class Chat extends Component {
 
   state: {
     showOlderMsgsLoader: boolean;
+    showPopupMenu: boolean;
+    popupPosY: number;
+    popupPosX: number;
+    selectedMessage: Message;
     isInitRun: boolean;
     listHeight: number;
     listContentHeight: number;
-    showForwardAnim: boolean;
-    messageForForward: Message;
+    keyboardHeight: number;
+    selectMode: boolean;
   };
 
+  onShowPopupMenu: (event: Object) => void;
+  onDismissPopupMenu: (event: Object) => void;
+
   $listView: ListView;
-  $thisInputElement: Footer;
-  $msgForReply: Animatable.View;
+  $keyboardAvoidView: KeyboardAvoidingView;
+  $inputFooter: Footer;
+  keyboardListeners: Array<Object>;
 
   constructor(props) {
     super(props);
 
+    this.onShowPopupMenu = this.onShowPopupMenu.bind(this);
+    this.onMessagePress = this.onMessagePress.bind(this);
+
+    this.keyboardAppear = this.keyboardAppear.bind(this);
+    this.keyboardDisappear = this.keyboardDisappear.bind(this);
+
     this.state = {
       showOlderMsgsLoader: false,
+      showPopupMenu: false,
+      popupPosY: 0,
+      popupPosX: 0,
+      selectedMessage: null,
       isInitRun: true,
       listHeight: 0,
       listContentHeight: 0,
       showForwardAnim: false,
-      messageForForward: null,
+      keyboardHeight: 0,
+      selectMode: false,
     };
+  }
+
+  componentDidMount() {
+    const updateListener = Platform.OS === 'android'
+      ? 'keyboardDidShow' : 'keyboardWillShow';
+    const resetListener = Platform.OS === 'android'
+      ? 'keyboardDidHide' : 'keyboardWillHide';
+    this.keyboardListeners = [
+      Keyboard.addListener(updateListener, this.keyboardAppear),
+      Keyboard.addListener(resetListener, this.keyboardDisappear),
+    ];
   }
 
   componentWillReceiveProps(newProps) {
@@ -76,6 +101,8 @@ export default class Chat extends Component {
     if (this.loaderTimer) {
       clearTimeout(this.loaderTimer);
     }
+
+    this.keyboardListeners.forEach(listener => listener.remove());
   }
 
   onListContentSizeChange(listContentHeight) {
@@ -121,37 +148,6 @@ export default class Chat extends Component {
     });
   }
 
-  onForwardMessageStart(message, posY) {
-    this.setState({
-      startPosY: posY - ANIM_POSITION_ADJUST,
-      showForwardAnim: true,
-      messageForForward: message,
-    });
-  }
-
-  onForwardMessageEnd() {
-    const { messageForForward } = this.state;
-    const { communication } = this.props;
-
-    // Add message to messages for forward to show it in dock
-    // on other screens
-    communication.addMessageForForward(messageForForward);
-    this.setState({ showForwardAnim: false });
-  }
-
-  async onRemoveMsgForReply() {
-    const { communication } = this.props;
-    if (this.$msgForReply) {
-      if (ScreenParams.isTabletLayout()) {
-        await this.$msgForReply.slideOutRight(100);
-      } else {
-        await this.$msgForReply.slideOutLeft(100);
-      }
-    }
-
-    communication.removeMessageForReply();
-  }
-
   async onScroll({ nativeEvent }) {
     const { communication } = this.props;
     const { selectedConversation } = communication;
@@ -175,21 +171,144 @@ export default class Chat extends Component {
     }
   }
 
-  renderMessageForForward(message) {
-    return (
-      <ForwardMessage
-        style={styles.forwardMessage}
-        key={message.id}
-        message={message}
-      />
+  onShowPopupMenu(event, message) {
+    this.setState({
+      showPopupMenu: true,
+      popupPosY: event.pageY,
+      popupPosX: event.pageX,
+      selectedMessage: message,
+    });
+  }
+
+  onDismissPopupMenu() {
+    this.setState({
+      showPopupMenu: false,
+      popupPosY: 0,
+      popupPosX: 0,
+      selectedMessage: null,
+    });
+  }
+
+  onMessagePress() {
+    this.onDismissPopupMenu();
+    Keyboard.dismiss();
+  }
+
+  onDeleteMessage() {
+    const { communication } = this.props;
+    const { selectedMessage } = this.state;
+
+    if (!selectedMessage || selectedMessage.deleted) {
+      return;
+    }
+
+    Alert.alert(
+      'Attention!',
+      'Delete message?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => communication.deleteMessage(selectedMessage.id),
+        },
+      ],
+      { cancelable: false }
     );
   }
 
-  renderRow(row) {
+  onInputInFocus() {
+    this.onDismissPopupMenu();
+  }
+
+  onEditMessage() {
+    const { selectedMessage } = this.state;
+
+    this.context.navigator.push({
+      screen: 'communication.EditMessage',
+      animated: true,
+      passProps: {
+        message: selectedMessage,
+        onSave: this.onSendEditedMessage.bind(this),
+        fullEditorMode: false,
+      },
+    });
+  }
+
+  onSendEditedMessage(messageText) {
+    const { selectedMessage } = this.state;
+    if (selectedMessage) {
+      this.props.communication.editMessage(selectedMessage.id, messageText);
+    }
+  }
+
+  onReplyToMessage() {
+    const { selectedMessage } = this.state;
+    if (selectedMessage) {
+      this.props.communication.setMessageForReply(selectedMessage);
+    }
+
+    this.onDismissPopupMenu();
+    if (this.$inputFooter) {
+      this.$inputFooter.wrappedInstance.setFocusToInput();
+    }
+  }
+
+  onForwardMessage() {
+    const { selectMode } = this.state;
+
+    this.setState({ selectMode: !selectMode });
+    this.props.communication.setSelectMode(!selectMode);
+    this.onDismissPopupMenu();
+  }
+
+  getActionsForMessage(message: Message) {
+    if (message.deleted) return null;
+
+    const actions = [
+      {
+        title: 'Reply',
+        action: ::this.onReplyToMessage,
+      },
+      {
+        title: 'Forward',
+        action: ::this.onForwardMessage,
+      },
+    ];
+
+    if (message.editable) {
+      actions.push({
+        title: 'Edit',
+        action: ::this.onEditMessage,
+      });
+    }
+
+    if (message.deletable) {
+      actions.push({
+        title: 'Delete',
+        action: ::this.onDeleteMessage,
+      });
+    }
+
+    return actions;
+  }
+
+  keyboardAppear({ endCoordinates: { height } }) {
+    this.setState({ keyboardHeight: height });
+  }
+
+  keyboardDisappear() {
+    this.setState({ keyboardHeight: 0 });
+  }
+
+  renderRow(message) {
     return (
       <MessageView
-        message={row}
-        onForwardMessage={::this.onForwardMessageStart}
+        message={message}
+        onPress={this.onMessagePress}
+        onLongPress={this.onShowPopupMenu}
       />
     );
   }
@@ -204,10 +323,11 @@ export default class Chat extends Component {
 
   render() {
     const { communication, style } = this.props;
-    const { showForwardAnim, startPosY, messageForForward } = this.state;
     const {
-      isMsgsForForwardAvailable,
-      msgsForForward,
+      keyboardHeight, showPopupMenu, popupPosY, popupPosX, selectedMessage,
+    } = this.state;
+
+    const {
       messageForReply,
       selectedConversation: conversation,
       selectedConversationDataSource: ds,
@@ -231,23 +351,19 @@ export default class Chat extends Component {
       );
     }
 
-
-    const replyMsgTop = conversation.isGroup ? REPLY_TOP_GROUP : REPLY_TOP;
-    const replyMsgContStyle = [
-      isTablet ? styles.replyMsgContFromRight : styles.replyMsgContFromLeft,
-      { top: replyMsgTop },
-    ];
-
     return (
       <KeyboardAvoidingView
         style={[styles.container, style]}
         contentContainerStyle={styles.container}
-        behavior={Platform.OS === 'ios' ? 'padding' : null}
+        behavior={Platform.OS === 'ios' ? 'position' : null}
+        ref={ref => this.$keyboardAvoidView = ref}
       >
         <ListView
-          contentContainerStyle={styles.list}
+          style={styles.list}
+          contentContainerStyle={styles.listInsideCont}
           dataSource={ds}
           enableEmptySections
+          keyboardShouldPersistTaps="handled"
           ref={ref => this.$listView = ref}
           renderHeader={::this.renderHeader}
           renderRow={::this.renderRow}
@@ -255,52 +371,24 @@ export default class Chat extends Component {
           onContentSizeChange={(w, h) => this.onListContentSizeChange(h)}
           onLayout={::this.onListLayout}
           onScroll={::this.onScroll}
+          removeClippedSubviews={false}
         />
         <Footer
-          ref={ref => this.$thisInputElement = ref}
+          ref={ref => this.$inputFooter = ref}
+          onInputInFocus={::this.onInputInFocus}
           conversationId={conversation.id}
           conversationType={communication.selectedConversation.type}
         />
 
-        {messageForReply && (
-          <Animatable.View
-            style={replyMsgContStyle}
-            animation={isTablet ? 'slideInRight' : 'slideInLeft'}
-            duration={150}
-            ref={ref => this.$msgForReply = ref}
-          >
-            <Icon
-              style={styles.replyIcon}
-              source="icon-reply-16"
-            />
-            <Text
-              style={styles.replyMsgText}
-              numberOfLines={1}
-              ellipsizeMode="tail"
-            >
-              Reply to: {communication.messageForReply.editBody}
-            </Text>
-            <Icon
-              touchStyle={styles.delReplyMsgIcon}
-              onPress={::this.onRemoveMsgForReply}
-              source="icon-trashcan-16"
-            />
-          </Animatable.View>
-        )}
+        {messageForReply && <ReplyMessage />}
 
-        {showForwardAnim && (
-          <MoveYAnimElement
-            startPosY={startPosY}
-            message={messageForForward ? messageForForward.body : ''}
-            onAnimationEnd={::this.onForwardMessageEnd}
-          />
-        )}
-
-        {isMsgsForForwardAvailable && (
-          <BottomDock
-            style={isTablet ? styles.bottomDockTablet : null}
-            items={msgsForForward.slice()}
-            renderItem={::this.renderMessageForForward}
+        {showPopupMenu && (
+          <PopupMenu
+            posY={popupPosY}
+            keyboardOffset={keyboardHeight}
+            posX={popupPosX}
+            dismissAction={::this.onDismissPopupMenu}
+            actions={this.getActionsForMessage(selectedMessage)}
           />
         )}
       </KeyboardAvoidingView>
@@ -311,56 +399,20 @@ export default class Chat extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    overflow: 'hidden',
   },
 
   list: {
-    paddingHorizontal: 16,
+    flex: 1,
+  },
+
+  listInsideCont: {
+    paddingHorizontal: 8,
     paddingVertical: 10,
   },
 
   forwardMessage: {
     marginLeft: 10,
-  },
-
-  replyMsgContFromRight: {
-    height: 38,
-    right: 0,
-    position: 'absolute',
-    flexDirection: 'row',
-    backgroundColor: '#FFF',
-    paddingVertical: 8,
-    borderBottomColor: '$pe_color_twitter',
-    borderBottomWidth: 1,
-    borderLeftColor: '$pe_color_twitter',
-    borderLeftWidth: 1,
-    alignItems: 'center',
-  },
-
-  replyMsgContFromLeft: {
-    height: 38,
-    left: 0,
-    position: 'absolute',
-    flexDirection: 'row',
-    backgroundColor: '#FFF',
-    paddingVertical: 8,
-    borderBottomColor: '$pe_color_twitter',
-    borderBottomWidth: 1,
-    borderRightColor: '$pe_color_twitter',
-    borderRightWidth: 1,
-    alignItems: 'center',
-  },
-
-  replyIcon: {
-    paddingHorizontal: 8,
-    color: '$pe_color_gray_7d',
-  },
-
-  delReplyMsgIcon: {
-    paddingHorizontal: 16,
-  },
-
-  replyMsgText: {
-    maxWidth: '78%',
   },
 
   listHeader: {

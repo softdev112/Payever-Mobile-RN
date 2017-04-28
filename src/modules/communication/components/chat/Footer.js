@@ -26,6 +26,7 @@ export default class Footer extends Component {
     conversationId: number;
     textValue?: string;
     conversationType: ConversationType;
+    onInputInFocus?: Function;
   };
 
   state: {
@@ -48,6 +49,14 @@ export default class Footer extends Component {
       screen: 'marketing.CreateOffer',
       passProps: { conversationId },
     });
+  }
+
+  onFocus() {
+    const { onInputInFocus } = this.props;
+
+    if (onInputInFocus) {
+      onInputInFocus();
+    }
   }
 
   onSend() {
@@ -78,6 +87,12 @@ export default class Footer extends Component {
     }
   }
 
+  setFocusToInput() {
+    if (this.$input) {
+      this.$input.focus();
+    }
+  }
+
   render() {
     const { communication } = this.props;
 
@@ -98,7 +113,8 @@ export default class Footer extends Component {
         )}
         <TextInput
           style={styles.input}
-          ref={i => this.$input = i}
+          ref={ref => this.$input = ref}
+          onFocus={::this.onFocus}
           onChangeText={this.onType}
           onSubmitEditing={::this.onSend}
           placeholder="Send message"
@@ -125,9 +141,11 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
+    backgroundColor: '#FFF',
     flexDirection: 'row',
     height: 50,
     justifyContent: 'space-between',
+    zIndex: 50,
   },
 
   icon: {

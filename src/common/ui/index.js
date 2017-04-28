@@ -25,6 +25,8 @@ export Loader from './Loader';
 export MoveYAnimElement from './MoveYAnimElement';
 export NavBar from './NavBar';
 export WebViewEx from './WebViewEx';
+export PopupMenu from './PopupMenu';
+export RoundSwitch from './RoundSwitch';
 export Text from './Text';
 export TextInput from './TextInput';
 export TextButton from './TextButton';

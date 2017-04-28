@@ -41,6 +41,7 @@ export default class CommunicationStore {
   @observable contactsForAction: Array<Contact> = [];
 
   @observable messageForReply: Message = null;
+  @observable selectMode: boolean = false;
 
   store: Store;
   socket: SocketApi;
@@ -185,6 +186,11 @@ export default class CommunicationStore {
         .error(log.error)
         .promise();
     }
+  }
+
+  @action
+  setSelectMode(mode) {
+    extendObservable(this, { selectMode: mode });
   }
 
   @action
@@ -363,6 +369,7 @@ export default class CommunicationStore {
 
       conversation.updateStatus(status, typing);
     });
+
     this.messengerInfo.conversations.forEach((info: ConversationInfo) => {
       if (info.status.userId !== status.userId) return;
       info.updateStatus(status);

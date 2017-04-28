@@ -1,7 +1,7 @@
 import { Children, Component, PropTypes } from 'react';
 import { Image, View } from 'react-native';
 import StyleSheet from '../StyleSheet';
-
+import AvatarButton from './AvatarButton';
 import Back from './Back';
 import Button from './Button';
 import IconButton from './IconButton';
@@ -13,12 +13,14 @@ import ComplexTitle from './ComplexTitle';
 import bgGradient from './images/gradient.png';
 
 export default class NavBar extends Component {
+  static Avatar     = AvatarButton;
   static Back       = Back;
   static Button     = Button;
   static Default    = Default;
   static IconButton = IconButton;
   static Menu       = Menu;
   static Title      = Title;
+
   static ComplexTitle = ComplexTitle;
 
   static childContextTypes = {
@@ -34,7 +36,7 @@ export default class NavBar extends Component {
     /**
      * Apply popup styles to NavBar
      */
-    popup?: boolean;
+      popup?: boolean;
     style?: Object | number;
   };
 
@@ -47,20 +49,16 @@ export default class NavBar extends Component {
   render() {
     const { style, popup } = this.props;
     const children = Children.toArray(this.props.children);
-
     const additionalStyle = popup ? styles.container_popup : null;
     const leftStyle       = popup ? styles.leftZone_popup : null;
-
     return (
       <View style={[styles.container, additionalStyle, style]}>
         <View style={[styles.leftZone, leftStyle]}>
           {children.filter(filterByAlign('left'))}
         </View>
-
         <View style={styles.centerZone}>
           {children.filter(filterByAlign('center'))}
         </View>
-
         <Image style={styles.rightZone} source={bgGradient}>
           {children.filter(filterByRightAlign())}
         </Image>
