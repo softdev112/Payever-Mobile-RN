@@ -1,150 +1,124 @@
 import { Component, PropTypes } from 'react';
-import { Alert } from 'react-native';
-import Swipeable from 'react-native-swipeable';
+import { observer, inject } from 'mobx-react/native';
+import { Animated, TouchableWithoutFeedback } from 'react-native';
 import type { Navigator } from 'react-native-navigation';
-import { Html, Icon, StyleSheet, Text, View } from 'ui';
-import { inject, observer } from 'mobx-react/native';
-import * as Animatable from 'react-native-animatable';
+import { Html, RoundSwitch, StyleSheet, Text, View } from 'ui';
 
 import MediaView from './MediaView';
 import Avatar from '../contacts/Avatar';
 import type Message from '../../../../store/communication/models/Message';
 import Offer from '../../../marketing/components/OfferDetails';
-import type CommunicationStore from '../../../../store/communication';
+import CommunicationStore from '../../../../store/communication';
+
+const SWITCH_INIT_Y_POS = -40;
 
 @inject('communication')
 @observer
 export default class MessageView extends Component {
+  static defaultProps = {
+    selectMode: false,
+  };
+
   static contextTypes = {
     navigator: PropTypes.object.isRequired,
   };
 
   props: {
     message: Message;
-    communication?: CommunicationStore;
-    onForwardMessage: (message: Message, pageY: number) => void;
+    communication: CommunicationStore;
+    selectMode?: boolean;
+    onPress?: () => void;
+    onLongPress?: () => void;
+    onSelectPress?: () => void;
   };
 
   context: {
     navigator: Navigator;
   };
 
-  $animMessageView: Animatable.View;
-  $swipeRow: Swipeable;
+  state: {
+    paddingAnimValue: Animated.Value;
+    leftPosAnimValue: Animated.Value;
+  };
 
-  onDeleteMessagePress() {
-    if (this.props.message.deleted) return;
+  constructor(props) {
+    super(props);
 
-    Alert.alert(
-      'Attention!',
-      'Delete message?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: () => this.deleteMessage(),
-        },
-      ],
-      { cancelable: false }
-    );
+    this.state = {
+      paddingAnimValue: new Animated.Value(0),
+      leftPosAnimValue: new Animated.Value(SWITCH_INIT_Y_POS),
+    };
   }
 
-  onEditMessage() {
-    const { message } = this.props;
+  componentDidMount() {
+    const { selectMode } = this.props.communication;
 
-    this.swipeBack();
-
-    this.context.navigator.push({
-      screen: 'communication.EditMessage',
-      animated: true,
-      passProps: {
-        message,
-        onSave: this.onSendEditedMessage.bind(this),
-        fullEditorMode: false,
-      },
-    });
-  }
-
-  onSendEditedMessage(messageText) {
-    const { communication, message } = this.props;
-    communication.editMessage(message.id, messageText);
-  }
-
-  onReplyToMessage() {
-    const { communication, message } = this.props;
-    communication.setMessageForReply(message);
-    this.swipeBack();
-  }
-
-  deleteMessage() {
-    const { communication, message } = this.props;
-    communication.deleteMessage(message.id);
-    this.swipeBack();
-  }
-
-  prepareForForward({ nativeEvent: { pageY } }) {
-    const { communication, message } = this.props;
-
-    if (communication.checkMsgInForForward(message.id)) {
-      this.$animMessageView.shake(300).then(() => this.swipeBack());
-      return;
+    if (selectMode) {
+      this.onSelectModeOn();
     }
-
-    this.swipeBack();
-    this.props.onForwardMessage(this.props.message, pageY);
   }
 
-  getSwipeButtons() {
-    const { message } = this.props;
+  componentWillReceiveProps(newProps) {
+    const { selectMode } = this.props.communication;
 
-    if (message.deleted) return null;
-
-    const rightButtons = [];
-    rightButtons.push(
-      <Icon
-        onPress={::this.onReplyToMessage}
-        style={styles.actionIcon}
-        source="icon-reply-16"
-      />
-    );
-
-    rightButtons.push(
-      <Icon
-        onPress={(e) => this.prepareForForward(e)}
-        style={styles.actionIcon}
-        source="icon-arrow-right-3-16"
-      />
-    );
-
-    if (message.editable) {
-      rightButtons.push(
-        <Icon
-          onPress={::this.onEditMessage}
-          style={styles.actionIcon}
-          source="icon-edit-16"
-        />
-      );
+    if (!selectMode && newProps.communication.selectMode) {
+      this.onSelectModeOn();
+    } else if (selectMode && !newProps.communication.selectMode) {
+      this.onSelectedModeOff();
     }
-
-    if (message.deletable) {
-      rightButtons.push(
-        <Icon
-          onPress={::this.onDeleteMessagePress}
-          style={styles.actionIcon}
-          source="icon-trashcan-16"
-        />
-      );
-    }
-
-    return rightButtons;
   }
 
-  swipeBack() {
-    if (this.$swipeRow) {
-      this.$swipeRow.recenter();
+  onSelectModeOn() {
+    const { paddingAnimValue, leftPosAnimValue } = this.state;
+
+    Animated.parallel([
+      Animated.timing(paddingAnimValue, {
+        toValue: 40,
+        duration: 250,
+      }),
+      Animated.timing(leftPosAnimValue, {
+        toValue: 5,
+        duration: 400,
+      }),
+    ]).start();
+  }
+
+  onSelectedModeOff() {
+    const { paddingAnimValue, leftPosAnimValue } = this.state;
+
+    Animated.parallel([
+      Animated.timing(paddingAnimValue, {
+        toValue: 4,
+        duration: 400,
+      }),
+      Animated.timing(leftPosAnimValue, {
+        toValue: SWITCH_INIT_Y_POS,
+        duration: 250,
+      }),
+    ]).start();
+  }
+
+  onMessagePress({ nativeEvent }) {
+    const { onPress } = this.props;
+
+    if (onPress) {
+      onPress(nativeEvent);
+    }
+  }
+
+  onMessageLongPress({ nativeEvent }) {
+    const { message, onLongPress } = this.props;
+
+    if (onLongPress) {
+      onLongPress(nativeEvent, message);
+    }
+  }
+
+  onSelectValueChange() {
+    const { onSelectPress } = this.props;
+
+    if (onSelectPress) {
+      onSelectPress();
     }
   }
 
@@ -167,7 +141,8 @@ export default class MessageView extends Component {
   }
 
   render() {
-    const message: Message = this.props.message;
+    const { message } = this.props;
+    const { paddingAnimValue, leftPosAnimValue } = this.state;
 
     if (message.isSystem) {
       return (
@@ -184,21 +159,18 @@ export default class MessageView extends Component {
     const messageSeen = message.unread ? '' : 'Seen';
 
     return (
-      <Swipeable
-        style={styles.swipeContainer}
-        rightButtons={this.getSwipeButtons()}
-        rightButtonWidth={50}
-        rightActionActivationDistance={80}
-        contentContainerStyle={styles.swipeContainerInside}
-        rightButtonContainerStyle={styles.actionIconContainer}
-        onRightButtonsOpenRelease={() => this.setState({ isRowShift: true })}
-        onRightButtonsCloseRelease={() => this.setState({ isRowShift: false })}
-        onRef={ref => this.$swipeRow = ref}
+      <TouchableWithoutFeedback
+        onLongPress={::this.onMessageLongPress}
+        onPress={::this.onMessagePress}
       >
-        <Animatable.View
-          style={styles.container}
-          ref={ref => this.$animMessageView = ref}
+        <Animated.View
+          style={[styles.container, { paddingLeft: paddingAnimValue }]}
         >
+          <RoundSwitch
+            style={[styles.selectSwitch,
+            { left: leftPosAnimValue }]}
+            onValueChange={::this.onSelectValueChange}
+          />
           <Avatar style={styles.avatar} avatar={message.avatar} />
           <View style={styles.message}>
             <View style={styles.header}>
@@ -221,8 +193,8 @@ export default class MessageView extends Component {
               {this.renderContent(message)}
             </View>
           </View>
-        </Animatable.View>
-      </Swipeable>
+        </Animated.View>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -232,23 +204,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     minHeight: 50,
+    padding: 4,
     paddingBottom: 8,
-  },
-
-  swipeContainer: {
-    overflow: 'hidden',
-  },
-
-  swipeContainerInside: {
-    padding: 2,
-  },
-
-  actionIcon: {
-    fontSize: 24,
-  },
-
-  actionIconContainer: {
-    alignSelf: 'center',
   },
 
   body: {
@@ -326,5 +283,11 @@ const styles = StyleSheet.create({
     color: '$pe_color_gray',
     fontSize: 11,
     fontWeight: '200',
+  },
+
+  selectSwitch: {
+    position: 'absolute',
+    top: 8,
+    left: SWITCH_INIT_Y_POS,
   },
 });

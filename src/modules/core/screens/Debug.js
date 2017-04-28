@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { Component } from 'react';
 import { TouchableOpacity, WebView } from 'react-native';
-import { Html, NavBar, StyleSheet, Text, View, Button } from 'ui';
+import { RoundSwitch, Html, NavBar, StyleSheet, Text, View, Button } from 'ui';
 import { Navigator, Navigation } from 'react-native-navigation';
 import { soundHelper } from 'utils';
 import { observer, inject } from 'mobx-react/native';
@@ -50,9 +50,12 @@ export default class Debug extends Component {
     return (
       <View style={styles.container}>
         <NavBar.Default />
+        <RoundSwitch
+          
+        />
         <WebView
           contentInset={{ top: 20, left: 0, bottom: 0, right: 0 }}
-          source={{ uri: 'https://www.getpayever.com'}}
+          source={{ uri: 'https://stage.payever.de'}}
           javaScriptEnabled
           domStorageEnabled
           startInLoadingState={false}

@@ -26,10 +26,17 @@ export default class Menu extends Component {
 
   props: {
     profiles: ProfilesStore;
+    onPress?: Function;
   };
 
   onPress() {
-    toggleMenu(this.context.navigator);
+    const { onPress } = this.props;
+
+    if (onPress) {
+      onPress();
+    } else {
+      toggleMenu(this.context.navigator);
+    }
   }
 
   render() {

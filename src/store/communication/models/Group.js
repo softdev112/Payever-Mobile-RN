@@ -14,7 +14,7 @@ export default class Group {
   participantsCount: string;
   recipient_id: string;
   type: 'chat-group' | 'marketing-group';
-  @observable unreadCount: number;
+  @observable unreadCount: ?number;
 
   constructor(data) {
     extendObservable(this, data);

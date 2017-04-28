@@ -11,7 +11,6 @@ export default class GroupSettingsData {
   removeMember: (memberId: number) => void;
 
   constructor(data) {
-    console.log(data);
     extendObservable(this, data);
   }
 

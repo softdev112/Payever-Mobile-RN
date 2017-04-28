@@ -68,7 +68,8 @@ const styles = StyleSheet.create({
   },
 
   led: {
-    marginRight: 8,
+    marginRight: 4,
+    marginTop: 2,
   },
 
   text: {
