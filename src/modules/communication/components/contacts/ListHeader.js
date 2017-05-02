@@ -13,9 +13,18 @@ const TITLES = {
   foundMessages: 'FOUND MESSAGES',
 };
 
+const PICKUP_MODE_TITLES = {
+  contacts: 'CONTACTS',
+  groups:   'GROUPS',
+};
+
 @inject('communication')
 @observer
 export default class ListHeader extends Component {
+  static defaultProps = {
+    pickUpMode: false,
+  };
+
   static contextTypes = {
     navigator: PropTypes.object.isRequired,
   };
@@ -27,6 +36,7 @@ export default class ListHeader extends Component {
   props: {
     communication: CommunicationStore;
     hideMessages: boolean;
+    pickUpMode: boolean;
     type: 'contacts' | 'groups' | 'foundMessages';
   };
 
@@ -44,7 +54,7 @@ export default class ListHeader extends Component {
   }
 
   render() {
-    const { communication, hideMessages, type } = this.props;
+    const { communication, hideMessages, pickUpMode, type } = this.props;
 
     if (type === 'foundMessages' && hideMessages) {
       //noinspection JSConstructorReturnsPrimitive
@@ -57,11 +67,13 @@ export default class ListHeader extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.title}>
-          <Text style={styles.title_text}>{TITLES[type]}</Text>
+          <Text style={styles.title_text}>
+            {pickUpMode ? PICKUP_MODE_TITLES[type] : TITLES[type]}
+          </Text>
           <CountBadge value={count} />
         </View>
 
-        {type !== 'foundMessages' && (
+        {(type !== 'foundMessages' && !pickUpMode) && (
           <Icon
             style={styles.add}
             source="icon-plus-circle-24"

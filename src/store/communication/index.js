@@ -35,13 +35,16 @@ export default class CommunicationStore {
   @observable foundMessages: Array<Message> = [];
   @observable contactsFilter: string = '';
 
-  @observable msgsForForward: Array<Message> = [];
+  @observable selectedMessages: Array<Message> = [];
 
   @observable contactsAutocomplete: Array = [];
   @observable contactsForAction: Array<Contact> = [];
 
   @observable messageForReply: Message = null;
+
+  // UI observables
   @observable selectMode: boolean = false;
+  @observable forwardMode: boolean = false;
 
   store: Store;
   socket: SocketApi;
@@ -71,6 +74,10 @@ export default class CommunicationStore {
 
     // Allow to send typingStatus only once per 5sec
     this.updateTypingStatus = this::throttle(this.updateTypingStatus, 5000);
+  }
+
+  @computed get isError() {
+    return this.error !== '';
   }
 
   @action
@@ -110,10 +117,8 @@ export default class CommunicationStore {
     const userId = socket.userId;
     const type = this.messengerInfo.getConversationType(id);
 
-    return apiHelper(
-      socket.getConversation({ id, type, limit }),
-      this.conversationDs
-    ).cache(`communication:conversations:${userId}:${id}`)
+    return apiHelper(socket.getConversation({ id, type, limit }), this)
+      .cache(`communication:conversations:${userId}:${id}`)
       .success(async (data) => {
         const conversation = new Conversation(data);
         conversation.allMessagesFetched =
@@ -194,6 +199,11 @@ export default class CommunicationStore {
   }
 
   @action
+  setForwardMode(mode) {
+    extendObservable(this, { forwardMode: mode });
+  }
+
+  @action
   async search(text) {
     this.contactsFilter = (text || '').toLowerCase();
 
@@ -249,15 +259,6 @@ export default class CommunicationStore {
     }
 
     return socket.sendMessage(options);
-  }
-
-  @action
-  async forwardMessage(forwardFromId) {
-    const socket = await this.store.api.messenger.getSocket();
-    return socket.sendMessage({
-      forwardFromId,
-      conversationId: this.selectedConversationId,
-    });
   }
 
   @action
@@ -342,6 +343,25 @@ export default class CommunicationStore {
   }
 
   @computed
+  get contactsAndGroupsDataSource() {
+    const filter = this.contactsFilter;
+    const info = this.messengerInfo;
+
+    let contacts = info ? info.conversations.slice() : [];
+    let groups   = info ? info.groups.slice() : [];
+
+    if (filter) {
+      contacts = contacts.filter(c => c.name.toLowerCase().includes(filter));
+      groups = groups.filter(c => c.name.toLowerCase().includes(filter));
+    }
+
+    return this.contactDs.cloneWithRowsAndSections(
+      { contacts, groups },
+      ['contacts', 'groups']
+    );
+  }
+
+  @computed
   get selectedConversation(): Conversation {
     return this.conversations.get(this.selectedConversationId);
   }
@@ -353,8 +373,8 @@ export default class CommunicationStore {
     return this.conversationDs.cloneWithRows(messages.slice());
   }
 
-  @computed get isMsgsForForwardAvailable() {
-    return this.msgsForForward.length > 0;
+  @computed get isMessagesSelected() {
+    return this.selectedMessages.length > 0;
   }
 
   @computed get isContactsForActionAvailable() {
@@ -402,18 +422,36 @@ export default class CommunicationStore {
   }
 
   @action
+  async forwardMessage(forwardFromId) {
+    const socket = await this.store.api.messenger.getSocket();
+    return socket.sendMessage({
+      forwardFromId,
+      conversationId: this.selectedConversationId,
+    });
+  }
+
+  @action
+  forwardSelectedMessages() {
+    this.selectedMessages.forEach(async (m) => {
+      await this.forwardMessage(m.id);
+    });
+
+    this.clearSelectedMessages();
+  }
+
+  @action
   async deleteMessage(messageId) {
     const socket = await this.store.api.messenger.getSocket();
-
-    if (this.checkMsgInForForward(messageId)) {
-      this.removeMessageFromForward(messageId);
-    }
-
-    if (this.messageForReply && this.messageForReply.id === messageId) {
-      this.messageForReply = null;
-    }
-
     return socket.deleteMessage(messageId);
+  }
+
+  @action
+  deleteSelectedMessages() {
+    this.selectedMessages.forEach(async (m) => {
+      await this.deleteMessage(m.id);
+    });
+
+    this.clearSelectedMessages();
   }
 
   @action
@@ -424,21 +462,31 @@ export default class CommunicationStore {
   }
 
   @action
-  addMessageForForward(message: Message) {
-    if (this.checkMsgInForForward(message.id)) return;
+  selectMessage(message: Message) {
+    if (this.checkMessageSelected(message.id)) return;
 
-    this.msgsForForward.push(message);
+    extendObservable(this, {
+      selectedMessages: this.selectedMessages.concat(message),
+    });
   }
 
   @action
-  removeMessageFromForward(messageId: number) {
-    this.msgsForForward =
-      this.msgsForForward.filter(message => message.id !== messageId);
+  deselectMessage(messageId: number) {
+    extendObservable(this, {
+      selectedMessages: this.selectedMessages.filter(m => m.id !== messageId),
+    });
   }
 
   @action
-  checkMsgInForForward(messageId: number) {
-    return !!this.msgsForForward.find(message => message.id === messageId);
+  clearSelectedMessages() {
+    extendObservable(this, {
+      selectedMessages: [],
+    });
+  }
+
+  @action
+  checkMessageSelected(messageId: number) {
+    return !!this.selectedMessages.find(m => m.id === messageId);
   }
 
   @action

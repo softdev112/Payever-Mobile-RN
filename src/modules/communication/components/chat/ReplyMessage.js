@@ -9,6 +9,7 @@ import CommunicationStore from '../../../../store/communication';
 export default class ReplyMessage extends Component {
   props: {
     communication: CommunicationStore;
+    onRemove?: () => void;
   };
 
   state: {
@@ -31,12 +32,17 @@ export default class ReplyMessage extends Component {
   }
 
   onRemoveMsgForReply() {
-    const { communication } = this.props;
+    const { communication, onRemove } = this.props;
 
     Animated.timing(this.state.animValue, {
       toValue: 0,
       duration: 200,
-    }).start(() => communication.removeMessageForReply());
+    }).start(() => {
+      communication.removeMessageForReply();
+      if (onRemove) {
+        onRemove();
+      }
+    });
   }
 
   render() {

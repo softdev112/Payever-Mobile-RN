@@ -18,6 +18,13 @@ export default class ChatScreen extends Component {
     navigator: Navigator;
   };
 
+  onCancelSelectedMode() {
+    const { communication } = this.props;
+
+    communication.clearSelectedMessages();
+    communication.setSelectMode(false);
+  }
+
   onSettingsPress() {
     const { communication, navigator } = this.props;
     const { selectedConversation: conversation } = communication;
@@ -38,20 +45,37 @@ export default class ChatScreen extends Component {
   }
 
   render() {
-    const { messengerInfo, selectedConversationId } = this.props.communication;
+    const {
+      messengerInfo, selectedConversationId, selectMode,
+    } = this.props.communication;
     const { avatar } = messengerInfo.byId(selectedConversationId);
 
     return (
       <View style={styles.container}>
         <NavBar>
-          <NavBar.Back />
+          {selectMode ? (
+            <NavBar.Button
+              align="left"
+              title="Delete All"
+              onPress={::this.onCancelSelectedMode}
+            />
+          ) : (
+            <NavBar.Back />
+          )}
           <NavBar.ComplexTitle>
             <Header />
           </NavBar.ComplexTitle>
-          <NavBar.Avatar
-            avatar={avatar}
-            onPress={::this.onSettingsPress}
-          />
+          {selectMode ? (
+            <NavBar.Button
+              title="Cancel"
+              onPress={::this.onCancelSelectedMode}
+            />
+          ) : (
+            <NavBar.Avatar
+              avatar={avatar}
+              onPress={::this.onSettingsPress}
+            />
+          )}
         </NavBar>
         <Chat style={styles.chat} />
       </View>

@@ -11,6 +11,7 @@ export default class Title extends Component {
 
   static defaultProps = {
     align: 'center',
+    showTitle: 'size-dep',
   };
 
   context: {
@@ -21,15 +22,34 @@ export default class Title extends Component {
     onPress: () => any;
     source: Object | number | string;
     title?: string;
+    showTitle?: 'size-dep' | 'always' | 'never';
   };
 
   render() {
-    const { onPress, source, title } = this.props;
+    const { onPress, source, showTitle, title } = this.props;
     const { popup } = this.context;
 
     const titleStyles = [popup ? styles.title_popup : styles.title];
     if (source) {
       titleStyles.push(styles.title_icon);
+    }
+
+    switch (showTitle) {
+      case 'always':
+        titleStyles.push(styles.showTitle);
+        break;
+
+      case 'never':
+        titleStyles.push(styles.hideTitle);
+        break;
+
+      case 'size-dep':
+        titleStyles.push(styles.sizeDepTitle);
+        break;
+
+      default:
+        titleStyles.push(styles.sizeDepTitle);
+        break;
     }
 
     return (
@@ -55,13 +75,9 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    color: '$pe_color_gray',
+    color: '#000',
     fontSize: 18,
     textAlign: 'center',
-    '@media (max-width: 600)': {
-      width: 0,
-      height: 0,
-    },
   },
 
   title_icon: {
@@ -79,6 +95,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     '@media (max-width: 480)': {
       fontSize: 16,
+    },
+  },
+
+  showTitle: {
+  },
+
+  hideTitle: {
+    width: 0,
+    height: 0,
+  },
+
+  sizeDepTitle: {
+    '@media (max-width: 600)': {
+      width: 0,
+      height: 0,
     },
   },
 });
