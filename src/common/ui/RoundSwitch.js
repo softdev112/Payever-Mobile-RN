@@ -11,7 +11,7 @@ export default class RoundSwitch extends Component {
     style?: Object;
     onIconStyle?: Object;
     offIconStyle?: Object;
-    initValue?: boolean;
+    value?: boolean;
   };
 
   state: {
@@ -23,9 +23,15 @@ export default class RoundSwitch extends Component {
     super(props);
 
     this.state = {
-      value: props.initValue,
+      value: props.value,
       animValue: new Animated.Value(0),
     };
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.value !== this.state.value) {
+      this.onPress();
+    }
   }
 
   onPress() {

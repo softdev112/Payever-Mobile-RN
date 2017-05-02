@@ -45,14 +45,20 @@ export default class Debug extends Component {
         MyOnlineShop
       </p>
     `;
-    const { inspectObj } = this.props;
+    const { inspectObj, navigator } = this.props;
 
     return (
       <View style={styles.container}>
         <NavBar.Default />
-        <RoundSwitch
-          
-        />
+        <TouchableOpacity
+          onPress={() => {
+            navigator.push({
+              screen: 'communication.SelectContact'
+            })
+          }}
+        >
+          <Text>OOOOO</Text>
+        </TouchableOpacity>
         <WebView
           contentInset={{ top: 20, left: 0, bottom: 0, right: 0 }}
           source={{ uri: 'https://stage.payever.de'}}

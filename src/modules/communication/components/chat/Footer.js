@@ -2,7 +2,8 @@ import { Component, PropTypes } from 'react';
 import { Keyboard, TextInput } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
-import { Icon, StyleSheet, View } from 'ui';
+import * as Animatable from 'react-native-animatable';
+import { Icon, StyleSheet } from 'ui';
 
 import CommunicationStore from '../../../../store/communication';
 import type { ConversationType } from
@@ -39,6 +40,7 @@ export default class Footer extends Component {
     this.state = {
       text: props.textValue || '',
     };
+
     this.onType = ::this.onType;
   }
 
@@ -73,6 +75,10 @@ export default class Footer extends Component {
       }
     }
 
+    if (communication.selectedMessages.length > 0) {
+      communication.forwardSelectedMessages();
+    }
+
     Keyboard.dismiss();
     this.setState({ text: '' });
   }
@@ -93,16 +99,35 @@ export default class Footer extends Component {
     }
   }
 
+  removeFocusFromInput() {
+    if (this.$input) {
+      this.$input.blur();
+    }
+  }
+
   render() {
-    const { communication } = this.props;
+    const {
+      messengerInfo, selectedMessages, messageForReply,
+    } = this.props.communication;
+    const { text } = this.state;
 
     let isBusiness = false;
-    if (communication.messengerInfo) {
-      isBusiness = communication.messengerInfo.isBusiness;
+    if (messengerInfo) {
+      isBusiness = messengerInfo.isBusiness;
+    }
+
+    const sendBtnStyle = [styles.icon];
+    if (selectedMessages.length > 0 || messageForReply || text !== '') {
+      sendBtnStyle.push(styles.activeSendBtn);
     }
 
     return (
-      <View style={styles.container}>
+      <Animatable.View
+        ref={c => this.$container = c}
+        style={styles.container}
+        animation="slideInUp"
+        duration={300}
+      >
         {isBusiness && (
           <Icon
             style={styles.icon}
@@ -123,13 +148,13 @@ export default class Footer extends Component {
           value={this.state.text}
         />
         <Icon
-          style={styles.icon}
+          style={sendBtnStyle}
           hitSlop={14}
           onPress={::this.onSend}
-          source="icon-arrow-right-16"
+          source="fa-paper-plane"
           touchStyle={styles.icon_touch}
         />
-      </View>
+      </Animatable.View>
     );
   }
 }
@@ -165,6 +190,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 12,
+  },
+
+  activeSendBtn: {
+    color: '$pe_color_blue',
   },
 
   input: {
