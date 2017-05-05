@@ -23,6 +23,7 @@ export default class ChatScreen extends Component {
 
     communication.clearSelectedMessages();
     communication.setSelectMode(false);
+    communication.setForwardMode(false);
   }
 
   onSettingsPress() {
@@ -46,22 +47,22 @@ export default class ChatScreen extends Component {
 
   render() {
     const {
-      messengerInfo, selectedConversationId, selectMode,
+      messengerInfo, selectedConversationId, selectMode, forwardMode,
     } = this.props.communication;
     const { avatar } = messengerInfo.byId(selectedConversationId);
 
     return (
       <View style={styles.container}>
         <NavBar>
-          {selectMode ? (
+          {(selectMode && !forwardMode) && (
             <NavBar.Button
               align="left"
               title="Delete All"
               onPress={::this.onCancelSelectedMode}
             />
-          ) : (
-            <NavBar.Back />
           )}
+          {!selectMode && <NavBar.Back />}
+
           <NavBar.ComplexTitle>
             <Header />
           </NavBar.ComplexTitle>

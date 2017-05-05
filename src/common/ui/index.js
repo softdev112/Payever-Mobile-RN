@@ -6,6 +6,7 @@ export { Image, View } from 'react-native';
 export StyleSheet from './StyleSheet';
 
 export BottomDock from './BottomDock';
+export BottomOverlay from './BottomOverlay';
 export Button from './Button';
 export Container from './Container';
 export DataSource from './DataSource';

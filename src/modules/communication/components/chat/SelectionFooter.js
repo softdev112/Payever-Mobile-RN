@@ -64,6 +64,8 @@ export default class SelectionFooter extends Component {
   }
 
   render() {
+    const { forwardMode } = this.props.communication;
+
     return (
       <Animatable.View
         ref={c => this.$container = c}
@@ -71,19 +73,22 @@ export default class SelectionFooter extends Component {
         animation="slideInUp"
         duration={300}
       >
-        <Icon
-          style={styles.icon}
-          onPress={::this.onDeleteMessages}
-          source="fa-trash-o"
-          touchStyle={styles.icon_action_touch}
-        />
-        <Icon
-          style={styles.icon}
-          hitSlop={14}
-          onPress={::this.onForwardMessages}
-          source="fa-share"
-          touchStyle={styles.icon_touch}
-        />
+        {forwardMode ? (
+          <Icon
+            style={styles.icon}
+            hitSlop={14}
+            onPress={::this.onForwardMessages}
+            source="fa-share"
+            touchStyle={styles.icon_touch}
+          />
+        ) : (
+          <Icon
+            style={styles.icon}
+            onPress={::this.onDeleteMessages}
+            source="fa-trash-o"
+            touchStyle={styles.icon_action_touch}
+          />
+        )}
       </Animatable.View>
     );
   }
@@ -91,7 +96,6 @@ export default class SelectionFooter extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'stretch',
     borderTopColor: '$pe_color_light_gray_1',
     borderTopWidth: 1,
     borderBottomColor: '$pe_color_light_gray_1',
@@ -99,7 +103,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     flexDirection: 'row',
     height: 50,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    alignItems: 'stretch',
     zIndex: 50,
   },
 

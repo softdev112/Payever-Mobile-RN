@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { View, Text, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableHighlight } from 'react-native';
 import StyleSheet from '../StyleSheet';
 
 export default class SegmentedControl extends Component {
@@ -58,25 +58,26 @@ export default class SegmentedControl extends Component {
         btnContainerStyle.push({ backgroundColor: tintColor });
       }
 
+      const underlayColor = `${tintColor.substr(0, 7)}${55}`;
+
       return (
         <View
           key={index}
           style={btnContainerStyle}
         >
-          <TouchableWithoutFeedback
+          <TouchableHighlight
             style={styles.btn}
             onPress={(e) => this.onChange(e, buttonTitle, index)}
+            underlayColor={underlayColor}
             disabled={!enabled}
           >
-            <View style={styles.textWrapper}>
-              <Text
-                style={[styles.btnTitle, { color: textColor }]}
-                numberOfLines={1}
-              >
-                {buttonTitle.replace(/\b./g, l => l.toUpperCase())}
-              </Text>
-            </View>
-          </TouchableWithoutFeedback>
+            <Text
+              style={[styles.btnTitle, { color: textColor }]}
+              numberOfLines={1}
+            >
+              {buttonTitle.replace(/\b./g, l => l.toUpperCase())}
+            </Text>
+          </TouchableHighlight>
         </View>
       );
     });
@@ -96,7 +97,7 @@ export default class SegmentedControl extends Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'stretch',
     justifyContent: 'center',
     borderColor: '#0084ff',
     borderRadius: 5,
@@ -107,14 +108,11 @@ const styles = StyleSheet.create({
 
   btnContainer: {
     flex: 1,
+    alignItems: 'stretch',
     backgroundColor: '#FFF',
   },
 
   btn: {
-    width: 60,
-  },
-
-  textWrapper: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',

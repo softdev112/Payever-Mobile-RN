@@ -10,8 +10,9 @@ import ChatSkeleton from '../components/chat/ChatSkeleton';
 import Contacts from '../components/contacts';
 import ContactsScreen from './Contacts';
 import CommunicationStore from '../../../store/communication';
+import Profiles from '../../../store/profiles';
 
-@inject('communication')
+@inject('communication', 'profiles')
 @observer
 export default class Main extends Component {
   static navigatorStyle = {
@@ -20,8 +21,26 @@ export default class Main extends Component {
 
   props: {
     communication: CommunicationStore;
+    profiles: Profiles;
     navigator: Navigator;
   };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      appsBottom: [],
+    };
+  }
+
+  async componentWillMount() {
+    const { profiles } = this.props;
+
+    const apps = profiles.currentProfile.applications;
+    this.setState({
+      appsBottom: apps && apps.filter(a => a.location === 'bottom'),
+    });
+  }
 
   onSettingsPress() {
     const { communication, navigator } = this.props;

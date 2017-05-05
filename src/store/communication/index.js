@@ -41,6 +41,10 @@ export default class CommunicationStore {
   @observable contactsForAction: Array<Contact> = [];
 
   @observable messageForReply: Message = null;
+  @observable messageForEdit: Message = null;
+
+  @observable isFileUploading: boolean = false;
+  uploadingFileMessageIndex: number = -1;
 
   // UI observables
   @observable selectMode: boolean = false;
@@ -98,13 +102,7 @@ export default class CommunicationStore {
       .success((data: MessengerData) => {
         this.initSocket(data.wsUrl, data.messengerUser.id);
         this.messengerInfo = new MessengerInfo(data);
-
         this.conversations = observable.map();
-        const conversation = this.messengerInfo.getDefaultConversation();
-
-        // noinspection JSIgnoredPromiseFromCall
-        this.setSelectedConversationId(conversation.id);
-        this.conversationDs.isLoading = false;
 
         return this.messengerInfo;
       })
@@ -195,12 +193,12 @@ export default class CommunicationStore {
 
   @action
   setSelectMode(mode) {
-    extendObservable(this, { selectMode: mode });
+    this.selectMode = mode;
   }
 
   @action
   setForwardMode(mode) {
-    extendObservable(this, { forwardMode: mode });
+    this.forwardMode = mode;
   }
 
   @action
@@ -262,6 +260,47 @@ export default class CommunicationStore {
   }
 
   @action
+  async sendMessageWithMedias(
+    body,
+    mediaFileInfo,
+    conversationId = this.selectedConversationId
+  ) {
+    const { messengerUser } = this.messengerInfo;
+
+    const { settings } = this.selectedConversation;
+    if (settings && settings.notification) {
+      soundHelper.playMsgSent();
+    }
+
+    let { messages } = this.selectedConversation;
+    this.isFileUploading = true;
+    this.uploadingFileMessageIndex = messages.length;
+
+    const uploadMessage = {
+      id: Date.now(),
+      fileName: mediaFileInfo.fileName,
+      isFileUploading: true,
+    };
+
+    messages = messages.concat(uploadMessage);
+
+    this.selectedConversation.messages = messages;
+
+    this.store.api.messenger.sendMessageWithMedias(
+      messengerUser.id,
+      conversationId,
+      body,
+      {
+        data: mediaFileInfo.data,
+        fileName: mediaFileInfo.fileName,
+      }
+    ).catch(log.error);
+
+    this.selectedConversation.messages.remove(uploadMessage);
+    this.isFileUploading = false;
+  }
+
+  @action
   async searchMessages(query) {
     const socket = await this.store.api.messenger.getSocket();
     return apiHelper(socket.searchMessages(query))
@@ -281,6 +320,16 @@ export default class CommunicationStore {
   @action
   removeMessageForReply() {
     this.messageForReply = null;
+  }
+
+  @action
+  setMessageForEdit(message: Message) {
+    this.messageForEdit = message;
+  }
+
+  @action
+  removeMessageForEdit() {
+    this.messageForEdit = null;
   }
 
   @action
