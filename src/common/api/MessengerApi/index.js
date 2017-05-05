@@ -1,4 +1,6 @@
 import { pickBy } from 'lodash';
+import RNFetchBlob from 'react-native-fetch-blob';
+import { log } from 'utils';
 import type PayeverApi from '../index';
 import SocketApi from './SocketApi';
 import WampClient from './WampClient';
@@ -120,24 +122,31 @@ export default class MessengerApi {
     });
   }
 
-  sendMessageWithMedias(
+  async sendMessageWithMedias(
     userId: number,
     conversationId: number,
-    recipients: string,
     message: string,
-    media: Array<any>
+    media: Object
   ): Promise<MessageResp> {
-    return this.client.post('/api/rest/v1/messenger/new/message', {
-      format: 'formData',
-      data: {
-        userId,
-        conversationId,
-        new_message: {
-          media,
-          recipients,
-          body: message,
-        },
+    return RNFetchBlob.fetch(
+      'POST',
+      'https://stage.payever.de/api/rest/v1/messenger/new/message/medias',
+      {
+        Authorization: 'Bearer ' + await this.client.authStore.getAccessToken(),
+        'Content-Type': 'octet-stream',
       },
+      [
+        { name: 'userId', data: userId },
+        { name: 'conversationId', data: conversationId },
+        {
+          name: 'new_message_medias[medias][0][binaryContent]',
+          filename: media.fileName,
+          data: media.data,
+        },
+        { name: 'new_message_medias[body]', data: message },
+      ]
+    ).uploadProgress((written, total) => {
+      log.error(written / total);
     });
   }
 

@@ -1,4 +1,4 @@
-import { action, extendObservable, observable, computed } from 'mobx';
+import { extendObservable, observable, computed } from 'mobx';
 import { debounce } from 'lodash';
 import { soundHelper } from 'utils';
 import Message from './Message';
@@ -13,7 +13,6 @@ export default class Conversation {
   @observable status: ConversationStatus;
   type: ConversationType = '';
   allMessagesFetched: boolean = false;
-  isNewMessageAdded: boolean = false;
   @observable settings: ConversationSettingsData | GroupSettingsData = null;
 
   constructor(data) {
@@ -51,11 +50,6 @@ export default class Conversation {
       ? this.settings.members.filter(m => m.status.online).length : 0;
   }
 
-  @action
-  clearNewMessageFlag() {
-    this.isNewMessageAdded = false;
-  }
-
   updateMessage(message: Message) {
     if (!(message instanceof Message)) {
       message = new Message(message);
@@ -71,7 +65,17 @@ export default class Conversation {
       return;
     }
 
-    this.isNewMessageAdded = true;
+    if (message.medias.length > 0) {
+      const imageMessageIndex = this.messages.findIndex((m) => {
+        return m.fileName === message.medias[0].name;
+      });
+
+      if (imageMessageIndex !== -1) {
+        this.messages[imageMessageIndex] = message;
+        return;
+      }
+    }
+
     this.messages.push(message);
 
     if (this.settings && this.settings.notification && !message.own) {

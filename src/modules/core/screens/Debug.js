@@ -6,7 +6,7 @@ import { Navigator, Navigation } from 'react-native-navigation';
 import { soundHelper } from 'utils';
 import { observer, inject } from 'mobx-react/native';
 import AuthStore from '../../../store/auth';
-
+import SegmentedControl from '../../../common/ui/SegmentedControl/index.android';
 const testSound = require('../../../store/communication/resources/sounds/receive_msg.mp3');
 
 @inject('auth')
@@ -52,13 +52,17 @@ export default class Debug extends Component {
         <NavBar.Default />
         <TouchableOpacity
           onPress={() => {
-            navigator.push({
-              screen: 'communication.SelectContact'
-            })
+            navigator.showLightBox({
+              screen: 'core.FloatToolbar'
+            });
           }}
         >
           <Text>OOOOO</Text>
         </TouchableOpacity>
+        <SegmentedControl
+          values={['one', 'two', 'three']}
+          selectedIndex={0}
+        />
         <WebView
           contentInset={{ top: 20, left: 0, bottom: 0, right: 0 }}
           source={{ uri: 'https://stage.payever.de'}}

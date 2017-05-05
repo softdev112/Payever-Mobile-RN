@@ -17,6 +17,7 @@ export default {
   'communication.GeneralSettings': require('./modules/communication/screens/GeneralSettings').default,
   'core.Debug': require('./modules/core/screens/Debug').default,
   'core.ErrorPage': require('./modules/core/screens/ErrorPage').default,
+  'core.FloatToolbar': require('./modules/core/screens/FloatToolbar').default,
   'core.PushNotification': require('./modules/core/screens/PushNotification').default,
   'core.SideMenu': require('./modules/core/screens/SideMenu').default,
   'core.LaunchScreen': require('./modules/core/screens/LaunchScreen').default,

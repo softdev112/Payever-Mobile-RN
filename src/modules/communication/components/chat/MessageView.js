@@ -4,6 +4,7 @@ import type { Navigator } from 'react-native-navigation';
 import { Html, RoundSwitch, StyleSheet, Text, View } from 'ui';
 
 import MediaView from './MediaView';
+import UploadFileMsgView from './UploadFileMsgView';
 import Avatar from '../contacts/Avatar';
 import type Message from '../../../../store/communication/models/Message';
 import Offer from '../../../marketing/components/OfferDetails';
@@ -25,6 +26,7 @@ export default class MessageView extends PureComponent {
     style?: Object;
     selectMode?: boolean;
     selected?: boolean;
+    deleteMode?: boolean;
     onPress?: () => void;
     onLongPress?: () => void;
     onSelectPress?: () => void;
@@ -142,8 +144,12 @@ export default class MessageView extends PureComponent {
   }
 
   render() {
-    const { message, selected, style } = this.props;
+    const { deleteMode, message, selected, style } = this.props;
     const { paddingAnimValue, leftPosAnimValue } = this.state;
+
+    if (message.isFileUploading) {
+      return <UploadFileMsgView />;
+    }
 
     if (message.isSystem) {
       return (
@@ -171,6 +177,7 @@ export default class MessageView extends PureComponent {
             style={[styles.selectSwitch, { left: leftPosAnimValue }]}
             value={selected}
             onValueChange={::this.onSelectValueChange}
+            disabled={(deleteMode && !message.deletable) || message.deleted}
           />
           <Avatar style={styles.avatar} avatar={message.avatar} />
           <View style={styles.message}>
@@ -268,7 +275,7 @@ const styles = StyleSheet.create({
   },
 
   replayContainer: {
-    borderLeftColor: '$pe_color_dark_gray',
+    borderLeftColor: '$pe_color_blue',
     borderLeftWidth: 1,
     paddingLeft: 10,
     paddingVertical: 2,
@@ -276,7 +283,7 @@ const styles = StyleSheet.create({
   },
 
   replySender: {
-    color: '$pe_color_dark_gray',
+    color: '$pe_color_blue',
     fontSize: 11,
     fontWeight: '500',
   },

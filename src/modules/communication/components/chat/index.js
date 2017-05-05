@@ -12,6 +12,7 @@ import SelectionFooter from './SelectionFooter';
 import MessageView from './MessageView';
 import ReplyMessage from './ReplyMessage';
 import ForwardMessage from './ForwardMessage';
+import EditMessage from './EditMessage';
 import CommunicationStore from '../../../../store/communication';
 import Message from '../../../../store/communication/models/Message';
 
@@ -88,7 +89,10 @@ export default class Chat extends Component {
   }
 
   componentWillUnmount() {
-    this.props.communication.removeMessageForReply();
+    const { communication } = this.props;
+    communication.removeMessageForReply();
+    communication.removeMessageForEdit();
+
     if (this.loaderTimer) {
       clearTimeout(this.loaderTimer);
     }
@@ -100,7 +104,8 @@ export default class Chat extends Component {
   componentWillReact() {
     const { communication } = this.props;
     const {
-      messageForReply, selectedConversation, selectedMessages, selectMode,
+      messageForReply, messageForEdit, selectedConversation, selectedMessages,
+      selectMode,
     } = communication;
     const { animValue, messagesCount, showOlderMsgsLoader } = this.state;
 
@@ -118,7 +123,7 @@ export default class Chat extends Component {
 
     /* eslint-disable no-underscore-dangle */
     const isMsgsForForward = selectedMessages.length > 0 && !selectMode;
-    if ((isMsgsForForward || messageForReply)) {
+    if ((isMsgsForForward || messageForReply || messageForEdit)) {
       if (animValue._value === 0) {
         Animated.timing(animValue, {
           toValue: 50,
@@ -189,6 +194,7 @@ export default class Chat extends Component {
   onDeleteMessage() {
     const { communication } = this.props;
 
+    this.cleareAllCurrentSelections();
     communication.setSelectMode(true);
     communication.selectMessage(this.state.selectedMessage);
     this.onDismissPopupMenu();
@@ -199,17 +205,18 @@ export default class Chat extends Component {
   }
 
   onEditMessage() {
+    const { communication } = this.props;
     const { selectedMessage } = this.state;
 
-    this.context.navigator.push({
-      screen: 'communication.EditMessage',
-      animated: true,
-      passProps: {
-        message: selectedMessage,
-        onSave: this.onSendEditedMessage.bind(this),
-        fullEditorMode: false,
-      },
-    });
+    if (!selectedMessage) return;
+
+    this.cleareAllCurrentSelections();
+    communication.setMessageForEdit(selectedMessage);
+
+    this.onDismissPopupMenu();
+    if (this.$inputFooter) {
+      this.$inputFooter.wrappedInstance.setFocusToInput();
+    }
   }
 
   onEmptyFieldTap() {
@@ -225,18 +232,12 @@ export default class Chat extends Component {
     }
   }
 
-  onSendEditedMessage(messageText) {
-    const { selectedMessage } = this.state;
-    if (selectedMessage) {
-      this.props.communication.editMessage(selectedMessage.id, messageText);
-    }
-  }
-
   onReplyToMessage() {
     const { selectedMessage } = this.state;
-    if (selectedMessage) {
-      this.props.communication.setMessageForReply(selectedMessage);
-    }
+    if (!selectedMessage) return;
+
+    this.cleareAllCurrentSelections();
+    this.props.communication.setMessageForReply(selectedMessage);
 
     this.onDismissPopupMenu();
     if (this.$inputFooter) {
@@ -247,7 +248,9 @@ export default class Chat extends Component {
   onForwardMessage() {
     const { communication } = this.props;
 
+    this.cleareAllCurrentSelections();
     communication.setSelectMode(true);
+    communication.setForwardMode(true);
     communication.selectMessage(this.state.selectedMessage);
     this.onDismissPopupMenu();
   }
@@ -288,6 +291,13 @@ export default class Chat extends Component {
     return actions;
   }
 
+  cleareAllCurrentSelections() {
+    const { communication } = this.props;
+    communication.removeMessageForReply();
+    communication.removeMessageForEdit();
+    communication.clearSelectedMessages();
+  }
+
   keyboardAppear({ endCoordinates: { height } }) {
     this.setState({ keyboardHeight: height });
   }
@@ -307,6 +317,7 @@ export default class Chat extends Component {
         onLongPress={this.onShowPopupMenu}
         onSelectPress={this.onMessageSelectChange}
         selectMode={communication.selectMode}
+        deleteMode={!communication.forwardMode}
       />
     );
   }
@@ -328,6 +339,7 @@ export default class Chat extends Component {
 
     const {
       messageForReply,
+      messageForEdit,
       selectedConversation: conversation,
       selectedConversationId,
       selectedMessages,
@@ -383,6 +395,7 @@ export default class Chat extends Component {
           <Footer
             ref={ref => this.$inputFooter = ref}
             onInputInFocus={::this.onInputInFocus}
+            textValue={messageForEdit ? messageForEdit.editBody : ''}
             conversationId={conversation.id}
             conversationType={communication.selectedConversation.type}
           />
@@ -390,6 +403,7 @@ export default class Chat extends Component {
 
         {messageForReply && <ReplyMessage />}
         {isMsgsForForward && <ForwardMessage />}
+        {messageForEdit && <EditMessage />}
 
         {showPopupMenu && (
           <PopupMenu
