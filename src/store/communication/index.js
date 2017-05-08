@@ -43,8 +43,7 @@ export default class CommunicationStore {
   @observable messageForReply: Message = null;
   @observable messageForEdit: Message = null;
 
-  @observable isFileUploading: boolean = false;
-  uploadingFileMessageIndex: number = -1;
+  @observable filesUploadingProgress: ObservableMap<number> = observable.map();
 
   // UI observables
   @observable selectMode: boolean = false;
@@ -274,18 +273,17 @@ export default class CommunicationStore {
 
     let { messages } = this.selectedConversation;
     this.isFileUploading = true;
-    this.uploadingFileMessageIndex = messages.length;
 
     const uploadMessage = {
-      id: Date.now(),
+      id: String(Date.now()),
       fileName: mediaFileInfo.fileName,
       isFileUploading: true,
     };
 
     messages = messages.concat(uploadMessage);
-
     this.selectedConversation.messages = messages;
 
+    this.filesUploadingProgress.set(uploadMessage.id, 0);
     this.store.api.messenger.sendMessageWithMedias(
       messengerUser.id,
       conversationId,
@@ -293,11 +291,27 @@ export default class CommunicationStore {
       {
         data: mediaFileInfo.data,
         fileName: mediaFileInfo.fileName,
-      }
+        uploadProgressKey: uploadMessage.id,
+      },
+      this
     ).catch(log.error);
+  }
 
-    this.selectedConversation.messages.remove(uploadMessage);
-    this.isFileUploading = false;
+  @action
+  updateFileUploadProgress(progressId: string, value: number) {
+    const key = progressId;
+    if (this.filesUploadingProgress.has(key)) {
+      if (value >= 100) {
+        this.filesUploadingProgress.set(key, 100);
+      } else {
+        this.filesUploadingProgress.set(key, value);
+      }
+    }
+  }
+
+  @action
+  removeFileUploadingProgress(progressId: string) {
+    this.filesUploadingProgress.delete(progressId);
   }
 
   @action
@@ -497,10 +511,23 @@ export default class CommunicationStore {
   @action
   deleteSelectedMessages() {
     this.selectedMessages.forEach(async (m) => {
-      await this.deleteMessage(m.id);
+      if (!m.deleted && m.deletable) {
+        await this.deleteMessage(m.id);
+      }
     });
 
     this.clearSelectedMessages();
+  }
+
+  @action
+  deleteAllMsgsInSelectConversation() {
+    this.clearSelectedMessages();
+
+    this.selectedConversation.messages.forEach(async (m) => {
+      if (!m.deleted && m.deletable) {
+        await this.deleteMessage(m.id);
+      }
+    });
   }
 
   @action

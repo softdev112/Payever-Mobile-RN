@@ -148,7 +148,7 @@ export default class MessageView extends PureComponent {
     const { paddingAnimValue, leftPosAnimValue } = this.state;
 
     if (message.isFileUploading) {
-      return <UploadFileMsgView />;
+      return <UploadFileMsgView message={message} />;
     }
 
     if (message.isSystem) {
