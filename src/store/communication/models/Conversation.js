@@ -6,7 +6,7 @@ import ConversationSettingsData from './ConversationSettingsData';
 import GroupSettingsData from './GroupSettingsData';
 
 export default class Conversation {
-  archived: boolean;
+  @observable archived: boolean;
   id: number;
   @observable messages: Array<Message> = [];
   name: string;

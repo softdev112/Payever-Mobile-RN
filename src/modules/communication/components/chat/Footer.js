@@ -80,6 +80,11 @@ export default class Footer extends Component {
         return;
       }
 
+      if (!response.fileName) {
+        response.fileName = response.uri.split('/').pop();
+      }
+
+
       communication.sendMessageWithMedias(
         this.state.text,
         {

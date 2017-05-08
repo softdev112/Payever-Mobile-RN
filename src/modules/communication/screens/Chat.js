@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
+import { Alert } from 'react-native';
 import type { Navigator } from 'react-native-navigation';
 import { NavBar, StyleSheet, View } from 'ui';
 import Chat from '../components/chat';
@@ -17,6 +18,40 @@ export default class ChatScreen extends Component {
     communication: CommunicationStore;
     navigator: Navigator;
   };
+
+  onDeleteAllMessages() {
+    const { communication } = this.props;
+    const { selectedConversation } = communication;
+    const messagesCount = selectedConversation.messages.length;
+
+    if (messagesCount === 0) return;
+
+    let warningText = `Delete All ${messagesCount}`;
+    if (messagesCount === 1) {
+      warningText += ' message?';
+    } else {
+      warningText += ' messages?';
+    }
+
+    Alert.alert(
+      'Attention!',
+      warningText,
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            communication.deleteAllMsgsInSelectConversation();
+            communication.setSelectMode(false);
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  }
 
   onCancelSelectedMode() {
     const { communication } = this.props;
@@ -58,7 +93,7 @@ export default class ChatScreen extends Component {
             <NavBar.Button
               align="left"
               title="Delete All"
-              onPress={::this.onCancelSelectedMode}
+              onPress={::this.onDeleteAllMessages}
             />
           )}
           {!selectMode && <NavBar.Back />}

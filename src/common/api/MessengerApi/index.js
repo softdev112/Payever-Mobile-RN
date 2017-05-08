@@ -1,9 +1,9 @@
 import { pickBy } from 'lodash';
 import RNFetchBlob from 'react-native-fetch-blob';
-import { log } from 'utils';
 import type PayeverApi from '../index';
 import SocketApi from './SocketApi';
 import WampClient from './WampClient';
+import CommunicationStore from '../../../store/communication';
 
 export default class MessengerApi {
   client: PayeverApi;
@@ -126,7 +126,8 @@ export default class MessengerApi {
     userId: number,
     conversationId: number,
     message: string,
-    media: Object
+    media: Object,
+    store: CommunicationStore
   ): Promise<MessageResp> {
     return RNFetchBlob.fetch(
       'POST',
@@ -146,7 +147,9 @@ export default class MessengerApi {
         { name: 'new_message_medias[body]', data: message },
       ]
     ).uploadProgress((written, total) => {
-      log.error(written / total);
+      store.updateFileUploadProgress(
+        // I add 1.97 koef for encoding to 64 bits as i understand how it works
+        media.uploadProgressKey, 1.97 * 100 * (written / total));
     });
   }
 
