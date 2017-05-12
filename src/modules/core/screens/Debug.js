@@ -3,8 +3,10 @@ import { Component } from 'react';
 import { TouchableOpacity, WebView } from 'react-native';
 import { RoundSwitch, Html, NavBar, StyleSheet, Text, View, Button } from 'ui';
 import { Navigator, Navigation } from 'react-native-navigation';
+import { google, facebook, twitter, tumblr } from 'react-native-simple-auth';
 import { soundHelper } from 'utils';
 import { observer, inject } from 'mobx-react/native';
+
 import AuthStore from '../../../store/auth';
 import SegmentedControl from '../../../common/ui/SegmentedControl/index.android';
 const testSound = require('../../../store/communication/resources/sounds/receive_msg.mp3');
@@ -12,13 +14,29 @@ const testSound = require('../../../store/communication/resources/sounds/receive
 @inject('auth')
 @observer
 export default class Debug extends Component {
-  static navigatorStyle = { navBarHidden: true };
+  static navigatorStyle = {
+    navBarHidden: true,
+    tabBarHidden: true,
+    drawUnderTabBar: true,
+  };
 
   props:{
     auth: AuthStore;
     navigator: Navigator;
     inspectObj?: any;
   };
+
+  state: {
+    isHidden: boolean,
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isHidden: true,
+    }
+  }
 
   renderNode(node, index, list) {
     console.log([node, index, list]);
@@ -52,25 +70,26 @@ export default class Debug extends Component {
         <NavBar.Default />
         <TouchableOpacity
           onPress={() => {
-            navigator.showLightBox({
-              screen: 'core.FloatToolbar'
+            twitter({
+              appId: 'oRCkHDAnAFSXiO1wayGlpBkwn',
+              appSecret: 'C3FUgIBnjdn1Je6dD5NX5AboFEJ1vWqVVwOLJ03Itk0Xp58but',
+              callback: 'https://stage.payever.de/selfterminal/new/5/pos/5',
+            }).then((info) => {
+              console.log('tttttttttttttttttttt11111');
+              console.log(info);
+            }).catch((error) => {
+              console.log('ttttttttttttttttttttt22222');
+              console.log(error);
             });
           }}
         >
-          <Text>OOOOO</Text>
+          <Text>Twitter Auth</Text>
         </TouchableOpacity>
         <SegmentedControl
           values={['one', 'two', 'three']}
           selectedIndex={0}
         />
-        <WebView
-          contentInset={{ top: 20, left: 0, bottom: 0, right: 0 }}
-          source={{ uri: 'https://stage.payever.de'}}
-          javaScriptEnabled
-          domStorageEnabled
-          startInLoadingState={false}
-          bounces={false}
-        />
+        <View style={{ flex: 1, borderColor: 'red', borderWidth: 1 }}></View>
       </View>
     )
   }

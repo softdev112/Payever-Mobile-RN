@@ -7,7 +7,7 @@ import StyleSheet from './StyleSheet';
 export default class FlatTextInput extends Component {
   static defaultProps = {
     keyboardType: 'default',
-    securityTextEntry: false,
+    secureTextEntry: false,
     placeholder: 'Enter text',
     autoCorrect: false,
     renderValidator: () => {},
@@ -16,7 +16,7 @@ export default class FlatTextInput extends Component {
 
   props: {
     placeholder?: string;
-    securityTextEntry?: boolean;
+    secureTextEntry?: boolean;
     style?: Object;
     inputStyle?: Object;
     autoCorrect?: boolean;
@@ -26,7 +26,9 @@ export default class FlatTextInput extends Component {
     onFocus?: Function;
     onLayout?: Function;
     onBlur?: Function;
+    onSubmitEditing?: Function;
     renderValidator?: Function;
+    returnKeyType?: string;
   };
 
   state: {
@@ -71,6 +73,14 @@ export default class FlatTextInput extends Component {
     this.$textInput.focus();
   }
 
+  setFocus() {
+    if (this.$textInput) {
+      this.$textInput.focus();
+    }
+
+    this.setState({ isFocused: true });
+  }
+
   renderValidator() {
     const { renderValidator } = this.props;
 
@@ -83,8 +93,9 @@ export default class FlatTextInput extends Component {
 
   render() {
     const {
-      autoCorrect, inputStyle, placeholder, securityTextEntry, style,
-      value, onChangeText, onLayout, keyboardType,
+      autoCorrect, inputStyle, placeholder, secureTextEntry, style,
+      value, onChangeText, onLayout, keyboardType, returnKeyType,
+      onSubmitEditing,
     } = this.props;
     const { isFocused } = this.state;
 
@@ -100,7 +111,7 @@ export default class FlatTextInput extends Component {
             placeholder={placeholder}
             autoCorrect={autoCorrect}
             autoCapitalize="none"
-            securityTextEntry={securityTextEntry}
+            secureTextEntry={secureTextEntry}
             value={value}
             onChangeText={onChangeText}
             keyboardType={keyboardType}
@@ -108,6 +119,8 @@ export default class FlatTextInput extends Component {
             onBlur={::this.onBlur}
             onLayout={onLayout}
             underlineColorAndroid="transparent"
+            returnKeyType={returnKeyType}
+            onSubmitEditing={onSubmitEditing}
           />
         </Animatable.View>
       </View>

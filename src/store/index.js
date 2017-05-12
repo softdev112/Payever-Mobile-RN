@@ -9,6 +9,7 @@ import CommunicationStore from './communication';
 import OffersStore from './offers';
 import ProfilesStore from './profiles';
 import SearchStore from './search';
+import UIStore from './ui';
 
 /* eslint-disable no-console */
 export default class Store {
@@ -17,6 +18,7 @@ export default class Store {
   offers: OffersStore               = new OffersStore(this);
   profiles: ProfilesStore           = new ProfilesStore(this);
   search: SearchStore               = new SearchStore(this);
+  ui: UIStore                       = new UIStore(this);
 
   api: PayeverApi;
   config: Config;
