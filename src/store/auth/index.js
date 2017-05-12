@@ -2,9 +2,9 @@ import { action, observable, runInAction } from 'mobx';
 import { now, isDate } from 'lodash';
 import { AsyncStorage } from 'react-native';
 import { apiHelper, log } from 'utils';
-import type Store from './index';
-import type { AuthData } from '../common/api/AuthApi';
-import { showScreen } from '../common/Navigation';
+import type Store from './../index';
+import type { AuthData } from '../../common/api/AuthApi';
+import { showScreen } from '../../common/Navigation';
 
 const STORE_NAME = 'store.auth';
 
@@ -33,6 +33,69 @@ export default class AuthStore {
       .success((data: AuthData) => {
         this.updateTokens(data);
       })
+      .promise();
+  }
+
+  @action
+  registerNewUser(user) {
+    const { api } = this.store;
+
+    return apiHelper(api.auth.registerNewUser(user), this)
+      .success()
+      .error(log.error)
+      .promise();
+  }
+
+  @action
+  resetPassword(email) {
+    const { api } = this.store;
+
+    return apiHelper(api.auth.resetPassword(email), this)
+      .success(() => true)
+      .error((err) => {
+        log.error(err);
+        return false;
+      })
+      .promise();
+  }
+
+  @action
+  resendConfirmationEmail(email) {
+    const { api } = this.store;
+
+    return apiHelper(api.auth.resendConfirmationEmail(email), this)
+      .success(() => true)
+      .error((err) => {
+        log.error(err);
+        return false;
+      })
+      .promise();
+  }
+
+  @action
+  async signInWithSocial(socialNetwork: string, socialUserInfo) {
+    const { api } = this.store;
+
+    const userInfo = await this.connectToSocial(socialNetwork, socialUserInfo);
+
+    return apiHelper(api.auth.loginWithTemporarySocialUser(
+        userInfo.client_id,
+        userInfo.secret_key
+      ),
+      this
+    ).success((data: AuthData) => {
+      this.updateTokens(data);
+    }).error(log.error)
+      .promise();
+  }
+
+  @action
+  connectToSocial(socialName, credentials: SocialCredentials) {
+    const { api } = this.store;
+
+    return apiHelper(api.auth.connectToSocial(socialName, credentials), this)
+      .success((data: AuthData) => data)
+      .error(log.error)
       .promise();
   }
 
@@ -149,4 +212,11 @@ export default class AuthStore {
 type SignInResult = {
   success: boolean;
   error: string;
+};
+
+type SocialCredentials = {
+  access_token: string;
+  expires_in: string;
+  oauth_token: string;
+  oauth_token_secret: string;
 };

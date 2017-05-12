@@ -53,16 +53,19 @@ export default class PayeverApi {
   async post(
     url: string,
     data: Object = null,
-    options: RequestOptions = {}
+    options: RequestOptions = { addTokenToHeader: true }
   ): Promise<ApiResp> {
     const isJson = options.format === 'json';
     delete options.format;
 
     const headers = {
       'Accept':        'application/json',
-      'Authorization': 'Bearer ' + await this.authStore.getAccessToken(),
       'Content-Type':  isJson ? 'application/json' : 'multipart/form-data',
     };
+
+    if (options.addTokenToHeader) {
+      headers.Authorization = 'Bearer ' + await this.authStore.getAccessToken();
+    }
 
     return this.fetch(url, {
       body: isJson ? JSON.stringify(data) : objectToFormData(data),
@@ -172,6 +175,7 @@ function objectToFormData(data: Object) {
 type RequestOptions = {
   format: 'json' | 'formData';
   query: Object;
+  addTokenToHeader: boolean;
 
   body: any;
   credentials: 'include' | 'omit' | 'same-origin';

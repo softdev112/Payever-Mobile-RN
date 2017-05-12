@@ -1,26 +1,65 @@
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
+import { inject, observer } from 'mobx-react/native';
 import { Animated } from 'react-native';
+import { Navigator } from 'react-native-navigation';
 import { Icon, IconText, StyleSheet, View } from 'ui';
 
-import type AppItem from '../../../store/profiles/models/AppItem';
+import ProfilesStore from '../../../store/profiles';
+import UIStore from '../../../store/ui';
+import { Config } from '../../../config';
+import AppItem from '../../../store/profiles/models/AppItem';
 
-const FLOAT_DOCK_HIDE_POS = -51;
+const FLOAT_DOCK_HIDE_POS = -57;
 
+const APPS: Array<Object> = [
+  {
+    label: 'purchases',
+    name: 'Purchases',
+    url: '/private/transactions',
+    image: '/images/dashboard/purchases.png',
+  },
+  {
+    label: 'communication',
+    name: 'Communication',
+    url: '/private/network/app/communication',
+    image: '/images/dashboard/communication.png',
+  },
+  {
+    label: 'account',
+    name: 'Account',
+    image: '/images/dashboard/settings.png',
+  },
+];
+
+@inject('config', 'profiles', 'ui')
+@observer
 export default class Dock extends Component {
   static defaultProps = {
     showApps: true,
-    floatMode: false,
+    floatMode: true,
+    selectedIndex: 2,
+  };
+
+  static contextTypes = {
+    navigator: PropTypes.object.isRequired,
   };
 
   props: {
-    apps: Array<AppItem>;
     onAppClick: (item: AppItem) => any;
-    showApps?: boolean;
     floatMode?: boolean;
+    selectedIndex?: number;
+    config: Config;
+    profiles: ProfilesStore;
+    ui: UIStore;
+  };
+
+  context: {
+    navigator: Navigator;
   };
 
   state: {
     animValue: Animated.Value;
+    appsBottom: Array<AppItem>;
   };
 
   constructor(props) {
@@ -28,7 +67,36 @@ export default class Dock extends Component {
 
     this.state = {
       animValue: new Animated.Value(FLOAT_DOCK_HIDE_POS),
+      appsBottom: [],
+      selectedIndex: props.selectedIndex,
     };
+  }
+
+  async componentWillMount() {
+    const { config, profiles } = this.props;
+    const profile = profiles.currentProfile;
+
+    let apps = [];
+    if (profiles.currentProfile.isBusiness) {
+      apps = (await profiles.loadApplications(profile.id))
+        .filter(a => a.location === 'bottom');
+    } else {
+      apps = APPS.map((app) => {
+        let url = config.siteUrl + app.url;
+        if (app.label === 'account') {
+          url = profiles.privateProfile.settingsUrl;
+        }
+
+        return new AppItem({
+          url,
+          label: app.label,
+          name: app.name,
+          image: { uri: config.siteUrl + app.image },
+        });
+      });
+    }
+
+    this.setState({ appsBottom: apps });
   }
 
   onSwitchDockSate() {
@@ -49,27 +117,52 @@ export default class Dock extends Component {
     /* eslint-enable no-underscore-dangle */
   }
 
-  onAppIconClick(item: AppItem) {
-    const { floatMode, onAppClick } = this.props;
+  onAppClick(app: AppItem, index) {
+    const { floatMode, onAppClick, ui } = this.props;
+    const { navigator } = this.context;
 
     if (floatMode) {
       this.onSwitchDockSate();
     }
 
     if (onAppClick) {
-      onAppClick(item);
+      onAppClick(app);
+    }
+
+    if (ui.tabBarUI.selectedIndex === index) {
+      return;
+    }
+
+    ui.tabBarUI.setSelectedIndex(index);
+
+    if (app.settings.screenId) {
+      navigator.resetTo({
+        title: app.name,
+        screen: app.settings.screenId,
+        animated: false,
+      });
+      return;
+    }
+
+    if (app.url) {
+      navigator.resetTo({
+        title: app.name,
+        screen: 'core.WebView',
+        passProps: {
+          ...app.settings.webView,
+          url: app.url,
+        },
+        animated: false,
+      });
     }
   }
 
-  renderIcon(item: AppItem) {
-    const { showApps } = this.props;
+  renderIcon(item: AppItem, index) {
+    const { ui } = this.props;
 
     let title = item.name;
     const logoSource = item.logoSource;
-    if (item.label === 'dashboard' && showApps) {
-      title = 'Home';
-      logoSource.uri = logoSource.uri.replace('dashboard.png', 'home.png');
-    }
+
 
     if (item.label === 'communication') {
       title = 'Chat';
@@ -80,13 +173,24 @@ export default class Dock extends Component {
       item.label === 'dashboard' ? null : styles.image_shadow,
     ];
 
+    if (item.label === 'dashboard') {
+      title = 'Home';
+      logoSource.uri = logoSource.uri.replace('dashboard.png', 'home.png');
+      imageStyles.push(styles.homeIcon);
+    }
+
+    const appStyle = [styles.icon];
+    if (ui.tabBarUI.selectedIndex === index) {
+      appStyle.push(styles.selectedApp);
+    }
+
     return (
       <IconText
-        style={styles.icon}
+        style={appStyle}
         key={item.label}
         imageStyle={imageStyles}
         textStyle={styles.title}
-        onPress={() => this.onAppIconClick(item)}
+        onPress={() => this.onAppClick(item, index)}
         source={logoSource}
         title={title}
       />
@@ -94,8 +198,8 @@ export default class Dock extends Component {
   }
 
   render() {
-    const { animValue } = this.state;
-    const { apps, floatMode } = this.props;
+    const { animValue, appsBottom } = this.state;
+    const { floatMode } = this.props;
 
     const containerStyle = [styles.container];
     if (floatMode) {
@@ -116,7 +220,7 @@ export default class Dock extends Component {
           </View>
         )}
         <View style={styles.content}>
-          {apps.map(::this.renderIcon)}
+          {appsBottom.map(::this.renderIcon)}
         </View>
       </Animated.View>
     );
@@ -127,6 +231,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     paddingTop: 2,
+    justifyContent: 'center',
     backgroundColor: 'transparent',
     shadowColor: 'rgba(0, 0, 0, .06)',
     shadowOpacity: 1,
@@ -136,12 +241,12 @@ const styles = StyleSheet.create({
   },
 
   content: {
-    height: 55,
+    height: 62,
     flexWrap: 'nowrap',
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
-    paddingTop: 2,
+    alignItems: 'flex-end',
+    paddingVertical: 2,
     backgroundColor: '#fff',
   },
 
@@ -189,7 +294,7 @@ const styles = StyleSheet.create({
 
   image: {
     width: 40,
-    height: 35,
+    height: 40,
   },
 
   image_shadow: {},
@@ -235,5 +340,14 @@ const styles = StyleSheet.create({
       fontSize: 14,
       padding: 0,
     },
+  },
+
+  selectedApp: {
+    marginBottom: 6,
+  },
+
+  homeIcon: {
+    width: 35,
+    height: 35,
   },
 });

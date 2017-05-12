@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
 
   neutralText: {
-    color: '$pe_color_twitter',
+    color: '$pe_color_blue',
     fontSize: 12,
   },
 
