@@ -38,9 +38,9 @@ export default Object.assign({
     },
 
     linkedIn: {
-      appId: '78i17qw4bkesm1',
-      appSecret: 'bZ7BkFzZghsn031w',
-      callback: '/social/connect/auth_linkedin/',
+      appId: '78a1v96xm7x1tt',
+      appSecret: 'Umu6R25x1w7NiDt6',
+      callback: 'https://localhost:3003/auth/linkedin',
       scope: 'r_basicprofile r_emailaddress',
     },
   },

@@ -39,12 +39,12 @@ export default class Register extends Component {
   }
 
   onRegisterWithFacebook() {
-    const { auth, config: { siteUrl, oauthData } } = this.props;
+    const { auth, config: { oauthData } } = this.props;
 
     facebook({
       appId: oauthData.facebook.appId,
       appSecret: oauthData.facebook.appSecret,
-      callback: siteUrl + oauthData.facebook.callback,
+      callback: oauthData.facebook.callback,
       scope: oauthData.facebook.scope,
       fields: oauthData.facebook.fields,
     }).then(async ({ credentials }) => {
@@ -75,32 +75,23 @@ export default class Register extends Component {
     }).catch(log.error);
   }
 
-  /* eslint-disable */
   onRegisterWithLinkedIn() {
-    const { auth, config: { siteUrl, oauthData } } = this.props;
+    const { auth, config: { oauthData } } = this.props;
 
     linkedIn({
       appId: oauthData.linkedIn.appId,
       appSecret: oauthData.linkedIn.appSecret,
-      callback: siteUrl + oauthData.linkedIn.callback,
+      callback: oauthData.linkedIn.callback,
       scope: oauthData.linkedIn.scope,
-    }).then(async ( credentials ) => {
-      //await auth.signInWithSocial('google', credentials);
+    }).then(async ({ credentials }) => {
+      await auth.signInWithSocial('linkedin', credentials);
 
-      console.log('tttttttttttttttttttttttttt');
-      console.log(credentials)
-      console.log('tttttttttttttttttttttttttt');
-      // const isLoggedIn = await auth.checkAuth();
-      // if (isLoggedIn) {
-      //   showScreen('dashboard.ChooseAccount');
-      // }
-    }).catch((err) => {
-      console.log('ttttttttttttttteeeeee')
-      console.log(err);
-      console.log('ttttttttttttttteeeeee')
-    });
+      const isLoggedIn = await auth.checkAuth();
+      if (isLoggedIn) {
+        showScreen('dashboard.ChooseAccount');
+      }
+    }).catch(log.error);
   }
-  /* eslint-enable */
 
   onRegisterWithEmail() {
     const { navigator } = this.props;
