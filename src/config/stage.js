@@ -15,8 +15,8 @@ export default {
     },
 
     facebook: {
-      appId: '438908279593357',
-      appSecret: 'cd96a62e92a5bc498896209613e2d0bf',
+      appId: '306625799760428',
+      appSecret: '4e0e5079b5c7eeff9f16295f0212ca95',
       callback: '/social/auth/facebook',
       scope: 'email public_profile',
       fields: [
@@ -33,9 +33,9 @@ export default {
     },
 
     linkedIn: {
-      appId: '78i17qw4bkesm1',
-      appSecret: 'bZ7BkFzZghsn031w',
-      callback: '/social/connect/auth_linkedin',
+      appId: '78a1v96xm7x1tt',
+      appSecret: 'Umu6R25x1w7NiDt6',
+      callback: 'https://localhost:3003/auth/linkedin',
       scope: 'r_basicprofile r_emailaddress',
     },
   },

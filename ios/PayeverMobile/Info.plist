@@ -26,10 +26,10 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>google</string>
+			<string>facebook</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.463919467171-u54vacd9oiso7l14f97g38odsak91njg</string>
+				<string>fb306625799760428</string>
 			</array>
 		</dict>
 		<dict>
@@ -46,10 +46,20 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>fasebook</string>
+			<string>linkedIn</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fbNGUZ26BK5M</string>
+				<string>li78i17qw4bkesm1</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>google</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.463919467171-u54vacd9oiso7l14f97g38odsak91njg</string>
 			</array>
 		</dict>
 	</array>
