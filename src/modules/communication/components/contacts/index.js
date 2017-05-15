@@ -15,11 +15,13 @@ import type ProfilesStore from '../../../../store/profiles';
 export default class Contacts extends Component {
   static defaultProps = {
     phoneView: true,
+    pickUpMode: false,
   };
 
   props: {
     communication?: CommunicationStore;
     phoneView: boolean;
+    pickUpMode?: boolean;
     style?: Object | number;
     profiles?: ProfilesStore;
   };
@@ -33,8 +35,14 @@ export default class Contacts extends Component {
   }
 
   render() {
-    const { communication, phoneView, style } = this.props;
-    const ds = communication.contactDataSource;
+    const { communication, pickUpMode, phoneView, style } = this.props;
+    let ds;
+    if (pickUpMode) {
+      ds = communication.contactsAndGroupsDataSource;
+    } else {
+      ds = communication.contactDataSource;
+    }
+
     const info = communication.messengerInfo;
 
     if (!info) {
@@ -60,6 +68,7 @@ export default class Contacts extends Component {
           renderSectionHeader={(_, type) => (
             <ListHeader
               conversationInfo={info}
+              pickUpMode={pickUpMode}
               hideMessages={communication.foundMessages.length < 1}
               type={type}
             />

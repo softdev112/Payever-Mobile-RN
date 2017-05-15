@@ -9,6 +9,9 @@ const styleSheet = new Api();
 styleSheet.build({
   rem: getRemKoef(),
   pe_color_twitter: '#50abf1',
+  pe_color_facebook: '#45619d',
+  pe_color_linkedIn: '#0077b5',
+  pe_color_google: '#CC4A3C',
   pe_color_black: '#000',
   pe_color_blue: '#0084ff',
   pe_color_dark_gray: '#3d3d3d',

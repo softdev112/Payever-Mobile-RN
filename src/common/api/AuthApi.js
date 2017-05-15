@@ -20,6 +20,44 @@ export default class AuthApi {
     });
   }
 
+  loginWithTemporarySocialUser(
+    clientId: string,
+    clientSecret: string
+  ): Promise<AuthResp> {
+    return this.client.fetch('/oauth/v2/token', {
+      query: {
+        client_id: clientId,
+        client_secret: clientSecret,
+        grant_type: 'http://www.payever.de/rest',
+      },
+      preventTokenRefresh: true,
+    });
+  }
+
+  registerNewUser(user): Promise<ApiResp> {
+    return this.client.post(
+      '/api/rest/v1/user/register',
+      { register_user: user },
+      { addTokenToHeader: false }
+    );
+  }
+
+  resetPassword(email): Promise<ApiResp> {
+    return this.client.post(
+      '/api/rest/v1/user/resetting/send-email',
+      { email },
+      { addTokenToHeader: false }
+    );
+  }
+
+  resendConfirmationEmail(email): Promise<ApiResp> {
+    return this.client.post(
+      '/api/rest/v1/user/resetting/send-email',
+      { email },
+      { addTokenToHeader: false }
+    );
+  }
+
   async refreshToken(refreshToken): Promise<AuthResp> {
     return await this.client.fetch('/oauth/v2/token', {
       query: {
@@ -39,6 +77,15 @@ export default class AuthApi {
       return true;
     }
     return true;
+  }
+
+  async connectToSocial(socialNetworkName: string, credentials) {
+    return await this.client.post(
+      `/api/rest/v1/connect/${socialNetworkName}`,
+      credentials, {
+        format: 'json',
+        addTokenToHeader: false,
+      });
   }
 }
 

@@ -178,6 +178,14 @@ export default class ProfilesStore {
   @action
   setCurrentProfile(profile: Profile) {
     this.currentProfile = profile;
+
+    // Set start selected index for toolbar for profile
+    // 1 - private, 3 - business
+    if (profile && profile.isBusiness) {
+      this.store.ui.tabBarUI.setSelectedIndex(3);
+    } else {
+      this.store.ui.tabBarUI.setSelectedIndex(1);
+    }
   }
 
   @action

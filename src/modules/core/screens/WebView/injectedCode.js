@@ -22,6 +22,10 @@ function injectedBody(options) {
     }
 
     getNavBarInfo();
+
+    setTimeout(() => sendData({
+      command: 'hide-loader',
+    }, 400));
   }
 
   function replaceHeaderButtons() {
@@ -38,6 +42,27 @@ function injectedBody(options) {
         sendData({ command: 'show-menu' });
       });
       $btnMenu.parentNode.replaceChild($replace, $btnMenu);
+    }
+
+    // If it first page remove Back button
+    if (document.location.href.endsWith('/transactions')
+      || document.location.href.endsWith('/items')
+      || document.location.href.endsWith('/account')
+      || document.location.href.endsWith('/my_stores')) {
+      var $leftBackNav = document.querySelector('.left-nav');
+
+      if ($leftBackNav) {
+        $leftBackNav.style.display = 'none';
+      }
+    }
+
+    // Remove hash tags
+    const $backBtn = document.querySelector('.btn-primary.btn-link');
+    if ($backBtn && $backBtn.href && $backBtn.href.includes('#')) {
+      $replace = $backBtn.cloneNode(true);
+      $replace.href = $backBtn.href.split('#')[0];
+      $replace.style.marginRight = 0;
+      $backBtn.parentNode.replaceChild($replace, $backBtn);
     }
   }
 

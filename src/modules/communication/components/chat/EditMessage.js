@@ -5,37 +5,37 @@ import CommunicationStore from '../../../../store/communication';
 
 @inject('communication')
 @observer
-export default class ReplyMessage extends Component {
+export default class EditMessage extends Component {
   props: {
     communication: CommunicationStore;
   };
 
-  onRemoveMsgForReply() {
+  onRemoveEditedMessage() {
     const { communication } = this.props;
-    communication.removeMessageForReply();
+    communication.removeMessageForEdit();
   }
 
   render() {
-    const { messageForReply: message } = this.props.communication;
+    const { messageForEdit: message } = this.props.communication;
 
     return (
-      <BottomOverlay onRemove={::this.onRemoveMsgForReply}>
-        <View style={styles.replyIconCont}>
+      <BottomOverlay onRemove={::this.onRemoveEditedMessage}>
+        <View style={styles.editIconCont}>
           <Icon
-            style={styles.replyIcon}
-            source="icon-reply-16"
+            style={styles.editIcon}
+            source="icon-edit-16"
           />
         </View>
-        <View style={styles.replyMsgData}>
+        <View style={styles.editMsgData}>
           <Text
-            style={styles.replyMsgAuthor}
+            style={styles.editMsgAuthor}
             numberOfLines={1}
             ellipsizeMode="tail"
           >
             {message.senderName}
           </Text>
           <Text
-            style={styles.replyMsgText}
+            style={styles.editMsgText}
             numberOfLines={1}
             ellipsizeMode="tail"
           >
@@ -48,17 +48,17 @@ export default class ReplyMessage extends Component {
 }
 
 const styles = StyleSheet.create({
-  replyIconCont: {
+  editIconCont: {
     width: 50,
     justifyContent: 'center',
     alignItems: 'center',
   },
 
-  replyIcon: {
+  editIcon: {
     color: '$pe_color_gray_7d',
   },
 
-  replyMsgData: {
+  editMsgData: {
     flex: 1,
     alignSelf: 'stretch',
     borderLeftColor: '$pe_color_blue',
@@ -66,17 +66,13 @@ const styles = StyleSheet.create({
     paddingLeft: 4,
   },
 
-  replyMsgDelIcon: {
-    width: 30,
-  },
-
-  replyMsgAuthor: {
+  editMsgAuthor: {
     color: '$pe_color_blue',
     fontWeight: '400',
     marginBottom: 2,
   },
 
-  replyMsgText: {
+  editMsgText: {
     fontWeight: '400',
   },
 });

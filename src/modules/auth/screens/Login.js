@@ -7,7 +7,6 @@ import {
 import type { Navigator } from 'react-native-navigation';
 
 import type AuthStore from '../../../store/auth';
-import type { Config } from '../../../config';
 
 @inject('auth', 'config')
 @observer
@@ -19,7 +18,6 @@ export default class Login extends Component {
   props: {
     auth: AuthStore;
     navigator: Navigator;
-    config: Config;
   };
 
   $usernameInput: TextInput;
@@ -69,14 +67,9 @@ export default class Login extends Component {
     }
   }
 
-  onSignUp() {
-    const { config, navigator } = this.props;
-    //noinspection JSUnresolvedFunction
-    Keyboard.dismiss();
-    navigator.push({
-      screen: 'core.WebView',
-      passProps: { url: config.siteUrl + '/register' },
-    });
+  onForgotPassword() {
+    const { navigator } = this.props;
+    navigator.push({ screen: 'auth.ResetPassword', animated: true });
   }
 
   render() {
@@ -88,6 +81,10 @@ export default class Login extends Component {
         <NavBar>
           <NavBar.Back title="Back" showTitle="always" />
           <NavBar.Title title="Login" />
+          <NavBar.Button
+            title="Forgot Password?"
+            onPress={::this.onForgotPassword}
+          />
         </NavBar>
         <Loader isLoading={isLoading}>
           <Container contentContainerStyle={styles.form} layout="small">

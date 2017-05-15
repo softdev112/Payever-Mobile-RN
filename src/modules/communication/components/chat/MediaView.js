@@ -43,7 +43,7 @@ function MediaFile({ media }: PropTypes) {
   );
 }
 
-function MediaImage({ media }: PropTypes) {
+const MediaImage = observer(['config'], ({ media, config }: PropTypes) => {
   let properties;
   try {
     properties = media.formats.reference.properties;
@@ -55,12 +55,12 @@ function MediaImage({ media }: PropTypes) {
     <View>
       <Text numberOfLines={1} ellipsizeMode="middle">{media.name}</Text>
       <Image
-        style={[styles.image, calcImageDimensions(properties)]}
-        source={{ uri: media.url }}
+        style={calcImageDimensions(properties)}
+        source={{ uri: config.siteUrl + media.url }}
       />
     </View>
   );
-}
+});
 
 export function calcImageDimensions(imageProperties) {
   const OFFSET = 130;
@@ -126,4 +126,5 @@ const styles = StyleSheet.create({
 
 type PropTypes = {
   media: Media;
+  config?: Config;
 };

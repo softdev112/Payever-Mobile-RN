@@ -35,13 +35,19 @@ export default class CommunicationStore {
   @observable foundMessages: Array<Message> = [];
   @observable contactsFilter: string = '';
 
-  @observable msgsForForward: Array<Message> = [];
+  @observable selectedMessages: Array<Message> = [];
 
   @observable contactsAutocomplete: Array = [];
   @observable contactsForAction: Array<Contact> = [];
 
   @observable messageForReply: Message = null;
+  @observable messageForEdit: Message = null;
+
+  @observable filesUploadingProgress: ObservableMap<number> = observable.map();
+
+  // UI observables
   @observable selectMode: boolean = false;
+  @observable forwardMode: boolean = false;
 
   store: Store;
   socket: SocketApi;
@@ -73,6 +79,10 @@ export default class CommunicationStore {
     this.updateTypingStatus = this::throttle(this.updateTypingStatus, 5000);
   }
 
+  @computed get isError() {
+    return this.error !== '';
+  }
+
   @action
   async loadMessengerInfo(profile: BusinessProfile) {
     const { api } = this.store;
@@ -91,13 +101,7 @@ export default class CommunicationStore {
       .success((data: MessengerData) => {
         this.initSocket(data.wsUrl, data.messengerUser.id);
         this.messengerInfo = new MessengerInfo(data);
-
         this.conversations = observable.map();
-        const conversation = this.messengerInfo.getDefaultConversation();
-
-        // noinspection JSIgnoredPromiseFromCall
-        this.setSelectedConversationId(conversation.id);
-        this.conversationDs.isLoading = false;
 
         return this.messengerInfo;
       })
@@ -110,10 +114,8 @@ export default class CommunicationStore {
     const userId = socket.userId;
     const type = this.messengerInfo.getConversationType(id);
 
-    return apiHelper(
-      socket.getConversation({ id, type, limit }),
-      this.conversationDs
-    ).cache(`communication:conversations:${userId}:${id}`)
+    return apiHelper(socket.getConversation({ id, type, limit }), this)
+      .cache(`communication:conversations:${userId}:${id}`)
       .success(async (data) => {
         const conversation = new Conversation(data);
         conversation.allMessagesFetched =
@@ -190,7 +192,12 @@ export default class CommunicationStore {
 
   @action
   setSelectMode(mode) {
-    extendObservable(this, { selectMode: mode });
+    this.selectMode = mode;
+  }
+
+  @action
+  setForwardMode(mode) {
+    this.forwardMode = mode;
   }
 
   @action
@@ -252,12 +259,59 @@ export default class CommunicationStore {
   }
 
   @action
-  async forwardMessage(forwardFromId) {
-    const socket = await this.store.api.messenger.getSocket();
-    return socket.sendMessage({
-      forwardFromId,
-      conversationId: this.selectedConversationId,
-    });
+  async sendMessageWithMedias(
+    body,
+    mediaFileInfo,
+    conversationId = this.selectedConversationId
+  ) {
+    const { messengerUser } = this.messengerInfo;
+
+    const { settings } = this.selectedConversation;
+    if (settings && settings.notification) {
+      soundHelper.playMsgSent();
+    }
+
+    let { messages } = this.selectedConversation;
+    this.isFileUploading = true;
+
+    const uploadMessage = {
+      id: String(Date.now()),
+      fileName: mediaFileInfo.fileName,
+      isFileUploading: true,
+    };
+
+    messages = messages.concat(uploadMessage);
+    this.selectedConversation.messages = messages;
+
+    this.filesUploadingProgress.set(uploadMessage.id, 0);
+    this.store.api.messenger.sendMessageWithMedias(
+      messengerUser.id,
+      conversationId,
+      body,
+      {
+        data: mediaFileInfo.data,
+        fileName: mediaFileInfo.fileName,
+        uploadProgressKey: uploadMessage.id,
+      },
+      this
+    ).catch(log.error);
+  }
+
+  @action
+  updateFileUploadProgress(progressId: string, value: number) {
+    const key = progressId;
+    if (this.filesUploadingProgress.has(key)) {
+      if (value >= 100) {
+        this.filesUploadingProgress.set(key, 100);
+      } else {
+        this.filesUploadingProgress.set(key, value);
+      }
+    }
+  }
+
+  @action
+  removeFileUploadingProgress(progressId: string) {
+    this.filesUploadingProgress.delete(progressId);
   }
 
   @action
@@ -280,6 +334,16 @@ export default class CommunicationStore {
   @action
   removeMessageForReply() {
     this.messageForReply = null;
+  }
+
+  @action
+  setMessageForEdit(message: Message) {
+    this.messageForEdit = message;
+  }
+
+  @action
+  removeMessageForEdit() {
+    this.messageForEdit = null;
   }
 
   @action
@@ -342,6 +406,25 @@ export default class CommunicationStore {
   }
 
   @computed
+  get contactsAndGroupsDataSource() {
+    const filter = this.contactsFilter;
+    const info = this.messengerInfo;
+
+    let contacts = info ? info.conversations.slice() : [];
+    let groups   = info ? info.groups.slice() : [];
+
+    if (filter) {
+      contacts = contacts.filter(c => c.name.toLowerCase().includes(filter));
+      groups = groups.filter(c => c.name.toLowerCase().includes(filter));
+    }
+
+    return this.contactDs.cloneWithRowsAndSections(
+      { contacts, groups },
+      ['contacts', 'groups']
+    );
+  }
+
+  @computed
   get selectedConversation(): Conversation {
     return this.conversations.get(this.selectedConversationId);
   }
@@ -353,8 +436,8 @@ export default class CommunicationStore {
     return this.conversationDs.cloneWithRows(messages.slice());
   }
 
-  @computed get isMsgsForForwardAvailable() {
-    return this.msgsForForward.length > 0;
+  @computed get isMessagesSelected() {
+    return this.selectedMessages.length > 0;
   }
 
   @computed get isContactsForActionAvailable() {
@@ -402,18 +485,49 @@ export default class CommunicationStore {
   }
 
   @action
+  async forwardMessage(forwardFromId) {
+    const socket = await this.store.api.messenger.getSocket();
+    return socket.sendMessage({
+      forwardFromId,
+      conversationId: this.selectedConversationId,
+    });
+  }
+
+  @action
+  forwardSelectedMessages() {
+    this.selectedMessages.forEach(async (m) => {
+      await this.forwardMessage(m.id);
+    });
+
+    this.clearSelectedMessages();
+  }
+
+  @action
   async deleteMessage(messageId) {
     const socket = await this.store.api.messenger.getSocket();
-
-    if (this.checkMsgInForForward(messageId)) {
-      this.removeMessageFromForward(messageId);
-    }
-
-    if (this.messageForReply && this.messageForReply.id === messageId) {
-      this.messageForReply = null;
-    }
-
     return socket.deleteMessage(messageId);
+  }
+
+  @action
+  deleteSelectedMessages() {
+    this.selectedMessages.forEach(async (m) => {
+      if (!m.deleted && m.deletable) {
+        await this.deleteMessage(m.id);
+      }
+    });
+
+    this.clearSelectedMessages();
+  }
+
+  @action
+  deleteAllMsgsInSelectConversation() {
+    this.clearSelectedMessages();
+
+    this.selectedConversation.messages.forEach(async (m) => {
+      if (!m.deleted && m.deletable) {
+        await this.deleteMessage(m.id);
+      }
+    });
   }
 
   @action
@@ -424,21 +538,31 @@ export default class CommunicationStore {
   }
 
   @action
-  addMessageForForward(message: Message) {
-    if (this.checkMsgInForForward(message.id)) return;
+  selectMessage(message: Message) {
+    if (this.checkMessageSelected(message.id)) return;
 
-    this.msgsForForward.push(message);
+    extendObservable(this, {
+      selectedMessages: this.selectedMessages.concat(message),
+    });
   }
 
   @action
-  removeMessageFromForward(messageId: number) {
-    this.msgsForForward =
-      this.msgsForForward.filter(message => message.id !== messageId);
+  deselectMessage(messageId: number) {
+    extendObservable(this, {
+      selectedMessages: this.selectedMessages.filter(m => m.id !== messageId),
+    });
   }
 
   @action
-  checkMsgInForForward(messageId: number) {
-    return !!this.msgsForForward.find(message => message.id === messageId);
+  clearSelectedMessages() {
+    extendObservable(this, {
+      selectedMessages: [],
+    });
+  }
+
+  @action
+  checkMessageSelected(messageId: number) {
+    return !!this.selectedMessages.find(m => m.id === messageId);
   }
 
   @action

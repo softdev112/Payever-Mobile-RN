@@ -2,6 +2,9 @@ import type BusinessProfile from './BusinessProfile';
 import type Store from '../../index';
 
 const SETTINGS = {
+  dashboard: {
+    screenId: 'dashboard.Dashboard',
+  },
   communication: {
     screenId: 'communication.Main',
   },

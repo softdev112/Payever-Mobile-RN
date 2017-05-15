@@ -1,6 +1,6 @@
 import { Component, PropTypes } from 'react';
 import {
-  Alert, Keyboard, KeyboardAvoidingView, ListView, Platform,
+  Animated, Keyboard, KeyboardAvoidingView, FlatList, Platform,
 } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import { inject, observer } from 'mobx-react/native';
@@ -8,8 +8,11 @@ import { ErrorBox, Loader, PopupMenu, StyleSheet, View } from 'ui';
 import { ScreenParams } from 'utils';
 
 import Footer from './Footer';
+import SelectionFooter from './SelectionFooter';
 import MessageView from './MessageView';
 import ReplyMessage from './ReplyMessage';
+import ForwardMessage from './ForwardMessage';
+import EditMessage from './EditMessage';
 import CommunicationStore from '../../../../store/communication';
 import Message from '../../../../store/communication/models/Message';
 
@@ -23,7 +26,6 @@ export default class Chat extends Component {
   props: {
     communication?: CommunicationStore;
     style?: Object | number;
-    currentConversationId?: number;
   };
 
   context: {
@@ -31,22 +33,20 @@ export default class Chat extends Component {
   };
 
   state: {
+    messageCount: number;
     showOlderMsgsLoader: boolean;
     showPopupMenu: boolean;
     popupPosY: number;
     popupPosX: number;
     selectedMessage: Message;
-    isInitRun: boolean;
-    listHeight: number;
-    listContentHeight: number;
     keyboardHeight: number;
-    selectMode: boolean;
+    animValue: Animated.Value;
   };
 
   onShowPopupMenu: (event: Object) => void;
   onDismissPopupMenu: (event: Object) => void;
 
-  $listView: ListView;
+  $listView: FlatList;
   $keyboardAvoidView: KeyboardAvoidingView;
   $inputFooter: Footer;
   keyboardListeners: Array<Object>;
@@ -56,22 +56,24 @@ export default class Chat extends Component {
 
     this.onShowPopupMenu = this.onShowPopupMenu.bind(this);
     this.onMessagePress = this.onMessagePress.bind(this);
+    this.onMessageSelectChange = this.onMessageSelectChange.bind(this);
 
     this.keyboardAppear = this.keyboardAppear.bind(this);
     this.keyboardDisappear = this.keyboardDisappear.bind(this);
 
+    const { selectedConversation } = this.props.communication;
+    const messagesCount = selectedConversation
+      ? selectedConversation.messages.length : 0;
+
     this.state = {
+      messagesCount,
       showOlderMsgsLoader: false,
       showPopupMenu: false,
       popupPosY: 0,
       popupPosX: 0,
       selectedMessage: null,
-      isInitRun: true,
-      listHeight: 0,
-      listContentHeight: 0,
-      showForwardAnim: false,
       keyboardHeight: 0,
-      selectMode: false,
+      animValue: new Animated.Value(0),
     };
   }
 
@@ -86,18 +88,11 @@ export default class Chat extends Component {
     ];
   }
 
-  componentWillReceiveProps(newProps) {
-    const { currentConversationId } = this.props;
-    if (currentConversationId !== newProps.currentConversationId) {
-      this.setState({
-        isInitRun: true,
-        listContentHeight: 0,
-      });
-    }
-  }
-
   componentWillUnmount() {
-    this.props.communication.removeMessageForReply();
+    const { communication } = this.props;
+    communication.removeMessageForReply();
+    communication.removeMessageForEdit();
+
     if (this.loaderTimer) {
       clearTimeout(this.loaderTimer);
     }
@@ -105,54 +100,57 @@ export default class Chat extends Component {
     this.keyboardListeners.forEach(listener => listener.remove());
   }
 
-  onListContentSizeChange(listContentHeight) {
-    const { isInitRun, listHeight } = this.state;
-    const { selectedConversation } = this.props.communication;
+  /* eslint-disable sort-class-members/sort-class-members */
+  componentWillReact() {
+    const { communication } = this.props;
+    const {
+      messageForReply, messageForEdit, selectedConversation, selectedMessages,
+      selectMode,
+    } = communication;
+    const { animValue, messagesCount, showOlderMsgsLoader } = this.state;
 
-    if (listContentHeight > listHeight && listHeight !== 0) {
-      if (isInitRun && this.$listView) {
-        this.$listView.scrollToEnd({ animated: false });
-      } else if (this.$listView && selectedConversation.isNewMessageAdded) {
-        this.$listView.scrollToEnd({ animated: true });
-        selectedConversation.clearNewMessageFlag();
+    const newMessagesCount = selectedConversation
+      ? selectedConversation.messages.length : 0;
+
+    if (messagesCount !== newMessagesCount) {
+      if (this.$listView && !showOlderMsgsLoader
+        && !communication.isLoading) {
+        this.$listView.scrollToOffset({ offset: 0, animated: true });
       }
-    } else if (this.$listView && listHeight !== 0) {
-      this.$listView.scrollTo({ x: 0, y: 0, animated: true });
+
+      this.setState({ messagesCount: newMessagesCount });
     }
 
-    // After first render of list switch scrollToEnd animated param to true
-    // if listHeight === 0 we didn't scroll onListLayout will scrollToEnd
-    // first time
-    this.setState({
-      listContentHeight,
-      isInitRun: listHeight === 0,
-    });
-  }
-
-  onListLayout({ nativeEvent: { layout } }) {
-    const { listContentHeight, listHeight } = this.state;
-
-    if (listHeight !== 0) return;
-
-    // Test if it runs after onContentChange and onContentChange
-    // didn't has listHeight and do not scrollToEnd yet because of this
-    if (listContentHeight !== 0 && listContentHeight > layout.height) {
-      this.$listView.scrollToEnd({ animated: false });
+    /* eslint-disable no-underscore-dangle */
+    const isMsgsForForward = selectedMessages.length > 0 && !selectMode;
+    if ((isMsgsForForward || messageForReply || messageForEdit)) {
+      if (animValue._value === 0) {
+        Animated.timing(animValue, {
+          toValue: 50,
+          duration: 300,
+        }).start();
+      }
+    } else if (animValue._value === 50) {
+      Animated.timing(animValue, {
+        toValue: 0,
+        duration: 300,
+      }).start();
     }
-
-    // If listContentHeight === 0 we didn't scroll onContentChange will
-    // scrollToEnd first time else it sets scrollToEnd animated param to true
-    this.setState({
-      listHeight: layout.height,
-      isInitRun: listContentHeight === 0,
-    });
+    /* eslint-enable no-underscore-dangle */
   }
 
-  async onScroll({ nativeEvent }) {
+  async onViewableItemsChange({ viewableItems }) {
+    if (!viewableItems || viewableItems.length === 0) return;
+
     const { communication } = this.props;
     const { selectedConversation } = communication;
 
-    if (nativeEvent.contentOffset.y <= 0) {
+    if (!selectedConversation || !selectedConversation.messages) return;
+
+    const lastMessageIdx = selectedConversation.messages.length - 1;
+    const currentMessageIdx = viewableItems[viewableItems.length - 1].index;
+
+    if (lastMessageIdx === currentMessageIdx) {
       if (!this.state.showOlderMsgsLoader
         && !selectedConversation.allMessagesFetched) {
         this.setState({ showOlderMsgsLoader: true });
@@ -190,33 +188,16 @@ export default class Chat extends Component {
   }
 
   onMessagePress() {
-    this.onDismissPopupMenu();
-    Keyboard.dismiss();
+    this.dismissPopupMenuAndKeyboard();
   }
 
   onDeleteMessage() {
     const { communication } = this.props;
-    const { selectedMessage } = this.state;
 
-    if (!selectedMessage || selectedMessage.deleted) {
-      return;
-    }
-
-    Alert.alert(
-      'Attention!',
-      'Delete message?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-        {
-          text: 'OK',
-          onPress: () => communication.deleteMessage(selectedMessage.id),
-        },
-      ],
-      { cancelable: false }
-    );
+    this.cleareAllCurrentSelections();
+    communication.setSelectMode(true);
+    communication.selectMessage(this.state.selectedMessage);
+    this.onDismissPopupMenu();
   }
 
   onInputInFocus() {
@@ -224,31 +205,39 @@ export default class Chat extends Component {
   }
 
   onEditMessage() {
+    const { communication } = this.props;
     const { selectedMessage } = this.state;
 
-    this.context.navigator.push({
-      screen: 'communication.EditMessage',
-      animated: true,
-      passProps: {
-        message: selectedMessage,
-        onSave: this.onSendEditedMessage.bind(this),
-        fullEditorMode: false,
-      },
-    });
+    if (!selectedMessage) return;
+
+    this.cleareAllCurrentSelections();
+    communication.setMessageForEdit(selectedMessage);
+
+    this.onDismissPopupMenu();
+    if (this.$inputFooter) {
+      this.$inputFooter.wrappedInstance.setFocusToInput();
+    }
   }
 
-  onSendEditedMessage(messageText) {
-    const { selectedMessage } = this.state;
-    if (selectedMessage) {
-      this.props.communication.editMessage(selectedMessage.id, messageText);
+  onEmptyFieldTap() {
+    this.dismissPopupMenuAndKeyboard();
+  }
+
+  onMessageSelectChange(select: boolean, message: Message) {
+    const { communication } = this.props;
+    if (select) {
+      communication.selectMessage(message);
+    } else {
+      communication.deselectMessage(message.id);
     }
   }
 
   onReplyToMessage() {
     const { selectedMessage } = this.state;
-    if (selectedMessage) {
-      this.props.communication.setMessageForReply(selectedMessage);
-    }
+    if (!selectedMessage) return;
+
+    this.cleareAllCurrentSelections();
+    this.props.communication.setMessageForReply(selectedMessage);
 
     this.onDismissPopupMenu();
     if (this.$inputFooter) {
@@ -257,11 +246,18 @@ export default class Chat extends Component {
   }
 
   onForwardMessage() {
-    const { selectMode } = this.state;
+    const { communication } = this.props;
 
-    this.setState({ selectMode: !selectMode });
-    this.props.communication.setSelectMode(!selectMode);
+    this.cleareAllCurrentSelections();
+    communication.setSelectMode(true);
+    communication.setForwardMode(true);
+    communication.selectMessage(this.state.selectedMessage);
     this.onDismissPopupMenu();
+  }
+
+  dismissPopupMenuAndKeyboard() {
+    this.onDismissPopupMenu();
+    Keyboard.dismiss();
   }
 
   getActionsForMessage(message: Message) {
@@ -295,6 +291,13 @@ export default class Chat extends Component {
     return actions;
   }
 
+  cleareAllCurrentSelections() {
+    const { communication } = this.props;
+    communication.removeMessageForReply();
+    communication.removeMessageForEdit();
+    communication.clearSelectedMessages();
+  }
+
   keyboardAppear({ endCoordinates: { height } }) {
     this.setState({ keyboardHeight: height });
   }
@@ -303,17 +306,23 @@ export default class Chat extends Component {
     this.setState({ keyboardHeight: 0 });
   }
 
-  renderRow(message) {
+  renderItem({ item: message }) {
+    const { communication } = this.props;
+
     return (
       <MessageView
         message={message}
+        selected={communication.checkMessageSelected(message.id)}
         onPress={this.onMessagePress}
         onLongPress={this.onShowPopupMenu}
+        onSelectPress={this.onMessageSelectChange}
+        selectMode={communication.selectMode}
+        deleteMode={!communication.forwardMode}
       />
     );
   }
 
-  renderHeader() {
+  renderFooter() {
     return (
       <View style={styles.listHeader}>
         <Loader isLoading={this.state.showOlderMsgsLoader} />
@@ -324,16 +333,22 @@ export default class Chat extends Component {
   render() {
     const { communication, style } = this.props;
     const {
-      keyboardHeight, showPopupMenu, popupPosY, popupPosX, selectedMessage,
+      animValue, keyboardHeight, showPopupMenu, popupPosY, popupPosX,
+      selectedMessage,
     } = this.state;
 
     const {
       messageForReply,
+      messageForEdit,
       selectedConversation: conversation,
-      selectedConversationDataSource: ds,
       selectedConversationId,
+      selectedMessages,
+      selectMode,
     } = communication;
 
+    const isMsgsForForward = selectedMessages.length > 0 && !selectMode;
+
+    // TODO: try to use pop(n)
     // This is hack to go to contacts list if we delete group we set
     // selectedConversationId = null. We need it because RNN doesn't have popTo
     // only for phone layout
@@ -345,8 +360,8 @@ export default class Chat extends Component {
 
     if (!conversation) {
       return (
-        <Loader isLoading={ds.isLoading}>
-          {ds.isError && <ErrorBox message={ds.error} />}
+        <Loader isLoading={communication.isLoading}>
+          {communication.isError && <ErrorBox message={communication.error} />}
         </Loader>
       );
     }
@@ -357,30 +372,38 @@ export default class Chat extends Component {
         contentContainerStyle={styles.container}
         behavior={Platform.OS === 'ios' ? 'position' : null}
         ref={ref => this.$keyboardAvoidView = ref}
+        onStartShouldSetResponder={() => true}
+        onResponderGrant={::this.onEmptyFieldTap}
       >
-        <ListView
+        <FlatList
           style={styles.list}
           contentContainerStyle={styles.listInsideCont}
-          dataSource={ds}
-          enableEmptySections
           keyboardShouldPersistTaps="handled"
           ref={ref => this.$listView = ref}
-          renderHeader={::this.renderHeader}
-          renderRow={::this.renderRow}
-          initialListSize={conversation.messages.length}
-          onContentSizeChange={(w, h) => this.onListContentSizeChange(h)}
-          onLayout={::this.onListLayout}
-          onScroll={::this.onScroll}
+          ListFooterComponent={::this.renderFooter}
+          renderItem={::this.renderItem}
+          keyExtractor={item => item.id}
+          data={conversation.messages.slice().reverse()}
+          onViewableItemsChanged={::this.onViewableItemsChange}
           removeClippedSubviews={false}
         />
-        <Footer
-          ref={ref => this.$inputFooter = ref}
-          onInputInFocus={::this.onInputInFocus}
-          conversationId={conversation.id}
-          conversationType={communication.selectedConversation.type}
-        />
+        <Animated.View style={{ height: animValue }} />
+
+        {selectMode ? (
+          <SelectionFooter />
+        ) : (
+          <Footer
+            ref={ref => this.$inputFooter = ref}
+            onInputInFocus={::this.onInputInFocus}
+            textValue={messageForEdit ? messageForEdit.editBody : ''}
+            conversationId={conversation.id}
+            conversationType={communication.selectedConversation.type}
+          />
+        )}
 
         {messageForReply && <ReplyMessage />}
+        {isMsgsForForward && <ForwardMessage />}
+        {messageForEdit && <EditMessage />}
 
         {showPopupMenu && (
           <PopupMenu
@@ -404,6 +427,7 @@ const styles = StyleSheet.create({
 
   list: {
     flex: 1,
+    transform: [{ scaleY: -1 }],
   },
 
   listInsideCont: {

@@ -6,12 +6,17 @@ import StyleSheet from './StyleSheet';
 const RADIUS = 12;
 
 export default class RoundSwitch extends Component {
+  static defaultProps = {
+    disabled: false,
+  };
+
   props: {
     onValueChange: () => any;
     style?: Object;
     onIconStyle?: Object;
     offIconStyle?: Object;
-    initValue?: boolean;
+    disabled?: boolean;
+    value?: boolean;
   };
 
   state: {
@@ -23,14 +28,22 @@ export default class RoundSwitch extends Component {
     super(props);
 
     this.state = {
-      value: props.initValue,
+      value: props.value,
       animValue: new Animated.Value(0),
     };
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.value !== this.state.value) {
+      this.onPress();
+    }
+  }
+
   onPress() {
-    const { onValueChange } = this.props;
+    const { disabled, onValueChange } = this.props;
     const { animValue, value } = this.state;
+
+    if (disabled) return;
 
     this.setState({ value: !value }, Animated.timing(animValue, {
       toValue: 8,
@@ -45,7 +58,7 @@ export default class RoundSwitch extends Component {
   }
 
   render() {
-    const { style, onIconStyle, offIconStyle } = this.props;
+    const { disabled, style, onIconStyle, offIconStyle } = this.props;
     const { animValue, value } = this.state;
 
     const scale = animValue.interpolate({
@@ -73,6 +86,10 @@ export default class RoundSwitch extends Component {
       source = 'icon-checkbox-24';
     }
 
+    if (disabled) {
+      iconStyle.push(styles.disabled);
+    }
+
     return (
       <Animated.View style={containerStyle}>
         <Icon
@@ -80,6 +97,7 @@ export default class RoundSwitch extends Component {
           touchStyle={styles.onBtn}
           source={source}
           onPress={::this.onPress}
+          disabled={disabled}
         />
       </Animated.View>
     );
@@ -113,5 +131,9 @@ const styles = StyleSheet.create({
     color: '$pe_color_icon',
     fontWeight: '100',
     fontSize: 22,
+  },
+
+  disabled: {
+    color: '$pe_color_light_gray',
   },
 });

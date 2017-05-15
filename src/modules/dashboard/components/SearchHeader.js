@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, PropTypes } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { Icon, ImageButton, StyleSheet, View, Text } from 'ui';
 import type { Navigator } from 'react-native-navigation';
@@ -9,18 +9,25 @@ import { toggleMenu } from '../../../common/Navigation';
 @inject('profiles')
 @observer
 export default class SearchHeader extends Component {
+  static contextTypes = {
+    navigator: PropTypes.object.isRequired,
+  };
+
   props: {
-    navigator: Navigator;
     title?: string;
     profiles?: ProfilesStore;
   };
 
+  context: {
+    navigator: Navigator;
+  };
+
   onProfilePress() {
-    toggleMenu(this.props.navigator);
+    toggleMenu(this.context.navigator);
   }
 
   onSearchPress() {
-    const { navigator } = this.props;
+    const { navigator } = this.context;
     navigator.push({
       title: 'Search',
       animated: false,

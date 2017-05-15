@@ -2,7 +2,10 @@ import { Component, PropTypes } from 'react';
 import { Keyboard, TextInput } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
-import { Icon, StyleSheet, View } from 'ui';
+import * as Animatable from 'react-native-animatable';
+import ImagePicker from 'react-native-image-picker';
+import { Icon, StyleSheet } from 'ui';
+import { log } from 'utils';
 
 import CommunicationStore from '../../../../store/communication';
 import type { ConversationType } from
@@ -26,7 +29,7 @@ export default class Footer extends Component {
     conversationId: number;
     textValue?: string;
     conversationType: ConversationType;
-    onInputInFocus?: Function;
+    onInputInFocus?: () => void;
   };
 
   state: {
@@ -39,15 +42,59 @@ export default class Footer extends Component {
     this.state = {
       text: props.textValue || '',
     };
+
     this.onType = ::this.onType;
   }
 
-  onActionPress() {
-    const { conversationId } = this.props;
+  componentWillReceiveProps(newProps) {
+    if (newProps.textValue !== this.props.textValue) {
+      this.setState({ text: newProps.textValue });
+    }
+  }
 
-    this.context.navigator.push({
-      screen: 'marketing.CreateOffer',
-      passProps: { conversationId },
+  onActionPress() {
+    const { conversationId, communication } = this.props;
+    const options = {
+      title: 'Attachments',
+      customButtons: [{
+        name: 'offer',
+        title: 'Send New Offer',
+      }],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+
+    ImagePicker.showImagePicker(options, (response) => {
+      if (!response || response.error || response.didCancel) {
+        log.error(response.error);
+        return;
+      }
+
+      if (response.customButton) {
+        this.context.navigator.push({
+          screen: 'marketing.CreateOffer',
+          passProps: { conversationId },
+        });
+        return;
+      }
+
+      if (!response.fileName) {
+        response.fileName = response.uri.split('/').pop();
+      }
+
+
+      communication.sendMessageWithMedias(
+        this.state.text,
+        {
+          data: response.data,
+          fileName: response.fileName,
+        },
+        conversationId
+      );
+
+      this.setState({ text: '' });
     });
   }
 
@@ -62,6 +109,14 @@ export default class Footer extends Component {
   onSend() {
     const { text } = this.state;
     const { communication, conversationId, conversationType } = this.props;
+    const { messageForEdit } = communication;
+
+    if (messageForEdit) {
+      communication.editMessage(messageForEdit.id, text);
+      communication.removeMessageForEdit();
+      return;
+    }
+
     if (text) {
       if (conversationType === 'marketing-group') {
         communication.sendMsgToMarketingGroup(
@@ -71,6 +126,10 @@ export default class Footer extends Component {
       } else {
         communication.sendMessage(conversationId, text);
       }
+    }
+
+    if (communication.selectedMessages.length > 0) {
+      communication.forwardSelectedMessages();
     }
 
     Keyboard.dismiss();
@@ -93,16 +152,36 @@ export default class Footer extends Component {
     }
   }
 
+  removeFocusFromInput() {
+    if (this.$input) {
+      this.$input.blur();
+    }
+  }
+
   render() {
-    const { communication } = this.props;
+    const {
+      messengerInfo, selectedMessages, messageForReply, messageForEdit,
+    } = this.props.communication;
+    const { text } = this.state;
 
     let isBusiness = false;
-    if (communication.messengerInfo) {
-      isBusiness = communication.messengerInfo.isBusiness;
+    if (messengerInfo) {
+      isBusiness = messengerInfo.isBusiness;
+    }
+
+    const sendBtnStyle = [styles.icon];
+    if (selectedMessages.length > 0 || messageForReply
+      || messageForEdit || text !== '') {
+      sendBtnStyle.push(styles.activeSendBtn);
     }
 
     return (
-      <View style={styles.container}>
+      <Animatable.View
+        ref={c => this.$container = c}
+        style={styles.container}
+        animation="slideInUp"
+        duration={300}
+      >
         {isBusiness && (
           <Icon
             style={styles.icon}
@@ -123,13 +202,13 @@ export default class Footer extends Component {
           value={this.state.text}
         />
         <Icon
-          style={styles.icon}
+          style={sendBtnStyle}
           hitSlop={14}
           onPress={::this.onSend}
-          source="icon-arrow-right-16"
+          source={messageForEdit ? 'fa-check' : 'fa-paper-plane'}
           touchStyle={styles.icon_touch}
         />
-      </View>
+      </Animatable.View>
     );
   }
 }
@@ -165,6 +244,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 12,
+  },
+
+  activeSendBtn: {
+    color: '$pe_color_blue',
   },
 
   input: {
