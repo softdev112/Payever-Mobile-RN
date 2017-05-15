@@ -1,20 +1,18 @@
-import { Component } from 'react';
 import { images, NavBar, StyleSheet, View } from 'ui';
 import Contacts from '../components/contacts';
+import Dock from '../../../modules/core/components/Dock';
 
-export default class ContactsScreen extends Component {
-  static navigatorStyle = {
-    navBarHidden: true,
-  };
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <NavBar.Default title="Communication" source={images.communication} />
-        <Contacts style={styles.contacts} phoneView />
-      </View>
-    );
-  }
+export default function () {
+  return (
+    <View style={styles.container}>
+      <NavBar>
+        <NavBar.Title title="Communication" source={images.communication} />
+        <NavBar.Menu />
+      </NavBar>
+      <Contacts style={styles.contacts} phoneView />
+      <Dock />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

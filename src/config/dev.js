@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import local from './local';
 
 export default Object.assign({
@@ -9,5 +10,38 @@ export default Object.assign({
   },
   debug: {
     logApiCall: true,
+  },
+
+  oauthData: {
+    twitter: {
+      appId: 'oRCkHDAnAFSXiO1wayGlpBkwn',
+      appSecret: 'C3FUgIBnjdn1Je6dD5NX5AboFEJ1vWqVVwOLJ03Itk0Xp58but',
+      callback: '/social/auth/twitter',
+    },
+
+    facebook: {
+      appId: '438908279593357',
+      appSecret: 'cd96a62e92a5bc498896209613e2d0bf',
+      callback: '/social/auth/facebook',
+      scope: 'email public_profile',
+      fields: [
+        'id', 'name', 'first_name', 'last_name',
+        'picture.type(large)', 'email', 'cover', 'birthday',
+      ],
+    },
+
+    google: {
+      appId: '463919467171-u54vacd9oiso7l14f97g38odsak91njg.apps.googleusercontent.com',
+      appSecret: 'SihRvMNWT2j5088wEZ_A2MRR',
+      callback: 'com.googleusercontent.apps.463919467171-u54vacd9oiso7l14f97g38odsak91njg:/google',
+      scope: 'https://www.googleapis.com/auth/content',
+    },
+
+    linkedIn: {
+      appId: '78i17qw4bkesm1',
+      appSecret: 'bZ7BkFzZghsn031w',
+      callback: '/social/connect/auth_linkedin/',
+      scope: 'r_basicprofile r_emailaddress',
+    },
   },
 }, local);

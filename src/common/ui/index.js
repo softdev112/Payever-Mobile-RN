@@ -6,6 +6,7 @@ export { Image, View } from 'react-native';
 export StyleSheet from './StyleSheet';
 
 export BottomDock from './BottomDock';
+export BottomOverlay from './BottomOverlay';
 export Button from './Button';
 export Container from './Container';
 export DataSource from './DataSource';
@@ -27,6 +28,8 @@ export NavBar from './NavBar';
 export WebViewEx from './WebViewEx';
 export PopupMenu from './PopupMenu';
 export RoundSwitch from './RoundSwitch';
+export SegmentedControl from './SegmentedControl';
+export SocialIconButton from './SocialIconButton';
 export Text from './Text';
 export TextInput from './TextInput';
 export TextButton from './TextButton';

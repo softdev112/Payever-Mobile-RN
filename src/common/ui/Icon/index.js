@@ -12,11 +12,16 @@ const DEFAULT_HIT_SLOP   = 10;
  * are stored as bitmap or as transformed SVG.
  */
 export default class Icon extends Component {
+  static defaultProps = {
+    disabled: false,
+  };
+
   props: {
     hitSlop?: Object;
     onPress?: () => any;
     source: string | Object;
     touchStyle?: Object | number;
+    disabled?: boolean;
   };
 
   constructor(props) {
@@ -27,7 +32,7 @@ export default class Icon extends Component {
   }
 
   render() {
-    const { onPress, source, touchStyle } = this.props;
+    const { disabled, onPress, source, touchStyle } = this.props;
     const { hitSlop } = this.state;
     const iconNode = componentFactory(source, this.props);
 
@@ -37,6 +42,7 @@ export default class Icon extends Component {
           hitSlop={hitSlop}
           onPress={onPress}
           style={touchStyle}
+          disabled={disabled}
         >
           {iconNode}
         </TouchableOpacity>

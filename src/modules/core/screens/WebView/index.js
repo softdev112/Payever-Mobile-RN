@@ -7,6 +7,8 @@ import { log } from 'utils';
 
 import injectedCode, { getLoaderHtml } from './injectedCode';
 import WebViewError from './WebViewError';
+import WebViewLoader from '../../../../common/ui/WebView/WebViewLoader';
+import Dock from '../../components/Dock';
 import { showScreen, toggleMenu } from '../../../../common/Navigation';
 import type AuthStore from '../../../../store/auth';
 import type { Config } from '../../../../config';
@@ -43,6 +45,7 @@ export default class WebView extends Component {
     isCustomNavBar: boolean;
     title: string;
     titleImgUrl: string;
+    showLoader: boolean;
   };
 
   $view: ReactWebView;
@@ -61,6 +64,7 @@ export default class WebView extends Component {
       isCustomNavBar: false,
       title: '',
       titleImgUrl: '',
+      showLoader: true,
     };
   }
 
@@ -146,6 +150,11 @@ export default class WebView extends Component {
         break;
       }
 
+      case 'hide-loader': {
+        this.setState({ showLoader: false });
+        break;
+      }
+
       default: {
         log.warn(`Unknown webview command ${object.command}`);
       }
@@ -163,7 +172,9 @@ export default class WebView extends Component {
 
   render() {
     const { url, referer } = this.props;
-    const { errorMsg, isCustomNavBar, title, titleImgUrl } = this.state;
+    const {
+      errorMsg, isCustomNavBar, showLoader, title, titleImgUrl,
+    } = this.state;
     const topInset = isCustomNavBar ? -75 : 0;
 
     let source;
@@ -202,6 +213,9 @@ export default class WebView extends Component {
           renderError={::this.renderError}
           bounces={false}
         />
+
+        {showLoader && <WebViewLoader />}
+        <Dock />
       </View>
     );
   }

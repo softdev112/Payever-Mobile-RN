@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
+import { Alert } from 'react-native';
 import type { Navigator } from 'react-native-navigation';
 import { NavBar, StyleSheet, View } from 'ui';
 import Chat from '../components/chat';
@@ -17,6 +18,48 @@ export default class ChatScreen extends Component {
     communication: CommunicationStore;
     navigator: Navigator;
   };
+
+  onDeleteAllMessages() {
+    const { communication } = this.props;
+    const { selectedConversation } = communication;
+    const messagesCount = selectedConversation.messages.length;
+
+    if (messagesCount === 0) return;
+
+    let warningText = `Delete All ${messagesCount}`;
+    if (messagesCount === 1) {
+      warningText += ' message?';
+    } else {
+      warningText += ' messages?';
+    }
+
+    Alert.alert(
+      'Attention!',
+      warningText,
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: () => {
+            communication.deleteAllMsgsInSelectConversation();
+            communication.setSelectMode(false);
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  }
+
+  onCancelSelectedMode() {
+    const { communication } = this.props;
+
+    communication.clearSelectedMessages();
+    communication.setSelectMode(false);
+    communication.setForwardMode(false);
+  }
 
   onSettingsPress() {
     const { communication, navigator } = this.props;
@@ -38,20 +81,37 @@ export default class ChatScreen extends Component {
   }
 
   render() {
-    const { messengerInfo, selectedConversationId } = this.props.communication;
+    const {
+      messengerInfo, selectedConversationId, selectMode, forwardMode,
+    } = this.props.communication;
     const { avatar } = messengerInfo.byId(selectedConversationId);
 
     return (
       <View style={styles.container}>
         <NavBar>
-          <NavBar.Back />
+          {(selectMode && !forwardMode) && (
+            <NavBar.Button
+              align="left"
+              title="Delete All"
+              onPress={::this.onDeleteAllMessages}
+            />
+          )}
+          {!selectMode && <NavBar.Back />}
+
           <NavBar.ComplexTitle>
             <Header />
           </NavBar.ComplexTitle>
-          <NavBar.Avatar
-            avatar={avatar}
-            onPress={::this.onSettingsPress}
-          />
+          {selectMode ? (
+            <NavBar.Button
+              title="Cancel"
+              onPress={::this.onCancelSelectedMode}
+            />
+          ) : (
+            <NavBar.Avatar
+              avatar={avatar}
+              onPress={::this.onSettingsPress}
+            />
+          )}
         </NavBar>
         <Chat style={styles.chat} />
       </View>

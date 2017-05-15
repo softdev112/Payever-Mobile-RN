@@ -39,18 +39,23 @@ export default class SideMenu extends Component {
   }
 
   onProfileSelect(profile: BusinessProfile) {
-    const { profiles } = this.props;
+    const { navigator, profiles } = this.props;
 
     this.onClose();
     profiles.setCurrentProfile(profile);
-    showScreen('dashboard.Dashboard');
+    navigator.resetTo({
+      screen: 'communication.Main',
+      animated: false,
+    });
   }
 
   onUserPress() {
-    const { profiles } = this.props;
+    const { navigator, profiles } = this.props;
     profiles.setCurrentProfile(profiles.privateProfile);
-    // todo: replace to navigator.push
-    showScreen('dashboard.Private');
+    navigator.resetTo({
+      screen: 'communication.Main',
+      animated: false,
+    });
   }
 
   onProfileSettingsPress() {

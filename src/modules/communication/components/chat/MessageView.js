@@ -1,22 +1,20 @@
-import { Component, PropTypes } from 'react';
-import { observer, inject } from 'mobx-react/native';
+import { PureComponent, PropTypes } from 'react';
 import { Animated, TouchableWithoutFeedback } from 'react-native';
 import type { Navigator } from 'react-native-navigation';
 import { Html, RoundSwitch, StyleSheet, Text, View } from 'ui';
 
 import MediaView from './MediaView';
+import UploadFileMsgView from './UploadFileMsgView';
 import Avatar from '../contacts/Avatar';
 import type Message from '../../../../store/communication/models/Message';
 import Offer from '../../../marketing/components/OfferDetails';
-import CommunicationStore from '../../../../store/communication';
 
 const SWITCH_INIT_Y_POS = -40;
 
-@inject('communication')
-@observer
-export default class MessageView extends Component {
+export default class MessageView extends PureComponent {
   static defaultProps = {
     selectMode: false,
+    selected: false,
   };
 
   static contextTypes = {
@@ -25,8 +23,10 @@ export default class MessageView extends Component {
 
   props: {
     message: Message;
-    communication: CommunicationStore;
+    style?: Object;
     selectMode?: boolean;
+    selected?: boolean;
+    deleteMode?: boolean;
     onPress?: () => void;
     onLongPress?: () => void;
     onSelectPress?: () => void;
@@ -51,7 +51,7 @@ export default class MessageView extends Component {
   }
 
   componentDidMount() {
-    const { selectMode } = this.props.communication;
+    const { selectMode } = this.props;
 
     if (selectMode) {
       this.onSelectModeOn();
@@ -59,11 +59,11 @@ export default class MessageView extends Component {
   }
 
   componentWillReceiveProps(newProps) {
-    const { selectMode } = this.props.communication;
+    const { selectMode } = this.props;
 
-    if (!selectMode && newProps.communication.selectMode) {
+    if (!selectMode && newProps.selectMode) {
       this.onSelectModeOn();
-    } else if (selectMode && !newProps.communication.selectMode) {
+    } else if (selectMode && !newProps.selectMode) {
       this.onSelectedModeOff();
     }
   }
@@ -109,16 +109,19 @@ export default class MessageView extends Component {
   onMessageLongPress({ nativeEvent }) {
     const { message, onLongPress } = this.props;
 
+    if (message.deleted) return;
+
     if (onLongPress) {
       onLongPress(nativeEvent, message);
     }
   }
 
-  onSelectValueChange() {
-    const { onSelectPress } = this.props;
+  onSelectValueChange(value: boolean) {
+    const { message, onSelectPress } = this.props;
+    if (message.deleted) return;
 
     if (onSelectPress) {
-      onSelectPress();
+      onSelectPress(value, message);
     }
   }
 
@@ -141,12 +144,16 @@ export default class MessageView extends Component {
   }
 
   render() {
-    const { message } = this.props;
+    const { deleteMode, message, selected, style } = this.props;
     const { paddingAnimValue, leftPosAnimValue } = this.state;
+
+    if (message.isFileUploading) {
+      return <UploadFileMsgView message={message} />;
+    }
 
     if (message.isSystem) {
       return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
           <Text style={styles.messageSystem}>{message.body}</Text>
         </View>
       );
@@ -164,12 +171,13 @@ export default class MessageView extends Component {
         onPress={::this.onMessagePress}
       >
         <Animated.View
-          style={[styles.container, { paddingLeft: paddingAnimValue }]}
+          style={[styles.container, { paddingLeft: paddingAnimValue }, style]}
         >
           <RoundSwitch
-            style={[styles.selectSwitch,
-            { left: leftPosAnimValue }]}
+            style={[styles.selectSwitch, { left: leftPosAnimValue }]}
+            value={selected}
             onValueChange={::this.onSelectValueChange}
+            disabled={(deleteMode && !message.deletable) || message.deleted}
           />
           <Avatar style={styles.avatar} avatar={message.avatar} />
           <View style={styles.message}>
@@ -206,6 +214,7 @@ const styles = StyleSheet.create({
     minHeight: 50,
     padding: 4,
     paddingBottom: 8,
+    transform: [{ scaleY: -1 }],
   },
 
   body: {
@@ -266,7 +275,7 @@ const styles = StyleSheet.create({
   },
 
   replayContainer: {
-    borderLeftColor: '$pe_color_dark_gray',
+    borderLeftColor: '$pe_color_blue',
     borderLeftWidth: 1,
     paddingLeft: 10,
     paddingVertical: 2,
@@ -274,7 +283,7 @@ const styles = StyleSheet.create({
   },
 
   replySender: {
-    color: '$pe_color_dark_gray',
+    color: '$pe_color_blue',
     fontSize: 11,
     fontWeight: '500',
   },
