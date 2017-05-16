@@ -40,7 +40,7 @@ export default class ProfilesApi {
     return this.client.delete(`/api/rest/v1/profiles/${businessId}/unfollow`);
   }
 
-  getAllContacts(businessId, page): Promise<ProfileContactsResp> {
+  async getAllContacts(businessId, page): Promise<ProfileContactsResp> {
     return this.client.get(
       `/api/rest/v1/contact/business/${businessId}`,
       { page }

@@ -125,9 +125,9 @@ export default class Conversation {
   }
 
   setNotificationSetting(value) {
-    extendObservable(this.settings, {
-      notification: value,
-    });
+    if (this.settings) {
+      this.settings.notification = value;
+    }
   }
 }
 

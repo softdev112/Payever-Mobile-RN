@@ -5,6 +5,7 @@ import type { Navigator } from 'react-native-navigation';
 import { NavBar, StyleSheet, View } from 'ui';
 import Chat from '../components/chat';
 import Header from '../components/chat/Header';
+import SettingsFloatMenu from '../components/chat/SettingsFloatMenu';
 import CommunicationStore from '../../../store/communication';
 
 @inject('communication')
@@ -18,6 +19,20 @@ export default class ChatScreen extends Component {
     communication: CommunicationStore;
     navigator: Navigator;
   };
+
+  state: {
+    showSettingsPopup: true;
+  };
+
+  $settingsPopup: SettingsFloatMenu;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showSettingsPopup: false,
+    };
+  }
 
   onDeleteAllMessages() {
     const { communication } = this.props;
@@ -80,10 +95,27 @@ export default class ChatScreen extends Component {
     }
   }
 
+  onSwitchSettingsPopup() {
+    const { showSettingsPopup } = this.state;
+
+    if (showSettingsPopup && this.$settingsPopup) {
+      this.$settingsPopup.wrappedInstance.hideSettingsPopup(
+        ::this.onRemoveSettingsPopup
+      );
+    } else {
+      this.setState({ showSettingsPopup: true });
+    }
+  }
+
+  onRemoveSettingsPopup() {
+    this.setState({ showSettingsPopup: false });
+  }
+
   render() {
     const {
       messengerInfo, selectedConversationId, selectMode, forwardMode,
     } = this.props.communication;
+    const { showSettingsPopup } = this.state;
     const { avatar } = messengerInfo.byId(selectedConversationId);
 
     return (
@@ -98,7 +130,7 @@ export default class ChatScreen extends Component {
           )}
           {!selectMode && <NavBar.Back />}
 
-          <NavBar.ComplexTitle>
+          <NavBar.ComplexTitle onPress={::this.onSwitchSettingsPopup}>
             <Header />
           </NavBar.ComplexTitle>
           {selectMode ? (
@@ -113,6 +145,13 @@ export default class ChatScreen extends Component {
             />
           )}
         </NavBar>
+
+        {showSettingsPopup && (
+          <SettingsFloatMenu
+            ref={r => this.$settingsPopup = r}
+            onRemove={::this.onRemoveSettingsPopup}
+          />
+        )}
         <Chat style={styles.chat} />
       </View>
     );

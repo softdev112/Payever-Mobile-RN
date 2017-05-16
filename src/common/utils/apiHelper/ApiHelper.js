@@ -180,6 +180,7 @@ async function loadData(apiPromise, cacheId, lifeTime, timeout, noCache) {
   if (!data && await isConnected()) {
     try {
       data = await loadFromApi(apiPromise, timeout);
+
       if (data && cacheId) {
         saveToCache(cacheId, lifeTime, data);
       }

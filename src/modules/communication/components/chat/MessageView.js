@@ -165,6 +165,9 @@ export default class MessageView extends PureComponent {
     const messageEdited = message.edited ? '(edited)' : '';
     const messageSeen = message.unread ? '' : 'Seen';
 
+    const isMsgSelectorDisable = message.deleted
+      || (deleteMode && !message.deletable);
+
     return (
       <TouchableWithoutFeedback
         onLongPress={::this.onMessageLongPress}
@@ -177,7 +180,7 @@ export default class MessageView extends PureComponent {
             style={[styles.selectSwitch, { left: leftPosAnimValue }]}
             value={selected}
             onValueChange={::this.onSelectValueChange}
-            disabled={(deleteMode && !message.deletable) || message.deleted}
+            disabled={isMsgSelectorDisable}
           />
           <Avatar style={styles.avatar} avatar={message.avatar} />
           <View style={styles.message}>

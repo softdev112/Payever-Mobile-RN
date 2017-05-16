@@ -58,7 +58,7 @@ function playSound(soundToPlay, settings: UserSettings = null) {
 /**
  * Return if current time inside no disturb period
  * @param from - No disturb period start time
- * @param to - No disturb perios end time
+ * @param to - No disturb period end time
  */
 function isNoDisturbPeriod(from: TimePoint, to: TimePoint): boolean {
   const date = new Date();
