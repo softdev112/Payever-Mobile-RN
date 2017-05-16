@@ -193,6 +193,7 @@ export default class Dock extends Component {
         onPress={() => this.onAppClick(item, index)}
         source={logoSource}
         title={title}
+        titleNumberOfLines={1}
       />
     );
   }

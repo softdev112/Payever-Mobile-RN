@@ -622,7 +622,7 @@ export default class CommunicationStore {
     const socket = await this.store.api.messenger.getSocket();
 
     return apiHelper(socket.getConversationSettings(id), this)
-      .success((data) => new ConversationSettingsData(data))
+      .success(data => new ConversationSettingsData(data))
       .promise();
   }
 
@@ -633,7 +633,12 @@ export default class CommunicationStore {
     apiHelper(socket.changeConvNotificationProp(
       this.selectedConversationId, state
     )).success();
+
     this.selectedConversation.setNotificationSetting(state);
+    const convInfo = this.messengerInfo.byId(this.selectedConversationId);
+    if (convInfo) {
+      convInfo.notification = state;
+    }
   }
 
   @action

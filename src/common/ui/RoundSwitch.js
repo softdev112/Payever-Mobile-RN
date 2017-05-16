@@ -35,7 +35,11 @@ export default class RoundSwitch extends Component {
 
   componentWillReceiveProps(newProps) {
     if (newProps.value !== this.state.value) {
-      this.onPress();
+      const { animValue, value } = this.state;
+      this.setState({ value: !value }, Animated.timing(animValue, {
+        toValue: 8,
+        duration: 600,
+      }).start(() => this.state.animValue.setValue(0)));
     }
   }
 
@@ -94,7 +98,6 @@ export default class RoundSwitch extends Component {
       <Animated.View style={containerStyle}>
         <Icon
           style={iconStyle}
-          touchStyle={styles.onBtn}
           source={source}
           onPress={::this.onPress}
           disabled={disabled}
@@ -116,10 +119,6 @@ const styles = StyleSheet.create({
 
   containerOff: {
     backgroundColor: '#FFF',
-  },
-
-  offBtn: {
-    backgroundColor: '$pe_color_gray_2',
   },
 
   onIcon: {

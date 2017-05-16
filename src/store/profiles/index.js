@@ -93,7 +93,8 @@ export default class ProfilesStore {
     }
 
     if (this.contactsDs.isLoading
-      || (currentPage !== 0 && currentPage === pageCount)) {
+      || (currentPage !== 0 && currentPage === pageCount)
+      || pageCount === 0) {
       return;
     }
 

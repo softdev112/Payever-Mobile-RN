@@ -7,7 +7,6 @@ import type { Navigator } from 'react-native-navigation';
 import type CommunicationStore from '../../../store/communication';
 import type UserSettings
   from '../../../store/communication/models/UserSettings';
-import CheckBoxPref from '../components/settings/CheckBoxPref';
 import SwitchableSliderPref from '../components/settings/SwitchableSliderPref';
 import SwitchableTimePeriodPref
   from '../components/settings/SwitchableTimePeriodPref';
@@ -55,12 +54,6 @@ export default class GeneralSettings extends Component {
           <NavBar.Button title="Save" onPress={::this.onSavePress} />
         </NavBar>
         <ScrollView contentContainerStyle={styles.settings}>
-          <CheckBoxPref
-            settings={settings}
-            prefName="notificationPreview"
-            title="Message Preview"
-            icon="fa-envelope-o"
-          />
           <SwitchableSliderPref
             settings={settings}
             switchPrefName="notificationSound"

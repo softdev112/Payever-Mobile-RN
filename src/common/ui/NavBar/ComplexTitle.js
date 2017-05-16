@@ -12,7 +12,7 @@ export default class ComplexTitle extends Component {
   };
 
   render() {
-    const { children, onPress } = this.props;
+    const { children, onPress = () => {} } = this.props;
 
     return (
       <NavBarItem onPress={onPress}>

@@ -3,7 +3,7 @@ import { Animated } from 'react-native';
 import Icon from './Icon';
 import StyleSheet from './StyleSheet';
 
-export default class ForwardMessage extends Component {
+export default class BottomOverlay extends Component {
   props: {
     children: Array<Component>;
     onRemove?: () => void;

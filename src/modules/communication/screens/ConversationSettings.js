@@ -27,9 +27,9 @@ export default class ConversationSettings extends Component {
   constructor(props) {
     super(props);
 
-    const { communication: { selectedConversation } } = this.props;
+    const { messengerInfo, selectedConversationId } = this.props.communication;
     this.state = {
-      notificationOn: selectedConversation.settings.notification,
+      notificationOn: messengerInfo.byId(selectedConversationId).notification,
     };
   }
 
@@ -108,7 +108,7 @@ export default class ConversationSettings extends Component {
                 icon="fa-bell-o"
                 onValueChange={::this.onConvNotificationPropChange}
               />
-              {settings.offers.length > 0 && (
+              {(settings.offers && settings.offers.length > 0) && (
                 <View style={styles.offersContainer}>
                   <Text style={styles.offersTitle}>Sent Offers:</Text>
                   <ScrollView
