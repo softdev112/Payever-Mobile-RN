@@ -18,6 +18,7 @@ export GridView from './GridView';
 export Header from './Header';
 export Html from './Html';
 export Icon from './Icon';
+export IconButton from './IconButton';
 export IconText from './IconText';
 export images from './images';
 export ImageButton from './ImageButton';

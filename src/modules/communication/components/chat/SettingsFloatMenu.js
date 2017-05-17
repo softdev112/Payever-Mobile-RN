@@ -2,7 +2,7 @@ import { Component, PropTypes } from 'react';
 import { Animated } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
-import { Icon, StyleSheet } from 'ui';
+import { IconButton, StyleSheet } from 'ui';
 
 import CommunicationStore from '../../../../store/communication';
 
@@ -61,6 +61,28 @@ export default class SettingsFloatMenu extends Component {
     this.hideSettingsPopup(this.props.onRemove);
   }
 
+  onUserInfoPress() {
+    const { communication } = this.props;
+    const { navigator } = this.context;
+    const { selectedConversation: conversation } = communication;
+
+    if (!conversation) return;
+
+    if (conversation.isGroup) {
+      navigator.push({
+        screen: 'communication.GroupSettings',
+        animated: true,
+      });
+    } else {
+      navigator.push({
+        screen: 'communication.ConversationSettings',
+        animated: true,
+      });
+    }
+
+    this.onRemove();
+  }
+
   onSwitchNotificationSetting() {
     const { communication } = this.props;
     const { messengerInfo, selectedConversationId } = communication;
@@ -83,35 +105,36 @@ export default class SettingsFloatMenu extends Component {
     const { messengerInfo, selectedConversationId } = communication;
     const { animValue } = this.state;
 
-    const notifIconStyle = [styles.icon];
     const notifOn = messengerInfo.byId(selectedConversationId).notification;
-    if (notifOn) {
-      notifIconStyle.push(styles.iconOn);
-    }
 
     return (
       <Animated.View
         style={[styles.container, style, { top: animValue }]}
       >
-        <Icon
-          style={notifIconStyle}
-          hitSlop={14}
+        <IconButton
+          onPress={() => {}}
+          source="icon-search-16"
+          title="Search"
+        />
+
+        <IconButton
+          iconStyle={notifOn ? null : styles.iconOff}
+          titleStyle={notifOn ? null : styles.iconOff}
           onPress={::this.onSwitchNotificationSetting}
           source={notifOn ? 'fa-bell' : 'fa-bell-slash'}
+          title="Mute"
         />
 
-        <Icon
-          style={styles.iconOn}
-          hitSlop={14}
+        <IconButton
           onPress={::this.onSendOffer}
           source={'icon-plus-24'}
+          title="Offer"
         />
 
-        <Icon
-          style={styles.iconOn}
-          hitSlop={14}
-          onPress={::this.onSendOffer}
+        <IconButton
+          onPress={::this.onUserInfoPress}
           source={'fa-info-circle'}
+          title="Info"
         />
       </Animated.View>
     );
@@ -121,7 +144,7 @@ export default class SettingsFloatMenu extends Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    height: 40,
+    height: 55,
     width: '100%',
     justifyContent: 'space-around',
     alignItems: 'center',
@@ -132,13 +155,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
 
-  icon: {
+  iconOff: {
     color: '$pe_color_icon',
-    fontSize: 24,
-  },
-
-  iconOn: {
-    color: '$pe_color_blue',
-    fontSize: 24,
   },
 });
