@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ListView } from 'react-native';
+import { FlatList } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { ErrorBox, Loader, StyleSheet, View } from 'ui';
 
@@ -124,43 +124,40 @@ export default class SavedContactsList extends Component {
       communication.addContactForAction(contact));
   }
 
-  renderRow(contact) {
+  renderItem({ item: contact }) {
     return (
       <SavedContactView
         contact={contact}
-        key={contact.id}
         initValue={this.isContactSelected(contact.id)}
         onSelectedChange={::this.onSelectedContactChange}
       />
     );
   }
 
-  renderSeparator(_, rowId) {
-    return <View key={rowId} style={styles.smallDivider} />;
+  renderSeparator() {
+    return <View style={styles.smallDivider} />;
   }
 
   renderFooter() {
     const { profiles } = this.props;
-    const ds = profiles.contactsDataSource;
 
-    if (!ds.isLoading) return null;
+    if (!profiles.isLoading) return null;
 
     return (
       <View style={styles.footer}>
-        <Loader isLoading={ds.isLoading} />
+        <Loader isLoading={profiles.isLoading} />
       </View>
     );
   }
 
   render() {
     const { profiles, style } = this.props;
-    const ds = profiles.contactsDataSource;
 
-    if ((ds.isLoading || ds.error) && ds.getRowCount() === 0) {
+    if (profiles.isLoading || profiles.error) {
       return (
         <View style={[styles.container, style]}>
-          <Loader isLoading={ds.isLoading}>
-            <ErrorBox message={ds.error} />
+          <Loader isLoading={profiles.isLoading}>
+            <ErrorBox message={profiles.error} />
           </Loader>
         </View>
       );
@@ -168,15 +165,15 @@ export default class SavedContactsList extends Component {
 
     return (
       <View style={[styles.container, style]}>
-        <ListView
-          dataSource={ds}
-          enableEmptySections
+        <FlatList
+          data={profiles.contacts.slice()}
           keyboardShouldPersistTaps="always"
-          renderRow={::this.renderRow}
+          renderItem={::this.renderItem}
           renderSeparator={::this.renderSeparator}
           renderFooter={::this.renderFooter}
           onEndReached={::this.onEndReached}
           onEndReachedThreshold={80}
+          keyExtrator={c => c.id}
         />
       </View>
     );

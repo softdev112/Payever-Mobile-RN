@@ -1,6 +1,5 @@
-import { computed, observable, action } from 'mobx';
+import { observable, action } from 'mobx';
 import { apiHelper } from 'utils';
-import { DataSource } from 'ui';
 
 import type {
   ProfilesData, ContactsPaginationData,
@@ -27,19 +26,10 @@ export default class ProfilesStore {
   @observable error: string     = '';
   @observable isLoading: boolean = false;
 
-  contactsDs: DataSource = new DataSource({
-    rowHasChanged: (r1, r2) => r1 !== r2,
-  });
-
   store: Store;
 
   constructor(store: Store) {
     this.store = store;
-  }
-
-  @computed
-  get contactsDataSource() {
-    return this.contactsDs.cloneWithRows(this.contacts.slice());
   }
 
   getAllProfiles(includePrivate = true): Array<Object> {
@@ -92,8 +82,7 @@ export default class ProfilesStore {
       currentPage = +this.contactsPaginationData.current;
     }
 
-    if (this.contactsDs.isLoading
-      || (currentPage !== 0 && currentPage === pageCount)
+    if (this.isLoading || (currentPage !== 0 && currentPage === pageCount)
       || pageCount === 0) {
       return;
     }
@@ -103,7 +92,7 @@ export default class ProfilesStore {
         this.currentProfile.business.slug,
         currentPage + 1
       ),
-      this.contactsDs
+      this
     ).success((data) => {
       this.contactsPaginationData = data.pagination_data;
       this.contacts = this.contacts.concat(data.contact_models);

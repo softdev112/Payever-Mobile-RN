@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import {
-  Image, TextInput, TouchableWithoutFeedback, ListView,
+  Image, TextInput, TouchableWithoutFeedback, FlatList,
 } from 'react-native';
 import { Icon, Loader, SpinnerButton, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
@@ -31,10 +31,6 @@ export default class SearchForm extends Component {
     this.state = {
       query: '',
     };
-
-    this.dataSource = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
   }
 
   onTextChange(query) {
@@ -56,7 +52,7 @@ export default class SearchForm extends Component {
     }
   }
 
-  renderRow(row: SearchRow) {
+  renderItem({ item }: SearchRow) {
     const RowComponent = observer(({ business }) => {
       return (
         <View style={styles.row}>
@@ -73,13 +69,12 @@ export default class SearchForm extends Component {
       );
     });
 
-    return <RowComponent business={row} />;
+    return <RowComponent business={item} />;
   }
 
   render() {
     const { query } = this.state;
     const search:SearchStore = this.props.search;
-    const dataSource = this.dataSource.cloneWithRows(search.items.slice());
 
     return (
       <View style={styles.container}>
@@ -115,13 +110,13 @@ export default class SearchForm extends Component {
               style={styles.spinner}
               isLoading={search.isSearching}
             >
-              <ListView
-                dataSource={dataSource}
-                renderRow={::this.renderRow}
-                contentContainerStyle={styles.results}
-                enableEmptySections
+              <FlatList
+                style={styles.results}
+                data={search.items.slice()}
+                renderItem={::this.renderItem}
                 keyboardShouldPersistTaps="always"
                 initialListSize={20}
+                keyExtractor={i => i.id}
               />
             </Loader>
           </View>
@@ -152,7 +147,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: 54,
+    height: 55,
     paddingHorizontal: 20,
     borderBottomColor: '$pe_color_light_gray_1',
     borderBottomWidth: 1,
@@ -163,7 +158,7 @@ const styles = StyleSheet.create({
 
   icon: {
     color: '$pe_color_icon',
-    fontSize: '2.2rem',
+    fontSize: 16,
   },
 
   spinner: {
@@ -179,12 +174,13 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     borderWidth: 0,
+    fontSize: 16,
     color: '$pe_color_black',
     '@media ios': {
-      marginLeft: 5,
+      marginLeft: 8,
     },
     '@media android': {
-      marginLeft: 3,
+      marginLeft: 5,
     },
   },
 

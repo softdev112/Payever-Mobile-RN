@@ -28,7 +28,6 @@ export default class Contact extends Component {
     communication?: CommunicationStore;
     item: Object;
     phoneView: boolean;
-    type: 'contacts' | 'groups' | 'foundMessages';
   };
 
   onContactSelect(item: ConversationInfo | Message) {
@@ -140,13 +139,14 @@ export default class Contact extends Component {
   }
 
   render() {
-    const { item, type } = this.props;
-    if (type === 'groups') {
-      return this.renderGroup(item);
+    const { item } = this.props;
+
+    if (item.type === undefined) {
+      return this.renderMessage(item);
     }
 
-    if (type === 'foundMessages') {
-      return this.renderMessage(item);
+    if (item.isGroup) {
+      return this.renderGroup(item);
     }
 
     return this.renderContact(item);

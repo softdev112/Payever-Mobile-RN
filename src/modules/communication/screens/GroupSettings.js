@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { ListView } from 'react-native';
+import { FlatList } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import {
   Icon, ErrorBox, Loader, NavBar, StyleSheet, Text, TextButton, View,
@@ -55,7 +55,7 @@ export default class GroupSettings extends Component {
     navigator.pop({ animated: true });
   }
 
-  renderMemberRow(member) {
+  renderMemberItem({ item: member }) {
     const { selectedConversation: conversation } = this.props.communication;
 
     if (!conversation) {
@@ -76,7 +76,6 @@ export default class GroupSettings extends Component {
     const { communication } = this.props;
     const { isLoading, error, selectedConversation } = communication;
     const { settings } = selectedConversation;
-    const ds = communication.groupMembersDataSource;
 
     const memberCount = selectedConversation.membersCount;
 
@@ -119,11 +118,11 @@ export default class GroupSettings extends Component {
               <Text style={styles.membersTitle}>
                 {`${memberCount} ${memberCount === 1 ? 'Member' : 'Members'}:`}
               </Text>
-              <ListView
+              <FlatList
                 style={styles.membersList}
-                dataSource={ds}
-                enableEmptySections
-                renderRow={::this.renderMemberRow}
+                data={settings.members.slice()}
+                renderItem={::this.renderMemberItem}
+                keyExtractor={m => m.id}
               />
             </View>
           )}

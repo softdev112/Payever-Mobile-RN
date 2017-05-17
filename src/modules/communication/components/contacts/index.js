@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { ListView } from 'react-native';
+import { SectionList } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { ErrorBox, Loader, StyleSheet, View } from 'ui';
 
@@ -36,11 +36,15 @@ export default class Contacts extends Component {
 
   render() {
     const { communication, pickUpMode, phoneView, style } = this.props;
-    let ds;
+    let sections = [];
     if (pickUpMode) {
-      ds = communication.contactsAndGroupsDataSource;
+      // Take only contacts and groups
+      sections = [
+        communication.contactsAndGroupsData[0],
+        communication.contactsAndGroupsData[1],
+      ];
     } else {
-      ds = communication.contactDataSource;
+      sections = communication.contactsAndGroupsData;
     }
 
     const info = communication.messengerInfo;
@@ -48,31 +52,31 @@ export default class Contacts extends Component {
     if (!info) {
       return (
         <View style={style}>
-          <Loader isLoading={ds.isLoading}>
-            {ds.isError && <ErrorBox message={ds.error} />}
+          <Loader isLoading={communication.isLoading}>
+            {communication.isError && (
+              <ErrorBox message={communication.error} />
+            )}
           </Loader>
         </View>
       );
     }
 
     return (
-      <View style={style}>
-        <ListView
-          contentContainerStyle={styles.contentContainer}
-          dataSource={ds}
-          enableEmptySections
-          renderHeader={() => <Search />}
-          renderRow={(item, type) => (
-            <Contact item={item} phoneView={phoneView} type={type} />
+      <View style={[style, styles.contentContainer]}>
+        <Search />
+        <SectionList
+          sections={sections}
+          renderItem={({ item }) => (
+            <Contact item={item} phoneView={phoneView} />
           )}
-          renderSectionHeader={(_, type) => (
+          renderSectionHeader={({ section }) => (
             <ListHeader
               conversationInfo={info}
               pickUpMode={pickUpMode}
-              hideMessages={communication.foundMessages.length < 1}
-              type={type}
+              type={section.title}
             />
           )}
+          keyExtractor={c => c.id}
         />
       </View>
     );

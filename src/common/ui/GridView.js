@@ -1,37 +1,46 @@
 import { Component } from 'react';
-import { ListView } from 'react-native';
+import { FlatList } from 'react-native';
 import StyleSheet from './StyleSheet';
+import { ScreenParams } from '../utils';
 
 export default class GridView extends Component {
-  static DataSource: DataSource = ListView.DataSource;
-  static defaultProps = { renderFooter: () => null };
+  static defaultProps = {
+    renderFooter: () => null,
+    itemWidth: 200,
+  };
 
   props: {
-    contentContainerStyle?: Object | number;
-    dataSource: ListView.DataSource;
-    renderRow: () => any;
-    renderFooter?: () => any;
+    data: Array<any>;
+    keyExtractor: () => any;
+    renderItem: () => Component;
+    renderFooter?: () => Component;
     style?: Object | number;
+    itemWidth?: number;
   };
 
   render() {
     const {
-      contentContainerStyle,
-      dataSource,
-      renderRow,
+      data,
+      keyExtractor,
+      renderItem,
       style,
       renderFooter,
+      itemWidth,
     } = this.props;
 
+    const numberOfColumns = Math.floor(ScreenParams.width / itemWidth);
+
     return (
-      <ListView
-        initialListSize={30}
+      <FlatList
         style={[styles.container, style]}
-        contentContainerStyle={[styles.list, contentContainerStyle]}
-        dataSource={dataSource}
-        renderRow={renderRow}
-        renderFooter={renderFooter}
+        initialNumToRender={30}
+        data={data}
+        renderItem={renderItem}
+        ListFooterComponent={renderFooter}
         showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}
+        keyExtractor={keyExtractor}
+        numColumns={numberOfColumns}
       />
     );
   }
@@ -40,16 +49,6 @@ export default class GridView extends Component {
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
-  },
-
-  list: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    flexWrap: 'wrap',
+    paddingTop: 8,
   },
 });
-
-declare class DataSource extends ListView.DataSource {
-  getRowCount(): number;
-}

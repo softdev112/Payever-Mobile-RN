@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { Animated, ListViewDataSource } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import { GridView, IconText, Loader, StyleSheet, View } from 'ui';
@@ -29,19 +28,12 @@ export default class Dashboard extends Component {
     appsTop: Array<AppItem>;
   };
 
-  dataSource: ListViewDataSource;
-
   constructor(props) {
     super(props);
 
     this.state = {
       appsTop: [],
-      appearAnimation: new Animated.Value(1),
     };
-
-    this.dataSource = new GridView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
   }
 
   async componentWillMount() {
@@ -77,7 +69,7 @@ export default class Dashboard extends Component {
     }
   }
 
-  renderIcon(item: AppItem) {
+  renderIcon({ item }: AppItem) {
     return (
       <IconText
         style={styles.icon}
@@ -91,35 +83,21 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { appearAnimation, appsTop } = this.state;
-    const dataSourceTop = this.dataSource.cloneWithRows(appsTop);
+    const { appsTop } = this.state;
 
     const iconWidth = ScreenParams.isTabletLayout()
       ? APP_ICON_WIDTH_TABLET : APP_ICON_WIDTH_PHONE;
-    const iconsPerRow = Math.floor(ScreenParams.width / iconWidth);
-    const iconsPadding = (ScreenParams.width - (iconsPerRow * iconWidth)) / 2;
 
     return (
       <Loader isLoading={appsTop.length < 1}>
         <View style={styles.container}>
           <SearchHeader navigator={this.props.navigator} />
-
-          <Animated.View
-            style={[
-              styles.animationView,
-              { transform: [{ scale: appearAnimation }] },
-            ]}
-          >
-            <GridView
-              dataSource={dataSourceTop}
-              renderRow={::this.renderIcon}
-              contentContainerStyle={[
-                styles.apps,
-                { paddingLeft: iconsPadding },
-              ]}
-            />
-          </Animated.View>
-
+          <GridView
+            data={appsTop}
+            renderItem={::this.renderIcon}
+            itemWidth={iconWidth}
+            keyExtractor={app => app.id}
+          />
           <Dock floatMode={false} />
         </View>
       </Loader>
@@ -134,21 +112,6 @@ const styles = StyleSheet.create({
 
   animationView: {
     flex: 1,
-  },
-
-  apps: {
-    paddingTop: 20,
-  },
-
-  cards_container: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-  },
-
-  cards_scroll: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    maxHeight: 500,
   },
 
   icon: {
