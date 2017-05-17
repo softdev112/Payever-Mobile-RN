@@ -13,11 +13,6 @@ const TITLES = {
   foundMessages: 'FOUND MESSAGES',
 };
 
-const PICKUP_MODE_TITLES = {
-  contacts: 'CONTACTS',
-  groups:   'GROUPS',
-};
-
 @inject('communication')
 @observer
 export default class ListHeader extends Component {
@@ -35,7 +30,6 @@ export default class ListHeader extends Component {
 
   props: {
     communication: CommunicationStore;
-    hideMessages: boolean;
     pickUpMode: boolean;
     type: 'contacts' | 'groups' | 'foundMessages';
   };
@@ -54,9 +48,9 @@ export default class ListHeader extends Component {
   }
 
   render() {
-    const { communication, hideMessages, pickUpMode, type } = this.props;
+    const { communication, pickUpMode, type } = this.props;
 
-    if (type === 'foundMessages' && hideMessages) {
+    if (type === 'foundMessages' && communication.foundMessages.length === 0) {
       //noinspection JSConstructorReturnsPrimitive
       return null;
     }
@@ -68,7 +62,7 @@ export default class ListHeader extends Component {
       <View style={styles.container}>
         <View style={styles.title}>
           <Text style={styles.title_text}>
-            {pickUpMode ? PICKUP_MODE_TITLES[type] : TITLES[type]}
+            {TITLES[type]}
           </Text>
           <CountBadge value={count} />
         </View>
@@ -88,7 +82,6 @@ export default class ListHeader extends Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    marginVertical: 8,
     padding: 5,
     backgroundColor: '#FFF',
   },

@@ -3,7 +3,7 @@
  */
 import { Component, PropTypes } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { ListView, TouchableOpacity } from 'react-native';
+import { FlatList, TouchableOpacity } from 'react-native';
 import type { Navigator } from 'react-native-navigation';
 import {
   BottomDock, Loader, MoveYAnimElement, StyleSheet, Text, TextButton, View,
@@ -105,7 +105,7 @@ export default class AddContactBlock extends Component {
     return <AddedContact contact={contact} key={contact.id} />;
   }
 
-  renderRow(contact) {
+  renderItem({ item: contact }) {
     const { communication } = this.props;
     const isContactAdded = communication.checkContactAddedForAction(contact.id);
 
@@ -124,8 +124,8 @@ export default class AddContactBlock extends Component {
     );
   }
 
-  renderSeparator(_, rowId) {
-    return <View key={rowId} style={styles.smallDivider} />;
+  renderSeparator() {
+    return <View style={styles.smallDivider} />;
   }
 
   render() {
@@ -147,12 +147,12 @@ export default class AddContactBlock extends Component {
           onSearchAction={::this.onSearchContacts}
         />
         <Loader isLoading={communication.isLoading}>
-          <ListView
-            dataSource={communication.contactsAutocompDataSource}
-            enableEmptySections
-            renderRow={::this.renderRow}
-            renderSeparator={::this.renderSeparator}
+          <FlatList
+            data={communication.contactsAutocomplete.slice()}
+            renderRow={::this.renderItem}
+            ItemSeparatorComponent={::this.renderSeparator}
             keyboardShouldPersistTaps="always"
+            keyExtractor={contact => contact.id}
           />
         </Loader>
 

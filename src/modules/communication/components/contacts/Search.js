@@ -54,7 +54,9 @@ export default class Search extends Component {
   }
 
   render() {
-    const { iconStyle, inputStyle, showSettings, style } = this.props;
+    const {
+      communication, iconStyle, inputStyle, showSettings, style,
+    } = this.props;
 
     return (
       <View style={[styles.container, style]}>
@@ -75,6 +77,7 @@ export default class Search extends Component {
             returnKeyType="search"
             autoCapitalize="none"
             underlineColorAndroid="transparent"
+            value={communication.contactsFilter}
           />
         </View>
         {showSettings && (

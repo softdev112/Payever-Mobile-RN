@@ -21,15 +21,6 @@ export default class ChooseAccount extends Component {
     profiles: ProfilesStore;
   };
 
-  dataSource: GridView.DataSource;
-
-  constructor(props) {
-    super(props);
-    this.dataSource = new GridView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
-  }
-
   async componentWillMount() {
     const { profiles, navigator } = this.props;
 
@@ -82,7 +73,7 @@ export default class ChooseAccount extends Component {
     );
   }
 
-  renderRow(profile: Profile) {
+  renderItem({ item: profile }: Profile) {
     return (
       <IconText
         style={styles.item}
@@ -95,9 +86,9 @@ export default class ChooseAccount extends Component {
     );
   }
 
-  renderProfiles(dataSource: GridView.DataSource) {
+  renderProfiles(data: Array<any>) {
     //noinspection JSUnresolvedFunction
-    if (dataSource.getRowCount() < 1) {
+    if (data.length < 1) {
       return (
         <View style={styles.error}>
           <Text>Sorry. Error has occurred. Try again later.</Text>
@@ -106,14 +97,12 @@ export default class ChooseAccount extends Component {
     }
 
     return (
-      <View style={styles.gridWrapper}>
-        <GridView
-          dataSource={dataSource}
-          renderFooter={::this.renderFooter}
-          renderRow={::this.renderRow}
-          contentContainerStyle={styles.grid}
-        />
-      </View>
+      <GridView
+        data={data}
+        renderFooter={::this.renderFooter}
+        renderItem={::this.renderItem}
+        keyExtractor={item => item.id}
+      />
     );
   }
 
@@ -121,13 +110,13 @@ export default class ChooseAccount extends Component {
     const { profiles } = this.props;
 
     //noinspection JSUnresolvedFunction
-    const dataSource = this.dataSource.cloneWithRows(profiles.getAllProfiles());
+    const data = profiles.getAllProfiles().slice();
 
     return (
       <View style={styles.container}>
         <Header textStyle={styles.header}>Welcome!</Header>
         <Loader isLoading={profiles.isLoading}>
-          {this.renderProfiles(dataSource)}
+          {this.renderProfiles(data)}
         </Loader>
       </View>
     );
@@ -143,18 +132,6 @@ const styles = StyleSheet.create({
   error: {
     alignItems: 'center',
     flex: 1,
-    justifyContent: 'center',
-  },
-
-  grid: {
-    alignSelf: 'center',
-    justifyContent: 'center',
-    paddingVertical: 20,
-  },
-
-  gridWrapper: {
-    flex: 1,
-    flexDirection: 'row',
     justifyContent: 'center',
   },
 

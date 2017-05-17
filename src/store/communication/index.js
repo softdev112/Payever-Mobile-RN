@@ -2,7 +2,6 @@ import {
   action, autorun, computed, extendObservable, observable, ObservableMap,
 } from 'mobx';
 import { apiHelper, log, soundHelper } from 'utils';
-import { DataSource } from 'ui';
 import { throttle } from 'lodash';
 
 import UserSettings from './models/UserSettings';
@@ -54,23 +53,6 @@ export default class CommunicationStore {
   socketHandlers: SocketHandlers;
   socketObserver: Function;
 
-  contactsAutocompleteDs: DataSource = new DataSource({
-    rowHasChanged: (r1, r2) => r1 !== r2,
-  });
-
-  groupMembersDs: DataSource = new DataSource({
-    rowHasChanged: (r1, r2) => r1 !== r2,
-  });
-
-  contactDs: DataSource = new DataSource({
-    rowHasChanged: (r1, r2) => r1 !== r2,
-    sectionHeaderHasChanged: (r1, r2) => r1 !== r2,
-  });
-
-  conversationDs: DataSource = new DataSource({
-    rowHasChanged: (r1, r2) => r1 !== r2,
-  });
-
   constructor(store: Store) {
     this.store = store;
     this.socketHandlers = new SocketHandlers(this);
@@ -94,9 +76,7 @@ export default class CommunicationStore {
       apiPromise = api.messenger.getPrivate();
     }
 
-    this.conversationDs.isLoading = true;
-
-    return apiHelper(apiPromise, this.contactDs)
+    return apiHelper(apiPromise, this)
       .cache('communication:messengerInfo:' + profile.id)
       .success((data: MessengerData) => {
         this.initSocket(data.wsUrl, data.messengerUser.id);
@@ -142,7 +122,7 @@ export default class CommunicationStore {
     const conversation = this.conversations.get(id);
     if (!conversation) return null;
 
-    if (conversation.allMessagesFetched || this.conversationDs.isLoading) {
+    if (conversation.allMessagesFetched || this.isLoading) {
       return null;
     }
 
@@ -202,7 +182,7 @@ export default class CommunicationStore {
 
   @action
   async search(text) {
-    this.contactsFilter = (text || '').toLowerCase();
+    this.contactsFilter = text || '';
 
     if (!text) {
       this.foundMessages = [];
@@ -210,7 +190,7 @@ export default class CommunicationStore {
     }
 
     //noinspection JSIgnoredPromiseFromCall
-    await this.searchMessages(text);
+    await this.searchMessages(this.contactsFilter.toLowerCase());
   }
 
   @action
@@ -220,7 +200,7 @@ export default class CommunicationStore {
 
     return apiHelper(
       messenger.getAvailableContacts(messengerUser.id, query),
-      this.contactsAutocompleteDs
+      this
     ).success((data) => {
       this.contactsAutocomplete = data;
     })
@@ -368,25 +348,7 @@ export default class CommunicationStore {
   }
 
   @computed
-  get contactsAutocompDataSource() {
-    return this.contactsAutocompleteDs.cloneWithRows(
-      this.contactsAutocomplete.slice()
-    );
-  }
-
-  @computed
-  get groupMembersDataSource() {
-    const { settings } = this.selectedConversation;
-    let chatGroupMembers = [];
-    if (settings) {
-      chatGroupMembers = settings.members.slice();
-    }
-
-    return this.groupMembersDs.cloneWithRows(chatGroupMembers);
-  }
-
-  @computed
-  get contactDataSource() {
+  get contactsAndGroupsData() {
     const filter = this.contactsFilter;
     const info = this.messengerInfo;
 
@@ -399,45 +361,24 @@ export default class CommunicationStore {
       groups = groups.filter(c => c.name.toLowerCase().includes(filter));
     }
 
-    return this.contactDs.cloneWithRowsAndSections(
-      { contacts, groups, foundMessages },
-      ['contacts', 'groups', 'foundMessages']
-    );
-  }
-
-  @computed
-  get contactsAndGroupsDataSource() {
-    const filter = this.contactsFilter;
-    const info = this.messengerInfo;
-
-    let contacts = info ? info.conversations.slice() : [];
-    let groups   = info ? info.groups.slice() : [];
-
-    if (filter) {
-      contacts = contacts.filter(c => c.name.toLowerCase().includes(filter));
-      groups = groups.filter(c => c.name.toLowerCase().includes(filter));
-    }
-
-    return this.contactDs.cloneWithRowsAndSections(
-      { contacts, groups },
-      ['contacts', 'groups']
-    );
+    return [{
+      data: contacts,
+      title: 'contacts',
+      key: '1',
+    }, {
+      data: groups,
+      title: 'groups',
+      key: '2',
+    }, {
+      data: foundMessages,
+      title: 'foundMessages',
+      key: '3',
+    }];
   }
 
   @computed
   get selectedConversation(): Conversation {
     return this.conversations.get(this.selectedConversationId);
-  }
-
-  @computed
-  get selectedConversationDataSource() {
-    const conversation = this.selectedConversation;
-    const messages = conversation ? conversation.messages : [];
-    return this.conversationDs.cloneWithRows(messages.slice());
-  }
-
-  @computed get isMessagesSelected() {
-    return this.selectedMessages.length > 0;
   }
 
   @computed get isContactsForActionAvailable() {
