@@ -11,7 +11,7 @@ export default class IconButton extends Component {
   };
 
   props: {
-    align?: 'left' | 'right' | 'middle';
+    align?: 'left' | 'right' | 'center';
     imageStyle?: Object | number;
     onPress: () => any;
     source: Object | number | string;

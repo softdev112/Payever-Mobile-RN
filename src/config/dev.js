@@ -20,9 +20,9 @@ export default Object.assign({
     },
 
     facebook: {
-      appId: '438908279593357',
-      appSecret: 'cd96a62e92a5bc498896209613e2d0bf',
-      callback: '/social/auth/facebook',
+      appId: '306625799760428',
+      appSecret: '4e0e5079b5c7eeff9f16295f0212ca95',
+      callback: 'fb306625799760428://authorize',
       scope: 'email public_profile',
       fields: [
         'id', 'name', 'first_name', 'last_name',

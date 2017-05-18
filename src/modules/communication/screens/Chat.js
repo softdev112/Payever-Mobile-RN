@@ -7,8 +7,9 @@ import Chat from '../components/chat';
 import Header from '../components/chat/Header';
 import SettingsFloatMenu from '../components/chat/SettingsFloatMenu';
 import CommunicationStore from '../../../store/communication';
+import UIStore from '../../../store/ui';
 
-@inject('communication')
+@inject('communication', 'ui')
 @observer
 export default class ChatScreen extends Component {
   static navigatorStyle = {
@@ -18,6 +19,7 @@ export default class ChatScreen extends Component {
   props: {
     communication: CommunicationStore;
     navigator: Navigator;
+    ui: UIStore;
   };
 
   state: {
@@ -115,36 +117,43 @@ export default class ChatScreen extends Component {
     const {
       messengerInfo, selectedConversationId, selectMode, forwardMode,
     } = this.props.communication;
+    const { ui: { communicationUI } } = this.props;
     const { showSettingsPopup } = this.state;
     const { avatar } = messengerInfo.byId(selectedConversationId);
 
     return (
       <View style={styles.container}>
-        <NavBar>
-          {(selectMode && !forwardMode) && (
-            <NavBar.Button
-              align="left"
-              title="Delete All"
-              onPress={::this.onDeleteAllMessages}
-            />
-          )}
-          {!selectMode && <NavBar.Back />}
+        {communicationUI.searchMessagesMode ? (
+          <NavBar style={styles.searchNavBar}>
+            <NavBar.Search />
+          </NavBar>
+        ) : (
+          <NavBar>
+            {(selectMode && !forwardMode) && (
+              <NavBar.Button
+                align="left"
+                title="Delete All"
+                onPress={::this.onDeleteAllMessages}
+              />
+            )}
+            {!selectMode && <NavBar.Back />}
 
-          <NavBar.ComplexTitle onPress={::this.onSwitchSettingsPopup}>
-            <Header />
-          </NavBar.ComplexTitle>
-          {selectMode ? (
-            <NavBar.Button
-              title="Cancel"
-              onPress={::this.onCancelSelectedMode}
-            />
-          ) : (
-            <NavBar.Avatar
-              avatar={avatar}
-              onPress={::this.onSettingsPress}
-            />
-          )}
-        </NavBar>
+            <NavBar.ComplexTitle onPress={::this.onSwitchSettingsPopup}>
+              <Header />
+            </NavBar.ComplexTitle>
+            {selectMode ? (
+              <NavBar.Button
+                title="Cancel"
+                onPress={::this.onCancelSelectedMode}
+              />
+            ) : (
+              <NavBar.Avatar
+                avatar={avatar}
+                onPress={::this.onSettingsPress}
+              />
+            )}
+          </NavBar>
+        )}
 
         {showSettingsPopup && (
           <SettingsFloatMenu
@@ -166,6 +175,10 @@ const styles = StyleSheet.create({
   header: {
     borderColor: 'red',
     borderWidth: 1,
+  },
+
+  searchNavBar: {
+    paddingHorizontal: 0,
   },
 
   chat: {

@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { Component } from 'react';
-import { TouchableOpacity, WebView } from 'react-native';
-import { RoundSwitch, Html, NavBar, StyleSheet, Text, View, Button } from 'ui';
+import { TouchableOpacity } from 'react-native';
+import { RoundSwitch, Html, NavBar, StyleSheet, Text, View, Button, WebView } from 'ui';
 import { Navigator, Navigation } from 'react-native-navigation';
 import { google, facebook, twitter, tumblr } from 'react-native-simple-auth';
 import { soundHelper } from 'utils';
@@ -67,7 +67,9 @@ export default class Debug extends Component {
 
     return (
       <View style={styles.container}>
-        <NavBar.Default />
+        <NavBar>
+          <NavBar.Search />
+        </NavBar>  
         <TouchableOpacity
           onPress={() => {
             twitter({
@@ -89,7 +91,13 @@ export default class Debug extends Component {
           values={['one', 'two', 'three']}
           selectedIndex={0}
         />
-        <View style={{ flex: 1, borderColor: 'red', borderWidth: 1 }}></View>
+        <View style={{ flex: 1, borderColor: 'red', borderWidth: 1 }}>
+          <WebView
+            showLoader={false}
+            showNavBar="never"
+            source={{ uri: 'https://gmail.com' }}
+          />
+        </View>
       </View>
     )
   }

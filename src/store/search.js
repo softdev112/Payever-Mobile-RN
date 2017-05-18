@@ -10,6 +10,7 @@ export default class SearchStore {
   @observable isSearching = false;
 
   @observable error: string = '';
+  @observable isLoading: boolean = false;
 
   store: Store;
 

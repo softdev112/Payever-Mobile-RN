@@ -5,11 +5,12 @@ import type { Navigator } from 'react-native-navigation';
 import { IconButton, StyleSheet } from 'ui';
 
 import CommunicationStore from '../../../../store/communication';
+import UIStore from '../../../../store/ui';
 
 const INIT_TOP = 20;
 const SHOW_TOP = 70;
 
-@inject('communication')
+@inject('communication', 'ui')
 @observer
 export default class SettingsFloatMenu extends Component {
   static contextTypes = {
@@ -25,6 +26,7 @@ export default class SettingsFloatMenu extends Component {
     conversationId: number;
     onRemove?: (cb?: () => void) => void;
     style?: Object;
+    ui: UIStore;
   };
 
   state: {
@@ -54,6 +56,12 @@ export default class SettingsFloatMenu extends Component {
       passProps: { conversationId },
     });
 
+    this.onRemove();
+  }
+
+  onSearchMessages() {
+    const { ui: { communicationUI } } = this.props;
+    communicationUI.setSearchMessagesMode(true);
     this.onRemove();
   }
 
@@ -112,7 +120,7 @@ export default class SettingsFloatMenu extends Component {
         style={[styles.container, style, { top: animValue }]}
       >
         <IconButton
-          onPress={() => {}}
+          onPress={::this.onSearchMessages}
           source="icon-search-16"
           title="Search"
         />
