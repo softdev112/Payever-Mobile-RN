@@ -307,6 +307,11 @@ export default class CommunicationStore {
   }
 
   @action
+  clearFoundMessages() {
+    this.foundMessages = [];
+  }
+
+  @action
   setMessageForReply(message: Message) {
     this.messageForReply = message;
   }

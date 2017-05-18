@@ -8,6 +8,7 @@ import IconButton from './IconButton';
 import Menu from './Menu';
 import Title from './Title';
 import ComplexTitle from './ComplexTitle';
+import SearchItem from './SearchItem';
 
 //noinspection JSUnresolvedVariable
 import bgGradient from './images/gradient.png';
@@ -20,6 +21,7 @@ export default class NavBar extends Component {
   static IconButton = IconButton;
   static Menu       = Menu;
   static Title      = Title;
+  static Search     = SearchItem;
 
   static ComplexTitle = ComplexTitle;
 

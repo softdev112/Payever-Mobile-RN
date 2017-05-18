@@ -14,9 +14,10 @@ import ReplyMessage from './ReplyMessage';
 import ForwardMessage from './ForwardMessage';
 import EditMessage from './EditMessage';
 import CommunicationStore from '../../../../store/communication';
+import UIStore from '../../../../store/ui';
 import Message from '../../../../store/communication/models/Message';
 
-@inject('communication')
+@inject('communication', 'ui')
 @observer
 export default class Chat extends Component {
   static contextTypes = {
@@ -26,6 +27,7 @@ export default class Chat extends Component {
   props: {
     communication?: CommunicationStore;
     style?: Object | number;
+    ui: UIStore;
   };
 
   context: {
@@ -331,7 +333,7 @@ export default class Chat extends Component {
   }
 
   render() {
-    const { communication, style } = this.props;
+    const { communication, ui: { communicationUI }, style } = this.props;
     const {
       animValue, keyboardHeight, showPopupMenu, popupPosY, popupPosX,
       selectedMessage,
@@ -344,6 +346,7 @@ export default class Chat extends Component {
       selectedConversationId,
       selectedMessages,
       selectMode,
+      foundMessages,
     } = communication;
 
     const isMsgsForForward = selectedMessages.length > 0 && !selectMode;
@@ -366,6 +369,13 @@ export default class Chat extends Component {
       );
     }
 
+    let data;
+    if (communicationUI.searchMessagesMode && foundMessages.length !== 0) {
+      data = foundMessages.slice().reverse();
+    } else {
+      data = conversation.messages.slice().reverse();
+    }
+
     return (
       <KeyboardAvoidingView
         style={[styles.container, style]}
@@ -383,7 +393,7 @@ export default class Chat extends Component {
           ListFooterComponent={::this.renderFooter}
           renderItem={::this.renderItem}
           keyExtractor={item => item.id}
-          data={conversation.messages.slice().reverse()}
+          data={data}
           onViewableItemsChanged={::this.onViewableItemsChange}
           removeClippedSubviews={false}
         />
