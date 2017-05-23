@@ -72,16 +72,9 @@ export default class Debug extends Component {
         </NavBar>  
         <TouchableOpacity
           onPress={() => {
-            twitter({
-              appId: 'oRCkHDAnAFSXiO1wayGlpBkwn',
-              appSecret: 'C3FUgIBnjdn1Je6dD5NX5AboFEJ1vWqVVwOLJ03Itk0Xp58but',
-              callback: 'https://stage.payever.de/selfterminal/new/5/pos/5',
-            }).then((info) => {
-              console.log('tttttttttttttttttttt11111');
-              console.log(info);
-            }).catch((error) => {
-              console.log('ttttttttttttttttttttt22222');
-              console.log(error);
+            navigator.push({
+              screen: 'dashboard.AddNewBusiness',
+              animated: true,
             });
           }}
         >

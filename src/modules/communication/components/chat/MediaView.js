@@ -1,29 +1,44 @@
 /* eslint-disable react/prefer-stateless-function */
-import { Component } from 'react';
-import { Image, Linking, TouchableOpacity } from 'react-native';
-import { inject, observer } from 'mobx-react/native';
+import { Component, PropTypes } from 'react';
+import { Image, TouchableOpacity } from 'react-native';
+import { observer } from 'mobx-react/native';
+import { Navigator } from 'react-native-navigation';
 import { Icon, StyleSheet, Text, View } from 'ui';
 import { format, ScreenParams } from 'utils';
 import Media from '../../../../store/communication/models/Media';
 import { Config } from '../../../../config';
 
-@inject('config')
-@observer
 export default class MediaView extends Component {
+  static contextTypes = {
+    navigator: PropTypes.object.isRequired,
+  };
+
   props: {
-    config?: Config;
     media: Media;
   };
 
+  context: {
+    navigator: Navigator;
+  };
+
+  onMediaPress() {
+    const { media } = this.props;
+
+    this.context.navigator.push({
+      screen: 'communication.ImageMedia',
+      passProps: { media },
+      animated: true,
+    });
+  }
+
   render() {
-    const { config, media } = this.props;
+    const { media } = this.props;
     const AttachmentComponent = media.isImage ? MediaImage : MediaFile;
-    const url = config.siteUrl + media.url;
 
     return (
       <View>
         <Text style={styles.label}>Sent a file</Text>
-        <TouchableOpacity onPress={() => Linking.openURL(url)}>
+        <TouchableOpacity onPress={::this.onMediaPress}>
           <AttachmentComponent media={media} />
         </TouchableOpacity>
       </View>
@@ -43,7 +58,7 @@ function MediaFile({ media }: PropTypes) {
   );
 }
 
-const MediaImage = observer(['config'], ({ media, config }: PropTypes) => {
+const MediaImage = observer(['config'], ({ media, config }: MediaImageObj) => {
   let properties;
   try {
     properties = media.formats.reference.properties;
@@ -124,7 +139,7 @@ const styles = StyleSheet.create({
   },
 });
 
-type PropTypes = {
+type MediaImageObj = {
   media: Media;
   config?: Config;
 };

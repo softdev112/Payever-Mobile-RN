@@ -22,6 +22,7 @@ export default class Icon extends Component {
     source: string | Object;
     touchStyle?: Object | number;
     disabled?: boolean;
+    activeOpacity?: number;
   };
 
   constructor(props) {
@@ -32,13 +33,16 @@ export default class Icon extends Component {
   }
 
   render() {
-    const { disabled, onPress, source, touchStyle } = this.props;
+    const {
+      activeOpacity, disabled, onPress, source, touchStyle,
+    } = this.props;
     const { hitSlop } = this.state;
     const iconNode = componentFactory(source, this.props);
 
     if (onPress) {
       return (
         <TouchableOpacity
+          activeOpacity={activeOpacity}
           hitSlop={hitSlop}
           onPress={onPress}
           style={touchStyle}

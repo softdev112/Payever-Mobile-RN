@@ -21,6 +21,23 @@ export default class ChooseAccount extends Component {
     profiles: ProfilesStore;
   };
 
+  state: {
+    ownBusinessesCount: number;
+  };
+
+  $list: GridView;
+
+  constructor(props) {
+    super(props);
+
+    const { navigator, profiles } = props;
+    navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+
+    this.state = {
+      ownBusinessesCount: profiles.ownBusinesses.length,
+    };
+  }
+
   async componentWillMount() {
     const { profiles, navigator } = this.props;
 
@@ -40,6 +57,25 @@ export default class ChooseAccount extends Component {
     pushNotificationsHelper.createInstance(store.api, privateProfile.user)
       .registerNotifications()
       .catch(log.warn);
+
+    this.setState({ ownBusinessesCount: profiles.ownBusinesses.length });
+  }
+
+  onNavigatorEvent(event) {
+    const { profiles: { ownBusinesses } } = this.props;
+    const { ownBusinessesCount } = this.state;
+
+    switch (event.id) {
+      case 'didAppear':
+        if (ownBusinesses.length === ownBusinessesCount + 1 && this.$list) {
+          this.$list.scrollToEnd();
+          this.setState({ ownBusinessesCount: ownBusinesses.length });
+        }
+        break;
+
+      default:
+        break;
+    }
   }
 
   onAddNewBusiness() {
@@ -99,6 +135,7 @@ export default class ChooseAccount extends Component {
     return (
       <GridView
         data={data}
+        ref={r => this.$list = r}
         renderFooter={::this.renderFooter}
         renderItem={::this.renderItem}
         keyExtractor={item => item.id}
@@ -127,6 +164,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    paddingBottom: 16,
   },
 
   error: {

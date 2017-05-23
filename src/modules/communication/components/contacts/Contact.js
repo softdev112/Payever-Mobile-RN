@@ -35,9 +35,9 @@ export default class Contact extends Component {
     const conversationId = item.conversation ? item.conversation.id : item.id;
     communication.setSelectedConversationId(conversationId);
 
-    if (phoneView && !communication.forwardMode) {
+    if (phoneView && !communication.ui.forwardMode) {
       this.context.navigator.push({ screen: 'communication.Chat' });
-    } else if (communication.forwardMode) {
+    } else if (communication.ui.forwardMode) {
       this.context.navigator.pop({ animated: false });
     }
   }

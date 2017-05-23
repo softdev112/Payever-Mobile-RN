@@ -3,7 +3,7 @@ import RNFetchBlob from 'react-native-fetch-blob';
 import type PayeverApi from '../index';
 import SocketApi from './SocketApi';
 import WampClient from './WampClient';
-import CommunicationStore from '../../../store/communication';
+import config from '../../../config';
 
 export default class MessengerApi {
   client: PayeverApi;
@@ -126,12 +126,12 @@ export default class MessengerApi {
     userId: number,
     conversationId: number,
     message: string,
-    media: Object,
-    store: CommunicationStore
+    media: MediaRequestData,
+    progressCb: (uploadId: number, progress: number) => void
   ): Promise<MessageResp> {
     return RNFetchBlob.fetch(
       'POST',
-      'https://stage.payever.de/api/rest/v1/messenger/new/message/medias',
+      config.siteUrl + '/api/rest/v1/messenger/new/message/medias',
       {
         Authorization: 'Bearer ' + await this.client.authStore.getAccessToken(),
         'Content-Type': 'octet-stream',
@@ -147,9 +147,10 @@ export default class MessengerApi {
         { name: 'new_message_medias[body]', data: message },
       ]
     ).uploadProgress((written, total) => {
-      store.updateFileUploadProgress(
-        // I add 1.97 koef for encoding to 64 bits as i understand how it works
-        media.uploadProgressKey, 1.97 * 100 * (written / total));
+      if (progressCb) {
+        // I add 1.98 koef for encoding to 64 bits as i understand how it works
+        progressCb(media.uploadProgressKey, 1.98 * 100 * (written / total));
+      }
     });
   }
 
@@ -299,7 +300,7 @@ type MessageData = {
   forwardFrom: ?Object;
   id: number;
   isSystem: boolean;
-  medias: Array<any>;
+  medias: Array<MediaData>;
   offer: ?Object;
   offerId: ?number;
   opponentUnread: boolean;
@@ -342,4 +343,39 @@ type GroupData = {
   recipient_id: string;
   type: string;
   unreadCount: number;
+};
+
+type MediaData = {
+  content_type: string;
+  formats: {
+    reference: {
+      properties: FileProperties | ImageProperties;
+      type: 'reference';
+      url: string;
+    };
+  };
+  name: string;
+  size: number;
+  url: string;
+};
+
+type ImageProperties = {
+  alt: string;
+  height: number;
+  src: string;
+  title: string;
+  width: number;
+};
+
+type FileProperties = {
+  file: string;
+  thumbnail: string;
+  title: string;
+};
+
+type MediaRequestData = {
+  fileName: string;
+  uri: string;
+  data: string;
+  uploadProgressKey: string;
 };

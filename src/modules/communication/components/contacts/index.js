@@ -27,10 +27,13 @@ export default class Contacts extends Component {
   };
 
   componentDidMount() {
-    const { communication, profiles } = this.props;
+    const { communication, profiles, pickUpMode } = this.props;
 
     //noinspection JSIgnoredPromiseFromCall
-    communication.loadMessengerInfo(profiles.currentProfile);
+    if (!pickUpMode) {
+      communication.loadMessengerInfo(profiles.currentProfile);
+    }
+
     communication.search('');
   }
 

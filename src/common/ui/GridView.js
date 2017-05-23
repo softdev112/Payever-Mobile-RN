@@ -18,6 +18,14 @@ export default class GridView extends Component {
     itemWidth?: number;
   };
 
+  $list: FlatList;
+
+  scrollToEnd(options = { animated: false }) {
+    if (this.$list) {
+      this.$list.scrollToEnd(options);
+    }
+  }
+
   render() {
     const {
       data,
@@ -33,6 +41,7 @@ export default class GridView extends Component {
     return (
       <FlatList
         style={[styles.container, style]}
+        ref={r => this.$list = r}
         initialNumToRender={30}
         data={data}
         renderItem={renderItem}

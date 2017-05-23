@@ -1,5 +1,5 @@
 import { observable, action } from 'mobx';
-import { apiHelper } from 'utils';
+import { apiHelper, log } from 'utils';
 
 import type {
   ProfilesData, ContactsPaginationData,
@@ -22,6 +22,8 @@ export default class ProfilesStore {
   @observable currentProfile: PersonalProfile | BusinessProfile = null;
   @observable contacts: Array<SavedContact> = [];
   contactsPaginationData: ContactsPaginationData;
+
+  @observable logoUploadingProgress: number = false;
 
   @observable error: string     = '';
   @observable isLoading: boolean = false;
@@ -182,9 +184,36 @@ export default class ProfilesStore {
   createNewBusiness(business) {
     const { api } = this.store;
 
-    return apiHelper(api.business.createNewBusiness(business))
-      .success()
+    return apiHelper(api.business.createNewBusiness(business), this)
+      .success(data => data)
+      .error(log.error)
       .promise();
+  }
+
+  @action
+  getBusinessInfo(slug: string) {
+    const { api } = this.store;
+
+    return apiHelper(api.business.getBusinessInfo(slug), this)
+      .success(data => data)
+      .error(log.error)
+      .promise();
+  }
+
+  @action
+  uploadBusinessLogo(mediaFileInfo) {
+    this.logoUploadingProgress = 0;
+    return this.store.api.business.uploadBusinessLogo(
+      { data: mediaFileInfo.data, fileName: mediaFileInfo.fileName }
+    ).catch(log.error);
+  }
+
+  @action
+  updateLogoUploadProgress(value: number) {
+    this.logoUploadingProgress = 0;
+    if (value >= 100) {
+      this.logoUploadingProgress = 100;
+    }
   }
 
   businessById(profileId): BusinessProfile {

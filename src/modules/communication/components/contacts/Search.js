@@ -16,6 +16,7 @@ export default class Search extends Component {
 
   static defaultProps = {
     showSettings: true,
+    localState: false,
   };
 
   $input: TextInput;
@@ -31,7 +32,20 @@ export default class Search extends Component {
     style?: Object;
     inputStyle?: Object;
     iconStyle?: Object;
+    localState: boolean;
   };
+
+  state: {
+    value: string;
+  };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: '',
+    };
+  }
 
   onSearchPress() {
     this.$input.focus();
@@ -44,7 +58,11 @@ export default class Search extends Component {
   }
 
   onTextChange(text) {
-    const { onSearchAction } = this.props;
+    const { onSearchAction, localState } = this.props;
+
+    if (localState) {
+      this.setState({ value: text });
+    }
 
     if (onSearchAction) {
       onSearchAction(text);
@@ -55,8 +73,9 @@ export default class Search extends Component {
 
   render() {
     const {
-      communication, iconStyle, inputStyle, showSettings, style,
+      communication, iconStyle, inputStyle, showSettings, style, localState,
     } = this.props;
+    const { value } = this.state;
 
     return (
       <View style={[styles.container, style]}>
@@ -77,7 +96,7 @@ export default class Search extends Component {
             returnKeyType="search"
             autoCapitalize="none"
             underlineColorAndroid="transparent"
-            value={communication.contactsFilter}
+            value={localState ? value : communication.contactsFilter}
           />
         </View>
         {showSettings && (

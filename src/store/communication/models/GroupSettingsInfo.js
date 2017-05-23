@@ -1,20 +1,20 @@
 import { observable, extendObservable } from 'mobx';
-import type GroupMember from './GroupMemberData';
+import type GroupMemberInfo from './GroupMemberInfo';
 
-export default class GroupSettingsData {
+export default class GroupSettingsInfo {
   id: number;
   name: string;
-  members: Array<GroupMember>;
+  members: Array<GroupMemberInfo>;
   isOwner: true;
 
-  addMember: (member: GroupMember) => void;
+  addMember: (member: GroupMemberInfo) => void;
   removeMember: (memberId: number) => void;
 
   constructor(data) {
     extendObservable(this, data);
   }
 
-  addMember(member: GroupMember) {
+  addMember(member: GroupMemberInfo) {
     this.members.push(observable(member));
   }
 

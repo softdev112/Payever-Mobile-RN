@@ -13,6 +13,7 @@ export default class ForwardMessage extends Component {
   onRemoveMsgsForForward() {
     const { communication } = this.props;
     communication.clearSelectedMessages();
+    communication.ui.setForwardMode(false);
   }
 
   render() {

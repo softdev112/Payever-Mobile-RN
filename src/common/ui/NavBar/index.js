@@ -31,6 +31,7 @@ export default class NavBar extends Component {
 
   static defaultProps = {
     popup: false,
+    transparent: false,
   };
 
   props: {
@@ -40,6 +41,7 @@ export default class NavBar extends Component {
      */
       popup?: boolean;
     style?: Object | number;
+    transparent?: boolean;
   };
 
   getChildContext() {
@@ -49,19 +51,32 @@ export default class NavBar extends Component {
   }
 
   render() {
-    const { style, popup } = this.props;
+    const { style, popup, transparent } = this.props;
     const children = Children.toArray(this.props.children);
-    const additionalStyle = popup ? styles.container_popup : null;
-    const leftStyle       = popup ? styles.leftZone_popup : null;
+
+    const containerStyle = [styles.container];
+    if (popup) {
+      containerStyle.push(styles.container_popup);
+    }
+
+    if (transparent) {
+      containerStyle.push(styles.container_transparent);
+    }
+
+    const leftStyle = popup ? styles.leftZone_popup : null;
+
     return (
-      <View style={[styles.container, additionalStyle, style]}>
+      <View style={[containerStyle, style]}>
         <View style={[styles.leftZone, leftStyle]}>
           {children.filter(filterByAlign('left'))}
         </View>
         <View style={styles.centerZone}>
           {children.filter(filterByAlign('center'))}
         </View>
-        <Image style={styles.rightZone} source={bgGradient}>
+        <Image
+          style={styles.rightZone}
+          source={transparent ? null : bgGradient}
+        >
           {children.filter(filterByRightAlign())}
         </Image>
       </View>
@@ -113,6 +128,12 @@ const styles = StyleSheet.create({
 
   container_popup: {
     paddingHorizontal: '$paddingPopup',
+  },
+
+  container_transparent: {
+    backgroundColor: 'transparent',
+    borderBottomColor: 'transparent',
+    borderBottomWidth: 0,
   },
 
   leftZone: {

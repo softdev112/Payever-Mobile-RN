@@ -23,7 +23,8 @@ export default class SelectionFooter extends Component {
   };
 
   onForwardMessages() {
-    this.props.communication.setSelectMode(false);
+    const { ui } = this.props.communication;
+    ui.setSelectMode(false);
     this.context.navigator.push({
       screen: 'communication.SelectContact',
       animated: true,
@@ -55,7 +56,7 @@ export default class SelectionFooter extends Component {
           text: 'OK',
           onPress: () => {
             communication.deleteSelectedMessages();
-            communication.setSelectMode(false);
+            communication.ui.setSelectMode(false);
           },
         },
       ],
@@ -64,7 +65,7 @@ export default class SelectionFooter extends Component {
   }
 
   render() {
-    const { forwardMode } = this.props.communication;
+    const { forwardMode } = this.props.communication.ui;
 
     return (
       <Animatable.View

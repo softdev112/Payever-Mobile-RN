@@ -1,5 +1,4 @@
-import { extendObservable, observable } from 'mobx';
-
+import { computed, extendObservable, observable } from 'mobx';
 import type Avatar from './Avatar';
 import type Message from './Message';
 
@@ -18,5 +17,10 @@ export default class Group {
 
   constructor(data) {
     extendObservable(this, data);
+  }
+
+  @computed
+  get isGroup() {
+    return this.type && this.type.endsWith('group');
   }
 }

@@ -5,12 +5,11 @@ import type { Navigator } from 'react-native-navigation';
 import { IconButton, StyleSheet } from 'ui';
 
 import CommunicationStore from '../../../../store/communication';
-import UIStore from '../../../../store/ui';
 
 const INIT_TOP = 20;
 const SHOW_TOP = 70;
 
-@inject('communication', 'ui')
+@inject('communication')
 @observer
 export default class SettingsFloatMenu extends Component {
   static contextTypes = {
@@ -26,7 +25,6 @@ export default class SettingsFloatMenu extends Component {
     conversationId: number;
     onRemove?: (cb?: () => void) => void;
     style?: Object;
-    ui: UIStore;
   };
 
   state: {
@@ -60,8 +58,8 @@ export default class SettingsFloatMenu extends Component {
   }
 
   onSearchMessages() {
-    const { ui: { communicationUI } } = this.props;
-    communicationUI.setSearchMessagesMode(true);
+    const { communication: { ui } } = this.props;
+    ui.setSearchMessagesMode(true);
     this.onRemove();
   }
 
@@ -93,8 +91,9 @@ export default class SettingsFloatMenu extends Component {
 
   onSwitchNotificationSetting() {
     const { communication } = this.props;
-    const { messengerInfo, selectedConversationId } = communication;
+    if (communication.selectedConversation.isGroup) return;
 
+    const { messengerInfo, selectedConversationId } = communication;
     const notifOn = messengerInfo.byId(selectedConversationId).notification;
     communication.changeConvNotificationProp(!notifOn);
   }
@@ -125,13 +124,15 @@ export default class SettingsFloatMenu extends Component {
           title="Search"
         />
 
-        <IconButton
-          iconStyle={notifOn ? null : styles.iconOff}
-          titleStyle={notifOn ? null : styles.iconOff}
-          onPress={::this.onSwitchNotificationSetting}
-          source={notifOn ? 'fa-bell' : 'fa-bell-slash'}
-          title="Mute"
-        />
+        {!communication.selectedConversation.isGroup && (
+          <IconButton
+            iconStyle={notifOn ? null : styles.iconOff}
+            titleStyle={notifOn ? null : styles.iconOff}
+            onPress={::this.onSwitchNotificationSetting}
+            source={notifOn ? 'fa-bell' : 'fa-bell-slash'}
+            title="Mute"
+          />
+        )}
 
         <IconButton
           onPress={::this.onSendOffer}
