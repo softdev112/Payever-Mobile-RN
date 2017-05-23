@@ -4,7 +4,7 @@ import Swipeable from 'react-native-swipeable';
 import { Icon, StyleSheet, Text, View } from 'ui';
 
 import type GroupMemberData
-  from '../../../../store/communication/models/GroupMemberData';
+  from '../../../../store/communication/models/GroupMemberInfo';
 import Avatar from '../contacts/Avatar';
 
 export default class GroupMember extends Component {

@@ -1,9 +1,10 @@
 import { extendObservable, observable, computed } from 'mobx';
 import { debounce } from 'lodash';
-import { soundHelper } from 'utils';
+import RNFetchBlob from 'react-native-fetch-blob';
+import { log, soundHelper } from 'utils';
 import Message from './Message';
-import ConversationSettingsData from './ConversationSettingsData';
-import GroupSettingsData from './GroupSettingsData';
+import ConversationSettingsData from './ConversationSettingsInfo';
+import GroupSettingsData from './GroupSettingsInfo';
 
 export default class Conversation {
   @observable archived: boolean;
@@ -32,7 +33,7 @@ export default class Conversation {
 
   @computed
   get isGroup() {
-    return this.type.endsWith('group');
+    return this.type && this.type.endsWith('group');
   }
 
   @computed
@@ -50,7 +51,7 @@ export default class Conversation {
       ? this.settings.members.filter(m => m.status.online).length : 0;
   }
 
-  updateMessage(message: Message) {
+  async updateMessage(message: Message) {
     if (!(message instanceof Message)) {
       message = new Message(message);
     }
@@ -71,7 +72,18 @@ export default class Conversation {
       });
 
       if (imageMessageIndex !== -1) {
+        const copyImagePath = this.messages[imageMessageIndex].uri;
         this.messages[imageMessageIndex] = message;
+
+        // Remove copy of chosen image
+        try {
+          if (await RNFetchBlob.fs.exists(copyImagePath)) {
+            await RNFetchBlob.fs.unlink(copyImagePath);
+          }
+        } catch (err) {
+          log.error(err);
+        }
+
         return;
       }
     }

@@ -9,15 +9,16 @@ import MessengerInfo from './models/MessengerInfo';
 import Contact from './models/Contact';
 import Conversation, { ConversationStatus }
   from './models/Conversation';
-import ConversationSettingsData from './models/ConversationSettingsData';
-import GroupSettingsData from './models/GroupSettingsData';
+import ConversationSettingsData from './models/ConversationSettingsInfo';
+import GroupSettingsData from './models/GroupSettingsInfo';
 import { MessengerData } from '../../common/api/MessengerApi';
 import SocketHandlers from './SocketHandlers';
 import Message from './models/Message';
+import CommunicationUI from './ui/CommunicationUI';
 import type SocketApi from '../../common/api/MessengerApi/SocketApi';
 import type ConversationInfo from './models/ConversationInfo';
 import type BusinessProfile from '../profiles/models/BusinessProfile';
-import type GroupMemberData from './models/GroupMemberData';
+import type GroupMemberData from './models/GroupMemberInfo';
 import type Store from '../index';
 
 const MSGS_REQUEST_LIMIT = 30;
@@ -44,9 +45,8 @@ export default class CommunicationStore {
 
   @observable filesUploadingProgress: ObservableMap<number> = observable.map();
 
-  // UI observables
-  @observable selectMode: boolean = false;
-  @observable forwardMode: boolean = false;
+  // UI
+  @observable ui: CommunicationUI = {};
 
   store: Store;
   socket: SocketApi;
@@ -59,6 +59,7 @@ export default class CommunicationStore {
 
     // Allow to send typingStatus only once per 5sec
     this.updateTypingStatus = this::throttle(this.updateTypingStatus, 5000);
+    this.ui = new CommunicationUI();
   }
 
   @computed get isError() {
@@ -171,16 +172,6 @@ export default class CommunicationStore {
   }
 
   @action
-  setSelectMode(mode) {
-    this.selectMode = mode;
-  }
-
-  @action
-  setForwardMode(mode) {
-    this.forwardMode = mode;
-  }
-
-  @action
   async search(text) {
     this.contactsFilter = text || '';
 
@@ -203,7 +194,7 @@ export default class CommunicationStore {
       this
     ).success((data) => {
       this.contactsAutocomplete = data;
-    })
+    }).error(log.error)
     .promise();
   }
 
@@ -257,7 +248,10 @@ export default class CommunicationStore {
     const uploadMessage = {
       id: String(Date.now()),
       fileName: mediaFileInfo.fileName,
+      uri: mediaFileInfo.uri,
       isFileUploading: true,
+      width: mediaFileInfo.width,
+      height: mediaFileInfo.height,
     };
 
     messages = messages.concat(uploadMessage);
@@ -273,7 +267,7 @@ export default class CommunicationStore {
         fileName: mediaFileInfo.fileName,
         uploadProgressKey: uploadMessage.id,
       },
-      this
+      this.updateFileUploadProgress.bind(this)
     ).catch(log.error);
   }
 
@@ -313,6 +307,12 @@ export default class CommunicationStore {
 
   @action
   setMessageForReply(message: Message) {
+    // Clear all selections
+    this.removeMessageForEdit();
+    this.clearSelectedMessages();
+    this.ui.setSelectMode(false);
+    this.ui.setForwardMode(false);
+
     this.messageForReply = message;
   }
 

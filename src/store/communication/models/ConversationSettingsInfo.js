@@ -2,7 +2,7 @@ import { extendObservable } from 'mobx';
 import type Avatar from './Avatar';
 import type Contact from './Contact';
 
-export default class ConversationSettingsData {
+export default class ConversationSettingsInfo {
   id: number;
   avatar: ?Avatar;
   name: string;

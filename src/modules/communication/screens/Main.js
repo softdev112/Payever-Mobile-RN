@@ -63,7 +63,6 @@ export default class Main extends Component {
 
   render() {
     const { communication } = this.props;
-    const { contactDataSource } = communication;
 
     if (!ScreenParams.isTabletLayout()) {
       return <ContactsScreen />;
@@ -90,7 +89,7 @@ export default class Main extends Component {
             keyboardVerticalOffset={-170}
           >
             <View style={styles.chat_shadow} />
-            {contactDataSource.isLoading ? (
+            {communication.isLoading ? (
               <ChatSkeleton />
             ) : (
               <Chat

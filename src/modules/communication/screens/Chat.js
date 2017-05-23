@@ -7,9 +7,8 @@ import Chat from '../components/chat';
 import Header from '../components/chat/Header';
 import SettingsFloatMenu from '../components/chat/SettingsFloatMenu';
 import CommunicationStore from '../../../store/communication';
-import UIStore from '../../../store/ui';
 
-@inject('communication', 'ui')
+@inject('communication')
 @observer
 export default class ChatScreen extends Component {
   static navigatorStyle = {
@@ -19,7 +18,6 @@ export default class ChatScreen extends Component {
   props: {
     communication: CommunicationStore;
     navigator: Navigator;
-    ui: UIStore;
   };
 
   state: {
@@ -62,7 +60,7 @@ export default class ChatScreen extends Component {
           text: 'OK',
           onPress: () => {
             communication.deleteAllMsgsInSelectConversation();
-            communication.setSelectMode(false);
+            communication.ui.setSelectMode(false);
           },
         },
       ],
@@ -74,8 +72,8 @@ export default class ChatScreen extends Component {
     const { communication } = this.props;
 
     communication.clearSelectedMessages();
-    communication.setSelectMode(false);
-    communication.setForwardMode(false);
+    communication.ui.setSelectMode(false);
+    communication.ui.setForwardMode(false);
   }
 
   onSettingsPress() {
@@ -115,33 +113,33 @@ export default class ChatScreen extends Component {
 
   render() {
     const {
-      messengerInfo, selectedConversationId, selectMode, forwardMode,
+      messengerInfo, selectedConversationId, ui,
     } = this.props.communication;
-    const { ui: { communicationUI } } = this.props;
     const { showSettingsPopup } = this.state;
     const { avatar } = messengerInfo.byId(selectedConversationId);
 
     return (
       <View style={styles.container}>
-        {communicationUI.searchMessagesMode ? (
+        {ui.searchMessagesMode ? (
           <NavBar style={styles.searchNavBar}>
             <NavBar.Search />
           </NavBar>
         ) : (
           <NavBar>
-            {(selectMode && !forwardMode) && (
+            {(ui.selectMode && !ui.forwardMode) && (
               <NavBar.Button
                 align="left"
                 title="Delete All"
                 onPress={::this.onDeleteAllMessages}
               />
             )}
-            {!selectMode && <NavBar.Back />}
+            {!ui.selectMode && <NavBar.Back />}
 
             <NavBar.ComplexTitle onPress={::this.onSwitchSettingsPopup}>
               <Header />
             </NavBar.ComplexTitle>
-            {selectMode ? (
+
+            {ui.selectMode ? (
               <NavBar.Button
                 title="Cancel"
                 onPress={::this.onCancelSelectedMode}
@@ -170,11 +168,6 @@ export default class ChatScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-
-  header: {
-    borderColor: 'red',
-    borderWidth: 1,
   },
 
   searchNavBar: {

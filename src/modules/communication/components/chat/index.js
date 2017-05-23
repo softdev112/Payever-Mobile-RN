@@ -14,10 +14,9 @@ import ReplyMessage from './ReplyMessage';
 import ForwardMessage from './ForwardMessage';
 import EditMessage from './EditMessage';
 import CommunicationStore from '../../../../store/communication';
-import UIStore from '../../../../store/ui';
 import Message from '../../../../store/communication/models/Message';
 
-@inject('communication', 'ui')
+@inject('communication')
 @observer
 export default class Chat extends Component {
   static contextTypes = {
@@ -27,7 +26,6 @@ export default class Chat extends Component {
   props: {
     communication?: CommunicationStore;
     style?: Object | number;
-    ui: UIStore;
   };
 
   context: {
@@ -107,8 +105,8 @@ export default class Chat extends Component {
     const { communication } = this.props;
     const {
       messageForReply, messageForEdit, selectedConversation, selectedMessages,
-      selectMode,
     } = communication;
+    const { selectMode } = communication.ui;
     const { animValue, messagesCount, showOlderMsgsLoader } = this.state;
 
     const newMessagesCount = selectedConversation
@@ -196,8 +194,8 @@ export default class Chat extends Component {
   onDeleteMessage() {
     const { communication } = this.props;
 
-    this.cleareAllCurrentSelections();
-    communication.setSelectMode(true);
+    this.clearAllCurrentSelections();
+    communication.ui.setSelectMode(true);
     communication.selectMessage(this.state.selectedMessage);
     this.onDismissPopupMenu();
   }
@@ -212,7 +210,7 @@ export default class Chat extends Component {
 
     if (!selectedMessage) return;
 
-    this.cleareAllCurrentSelections();
+    this.clearAllCurrentSelections();
     communication.setMessageForEdit(selectedMessage);
 
     this.onDismissPopupMenu();
@@ -235,13 +233,13 @@ export default class Chat extends Component {
   }
 
   onReplyToMessage() {
+    const { communication } = this.props;
     const { selectedMessage } = this.state;
     if (!selectedMessage) return;
 
-    this.cleareAllCurrentSelections();
-    this.props.communication.setMessageForReply(selectedMessage);
-
+    communication.setMessageForReply(selectedMessage);
     this.onDismissPopupMenu();
+
     if (this.$inputFooter) {
       this.$inputFooter.wrappedInstance.setFocusToInput();
     }
@@ -250,9 +248,8 @@ export default class Chat extends Component {
   onForwardMessage() {
     const { communication } = this.props;
 
-    this.cleareAllCurrentSelections();
-    communication.setSelectMode(true);
-    communication.setForwardMode(true);
+    communication.ui.setSelectMode(true);
+    communication.ui.setForwardMode(true);
     communication.selectMessage(this.state.selectedMessage);
     this.onDismissPopupMenu();
   }
@@ -293,7 +290,7 @@ export default class Chat extends Component {
     return actions;
   }
 
-  cleareAllCurrentSelections() {
+  clearAllCurrentSelections() {
     const { communication } = this.props;
     communication.removeMessageForReply();
     communication.removeMessageForEdit();
@@ -318,8 +315,8 @@ export default class Chat extends Component {
         onPress={this.onMessagePress}
         onLongPress={this.onShowPopupMenu}
         onSelectPress={this.onMessageSelectChange}
-        selectMode={communication.selectMode}
-        deleteMode={!communication.forwardMode}
+        selectMode={communication.ui.selectMode}
+        deleteMode={!communication.ui.forwardMode}
       />
     );
   }
@@ -333,7 +330,7 @@ export default class Chat extends Component {
   }
 
   render() {
-    const { communication, ui: { communicationUI }, style } = this.props;
+    const { communication, style } = this.props;
     const {
       animValue, keyboardHeight, showPopupMenu, popupPosY, popupPosX,
       selectedMessage,
@@ -345,11 +342,11 @@ export default class Chat extends Component {
       selectedConversation: conversation,
       selectedConversationId,
       selectedMessages,
-      selectMode,
       foundMessages,
+      ui,
     } = communication;
 
-    const isMsgsForForward = selectedMessages.length > 0 && !selectMode;
+    const isMsgsForForward = selectedMessages.length > 0 && !ui.selectMode;
 
     // TODO: try to use pop(n)
     // This is hack to go to contacts list if we delete group we set
@@ -370,8 +367,8 @@ export default class Chat extends Component {
     }
 
     let data;
-    if (communicationUI.searchMessagesMode && foundMessages.length !== 0) {
-      data = foundMessages.slice().reverse();
+    if (ui.searchMessagesMode && foundMessages.length !== 0) {
+      data = foundMessages.slice().filter(m => !m.deleted).reverse();
     } else {
       data = conversation.messages.slice().reverse();
     }
@@ -399,7 +396,7 @@ export default class Chat extends Component {
         />
         <Animated.View style={{ height: animValue }} />
 
-        {selectMode ? (
+        {ui.selectMode ? (
           <SelectionFooter />
         ) : (
           <Footer

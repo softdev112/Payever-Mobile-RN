@@ -90,6 +90,9 @@ export default class Footer extends Component {
         {
           data: response.data,
           fileName: response.fileName,
+          uri: response.uri,
+          width: response.width,
+          height: response.height,
         },
         conversationId
       );

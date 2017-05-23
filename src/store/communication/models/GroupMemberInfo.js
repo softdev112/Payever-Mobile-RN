@@ -1,7 +1,7 @@
 import { extendObservable } from 'mobx';
 import type Avatar from './Avatar';
 
-export default class GroupMemberData {
+export default class GroupMemberInfo {
   id: number;
   recipient_id: string;
   name: string;

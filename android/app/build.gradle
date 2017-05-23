@@ -104,8 +104,8 @@ android {
         applicationId "de.payever.payever"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 2001016
-        versionName "2.1.16"
+        versionCode 2001017
+        versionName "2.1.17"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -155,6 +155,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-image-resizer')
     compile project(':react-native-fetch-blob')
     compile project(':react-native-image-picker')
     compile project(':react-native-sound')

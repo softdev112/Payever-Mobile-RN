@@ -20,17 +20,18 @@ export default class SelectContact extends Component {
 
   componentDidMount() {
     const { communication } = this.props;
-    communication.setForwardMode(true);
+    communication.ui.setForwardMode(true);
   }
 
   componentWillUnmount() {
     const { communication } = this.props;
-    communication.setForwardMode(false);
+    communication.ui.setForwardMode(false);
   }
 
   onCancelFroward() {
     const { communication, navigator } = this.props;
-    communication.setForwardMode(false);
+    communication.ui.setForwardMode(false);
+    communication.ui.setSelectMode(true);
     navigator.pop({ animated: true });
   }
 
