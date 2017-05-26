@@ -7,6 +7,9 @@ export default class GridView extends Component {
   static defaultProps = {
     renderFooter: () => null,
     itemWidth: 200,
+    itemHeight: 200,
+    centerContent: false,
+    scrollEnabled: true,
   };
 
   props: {
@@ -16,9 +19,25 @@ export default class GridView extends Component {
     renderFooter?: () => Component;
     style?: Object | number;
     itemWidth?: number;
+    itemHeight?: number;
+    centerContent?: boolean;
+    numColumns?: number;
+    scrollEnabled?: boolean;
   };
 
   $list: FlatList;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      gridHeight: 0,
+    };
+  }
+
+  onLayout({ nativeEvent }) {
+    this.setState({ gridHeight: nativeEvent.layout.height });
+  }
 
   scrollToEnd(options = { animated: false }) {
     if (this.$list) {
@@ -34,22 +53,43 @@ export default class GridView extends Component {
       style,
       renderFooter,
       itemWidth,
+      itemHeight,
+      numColumns,
+      centerContent,
+      scrollEnabled,
     } = this.props;
+    const { gridHeight } = this.state;
 
-    const numberOfColumns = Math.floor(ScreenParams.width / itemWidth);
+    const numOfColumns = numColumns
+      || Math.floor(ScreenParams.width / itemWidth);
+    const marginLeft =
+      (ScreenParams.width - (numOfColumns * itemWidth)) / (numOfColumns + 1);
+
+    const contentStyle = [styles.content];
+    const columnHeight =
+      (data.length / numOfColumns) * itemHeight;
+    const isCenteredAvailable = columnHeight < gridHeight;
+
+    if (centerContent && isCenteredAvailable) {
+      contentStyle.push(styles.centerContent);
+    }
 
     return (
       <FlatList
+        scrollEnabled={scrollEnabled && !(centerContent && isCenteredAvailable)}
+        contentContainerStyle={contentStyle}
         style={[styles.container, style]}
         ref={r => this.$list = r}
         initialNumToRender={30}
         data={data}
-        renderItem={renderItem}
+        renderItem={(info) => renderItem(info, marginLeft)}
         ListFooterComponent={renderFooter}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         keyExtractor={keyExtractor}
-        numColumns={numberOfColumns}
+        numColumns={numOfColumns}
+        contentInset={{ top: 10, bottom: 10 }}
+        onLayout={::this.onLayout}
       />
     );
   }
@@ -58,6 +98,14 @@ export default class GridView extends Component {
 const styles = StyleSheet.create({
   container: {
     alignSelf: 'center',
-    paddingTop: 8,
+  },
+
+  content: {
+    alignSelf: 'center',
+  },
+
+  centerContent: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });

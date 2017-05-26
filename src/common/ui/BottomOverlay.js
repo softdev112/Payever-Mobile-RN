@@ -4,9 +4,16 @@ import Icon from './Icon';
 import StyleSheet from './StyleSheet';
 
 export default class BottomOverlay extends Component {
+  static defaultProps = {
+    startBottom: 0,
+    endBottom: 50,
+  };
+
   props: {
     children: Array<Component>;
     onRemove?: () => void;
+    startBottom?: number;
+    endBottom?: number;
   };
 
   state: {
@@ -17,22 +24,22 @@ export default class BottomOverlay extends Component {
     super(props);
 
     this.state = {
-      animValue: new Animated.Value(0),
+      animValue: new Animated.Value(props.startBottom),
     };
   }
 
   componentDidMount() {
     Animated.timing(this.state.animValue, {
-      toValue: 50,
+      toValue: this.props.endBottom,
       duration: 200,
     }).start();
   }
 
   onRemove() {
-    const { onRemove } = this.props;
+    const { onRemove, startBottom } = this.props;
 
     Animated.timing(this.state.animValue, {
-      toValue: 0,
+      toValue: startBottom,
       duration: 200,
     }).start(() => {
       if (onRemove) {

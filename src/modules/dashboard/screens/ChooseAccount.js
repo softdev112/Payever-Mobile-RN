@@ -91,7 +91,7 @@ export default class ChooseAccount extends Component {
     const { navigator, profiles } = this.props;
     profiles.setCurrentProfile(profile);
     navigator.resetTo({
-      screen: 'communication.Main',
+      screen: profile.isBusiness ? 'dashboard.Dashboard' : 'dashboard.Private',
       animated: true,
     });
   }
@@ -134,8 +134,10 @@ export default class ChooseAccount extends Component {
 
     return (
       <GridView
+        style={styles.appGrid}
         data={data}
         ref={r => this.$list = r}
+        itemWidth={210}
         renderFooter={::this.renderFooter}
         renderItem={::this.renderItem}
         keyExtractor={item => item.id}
@@ -164,7 +166,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    paddingBottom: 16,
+  },
+
+  appGrid: {
+    paddingTop: 10,
   },
 
   error: {

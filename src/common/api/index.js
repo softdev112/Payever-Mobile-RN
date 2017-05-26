@@ -7,6 +7,7 @@ import type { Config } from '../../config';
 
 import AuthApi from './AuthApi';
 import BusinessApi from './BusinessApi';
+import ContactsApi from './ContactsApi';
 import DashboardApi from './DashboardApi';
 import DeviceApi from './DeviceApi';
 import MarketingApi from './MarketingApi';
@@ -18,6 +19,7 @@ import UserApi from './UserApi';
 export default class PayeverApi {
   auth: AuthApi           = new AuthApi(this);
   business: BusinessApi   = new BusinessApi(this);
+  contacts: ContactsApi   = new ContactsApi(this);
   dashboard: DashboardApi = new DashboardApi(this);
   device: DeviceApi       = new DeviceApi(this);
   marketing: MarketingApi = new MarketingApi(this);
@@ -123,6 +125,7 @@ export default class PayeverApi {
     if (query && Object.keys(query).length) {
       fullUrl += '?' + objectToQueryString(query);
     }
+
     return fullUrl;
   }
 }

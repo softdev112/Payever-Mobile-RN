@@ -22,7 +22,7 @@ export default class BusinessApi {
   }
 
   // ToDo: This API endpoint is marked as deprecated
-  async createNewBusiness(business: BusinessReq): Promise<CreatedBusinessResp> {
+  createNewBusiness(business: BusinessReq): Promise<CreatedBusinessResp> {
     return this.client.post('/api/rest/v1/business/create', { business });
   }
 

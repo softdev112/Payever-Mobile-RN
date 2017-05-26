@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { ScrollView } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
-import { Icon, ImageButton, StyleSheet, Text, View } from 'ui';
+import { Icon, ImageButton, StyleSheet, Text, TextButton, View } from 'ui';
 import { Navigator } from 'react-native-navigation';
 import { log } from 'utils';
 
@@ -39,23 +39,18 @@ export default class SideMenu extends Component {
   }
 
   onProfileSelect(profile: BusinessProfile) {
-    const { navigator, profiles } = this.props;
+    const { profiles } = this.props;
 
     this.onClose();
     profiles.setCurrentProfile(profile);
-    navigator.resetTo({
-      screen: 'communication.Main',
-      animated: false,
-    });
+    showScreen('dashboard.Dashboard');
   }
 
   onUserPress() {
-    const { navigator, profiles } = this.props;
+    const { profiles } = this.props;
     profiles.setCurrentProfile(profiles.privateProfile);
-    navigator.resetTo({
-      screen: 'communication.Main',
-      animated: false,
-    });
+    this.onClose();
+    showScreen('dashboard.Private');
   }
 
   onProfileSettingsPress() {
@@ -73,6 +68,15 @@ export default class SideMenu extends Component {
     navigator.push({
       screen: 'core.Debug',
       title: 'Debug',
+      animated: true,
+    });
+  }
+
+  onContactsList() {
+    const { navigator } = this.props;
+    this.onClose();
+    navigator.push({
+      screen: 'contacts.BusinessContacts',
       animated: true,
     });
   }
@@ -147,6 +151,11 @@ export default class SideMenu extends Component {
               Debug page
             </Text>
           )}
+          <TextButton
+            style={styles.allContactsBtn}
+            title="All Contacts"
+            onPress={::this.onContactsList}
+          />
           <Text
             style={styles.bottomMenu_item}
             onPress={::this.onLogoutPress}
@@ -242,5 +251,9 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     paddingHorizontal: 24,
     paddingVertical: 18,
+  },
+
+  allContactsBtn: {
+    paddingHorizontal: 24,
   },
 });

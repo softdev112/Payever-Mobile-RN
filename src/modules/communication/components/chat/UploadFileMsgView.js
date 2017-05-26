@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   container: {
     minHeight: 200,
     transform: [{ scaleY: -1 }],
-    marginLeft: 50,
+    marginLeft: 54,
     paddingTop: 20,
   },
 

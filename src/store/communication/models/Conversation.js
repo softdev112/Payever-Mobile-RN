@@ -1,10 +1,11 @@
-import { extendObservable, observable, computed } from 'mobx';
+import { action, extendObservable, observable, computed } from 'mobx';
 import { debounce } from 'lodash';
 import RNFetchBlob from 'react-native-fetch-blob';
 import { log, soundHelper } from 'utils';
 import Message from './Message';
-import ConversationSettingsData from './ConversationSettingsInfo';
-import GroupSettingsData from './GroupSettingsInfo';
+import ConversationSettingsInfo from './ConversationSettingsInfo';
+import GroupSettingsInfo from './GroupSettingsInfo';
+import GroupMemberInfo from './GroupMemberInfo';
 
 export default class Conversation {
   @observable archived: boolean;
@@ -14,7 +15,7 @@ export default class Conversation {
   @observable status: ConversationStatus;
   type: ConversationType = '';
   allMessagesFetched: boolean = false;
-  @observable settings: ConversationSettingsData | GroupSettingsData = null;
+  @observable settings: ConversationSettingsInfo | GroupSettingsInfo = null;
 
   constructor(data) {
     data.messages = (data.messages || []).map(m => new Message(m));
@@ -51,6 +52,22 @@ export default class Conversation {
       ? this.settings.members.filter(m => m.status.online).length : 0;
   }
 
+  @action
+  addMember(member: GroupMemberInfo) {
+    if (this.isGroup && this.settings) {
+      this.settings.members.push(member);
+    }
+  }
+
+  @action
+  removeMember(memberId: number) {
+    if (this.isGroup && this.settings) {
+      const { members } = this.settings;
+      this.settings.members = members.filter(m => m.id !== memberId);
+    }
+  }
+
+  @action
   async updateMessage(message: Message) {
     if (!(message instanceof Message)) {
       message = new Message(message);
@@ -95,6 +112,7 @@ export default class Conversation {
     }
   }
 
+  @action
   updateStatus(status, typing = false) {
     if (!typing) {
       extendObservable(this.status, status);
@@ -114,6 +132,7 @@ export default class Conversation {
    * This method will be called only in 6s seconds. If it's called again the
    * timer is reset.
    */
+  @action
   updateTypingStatusLazily() {
     this.status.typing = false;
   }
@@ -124,18 +143,21 @@ export default class Conversation {
       .map((message: Message) => message.id);
   }
 
+  @action
   setReadStatus(messageId) {
     this.messages
       .filter((message: Message) => message.id === messageId)
       .forEach((message: Message) => message.opponentUnread = false);
   }
 
+  @action
   setConversationSettings(
-    settings: ConversationSettingsData | GroupSettingsData
+    settings: ConversationSettingsInfo | GroupSettingsInfo
   ) {
     extendObservable(this, { settings });
   }
 
+  @action
   setNotificationSetting(value) {
     if (this.settings) {
       this.settings.notification = value;

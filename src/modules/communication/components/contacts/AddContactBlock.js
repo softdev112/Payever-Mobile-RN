@@ -11,8 +11,10 @@ import type CommunicationStore
   from '../../../../store/communication';
 import type ProfilesStore
   from '../../../../store/profiles';
+import type ContactsStore
+  from '../../../../store/contacts';
 
-@inject('communication', 'profiles')
+@inject('communication', 'profiles', 'contacts')
 @observer
 export default class AddContactBlock extends Component {
   static navigatorStyle = {
@@ -26,6 +28,7 @@ export default class AddContactBlock extends Component {
   props: {
     communication: CommunicationStore;
     profiles: ProfilesStore;
+    contacts: ContactsStore;
     style?: Object;
   };
 
@@ -35,8 +38,6 @@ export default class AddContactBlock extends Component {
 
   componentWillUnmount() {
     const { communication } = this.props;
-
-    communication.clearAddForActionContacts();
     communication.clearAtocomleteContactsSearch();
   }
 
@@ -66,9 +67,11 @@ export default class AddContactBlock extends Component {
 
   onShowContactList() {
     const { navigator } = this.context;
+    const { contacts } = this.props;
 
+    contacts.ui.setSelectMode(true);
     navigator.push({
-      screen: 'communication.AddContactToGroup',
+      screen: 'contacts.BusinessContacts',
       animated: true,
     });
   }
@@ -102,7 +105,9 @@ export default class AddContactBlock extends Component {
   }
 
   render() {
-    const { communication, style, profiles } = this.props;
+    const { communication, contacts, style, profiles } = this.props;
+    const isContactsSelected = contacts.selectedContacts.length > 0
+      || communication.contactsForAction.length > 0;
 
     return (
       <View style={[styles.container, style]}>
@@ -126,6 +131,7 @@ export default class AddContactBlock extends Component {
             ItemSeparatorComponent={::this.renderSeparator}
             keyboardShouldPersistTaps="always"
             keyExtractor={contact => contact.id}
+            contentInset={{ bottom: isContactsSelected ? 50 : 10 }}
           />
         </Loader>
       </View>

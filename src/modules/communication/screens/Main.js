@@ -11,8 +11,9 @@ import Contacts from '../components/contacts';
 import ContactsScreen from './Contacts';
 import CommunicationStore from '../../../store/communication';
 import Profiles from '../../../store/profiles';
+import UIStore from '../../../store/ui';
 
-@inject('communication', 'profiles')
+@inject('communication', 'profiles', 'ui')
 @observer
 export default class Main extends Component {
   static navigatorStyle = {
@@ -23,6 +24,7 @@ export default class Main extends Component {
     communication: CommunicationStore;
     profiles: Profiles;
     navigator: Navigator;
+    ui: UIStore;
   };
 
   constructor(props) {
@@ -61,6 +63,11 @@ export default class Main extends Component {
     }
   }
 
+  onGoBack() {
+    const { ui } = this.props;
+    ui.tabBarUI.setSelectedIndex(ui.tabBarUI.tabs.dashboard);
+  }
+
   render() {
     const { communication } = this.props;
 
@@ -71,7 +78,7 @@ export default class Main extends Component {
     return (
       <View style={styles.container}>
         <NavBar>
-          <NavBar.Back title="Back" />
+          <NavBar.Back title="Back" onPress={::this.onGoBack} />
           <NavBar.Title title="Communication" source={images.communication} />
           <NavBar.IconButton
             imageStyle={styles.settingsIcon}

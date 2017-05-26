@@ -10,11 +10,13 @@ import OffersStore from './offers';
 import ProfilesStore from './profiles';
 import SearchStore from './search';
 import UIStore from './ui';
+import ContactsStore from './contacts';
 
 /* eslint-disable no-console */
 export default class Store {
   auth: AuthStore                   = new AuthStore(this);
   communication: CommunicationStore = new CommunicationStore(this);
+  contacts: ContactsStore           = new ContactsStore(this);
   offers: OffersStore               = new OffersStore(this);
   profiles: ProfilesStore           = new ProfilesStore(this);
   search: SearchStore               = new SearchStore(this);
