@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Animated } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import { GridView, IconText, Loader, StyleSheet, View } from 'ui';
@@ -9,7 +10,7 @@ import type AppItem from '../../../store/profiles/models/AppItem';
 import Dock from '../../core/components/Dock';
 import SearchHeader from '../components/SearchHeader';
 
-const APP_ICON_WIDTH_PHONE = 90;
+const APP_ICON_WIDTH_PHONE = 80;
 const APP_ICON_WIDTH_TABLET = 130;
 
 @inject('profiles', 'config')
@@ -26,6 +27,8 @@ export default class Dashboard extends Component {
 
   state: {
     appsTop: Array<AppItem>;
+    layoutDone: boolean;
+    appearAnimation: Animated.Value;
   };
 
   constructor(props) {
@@ -33,6 +36,8 @@ export default class Dashboard extends Component {
 
     this.state = {
       appsTop: [],
+      layoutDone: false,
+      appearAnimation: new Animated.Value(1),
     };
   }
 
@@ -44,6 +49,10 @@ export default class Dashboard extends Component {
     this.setState({
       appsTop:    apps.filter(a => a.location === 'top'),
     });
+  }
+
+  componentDidMount() {
+    this.animateLayout();
   }
 
   onAppClick(app: AppItem) {
@@ -69,10 +78,18 @@ export default class Dashboard extends Component {
     }
   }
 
-  renderIcon({ item }: AppItem) {
+  animateLayout() {
+    Animated.timing(this.state.appearAnimation, {
+      toValue: 10,
+      delay: 300,
+      duration: 300,
+    }).start();
+  }
+
+  renderIcon({ item }: AppItem, marginLeft) {
     return (
       <IconText
-        style={styles.icon}
+        style={[styles.icon, { marginLeft }]}
         imageStyle={styles.icon_image}
         textStyle={styles.icon_title}
         onPress={() => this.onAppClick(item)}
@@ -83,21 +100,32 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { appsTop } = this.state;
+    const { appsTop, appearAnimation } = this.state;
 
     const iconWidth = ScreenParams.isTabletLayout()
       ? APP_ICON_WIDTH_TABLET : APP_ICON_WIDTH_PHONE;
 
+    const opacity = appearAnimation.interpolate({
+      inputRange: [1, 10],
+      outputRange: [0, 1],
+    });
+
     return (
       <Loader isLoading={appsTop.length < 1}>
         <View style={styles.container}>
-          <SearchHeader navigator={this.props.navigator} />
-          <GridView
-            data={appsTop}
-            renderItem={::this.renderIcon}
-            itemWidth={iconWidth}
-            keyExtractor={app => app.id}
-          />
+          <SearchHeader />
+          <Animated.View style={[styles.animationView, { opacity }]}>
+            <GridView
+              style={styles.appGrid}
+              centerContent
+              data={appsTop}
+              renderItem={::this.renderIcon}
+              itemWidth={iconWidth}
+              itemHeight={iconWidth}
+              numColumns={4}
+              keyExtractor={app => app.id}
+            />
+          </Animated.View>
           <Dock floatMode={false} />
         </View>
       </Loader>
@@ -114,22 +142,26 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
+  appGrid: {
+    paddingTop: 10,
+    marginLeft: 0,
+  },
+
   icon: {
-    height: 93,
+    height: 102,
     width: APP_ICON_WIDTH_PHONE,
-    marginBottom: 8,
   },
 
   icon_image: {
-    borderRadius: 15,
+    borderRadius: 14,
     elevation: 5,
-    height: 50,
+    height: 63,
+    width: 63,
     marginBottom: 8,
     shadowColor: 'rgba(0, 0, 0, .1)',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 1,
     shadowRadius: 5,
-    width: 50,
   },
 
   icon_title: {
@@ -137,6 +169,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     fontWeight: '400',
     paddingTop: 0,
+    fontSize: 12,
+  },
+
+  '@media (min-width: 370)': {
+    appGrid: {
+      marginLeft: -12,
+    },
+  },
+
+  '@media (min-width: 400)': {
+    appGrid: {
+      marginLeft: -17,
+    },
   },
 
   '@media (min-width: 550)': {
@@ -148,8 +193,8 @@ const styles = StyleSheet.create({
     icon_image: {
       borderRadius: 18,
       height: 80,
-      shadowRadius: 10,
       width: 80,
+      shadowRadius: 10,
     },
 
     icon_title: {

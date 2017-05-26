@@ -1,4 +1,4 @@
-export default class SavedContact {
+export default class CustomerContactInfo {
   id: number;
   first_name: ?string;
   last_name: ?string;

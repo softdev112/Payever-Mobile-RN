@@ -123,13 +123,13 @@ export default class AddNewBusiness extends Component {
       return;
     }
 
-    let logoFileName = '';
+    let logoFileId = '';
     if (logoFile) {
       try {
         const logoResp = await profiles.uploadBusinessLogo(logoFile);
         if (logoResp && logoResp.respInfo.status === 200) {
           const data = await logoResp.json();
-          logoFileName = data.details.id;
+          logoFileId = data.details.id;
         }
 
         if (await RNFetchBlob.fs.exists(logoFile.uri)) {
@@ -143,7 +143,7 @@ export default class AddNewBusiness extends Component {
     const newBusiness = {
       companyName: formElementsData[0],
       legalForm: formElementsData[1],
-      businessLogo: logoFileName,
+      businessLogo: logoFileId,
       address: {
         phone: formElementsData[2],
         country: currentCountry.cca2,
@@ -399,6 +399,7 @@ const styles = StyleSheet.create({
   countryText: {
     color: '$pe_color_gray',
     fontSize: 18,
+    fontWeight: '200',
     alignSelf: 'center',
     marginLeft: 8,
   },

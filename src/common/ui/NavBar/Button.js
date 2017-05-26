@@ -9,6 +9,7 @@ export default class Button extends Component {
   static defaultProps = {
     align: 'right',
     unwind: false,
+    disabled: false,
   };
 
   static contextTypes = {
@@ -24,6 +25,7 @@ export default class Button extends Component {
     title: string;
     style?: Object | number;
     unwind?: boolean;
+    disabled?: boolean;
   };
 
   onPress() {
@@ -39,11 +41,16 @@ export default class Button extends Component {
   }
 
   render() {
-    const { style, title } = this.props;
+    const { disabled, style, title } = this.props;
+
+    const disableBtn = [styles.title, style];
+    if (disabled) {
+      disableBtn.push(styles.disabledBtn);
+    }
 
     return (
-      <NavBarItem onPress={::this.onPress}>
-        <Text numberOfLines={1} style={[styles.title, style]}>
+      <NavBarItem disabled={disabled} onPress={::this.onPress}>
+        <Text numberOfLines={1} style={disableBtn}>
           {title}
         </Text>
       </NavBarItem>
@@ -55,5 +62,9 @@ const styles = StyleSheet.create({
   title: {
     color: '$pe_color_blue',
     fontSize: 16,
+  },
+
+  disabledBtn: {
+    color: '$pe_color_icon',
   },
 });

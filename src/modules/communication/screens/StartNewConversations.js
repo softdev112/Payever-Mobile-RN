@@ -4,17 +4,21 @@ import { Navigator } from 'react-native-navigation';
 import { Icon, FlatTextInput, NavBar, StyleSheet, View } from 'ui';
 
 import AddContactBlock from '../components/contacts/AddContactBlock';
-import CommunicationStore from '../../../store/communication';
+import SelectedContacts from '../../contacts/components/SelectedContacts';
 
-@inject('communication')
+import CommunicationStore from '../../../store/communication';
+import ContactsStore from '../../../store/contacts';
+
+@inject('communication', 'contacts')
 @observer
-export default class AddContact extends Component {
+export default class StartNewConversations extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };
 
   props: {
     communication: CommunicationStore;
+    contacts: ContactsStore;
     navigator: Navigator;
   };
 
@@ -32,6 +36,12 @@ export default class AddContact extends Component {
       messageText: '',
       messageHtml: '',
     };
+  }
+
+  componentWillUnmount() {
+    const { communication, contacts } = this.props;
+    communication.clearContactsForAction();
+    contacts.clearSelectedContacts();
   }
 
   onMessageEdited(messageHtml: string = '') {
@@ -57,6 +67,9 @@ export default class AddContact extends Component {
   onAddContacts() {
     const { messageHtml, messageText } = this.state;
     const { communication, navigator } = this.props;
+
+    if (communication.isLoading) return;
+
     if (!messageText) {
       this.$messageTextInput.shakeElementAndSetFocus();
       return;
@@ -67,11 +80,15 @@ export default class AddContact extends Component {
   }
 
   render() {
+    const { communication, contacts } = this.props;
+    const isContactsSelected = contacts.selectedContacts.length > 0
+      || communication.contactsForAction.length > 0;
+
     return (
       <View style={styles.container}>
         <NavBar popup>
           <NavBar.Back />
-          <NavBar.Title title="Add a contact" />
+          <NavBar.Title showTitle="always" title="Add a contact" />
           <NavBar.Button title="Send" onPress={::this.onAddContacts} />
         </NavBar>
         <View style={styles.content}>
@@ -89,10 +106,10 @@ export default class AddContact extends Component {
               source="icon-edit-16"
             />
           </View>
-          <AddContactBlock
-            style={styles.addContactBlock}
-            bottomDockStyle={styles.bottomDockStyle}
-          />
+
+          <AddContactBlock style={styles.addContactBlock} />
+
+          {isContactsSelected && <SelectedContacts />}
         </View>
       </View>
     );

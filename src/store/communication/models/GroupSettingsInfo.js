@@ -4,7 +4,7 @@ import type GroupMemberInfo from './GroupMemberInfo';
 export default class GroupSettingsInfo {
   id: number;
   name: string;
-  members: Array<GroupMemberInfo>;
+  @observable members: Array<GroupMemberInfo>;
   isOwner: true;
 
   addMember: (member: GroupMemberInfo) => void;

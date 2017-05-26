@@ -9,6 +9,7 @@ const DEFAULT_HIT_SLOP = 10;
 export default class NavBarItem extends Component {
   static defaultProps = {
     align: 'center',
+    disabled: false,
   };
 
   props: {
@@ -16,6 +17,7 @@ export default class NavBarItem extends Component {
     children: any;
     style?: Object;
     align?: 'left' | 'right' | 'middle';
+    disabled?: boolean;
   };
 
   getAlignStyles(align: 'left' | 'right' | 'center') {
@@ -32,7 +34,7 @@ export default class NavBarItem extends Component {
   }
 
   render() {
-    const { align, children, onPress, style } = this.props;
+    const { align, children, disabled, onPress, style } = this.props;
 
     const hitSlop = {
       top: DEFAULT_HIT_SLOP,
@@ -49,7 +51,7 @@ export default class NavBarItem extends Component {
         style={touchElementStyle}
         accessibilityComponentType="button"
         accessibilityTraits={['button']}
-        disabled={!onPress}
+        disabled={!onPress || disabled}
         hitSlop={hitSlop}
         onPress={onPress}
       >

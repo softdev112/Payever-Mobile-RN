@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     '@media ios': {
       paddingTop: 30,
     },
+    height: 55,
   },
 
   search: {
@@ -87,5 +88,23 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     borderRadius: 15,
+    marginBottom: 2,
+  },
+
+  '@media (min-width: 550)': {
+    container: {
+      height: 80,
+    },
+
+    profile: {
+      width: 50,
+      height: 50,
+      borderRadius: 25,
+      marginBottom: 2,
+    },
+
+    search: {
+      fontSize: 24,
+    },
   },
 });

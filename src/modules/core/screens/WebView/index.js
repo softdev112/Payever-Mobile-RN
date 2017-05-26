@@ -8,7 +8,6 @@ import { log } from 'utils';
 import injectedCode, { getLoaderHtml } from './injectedCode';
 import WebViewError from './WebViewError';
 import WebViewLoader from '../../../../common/ui/WebView/WebViewLoader';
-import Dock from '../../components/Dock';
 import { showScreen, toggleMenu } from '../../../../common/Navigation';
 import type AuthStore from '../../../../store/auth';
 import type { Config } from '../../../../config';
@@ -215,7 +214,6 @@ export default class WebView extends Component {
         />
 
         {showLoader && <WebViewLoader />}
-        <Dock />
       </View>
     );
   }

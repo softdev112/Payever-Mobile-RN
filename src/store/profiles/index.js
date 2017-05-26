@@ -1,13 +1,10 @@
 import { observable, action } from 'mobx';
 import { apiHelper, log } from 'utils';
 
-import type {
-  ProfilesData, ContactsPaginationData,
-} from '../../common/api/ProfilesApi';
+import type { ProfilesData } from '../../common/api/ProfilesApi';
 import type { MenuItemData } from '../../common/api/MenuApi';
 import type { ActivityItemData } from '../../common/api/BusinessApi';
 import type Store from './index';
-import type SavedContact from './models/SavedContact';
 import ActivityItem from './models/ActivityItem';
 import AppItem from './models/AppItem';
 import BusinessProfile from './models/BusinessProfile';
@@ -20,10 +17,8 @@ export default class ProfilesStore {
   @observable privateProfile: PersonalProfile         = null;
 
   @observable currentProfile: PersonalProfile | BusinessProfile = null;
-  @observable contacts: Array<SavedContact> = [];
-  contactsPaginationData: ContactsPaginationData;
 
-  @observable logoUploadingProgress: number = false;
+  @observable logoUploadingProgress: number = 0;
 
   @observable error: string     = '';
   @observable isLoading: boolean = false;
@@ -65,40 +60,8 @@ export default class ProfilesStore {
           return new BusinessProfile(profile, this.store);
         });
         this.privateProfile = new PersonalProfile(data.private, this.store);
-
-        this.contactsPaginationData = null;
-        this.contacts = [];
       })
       .promise();
-  }
-
-  @action
-  loadAllContacts() {
-    const { api } = this.store;
-    let pageCount = 0;
-    let currentPage = 0;
-
-    if (this.contactsPaginationData) {
-      // pageCount - number, current - string
-      pageCount = this.contactsPaginationData.pageCount;
-      currentPage = +this.contactsPaginationData.current;
-    }
-
-    if (this.isLoading || (currentPage !== 0 && currentPage === pageCount)
-      || pageCount === 0) {
-      return;
-    }
-
-    apiHelper(
-      api.profiles.getAllContacts(
-        this.currentProfile.business.slug,
-        currentPage + 1
-      ),
-      this
-    ).success((data) => {
-      this.contactsPaginationData = data.pagination_data;
-      this.contacts = this.contacts.concat(data.contact_models);
-    });
   }
 
   @action
@@ -171,12 +134,14 @@ export default class ProfilesStore {
   setCurrentProfile(profile: Profile) {
     this.currentProfile = profile;
 
+    const { ui } = this.store;
+
     // Set start selected index for toolbar for profile
-    // 1 - private, 3 - business
+    // 1 - private, 2 - business
     if (profile && profile.isBusiness) {
-      this.store.ui.tabBarUI.setSelectedIndex(3);
+      ui.tabBarUI.setSelectedIndex(ui.tabBarUI.tabs.dashboard);
     } else {
-      this.store.ui.tabBarUI.setSelectedIndex(1);
+      ui.tabBarUI.setSelectedIndex(ui.tabBarUI.tabs.privateDashboard);
     }
   }
 

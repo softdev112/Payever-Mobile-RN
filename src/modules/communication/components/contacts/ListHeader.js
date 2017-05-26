@@ -39,7 +39,7 @@ export default class ListHeader extends Component {
     const { type } = this.props;
 
     if (type === 'contacts') {
-      navigator.push({ screen: 'communication.AddContact' });
+      navigator.push({ screen: 'communication.StartNewConversations' });
     }
 
     if (type === 'groups') {

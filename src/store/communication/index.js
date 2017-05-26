@@ -14,11 +14,11 @@ import GroupSettingsData from './models/GroupSettingsInfo';
 import { MessengerData } from '../../common/api/MessengerApi';
 import SocketHandlers from './SocketHandlers';
 import Message from './models/Message';
-import CommunicationUI from './ui/CommunicationUI';
+import CommunicationUI from './ui';
 import type SocketApi from '../../common/api/MessengerApi/SocketApi';
 import type ConversationInfo from './models/ConversationInfo';
 import type BusinessProfile from '../profiles/models/BusinessProfile';
-import type GroupMemberData from './models/GroupMemberInfo';
+import type GroupMemberInfo from './models/GroupMemberInfo';
 import type Store from '../index';
 
 const MSGS_REQUEST_LIMIT = 30;
@@ -535,7 +535,7 @@ export default class CommunicationStore {
   }
 
   @action
-  clearAddForActionContacts() {
+  clearContactsForAction() {
     this.contactsForAction = [];
   }
 
@@ -618,10 +618,10 @@ export default class CommunicationStore {
   @action
   async removeGroupMember(groupId: number, memberId: number) {
     const socket = await this.store.api.messenger.getSocket();
-    this.selectedGroupSettings.removeMember(memberId);
 
     apiHelper(socket.removeGroupMember(groupId, memberId))
       .success(() => {
+        this.selectedConversation.removeMember(memberId);
         this.markConversationAsRead(this.selectedConversationId);
       })
       .error(log.error);
@@ -632,7 +632,7 @@ export default class CommunicationStore {
     const socket = await this.store.api.messenger.getSocket();
     return apiHelper(socket.addGroupMember(groupId, memberAlias))
       .success((data) => {
-        this.selectedGroupSettings.addMember(data);
+        this.selectedConversation.addMember(data);
 
         // Mark conversation as read to avoid badge appearance
         this.markConversationAsRead(this.selectedConversationId);
@@ -642,8 +642,13 @@ export default class CommunicationStore {
 
   @action
   addAllMembersToGroup(groupId: number) {
-    const members = this.contactsForAction.slice();
-    members.forEach(async (member: GroupMemberData) => {
+    const contacts = this.store.contacts.selectedContacts.slice().map((m) => {
+      m.id = `contact-${m.id}`;
+      return m;
+    });
+
+    const members = contacts.concat(this.contactsForAction.slice());
+    members.forEach(async (member: GroupMemberInfo) => {
       await this.addGroupMember(groupId, member.id);
     });
   }
@@ -677,7 +682,13 @@ export default class CommunicationStore {
 
   @action
   sendInviteMsgToContacts(message: string) {
-    const recipients = this.contactsForAction.slice()
+    const userContacts = this.store.contacts.selectedContacts.slice()
+      .map((m) => {
+        m.id = `contact-${m.id}`;
+        return m;
+      });
+
+    const recipients = userContacts.concat(this.contactsForAction.slice())
       .reduce((result, contact, index, contacts) => {
         return result + contact.id +
           (contacts.length - 1 !== index ? ',' : '');
@@ -690,7 +701,10 @@ export default class CommunicationStore {
       messengerUser.id,
       recipients,
       message
-    )).success();
+    )).success(() => {
+      this.clearAtocomleteContactsSearch();
+      this.store.contacts.clearSelectedContacts();
+    });
   }
 
   @action

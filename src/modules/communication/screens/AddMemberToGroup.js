@@ -2,10 +2,12 @@ import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { NavBar, StyleSheet, View } from 'ui';
 
+import SelectedContacts from '../../contacts/components/SelectedContacts';
 import AddContactBlock from '../components/contacts/AddContactBlock';
 import type CommunicationStore from '../../../store/communication';
+import type ContactsStore from '../../../store/contacts';
 
-@inject('communication')
+@inject('communication', 'contacts')
 @observer
 export default class AddMemberToGroup extends Component {
   static navigatorStyle = {
@@ -14,14 +16,27 @@ export default class AddMemberToGroup extends Component {
 
   props: {
     communication: CommunicationStore;
+    contacts: ContactsStore;
   };
+
+  componentWillUnmount() {
+    const { communication, contacts } = this.props;
+    communication.clearContactsForAction();
+    contacts.clearSelectedContacts();
+  }
 
   onAddMembersToGroup() {
     const { communication } = this.props;
+    if (communication.isLoading) return;
+
     communication.addAllMembersToGroup(communication.selectedConversation.id);
   }
 
   render() {
+    const { communication, contacts } = this.props;
+    const isContactsSelected = contacts.selectedContacts.length > 0
+      || communication.contactsForAction.length > 0;
+
     return (
       <View style={styles.container}>
         <NavBar>
@@ -35,6 +50,8 @@ export default class AddMemberToGroup extends Component {
         </NavBar>
         <View style={styles.content}>
           <AddContactBlock bottomDockStyle={styles.bottomDockPos} />
+
+          {isContactsSelected && <SelectedContacts />}
         </View>
       </View>
     );

@@ -5,11 +5,10 @@ import { Navigator } from 'react-native-navigation';
 import { Icon, IconText, StyleSheet, View } from 'ui';
 
 import ProfilesStore from '../../../store/profiles';
-import UIStore from '../../../store/ui';
 import { Config } from '../../../config';
 import AppItem from '../../../store/profiles/models/AppItem';
 
-const FLOAT_DOCK_HIDE_POS = -57;
+const FLOAT_DOCK_HIDE_POS = -89;
 
 const APPS: Array<Object> = [
   {
@@ -50,7 +49,6 @@ export default class Dock extends Component {
     selectedIndex?: number;
     config: Config;
     profiles: ProfilesStore;
-    ui: UIStore;
   };
 
   context: {
@@ -117,8 +115,8 @@ export default class Dock extends Component {
     /* eslint-enable no-underscore-dangle */
   }
 
-  onAppClick(app: AppItem, index) {
-    const { floatMode, onAppClick, ui } = this.props;
+  onAppClick(app: AppItem) {
+    const { floatMode, onAppClick } = this.props;
     const { navigator } = this.context;
 
     if (floatMode) {
@@ -129,14 +127,10 @@ export default class Dock extends Component {
       onAppClick(app);
     }
 
-    if (ui.tabBarUI.selectedIndex === index) {
-      return;
-    }
-
-    ui.tabBarUI.setSelectedIndex(index);
+    if (app.label === 'dashboard') return;
 
     if (app.settings.screenId) {
-      navigator.resetTo({
+      navigator.push({
         title: app.name,
         screen: app.settings.screenId,
         animated: false,
@@ -145,7 +139,7 @@ export default class Dock extends Component {
     }
 
     if (app.url) {
-      navigator.resetTo({
+      navigator.push({
         title: app.name,
         screen: 'core.WebView',
         passProps: {
@@ -158,35 +152,23 @@ export default class Dock extends Component {
   }
 
   renderIcon(item: AppItem, index) {
-    const { ui } = this.props;
-
-    let title = item.name;
     const logoSource = item.logoSource;
-
-
+    let title = item.name;
     if (item.label === 'communication') {
       title = 'Chat';
     }
 
-    const imageStyles = [
-      styles.image,
-      item.label === 'dashboard' ? null : styles.image_shadow,
-    ];
+    const imageStyles = [styles.image];
 
     if (item.label === 'dashboard') {
       title = 'Home';
       logoSource.uri = logoSource.uri.replace('dashboard.png', 'home.png');
-      imageStyles.push(styles.homeIcon);
-    }
-
-    const appStyle = [styles.icon];
-    if (ui.tabBarUI.selectedIndex === index) {
-      appStyle.push(styles.selectedApp);
+      imageStyles.push(styles.homeImage);
     }
 
     return (
       <IconText
-        style={appStyle}
+        style={styles.icon}
         key={item.label}
         imageStyle={imageStyles}
         textStyle={styles.title}
@@ -221,7 +203,8 @@ export default class Dock extends Component {
           </View>
         )}
         <View style={styles.content}>
-          {appsBottom.map(::this.renderIcon)}
+          {appsBottom.filter(a => a.label !== 'dashboard')
+            .map(::this.renderIcon)}
         </View>
       </Animated.View>
     );
@@ -242,12 +225,12 @@ const styles = StyleSheet.create({
   },
 
   content: {
-    height: 62,
+    height: 95,
     flexWrap: 'nowrap',
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    paddingVertical: 2,
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    padding: 2,
     backgroundColor: '#fff',
   },
 
@@ -287,18 +270,14 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    width: 63,
-    '@media android': {
-      width: 63,
-    },
+    width: 80,
+    height: 83,
   },
 
   image: {
-    width: 40,
-    height: 40,
+    width: 58,
+    height: 65,
   },
-
-  image_shadow: {},
 
   title: {
     color: '$pe_color_gray_2',
@@ -307,48 +286,45 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
 
+  homeImage: {
+    width: 50,
+    height: 50,
+    marginVertical: 8,
+  },
+
   '@media (min-width: 400)': {
     icon: {
-      width: 70,
+      width: 80,
     },
 
     image: {
-      width: 40,
-      height: 35,
+      width: 65,
+      height: 65,
     },
 
     title: {
-      fontSize: 12,
+      fontSize: 13,
       padding: 0,
     },
   },
 
   '@media (min-width: 550)': {
-    container: {
-      height: 62,
+    content: {
+      height: 185,
     },
 
     icon: {
-      width: 85,
+      width: 130,
     },
 
     image: {
-      width: 45,
-      height: 40,
+      width: 100,
+      height: 100,
     },
 
     title: {
-      fontSize: 14,
+      fontSize: 18,
       padding: 0,
     },
-  },
-
-  selectedApp: {
-    marginBottom: 6,
-  },
-
-  homeIcon: {
-    width: 35,
-    height: 35,
   },
 });

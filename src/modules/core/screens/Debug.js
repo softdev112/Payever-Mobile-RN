@@ -73,12 +73,12 @@ export default class Debug extends Component {
         <TouchableOpacity
           onPress={() => {
             navigator.push({
-              screen: 'dashboard.AddNewBusiness',
+              screen: 'contacts.BusinessContacts',
               animated: true,
             });
           }}
         >
-          <Text>Twitter Auth</Text>
+          <Text>Contacts</Text>
         </TouchableOpacity>
         <SegmentedControl
           values={['one', 'two', 'three']}
