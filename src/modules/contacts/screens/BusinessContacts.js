@@ -5,6 +5,9 @@ import { SegmentedControl, NavBar, StyleSheet, View } from 'ui';
 
 import ContactsStore from '../../../store/contacts';
 import CustomerContactsList from '../components/CustomerContactsList';
+import ContactGroupsList from '../components/ContactGroupsList';
+
+const SEGMENT_DATA = ['Customers', 'Groups'];
 
 @inject('contacts')
 @observer
@@ -18,7 +21,19 @@ export default class BusinessContacts extends Component {
     navigator: Navigator;
   };
 
-  $businessContactsList: CustomerContactsList;
+  state: {
+    showContacts: boolean;
+  };
+
+  $list: CustomerContactsList | ContactGroupsList;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showContacts: true,
+    };
+  }
 
   onAddContact() {
     this.props.navigator.push({
@@ -38,8 +53,13 @@ export default class BusinessContacts extends Component {
     navigator.pop({ animated: true });
   }
 
+  onShowContactsListSwitch(value) {
+    this.setState({ showContacts: value === SEGMENT_DATA[0] });
+  }
+
   render() {
     const { contacts } = this.props;
+    const { showContacts } = this.state;
 
     return (
       <View style={styles.container}>
@@ -55,9 +75,10 @@ export default class BusinessContacts extends Component {
           )}
           <NavBar.ComplexTitle>
             <SegmentedControl
-              style={{ width: 150 }}
-              values={['Customers', 'Groups']}
+              style={styles.segmentControl}
+              values={SEGMENT_DATA}
               selectedIndex={0}
+              onValueChange={::this.onShowContactsListSwitch}
             />
           </NavBar.ComplexTitle>
 
@@ -74,9 +95,15 @@ export default class BusinessContacts extends Component {
           )}
         </NavBar>
         <View style={styles.content}>
-          <CustomerContactsList
-            ref={ref => this.$businessContactsList = ref}
-          />
+          {showContacts ? (
+            <CustomerContactsList
+              ref={ref => this.$list = ref}
+            />
+          ) : (
+            <ContactGroupsList
+              ref={ref => this.$list = ref}
+            />
+          )}
         </View>
       </View>
     );
@@ -90,5 +117,9 @@ const styles = StyleSheet.create({
 
   content: {
     flex: 1,
+  },
+
+  segmentControl: {
+    width: 150,
   },
 });

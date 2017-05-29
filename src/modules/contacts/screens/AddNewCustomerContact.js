@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { findNodeHandle, ScrollView, Switch } from 'react-native';
+import {
+  findNodeHandle, Keyboard, Platform, ScrollView, Switch,
+} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import RNFetchBlob from 'react-native-fetch-blob';
 import DeviceInfo from 'react-native-device-info';
@@ -20,6 +22,7 @@ import ContactsStore from '../../../store/contacts';
 const KEYBOARD_SCROLL_ADJUST = 80;
 const EMAIL_VALID_PATTERN =
   '^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$';
+const CONTENT_INSET_ADJUST = 8;
 
 @inject('contacts')
 @observer
@@ -41,6 +44,7 @@ export default class AddNewCustomerContact extends Component {
     sendInvitation: boolean;
     isBirthdayPickerOn: boolean;
     birthday: Date;
+    keyboardHeight: boolean;
   };
 
   /**
@@ -83,7 +87,31 @@ export default class AddNewCustomerContact extends Component {
       sendInvitation: true,
       isBirthdayPickerOn: false,
       birthday: null,
+      keyboardHeight: 0,
     };
+  }
+
+  componentDidMount() {
+    const updateListener = Platform.OS === 'android'
+      ? 'keyboardDidShow' : 'keyboardWillShow';
+    const resetListener = Platform.OS === 'android'
+      ? 'keyboardDidHide' : 'keyboardWillHide';
+    this.keyboardListeners = [
+      Keyboard.addListener(
+        updateListener,
+        ({ endCoordinates: { height } }) => {
+          this.setState({ keyboardHeight: height });
+        }
+      ),
+      Keyboard.addListener(
+        resetListener,
+        () => this.setState({ keyboardHeight: 0 })
+      ),
+    ];
+  }
+
+  componentWillUnmount() {
+    this.keyboardListeners.forEach(listener => listener.remove());
   }
 
   async onCreateContact() {
@@ -274,7 +302,8 @@ export default class AddNewCustomerContact extends Component {
   render() {
     const { contacts } = this.props;
     const {
-      birthday, logoFile, formElementsData, currentCountry, sendInvitation,
+      birthday, logoFile, formElementsData, keyboardHeight,
+      currentCountry, sendInvitation,
     } = this.state;
 
     const contactBirth = birthday || new Date();
@@ -293,8 +322,9 @@ export default class AddNewCustomerContact extends Component {
         <Loader isLoading={contacts.isLoading}>
           <ScrollView
             contentContainerStyle={styles.content}
+            contentInset={{ bottom: keyboardHeight + CONTENT_INSET_ADJUST }}
             ref={ref => this.$scrollView = ref}
-            keyboardShouldPersistTaps="always"
+            keyboardShouldPersistTaps="handled"
           >
             <View style={styles.avatarContainer}>
               <Animatable.View ref={r => this.$image = r}>

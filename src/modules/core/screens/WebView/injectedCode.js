@@ -22,6 +22,7 @@ function injectedBody(options) {
     }
 
     getNavBarInfo();
+    patchAddApp();
 
     setTimeout(() => sendData({
       command: 'hide-loader',
@@ -52,6 +53,33 @@ function injectedBody(options) {
       $replace.style.marginRight = 0;
       $backBtn.parentNode.replaceChild($replace, $backBtn);
     }
+  }
+
+  function patchAddApp() {
+    //noinspection ES6ConvertVarToLetConst
+    function searchModal() {
+      var $dialogFooter = document.querySelector('.edit-campaign-add-item > .modal-content > .modal-footer');
+      if ($dialogFooter) {
+        //alert(1);
+        var $topFooter = $dialogFooter.cloneNode(true);
+
+        $topFooter.style.position = 'fixed';
+        $topFooter.style.right = 0;
+        $topFooter.style.top = 0;
+        $topFooter.style.borderBottom = '1px solid #e1e1e1';
+        $topFooter.style.backgroundColor = 'white';
+        $topFooter.style.width = '100%';
+        $topFooter.style.padding = '8px';
+        $topFooter.style.paddingRight = '0px';
+
+        var $dialog = document.querySelector('.edit-campaign-add-item');
+        $dialog.appendChild($topFooter);
+      }
+
+      setTimeout(searchModal, 2000);
+    }
+
+    setTimeout(searchModal, 2000);
   }
 
   function patchSelectElementsForAndroid() {

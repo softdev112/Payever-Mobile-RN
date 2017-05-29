@@ -8,7 +8,10 @@ import ContactsUI from './ui';
 
 export default class ContactsStore {
   @observable contacts: Array<CustomerContactInfo> = [];
-  contactsPaginationData: ContactsPaginationData;
+  contactsPaginationData: ContactsPaginationData = null;
+
+  @observable contactGroups: Array<any> = [];
+  contactGroupsPaginationData: ContactsPaginationData = null;
 
   @observable error: string     = '';
   @observable isLoading: boolean = false;
@@ -58,6 +61,44 @@ export default class ContactsStore {
     ).success((data) => {
       this.contactsPaginationData = data.pagination_data;
       this.contacts = this.contacts.concat(data.contact_models);
+    }).error(log.error)
+      .promise();
+  }
+
+  @action
+  loadAllContactGroups(
+    options: LoadContactsOptions = { fromFirstPage: false }
+  ) {
+    const { api, profiles } = this.store;
+    let pageCount = 0;
+    let currentPage = 0;
+
+    if (this.contactGroupsPaginationData && !options.fromFirstPage) {
+      // pageCount - number, current - string
+      pageCount = this.contactGroupsPaginationData.pageCount;
+      currentPage = +this.contactGroupsPaginationData.current;
+
+      if (pageCount === 0) return null;
+    }
+
+    if (this.isLoading || (currentPage !== 0 && currentPage === pageCount)) {
+      return null;
+    }
+
+    if (options.fromFirstPage) {
+      this.contactGroupsPaginationData = null;
+      this.contactGroups = [];
+    }
+
+    return apiHelper(
+      api.contacts.getAllContactGroups(
+        profiles.currentProfile.business.slug,
+        currentPage + 1
+      ),
+      this
+    ).success((data) => {
+      this.contactGroupsPaginationData = data.pagination_data;
+      this.contactGroups = this.contactGroups.concat(data.group_list);
     }).error(log.error)
       .promise();
   }
