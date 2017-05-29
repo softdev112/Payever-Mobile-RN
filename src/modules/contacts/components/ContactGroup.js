@@ -1,10 +1,9 @@
 import { PureComponent } from 'react';
 import { Animated, Image, TouchableWithoutFeedback } from 'react-native';
-import moment from 'moment';
 import { images, RoundSwitch, StyleSheet, Text, View } from 'ui';
 
-import type CustomerContactInfo
-  from '../../../store/contacts/models/CustomerContactInfo';
+import type ContactGroupInfo
+  from '../../../store/contacts/models/ContactGroupInfo';
 
 const SWITCH_INIT_Y_POS = -40;
 const INIT_PADDING = 8;
@@ -16,11 +15,11 @@ export default class CustomerContact extends PureComponent {
 
   props: {
     selectMode: boolean;
-    contact: CustomerContactInfo;
-    onSelectChange: (state: boolean, contact: CustomerContactInfo) => void;
+    group: ContactGroupInfo;
+    onSelectChange: (state: boolean, group: ContactGroupInfo) => void;
     style?: Object;
     selected?: boolean;
-    onLongPress?: (contact: CustomerContactInfo) => void;
+    onLongPress?: (group: ContactGroupInfo) => void;
     onPress?: () => void;
   };
 
@@ -65,10 +64,10 @@ export default class CustomerContact extends PureComponent {
   }
 
   onContactLongPress() {
-    const { contact, onLongPress } = this.props;
+    const { group, onLongPress } = this.props;
 
     if (onLongPress) {
-      onLongPress(contact);
+      onLongPress(group);
     }
   }
 
@@ -78,11 +77,11 @@ export default class CustomerContact extends PureComponent {
     Animated.parallel([
       Animated.timing(paddingAnimValue, {
         toValue: 40,
-        duration: 250,
+        duration: 200,
       }),
       Animated.timing(leftPosAnimValue, {
         toValue: 5,
-        duration: 400,
+        duration: 300,
       }),
     ]).start();
   }
@@ -93,34 +92,29 @@ export default class CustomerContact extends PureComponent {
     Animated.parallel([
       Animated.timing(paddingAnimValue, {
         toValue: 8,
-        duration: 400,
+        duration: 300,
       }),
       Animated.timing(leftPosAnimValue, {
         toValue: SWITCH_INIT_Y_POS,
-        duration: 250,
+        duration: 200,
       }),
     ]).start();
   }
 
   onSelectValueChange(value: boolean) {
-    const { onSelectChange, contact } = this.props;
+    const { onSelectChange, group } = this.props;
 
     if (onSelectChange) {
-      onSelectChange(value, contact);
+      onSelectChange(value, group);
     }
   }
 
   render() {
-    const { contact, selected, style } = this.props;
+    const { group, selected, style } = this.props;
     const { paddingAnimValue, leftPosAnimValue } = this.state;
-    const {
-      avatar_url, birthday, first_name, last_name, email, country, city,
-      street,
-    } = contact;
+    const { contacts_count, name, logo_url } = group;
 
-    const avatar = avatar_url ? { uri: avatar_url } : images.noAvatar;
-    const birthdayStr = birthday && birthday !== ''
-      ? moment(birthday).format('DD/MM/YYYY') : '';
+    const avatar = logo_url ? { uri: logo_url } : images.noAvatar;
 
     return (
       <TouchableWithoutFeedback
@@ -142,19 +136,10 @@ export default class CustomerContact extends PureComponent {
           />
           <View style={styles.textContainer}>
             <Text style={styles.mainText} numberOfLines={1}>
-              {first_name} {last_name}
+              {name}
             </Text>
-
             <Text style={styles.subText} numberOfLines={1}>
-              {`Birthday:  ${birthdayStr}`}
-            </Text>
-
-            <Text style={styles.subText} numberOfLines={1}>
-              {`Email: ${email}`}
-            </Text>
-
-            <Text style={styles.subText} numberOfLines={1}>
-              {country} {city} {street}
+              {`Contacts count:  ${contacts_count}`}
             </Text>
           </View>
         </Animated.View>
@@ -190,11 +175,6 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     color: '#000',
     paddingBottom: 2,
-  },
-
-  secondRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
   },
 
   subText: {

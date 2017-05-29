@@ -11,9 +11,16 @@ export default class ContactsApi {
     this.client = client;
   }
 
-  async getAllContacts(businessId, page): Promise<UserContactsResp> {
+  getAllContacts(businessId, page): Promise<UserContactsResp> {
     return this.client.get(
       `/api/rest/v1/contact/business/${businessId}`,
+      { page }
+    );
+  }
+
+  getAllContactGroups(businessId, page: number): Promise<ContactGroupsResp> {
+    return this.client.get(
+      `/api/rest/v1/contact-group/business/${businessId}`,
       { page }
     );
   }
@@ -61,11 +68,21 @@ export default class ContactsApi {
 
 declare class UserContactsResp extends ApiResp {
   pagination_data: ContactsPaginationData;
-  contact_models: Array<CustomerContact>;
+  contact_models: Array<CustomerContactData>;
 }
 
 declare class CustomerContactResp extends ApiResp {
-  data: CustomerContact;
+  data: CustomerContactData;
+}
+
+declare class ContactGroupsResp extends ApiResp {
+  pagination_data: ContactsPaginationData;
+  contact_models: Array<ContactGroupData>;
+}
+
+// eslint-disable-next-line
+declare class ContactGroupResp extends ApiResp {
+  data: ContactGroupData;
 }
 
 export type ContactsPaginationData = {
@@ -86,7 +103,7 @@ export type ContactsPaginationData = {
   lastItemNumber: number;
 };
 
-export type CustomerContact = {
+export type CustomerContactData = {
   id: number;
   first_name: string;
   last_name: string;
@@ -108,4 +125,11 @@ export type CustomerContact = {
   invitation_available: boolean;
   registered: boolean;
   last_active: string;
+};
+
+export type ContactGroupData = {
+  id: number;
+  name: string;
+  contacts_count: number;
+  logo_url: string;
 };

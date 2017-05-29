@@ -3,14 +3,14 @@ import { FlatList } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import { ErrorBox, Loader, StyleSheet, Text, View } from 'ui';
 
-import CustomerContact from './CustomerContact';
+import ContactGroup from './ContactGroup';
 import type CustomerContactInfo
   from '../../../store/contacts/models/CustomerContactInfo';
 import ContactsStore from '../../../store/contacts';
 
 @inject('contacts')
 @observer
-export default class BusinessContacts extends Component {
+export default class ContactGroupsList extends Component {
   props: {
     contacts: ContactsStore;
     style?: Object | number;
@@ -30,16 +30,11 @@ export default class BusinessContacts extends Component {
   }
 
   async componentWillMount() {
-    await this.props.contacts.loadAllContacts();
-  }
-
-  componentWillUnmount() {
-    const { contacts } = this.props;
-    contacts.ui.setSelectMode(false);
+    await this.props.contacts.loadAllContactGroups();
   }
 
   async onEndReached() {
-    await this.props.contacts.loadAllContacts();
+    await this.props.contacts.loadAllContactGroups();
   }
 
   onSelectedContactChange(isSelected, contact: CustomerContactInfo) {
@@ -58,13 +53,13 @@ export default class BusinessContacts extends Component {
     contacts.ui.setSelectMode(true);
   }
 
-  renderItem({ item: contact }) {
+  renderItem({ item: group }) {
     const { contacts } = this.props;
     return (
-      <CustomerContact
+      <ContactGroup
         selectMode={contacts.ui.selectMode}
-        selected={contacts.checkContactSelected(contact.id)}
-        contact={contact}
+        selected={false}
+        group={group}
         onSelectChange={this.onSelectedContactChange}
         onLongPress={this.onContactLongPress}
       />
@@ -113,7 +108,7 @@ export default class BusinessContacts extends Component {
         <FlatList
           extraData={[contacts.ui.selectMode]}
           initialNumToRender={20}
-          data={contacts.contacts.slice()}
+          data={contacts.contactGroups.slice()}
           keyboardShouldPersistTaps="always"
           renderItem={::this.renderItem}
           ItemSeparatorComponent={::this.renderSeparator}

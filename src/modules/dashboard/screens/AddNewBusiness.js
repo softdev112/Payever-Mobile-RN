@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { findNodeHandle, ScrollView, Text } from 'react-native';
+import {
+  Keyboard, findNodeHandle, Platform, ScrollView, Text,
+} from 'react-native';
 import ImagePicker from 'react-native-image-picker';
 import RNFetchBlob from 'react-native-fetch-blob';
 import DeviceInfo from 'react-native-device-info';
@@ -17,6 +19,7 @@ import ProfilesStore from '../../../store/profiles';
 
 const KEYBOARD_SCROLL_ADJUST = 80;
 const FORM_ELEMENTS_COUNT = 6;
+const CONTENT_INSET_ADJUST = 16;
 
 /**
  * Form validation messages
@@ -68,6 +71,7 @@ export default class AddNewBusiness extends Component {
     isSaveAttempt: boolean;
     avatarChosen: boolean;
     logoFile: Object;
+    keyboardHeight: number;
   };
 
   /**
@@ -81,6 +85,7 @@ export default class AddNewBusiness extends Component {
    */
   $formInputs: Array<FlatTextInput | FlatPicker> = [];
   $scrollView: ScrollView;
+  keyboardListeners: Array<Object>;
 
   constructor(props) {
     super(props);
@@ -106,7 +111,31 @@ export default class AddNewBusiness extends Component {
       isSaveAttempt: false,
       avatarChosen: false,
       logoFile: null,
+      keyboardHeight: 0,
     };
+  }
+
+  componentDidMount() {
+    const updateListener = Platform.OS === 'android'
+      ? 'keyboardDidShow' : 'keyboardWillShow';
+    const resetListener = Platform.OS === 'android'
+      ? 'keyboardDidHide' : 'keyboardWillHide';
+    this.keyboardListeners = [
+      Keyboard.addListener(
+        updateListener,
+        ({ endCoordinates: { height } }) => {
+          this.setState({ keyboardHeight: height });
+        }
+      ),
+      Keyboard.addListener(
+        resetListener,
+        () => this.setState({ keyboardHeight: 0 })
+      ),
+    ];
+  }
+
+  componentWillUnmount() {
+    this.keyboardListeners.forEach(listener => listener.remove());
   }
 
   async onCreateBusiness() {
@@ -262,7 +291,9 @@ export default class AddNewBusiness extends Component {
 
   render() {
     const { profiles } = this.props;
-    const { logoFile, formElementsData, currentCountry } = this.state;
+    const {
+      keyboardHeight, logoFile, formElementsData, currentCountry,
+    } = this.state;
 
     return (
       <View style={styles.container}>
@@ -274,6 +305,8 @@ export default class AddNewBusiness extends Component {
         <Loader isLoading={profiles.isLoading}>
           <ScrollView
             contentContainerStyle={styles.content}
+            contentInset={{ bottom: keyboardHeight + CONTENT_INSET_ADJUST }}
+            keyboardShouldPersistTaps="handled"
             ref={ref => this.$scrollView = ref}
           >
             <View style={styles.avatarContainer}>

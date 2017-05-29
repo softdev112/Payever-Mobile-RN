@@ -58,9 +58,6 @@ export default class Chat extends Component {
     this.onMessagePress = this.onMessagePress.bind(this);
     this.onMessageSelectChange = this.onMessageSelectChange.bind(this);
 
-    this.keyboardAppear = this.keyboardAppear.bind(this);
-    this.keyboardDisappear = this.keyboardDisappear.bind(this);
-
     const { selectedConversation } = this.props.communication;
     const messagesCount = selectedConversation
       ? selectedConversation.messages.length : 0;
@@ -83,8 +80,16 @@ export default class Chat extends Component {
     const resetListener = Platform.OS === 'android'
       ? 'keyboardDidHide' : 'keyboardWillHide';
     this.keyboardListeners = [
-      Keyboard.addListener(updateListener, this.keyboardAppear),
-      Keyboard.addListener(resetListener, this.keyboardDisappear),
+      Keyboard.addListener(
+        updateListener,
+        ({ endCoordinates: { height } }) => {
+          this.setState({ keyboardHeight: height });
+        }
+      ),
+      Keyboard.addListener(
+        resetListener,
+        () => this.setState({ keyboardHeight: 0 })
+      ),
     ];
   }
 
@@ -295,14 +300,6 @@ export default class Chat extends Component {
     communication.removeMessageForReply();
     communication.removeMessageForEdit();
     communication.clearSelectedMessages();
-  }
-
-  keyboardAppear({ endCoordinates: { height } }) {
-    this.setState({ keyboardHeight: height });
-  }
-
-  keyboardDisappear() {
-    this.setState({ keyboardHeight: 0 });
   }
 
   renderItem({ item: message }) {
