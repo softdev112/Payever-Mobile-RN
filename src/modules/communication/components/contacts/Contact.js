@@ -74,7 +74,12 @@ export default class Contact extends Component {
               {() => (<OnlineStatus isOnline={item.status.online} />)}
             </Observer>
           </View>
-          <Text numberOfLines={1}>{latestMessage}</Text>
+          <Text
+            style={styles.latestMessageText}
+            numberOfLines={1}
+          >
+            {latestMessage}
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -104,7 +109,12 @@ export default class Contact extends Component {
                 ? 'icon-settings-16' : 'icon-pencil-24'}
             />
           </View>
-          <Text numberOfLines={1}>{latestMessage}</Text>
+          <Text
+            style={styles.latestMessageText}
+            numberOfLines={1}
+          >
+            {latestMessage}
+          </Text>
         </View>
       </TouchableOpacity>
     );
@@ -238,5 +248,9 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 14,
     fontWeight: '400',
+  },
+
+  latestMessageText: {
+    color: '$pe_color_gray_2',
   },
 });

@@ -38,6 +38,8 @@ const styles = StyleSheet.create({
     '@media ios': {
       marginTop: 10,
     },
+    backgroundColor: '#FFF',
+    elevation: 8,
   },
 
   text: {

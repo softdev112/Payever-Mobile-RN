@@ -159,7 +159,7 @@ export default class ChatScreen extends Component {
             onRemove={::this.onRemoveSettingsPopup}
           />
         )}
-        <Chat style={styles.chat} />
+        <Chat />
       </View>
     );
   }
@@ -172,9 +172,5 @@ const styles = StyleSheet.create({
 
   searchNavBar: {
     paddingHorizontal: 0,
-  },
-
-  chat: {
-    flex: 1,
   },
 });

@@ -82,6 +82,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderBottomWidth: 1,
     zIndex: 0,
+    elevation: 10,
   },
 
   delIcon: {

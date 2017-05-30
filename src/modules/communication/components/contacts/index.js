@@ -26,6 +26,14 @@ export default class Contacts extends Component {
     profiles?: ProfilesStore;
   };
 
+  renderHeader: () => Component;
+
+  constructor(props) {
+    super(props);
+
+    this.renderHeader = this.renderHeader.bind(this);
+  }
+
   componentDidMount() {
     const { communication, profiles, pickUpMode } = this.props;
 
@@ -35,6 +43,10 @@ export default class Contacts extends Component {
     }
 
     communication.search('');
+  }
+
+  renderHeader() {
+    return <Search />;
   }
 
   render() {
@@ -54,7 +66,7 @@ export default class Contacts extends Component {
 
     if (!info) {
       return (
-        <View style={style}>
+        <View style={[styles.container, style]}>
           <Loader isLoading={communication.isLoading}>
             {communication.isError && (
               <ErrorBox message={communication.error} />
@@ -65,9 +77,11 @@ export default class Contacts extends Component {
     }
 
     return (
-      <View style={[style, styles.contentContainer]}>
-        <Search />
+      <View style={[styles.container, style]}>
         <SectionList
+          style={styles.contactsList}
+          contentContainerStyle={styles.contentContainer}
+          ListHeaderComponent={this.renderHeader}
           sections={sections}
           renderItem={({ item }) => (
             <Contact item={item} phoneView={phoneView} />
@@ -87,8 +101,22 @@ export default class Contacts extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+
+    // TODO: solve this for Android without this NavBar disappear after
+    // TODO: first rendering
+    '@media android': {
+      borderColor: 'transparent',
+      borderWidth: 1,
+    },
+  },
+
+  contactsList: {
+    paddingHorizontal: 8,
+  },
+
   contentContainer: {
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingVertical: 8,
   },
 });

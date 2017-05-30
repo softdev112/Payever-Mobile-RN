@@ -1,14 +1,11 @@
 import { Component, PropTypes } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { Animated } from 'react-native';
 import { Navigator } from 'react-native-navigation';
-import { Icon, IconText, StyleSheet, View } from 'ui';
+import { IconText, StyleSheet, View } from 'ui';
 
 import ProfilesStore from '../../../store/profiles';
 import { Config } from '../../../config';
 import AppItem from '../../../store/profiles/models/AppItem';
-
-const FLOAT_DOCK_HIDE_POS = -89;
 
 const APPS: Array<Object> = [
   {
@@ -35,8 +32,6 @@ const APPS: Array<Object> = [
 export default class Dock extends Component {
   static defaultProps = {
     showApps: true,
-    floatMode: true,
-    selectedIndex: 2,
   };
 
   static contextTypes = {
@@ -45,8 +40,6 @@ export default class Dock extends Component {
 
   props: {
     onAppClick: (item: AppItem) => any;
-    floatMode?: boolean;
-    selectedIndex?: number;
     config: Config;
     profiles: ProfilesStore;
   };
@@ -56,7 +49,6 @@ export default class Dock extends Component {
   };
 
   state: {
-    animValue: Animated.Value;
     appsBottom: Array<AppItem>;
   };
 
@@ -64,9 +56,7 @@ export default class Dock extends Component {
     super(props);
 
     this.state = {
-      animValue: new Animated.Value(FLOAT_DOCK_HIDE_POS),
       appsBottom: [],
-      selectedIndex: props.selectedIndex,
     };
   }
 
@@ -97,31 +87,9 @@ export default class Dock extends Component {
     this.setState({ appsBottom: apps });
   }
 
-  onSwitchDockSate() {
-    const { animValue } = this.state;
-
-    /* eslint-disable no-underscore-dangle */
-    if (animValue._value === 0) {
-      Animated.timing(animValue, {
-        toValue: FLOAT_DOCK_HIDE_POS,
-        duration: 300,
-      }).start();
-    } else {
-      Animated.timing(animValue, {
-        toValue: 0,
-        duration: 300,
-      }).start();
-    }
-    /* eslint-enable no-underscore-dangle */
-  }
-
   onAppClick(app: AppItem) {
-    const { floatMode, onAppClick } = this.props;
+    const { onAppClick } = this.props;
     const { navigator } = this.context;
-
-    if (floatMode) {
-      this.onSwitchDockSate();
-    }
 
     if (onAppClick) {
       onAppClick(app);
@@ -181,32 +149,15 @@ export default class Dock extends Component {
   }
 
   render() {
-    const { animValue, appsBottom } = this.state;
-    const { floatMode } = this.props;
-
-    const containerStyle = [styles.container];
-    if (floatMode) {
-      containerStyle.push(styles.floatMode);
-      containerStyle.push({ bottom: animValue });
-    }
+    const { appsBottom } = this.state;
 
     return (
-      <Animated.View style={containerStyle}>
-        {floatMode && (
-          <View style={styles.header}>
-            <Icon
-              style={styles.headerIcon}
-              tocuhStyle={styles.headerIconTouch}
-              source="icon-dots-h-24"
-              onPress={::this.onSwitchDockSate}
-            />
-          </View>
-        )}
-        <View style={styles.content}>
-          {appsBottom.filter(a => a.label !== 'dashboard')
-            .map(::this.renderIcon)}
-        </View>
-      </Animated.View>
+      <View style={styles.container}>
+        {
+          appsBottom.filter(a => a.label !== 'dashboard')
+            .map(::this.renderIcon)
+        }
+      </View>
     );
   }
 }
@@ -214,17 +165,6 @@ export default class Dock extends Component {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    paddingTop: 2,
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
-    shadowColor: 'rgba(0, 0, 0, .06)',
-    shadowOpacity: 1,
-    shadowRadius: 12,
-    shadowOffset: { width: 0, height: -8 },
-    elevation: 25,
-  },
-
-  content: {
     height: 95,
     flexWrap: 'nowrap',
     flexDirection: 'row',
@@ -232,41 +172,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 2,
     backgroundColor: '#fff',
-  },
-
-  floatMode: {
-    position: 'absolute',
-    bottom: FLOAT_DOCK_HIDE_POS,
-    zIndex: 1000,
-  },
-
-  header: {
-    height: 0,
-    alignSelf: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 5,
-    paddingVertical: 2,
-    overflow: 'hidden',
-    borderBottomColor: '#FFF',
-    borderBottomWidth: 15,
-    borderLeftWidth: 7,
-    borderLeftColor: 'transparent',
-    borderRightWidth: 7,
-    borderRightColor: 'transparent',
-    width: 50,
-  },
-
-  headerIcon: {
-    width: 25,
-    height: 20,
-    color: '$pe_color_icon',
-  },
-
-  headerIconTouch: {
-    position: 'absolute',
-    left: 50,
-    top: -5,
+    elevation: 25,
+    shadowColor: 'rgba(0, 0, 0, .06)',
+    shadowOpacity: 1,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: -8 },
   },
 
   icon: {

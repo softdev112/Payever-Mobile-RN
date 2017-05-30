@@ -228,6 +228,7 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'space-between',
     zIndex: 50,
+    elevation: 20,
   },
 
   icon: {
