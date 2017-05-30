@@ -10,6 +10,7 @@ export default class GridView extends Component {
     itemHeight: 200,
     centerContent: false,
     scrollEnabled: true,
+    spacingVertical: 4,
   };
 
   props: {
@@ -23,6 +24,7 @@ export default class GridView extends Component {
     centerContent?: boolean;
     numColumns?: number;
     scrollEnabled?: boolean;
+    spacingVertical?: number;
   };
 
   $list: FlatList;
@@ -57,7 +59,9 @@ export default class GridView extends Component {
       numColumns,
       centerContent,
       scrollEnabled,
+      spacingVertical,
     } = this.props;
+
     const { gridHeight } = this.state;
 
     const numOfColumns = numColumns
@@ -67,7 +71,7 @@ export default class GridView extends Component {
 
     const contentStyle = [styles.content];
     const columnHeight =
-      (data.length / numOfColumns) * itemHeight;
+      Math.ceil(data.length / numOfColumns) * (itemHeight + spacingVertical);
     const isCenteredAvailable = columnHeight < gridHeight;
 
     if (centerContent && isCenteredAvailable) {
@@ -97,7 +101,7 @@ export default class GridView extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    alignSelf: 'center',
+    flex: 1,
   },
 
   content: {

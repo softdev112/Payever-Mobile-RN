@@ -115,9 +115,14 @@ export default class Search extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#FFF',
     flexDirection: 'row',
     height: 27,
-    marginBottom: 10,
+    padding: 8,
+    paddingTop: 2,
+    '@media android': {
+      height: 40,
+    },
   },
 
   iconSearch: {

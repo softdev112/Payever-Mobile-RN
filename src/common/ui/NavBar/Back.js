@@ -1,4 +1,5 @@
 import { Component, PropTypes } from 'react';
+import { Platform } from 'react-native';
 import type { Navigator } from 'react-native-navigation';
 import IconButton from './IconButton';
 import StyleSheet from '../StyleSheet';
@@ -11,7 +12,15 @@ export default class Back extends Component {
 
   static defaultProps = {
     align: 'left',
-    source: 'icon-arrow-left-ios-24',
+    ...Platform.select({
+      ios: {
+        source: 'icon-arrow-left-ios-24',
+      },
+
+      android: {
+        source: 'icon-arrow-left-24',
+      },
+    }),
     showTitle: 'size-dep',
   };
 

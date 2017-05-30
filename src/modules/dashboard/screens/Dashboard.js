@@ -11,7 +11,9 @@ import Dock from '../../core/components/Dock';
 import SearchHeader from '../components/SearchHeader';
 
 const APP_ICON_WIDTH_PHONE = 80;
+const APP_ICON_HEIGHT_PHONE = 105;
 const APP_ICON_WIDTH_TABLET = 130;
+const APP_ICON_HEIGHT_TABLET = 135;
 
 @inject('profiles', 'config')
 @observer
@@ -100,10 +102,13 @@ export default class Dashboard extends Component {
   }
 
   render() {
+    const { profiles } = this.props;
     const { appsTop, appearAnimation } = this.state;
 
     const iconWidth = ScreenParams.isTabletLayout()
       ? APP_ICON_WIDTH_TABLET : APP_ICON_WIDTH_PHONE;
+    const iconHeight = ScreenParams.isTabletLayout()
+      ? APP_ICON_HEIGHT_TABLET : APP_ICON_HEIGHT_PHONE;
 
     const opacity = appearAnimation.interpolate({
       inputRange: [1, 10],
@@ -111,24 +116,26 @@ export default class Dashboard extends Component {
     });
 
     return (
-      <Loader isLoading={appsTop.length < 1}>
-        <View style={styles.container}>
-          <SearchHeader />
-          <Animated.View style={[styles.animationView, { opacity }]}>
-            <GridView
-              style={styles.appGrid}
-              centerContent
-              data={appsTop}
-              renderItem={::this.renderIcon}
-              itemWidth={iconWidth}
-              itemHeight={iconWidth}
-              numColumns={4}
-              keyExtractor={app => app.id}
-            />
-          </Animated.View>
-          <Dock floatMode={false} />
+      <View style={styles.container}>
+        <SearchHeader />
+        <View style={styles.content}>
+          <Loader isLoading={profiles.isLoading || appsTop.length === 0}>
+            <Animated.View style={[styles.animationView, { opacity }]}>
+              <GridView
+                style={styles.appGrid}
+                centerContent
+                data={appsTop}
+                renderItem={::this.renderIcon}
+                itemWidth={iconWidth}
+                itemHeight={iconHeight}
+                numColumns={4}
+                keyExtractor={app => app.id}
+              />
+            </Animated.View>
+          </Loader>
+          <Dock />
         </View>
-      </Loader>
+      </View>
     );
   }
 }
@@ -136,6 +143,11 @@ export default class Dashboard extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+
+  content: {
+    flex: 1,
+    alignItems: 'center',
   },
 
   animationView: {
@@ -148,13 +160,13 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    height: 102,
+    height: APP_ICON_HEIGHT_PHONE,
     width: APP_ICON_WIDTH_PHONE,
   },
 
   icon_image: {
     borderRadius: 14,
-    elevation: 5,
+    elevation: 4,
     height: 63,
     width: 63,
     marginBottom: 8,
@@ -187,7 +199,7 @@ const styles = StyleSheet.create({
   '@media (min-width: 550)': {
     icon: {
       width: APP_ICON_WIDTH_TABLET,
-      height: 135,
+      height: APP_ICON_HEIGHT_TABLET,
     },
 
     icon_image: {

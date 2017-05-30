@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
 
   zoomIcons: {
     color: '#000',
+    fontSize: 22,
   },
 
   loader: {

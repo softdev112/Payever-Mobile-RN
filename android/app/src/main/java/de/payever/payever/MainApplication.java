@@ -9,6 +9,8 @@ import de.payever.payever.reactwebviewex.ReactWebViewExPackage;
 import de.payever.payever.reactwebviewex.WebViewExActivityCallbacks;
 import com.reactnativenavigation.NavigationApplication;
 import com.zmxv.RNSound.RNSoundPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.imagepicker.ImagePickerPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +38,9 @@ public class MainApplication extends NavigationApplication {
             new ReactWebViewExPackage(),
             new RNNotificationsPackage(MainApplication.this),
             new RNDeviceInfo(),
-            new RNSoundPackage()
+            new RNSoundPackage(),
+            new RNFetchBlobPackage(),
+            new ImagePickerPackage()
         );
     }
 }

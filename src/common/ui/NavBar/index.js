@@ -121,9 +121,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: '$padding',
     '@media ios': {
       marginTop: 15,
+      zIndex: 1000,
     },
     backgroundColor: '#FFF',
-    zIndex: 1000,
+    elevation: 8,
   },
 
   container_popup: {
@@ -144,7 +145,9 @@ const styles = StyleSheet.create({
     left: '$padding',
     position: 'absolute',
     top: 0,
-    zIndex: 1001,
+    '@media ios': {
+      zIndex: 1001,
+    },
   },
 
   leftZone_popup: {
@@ -160,7 +163,9 @@ const styles = StyleSheet.create({
     position: 'absolute',
     right: 0,
     top: 0,
-    zIndex: 1000,
+    '@media ios': {
+      zIndex: 1001,
+    },
   },
 
   rightZone: {
