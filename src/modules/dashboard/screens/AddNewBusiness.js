@@ -161,8 +161,10 @@ export default class AddNewBusiness extends Component {
           logoFileId = data.details.id;
         }
 
-        if (await RNFetchBlob.fs.exists(logoFile.uri)) {
-          await RNFetchBlob.fs.unlink(logoFile.uri);
+        const filePath = Platform.OS === 'ios'
+          ? logoFile.uri : ('file://' + logoFile.path);
+        if (await RNFetchBlob.fs.exists(filePath)) {
+          await RNFetchBlob.fs.unlink(filePath);
         }
       } catch (err) {
         log.error(err);
@@ -321,6 +323,7 @@ export default class AddNewBusiness extends Component {
               {logoFile && (
                 <Icon
                   style={styles.removeIcon}
+                  touchStyle={styles.removeIconCont}
                   source="icon-minus-solid-16"
                   onPress={::this.onRemoveAvatar}
                   activeOpacity={0.7}
@@ -418,7 +421,6 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 12,
     justifyContent: 'flex-start',
-    overflow: 'hidden',
   },
 
   countryContainer: {
@@ -452,6 +454,7 @@ const styles = StyleSheet.create({
     fontSize: 80,
     alignSelf: 'center',
     marginTop: 10,
+    backgroundColor: 'transparent',
   },
 
   logoSizeText: {
@@ -465,12 +468,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 
-  removeIcon: {
-    fontSize: 24,
+  removeIconCont: {
     position: 'absolute',
     bottom: 0,
     right: 0,
+  },
+
+  removeIcon: {
+    fontSize: 24,
     color: '$pe_color_blue',
-    backgroundColor: 'transparent',
   },
 });

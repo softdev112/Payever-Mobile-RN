@@ -1,5 +1,5 @@
 import { Component, PropTypes } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
 import { ScreenParams } from '../../utils';
@@ -94,11 +94,14 @@ export default class PopupMenu extends Component {
     const { keyboardOffset } = this.props;
     const { isAboveTouch } = this.state;
 
+    // In iOS we should count keyboardOffset in Android
+    // touch coordinates already count keyboard if it appears
+    const keyboardAdjustment = Platform.OS === 'ios' ? keyboardOffset : 0;
     if (isAboveTouch) {
-      return touchY - (POSITION_Y_ADJUST - keyboardOffset);
+      return touchY - (POSITION_Y_ADJUST - keyboardAdjustment);
     }
 
-    return touchY - (MENU_OUTSIDE_HEIGHT - keyboardOffset);
+    return touchY - (MENU_OUTSIDE_HEIGHT - keyboardAdjustment);
   }
 
   getArrowXPos(touchX) {

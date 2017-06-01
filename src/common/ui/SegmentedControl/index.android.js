@@ -58,6 +58,14 @@ export default class SegmentedControl extends Component {
         btnContainerStyle.push({ backgroundColor: tintColor });
       }
 
+      if (index === 0) {
+        btnContainerStyle.push(styles.leftBtn);
+      }
+
+      if (index === values.length - 1) {
+        btnContainerStyle.push(styles.rightBtn);
+      }
+
       const underlayColor = `${tintColor.substr(0, 7)}${55}`;
 
       return (
@@ -110,6 +118,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'stretch',
     backgroundColor: '#FFF',
+    borderLeftWidth: 1,
+    borderLeftColor: '#0084ff',
+    borderRightWidth: 1,
+    borderRightColor: '#0084ff',
   },
 
   btn: {
@@ -121,5 +133,17 @@ const styles = StyleSheet.create({
   btnTitle: {
     fontSize: 15,
     color: '#0084ff',
+  },
+
+  leftBtn: {
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5,
+  },
+
+  rightBtn: {
+    borderTopRightRadius: 5,
+    borderBottomRightRadius: 5,
+    borderLeftWidth: 1,
+    borderLeftColor: '#0084ff',
   },
 });

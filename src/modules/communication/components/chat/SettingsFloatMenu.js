@@ -1,13 +1,13 @@
 import { Component, PropTypes } from 'react';
-import { Animated } from 'react-native';
+import { Animated, Platform } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import { IconButton, StyleSheet } from 'ui';
 
 import CommunicationStore from '../../../../store/communication';
 
-const INIT_TOP = 20;
-const SHOW_TOP = 70;
+const INIT_TOP = Platform.OS === 'android' ? 0 : 20;
+const SHOW_TOP = Platform.OS === 'android' ? 52 : 70;
 
 @inject('communication')
 @observer
@@ -119,6 +119,7 @@ export default class SettingsFloatMenu extends Component {
         style={[styles.container, style, { top: animValue }]}
       >
         <IconButton
+          iconStyle={styles.iconBtn}
           onPress={::this.onSearchMessages}
           source="icon-search-16"
           title="Search"
@@ -126,8 +127,8 @@ export default class SettingsFloatMenu extends Component {
 
         {!communication.selectedConversation.isGroup && (
           <IconButton
-            iconStyle={notifOn ? null : styles.iconOff}
-            titleStyle={notifOn ? null : styles.iconOff}
+            iconStyle={notifOn ? styles.iconBtn : styles.iconOff}
+            titleStyle={notifOn ? null : styles.titleOff}
             onPress={::this.onSwitchNotificationSetting}
             source={notifOn ? 'fa-bell' : 'fa-bell-slash'}
             title="Mute"
@@ -135,12 +136,14 @@ export default class SettingsFloatMenu extends Component {
         )}
 
         <IconButton
+          iconStyle={styles.iconBtn}
           onPress={::this.onSendOffer}
           source={'icon-plus-24'}
           title="Offer"
         />
 
         <IconButton
+          iconStyle={styles.iconBtn}
           onPress={::this.onUserInfoPress}
           source={'fa-info-circle'}
           title="Info"
@@ -156,15 +159,29 @@ const styles = StyleSheet.create({
     height: 55,
     width: '100%',
     justifyContent: 'space-around',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     position: 'absolute',
     backgroundColor: '#FFF',
     borderBottomColor: '$pe_color_apple_div',
     borderBottomWidth: 1,
-    zIndex: 10,
+    elevation: 4,
+
+    '@media ios': {
+      alignItems: 'center',
+      zIndex: 10,
+    },
+  },
+
+  iconBtn: {
+    fontSize: 18,
   },
 
   iconOff: {
+    color: '$pe_color_icon',
+    fontSize: 18,
+  },
+
+  titleOff: {
     color: '$pe_color_icon',
   },
 });

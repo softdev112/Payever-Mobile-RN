@@ -117,12 +117,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#FFF',
     flexDirection: 'row',
-    height: 27,
+    height: 40,
     padding: 8,
     paddingTop: 2,
-    '@media android': {
-      height: 40,
-    },
   },
 
   iconSearch: {
@@ -155,7 +152,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '200',
     marginLeft: 12,
-    padding: 0,
+    padding: 2,
   },
 
   searchBox: {

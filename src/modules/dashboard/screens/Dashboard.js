@@ -167,8 +167,8 @@ const styles = StyleSheet.create({
   icon_image: {
     borderRadius: 14,
     elevation: 4,
-    height: 63,
-    width: 63,
+    height: 62,
+    width: 62,
     marginBottom: 8,
     shadowColor: 'rgba(0, 0, 0, .1)',
     shadowOffset: { width: 0, height: 0 },

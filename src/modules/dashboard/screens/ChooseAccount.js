@@ -195,7 +195,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     margin: 10,
     width: 200,
-    elevation: 1,
+    backgroundColor: '#FFF',
+    elevation: 2,
   },
 
   logo: {

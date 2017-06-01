@@ -1,5 +1,6 @@
 import { action, extendObservable, observable, computed } from 'mobx';
 import { debounce } from 'lodash';
+import { Platform } from 'react-native';
 import RNFetchBlob from 'react-native-fetch-blob';
 import { log, soundHelper } from 'utils';
 import Message from './Message';
@@ -89,7 +90,9 @@ export default class Conversation {
       });
 
       if (imageMessageIndex !== -1) {
-        const copyImagePath = this.messages[imageMessageIndex].uri;
+        const fakeMessage = this.messages[imageMessageIndex];
+        const copyImagePath = Platform.OS === 'ios'
+          ? fakeMessage.uri : fakeMessage.path;
         this.messages[imageMessageIndex] = message;
 
         // Remove copy of chosen image

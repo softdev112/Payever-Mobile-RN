@@ -28,7 +28,7 @@ export default class IconText extends Component {
       titleNumberOfLines,
     } = this.props;
     const buttonStyles = [styles.button, style];
-    const imageStyles = [styles.image, imageStyle];
+    const imageStyles = [styles.imageCont, imageStyle];
     const textStyles = [styles.text, textStyle];
 
     if (disabled) {
@@ -72,7 +72,7 @@ export default class IconText extends Component {
             <Image
               style={imgStyle}
               source={source}
-              resizeMode="contain"
+              resizeMode="cover"
             />
           </View>
           {textNode}
@@ -86,9 +86,10 @@ export default class IconText extends Component {
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
+    paddingVertical: 2,
   },
 
-  image: {
+  imageCont: {
     width: 60,
     height: 60,
   },

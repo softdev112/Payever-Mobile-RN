@@ -133,16 +133,6 @@ export default class ProfilesStore {
   @action
   setCurrentProfile(profile: Profile) {
     this.currentProfile = profile;
-
-    const { ui } = this.store;
-
-    // Set start selected index for toolbar for profile
-    // 1 - private, 2 - business
-    if (profile && profile.isBusiness) {
-      ui.tabBarUI.setSelectedIndex(ui.tabBarUI.tabs.dashboard);
-    } else {
-      ui.tabBarUI.setSelectedIndex(ui.tabBarUI.tabs.privateDashboard);
-    }
   }
 
   @action
@@ -168,9 +158,8 @@ export default class ProfilesStore {
   @action
   uploadBusinessLogo(mediaFileInfo) {
     this.logoUploadingProgress = 0;
-    return this.store.api.business.uploadBusinessLogo(
-      { data: mediaFileInfo.data, fileName: mediaFileInfo.fileName }
-    ).catch(log.error);
+    return this.store.api.business.uploadBusinessLogo(mediaFileInfo)
+      .catch(log.error);
   }
 
   @action
