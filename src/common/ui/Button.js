@@ -69,7 +69,9 @@ export default class Button extends Component {
     }
 
     return (
-      <Animated.View style={{ opacity: this.state.opacityAnim }}>
+      <Animated.View
+        style={[styles.container, { opacity: this.state.opacityAnim }]}
+      >
         <TouchableOpacity
           style={buttonStyles}
           accessibilityComponentType="button"
@@ -85,10 +87,19 @@ export default class Button extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    paddingVertical: 4,
+    paddingHorizontal: 2,
+    backgroundColor: '#FFF',
+  },
+
   button: {
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '$pe_color_blue',
     borderRadius: 4,
-    padding: 3,
+    height: 45,
+    elevation: 3,
   },
 
   buttonDisabled: {

@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     '@media ios': {
-      zIndex: 1001,
+      zIndex: 1002,
     },
   },
 

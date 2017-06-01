@@ -143,8 +143,10 @@ export default class AddNewCustomerContact extends Component {
           logoFileId = data.details.id;
         }
 
-        if (await RNFetchBlob.fs.exists(logoFile.uri)) {
-          await RNFetchBlob.fs.unlink(logoFile.uri);
+        const filePath = Platform.OS === 'ios'
+          ? logoFile.uri : ('file://' + logoFile.path);
+        if (await RNFetchBlob.fs.exists(filePath)) {
+          await RNFetchBlob.fs.unlink(filePath);
         }
       } catch (err) {
         log.error(err);

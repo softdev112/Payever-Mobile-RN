@@ -249,6 +249,7 @@ export default class CommunicationStore {
       id: String(Date.now()),
       fileName: mediaFileInfo.fileName,
       uri: mediaFileInfo.uri,
+      path: mediaFileInfo.path,
       isFileUploading: true,
       width: mediaFileInfo.width,
       height: mediaFileInfo.height,
@@ -258,13 +259,13 @@ export default class CommunicationStore {
     this.selectedConversation.messages = messages;
 
     this.filesUploadingProgress.set(uploadMessage.id, 0);
-    this.store.api.messenger.sendMessageWithMedias(
+
+    await this.store.api.messenger.sendMessageWithMedias(
       messengerUser.id,
       conversationId,
       body,
       {
-        data: mediaFileInfo.data,
-        fileName: mediaFileInfo.fileName,
+        ...mediaFileInfo,
         uploadProgressKey: uploadMessage.id,
       },
       this.updateFileUploadProgress.bind(this)

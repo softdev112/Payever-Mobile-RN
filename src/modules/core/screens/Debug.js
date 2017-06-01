@@ -81,7 +81,8 @@ export default class Debug extends Component {
           <Text>Contacts</Text>
         </TouchableOpacity>
         <SegmentedControl
-          values={['one', 'two', 'three']}
+          style={{ width: 300 }}
+          values={['one', 'two', 'three', 'four']}
           selectedIndex={0}
         />
         <View style={{ flex: 1, borderColor: 'red', borderWidth: 1 }}>

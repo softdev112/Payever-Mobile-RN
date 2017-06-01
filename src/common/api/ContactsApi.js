@@ -48,7 +48,7 @@ export default class ContactsApi {
       config.siteUrl + '/api/rest/v1/contact/avatar/upload',
       {
         Authorization: 'Bearer ' + await this.client.authStore.getAccessToken(),
-        'Content-Type': 'octet-stream',
+        'Content-Type': 'application/octet-stream',
       },
       [
         {

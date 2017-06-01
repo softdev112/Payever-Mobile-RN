@@ -35,7 +35,7 @@ export default class BusinessApi {
       config.siteUrl + '/api/rest/v1/business/upload/logo',
       {
         Authorization: 'Bearer ' + await this.client.authStore.getAccessToken(),
-        'Content-Type': 'octet-stream',
+        'Content-Type': 'application/octet-stream',
       },
       [
         {

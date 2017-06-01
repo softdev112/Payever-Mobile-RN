@@ -120,6 +120,6 @@ const styles = StyleSheet.create({
   },
 
   segmentControl: {
-    width: 150,
+    width: 200,
   },
 });

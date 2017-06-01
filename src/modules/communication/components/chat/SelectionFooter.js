@@ -106,7 +106,11 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'stretch',
-    zIndex: 50,
+
+    '@media ios': {
+      zIndex: 50,
+    },
+    elevation: 20,
   },
 
   icon: {

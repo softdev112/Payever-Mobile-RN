@@ -1,13 +1,12 @@
 import { Component } from 'react';
 import { Animated, TextInput, View } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
-import Icon from '../Icon';
-import StyleSheet from '../StyleSheet';
-import TextButton from '../TextButton';
-import NavBarItem from './NavBarItem';
+import Icon from '../../Icon';
+import StyleSheet from '../../StyleSheet';
+import TextButton from '../../TextButton';
+import NavBarItem from '../NavBarItem';
 
-import CommunicaitonStore from '../../../store/communication';
-import UIStore from '../../../store/ui';
+import CommunicaitonStore from '../../../../store/communication';
 
 @inject('communication', 'ui')
 @observer
@@ -19,7 +18,6 @@ export default class SearchItem extends Component {
   props: {
     onPress: () => void;
     onCancel: () => void;
-    ui: UIStore;
     communication: CommunicaitonStore;
   };
 
@@ -57,9 +55,7 @@ export default class SearchItem extends Component {
   }
 
   onCancel() {
-    const {
-      onCancel, communication, ui: { communicationUI },
-    } = this.props;
+    const { onCancel, communication } = this.props;
 
     Animated.timing(this.state.animValue, {
       toValue: 0,
@@ -70,7 +66,7 @@ export default class SearchItem extends Component {
           onCancel();
         }
 
-        communicationUI.setSearchMessagesMode(false);
+        communication.ui.setSearchMessagesMode(false);
         communication.clearFoundMessages();
       });
     });
@@ -128,6 +124,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     alignItems: 'center',
     flexDirection: 'row',
+    zIndex: 10,
   },
 
   inputContainer: {

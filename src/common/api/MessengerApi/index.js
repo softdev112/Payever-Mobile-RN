@@ -1,5 +1,6 @@
 import { pickBy } from 'lodash';
 import RNFetchBlob from 'react-native-fetch-blob';
+import { log } from 'utils';
 import type PayeverApi from '../index';
 import SocketApi from './SocketApi';
 import WampClient from './WampClient';
@@ -134,24 +135,28 @@ export default class MessengerApi {
       config.siteUrl + '/api/rest/v1/messenger/new/message/medias',
       {
         Authorization: 'Bearer ' + await this.client.authStore.getAccessToken(),
-        'Content-Type': 'octet-stream',
+        'Content-Type': 'application/octet-stream; charset=utf-8',
+        expect: '100-continue',
+        connection: 'keep-alive',
+        accept: '*/*',
       },
       [
-        { name: 'userId', data: userId },
-        { name: 'conversationId', data: conversationId },
+        { name: 'userId', data: String(userId) },
+        { name: 'conversationId', data: String(conversationId) },
+        { name: 'new_message_medias[body]', data: message },
+
         {
           name: 'new_message_medias[medias][0][binaryContent]',
           filename: media.fileName,
           data: media.data,
         },
-        { name: 'new_message_medias[body]', data: message },
       ]
     ).uploadProgress((written, total) => {
       if (progressCb) {
         // I add 1.98 koef for encoding to 64 bits as i understand how it works
         progressCb(media.uploadProgressKey, 1.98 * 100 * (written / total));
       }
-    });
+    }).catch(log.error);
   }
 
   sendInviteMessageFromSupport(
@@ -375,6 +380,7 @@ type FileProperties = {
 
 type MediaRequestData = {
   fileName: string;
+  path: string;
   uri: string;
   data: string;
   uploadProgressKey: string;

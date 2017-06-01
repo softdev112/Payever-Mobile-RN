@@ -54,6 +54,7 @@ export default class Footer extends Component {
 
   onActionPress() {
     const { conversationId, communication } = this.props;
+    const { text } = this.state;
     const options = {
       title: 'Attachments',
       customButtons: [{
@@ -66,13 +67,13 @@ export default class Footer extends Component {
       },
     };
 
-    ImagePicker.showImagePicker(options, (response) => {
-      if (!response || response.error || response.didCancel) {
-        log.error(response.error);
+    ImagePicker.showImagePicker(options, async (logoFileInfo) => {
+      if (!logoFileInfo || logoFileInfo.error || logoFileInfo.didCancel) {
+        log.error(logoFileInfo.error);
         return;
       }
 
-      if (response.customButton) {
+      if (logoFileInfo.customButton) {
         this.context.navigator.push({
           screen: 'marketing.CreateOffer',
           passProps: { conversationId },
@@ -80,23 +81,11 @@ export default class Footer extends Component {
         return;
       }
 
-      if (!response.fileName) {
-        response.fileName = response.uri.split('/').pop();
+      if (!logoFileInfo.fileName) {
+        logoFileInfo.fileName = logoFileInfo.uri.split('/').pop();
       }
 
-
-      communication.sendMessageWithMedias(
-        this.state.text,
-        {
-          data: response.data,
-          fileName: response.fileName,
-          uri: response.uri,
-          width: response.width,
-          height: response.height,
-        },
-        conversationId
-      );
-
+      communication.sendMessageWithMedias(text, logoFileInfo, conversationId);
       this.setState({ text: '' });
     });
   }
@@ -227,7 +216,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 50,
     justifyContent: 'space-between',
-    zIndex: 50,
+
+    '@media ios': {
+      zIndex: 50,
+    },
     elevation: 20,
   },
 

@@ -34,6 +34,11 @@ export default class Back extends Component {
     source: Object | string;
     style?: Object | number;
     title?: string;
+
+    /**
+     * Show or not title with back button error iOS only
+     * in Android will set to 'never'
+     */
     showTitle?: 'size-dep' | 'always' | 'never';
   };
 
@@ -54,13 +59,14 @@ export default class Back extends Component {
     }
 
     const onPressAction = onPress || ::this.onPress;
+
     return (
       <IconButton
         imageStyle={iconStyle}
         onPress={onPressAction}
         source={iconSource}
         title={title}
-        showTitle={showTitle}
+        showTitle={Platform.OS === 'android' ? 'never' : showTitle}
         titleStyle={styles.title}
       />
     );

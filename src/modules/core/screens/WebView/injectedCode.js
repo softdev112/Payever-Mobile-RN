@@ -58,9 +58,16 @@ function injectedBody(options) {
   function patchAddApp() {
     //noinspection ES6ConvertVarToLetConst
     function searchModal() {
-      var $dialogFooter = document.querySelector('.edit-campaign-add-item > .modal-content > .modal-footer');
+      const $dialogFooter = document.querySelector('.edit-campaign-add-item > .modal-content > .modal-footer');
       if ($dialogFooter) {
-        //alert(1);
+        const $submitButton = $dialogFooter.querySelector('.btn-link.submits-modal');
+
+        function submitHandler() {
+          if ($submitButton) {
+            $submitButton.click();
+          }
+        }
+
         var $topFooter = $dialogFooter.cloneNode(true);
 
         $topFooter.style.position = 'fixed';
@@ -72,7 +79,12 @@ function injectedBody(options) {
         $topFooter.style.padding = '8px';
         $topFooter.style.paddingRight = '0px';
 
-        var $dialog = document.querySelector('.edit-campaign-add-item');
+        const $topSubmitBtn = $topFooter.querySelector('.btn-link.submits-modal');
+        if ($topSubmitBtn) {
+          $topSubmitBtn.addEventListener('click', submitHandler);
+        }
+
+        const $dialog = document.querySelector('.edit-campaign-add-item');
         $dialog.appendChild($topFooter);
       }
 

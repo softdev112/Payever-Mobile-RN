@@ -168,6 +168,7 @@ export default class ChatScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    zIndex: 0,
   },
 
   searchNavBar: {

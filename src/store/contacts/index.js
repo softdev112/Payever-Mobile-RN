@@ -117,9 +117,8 @@ export default class ContactsStore {
   @action
   uploadContactLogo(mediaFileInfo) {
     this.logoUploadingProgress = 0;
-    return this.store.api.contacts.uploadContactLogo(
-      { data: mediaFileInfo.data, fileName: mediaFileInfo.fileName }
-    ).catch(log.error);
+    return this.store.api.contacts.uploadContactLogo(mediaFileInfo)
+      .catch(log.error);
   }
 
   @action
