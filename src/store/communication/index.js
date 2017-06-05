@@ -66,6 +66,12 @@ export default class CommunicationStore {
     return this.error !== '';
   }
 
+  @computed
+  get conversationsCount() {
+    const { conversations, groups } = this.messengerInfo;
+    return conversations.length + groups.length + this.foundMessages.length;
+  }
+
   @action
   async loadMessengerInfo(profile: BusinessProfile) {
     const { api } = this.store;
@@ -83,6 +89,11 @@ export default class CommunicationStore {
         this.initSocket(data.wsUrl, data.messengerUser.id);
         this.messengerInfo = new MessengerInfo(data);
         this.conversations = observable.map();
+
+        if (!this.store.ui.phoneMode) {
+          const conversation = this.messengerInfo.getDefaultConversation();
+          this.setSelectedConversationId(conversation.id);
+        }
 
         return this.messengerInfo;
       })
@@ -452,6 +463,20 @@ export default class CommunicationStore {
   @action
   async deleteMessage(messageId) {
     const socket = await this.store.api.messenger.getSocket();
+    if (this.messageForEdit && this.messageForEdit.id === messageId) {
+      this.messageForEdit = null;
+    }
+
+    if (this.messageForReply && this.messageForReply.id === messageId) {
+      this.messageForReply = null;
+    }
+
+    if (this.selectedMessages.find(m => m.id === messageId)) {
+      this.selectedMessages = this.selectedMessages.filter(
+        m => m.id !== messageId
+      );
+    }
+
     return socket.deleteMessage(messageId);
   }
 
@@ -462,8 +487,6 @@ export default class CommunicationStore {
         await this.deleteMessage(m.id);
       }
     });
-
-    this.clearSelectedMessages();
   }
 
   @action

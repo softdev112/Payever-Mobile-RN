@@ -9,6 +9,12 @@ import { log, pushNotificationsHelper } from 'utils';
 import type ProfilesStore from '../../../store/profiles';
 import type Profile from '../../../store/profiles/models/Profile';
 
+const ADD_BUSINESS_PROFILE = {
+  id: Date.now(),
+  logoSource: images.addBusiness,
+  displayName: 'Add New Business',
+};
+
 @inject('profiles')
 @observer
 export default class ChooseAccount extends Component {
@@ -78,35 +84,22 @@ export default class ChooseAccount extends Component {
     }
   }
 
-  onAddNewBusiness() {
-    const { navigator } = this.props;
-
-    navigator.push({
-      screen: 'dashboard.AddNewBusiness',
-      animated: true,
-    });
-  }
-
   onProfileClick(profile: Profile) {
     const { navigator, profiles } = this.props;
+
+    if (profile === ADD_BUSINESS_PROFILE) {
+      navigator.push({
+        screen: 'dashboard.AddNewBusiness',
+        animated: true,
+      });
+      return;
+    }
+
     profiles.setCurrentProfile(profile);
     navigator.resetTo({
       screen: profile.isBusiness ? 'dashboard.Dashboard' : 'dashboard.Private',
       animated: true,
     });
-  }
-
-  renderFooter() {
-    return (
-      <IconText
-        style={styles.item}
-        textStyle={styles.iconTitle}
-        imageStyle={styles.logo}
-        onPress={::this.onAddNewBusiness}
-        source={images.addBusiness}
-        title="Add New Business"
-      />
-    );
   }
 
   renderItem({ item: profile }: Profile) {
@@ -138,7 +131,6 @@ export default class ChooseAccount extends Component {
         data={data}
         ref={r => this.$list = r}
         itemWidth={210}
-        renderFooter={::this.renderFooter}
         renderItem={::this.renderItem}
         keyExtractor={item => item.id}
       />
@@ -147,9 +139,11 @@ export default class ChooseAccount extends Component {
 
   render() {
     const { profiles } = this.props;
-
-    //noinspection JSUnresolvedFunction
     const data = profiles.getAllProfiles().slice();
+
+    // Add fake profile for add business to display it in row
+    // with profiles
+    data.push(ADD_BUSINESS_PROFILE);
 
     return (
       <View style={styles.container}>

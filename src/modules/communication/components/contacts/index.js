@@ -14,13 +14,11 @@ import type ProfilesStore from '../../../../store/profiles';
 @observer
 export default class Contacts extends Component {
   static defaultProps = {
-    phoneView: true,
     pickUpMode: false,
   };
 
   props: {
     communication?: CommunicationStore;
-    phoneView: boolean;
     pickUpMode?: boolean;
     style?: Object | number;
     profiles?: ProfilesStore;
@@ -50,7 +48,7 @@ export default class Contacts extends Component {
   }
 
   render() {
-    const { communication, pickUpMode, phoneView, style } = this.props;
+    const { communication, pickUpMode, style } = this.props;
     let sections = [];
     if (pickUpMode) {
       // Take only contacts and groups
@@ -79,12 +77,13 @@ export default class Contacts extends Component {
     return (
       <View style={[styles.container, style]}>
         <SectionList
+          initialNumToRender={communication.conversationsCount}
           style={styles.contactsList}
           contentContainerStyle={styles.contentContainer}
           ListHeaderComponent={this.renderHeader}
           sections={sections}
           renderItem={({ item }) => (
-            <Contact item={item} phoneView={phoneView} />
+            <Contact item={item} />
           )}
           renderSectionHeader={({ section }) => (
             <ListHeader

@@ -88,9 +88,10 @@ export default class Button extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 4,
-    paddingHorizontal: 2,
-    backgroundColor: '#FFF',
+    '@media android': {
+      paddingVertical: 4,
+      paddingHorizontal: 1,
+    },
   },
 
   button: {
@@ -99,10 +100,15 @@ const styles = StyleSheet.create({
     backgroundColor: '$pe_color_blue',
     borderRadius: 4,
     height: 45,
+
+    '@media ios': {
+      height: 41,
+    },
     elevation: 3,
   },
 
   buttonDisabled: {
+    opacity: 0.8,
   },
 
   text: {

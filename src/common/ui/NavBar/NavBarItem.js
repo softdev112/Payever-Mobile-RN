@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     flexDirection: 'row',
+    backgroundColor: 'transparent',
     padding: 6,
   },
 

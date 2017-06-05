@@ -80,9 +80,10 @@ export default class GridView extends Component {
 
     return (
       <FlatList
+        style={[styles.container, style]}
         scrollEnabled={scrollEnabled && !(centerContent && isCenteredAvailable)}
         contentContainerStyle={contentStyle}
-        style={[styles.container, style]}
+        alwaysBounceHorizontal={false}
         ref={r => this.$list = r}
         initialNumToRender={30}
         data={data}

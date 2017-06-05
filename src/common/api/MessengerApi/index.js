@@ -144,7 +144,6 @@ export default class MessengerApi {
         { name: 'userId', data: String(userId) },
         { name: 'conversationId', data: String(conversationId) },
         { name: 'new_message_medias[body]', data: message },
-
         {
           name: 'new_message_medias[medias][0][binaryContent]',
           filename: media.fileName,

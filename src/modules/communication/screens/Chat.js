@@ -1,14 +1,16 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
-import { Alert } from 'react-native';
+import { Alert, KeyboardAvoidingView, Platform } from 'react-native';
 import type { Navigator } from 'react-native-navigation';
 import { NavBar, StyleSheet, View } from 'ui';
 import Chat from '../components/chat';
+import Contacts from '../components/contacts';
 import Header from '../components/chat/Header';
 import SettingsFloatMenu from '../components/chat/SettingsFloatMenu';
 import CommunicationStore from '../../../store/communication';
+import UIStore from '../../../store/ui';
 
-@inject('communication')
+@inject('communication', 'ui')
 @observer
 export default class ChatScreen extends Component {
   static navigatorStyle = {
@@ -17,6 +19,7 @@ export default class ChatScreen extends Component {
 
   props: {
     communication: CommunicationStore;
+    ui: UIStore;
     navigator: Navigator;
   };
 
@@ -112,11 +115,13 @@ export default class ChatScreen extends Component {
   }
 
   render() {
+    const { communication, ui: appUI } = this.props;
     const {
       messengerInfo, selectedConversationId, ui,
-    } = this.props.communication;
+    } = communication;
     const { showSettingsPopup } = this.state;
-    const { avatar } = messengerInfo.byId(selectedConversationId);
+    const avatar = selectedConversationId
+      ? messengerInfo.byId(selectedConversationId).avatar : null;
 
     return (
       <View style={styles.container}>
@@ -153,13 +158,21 @@ export default class ChatScreen extends Component {
           </NavBar>
         )}
 
+        <KeyboardAvoidingView
+          style={styles.chatContainer}
+          contentContainerStyle={styles.chatContainer}
+          behavior={Platform.OS === 'ios' ? 'padding' : null}
+        >
+          {!appUI.phoneMode && <Contacts style={styles.contacts} />}
+          <Chat style={styles.chat} />
+        </KeyboardAvoidingView>
+
         {showSettingsPopup && (
           <SettingsFloatMenu
             ref={r => this.$settingsPopup = r}
             onRemove={::this.onRemoveSettingsPopup}
           />
         )}
-        <Chat />
       </View>
     );
   }
@@ -171,7 +184,29 @@ const styles = StyleSheet.create({
     zIndex: 0,
   },
 
+  splitViewContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+
   searchNavBar: {
     paddingHorizontal: 0,
+  },
+
+  contacts: {
+    flex: 1,
+    zIndex: 2,
+    borderRightColor: '$pe_color_light_gray_1',
+    borderRightWidth: 2,
+  },
+
+  chatContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    zIndex: 1,
+  },
+
+  chat: {
+    flex: 1.55,
   },
 });

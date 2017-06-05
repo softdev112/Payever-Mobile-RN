@@ -1,7 +1,5 @@
 import { Component, PropTypes } from 'react';
-import {
-  Animated, Keyboard, KeyboardAvoidingView, FlatList, Platform,
-} from 'react-native';
+import { Animated, Keyboard, FlatList, Platform } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import { inject, observer } from 'mobx-react/native';
 import { ErrorBox, Loader, PopupMenu, StyleSheet, View } from 'ui';
@@ -15,8 +13,9 @@ import ForwardMessage from './ForwardMessage';
 import EditMessage from './EditMessage';
 import CommunicationStore from '../../../../store/communication';
 import Message from '../../../../store/communication/models/Message';
+import UIStore from '../../../../store/ui';
 
-@inject('communication')
+@inject('communication', 'ui')
 @observer
 export default class Chat extends Component {
   static contextTypes = {
@@ -25,6 +24,7 @@ export default class Chat extends Component {
 
   props: {
     communication?: CommunicationStore;
+    ui?: UIStore;
     style?: Object | number;
   };
 
@@ -40,6 +40,7 @@ export default class Chat extends Component {
     popupPosX: number;
     selectedMessage: Message;
     keyboardHeight: number;
+    chatLayout: ComponentLayout;
     animValue: Animated.Value;
   };
 
@@ -47,7 +48,6 @@ export default class Chat extends Component {
   onDismissPopupMenu: (event: Object) => void;
 
   $listView: FlatList;
-  $keyboardAvoidView: KeyboardAvoidingView;
   $inputFooter: Footer;
   keyboardListeners: Array<Object>;
 
@@ -70,6 +70,10 @@ export default class Chat extends Component {
       popupPosX: 0,
       selectedMessage: null,
       keyboardHeight: 0,
+      chatLayout: {
+        width: ScreenParams.width,
+        height: ScreenParams.height,
+      },
       animValue: new Animated.Value(0),
     };
   }
@@ -174,11 +178,22 @@ export default class Chat extends Component {
     }
   }
 
+  onChatViewLayout({ nativeEvent }) {
+    if (!nativeEvent) return;
+
+    this.setState({
+      chatLayout: nativeEvent.layout,
+    });
+  }
+
   onShowPopupMenu(event, message) {
+    // Calc click relative position considering chat layout
+    const { chatLayout } = this.state;
+
     this.setState({
       showPopupMenu: true,
       popupPosY: event.pageY,
-      popupPosX: event.pageX,
+      popupPosX: event.pageX - (ScreenParams.width - chatLayout.width),
       selectedMessage: message,
     });
   }
@@ -200,7 +215,11 @@ export default class Chat extends Component {
     const { communication } = this.props;
 
     this.clearAllCurrentSelections();
+
+    // TODO: refactor communication ui use something like state-pattern
+    // TODO: delete-state, forward-state
     communication.ui.setSelectMode(true);
+    communication.ui.setForwardMode(false);
     communication.selectMessage(this.state.selectedMessage);
     this.onDismissPopupMenu();
   }
@@ -327,10 +346,10 @@ export default class Chat extends Component {
   }
 
   render() {
-    const { communication, style } = this.props;
+    const { communication, style, ui: appUI } = this.props;
     const {
       animValue, keyboardHeight, showPopupMenu, popupPosY, popupPosX,
-      selectedMessage,
+      selectedMessage, chatLayout,
     } = this.state;
 
     const {
@@ -349,17 +368,20 @@ export default class Chat extends Component {
     // This is hack to go to contacts list if we delete group we set
     // selectedConversationId = null. We need it because RNN doesn't have popTo
     // only for phone layout
-    const isTablet = ScreenParams.isTabletLayout();
-    if (!selectedConversationId && !isTablet) {
+    if (!selectedConversationId && appUI.phoneMode) {
       this.context.navigator.pop({ animated: false });
       return null;
     }
 
     if (!conversation) {
       return (
-        <Loader isLoading={communication.isLoading}>
-          {communication.isError && <ErrorBox message={communication.error} />}
-        </Loader>
+        <View style={[styles.container, style]}>
+          <Loader isLoading={communication.isLoading}>
+            {communication.isError && (
+              <ErrorBox message={communication.error} />
+            )}
+          </Loader>
+        </View>
       );
     }
 
@@ -371,18 +393,17 @@ export default class Chat extends Component {
     }
 
     return (
-      <KeyboardAvoidingView
+      <View
         style={[styles.container, style]}
-        contentContainerStyle={styles.container}
-        behavior={Platform.OS === 'ios' ? 'position' : null}
-        ref={ref => this.$keyboardAvoidView = ref}
         onStartShouldSetResponder={() => true}
         onResponderGrant={::this.onEmptyFieldTap}
+        onLayout={::this.onChatViewLayout}
+        key="a"
       >
         <FlatList
           style={styles.list}
           contentContainerStyle={styles.listInsideCont}
-          keyboardShouldPersistTaps="handled"
+          keyboardShouldPersistTaps="always"
           ref={ref => this.$listView = ref}
           ListFooterComponent={::this.renderFooter}
           renderItem={::this.renderItem}
@@ -405,20 +426,28 @@ export default class Chat extends Component {
           />
         )}
 
-        {messageForReply && <ReplyMessage />}
-        {isMsgsForForward && <ForwardMessage />}
-        {messageForEdit && <EditMessage />}
+        {messageForReply && (
+          <ReplyMessage style={{ width: chatLayout.width }} />
+        )}
+        {isMsgsForForward && (
+          <ForwardMessage style={{ width: chatLayout.width }} />
+        )}
+        {messageForEdit && (
+          <EditMessage style={{ width: chatLayout.width }} />
+        )}
 
         {showPopupMenu && (
           <PopupMenu
             posY={popupPosY}
-            keyboardOffset={keyboardHeight}
             posX={popupPosX}
+            keyboardOffset={keyboardHeight}
+            maxY={chatLayout.height}
+            maxX={chatLayout.width}
             dismissAction={::this.onDismissPopupMenu}
             actions={this.getActionsForMessage(selectedMessage)}
           />
         )}
-      </KeyboardAvoidingView>
+      </View>
     );
   }
 }
@@ -426,7 +455,6 @@ export default class Chat extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    overflow: 'hidden',
     zIndex: 0,
   },
 
@@ -436,20 +464,18 @@ const styles = StyleSheet.create({
   },
 
   listInsideCont: {
-    paddingHorizontal: 8,
+    paddingHorizontal: 10,
     paddingVertical: 10,
-  },
-
-  forwardMessage: {
-    marginLeft: 10,
   },
 
   listHeader: {
     paddingVertical: 5,
   },
-
-  bottomDockTablet: {
-    $topHeight: '80%',
-    top: '$topHeight',
-  },
 });
+
+type ComponentLayout = {
+  y: number;
+  x: number;
+  width: number;
+  height: number;
+};

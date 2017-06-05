@@ -340,6 +340,7 @@ export default class AddNewCustomerContact extends Component {
               {logoFile && (
                 <Icon
                   style={styles.removeIcon}
+                  touchStyle={styles.removeIconCont}
                   source="icon-minus-solid-16"
                   onPress={::this.onRemoveAvatar}
                   activeOpacity={0.7}
@@ -557,11 +558,14 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 
-  removeIcon: {
-    fontSize: 24,
+  removeIconCont: {
     position: 'absolute',
     bottom: 0,
     right: 0,
+  },
+
+  removeIcon: {
+    fontSize: 24,
     color: '$pe_color_blue',
     backgroundColor: 'transparent',
   },

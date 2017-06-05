@@ -27,6 +27,8 @@ export default class AvatarButton extends Component {
   render() {
     const { avatar, lettersStyle, style } = this.props;
 
+    if (!avatar) return null;
+
     if (avatar.type === 'url') {
       const avatarUrl = avatar.valueRetina || avatar.value;
       return (

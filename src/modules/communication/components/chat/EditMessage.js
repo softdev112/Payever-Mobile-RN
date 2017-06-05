@@ -8,6 +8,7 @@ import CommunicationStore from '../../../../store/communication';
 export default class EditMessage extends Component {
   props: {
     communication: CommunicationStore;
+    style?: Object;
   };
 
   onRemoveEditedMessage() {
@@ -16,10 +17,11 @@ export default class EditMessage extends Component {
   }
 
   render() {
-    const { messageForEdit: message } = this.props.communication;
+    const { communication, style } = this.props;
+    const { messageForEdit: message } = communication;
 
     return (
-      <BottomOverlay onRemove={::this.onRemoveEditedMessage}>
+      <BottomOverlay style={style} onRemove={::this.onRemoveEditedMessage}>
         <View style={styles.editIconCont}>
           <Icon
             style={styles.editIcon}

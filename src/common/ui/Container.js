@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
 
   scrollView_small: {
-    width: '80%',
+    width: '82%',
     maxWidth: 400,
   },
 });

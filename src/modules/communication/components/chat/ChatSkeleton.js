@@ -38,7 +38,7 @@ export default class ChatSkeleton extends Component {
         <FlatList
           style={styles.list}
           data={Array(10).fill('1')}
-          renderItme={::this.renderItem}
+          renderItem={::this.renderItem}
           ItemSeparatorComponent={::this.renderSeparator}
           keyExtractor={(item, index) => index}
         />
