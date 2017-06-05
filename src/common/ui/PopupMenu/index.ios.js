@@ -25,13 +25,13 @@ export default class PopupMenu extends Component {
   static defaultProps = {
     posY: DEFAULT_Y_POS,
     posX: DEFAULT_X_POS,
-    keyboardOffset: 0,
+    maxX: ScreenParams.width,
   };
 
   props: {
     posY?: number;
     posX?: number;
-    keyboardOffset?: number;
+    maxX?: number;
     style?: Object;
     actions: Array<Action>;
     dismissAction: Function;
@@ -74,12 +74,11 @@ export default class PopupMenu extends Component {
   }
 
   getMenuXPos(touchX) {
-    const { actions } = this.props;
-    const { width: screenWidth } = ScreenParams;
+    const { actions, maxX } = this.props;
     const btnsWidth = actions.length * BUTTON_WIDTH;
 
-    if (screenWidth - touchX <= btnsWidth) {
-      return screenWidth - btnsWidth - 8;
+    if (maxX - touchX <= btnsWidth) {
+      return maxX - btnsWidth - 8;
     } else if (touchX <= POSITION_X_ADJUST) {
       return 8;
     }
@@ -88,24 +87,23 @@ export default class PopupMenu extends Component {
   }
 
   getMenuYPos(touchY) {
-    const { keyboardOffset } = this.props;
     const { isAboveTouch } = this.state;
 
     if (isAboveTouch) {
-      return touchY - (POSITION_Y_ADJUST - keyboardOffset);
+      return touchY - POSITION_Y_ADJUST;
     }
 
-    return touchY - (MENU_HEIGHT - keyboardOffset);
+    return touchY - MENU_HEIGHT;
   }
 
   getArrowXPos(touchX) {
-    const { actions } = this.props;
-    const screen30PerWidth = ScreenParams.width * 0.3;
+    const { actions, maxX } = this.props;
+    const view30PerWidth = maxX * 0.3;
     const arrowXPosSetIndex = actions.length > 2 ? 1 : 0;
 
-    if (touchX <= screen30PerWidth) {
+    if (touchX <= view30PerWidth) {
       return ARROW_X_POS[arrowXPosSetIndex][0];
-    } else if (touchX >= screen30PerWidth && touchX < 2 * screen30PerWidth) {
+    } else if (touchX >= view30PerWidth && touchX < 2 * view30PerWidth) {
       return ARROW_X_POS[arrowXPosSetIndex][1];
     }
 

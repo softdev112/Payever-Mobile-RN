@@ -3,19 +3,19 @@ import { Animated } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import { GridView, IconText, Loader, StyleSheet, View } from 'ui';
-import { ScreenParams } from 'utils';
 
-import type ProfilesStore from '../../../store/profiles';
 import type AppItem from '../../../store/profiles/models/AppItem';
 import Dock from '../../core/components/Dock';
 import SearchHeader from '../components/SearchHeader';
+import type ProfilesStore from '../../../store/profiles';
+import type UIStore from '../../../store/ui';
 
-const APP_ICON_WIDTH_PHONE = 80;
-const APP_ICON_HEIGHT_PHONE = 105;
-const APP_ICON_WIDTH_TABLET = 130;
-const APP_ICON_HEIGHT_TABLET = 135;
+const ICON_WIDTH_PHONE = 80;
+const ICON_HEIGHT_PHONE = 105;
+const ICON_WIDTH_TABLET = 135;
+const ICON_HEIGHT_TABLET = 145;
 
-@inject('profiles', 'config')
+@inject('profiles', 'config', 'ui')
 @observer
 export default class Dashboard extends Component {
   static navigatorStyle = {
@@ -25,6 +25,7 @@ export default class Dashboard extends Component {
   props: {
     navigator: Navigator;
     profiles: ProfilesStore;
+    ui: UIStore;
   };
 
   state: {
@@ -102,13 +103,11 @@ export default class Dashboard extends Component {
   }
 
   render() {
-    const { profiles } = this.props;
+    const { profiles, ui } = this.props;
     const { appsTop, appearAnimation } = this.state;
 
-    const iconWidth = ScreenParams.isTabletLayout()
-      ? APP_ICON_WIDTH_TABLET : APP_ICON_WIDTH_PHONE;
-    const iconHeight = ScreenParams.isTabletLayout()
-      ? APP_ICON_HEIGHT_TABLET : APP_ICON_HEIGHT_PHONE;
+    const iconWidth = ui.phoneMode ? ICON_WIDTH_PHONE : ICON_WIDTH_TABLET;
+    const iconHeight = ui.phoneMode ? ICON_HEIGHT_PHONE : ICON_HEIGHT_TABLET;
 
     const opacity = appearAnimation.interpolate({
       inputRange: [1, 10],
@@ -128,7 +127,7 @@ export default class Dashboard extends Component {
                 renderItem={::this.renderIcon}
                 itemWidth={iconWidth}
                 itemHeight={iconHeight}
-                numColumns={4}
+                numColumns={ui.phoneMode ? 4 : 6}
                 keyExtractor={app => app.id}
               />
             </Animated.View>
@@ -160,8 +159,9 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    height: APP_ICON_HEIGHT_PHONE,
-    width: APP_ICON_WIDTH_PHONE,
+    paddingTop: 2,
+    height: ICON_HEIGHT_PHONE,
+    width: ICON_WIDTH_PHONE,
   },
 
   icon_image: {
@@ -197,20 +197,24 @@ const styles = StyleSheet.create({
   },
 
   '@media (min-width: 550)': {
+    appGrid: {
+      marginLeft: -25,
+    },
+
     icon: {
-      width: APP_ICON_WIDTH_TABLET,
-      height: APP_ICON_HEIGHT_TABLET,
+      width: ICON_WIDTH_TABLET,
+      height: ICON_HEIGHT_TABLET,
     },
 
     icon_image: {
-      borderRadius: 18,
-      height: 80,
-      width: 80,
+      borderRadius: 19,
+      height: 85,
+      width: 85,
       shadowRadius: 10,
     },
 
     icon_title: {
-      fontSize: 15,
+      fontSize: 18,
     },
   },
 });

@@ -12,8 +12,9 @@ import type ConversationInfo from
 import type Message from '../../../../store/communication/models/Message';
 import type CommunicationStore
   from '../../../../store/communication';
+import type UIStore from '../../../../store/ui';
 
-@inject('communication')
+@inject('communication', 'ui')
 @observer
 export default class Contact extends Component {
   static contextTypes = {
@@ -27,19 +28,19 @@ export default class Contact extends Component {
   props: {
     communication?: CommunicationStore;
     item: Object;
-    phoneView: boolean;
+    ui: UIStore;
   };
 
   onContactSelect(item: ConversationInfo | Message) {
-    const { communication, phoneView } = this.props;
+    const { communication, ui } = this.props;
+    const { navigator } = this.context;
     const conversationId = item.conversation ? item.conversation.id : item.id;
     communication.setSelectedConversationId(conversationId);
 
-    if (phoneView && !communication.ui.forwardMode) {
-      this.context.navigator.push({ screen: 'communication.Chat' });
-    } else if (communication.ui.forwardMode) {
-      this.context.navigator.pop({ animated: false });
-    }
+    if (!ui.phoneMode) return;
+
+    communication.ui.setPickContactMode(false);
+    navigator.push({ screen: 'communication.Chat' });
   }
 
   preprocessLatestMsgText(messageText) {

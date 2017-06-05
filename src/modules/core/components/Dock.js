@@ -4,6 +4,7 @@ import { Navigator } from 'react-native-navigation';
 import { IconText, StyleSheet, View } from 'ui';
 
 import ProfilesStore from '../../../store/profiles';
+import UIStore from '../../../store/ui';
 import { Config } from '../../../config';
 import AppItem from '../../../store/profiles/models/AppItem';
 
@@ -42,6 +43,7 @@ export default class Dock extends Component {
     onAppClick: (item: AppItem) => any;
     config: Config;
     profiles: ProfilesStore;
+    ui: UIStore;
   };
 
   context: {
@@ -88,8 +90,9 @@ export default class Dock extends Component {
   }
 
   onAppClick(app: AppItem) {
-    const { onAppClick } = this.props;
+    const { onAppClick, ui } = this.props;
     const { navigator } = this.context;
+    const { settings } = app;
 
     if (onAppClick) {
       onAppClick(app);
@@ -97,10 +100,13 @@ export default class Dock extends Component {
 
     if (app.label === 'dashboard') return;
 
+    const screenId = ui.phoneMode
+      ? settings.screenId : (settings.screenIdTablet || settings.screenId);
+
     if (app.settings.screenId) {
       navigator.push({
         title: app.name,
-        screen: app.settings.screenId,
+        screen: screenId,
         animated: false,
       });
       return;
@@ -219,17 +225,19 @@ const styles = StyleSheet.create({
   },
 
   '@media (min-width: 550)': {
-    content: {
-      height: 185,
+    container: {
+      height: 145,
+      paddingHorizontal: '18%',
     },
 
     icon: {
       width: 130,
+      height: 110,
     },
 
     image: {
-      width: 100,
-      height: 100,
+      height: 85,
+      width: 85,
     },
 
     title: {

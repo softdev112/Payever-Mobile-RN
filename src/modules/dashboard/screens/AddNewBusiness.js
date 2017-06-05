@@ -477,5 +477,6 @@ const styles = StyleSheet.create({
   removeIcon: {
     fontSize: 24,
     color: '$pe_color_blue',
+    backgroundColor: 'transparent',
   },
 });

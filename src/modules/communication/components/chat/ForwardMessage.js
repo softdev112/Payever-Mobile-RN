@@ -8,6 +8,7 @@ import CommunicationStore from '../../../../store/communication';
 export default class ForwardMessage extends Component {
   props: {
     communication: CommunicationStore;
+    style?: Object;
   };
 
   onRemoveMsgsForForward() {
@@ -17,7 +18,8 @@ export default class ForwardMessage extends Component {
   }
 
   render() {
-    const { selectedMessages } = this.props.communication;
+    const { communication, style } = this.props;
+    const { selectedMessages } = communication;
 
     const message = selectedMessages.length === 1 ? selectedMessages[0] : null;
 
@@ -35,7 +37,7 @@ export default class ForwardMessage extends Component {
     }, '');
 
     return (
-      <BottomOverlay onRemove={::this.onRemoveMsgsForForward}>
+      <BottomOverlay style={style} onRemove={::this.onRemoveMsgsForForward}>
         <View style={styles.forwardIconCont}>
           <Icon
             style={styles.forwardIcon}

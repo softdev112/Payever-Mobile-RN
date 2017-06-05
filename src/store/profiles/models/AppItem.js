@@ -6,7 +6,8 @@ const SETTINGS = {
     screenId: 'dashboard.Dashboard',
   },
   communication: {
-    screenId: 'communication.Main',
+    screenId: 'communication.Contacts',
+    screenIdTablet: 'communication.Chat',
   },
   settings: {
     webView: {

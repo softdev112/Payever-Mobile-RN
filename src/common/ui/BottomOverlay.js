@@ -14,6 +14,7 @@ export default class BottomOverlay extends Component {
     onRemove?: () => void;
     startBottom?: number;
     endBottom?: number;
+    style?: Object;
   };
 
   state: {
@@ -49,11 +50,11 @@ export default class BottomOverlay extends Component {
   }
 
   render() {
-    const { children } = this.props;
+    const { children, style } = this.props;
 
     return (
       <Animated.View
-        style={[styles.container, { bottom: this.state.animValue }]}
+        style={[styles.container, { bottom: this.state.animValue }, style]}
       >
         {children}
         <Icon

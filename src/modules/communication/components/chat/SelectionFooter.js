@@ -6,8 +6,9 @@ import * as Animatable from 'react-native-animatable';
 import { Icon, StyleSheet } from 'ui';
 
 import CommunicationStore from '../../../../store/communication';
+import UIStore from '../../../../store/ui';
 
-@inject('communication')
+@inject('communication', 'ui')
 @observer
 export default class SelectionFooter extends Component {
   static contextTypes = {
@@ -19,16 +20,18 @@ export default class SelectionFooter extends Component {
   };
 
   props: {
-    communication?: CommunicationStore;
+    communication: CommunicationStore;
+    ui: UIStore;
   };
 
   onForwardMessages() {
-    const { ui } = this.props.communication;
-    ui.setSelectMode(false);
-    this.context.navigator.push({
-      screen: 'communication.SelectContact',
-      animated: true,
-    });
+    const { communication, ui } = this.props;
+    communication.ui.setSelectMode(false);
+
+    if (ui.phoneMode) {
+      communication.ui.setPickContactMode(true);
+      this.context.navigator.pop({ animated: false });
+    }
   }
 
   onDeleteMessages() {

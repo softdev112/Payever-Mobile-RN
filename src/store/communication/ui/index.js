@@ -4,6 +4,7 @@ export default class CommunicationUI {
   @observable searchMessagesMode: boolean = false;
   @observable forwardMode: boolean = false;
   @observable selectMode: boolean = false;
+  @observable pickContactMode: boolean = false;
 
   @action
   setSearchMessagesMode(mode: boolean) {
@@ -11,12 +12,17 @@ export default class CommunicationUI {
   }
 
   @action
-  setSelectMode(mode) {
+  setSelectMode(mode: boolean) {
     this.selectMode = mode;
   }
 
   @action
-  setForwardMode(mode) {
+  setForwardMode(mode: boolean) {
     this.forwardMode = mode;
+  }
+
+  @action
+  setPickContactMode(mode: boolean) {
+    this.pickContactMode = mode;
   }
 }

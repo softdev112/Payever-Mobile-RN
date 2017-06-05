@@ -8,6 +8,7 @@ import CommunicationStore from '../../../../store/communication';
 export default class ReplyMessage extends Component {
   props: {
     communication: CommunicationStore;
+    style?: Object;
   };
 
   onRemoveMsgForReply() {
@@ -16,10 +17,11 @@ export default class ReplyMessage extends Component {
   }
 
   render() {
-    const { messageForReply: message } = this.props.communication;
+    const { communication, style } = this.props;
+    const { messageForReply: message } = communication;
 
     return (
-      <BottomOverlay onRemove={::this.onRemoveMsgForReply}>
+      <BottomOverlay style={style} onRemove={::this.onRemoveMsgForReply}>
         <View style={styles.replyIconCont}>
           <Icon
             style={styles.replyIcon}
