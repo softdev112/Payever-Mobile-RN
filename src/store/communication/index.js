@@ -586,7 +586,8 @@ export default class CommunicationStore {
        groupName,
        recipients,
        isAllowGroupChat
-    )).success();
+    )).success()
+      .complete(() => this.clearContactsForAction());
   }
 
   @action
@@ -682,7 +683,8 @@ export default class CommunicationStore {
   @action
   async deleteGroup(groupId: number) {
     const socket = await this.store.api.messenger.getSocket();
-    apiHelper(socket.deleteGroup(groupId))
+
+    return apiHelper(socket.deleteGroup(groupId))
       .success(() => {
         // Remove group locally
         const { groups } = this.messengerInfo;
@@ -703,7 +705,8 @@ export default class CommunicationStore {
           group => group.id !== groupId
         );
       })
-      .error(log.error);
+      .error(log.error)
+      .promise();
   }
 
   @action

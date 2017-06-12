@@ -16,13 +16,8 @@ const NUM_CONTACTS_TO_SHOW = 5;
 @inject('communication', 'profiles')
 @observer
 export default class Contacts extends Component {
-  static defaultProps = {
-    pickUpMode: false,
-  };
-
   props: {
     communication?: CommunicationStore;
-    pickUpMode?: boolean;
     style?: Object | number;
     profiles?: ProfilesStore;
   };
@@ -32,13 +27,13 @@ export default class Contacts extends Component {
   };
 
   renderHeader: () => Component;
-  renderSectionFooter: () => Component;
+  renderFooter: () => Component;
 
   constructor(props) {
     super(props);
 
     this.renderHeader = this.renderHeader.bind(this);
-    this.renderSectionFooter = this.renderSectionFooter.bind(this);
+    this.renderFooter = this.renderFooter.bind(this);
     this.getSectionsData = this.getSectionsData.bind(this);
 
     this.state = {
@@ -46,13 +41,19 @@ export default class Contacts extends Component {
     };
   }
 
-  componentDidMount() {
-    const { communication, profiles, pickUpMode } = this.props;
+  async componentWillMount() {
+    const { communication, profiles } = this.props;
 
     //noinspection JSIgnoredPromiseFromCall
-    if (!pickUpMode) {
-      communication.loadMessengerInfo(profiles.currentProfile);
+    if (!communication.ui.pickContactMode) {
+      await communication.loadMessengerInfo(profiles.currentProfile);
     }
+
+    const { messengerInfo } = communication;
+    this.setState({
+      contactsCount: messengerInfo.conversations.length,
+      groupsCount: messengerInfo.groups.length,
+    });
 
     communication.search('');
   }
@@ -83,19 +84,30 @@ export default class Contacts extends Component {
           return -1;
         }
 
-        if (idx === 2) return section;
+        const patchedData = section.data.sort(sortByLastMessage);
+        switch (idx) {
+          case 0:
+            if (isListShrink && patchedData.length > NUM_CONTACTS_TO_SHOW) {
+              section.data = patchedData.slice(0, NUM_CONTACTS_TO_SHOW);
+            }
 
-        let patchedData = section.data.sort(sortByLastMessage);
-        if (isListShrink && patchedData.length > NUM_CONTACTS_TO_SHOW) {
-          patchedData = patchedData.slice(0, NUM_CONTACTS_TO_SHOW);
+            break;
+
+          case 1:
+            if (isListShrink && patchedData.length > NUM_CONTACTS_TO_SHOW) {
+              section.data = patchedData.slice(0, NUM_CONTACTS_TO_SHOW);
+            }
+
+            break;
+
+          default:
+            return section;
         }
-
-        section.data = patchedData;
 
         return section;
       });
 
-    if (communication.pickUpMode) {
+    if (communication.ui.pickContactMode) {
       // Take only contacts and groups
       return [sections[0], sections[1]];
     }
@@ -107,8 +119,15 @@ export default class Contacts extends Component {
     return <Search />;
   }
 
-  renderSectionFooter() {
+  renderFooter() {
+    const { communication: { messengerInfo } } = this.props;
     const { isListShrink } = this.state;
+
+    if (messengerInfo.conversations.length <= NUM_CONTACTS_TO_SHOW
+      && messengerInfo.groups.length <= NUM_CONTACTS_TO_SHOW) {
+      return null;
+    }
+
     return (
       <TextButton
         style={styles.moreBtn}
@@ -119,7 +138,7 @@ export default class Contacts extends Component {
   }
 
   render() {
-    const { communication, pickUpMode, style } = this.props;
+    const { communication, style } = this.props;
     const info = communication.messengerInfo;
 
     if (!info) {
@@ -140,18 +159,15 @@ export default class Contacts extends Component {
           style={styles.contactsList}
           contentContainerStyle={styles.contentContainer}
           ListHeaderComponent={this.renderHeader}
+          ListFooterComponent={this.renderFooter}
           sections={this.getSectionsData()}
           renderItem={({ item }) => <Contact item={item} />}
           renderSectionHeader={({ section }) => (
             <ListHeader
               conversationInfo={info}
-              pickUpMode={pickUpMode}
               type={section.title}
             />
           )}
-          SectionSeparatorComponent={
-            ({ section }) => this.renderSectionFooter(section)
-          }
           keyExtractor={c => c.id}
         />
       </View>
@@ -181,7 +197,7 @@ const styles = StyleSheet.create({
 
   moreBtn: {
     height: 30,
-    alignSelf: 'flex-end',
+    alignSelf: 'center',
     justifyContent: 'center',
   },
 });

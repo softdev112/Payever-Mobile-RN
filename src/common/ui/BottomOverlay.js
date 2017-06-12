@@ -36,6 +36,15 @@ export default class BottomOverlay extends Component {
     }).start();
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.endBottom !== this.props.endBottom) {
+      Animated.timing(this.state.animValue, {
+        toValue: newProps.endBottom,
+        duration: 200,
+      }).start();
+    }
+  }
+
   onRemove() {
     const { onRemove, startBottom } = this.props;
 

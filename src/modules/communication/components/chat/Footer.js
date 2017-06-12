@@ -1,5 +1,5 @@
 import { Component, PropTypes } from 'react';
-import { Keyboard, TextInput } from 'react-native';
+import { Animated, Keyboard, TextInput } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import * as Animatable from 'react-native-animatable';
@@ -10,6 +10,11 @@ import { log } from 'utils';
 import CommunicationStore from '../../../../store/communication';
 import type { ConversationType } from
   '../../../../store/communication/models/Conversation';
+
+const INIT_TEXT_HEIGHT = 20;
+const MIN_FOOTER_HEIGHT = 50;
+const FOOTER_HEIGHT_ADJUST = 8;
+const MAX_FOOTER_HEIGHT = 120;
 
 @inject('communication')
 @observer
@@ -34,6 +39,8 @@ export default class Footer extends Component {
 
   state: {
     text: string;
+    textHeight: number;
+    animValue: Animated.Value;
   };
 
   constructor(props) {
@@ -41,6 +48,8 @@ export default class Footer extends Component {
 
     this.state = {
       text: props.textValue || '',
+      textHeight: INIT_TEXT_HEIGHT,
+      animValue: new Animated.Value(MIN_FOOTER_HEIGHT),
     };
 
     this.onType = ::this.onType;
@@ -138,6 +147,26 @@ export default class Footer extends Component {
     }
   }
 
+  onInputContentSizeChange({ nativeEvent: { contentSize: { height } } }) {
+    const { communication } = this.props;
+    const { animValue } = this.state;
+
+    let footerHeight = height + FOOTER_HEIGHT_ADJUST;
+    if (height <= MIN_FOOTER_HEIGHT) {
+      footerHeight = MIN_FOOTER_HEIGHT;
+    } else if (height >= MAX_FOOTER_HEIGHT) {
+      footerHeight = MAX_FOOTER_HEIGHT;
+    }
+
+    Animated.timing(animValue, {
+      toValue: footerHeight,
+      duration: 200,
+    }).start();
+
+    communication.ui.setChatFooterHeight(footerHeight);
+    this.setState({ textHeight: height });
+  }
+
   setFocusToInput() {
     if (this.$input) {
       this.$input.focus();
@@ -154,7 +183,7 @@ export default class Footer extends Component {
     const {
       messengerInfo, selectedMessages, messageForReply, messageForEdit,
     } = this.props.communication;
-    const { text } = this.state;
+    const { text, animValue } = this.state;
 
     let isBusiness = false;
     if (messengerInfo) {
@@ -170,7 +199,7 @@ export default class Footer extends Component {
     return (
       <Animatable.View
         ref={c => this.$container = c}
-        style={styles.container}
+        style={[styles.container, { height: animValue }]}
         animation="slideInUp"
         duration={300}
       >
@@ -190,9 +219,11 @@ export default class Footer extends Component {
           onChangeText={this.onType}
           onSubmitEditing={::this.onSend}
           placeholder="Send message"
-          returnKeyType="Enter"
+          placeholderTextColor="#e1e1e1"
+          returnKeyType="done"
           underlineColorAndroid="transparent"
           value={this.state.text}
+          onContentSizeChange={::this.onInputContentSizeChange}
         />
         <Icon
           style={sendBtnStyle}
@@ -215,7 +246,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     backgroundColor: '#FFF',
     flexDirection: 'row',
-    height: 50,
+    height: MIN_FOOTER_HEIGHT,
     justifyContent: 'space-between',
 
     '@media ios': {
@@ -251,5 +282,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 8,
     fontSize: 16,
+    alignSelf: 'center',
   },
 });

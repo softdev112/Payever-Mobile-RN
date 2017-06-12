@@ -16,10 +16,6 @@ const TITLES = {
 @inject('communication')
 @observer
 export default class ListHeader extends Component {
-  static defaultProps = {
-    pickUpMode: false,
-  };
-
   static contextTypes = {
     navigator: PropTypes.object.isRequired,
   };
@@ -30,7 +26,6 @@ export default class ListHeader extends Component {
 
   props: {
     communication: CommunicationStore;
-    pickUpMode: boolean;
     type: 'contacts' | 'groups' | 'foundMessages';
   };
 
@@ -48,7 +43,7 @@ export default class ListHeader extends Component {
   }
 
   render() {
-    const { communication, pickUpMode, type } = this.props;
+    const { communication, type } = this.props;
 
     if (type === 'foundMessages' && communication.foundMessages.length === 0) {
       //noinspection JSConstructorReturnsPrimitive
@@ -67,7 +62,7 @@ export default class ListHeader extends Component {
           <CountBadge value={count} />
         </View>
 
-        {(type !== 'foundMessages' && !pickUpMode) && (
+        {(type !== 'foundMessages' && !communication.pickContactMode) && (
           <Icon
             style={styles.add}
             source="icon-plus-circle-24"

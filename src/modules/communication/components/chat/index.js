@@ -13,9 +13,8 @@ import ForwardMessage from './ForwardMessage';
 import EditMessage from './EditMessage';
 import CommunicationStore from '../../../../store/communication';
 import Message from '../../../../store/communication/models/Message';
-import UIStore from '../../../../store/ui';
 
-@inject('communication', 'ui')
+@inject('communication')
 @observer
 export default class Chat extends Component {
   static contextTypes = {
@@ -24,7 +23,6 @@ export default class Chat extends Component {
 
   props: {
     communication?: CommunicationStore;
-    ui?: UIStore;
     style?: Object | number;
   };
 
@@ -42,6 +40,7 @@ export default class Chat extends Component {
     keyboardHeight: number;
     chatLayout: ComponentLayout;
     animValue: Animated.Value;
+    conversationId: number;
   };
 
   onShowPopupMenu: (event: Object) => void;
@@ -346,7 +345,7 @@ export default class Chat extends Component {
   }
 
   render() {
-    const { communication, style, ui: appUI } = this.props;
+    const { communication, style } = this.props;
     const {
       animValue, keyboardHeight, showPopupMenu, popupPosY, popupPosX,
       selectedMessage, chatLayout,
@@ -356,22 +355,12 @@ export default class Chat extends Component {
       messageForReply,
       messageForEdit,
       selectedConversation: conversation,
-      selectedConversationId,
       selectedMessages,
       foundMessages,
       ui,
     } = communication;
 
     const isMsgsForForward = selectedMessages.length > 0 && !ui.selectMode;
-
-    // TODO: try to use pop(n)
-    // This is hack to go to contacts list if we delete group we set
-    // selectedConversationId = null. We need it because RNN doesn't have popTo
-    // only for phone layout
-    if (!selectedConversationId && appUI.phoneMode) {
-      this.context.navigator.pop({ animated: false });
-      return null;
-    }
 
     if (!conversation) {
       return (

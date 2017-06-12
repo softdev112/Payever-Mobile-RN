@@ -21,7 +21,10 @@ export default class ReplyMessage extends Component {
     const { messageForReply: message } = communication;
 
     return (
-      <BottomOverlay style={style} onRemove={::this.onRemoveMsgForReply}>
+      <BottomOverlay
+        style={style} onRemove={::this.onRemoveMsgForReply}
+        endBottom={communication.ui.chatFooterHeight}
+      >
         <View style={styles.replyIconCont}>
           <Icon
             style={styles.replyIcon}

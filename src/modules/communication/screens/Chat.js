@@ -85,6 +85,8 @@ export default class ChatScreen extends Component {
 
     if (!conversation) return;
 
+    this.onRemoveSettingsPopup();
+
     if (conversation.isGroup) {
       navigator.push({
         screen: 'communication.GroupSettings',
