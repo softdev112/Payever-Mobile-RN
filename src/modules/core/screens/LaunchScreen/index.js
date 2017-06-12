@@ -1,16 +1,30 @@
 import { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
+import { inject, observer } from 'mobx-react/native';
 import { Icon, View, Text, StyleSheet } from 'ui';
 import { Navigator } from 'react-native-navigation';
-
+import UIStore from '../../../../store/ui';
 import SvgIconsShow from './SvgIconsShow';
 
+@inject('ui')
+@observer
 export default class LaunchScreen extends Component {
   static navigatorStyle = { navBarHidden: true };
 
   props: {
     navigator: Navigator;
+    ui: UIStore;
   };
+
+  componentDidMount() {
+    const { navigator, ui } = this.props;
+    if (ui.deepLink !== '') {
+      navigator.showModal({
+        screen: 'core.DeepLinksPopup',
+        animated: true,
+      });
+    }
+  }
 
   onCreateAccountPress() {
     this.props.navigator.push({

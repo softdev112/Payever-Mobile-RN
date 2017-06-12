@@ -18,6 +18,10 @@ const ICON_HEIGHT_TABLET = 145;
 @inject('profiles', 'config', 'ui')
 @observer
 export default class Dashboard extends Component {
+  static defaultProps = {
+    deepLink: '',
+  };
+
   static navigatorStyle = {
     navBarHidden: true,
   };
@@ -25,6 +29,7 @@ export default class Dashboard extends Component {
   props: {
     navigator: Navigator;
     profiles: ProfilesStore;
+    deepLink: string;
     ui: UIStore;
   };
 
@@ -55,7 +60,17 @@ export default class Dashboard extends Component {
   }
 
   componentDidMount() {
+    const { deepLink, navigator } = this.props;
+
     this.animateLayout();
+
+    if (deepLink !== '' && !deepLink.endsWith('/home')
+      && !deepLink.endsWith('/home#home')) {
+      navigator.push({
+        screen: 'core.WebView',
+        passProps: { url: deepLink },
+      });
+    }
   }
 
   onAppClick(app: AppItem) {
@@ -184,23 +199,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 
-  '@media (min-width: 370)': {
-    appGrid: {
-      marginLeft: -12,
-    },
-  },
-
-  '@media (min-width: 400)': {
-    appGrid: {
-      marginLeft: -17,
-    },
-  },
-
   '@media (min-width: 550)': {
-    appGrid: {
-      marginLeft: -25,
-    },
-
     icon: {
       width: ICON_WIDTH_TABLET,
       height: ICON_HEIGHT_TABLET,

@@ -10,12 +10,14 @@ import AppItem from './models/AppItem';
 import BusinessProfile from './models/BusinessProfile';
 import PersonalProfile from './models/PersonalProfile';
 import Profile from './models/Profile';
+import Offer from '../offers/models/Offer';
 
 export default class ProfilesStore {
   @observable ownBusinesses: Array<BusinessProfile>   = [];
   @observable staffBusinesses: Array<BusinessProfile> = [];
   @observable privateProfile: PersonalProfile         = null;
-
+  @observable profileDetails: any = null;
+  @observable profileOffers: Array<any> = [];
   @observable currentProfile: PersonalProfile | BusinessProfile = null;
 
   @observable logoUploadingProgress: number = 0;
@@ -126,6 +128,18 @@ export default class ProfilesStore {
           .map(item => new ActivityItem(item, this.store, profile));
         profile.todos = activities;
         return activities;
+      })
+      .promise();
+  }
+
+  @action
+  getAllOffers(id: number) {
+    const { api } = this.store;
+
+    return apiHelper(api.profiles.getAllOffers(id), this)
+      .success((data) => {
+        this.profileOffers = data.map(o => new Offer(o));
+        return this.profileOffers;
       })
       .promise();
   }

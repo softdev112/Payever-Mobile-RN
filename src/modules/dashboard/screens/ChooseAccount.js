@@ -8,6 +8,7 @@ import {
 import { log, pushNotificationsHelper } from 'utils';
 import type ProfilesStore from '../../../store/profiles';
 import type Profile from '../../../store/profiles/models/Profile';
+import type UIStore from '../../../store/ui';
 
 const ADD_BUSINESS_PROFILE = {
   id: Date.now(),
@@ -15,7 +16,7 @@ const ADD_BUSINESS_PROFILE = {
   displayName: 'Add New Business',
 };
 
-@inject('profiles')
+@inject('profiles', 'ui')
 @observer
 export default class ChooseAccount extends Component {
   static navigatorStyle = {
@@ -25,6 +26,7 @@ export default class ChooseAccount extends Component {
   props: {
     navigator: Navigator;
     profiles: ProfilesStore;
+    ui: UIStore;
   };
 
   state: {
@@ -65,6 +67,16 @@ export default class ChooseAccount extends Component {
       .catch(log.warn);
 
     this.setState({ ownBusinessesCount: profiles.ownBusinesses.length });
+  }
+
+  componentDidMount() {
+    const { navigator, ui } = this.props;
+    if (ui.deepLink !== '') {
+      navigator.showModal({
+        screen: 'core.DeepLinksPopup',
+        animated: true,
+      });
+    }
   }
 
   onNavigatorEvent(event) {
@@ -128,6 +140,7 @@ export default class ChooseAccount extends Component {
     return (
       <GridView
         style={styles.appGrid}
+        contentContainerStyle={styles.appGridContent}
         data={data}
         ref={r => this.$list = r}
         itemWidth={210}
@@ -164,6 +177,10 @@ const styles = StyleSheet.create({
 
   appGrid: {
     paddingTop: 10,
+  },
+
+  appGridContent: {
+    alignItems: 'center',
   },
 
   error: {

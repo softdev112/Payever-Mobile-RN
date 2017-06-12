@@ -25,6 +25,7 @@ export default class GridView extends Component {
     numColumns?: number;
     scrollEnabled?: boolean;
     spacingVertical?: number;
+    contentContainerStyle?: Object | number;
   };
 
   $list: FlatList;
@@ -49,6 +50,7 @@ export default class GridView extends Component {
 
   render() {
     const {
+      contentContainerStyle,
       data,
       keyExtractor,
       renderItem,
@@ -69,7 +71,7 @@ export default class GridView extends Component {
     const marginLeft =
       (ScreenParams.width - (numOfColumns * itemWidth)) / (numOfColumns + 1);
 
-    const contentStyle = [styles.content];
+    const contentStyle = [styles.content, contentContainerStyle];
     const columnHeight =
       Math.ceil(data.length / numOfColumns) * (itemHeight + spacingVertical);
     const isCenteredAvailable = columnHeight < gridHeight;
@@ -103,10 +105,11 @@ export default class GridView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    width: '100%',
   },
 
   content: {
-    alignSelf: 'center',
+    width: '100%',
   },
 
   centerContent: {

@@ -21,8 +21,12 @@ export default class ProfilesApi {
     return resp;
   }
 
-  getOfferById(id): Promise<OfferResp> {
+  getOfferById(id: number): Promise<OfferResp> {
     return this.client.get(`/api/rest/v1/profiles/offer/${id}`);
+  }
+
+  getAllOffers(id: number): Promise<OffersResp> {
+    return this.client.get(`/api/rest/v1/profiles/${id}/offers`);
   }
 
   search(query): Promise<SearchResp> {
@@ -48,12 +52,20 @@ export default class ProfilesApi {
   }
 }
 
+/* eslint-disable */
 declare class ProfileResp extends ApiResp {
   data: ProfilesData;
 }
 
-/* eslint-disable */
 declare class OfferResp extends ApiResp {
+  data: OfferData;
+}
+
+declare class OffersResp extends ApiResp {
+  data: Array<OfferData>;
+}
+
+type OfferData = {
   since: number;
   id: number;
   status: 'DRAFT' | 'SENT';

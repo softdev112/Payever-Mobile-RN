@@ -4,6 +4,7 @@ import { ScreenParams } from 'utils';
 import type Store from '../../store';
 
 export default class UIStore {
+  deepLink: string = '';
   @observable phoneMode: boolean = !ScreenParams.isTabletLayout();
   store: Store;
 
@@ -14,5 +15,10 @@ export default class UIStore {
   @action
   setPhoneMode(mode: boolean) {
     this.phoneMode = mode;
+  }
+
+  @action
+  setDeepLink(url) {
+    this.deepLink = url;
   }
 }

@@ -17,12 +17,38 @@ export default class CreateOffer extends Component {
     profiles?: ProfilesStore;
   };
 
+  state: {
+    btnsDisabled: boolean;
+  };
+
+  $webView: WebView;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      btnsDisabled: true,
+    };
+  }
+
+  onSendOffer() {
+    if (this.$webView) {
+      this.$webView.wrappedInstance.injectJS(
+        'callWebViewOnMessage({ command: "show-loader" });offerEditApp.send();'
+      );
+    }
+  }
+
+  onEnabledBtns() {
+    this.setState({ btnsDisabled: false });
+  }
+
   renderWrongProfile() {
     return (
       <View style={styles.container}>
         <NavBar popup>
           <NavBar.Back />
-          <NavBar.Title title="Create New Offer" />
+          <NavBar.Title title="New Offer" />
         </NavBar>
         <ErrorBox message="Choose another profile for offer creating" />
       </View>
@@ -30,8 +56,9 @@ export default class CreateOffer extends Component {
   }
 
   render() {
-    const profile = this.props.profiles.currentProfile;
-    const { communication, conversationId } = this.props;
+    const { communication, conversationId, profiles } = this.props;
+    const { btnsDisabled } = this.state;
+    const profile = profiles.currentProfile;
 
     const recipients = [];
     if (conversationId && communication.messengerInfo) {
@@ -55,15 +82,22 @@ export default class CreateOffer extends Component {
 
     return (
       <View style={styles.container}>
-        <NavBar popup>
+        <NavBar>
           <NavBar.Back />
-          <NavBar.Title title="Create New Offer" />
+          <NavBar.Title title="New Offer" showTitle="always" />
+          <NavBar.Button
+            title="Send"
+            disabled={btnsDisabled}
+            onPress={::this.onSendOffer}
+          />
         </NavBar>
         <WebView
+          ref={r => this.$webView = r}
           injectJs={js}
           showLoader
           showNavBar="never"
           source={{ uri }}
+          onLoaderHide={::this.onEnabledBtns}
         />
       </View>
     );
@@ -81,12 +115,29 @@ function injectedJs(recipients) {
   /** @name offerEditApp */
   /** @name offerEditApp.show_new */
 
+  if (!window.offerAppStarted) {
+    setTimeout(() => {
+      offerEditApp.show_new(recipients);
+    }, 1000);
+    window.offerAppStarted = true;
+  }
+
   fixOfferModal();
-  fixItemsModal();
-  offerEditApp.show_new(recipients);
+
+  setTimeout(() => {
+    callWebViewOnMessage({ command: 'hide-loader' });
+
+    const $modalContent =
+      document.querySelector('.modal.fade.offer-edit.in .modal-content');
+
+    if ($modalContent) {
+      $modalContent.style.marginTop = '-60px';
+    }
+  }, 2000);
 
   function fixOfferModal() {
     offerEditApp.on_after_save = function() {
+      offerEditApp.stop_spinner();
       callWebViewOnMessage({ command: 'back' });
     };
 
@@ -95,31 +146,17 @@ function injectedJs(recipients) {
     };
 
     function fix() {
-      var $header = document.getElementById('offer-dialog-header-region');
-      ['.back', 'h2'].forEach(function(selector) {
-        var el = $header.querySelector(selector);
-        if (!el) return;
-        el.style.display = 'none';
-      });
+      const $header = document.getElementById('offer-dialog-header-region');
+      if ($header) {
+        ['.back', 'h2'].forEach(function(selector) {
+          var $el = $header.querySelector(selector);
+          if (!$el) {
+            alert($el);
+            return;
+          }
 
-      const $sendBtn = document.getElementById('offer-send-step');
-      if ($sendBtn) {
-        $sendBtn.innerHTML = $sendBtn.innerHTML.replace('span', 'div');
-      }
-
-      callWebViewOnMessage({ command: 'hide-loader' });
-    }
-  }
-
-  function fixItemsModal() {
-    Layout.OfferAddItemForm.prototype.childEvents = function() {
-      setTimeout(fix, 300);
-    };
-
-    function fix() {
-      const $selectBtn = document.getElementById('offer-select-items');
-      if ($selectBtn) {
-        $selectBtn.innerHTML = $selectBtn.innerHTML.replace('span', 'div');
+          $el.style.display = 'none';
+        });
       }
     }
   }

@@ -126,7 +126,9 @@ export default class WebView extends Component {
 
     const data = nativeEvent.data;
     const object = JSON.parse(data);
+
     switch (object.command) {
+
       case 'show-menu': {
         toggleMenu(this.props.navigator);
         break;
