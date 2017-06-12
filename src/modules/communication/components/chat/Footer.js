@@ -185,11 +185,12 @@ export default class Footer extends Component {
         <TextInput
           style={styles.input}
           ref={ref => this.$input = ref}
+          multiline
           onFocus={::this.onFocus}
           onChangeText={this.onType}
           onSubmitEditing={::this.onSend}
           placeholder="Send message"
-          returnKeyType="send"
+          returnKeyType="Enter"
           underlineColorAndroid="transparent"
           value={this.state.text}
         />
@@ -248,6 +249,7 @@ const styles = StyleSheet.create({
 
   input: {
     flex: 1,
-    paddingHorizontal: 22,
+    paddingHorizontal: 8,
+    fontSize: 16,
   },
 });

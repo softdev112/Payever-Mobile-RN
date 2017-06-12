@@ -109,7 +109,10 @@ export default class CommunicationStore {
     return apiHelper(socket.getConversation({ id, type, limit }), this)
       .cache(`communication:conversations:${userId}:${id}`)
       .success(async (data) => {
-        const conversation = new Conversation(data);
+        const conversation = new Conversation(
+          data,
+          this.messengerInfo.byId(id)
+        );
         conversation.allMessagesFetched =
           data.messages.length < limit;
 
@@ -364,8 +367,7 @@ export default class CommunicationStore {
     return await socket.updateTypingStatus(conversationId);
   }
 
-  @computed
-  get contactsAndGroupsData() {
+  getContactsAndGroupsData() {
     const filter = this.contactsFilter;
     const info = this.messengerInfo;
 

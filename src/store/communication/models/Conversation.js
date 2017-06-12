@@ -7,6 +7,7 @@ import Message from './Message';
 import ConversationSettingsInfo from './ConversationSettingsInfo';
 import GroupSettingsInfo from './GroupSettingsInfo';
 import GroupMemberInfo from './GroupMemberInfo';
+import ConversationInfo from './ConversationInfo';
 
 export default class Conversation {
   @observable archived: boolean;
@@ -17,8 +18,9 @@ export default class Conversation {
   type: ConversationType = '';
   allMessagesFetched: boolean = false;
   @observable settings: ConversationSettingsInfo | GroupSettingsInfo = null;
+  conversationInfo: ConversationInfo = null;
 
-  constructor(data) {
+  constructor(data, conversationInfo) {
     data.messages = (data.messages || []).map(m => new Message(m));
 
     if (data.status) {
@@ -31,6 +33,8 @@ export default class Conversation {
       this.updateTypingStatusLazily,
       6000
     );
+
+    this.conversationInfo = conversationInfo;
   }
 
   @computed
@@ -84,6 +88,9 @@ export default class Conversation {
       return;
     }
 
+    this.conversationInfo.latestMessage = message;
+
+    // Test if it has media and remove upload progress message with this one
     if (message.medias.length > 0) {
       const imageMessageIndex = this.messages.findIndex((m) => {
         return m.fileName === message.medias[0].name;

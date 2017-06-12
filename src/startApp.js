@@ -1,5 +1,6 @@
 import { Linking } from 'react-native';
 import log from 'react-native-logging';
+import { Navigation } from 'react-native-navigation';
 import { registerScreens, showScreen } from './common/Navigation';
 import StyleSheet from './common/ui/StyleSheet';
 import config from './config';
@@ -8,13 +9,15 @@ import Store from './store';
 
 const store = new Store(config);
 
+// Process deep link in Android
 Linking.addEventListener('url', async ({ url }) => {
+  store.ui.setDeepLink(url);
+
   if (!await store.auth.checkAuth()) {
     showScreen('core.LaunchScreen');
-    return;
+  } else {
+    Navigation.showModal({ screen: 'core.DeepLinksPopup', animated: true });
   }
-
-  showScreen('pos.Terminal', { url });
 });
 
 log.transports.logS.url      = config.debug.logSUrl;
@@ -26,16 +29,13 @@ export default async function startApp() {
 
   StyleSheet.build();
 
-  if (!await store.auth.checkAuth()) {
-    showScreen('core.LaunchScreen');
-    return;
-  }
-
-  // It will return null in Android. In Android we go
-  // to pos.Terminal screen by addEventListener and 'url' event
   const url = await Linking.getInitialURL();
   if (url) {
-    showScreen('pos.Terminal', { url });
+    store.ui.setDeepLink(url);
+  }
+
+  if (!await store.auth.checkAuth()) {
+    showScreen('core.LaunchScreen');
   } else {
     showScreen('dashboard.ChooseAccount');
   }

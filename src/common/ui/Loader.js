@@ -28,6 +28,7 @@ export default class Loader extends Component {
       toValue: 1,
       duration: 1000,
       easing: Easing.linear,
+      useNativeDriver: true,
     })
       .start(() => this.spin());
   }

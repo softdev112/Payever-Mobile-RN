@@ -1,6 +1,7 @@
 import { Component } from 'react';
+import { KeyboardAvoidingView, Platform, TextInput } from 'react-native';
 import { Navigator } from 'react-native-navigation';
-import { NavBar, StyleSheet, View, ZssRichTextEditor } from 'ui';
+import { NavBar, StyleSheet, View } from 'ui';
 
 import type Message from '../../../store/communication/models/Message';
 
@@ -12,41 +13,76 @@ export default class EditMessage extends Component {
   props: {
     message: Message | string;
     navigator: Navigator;
-    fullEditorMode: boolean;
     onSave: (message: string) => void;
+    onChangeText: (text: string) => void;
   };
 
-  $richEditor: ZssRichTextEditor;
+  state: {
+    message: string;
+  };
+
+  $textInput: TextInput;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      message: props.message,
+    };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      if (this.$textInput) {
+        this.$textInput.focus();
+      }
+    }, 500);
+  }
 
   async onSaveMessage() {
     const { onSave, navigator } = this.props;
+    const { message } = this.state;
 
     if (onSave) {
-      const messageHtml = await this.$richEditor.getContentHtml();
-      onSave(messageHtml);
+      onSave(message);
     }
 
     navigator.pop({ animated: true });
   }
 
+  onChangeText(message) {
+    const { onChangeText } = this.props;
+
+    if (onChangeText) {
+      onChangeText(message);
+    }
+
+    this.setState({ message });
+  }
+
   render() {
-    const { fullEditorMode, message } = this.props;
-    const initMsgValue = typeof message === 'string' ? message : message.body;
+    const { message } = this.state;
 
     return (
       <View style={styles.container}>
         <NavBar popup>
           <NavBar.Back />
-          <NavBar.Title title="Edit Message" />
+          <NavBar.Title title="Edit Message" showTitle="always" />
           <NavBar.Button title="Save" onPress={::this.onSaveMessage} />
         </NavBar>
-        <ZssRichTextEditor
-          ref={ref => this.$richEditor = ref}
-          style={styles.richText}
-          hiddenTitle
-          initialContentHTML={initMsgValue || ' '}
-          showToolbar={fullEditorMode}
-        />
+        <KeyboardAvoidingView
+          style={styles.chatContainer}
+          contentContainerStyle={styles.chatContainer}
+          behavior={Platform.OS === 'ios' ? 'padding' : null}
+        >
+          <TextInput
+            style={styles.textInput}
+            ref={r => this.$textInput = r}
+            multiline
+            value={message}
+            onChangeText={::this.onChangeText}
+          />
+        </KeyboardAvoidingView>
       </View>
     );
   }
@@ -57,15 +93,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  richText: {
-    flex: 1,
-    paddingTop: 8,
-  },
-
   textInput: {
     flex: 1,
     fontSize: 16,
+    padding: 8,
     fontFamily: '$font_family',
     justifyContent: 'flex-start',
+  },
+
+  chatContainer: {
+    flex: 1,
+    zIndex: 1,
   },
 });

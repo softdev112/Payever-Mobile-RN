@@ -41,6 +41,7 @@ export default class WebView extends Component {
     enableExternalBrowser?: boolean;
     injectJs?: string;
     onLoadStart?: (event: Object, webView: ReactWebView) => ?boolean;
+    onLoaderHide?: () => {};
     onMessage?: (message: Object) => ?boolean;
 
     /**
@@ -130,7 +131,7 @@ export default class WebView extends Component {
   }
 
   onMessage({ nativeEvent }) {
-    const { onMessage } = this.props;
+    const { onLoaderHide, onMessage } = this.props;
 
     const json = nativeEvent.data || '{}';
     let data;
@@ -159,6 +160,16 @@ export default class WebView extends Component {
 
       case 'hide-loader': {
         this.setState({ showLoader: false });
+        if (onLoaderHide) {
+          onLoaderHide();
+        }
+
+        break;
+      }
+
+      case 'show-loader': {
+        this.setState({ showLoader: true });
+
         break;
       }
 
@@ -184,6 +195,12 @@ export default class WebView extends Component {
     if (!this.$view) return;
     //noinspection JSUnresolvedFunction
     this.$view.goBack();
+  }
+
+  injectJS(code: string) {
+    if (this.$view) {
+      this.$view.injectJavaScript(code);
+    }
   }
 
   renderError(domain, code, description) {
@@ -238,7 +255,6 @@ export default class WebView extends Component {
     }
 
     const source = formatSource(this.props.source, config.siteUrl);
-
     const injectJsCode = this.internalInjectedJs + ';' + injectJs;
 
     const containerStyle = [
@@ -263,6 +279,7 @@ export default class WebView extends Component {
           startInLoadingState={false}
           contentInset={contentInset}
         />
+
         {showLoader && <WebViewLoader />}
       </View>
     );
@@ -280,6 +297,10 @@ export function isExternalUrl(url: string, payeverUrl) {
 export function formatSource(source: Source, baseUrl: string) {
   if (source.uri && source.uri.startsWith('/')) {
     source.uri = baseUrl + source.uri;
+  }
+
+  if (source.url) {
+    return { uri: source.url };
   }
 
   if (source.uri) {

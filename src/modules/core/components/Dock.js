@@ -186,13 +186,20 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    width: 80,
-    height: 83,
+    width: 78,
+    height: 80,
   },
 
   image: {
-    width: 58,
-    height: 65,
+    borderRadius: 14,
+    elevation: 4,
+    height: 61,
+    width: 61,
+    marginBottom: 8,
+    shadowColor: 'rgba(0, 0, 0, .1)',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 1,
+    shadowRadius: 5,
   },
 
   title: {
@@ -208,14 +215,24 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
 
+  '@media (min-width: 350)': {
+    container: {
+      paddingHorizontal: '2%',
+    },
+  },
+
   '@media (min-width: 400)': {
+    container: {
+      paddingHorizontal: '2.4%',
+    },
+
     icon: {
       width: 80,
     },
 
     image: {
-      width: 65,
-      height: 65,
+      width: 61,
+      height: 61,
     },
 
     title: {
@@ -238,6 +255,8 @@ const styles = StyleSheet.create({
     image: {
       height: 85,
       width: 85,
+      borderRadius: 19,
+      shadowRadius: 10,
     },
 
     title: {

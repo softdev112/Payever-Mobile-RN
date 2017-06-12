@@ -8,3 +8,4 @@ export log from 'react-native-logging';
 export pushNotificationsHelper from './pushNotificationsHelper';
 export ScreenParams from './screenParams';
 export soundHelper from './soundHelper';
+export deepLinksHelper from './deepLinksHelper';

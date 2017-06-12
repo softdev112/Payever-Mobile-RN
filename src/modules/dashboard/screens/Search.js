@@ -1,12 +1,14 @@
 import { Component } from 'react';
 import {
-  Image, TextInput, TouchableWithoutFeedback, FlatList,
+  Image, TextInput, TouchableWithoutFeedback, TouchableOpacity, FlatList,
 } from 'react-native';
 import { Icon, Loader, SpinnerButton, StyleSheet, Text, View } from 'ui';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 
 import type SearchStore, { SearchRow } from '../../../store/search';
+import BusinessProfile from '../../../store/profiles/models/BusinessProfile';
+import PersonalProfile from '../../../store/profiles/models/PersonalProfile';
 
 @inject('search')
 @observer
@@ -33,6 +35,15 @@ export default class SearchForm extends Component {
     };
   }
 
+  onProfilePress(profile: PersonalProfile | BusinessProfile) {
+    const { navigator } = this.props;
+
+    navigator.showModal({
+      screen: 'dashboard.ProfileInfoWebView',
+      passProps: { profile },
+    });
+  }
+
   onTextChange(query) {
     const { search } = this.props;
     this.setState({ query });
@@ -55,7 +66,10 @@ export default class SearchForm extends Component {
   renderItem({ item }: SearchRow) {
     const RowComponent = observer(({ business }) => {
       return (
-        <View style={styles.row}>
+        <TouchableOpacity
+          style={styles.row}
+          onPress={() => this.onProfilePress(business)}
+        >
           <Image style={styles.logo} source={business.logoSource} />
           <Text style={styles.title}>{business.name}</Text>
           <SpinnerButton
@@ -65,7 +79,7 @@ export default class SearchForm extends Component {
             onPress={() => this.onFollow(business)}
             disabled={business.is_followUpdating}
           />
-        </View>
+        </TouchableOpacity>
       );
     });
 
@@ -105,28 +119,23 @@ export default class SearchForm extends Component {
         <Text style={styles.error}>{search.error}</Text>)}
 
         {!!query && (
-          <View style={styles.results}>
-            <Loader
-              style={styles.spinner}
-              isLoading={search.isSearching}
-            >
-              <FlatList
-                style={styles.results}
-                data={search.items.slice()}
-                renderItem={::this.renderItem}
-                keyboardShouldPersistTaps="always"
-                initialListSize={20}
-                keyExtractor={i => i.id}
-              />
-            </Loader>
-          </View>
+          <Loader
+            style={styles.spinner}
+            isLoading={search.isSearching}
+          >
+            <FlatList
+              data={search.items.slice()}
+              renderItem={::this.renderItem}
+              keyboardShouldPersistTaps="always"
+              initialListSize={3}
+              keyExtractor={i => i.id}
+            />
+          </Loader>
         )}
 
-        {!query && (
-          <TouchableWithoutFeedback onPress={::this.onClose}>
-            <View style={{ flex: 1 }} />
-          </TouchableWithoutFeedback>
-        )}
+        <TouchableWithoutFeedback onPress={::this.onClose}>
+          <View style={styles.freeSpace} />
+        </TouchableWithoutFeedback>
       </View>
     );
   }
@@ -135,7 +144,6 @@ export default class SearchForm extends Component {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    alignItems: 'center',
     zIndex: 10,
     top: 0,
     left: 0,
@@ -184,11 +192,6 @@ const styles = StyleSheet.create({
     },
   },
 
-  results: {
-    flex: 1,
-    alignSelf: 'stretch',
-  },
-
   row: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -223,5 +226,10 @@ const styles = StyleSheet.create({
     backgroundColor: '$pe_color_white',
     borderColor: '$pe_color_blue',
     borderWidth: 1,
+  },
+
+  freeSpace: {
+    flex: 100,
+    backgroundColor: 'transparent',
   },
 });
