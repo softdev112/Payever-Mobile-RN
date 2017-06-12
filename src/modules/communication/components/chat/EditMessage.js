@@ -21,7 +21,11 @@ export default class EditMessage extends Component {
     const { messageForEdit: message } = communication;
 
     return (
-      <BottomOverlay style={style} onRemove={::this.onRemoveEditedMessage}>
+      <BottomOverlay
+        style={style}
+        onRemove={::this.onRemoveEditedMessage}
+        endBottom={communication.ui.chatFooterHeight}
+      >
         <View style={styles.editIconCont}>
           <Icon
             style={styles.editIcon}

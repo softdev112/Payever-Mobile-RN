@@ -45,14 +45,14 @@ export default class GroupSettings extends Component {
     this.props.communication.removeGroupMember(group.id, memberId);
   }
 
-  onDeleteGroup() {
+  async onDeleteGroup() {
     const {
       communication: { selectedConversation: group },
       navigator,
     } = this.props;
-    this.props.communication.deleteGroup(group.id);
+    await this.props.communication.deleteGroup(group.id);
 
-    navigator.pop({ animated: true });
+    navigator.pop({ screen: 'communication.Chat', animated: true });
   }
 
   renderMemberItem({ item: member }) {
@@ -83,7 +83,7 @@ export default class GroupSettings extends Component {
       <View style={styles.container}>
         <NavBar popup>
           <NavBar.Back />
-          <NavBar.Title title="Group Settings" />
+          <NavBar.Title title="Group Settings" showTitle="always" />
         </NavBar>
         <Loader isLoading={isLoading}>
           {error || !settings ? (

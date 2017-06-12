@@ -37,7 +37,10 @@ export default class ForwardMessage extends Component {
     }, '');
 
     return (
-      <BottomOverlay style={style} onRemove={::this.onRemoveMsgsForForward}>
+      <BottomOverlay
+        style={style} onRemove={::this.onRemoveMsgsForForward}
+        endBottom={communication.ui.chatFooterHeight}
+      >
         <View style={styles.forwardIconCont}>
           <Icon
             style={styles.forwardIcon}

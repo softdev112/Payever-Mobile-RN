@@ -6,8 +6,9 @@ import { FlatTextInput, NavBar, StyleSheet, Text, View } from 'ui';
 
 import AddContactBlock from '../components/contacts/AddContactBlock';
 import type CommunicationStore from '../../../store/communication';
+import type ContactsStore from '../../../store/contacts';
 
-@inject('communication')
+@inject('communication', 'contacts')
 @observer
 export default class AddGroup extends Component {
   static navigatorStyle = {
@@ -16,6 +17,7 @@ export default class AddGroup extends Component {
 
   props: {
     communication: CommunicationStore;
+    contacts: ContactsStore;
     navigator: Navigator;
   };
 
@@ -54,14 +56,28 @@ export default class AddGroup extends Component {
     navigator.pop({ animated: true });
   }
 
+
   render() {
+    const { communication, contacts } = this.props;
     const { isAllowGroupChat } = this.state;
+
+    const addedContactsCount = communication.contactsForAction.length +
+      contacts.selectedContacts.length;
 
     return (
       <View style={styles.container}>
         <NavBar popup>
           <NavBar.Back />
-          <NavBar.Title title="Create New Group" />
+
+          <NavBar.ComplexTitle>
+            <View style={styles.header}>
+              <Text style={styles.headerMainText}>New Group</Text>
+              <Text>
+                {`${addedContactsCount} contacts selected`}
+              </Text>
+            </View>
+          </NavBar.ComplexTitle>
+
           <NavBar.Button title="Save" onPress={::this.onCreateNewGroup} />
         </NavBar>
         <View style={styles.formContent}>
@@ -94,6 +110,17 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 15,
     paddingHorizontal: 15,
+  },
+
+  header: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  headerMainText: {
+    borderColor: '#FFF',
+    fontSize: 16,
+    fontWeight: '400',
   },
 
   switchRow: {
