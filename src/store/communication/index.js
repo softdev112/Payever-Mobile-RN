@@ -572,14 +572,22 @@ export default class CommunicationStore {
 
   @action
   createNewGroup(groupName: string, isAllowGroupChat: boolean) {
-    const { api: { messenger } } = this.store;
+    const { api: { messenger }, contacts } = this.store;
     const { messengerUser } = this.messengerInfo;
 
-    const recipients = this.contactsForAction.slice()
-      .reduce((result, contact, index, contacts) => {
+    let recipients = this.contactsForAction.slice()
+      .reduce((result, contact, index, allContacts) => {
         return result + contact.id +
-          (contacts.length - 1 !== index ? ',' : '');
+          (allContacts.length - 1 !== index ? ',' : '');
       }, '');
+
+
+    // Add recipients from contacts
+    const userContacts = contacts.selectedContacts.slice();
+    recipients = userContacts.reduce((result, contact, index) => {
+      return result + `contact-${contact.id}` +
+        (userContacts.length - 1 !== index ? ',' : '');
+    }, recipients + (userContacts.length === 0 ? '' : ','));
 
     apiHelper(messenger.createNewGroup(
        messengerUser.id,
@@ -587,7 +595,10 @@ export default class CommunicationStore {
        recipients,
        isAllowGroupChat
     )).success()
-      .complete(() => this.clearContactsForAction());
+      .complete(() => {
+        this.clearContactsForAction();
+        contacts.clearSelectedContacts();
+      });
   }
 
   @action
@@ -690,6 +701,7 @@ export default class CommunicationStore {
         const { groups } = this.messengerInfo;
         const delGroupIndex = groups.findIndex(group => group.id === groupId);
 
+        // Find new group to display
         let newIndex = -1;
         if (groups.length > 1) {
           newIndex = delGroupIndex > 0 ? delGroupIndex - 1 : delGroupIndex + 1;

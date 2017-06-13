@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
+import { ScrollView } from 'react-native';
 import { BottomOverlay, Icon, StyleSheet, Text, View } from 'ui';
 import ContactsStore from '../../../store/contacts';
 import CommunicationStore from '../../../store/communication';
@@ -13,9 +14,46 @@ export default class SelectedContacts extends Component {
     style?: Object;
   };
 
+  onRemoveContact(id: number | string) {
+    const { communication, contacts } = this.props;
+
+    if (typeof id === 'string') {
+      communication.removeContactForAction(id);
+    } else {
+      contacts.removeContactFromSelected(id);
+    }
+  }
+
   onRemoveSelectedContacts() {
-    const { contacts } = this.props;
+    const { communication, contacts } = this.props;
     contacts.clearSelectedContacts();
+    communication.clearContactsForAction();
+  }
+
+  renderContacts() {
+    const { communication, contacts } = this.props;
+
+    const communicationContacts = communication.contactsForAction.slice();
+    const userContacts = contacts.selectedContacts.slice();
+
+    return userContacts.concat(communicationContacts)
+      .map((contact) => {
+        return (
+          <View
+            style={styles.contactCont}
+            key={contact.id}
+          >
+            <Text style={styles.contactName}>
+              {contact.name || `${contact.first_name} ${contact.last_name}`}
+            </Text>
+            <Icon
+              style={styles.delIcon}
+              onPress={() => this.onRemoveContact(contact.id)}
+              source="icon-trashcan-16"
+            />
+          </View>
+        );
+      });
   }
 
   render() {
@@ -50,6 +88,12 @@ export default class SelectedContacts extends Component {
           >
             {contactsText}
           </Text>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          >
+            {this.renderContacts()}
+          </ScrollView>
         </View>
       </BottomOverlay>
     );
@@ -78,5 +122,24 @@ const styles = StyleSheet.create({
 
   contactsText: {
     fontWeight: '400',
+  },
+
+  contactCont: {
+    flexDirection: 'row',
+    paddingHorizontal: 5,
+    alignItems: 'center',
+    borderRadius: 2,
+    backgroundColor: '$pe_color_dark_gray',
+    marginRight: 5,
+  },
+
+  contactName: {
+    color: '#FFF',
+  },
+
+  delIcon: {
+    color: '#FFF',
+    marginLeft: 5,
+    fontSize: 14,
   },
 });

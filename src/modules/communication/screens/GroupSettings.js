@@ -8,8 +8,9 @@ import {
 
 import GroupMember from '../components/settings/GroupMember';
 import type CommunicationStore from '../../../store/communication';
+import UIStore from '../../../store/ui';
 
-@inject('communication')
+@inject('communication', 'ui')
 @observer
 export default class GroupSettings extends Component {
   static navigatorStyle = {
@@ -19,6 +20,7 @@ export default class GroupSettings extends Component {
   props: {
     communication: CommunicationStore;
     navigator: Navigator;
+    ui: UIStore;
   };
 
   async componentWillMount() {
@@ -46,13 +48,13 @@ export default class GroupSettings extends Component {
   }
 
   async onDeleteGroup() {
-    const {
-      communication: { selectedConversation: group },
-      navigator,
-    } = this.props;
-    await this.props.communication.deleteGroup(group.id);
+    const { communication, navigator, ui } = this.props;
+    await communication.deleteGroup(communication.selectedConversation.id);
 
-    navigator.pop({ screen: 'communication.Chat', animated: true });
+    if (ui.phoneMode) {
+      navigator.popToRoot({ animated: false });
+      navigator.push({ screen: 'communication.Contacts', animated: false });
+    }
   }
 
   renderMemberItem({ item: member }) {
@@ -74,10 +76,11 @@ export default class GroupSettings extends Component {
 
   render() {
     const { communication } = this.props;
-    const { isLoading, error, selectedConversation } = communication;
-    const { settings } = selectedConversation;
+    const {
+      isLoading, error, selectedConversation: conversation,
+    } = communication;
 
-    const memberCount = selectedConversation.membersCount;
+    const membersCount = conversation ? conversation.membersCount : 0;
 
     return (
       <View style={styles.container}>
@@ -86,22 +89,22 @@ export default class GroupSettings extends Component {
           <NavBar.Title title="Group Settings" showTitle="always" />
         </NavBar>
         <Loader isLoading={isLoading}>
-          {error || !settings ? (
-            <ErrorBox message={error} />
+          {error || !conversation || !conversation.settings ? (
+            <ErrorBox message={error || 'Error while reading settings'} />
           ) : (
             <View style={styles.userInfo}>
               <View style={styles.nameContainer}>
                 <Text style={styles.name}>
-                  {settings.name}
+                  {conversation.settings.name}
                 </Text>
-                {settings.isOwner && (
+                {conversation.settings.isOwner && (
                   <Icon
                     style={styles.ownStar}
                     source="fa-star"
                   />
                 )}
               </View>
-              {settings.isOwner && (
+              {conversation.settings.isOwner && (
                 <View style={styles.btnsContainer}>
                   <TextButton
                     titleStyle={styles.btnTitle}
@@ -116,11 +119,11 @@ export default class GroupSettings extends Component {
                 </View>
               )}
               <Text style={styles.membersTitle}>
-                {`${memberCount} ${memberCount === 1 ? 'Member' : 'Members'}:`}
+                {`${membersCount} Member${membersCount === 1 ? '' : 's'}:`}
               </Text>
               <FlatList
                 style={styles.membersList}
-                data={settings.members.slice()}
+                data={conversation.settings.members.slice()}
                 renderItem={::this.renderMemberItem}
                 keyExtractor={m => m.id}
               />
