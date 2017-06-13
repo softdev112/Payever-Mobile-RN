@@ -219,7 +219,7 @@ export default class Footer extends Component {
           onChangeText={this.onType}
           onSubmitEditing={::this.onSend}
           placeholder="Send message"
-          placeholderTextColor="#e1e1e1"
+          placeholderTextColor="#b5b9be"
           returnKeyType="done"
           underlineColorAndroid="transparent"
           value={this.state.text}
