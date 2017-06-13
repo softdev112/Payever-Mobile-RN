@@ -1,28 +1,28 @@
 import { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
-import { Icon, View, Text, StyleSheet } from 'ui';
 import { Navigator } from 'react-native-navigation';
+import { Icon, View, Text, StyleSheet } from 'ui';
+import { deepLinksHelper } from 'utils';
 import UIStore from '../../../../store/ui';
+import ProfilesStore from '../../../../store/profiles';
 import SvgIconsShow from './SvgIconsShow';
 
-@inject('ui')
+@inject('profiles', 'ui')
 @observer
 export default class LaunchScreen extends Component {
   static navigatorStyle = { navBarHidden: true };
 
   props: {
     navigator: Navigator;
+    profiles: ProfilesStore;
     ui: UIStore;
   };
 
   componentDidMount() {
-    const { navigator, ui } = this.props;
+    const { navigator, profiles, ui } = this.props;
     if (ui.deepLink !== '') {
-      navigator.showModal({
-        screen: 'core.DeepLinksPopup',
-        animated: true,
-      });
+      deepLinksHelper.processDeepLink(ui.deepLink, profiles, navigator);
     }
   }
 

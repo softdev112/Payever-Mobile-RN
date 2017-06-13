@@ -1,31 +1,28 @@
-import { Navigation } from 'react-native-navigation';
-import { Config } from '../../../config';
+import { Navigator } from 'react-native-navigation';
+import config from '../../../config';
+import ProfilesStore from '../../../store/profiles';
 import { showScreen } from '../../Navigation';
 
+
 export default {
-  processStoresDeepLinks,
   processDeepLink,
 };
 
-function processStoresDeepLinks(url) {
-  if (!url) return false;
-
-  if (url.startsWith(Config.siteUrl + '/store/')) {
-    Navigation.showModal({
-      screen: 'core.DeepLinksPopup',
-      passProps: { url },
-      animated: true,
-    });
-    return true;
-  }
-
-  return false;
-}
-
-async function processDeepLink(url, store) {
+async function processDeepLink(
+  url: string,
+  profiles: ProfilesStore,
+  navigator: Navigator = null
+) {
   if (!url) return;
 
-  const { config, profiles } = store;
+  if (url.startsWith(config.siteUrl + '/store/')) {
+    navigator.showModal({
+      screen: 'core.DeepLinksPopup',
+      animated: true,
+    });
+    return;
+  }
+
   let slug = '';
   if (url.startsWith(config.siteUrl + '/business/')) {
     // Business profile
@@ -37,12 +34,12 @@ async function processDeepLink(url, store) {
   }
 
   if (slug === '') {
-    showScreen('core.WebView', { url });
     return;
   }
 
   if (!await profiles.load()) {
     showScreen('core.ErrorPage', { message: profiles.error });
+    return;
   }
 
   let linkProfile = null;
@@ -62,7 +59,6 @@ async function processDeepLink(url, store) {
 
   profiles.setCurrentProfile(linkProfile);
   showScreen(
-    linkProfile.isBusiness ? 'dashboard.Dashboard' : 'dashboard.Private',
-    { deepLink: url }
+    linkProfile.isBusiness ? 'dashboard.Dashboard' : 'dashboard.Private'
   );
 }
