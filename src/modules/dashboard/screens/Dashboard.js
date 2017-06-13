@@ -13,7 +13,7 @@ import type UIStore from '../../../store/ui';
 const ICON_WIDTH_PHONE = 80;
 const ICON_HEIGHT_PHONE = 105;
 const ICON_WIDTH_TABLET = 135;
-const ICON_HEIGHT_TABLET = 145;
+const ICON_HEIGHT_TABLET = 160;
 
 @inject('profiles', 'config', 'ui')
 @observer
@@ -142,7 +142,7 @@ export default class Dashboard extends Component {
                 renderItem={::this.renderIcon}
                 itemWidth={iconWidth}
                 itemHeight={iconHeight}
-                numColumns={ui.phoneMode ? 4 : 6}
+                numColumns={4}
                 keyExtractor={app => app.id}
               />
             </Animated.View>
@@ -199,10 +199,30 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 
-  '@media (min-width: 550)': {
+  // iPad Air, Air 2 etc
+  '@media (min-width: 750)': {
     icon: {
       width: ICON_WIDTH_TABLET,
       height: ICON_HEIGHT_TABLET,
+    },
+
+    icon_image: {
+      borderRadius: 17,
+      height: 78,
+      width: 78,
+      shadowRadius: 10,
+    },
+
+    icon_title: {
+      fontSize: 18,
+    },
+  },
+
+  // iPad Pro 12.9
+  '@media (min-width: 1000)': {
+    icon: {
+      width: ICON_WIDTH_TABLET,
+      height: ICON_HEIGHT_TABLET + 60,
     },
 
     icon_image: {

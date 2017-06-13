@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     height: 95,
     flexWrap: 'nowrap',
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     padding: 2,
     backgroundColor: '#fff',
@@ -215,15 +215,17 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
 
+  // iPhone 6, 6s, 7
   '@media (min-width: 350)': {
     container: {
-      paddingHorizontal: '2%',
+      paddingHorizontal: '3.5%',
     },
   },
 
+  // iPhone 7+, 6+
   '@media (min-width: 400)': {
     container: {
-      paddingHorizontal: '2.4%',
+      paddingHorizontal: '5%',
     },
 
     icon: {
@@ -241,10 +243,44 @@ const styles = StyleSheet.create({
     },
   },
 
-  '@media (min-width: 550)': {
+  // iPad Air, Air 2 etc
+  '@media (min-width: 750)': {
+    container: {
+      height: 125,
+      paddingHorizontal: '6.5%',
+    },
+
+    icon: {
+      width: 130,
+      height: 100,
+    },
+
+    image: {
+      height: 78,
+      width: 78,
+      borderRadius: 17,
+      shadowRadius: 10,
+    },
+
+    title: {
+      fontSize: 18,
+      padding: 0,
+    },
+  },
+
+  // iPad 10.5
+  '@media (min-width: 830)': {
+    container: {
+      height: 125,
+      paddingHorizontal: '7.2%',
+    },
+  },
+
+  // iPad Pro 12.9
+  '@media (min-width: 1000)': {
     container: {
       height: 145,
-      paddingHorizontal: '18%',
+      paddingHorizontal: '10%',
     },
 
     icon: {
