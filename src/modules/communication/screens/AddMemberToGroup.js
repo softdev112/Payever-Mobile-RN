@@ -49,7 +49,7 @@ export default class AddMemberToGroup extends Component {
           />
         </NavBar>
         <View style={styles.content}>
-          <AddContactBlock bottomDockStyle={styles.bottomDockPos} />
+          <AddContactBlock />
 
           {isContactsSelected && <SelectedContacts />}
         </View>
@@ -67,10 +67,5 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 12,
     paddingHorizontal: 15,
-  },
-
-  bottomDockPos: {
-    $topHeight: '72%',
-    top: '$topHeight',
   },
 });

@@ -2,25 +2,23 @@ import { Navigation } from 'react-native-navigation';
 import { TouchableWithoutFeedback } from 'react-native';
 import { Icon, StyleSheet, Text, View } from 'ui';
 
-export default function PushNotification(
-  { action, message, style, textStyle }: NotifPropTypes
+export default function ErrorByLoaclNotification(
+  { action, message }: { action: () => void; message: string }
 ) {
   function runNotificationAction() {
     Navigation.dismissInAppNotification();
 
-    if (action) {
-      action();
-    }
+    action();
   }
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={styles.container}>
       <TouchableWithoutFeedback onPress={runNotificationAction}>
         <View style={styles.notifContent}>
           <View style={styles.iconContainer}>
             <Icon style={styles.icon} source="icon-payever-64" />
           </View>
-          <Text style={[styles.message, textStyle]}>{message}</Text>
+          <Text style={styles.message}>{message}</Text>
         </View>
       </TouchableWithoutFeedback>
     </View>
@@ -33,7 +31,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     paddingHorizontal: 8,
-    backgroundColor: 'yellowgreen',
+    backgroundColor: 'red',
   },
 
   notifContent: {
@@ -61,10 +59,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
-type NotifPropTypes = {
-  action?: () => void;
-  message?: string;
-  style?: Object;
-  textStyle?: Object;
-};

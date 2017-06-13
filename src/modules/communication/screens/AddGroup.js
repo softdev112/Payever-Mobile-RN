@@ -1,9 +1,10 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { Switch } from 'react-native';
-import { Navigator } from 'react-native-navigation';
+import { Navigator, Navigation } from 'react-native-navigation';
 import { FlatTextInput, NavBar, StyleSheet, Text, View } from 'ui';
 
+import SelectedContacts from '../../contacts/components/SelectedContacts';
 import AddContactBlock from '../components/contacts/AddContactBlock';
 import type CommunicationStore from '../../../store/communication';
 import type ContactsStore from '../../../store/contacts';
@@ -44,11 +45,25 @@ export default class AddGroup extends Component {
   }
 
   onCreateNewGroup() {
-    const { communication, navigator } = this.props;
+    const { contacts, communication, navigator } = this.props;
     const { isAllowGroupChat, groupName } = this.state;
 
     if (groupName === '') {
       this.$groupNameTextInput.shakeElementAndSetFocus();
+      return;
+    }
+
+    if (communication.contactsForAction.length === 0
+      && contacts.selectedContacts.length === 0) {
+      Navigation.showInAppNotification({
+        screen: 'core.PushNotification',
+        title: 'Error!',
+        passProps: {
+          message: 'No contacts were selected',
+          style: styles.notificationError,
+          textStyle: styles.notificationText,
+        },
+      });
       return;
     }
 
@@ -95,6 +110,8 @@ export default class AddGroup extends Component {
             />
           </View>
           <AddContactBlock />
+
+          {addedContactsCount > 0 && <SelectedContacts />}
         </View>
       </View>
     );
@@ -132,5 +149,13 @@ const styles = StyleSheet.create({
 
   switchTitleText: {
     fontSize: 18,
+  },
+
+  notificationError: {
+    backgroundColor: 'red',
+  },
+
+  notificationText: {
+    fontWeight: '400',
   },
 });

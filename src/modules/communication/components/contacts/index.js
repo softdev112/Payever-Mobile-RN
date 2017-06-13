@@ -161,6 +161,7 @@ export default class Contacts extends Component {
           ListHeaderComponent={this.renderHeader}
           ListFooterComponent={this.renderFooter}
           sections={this.getSectionsData()}
+          initialNumToRender={20}
           renderItem={({ item }) => <Contact item={item} />}
           renderSectionHeader={({ section }) => (
             <ListHeader
