@@ -5,7 +5,7 @@ import type { Navigator } from 'react-native-navigation';
 import {
   GridView, Header, IconText, images, Loader, Text, View, StyleSheet,
 } from 'ui';
-import { log, pushNotificationsHelper } from 'utils';
+import { deepLinksHelper, log, pushNotificationsHelper } from 'utils';
 import type ProfilesStore from '../../../store/profiles';
 import type Profile from '../../../store/profiles/models/Profile';
 import type UIStore from '../../../store/ui';
@@ -70,12 +70,9 @@ export default class ChooseAccount extends Component {
   }
 
   componentDidMount() {
-    const { navigator, ui } = this.props;
+    const { navigator, profiles, ui } = this.props;
     if (ui.deepLink !== '') {
-      navigator.showModal({
-        screen: 'core.DeepLinksPopup',
-        animated: true,
-      });
+      deepLinksHelper.processDeepLink(ui.deepLink, profiles, navigator);
     }
   }
 

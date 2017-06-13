@@ -1,8 +1,9 @@
 import { Linking } from 'react-native';
 import log from 'react-native-logging';
 import { Navigation } from 'react-native-navigation';
+import { StyleSheet } from 'ui';
+import { deepLinksHelper } from 'utils';
 import { registerScreens, showScreen } from './common/Navigation';
-import StyleSheet from './common/ui/StyleSheet';
 import config from './config';
 import screens from './screens';
 import Store from './store';
@@ -12,11 +13,10 @@ const store = new Store(config);
 // Process deep link in Android
 Linking.addEventListener('url', async ({ url }) => {
   store.ui.setDeepLink(url);
-
   if (!await store.auth.checkAuth()) {
     showScreen('core.LaunchScreen');
   } else {
-    Navigation.showModal({ screen: 'core.DeepLinksPopup', animated: true });
+    deepLinksHelper.processDeepLink(url, store.profiles, Navigation);
   }
 });
 
