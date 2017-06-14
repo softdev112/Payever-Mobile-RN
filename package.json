@@ -1,6 +1,6 @@
 {
   "name": "PayeverMobile",
-  "version": "2.1.26",
+  "version": "2.1.27",
   "private": true,
   "scripts": {
     "start": "npm run env:dev && node node_modules/react-native/local-cli/cli.js start",
@@ -23,7 +23,7 @@
     "autolinker": "^1.4.0",
     "base-64": "^0.1.0",
     "immutable": "^3.8.1",
-    "jest": "^19.0.2",
+    "jest": "^20.0.4",
     "jest-react-native": "^18.0.0",
     "lodash": "^4.17.2",
     "mobx": "^3.1.6",
@@ -32,6 +32,7 @@
     "moment": "^2.17.1",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.3",
+    "react-test-renderer": "^15.5.4",
     "react-native-animatable": "^1.1.0",
     "react-native-circular-progress": "^0.0.8",
     "react-native-country-picker-modal": "^0.3.0-rc1",
@@ -47,7 +48,7 @@
     "react-native-navigation": "2.0.0",
     "react-native-notifications": "^1.1.9",
     "react-native-simple-auth": "^2.1.0",
-    "react-native-sound": "^0.9.1",
+    "react-native-sound": "^0.10.1",
     "react-native-swipeable": "^0.4.0",
     "react-native-zss-rich-text-editor": "^1.0.2",
     "redux": "^3.6.0"
@@ -57,23 +58,29 @@
     "setupTestFrameworkScriptFile": "./__tests__/jest-env.js",
     "modulePathIgnorePatterns": [
       "test-data",
-      "jest-env.js"
+      "jest-env.js",
+      "node_modules"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "utils",
+      "ui"
     ]
   },
   "devDependencies": {
-    "babel-eslint": "^7.1.1",
-    "babel-jest": "17.0.0",
-    "babel-plugin-module-resolver": "^2.4.0",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
+    "babel-plugin-module-resolver": "^2.7.1",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "cheerio": "^0.22.0",
-    "eslint": "^3.12.2",
-    "eslint-config-airbnb": "^13.0.0",
+    "eslint": "3.12.2",
+    "eslint-config-airbnb": "13.0.0",
     "eslint-import-resolver-node": "^0.3.0",
-    "eslint-import-resolver-react-native": "0.0.1",
-    "eslint-plugin-flowtype": "^2.29.1",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.8.0",
+    "eslint-import-resolver-react-native": "^0.0.1",
+    "eslint-plugin-flowtype": "^2.34.0",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-jsx-a11y": "2.2.3",
+    "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-sort-class-members": "^1.1.1",
     "git-validate": "^2.2.2",
     "gulp": "^3.9.1",
@@ -82,7 +89,6 @@
     "gulp-svgicons2svgfont": "^3.0.1",
     "gulp-task-doc": "^1.0.11",
     "minimist": "^1.2.0",
-    "react-test-renderer": "^15.4.2",
     "vinyl": "^2.0.1"
   },
   "pre-commit": [

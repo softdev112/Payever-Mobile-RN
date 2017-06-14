@@ -88,7 +88,7 @@ export default class StartNewConversations extends Component {
       <View style={styles.container}>
         <NavBar popup>
           <NavBar.Back />
-          <NavBar.Title showTitle="always" title="Add a contact" />
+          <NavBar.Title showTitle="always" title="Start Conversation" />
           <NavBar.Button title="Send" onPress={::this.onAddContacts} />
         </NavBar>
         <View style={styles.content}>

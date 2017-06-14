@@ -35,6 +35,11 @@ export default class BusinessContacts extends Component {
     };
   }
 
+  componentWillUnmount() {
+    const { contacts } = this.props;
+    contacts.ui.setSelectMode(false);
+  }
+
   onAddContact() {
     this.props.navigator.push({
       screen: 'contacts.AddNewCustomerContact',
@@ -120,6 +125,6 @@ const styles = StyleSheet.create({
   },
 
   segmentControl: {
-    width: 165,
+    width: 160,
   },
 });

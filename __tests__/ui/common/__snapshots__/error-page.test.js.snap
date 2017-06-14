@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`src/modules/core/screens/ErrorPage.js src/modules/core/screens/ErrorPage.js renders correctly 1`] = `
 <View
   style={

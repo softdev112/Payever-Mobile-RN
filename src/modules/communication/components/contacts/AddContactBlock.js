@@ -131,7 +131,7 @@ export default class AddContactBlock extends Component {
             ItemSeparatorComponent={::this.renderSeparator}
             keyboardShouldPersistTaps="always"
             keyExtractor={contact => contact.id}
-            contentInset={{ bottom: isContactsSelected ? 50 : 0 }}
+            contentInset={{ top: 0, bottom: isContactsSelected ? 50 : 0 }}
           />
         </Loader>
       </View>

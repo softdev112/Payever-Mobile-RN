@@ -97,5 +97,6 @@ const styles = StyleSheet.create({
 
   delIcon: {
     width: 30,
+    paddingLeft: 5,
   },
 });

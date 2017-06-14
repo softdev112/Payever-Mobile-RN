@@ -25,6 +25,10 @@ export default class ContactsApi {
     );
   }
 
+  getGroupDetails(groupId: number): Promise<GroupDetailsResp> {
+    return this.client.get(`/api/rest/v1/contact-group/${groupId}`);
+  }
+
   createNewContact(
     contact: CustomerContactInfo,
     slug: string
@@ -80,9 +84,8 @@ declare class ContactGroupsResp extends ApiResp {
   contact_models: Array<ContactGroupData>;
 }
 
-// eslint-disable-next-line
-declare class ContactGroupResp extends ApiResp {
-  data: ContactGroupData;
+declare class GroupDetailsResp extends ApiResp {
+  data: GroupDetailsData;
 }
 
 export type ContactsPaginationData = {
@@ -132,4 +135,15 @@ export type ContactGroupData = {
   name: string;
   contacts_count: number;
   logo_url: string;
+};
+
+export type GroupDetailsData = {
+  id: number;
+  name: string;
+  filters?: string;
+  contact_models: Array<CustomerContactData>;
+  logo_url?: string;
+  total_spent: number;
+  count_purchases: number;
+  orders_count: number;
 };

@@ -1,0 +1,59 @@
+{
+  "pagination_data": {
+    "last": 1,
+    "current": "1",
+    "numItemsPerPage": 20,
+    "first": 1,
+    "pageCount": 1,
+    "totalCount": 4,
+    "pageRange": 1,
+    "startPage": 1,
+    "endPage": 1,
+    "pagesInRange": [ 1 ],
+    "firstPageInRange": 1,
+    "lastPageInRange": 1,
+    "currentItemCount": 4,
+    "firstItemNumber": 1,
+    "lastItemNumber": 4
+  },
+
+  "group_list":
+    [
+      {
+        "id": 24,
+        "name": "fsdfsdfsd",
+        "contacts_count": 0,
+        "logo_url": "https://stage.payever.de/media/cache/group_logo.square.64.retina/b9/ae/b9ae0739ed595b8dc551324fd5318255.jpg",
+        "total_spent": "0.00",
+        "count_purchases": "0",
+        "orders_count": "0"
+      },
+      {
+        "id": 26,
+        "name": "GOSU",
+        "contacts_count": 5,
+        "logo_url": null,
+        "total_spent": "0.00",
+        "count_purchases": "0",
+        "orders_count": "0"
+      },
+      {
+        "id": 46,
+        "name": "Grou",
+        "contacts_count": 0,
+        "logo_url": "https://stage.payever.de/media/cache/group_logo.square.64.retina/58/09/5809ae0c23b9069e717b9b7c35dc5249.jpg",
+        "total_spent": "0.00",
+        "count_purchases": "0",
+        "orders_count": "0"
+      },
+      {
+        "id": 45,
+        "name": "Group2410",
+        "contacts_count": 0,
+        "logo_url": "https://stage.payever.de/media/cache/group_logo.square.64.retina/a0/70/a070397f32a92a71385b56d4329a26bd.jpg",
+        "total_spent": "0.00",
+        "count_purchases": "0",
+        "orders_count": "0"
+      }
+    ]
+}
