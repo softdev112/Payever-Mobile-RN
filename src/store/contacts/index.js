@@ -21,6 +21,9 @@ export default class ContactsStore {
 
   @observable ui: ContactsUI = {};
 
+  // eslint-disable-next-line flowtype/no-primitive-constructor-types
+  contactGroupsCache: Map<Number, Object> = new Map();
+
   store: Store;
 
   constructor(store: Store) {
@@ -104,6 +107,15 @@ export default class ContactsStore {
   }
 
   @action
+  getGroupDetails(groupId: number) {
+    const { api } = this.store;
+    return apiHelper(api.contacts.getGroupDetails(groupId))
+      .success(data => data)
+      .error(log.error)
+      .promise();
+  }
+
+  @action
   createNewContact(contact: CustomerContactInfo) {
     const { api } = this.store;
 
@@ -131,7 +143,9 @@ export default class ContactsStore {
 
   @action
   addContactToSelected(contact: CustomerContactInfo) {
-    this.selectedContacts.push(contact);
+    if (!this.checkContactSelected(contact.id)) {
+      this.selectedContacts.push(contact);
+    }
   }
 
   @action
@@ -142,11 +156,40 @@ export default class ContactsStore {
   @action
   clearSelectedContacts() {
     this.selectedContacts = [];
+    this.contactGroupsCache.clear();
   }
 
   @action
   checkContactSelected(id: number) {
     return !!this.selectedContacts.find(c => c.id === id);
+  }
+
+  @action
+  async addContactsFromGroupToSelected(groupId: number) {
+    let groupDetails = this.contactGroupsCache.get(groupId);
+    if (!groupDetails) {
+      groupDetails = await this.getGroupDetails(groupId);
+      this.contactGroupsCache.set(groupId, groupDetails);
+    }
+
+    if (!groupDetails || !groupDetails.contact_models) return;
+
+    groupDetails.contact_models.forEach(c => this.addContactToSelected(c));
+  }
+
+  @action
+  async removeContactsGroupFromSelected(groupId: number) {
+    let groupDetails = this.contactGroupsCache.get(groupId);
+    if (!groupDetails) {
+      groupDetails = await this.getGroupDetails(groupId);
+      this.contactGroupsCache.set(groupId, groupDetails);
+    }
+
+    if (!groupDetails || !groupDetails.contact_models) return;
+
+    groupDetails.contact_models.forEach(
+      c => this.removeContactFromSelected(c.id)
+    );
   }
 
   @action

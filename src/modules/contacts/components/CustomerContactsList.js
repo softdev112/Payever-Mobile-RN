@@ -33,11 +33,6 @@ export default class BusinessContacts extends Component {
     await this.props.contacts.loadAllContacts();
   }
 
-  componentWillUnmount() {
-    const { contacts } = this.props;
-    contacts.ui.setSelectMode(false);
-  }
-
   async onEndReached() {
     await this.props.contacts.loadAllContacts();
   }

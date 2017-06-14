@@ -4,8 +4,8 @@ import { inject, observer } from 'mobx-react/native';
 import { ErrorBox, Loader, StyleSheet, Text, View } from 'ui';
 
 import ContactGroup from './ContactGroup';
-import type CustomerContactInfo
-  from '../../../store/contacts/models/CustomerContactInfo';
+import type ContactGroupInfo
+  from '../../../store/contacts/models/ContactGroupInfo';
 import ContactsStore from '../../../store/contacts';
 
 @inject('contacts')
@@ -16,52 +16,55 @@ export default class ContactGroupsList extends Component {
     style?: Object | number;
   };
 
-  onSelectedContactChange: (
+  onSelectedGroupChange: (
     state: boolean,
-    contact: CustomerContactInfo
+    contact: ContactGroupInfo
   ) => void;
-  onContactLongPress: (contact: CustomerContactInfo) => void;
+  onGroupLongPress: (contact: ContactGroupInfo) => void;
 
   constructor(props) {
     super(props);
 
-    this.onSelectedContactChange = this.onSelectedContactChange.bind(this);
-    this.onContactLongPress = this.onContactLongPress.bind(this);
+    this.onSelectedGroupChange = this.onSelectedGroupChange.bind(this);
+    this.onGroupLongPress = this.onGroupLongPress.bind(this);
   }
 
   async componentWillMount() {
-    await this.props.contacts.loadAllContactGroups();
+    const { contacts } = this.props;
+    await contacts.loadAllContactGroups();
   }
 
   async onEndReached() {
-    await this.props.contacts.loadAllContactGroups();
+    const { contacts } = this.props;
+    await contacts.loadAllContactGroups();
   }
 
-  onSelectedContactChange(isSelected, contact: CustomerContactInfo) {
+  async onSelectedGroupChange(isSelected, group: ContactGroupInfo) {
     const { contacts } = this.props;
 
     if (isSelected) {
-      contacts.addContactToSelected(contact);
+      contacts.addContactsFromGroupToSelected(group.id);
     } else {
-      contacts.removeContactFromSelected(contact.id);
+      contacts.removeContactsGroupFromSelected(group.id);
     }
   }
 
-  onContactLongPress(contact) {
+  onGroupLongPress(group) {
     const { contacts } = this.props;
-    contacts.addContactToSelected(contact);
+    contacts.addContactsFromGroupToSelected(group.id);
     contacts.ui.setSelectMode(true);
   }
 
   renderItem({ item: group }) {
     const { contacts } = this.props;
+
     return (
       <ContactGroup
         selectMode={contacts.ui.selectMode}
         selected={false}
         group={group}
-        onSelectChange={this.onSelectedContactChange}
-        onLongPress={this.onContactLongPress}
+        onSelectChange={this.onSelectedGroupChange}
+        onLongPress={this.onGroupLongPress}
       />
     );
   }

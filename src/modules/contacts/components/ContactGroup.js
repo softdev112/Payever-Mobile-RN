@@ -8,7 +8,7 @@ import type ContactGroupInfo
 const SWITCH_INIT_Y_POS = -40;
 const INIT_PADDING = 8;
 
-export default class CustomerContact extends PureComponent {
+export default class ContactGroup extends PureComponent {
   static defaultProps = {
     selected: false,
   };
@@ -55,7 +55,7 @@ export default class CustomerContact extends PureComponent {
     }
   }
 
-  onContactPress({ nativeEvent }) {
+  onGroupPress({ nativeEvent }) {
     const { onPress } = this.props;
 
     if (onPress) {
@@ -63,7 +63,7 @@ export default class CustomerContact extends PureComponent {
     }
   }
 
-  onContactLongPress() {
+  onGroupLongPress() {
     const { group, onLongPress } = this.props;
 
     if (onLongPress) {
@@ -101,7 +101,7 @@ export default class CustomerContact extends PureComponent {
     ]).start();
   }
 
-  onSelectValueChange(value: boolean) {
+  async onSelectValueChange(value: boolean) {
     const { onSelectChange, group } = this.props;
 
     if (onSelectChange) {
@@ -118,8 +118,8 @@ export default class CustomerContact extends PureComponent {
 
     return (
       <TouchableWithoutFeedback
-        onLongPress={::this.onContactLongPress}
-        onPress={::this.onContactPress}
+        onLongPress={::this.onGroupLongPress}
+        onPress={::this.onGroupPress}
       >
         <Animated.View
           style={[styles.container, { paddingLeft: paddingAnimValue }, style]}

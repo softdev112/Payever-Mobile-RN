@@ -14,7 +14,7 @@ import type { ConversationType } from
 const INIT_TEXT_HEIGHT = 20;
 const MIN_FOOTER_HEIGHT = 50;
 const FOOTER_HEIGHT_ADJUST = 8;
-const MAX_FOOTER_HEIGHT = 120;
+const MAX_FOOTER_HEIGHT = 100;
 
 @inject('communication')
 @observer

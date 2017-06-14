@@ -88,9 +88,8 @@ export default class CommunicationStore {
       .success((data: MessengerData) => {
         this.initSocket(data.wsUrl, data.messengerUser.id);
         this.messengerInfo = new MessengerInfo(data);
-        this.conversations = observable.map();
 
-        if (!this.store.ui.phoneMode) {
+        if (!this.store.ui.phoneMode && !this.selectedConversationId) {
           const conversation = this.messengerInfo.getDefaultConversation();
           this.setSelectedConversationId(conversation.id);
         }
@@ -723,19 +722,19 @@ export default class CommunicationStore {
 
   @action
   sendInviteMsgToContacts(message: string) {
-    const userContacts = this.store.contacts.selectedContacts.slice()
+    const { api, contacts, profiles } = this.store;
+    const userContacts = contacts.selectedContacts.slice()
       .map((m) => {
         m.id = `contact-${m.id}`;
         return m;
       });
 
     const recipients = userContacts.concat(this.contactsForAction.slice())
-      .reduce((result, contact, index, contacts) => {
+      .reduce((result, contact, index, allContacts) => {
         return result + contact.id +
-          (contacts.length - 1 !== index ? ',' : '');
+          (allContacts.length - 1 !== index ? ',' : '');
       }, '');
 
-    const { api } = this.store;
     const { messengerUser } = this.messengerInfo;
 
     apiHelper(api.messenger.sendMessage(
@@ -744,7 +743,8 @@ export default class CommunicationStore {
       message
     )).success(() => {
       this.clearAtocomleteContactsSearch();
-      this.store.contacts.clearSelectedContacts();
+      contacts.clearSelectedContacts();
+      this.loadMessengerInfo(profiles.currentProfile);
     });
   }
 

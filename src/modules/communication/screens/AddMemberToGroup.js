@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
+import { Navigation, Navigator } from 'react-native-navigation';
 import { NavBar, StyleSheet, View } from 'ui';
 
 import SelectedContacts from '../../contacts/components/SelectedContacts';
@@ -17,6 +18,7 @@ export default class AddMemberToGroup extends Component {
   props: {
     communication: CommunicationStore;
     contacts: ContactsStore;
+    navigator: Navigator;
   };
 
   componentWillUnmount() {
@@ -26,10 +28,25 @@ export default class AddMemberToGroup extends Component {
   }
 
   onAddMembersToGroup() {
-    const { communication } = this.props;
+    const { communication, contacts, navigator } = this.props;
     if (communication.isLoading) return;
 
+    if (communication.contactsForAction.length === 0
+      && contacts.selectedContacts.length === 0) {
+      Navigation.showInAppNotification({
+        screen: 'core.PushNotification',
+        title: 'Error!',
+        passProps: {
+          message: 'No contacts were selected',
+          style: styles.notificationError,
+          textStyle: styles.notificationText,
+        },
+      });
+      return;
+    }
+
     communication.addAllMembersToGroup(communication.selectedConversation.id);
+    navigator.pop({ animated: true });
   }
 
   render() {
@@ -45,7 +62,7 @@ export default class AddMemberToGroup extends Component {
           <NavBar.Button
             title="Save"
             onPress={::this.onAddMembersToGroup}
-            unwind
+            disabled={communication.isLoading}
           />
         </NavBar>
         <View style={styles.content}>
@@ -67,5 +84,13 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 12,
     paddingHorizontal: 15,
+  },
+
+  notificationError: {
+    backgroundColor: 'red',
+  },
+
+  notificationText: {
+    fontWeight: '400',
   },
 });
