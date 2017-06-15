@@ -22,10 +22,32 @@ export default class UploadFileMsgView extends Component {
     communication.removeFileUploadingProgress(message.id);
   }
 
-  render() {
-    const { communication, message, style } = this.props;
+  renderProgressIndicator() {
+    const { communication, message } = this.props;
     const value = communication.filesUploadingProgress.has(message.id)
       ? communication.filesUploadingProgress.get(message.id) : 0;
+
+    return (
+      <View style={styles.progressContainer}>
+        <AnimatedCircularProgress
+          size={50}
+          width={1}
+          fill={value}
+          tintColor="#0084ff"
+          backgroundColor="#e1e1e1"
+        >
+          {(fill) => (
+            <Text style={styles.progress}>
+              {Math.round(fill)}%
+            </Text>
+          )}
+        </AnimatedCircularProgress>
+      </View>
+    );
+  }
+
+  render() {
+    const { message, style } = this.props;
 
     const imageStyle = [
       styles.image,
@@ -38,27 +60,19 @@ export default class UploadFileMsgView extends Component {
         animation="fadeIn"
         duration={300}
       >
-        <Image
-          style={imageStyle}
-          blurRadius={10}
-          source={{ uri: message.uri }}
-        >
-          <View style={styles.progressContainer}>
-            <AnimatedCircularProgress
-              size={50}
-              width={1}
-              fill={value}
-              tintColor="#0084ff"
-              backgroundColor="#e1e1e1"
-            >
-              {(fill) => (
-                <Text style={styles.progress}>
-                  {Math.round(fill)}%
-                </Text>
-              )}
-            </AnimatedCircularProgress>
+        {message.isPicture ? (
+          <Image
+            style={imageStyle}
+            blurRadius={10}
+            source={{ uri: message.uri }}
+          >
+            {this.renderProgressIndicator()}
+          </Image>
+        ) : (
+          <View style={styles.file}>
+            {this.renderProgressIndicator()}
           </View>
-        </Image>
+        )}
       </Animatable.View>
     );
   }
@@ -66,7 +80,7 @@ export default class UploadFileMsgView extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: 200,
+    minHeight: 70,
     transform: [{ scaleY: -1 }],
     marginLeft: 54,
     paddingTop: 20,
@@ -96,5 +110,15 @@ const styles = StyleSheet.create({
   image: {
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  file: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 5,
+    backgroundColor: '$pe_color_gray',
+    padding: 14,
+    height: 70,
   },
 });
