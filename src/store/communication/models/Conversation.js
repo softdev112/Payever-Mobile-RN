@@ -98,14 +98,21 @@ export default class Conversation {
 
       if (imageMessageIndex !== -1) {
         const fakeMessage = this.messages[imageMessageIndex];
-        const copyImagePath = Platform.OS === 'ios'
-          ? fakeMessage.uri : fakeMessage.path;
+
+        let tmpFileName = '';
+        if (fakeMessage.isPicture) {
+          tmpFileName = Platform.OS === 'ios'
+            ? fakeMessage.uri : fakeMessage.path;
+        } else {
+          tmpFileName = fakeMessage.uri;
+        }
+
         this.messages[imageMessageIndex] = message;
 
-        // Remove copy of chosen image
+        // Remove copy of chosen file
         try {
-          if (await RNFetchBlob.fs.exists(copyImagePath)) {
-            await RNFetchBlob.fs.unlink(copyImagePath);
+          if (await RNFetchBlob.fs.exists(tmpFileName)) {
+            await RNFetchBlob.fs.unlink(tmpFileName);
           }
         } catch (err) {
           log.error(err);

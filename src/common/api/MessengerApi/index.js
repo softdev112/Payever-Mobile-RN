@@ -130,7 +130,7 @@ export default class MessengerApi {
     media: MediaRequestData,
     progressCb: (uploadId: number, progress: number) => void
   ): Promise<MessageResp> {
-    return RNFetchBlob.fetch(
+    return await RNFetchBlob.fetch(
       'POST',
       config.siteUrl + '/api/rest/v1/messenger/new/message/medias',
       {
@@ -147,7 +147,7 @@ export default class MessengerApi {
         {
           name: 'new_message_medias[medias][0][binaryContent]',
           filename: media.fileName,
-          data: media.data,
+          data: media.data || `RNFetchBlob-${decodeURI(media.uri)}`,
         },
       ]
     ).uploadProgress((written, total) => {

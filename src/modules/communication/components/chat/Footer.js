@@ -4,6 +4,9 @@ import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import * as Animatable from 'react-native-animatable';
 import ImagePicker from 'react-native-image-picker';
+import {
+  DocumentPickerUtil, DocumentPicker,
+} from 'react-native-document-picker';
 import { Icon, StyleSheet } from 'ui';
 import { log } from 'utils';
 
@@ -68,7 +71,10 @@ export default class Footer extends Component {
       title: 'Attachments',
       customButtons: [{
         name: 'offer',
-        title: 'Send New Offer',
+        title: 'Send New Offer...',
+      }, {
+        name: 'file',
+        title: 'Send Document...',
       }],
       storageOptions: {
         skipBackup: true,
@@ -82,19 +88,41 @@ export default class Footer extends Component {
         return;
       }
 
-      if (logoFileInfo.customButton) {
-        this.context.navigator.push({
-          screen: 'marketing.CreateOffer',
-          passProps: { conversationId },
-        });
-        return;
+      switch (logoFileInfo.customButton) {
+        case 'offer':
+          this.context.navigator.push({
+            screen: 'marketing.CreateOffer',
+            passProps: { conversationId },
+          });
+          return;
+
+        case 'file':
+          DocumentPicker.show(
+            { filetype: [DocumentPickerUtil.allFiles()] },
+            (err, url) => {
+              const documentFile = {
+                ...url,
+                isPicture: false,
+              };
+
+              communication.sendMessageWithMedias(
+                text, documentFile, conversationId
+              );
+            });
+          return;
+
+        default:
+          logoFileInfo.isPicture = true;
+          if (!logoFileInfo.fileName) {
+            logoFileInfo.fileName = logoFileInfo.uri.split('/').pop();
+          }
+
+          communication.sendMessageWithMedias(
+            text, logoFileInfo, conversationId
+          );
+          break;
       }
 
-      if (!logoFileInfo.fileName) {
-        logoFileInfo.fileName = logoFileInfo.uri.split('/').pop();
-      }
-
-      communication.sendMessageWithMedias(text, logoFileInfo, conversationId);
       this.setState({ text: '' });
     });
   }

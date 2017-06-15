@@ -1,12 +1,13 @@
 /* eslint-disable react/prefer-stateless-function */
 import { Component, PropTypes } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
-import { observer } from 'mobx-react/native';
 import { Navigator } from 'react-native-navigation';
+import FileOpener from 'react-native-file-opener';
+import RNFetchBlob from 'react-native-fetch-blob';
 import { Icon, StyleSheet, Text, View } from 'ui';
-import { format, ScreenParams } from 'utils';
+import { format, log, ScreenParams } from 'utils';
 import Media from '../../../../store/communication/models/Media';
-import { Config } from '../../../../config';
+import config from '../../../../config';
 
 export default class MediaView extends Component {
   static contextTypes = {
@@ -21,61 +22,84 @@ export default class MediaView extends Component {
     navigator: Navigator;
   };
 
-  onMediaPress() {
+  async onMediaPress() {
     const { media } = this.props;
 
-    this.context.navigator.push({
-      screen: 'communication.ImageMedia',
-      passProps: { media },
-      animated: true,
-    });
+    if (media.isImage) {
+      this.context.navigator.push({
+        screen: 'communication.ImageMedia',
+        passProps: { media },
+        animated: true,
+      });
+    } else {
+      try {
+        const fileResp = await RNFetchBlob.config({
+          fileCache: true,
+          path:  `${RNFetchBlob.fs.dirs.CacheDir}/${media.name}`,
+        }).fetch('GET', config.siteUrl + media.formats.reference.url);
+
+        if (fileResp && fileResp.respInfo.status === 200) {
+          const filePath = await fileResp.path();
+          await FileOpener.open(filePath, '');
+        }
+      } catch (err) {
+        log.error(err);
+      }
+    }
+  }
+
+  renderMediaFile() {
+    const { media } = this.props;
+
+    return (
+      <View style={styles.file}>
+        <Icon style={styles.file_icon} source="icon-download-32" />
+        <Text
+          style={styles.file_name}
+          numberOfLines={1}
+          ellipsizeMode="middle"
+        >
+          {media.name}
+        </Text>
+        <Text style={styles.file_size}>{format.size(media.size)}</Text>
+      </View>
+    );
+  }
+
+  renderMediaImage() {
+    const { media } = this.props;
+
+    let properties;
+    try {
+      properties = media.formats.reference.properties;
+    } catch (e) {
+      properties = {};
+    }
+
+    return (
+      <View>
+        <Text numberOfLines={1} ellipsizeMode="middle">{media.name}</Text>
+        <Image
+          style={calcImageDimensions(properties)}
+          source={{ uri: config.siteUrl + media.url }}
+        />
+      </View>
+    );
   }
 
   render() {
     const { media } = this.props;
-    const AttachmentComponent = media.isImage ? MediaImage : MediaFile;
 
     return (
       <View>
         <Text style={styles.label}>Sent a file</Text>
         <TouchableOpacity onPress={::this.onMediaPress}>
-          <AttachmentComponent media={media} />
+          { media.isImage ? this.renderMediaImage() : this.renderMediaFile()}
         </TouchableOpacity>
       </View>
     );
   }
 }
-
-function MediaFile({ media }: PropTypes) {
-  return (
-    <View style={styles.file}>
-      <Icon style={styles.file_icon} source="icon-download-32" />
-      <Text style={styles.file_name} numberOfLines={1} ellipsizeMode="middle">
-        {media.name}
-      </Text>
-      <Text style={styles.file_size}>{format.size(media.size)}</Text>
-    </View>
-  );
-}
-
-const MediaImage = observer(['config'], ({ media, config }: MediaImageObj) => {
-  let properties;
-  try {
-    properties = media.formats.reference.properties;
-  } catch (e) {
-    properties = {};
-  }
-
-  return (
-    <View>
-      <Text numberOfLines={1} ellipsizeMode="middle">{media.name}</Text>
-      <Image
-        style={calcImageDimensions(properties)}
-        source={{ uri: config.siteUrl + media.url }}
-      />
-    </View>
-  );
-});
 
 export function calcImageDimensions(imageProperties) {
   const OFFSET = 130;
@@ -138,8 +162,3 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
-
-type MediaImageObj = {
-  media: Media;
-  config?: Config;
-};

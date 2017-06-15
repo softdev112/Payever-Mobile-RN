@@ -4173,6 +4173,10 @@ react-native-device-info@^0.10.1:
   version "0.10.1"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-0.10.1.tgz#8eb675fa624a356a14455c97ec82590ee1d1fdd8"
 
+react-native-document-picker@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-document-picker/-/react-native-document-picker-2.0.0.tgz#cbbb7358bfd23ed565bf4e04ce7e32f50c0b17eb"
+
 "react-native-emoji@git://github.com/niftylettuce/react-native-emoji.git":
   version "1.2.0"
   resolved "git://github.com/niftylettuce/react-native-emoji.git#70275d5e36cc9933f4d571fae7fa519ab566ca38"
@@ -4196,6 +4200,10 @@ react-native-fetch-blob@^0.10.5:
   dependencies:
     base-64 "0.1.0"
     glob "^7.0.6"
+
+react-native-file-opener@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-file-opener/-/react-native-file-opener-0.2.0.tgz#81c6c1e50db21e7b1f1ed8d58e3d1fc4969d8daa"
 
 react-native-hyperlink@0.0.8:
   version "0.0.8"

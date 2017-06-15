@@ -266,6 +266,8 @@ export default class CommunicationStore {
       isFileUploading: true,
       width: mediaFileInfo.width,
       height: mediaFileInfo.height,
+      fileSize: mediaFileInfo.fileSize,
+      isPicture: mediaFileInfo.isPicture,
     };
 
     messages = messages.concat(uploadMessage);
