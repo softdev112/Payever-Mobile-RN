@@ -11,6 +11,8 @@ import com.reactnativenavigation.NavigationApplication;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.imagepicker.ImagePickerPackage;
+import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
+import com.fileopener.FileOpenerPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,7 +42,9 @@ public class MainApplication extends NavigationApplication {
             new RNDeviceInfo(),
             new RNSoundPackage(),
             new RNFetchBlobPackage(),
-            new ImagePickerPackage()
+            new ImagePickerPackage(),
+            new ReactNativeDocumentPicker(),
+            new FileOpenerPackage()
         );
     }
 }

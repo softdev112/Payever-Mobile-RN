@@ -251,7 +251,7 @@ export default class Footer extends Component {
           returnKeyType="done"
           underlineColorAndroid="transparent"
           value={this.state.text}
-          onContentSizeChange={::this.onInputContentSizeChange}
+          onChange={::this.onInputContentSizeChange}
         />
         <Icon
           style={sendBtnStyle}
@@ -308,8 +308,11 @@ const styles = StyleSheet.create({
 
   input: {
     flex: 1,
-    paddingHorizontal: 8,
+    paddingRight: 8,
+    paddingLeft: 10,
     fontSize: 16,
-    alignSelf: 'center',
+    '@media ios': {
+      alignSelf: 'center',
+    },
   },
 });

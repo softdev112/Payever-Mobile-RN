@@ -25,6 +25,6 @@ describe('apiHelper Tests', () => {
   it('apiHelper if promise is null should return null', () => {
     const result = apiHelper(null);
 
-    expect(result).toBeNull();
+    expect(result.apiPromise).toBeNull();
   });
 });

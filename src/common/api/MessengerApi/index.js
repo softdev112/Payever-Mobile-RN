@@ -1,4 +1,5 @@
 import { pickBy } from 'lodash';
+import { Platform } from 'react-native';
 import RNFetchBlob from 'react-native-fetch-blob';
 import { log } from 'utils';
 import type PayeverApi from '../index';
@@ -147,7 +148,8 @@ export default class MessengerApi {
         {
           name: 'new_message_medias[medias][0][binaryContent]',
           filename: media.fileName,
-          data: media.data || `RNFetchBlob-${decodeURI(media.uri)}`,
+          data: media.data || Platform.OS === 'ios'
+            ? `RNFetchBlob-${decodeURI(media.uri)}` : decodeURI(media.uri),
         },
       ]
     ).uploadProgress((written, total) => {

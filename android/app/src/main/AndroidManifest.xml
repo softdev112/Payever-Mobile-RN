@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="de.payever.payever"
-    android:versionCode="1"
-    android:versionName="1.1">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="de.payever.payever"
+          android:versionCode="1"
+          android:versionName="1.1">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -10,7 +11,6 @@
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.hardware.camera.flash"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-feature android:name="android.hardware.camera" android:required="false" />
@@ -52,6 +52,18 @@
         android:value="c039b811a5a0a7cb526d6dd241e32211d1708c2a"
       />
       <meta-data android:name="com.wix.reactnativenotifications.gcmSenderId" android:value="463919467171\0" />
+      <provider
+          android:name="android.support.v4.content.FileProvider"
+          android:authorities="de.payever.payever.provider"
+          android:grantUriPermissions="true"
+          android:exported="false"
+          tools:replace="android:authorities">
+        <meta-data
+          tools:replace="android:resource"
+          android:name="android.support.FILE_PROVIDER_PATHS"
+          android:resource="@xml/file_paths"
+        />
+      </provider>
     </application>
 
 </manifest>

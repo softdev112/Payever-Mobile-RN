@@ -110,10 +110,16 @@ const styles = StyleSheet.create({
 
   content: {
     width: '100%',
+    '@media android': {
+      paddingBottom: 15,
+    },
   },
 
   centerContent: {
     flex: 1,
     justifyContent: 'center',
+    '@media android': {
+      paddingBottom: 0,
+    },
   },
 });

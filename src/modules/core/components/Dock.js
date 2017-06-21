@@ -188,11 +188,14 @@ const styles = StyleSheet.create({
   icon: {
     width: 78,
     height: 80,
+    '@media android': {
+      height: 84,
+    },
   },
 
   image: {
     borderRadius: 14,
-    elevation: 4,
+    elevation: 3,
     height: 61,
     width: 61,
     marginBottom: 8,

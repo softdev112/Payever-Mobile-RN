@@ -50,7 +50,10 @@ export default class CreateOffer extends Component {
           <NavBar.Back />
           <NavBar.Title title="New Offer" />
         </NavBar>
-        <ErrorBox message="Choose another profile for offer creating" />
+        <ErrorBox
+          message={`Please choose another profile for offer creating.
+            It should be business not private profile`}
+        />
       </View>
     );
   }
@@ -118,7 +121,7 @@ function injectedJs(recipients) {
   if (!window.offerAppStarted) {
     setTimeout(() => {
       offerEditApp.show_new(recipients);
-    }, 1000);
+    }, 4000);
     window.offerAppStarted = true;
   }
 
@@ -133,7 +136,7 @@ function injectedJs(recipients) {
     if ($modalContent) {
       $modalContent.style.marginTop = '-60px';
     }
-  }, 2000);
+  }, 5000);
 
   function fixOfferModal() {
     offerEditApp.on_after_save = function() {

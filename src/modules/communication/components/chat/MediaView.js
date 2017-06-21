@@ -1,11 +1,10 @@
-/* eslint-disable react/prefer-stateless-function */
 import { Component, PropTypes } from 'react';
-import { Image, TouchableOpacity } from 'react-native';
+import { Image, Platform, TouchableOpacity } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import FileOpener from 'react-native-file-opener';
 import RNFetchBlob from 'react-native-fetch-blob';
 import { Icon, StyleSheet, Text, View } from 'ui';
-import { format, log, ScreenParams } from 'utils';
+import { format, log, ScreenParams, androidMimeTypes } from 'utils';
 import Media from '../../../../store/communication/models/Media';
 import config from '../../../../config';
 
@@ -25,6 +24,7 @@ export default class MediaView extends Component {
   async onMediaPress() {
     const { media } = this.props;
 
+
     if (media.isImage) {
       this.context.navigator.push({
         screen: 'communication.ImageMedia',
@@ -33,14 +33,24 @@ export default class MediaView extends Component {
       });
     } else {
       try {
+        const saveDir = Platform.OS === 'ios'
+          ? RNFetchBlob.fs.dirs.CacheDir : RNFetchBlob.fs.dirs.DownloadDir;
+
         const fileResp = await RNFetchBlob.config({
           fileCache: true,
-          path:  `${RNFetchBlob.fs.dirs.CacheDir}/${media.name}`,
+          path:  `${saveDir}/${media.name}`,
         }).fetch('GET', config.siteUrl + media.formats.reference.url);
 
         if (fileResp && fileResp.respInfo.status === 200) {
           const filePath = await fileResp.path();
-          await FileOpener.open(filePath, '');
+
+          const filePathParts = filePath.split('.');
+          const fileExt = filePathParts[filePathParts.length - 1];
+
+          await FileOpener.open(
+            filePath,
+            Platform.OS === 'ios' ? '' : androidMimeTypes.getTypeByExt(fileExt)
+          );
         }
       } catch (err) {
         log.error(err);

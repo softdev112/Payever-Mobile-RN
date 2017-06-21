@@ -104,8 +104,8 @@ android {
         applicationId "de.payever.payever"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 2001028
-        versionName "2.1.28"
+        versionCode 2001029
+        versionName "2.1.29"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -176,9 +176,4 @@ dependencies {
 task copyDownloadableDepsToLibs(type: Copy) {
     from configurations.compile
     into 'libs'
-}
-
-project.afterEvaluate {
-    apply from: '../../src/common/ui/ZssRichTextEditor/htmlCopy.gradle';
-    copyEditorHtmlToAppAssets(file('../../src/common/ui/ZssRichTextEditor'))
 }

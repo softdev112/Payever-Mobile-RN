@@ -16,7 +16,6 @@ export default class ProfilesStore {
   @observable ownBusinesses: Array<BusinessProfile>   = [];
   @observable staffBusinesses: Array<BusinessProfile> = [];
   @observable privateProfile: PersonalProfile         = null;
-  @observable profileDetails: any = null;
   @observable profileOffers: Array<any> = [];
   @observable currentProfile: PersonalProfile | BusinessProfile = null;
 

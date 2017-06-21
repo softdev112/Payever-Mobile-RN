@@ -5,11 +5,12 @@ import type { Navigator } from 'react-native-navigation';
 import { IconButton, StyleSheet } from 'ui';
 
 import CommunicationStore from '../../../../store/communication';
+import ProfilesStore from '../../../../store/profiles';
 
 const INIT_TOP = Platform.OS === 'android' ? 0 : 20;
 const SHOW_TOP = Platform.OS === 'android' ? 52 : 70;
 
-@inject('communication')
+@inject('communication', 'profiles')
 @observer
 export default class SettingsFloatMenu extends Component {
   static contextTypes = {
@@ -21,7 +22,8 @@ export default class SettingsFloatMenu extends Component {
   };
 
   props: {
-    communication?: CommunicationStore;
+    communication: CommunicationStore;
+    profiles: ProfilesStore;
     conversationId: number;
     onRemove?: (cb?: () => void) => void;
     style?: Object;
@@ -108,7 +110,7 @@ export default class SettingsFloatMenu extends Component {
   }
 
   render() {
-    const { communication, style } = this.props;
+    const { communication, profiles, style } = this.props;
     const { messengerInfo, selectedConversationId } = communication;
     const { animValue } = this.state;
 
@@ -135,12 +137,14 @@ export default class SettingsFloatMenu extends Component {
           />
         )}
 
-        <IconButton
-          iconStyle={styles.iconBtn}
-          onPress={::this.onSendOffer}
-          source={'icon-plus-24'}
-          title="Offer"
-        />
+        {profiles.currentProfile.isBusiness && (
+          <IconButton
+            iconStyle={styles.iconBtn}
+            onPress={::this.onSendOffer}
+            source={'icon-plus-24'}
+            title="Offer"
+          />
+        )}
 
         <IconButton
           iconStyle={styles.iconBtn}

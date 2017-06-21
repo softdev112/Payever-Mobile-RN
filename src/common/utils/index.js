@@ -2,6 +2,7 @@
  * @providesModule utils
  */
 
+export androidMimeTypes from './androidMimeTypes';
 export apiHelper from './apiHelper';
 export format from './format';
 export log from 'react-native-logging';

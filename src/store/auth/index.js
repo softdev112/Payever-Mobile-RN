@@ -1,12 +1,13 @@
 import { action, observable, runInAction } from 'mobx';
 import { now, isDate } from 'lodash';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, NetInfo } from 'react-native';
 import { apiHelper, log } from 'utils';
 import type Store from './../index';
 import type { AuthData } from '../../common/api/AuthApi';
 import { showScreen } from '../../common/Navigation';
 
 const STORE_NAME = 'store.auth';
+const DEFAULT_EXPIRES_TOKEN = 3600;
 
 export default class AuthStore {
   @observable isLoggedIn: boolean  = false;
@@ -123,7 +124,10 @@ export default class AuthStore {
 
     log.debug('Expires value', this.expiresIn);
 
-    if (this.accessToken && this.expiresIn > new Date()) {
+    // Test if internet connection available if not do not update token
+    // but grunt access
+    if ((this.accessToken && this.expiresIn > new Date())
+      || !(await NetInfo.isConnected)) {
       return this.accessToken;
     }
 
@@ -137,7 +141,7 @@ export default class AuthStore {
         return data.access_token;
       })
       .error((e) => {
-        log.warn('Could not refresh token', e);
+        log.warn('Could not refresh token. Try to restart application', e);
         showScreen('core.LaunchScreen');
       })
       .promise();
@@ -147,6 +151,9 @@ export default class AuthStore {
     const expires = data.expires_in;
     if (expires && !isDate(expires) && isFinite(expires)) {
       data.expires_in = new Date(now() + ((expires - 10) * 1000));
+    } else {
+      data.expires_in =
+        new Date(now() + ((DEFAULT_EXPIRES_TOKEN - 10) * 1000));
     }
 
     this.accessToken  = data.access_token;

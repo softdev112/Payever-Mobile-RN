@@ -1,6 +1,7 @@
 {
   "presets": ["react-native-stage-0/decorator-support"],
   "plugins": [
+    "transform-flow-strip-types",
     ["module-resolver", {
       "root": ["./src"],
       "alias": {
