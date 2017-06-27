@@ -1,7 +1,7 @@
 import { Component, PropTypes } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { Navigator } from 'react-native-navigation';
-import { IconText, StyleSheet, View } from 'ui';
+import { IconText, images, StyleSheet, View } from 'ui';
 
 import ProfilesStore from '../../../store/profiles';
 import UIStore from '../../../store/ui';
@@ -126,6 +126,7 @@ export default class Dock extends Component {
   }
 
   renderIcon(item: AppItem, index) {
+    const { config } = this.props;
     const logoSource = item.logoSource;
     let title = item.name;
     if (item.label === 'communication') {
@@ -140,6 +141,10 @@ export default class Dock extends Component {
       imageStyles.push(styles.homeImage);
     }
 
+    const imageSource = images.getIconByUrl(
+      item.image ? item.image.replace(config.siteUrl, '') : ''
+    );
+
     return (
       <IconText
         style={styles.icon}
@@ -147,7 +152,7 @@ export default class Dock extends Component {
         imageStyle={imageStyles}
         textStyle={styles.title}
         onPress={() => this.onAppClick(item, index)}
-        source={logoSource}
+        source={imageSource || { uri: item.image }}
         title={title}
         titleNumberOfLines={1}
       />

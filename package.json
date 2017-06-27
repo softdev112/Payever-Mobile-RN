@@ -1,6 +1,6 @@
 {
   "name": "PayeverMobile",
-  "version": "2.1.29",
+  "version": "2.1.30",
   "private": true,
   "scripts": {
     "start": "npm run env:dev && node node_modules/react-native/local-cli/cli.js start",
@@ -46,12 +46,11 @@
     "react-native-logging": "0.0.6",
     "react-native-md-textinput": "^2.0.4",
     "react-native-modal-datetime-picker": "^3.0.1",
-    "react-native-navigation": "2.0.0",
+    "react-native-navigation": "next",
     "react-native-notifications": "^1.1.9",
     "react-native-simple-auth": "^2.1.0",
     "react-native-sound": "^0.10.1",
     "react-native-swipeable": "^0.4.0",
-    "react-native-zss-rich-text-editor": "^1.0.2",
     "react-test-renderer": "^15.5.4",
     "redux": "^3.6.0"
   },

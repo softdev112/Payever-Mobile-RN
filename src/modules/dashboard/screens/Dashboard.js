@@ -2,13 +2,14 @@ import { Component } from 'react';
 import { Animated } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
-import { GridView, IconText, Loader, StyleSheet, View } from 'ui';
+import { GridView, images, IconText, Loader, StyleSheet, View } from 'ui';
 
 import type AppItem from '../../../store/profiles/models/AppItem';
 import Dock from '../../core/components/Dock';
 import SearchHeader from '../components/SearchHeader';
 import type ProfilesStore from '../../../store/profiles';
 import type UIStore from '../../../store/ui';
+import { Config } from '../../../config';
 
 const ICON_WIDTH_PHONE = 80;
 const ICON_HEIGHT_PHONE = 105;
@@ -29,6 +30,7 @@ export default class Dashboard extends Component {
   props: {
     navigator: Navigator;
     profiles: ProfilesStore;
+    config: Config;
     deepLink: string;
     ui: UIStore;
   };
@@ -105,13 +107,18 @@ export default class Dashboard extends Component {
   }
 
   renderIcon({ item }: AppItem, marginLeft) {
+    const { config } = this.props;
+    const imageSource = images.getIconByUrl(
+      item.image ? item.image.replace(config.siteUrl, '') : ''
+    );
+
     return (
       <IconText
         style={[styles.icon, { marginLeft }]}
         imageStyle={styles.icon_image}
         textStyle={styles.icon_title}
         onPress={() => this.onAppClick(item)}
-        source={{ uri: item.image }}
+        source={imageSource || { uri: item.image }}
         title={item.name}
       />
     );

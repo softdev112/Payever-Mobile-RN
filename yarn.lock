@@ -2690,7 +2690,7 @@ interpret@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/interpret/-/interpret-1.0.1.tgz#d579fb7f693b858004947af39fa0db49f795602c"
 
-invariant@2.2.0, invariant@^2.2.0:
+invariant@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.0.tgz#c8d7e847366a49cc18b622f058a689d481e895f2"
   dependencies:
@@ -3272,10 +3272,6 @@ jsprim@^1.2.2:
 jsx-ast-utils@^1.0.0, jsx-ast-utils@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-1.4.1.tgz#3867213e8dd79bf1e8f2300c0cfc1efb182c0df1"
-
-keymirror@0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/keymirror/-/keymirror-0.1.1.tgz#918889ea13f8d0a42e7c557250eee713adc95c35"
 
 kind-of@^3.0.2:
   version "3.1.0"
@@ -4280,9 +4276,9 @@ react-native-modal-datetime-picker@^3.0.1:
     moment "^2.15.0"
     react-native-animated-modal "^1.0.1"
 
-react-native-navigation@2.0.0:
-  version "2.0.0-experimental.304"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.0.0-experimental.304.tgz#1deecd64a4c3d4865d356301fdf7141ac0ee706f"
+react-native-navigation@next:
+  version "2.0.0-experimental.252"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.0.0-experimental.252.tgz#86a1846675287896e1b94cf25699b67092b40ab1"
   dependencies:
     lodash "4.x.x"
 
@@ -4310,19 +4306,6 @@ react-native-sound@^0.10.1:
 react-native-swipeable@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/react-native-swipeable/-/react-native-swipeable-0.4.0.tgz#10ca127af1d206e857eb94c6bc49207ee21fa3e7"
-
-react-native-webview-bridge-updated@^1.0.0:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/react-native-webview-bridge-updated/-/react-native-webview-bridge-updated-1.0.7.tgz#0bcaf266b9be613d7436fcd7e15dc057cae732dc"
-  dependencies:
-    invariant "2.2.0"
-    keymirror "0.1.1"
-
-react-native-zss-rich-text-editor@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-zss-rich-text-editor/-/react-native-zss-rich-text-editor-1.0.2.tgz#87e5c448fe58081b51b947d077530700735a9ca6"
-  dependencies:
-    react-native-webview-bridge-updated "^1.0.0"
 
 react-native@0.44.3:
   version "0.44.3"
