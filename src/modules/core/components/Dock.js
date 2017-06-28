@@ -81,7 +81,7 @@ export default class Dock extends Component {
           url,
           label: app.label,
           name: app.name,
-          image: { uri: config.siteUrl + app.image },
+          image: config.siteUrl + app.image,
         });
       });
     }
@@ -126,24 +126,14 @@ export default class Dock extends Component {
   }
 
   renderIcon(item: AppItem, index) {
-    const { config } = this.props;
-    const logoSource = item.logoSource;
+    const imageStyles = [styles.image];
+
     let title = item.name;
     if (item.label === 'communication') {
       title = 'Chat';
     }
 
-    const imageStyles = [styles.image];
-
-    if (item.label === 'dashboard') {
-      title = 'Home';
-      logoSource.uri = logoSource.uri.replace('dashboard.png', 'home.png');
-      imageStyles.push(styles.homeImage);
-    }
-
-    const imageSource = images.getIconByUrl(
-      item.image ? item.image.replace(config.siteUrl, '') : ''
-    );
+    const imageSource = images.getIconByUrl(item.image);
 
     return (
       <IconText

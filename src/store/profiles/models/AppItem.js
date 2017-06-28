@@ -41,6 +41,7 @@ export default class AppItem {
   constructor(data, store: Store, profile: BusinessProfile) {
     this.store = store;
     this.profile = profile;
+
     Object.assign(this, data);
     this.settings = this.makeSettings();
   }

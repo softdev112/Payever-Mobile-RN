@@ -9,14 +9,13 @@ import Dock from '../../core/components/Dock';
 import SearchHeader from '../components/SearchHeader';
 import type ProfilesStore from '../../../store/profiles';
 import type UIStore from '../../../store/ui';
-import { Config } from '../../../config';
 
 const ICON_WIDTH_PHONE = 80;
 const ICON_HEIGHT_PHONE = 105;
 const ICON_WIDTH_TABLET = 135;
 const ICON_HEIGHT_TABLET = 160;
 
-@inject('profiles', 'config', 'ui')
+@inject('profiles', 'ui')
 @observer
 export default class Dashboard extends Component {
   static defaultProps = {
@@ -30,7 +29,6 @@ export default class Dashboard extends Component {
   props: {
     navigator: Navigator;
     profiles: ProfilesStore;
-    config: Config;
     deepLink: string;
     ui: UIStore;
   };
@@ -107,10 +105,7 @@ export default class Dashboard extends Component {
   }
 
   renderIcon({ item }: AppItem, marginLeft) {
-    const { config } = this.props;
-    const imageSource = images.getIconByUrl(
-      item.image ? item.image.replace(config.siteUrl, '') : ''
-    );
+    const imageSource = images.getIconByUrl(item.image);
 
     return (
       <IconText

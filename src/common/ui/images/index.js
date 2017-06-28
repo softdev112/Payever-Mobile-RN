@@ -1,4 +1,5 @@
 import icons from './app-icons';
+import config from '../../../config';
 
 /* eslint-disable global-require */
 export default {
@@ -10,5 +11,8 @@ export default {
 };
 
 function getIconByUrl(url: string) {
-  return icons.get(url);
+  if (!url) return url;
+
+  const cacheUrl = url.replace(config.siteUrl, '').split('?')[0];
+  return icons.get(cacheUrl);
 }
