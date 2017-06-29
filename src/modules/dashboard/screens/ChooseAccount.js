@@ -47,18 +47,12 @@ export default class ChooseAccount extends Component {
   }
 
   async componentWillMount() {
-    const { profiles, navigator } = this.props;
+    const { profiles } = this.props;
 
     //noinspection JSUnresolvedFunction
     Keyboard.dismiss();
 
-    if (!await profiles.load()) {
-      navigator.push({
-        screen: 'core.ErrorPage',
-        animated: true,
-        passProps: { message: profiles.error },
-      });
-    }
+    await profiles.load();
 
     // Register push notifications
     const { store, privateProfile } = profiles;

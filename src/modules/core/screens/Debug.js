@@ -73,7 +73,10 @@ export default class Debug extends Component {
         <TouchableOpacity
           onPress={() => {
             navigator.push({
-              screen: 'contacts.BusinessContacts',
+              screen: 'core.ErrorPage',
+              passProps: {
+                message: 'Hello World!!! Hi dksmfksdmfksdfmksdlfmsdklfmsdkfmsdklfmskdmfksmfksdmfklsdmfksdmkf',
+              },
               animated: true,
             });
           }}
@@ -89,7 +92,7 @@ export default class Debug extends Component {
           <WebView
             showLoader={false}
             showNavBar="never"
-            source={{ uri: 'https://gmail.com' }}
+            source={{ uri: 'https://stage.payever.de/business/cool-busines/items' }}
           />
         </View>
       </View>

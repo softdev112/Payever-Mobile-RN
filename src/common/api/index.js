@@ -1,6 +1,7 @@
 /* eslint-disable quote-props */
 /** @name ApiResp */
-import { log } from 'utils';
+import { Navigation } from 'react-native-navigation';
+import { log, networkHelper } from 'utils';
 
 import type AuthStore from '../../store/auth';
 import type { Config } from '../../config';
@@ -91,6 +92,19 @@ export default class PayeverApi {
 
   //noinspection InfiniteRecursionJS
   async fetch(url: string, options: Object = {}): Promise<ApiResp> {
+    // Test if connection available if not and there is
+    // no cache show error screen
+    if (url !== '/device/link' && !await networkHelper.isConnected()) {
+      Navigation.showModal({
+        screen: 'core.ErrorPage',
+        passProps: {
+          message: networkHelper.errorMessage,
+        },
+      });
+
+      return null;
+    }
+
     options.method = options.method || 'GET';
     url = this.normalizeUrl(url, options.query);
 

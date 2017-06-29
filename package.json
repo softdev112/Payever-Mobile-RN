@@ -1,6 +1,6 @@
 {
   "name": "PayeverMobile",
-  "version": "2.1.30",
+  "version": "2.1.31",
   "private": true,
   "scripts": {
     "start": "npm run env:dev && node node_modules/react-native/local-cli/cli.js start",
@@ -46,7 +46,7 @@
     "react-native-logging": "0.0.6",
     "react-native-md-textinput": "^2.0.4",
     "react-native-modal-datetime-picker": "^3.0.1",
-    "react-native-navigation": "next",
+    "react-native-navigation": "2.0.0-experimental.252",
     "react-native-notifications": "^1.1.9",
     "react-native-simple-auth": "^2.1.0",
     "react-native-sound": "^0.10.1",
@@ -56,6 +56,9 @@
   },
   "jest": {
     "preset": "react-native",
+    "globals": {
+      "__DEV__": true
+    },
     "rootDir": ".",
     "setupTestFrameworkScriptFile": "./__tests__/jest-env.js",
     "modulePathIgnorePatterns": [

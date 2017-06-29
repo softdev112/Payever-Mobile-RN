@@ -1,13 +1,13 @@
 import { runInAction } from 'mobx';
-import { log } from '../index';
-import { isConnected, loadFromApi, NETWORK_ERROR } from './network';
-import { isCacheUpToDate, loadFromCache, saveToCache } from './cache';
+import { Navigation } from 'react-native-navigation';
+import { cacheHelper, log, networkHelper } from '../index';
 
 /**
  * This helper simplifies API call from Store
  */
 export default class ApiHelper {
-  apiPromise: Promise<ApiResp>;
+  apiEndPoint: Function;
+  showErrorPage: boolean;
   fetchPromise: Promise;
   returnValue: any;
   stateObject: ?Object = null;
@@ -21,9 +21,14 @@ export default class ApiHelper {
   onError: (error: string) => any;
   onComplete: () => any;
 
-  constructor(apiPromise: Promise<ApiResp>, stateObject: Object = null) {
-    this.apiPromise = apiPromise;
+  constructor(
+    apiEndPoint: Function,
+    stateObject: Object = null,
+    showErrorPage: boolean = true
+  ) {
+    this.apiEndPoint = apiEndPoint;
     this.stateObject = stateObject;
+    this.showErrorPage = showErrorPage;
 
     this.onSuccess  = () => {};
     this.onError    = () => {};
@@ -136,11 +141,12 @@ export default class ApiHelper {
     this.setState({ error: '', isLoading: true });
 
     const { data, error } = await loadData(
-      this.apiPromise,
+      this.apiEndPoint,
       this.cacheId,
       this.cacheLifetime,
       this.timeout,
-      this.noCache
+      this.noCache,
+      this.showErrorPage
     );
 
     if (data) {
@@ -165,42 +171,60 @@ export default class ApiHelper {
   }
 }
 
-async function loadData(apiPromise, cacheId, lifeTime, timeout, noCache) {
-  let cacheWasUsed = false;
+async function loadData(
+  apiEndPoint,
+  cacheId,
+  lifeTime,
+  timeout,
+  noCache,
+  showErrorPage
+) {
   let data;
-  let error;
+  const isConnected = await networkHelper.isConnected();
 
-  // Try to load cache if a value isn't expired and noCache = false
-  if (!noCache && cacheId && isCacheUpToDate(cacheId, lifeTime)) {
-    data = await loadFromCache(cacheId);
-    cacheWasUsed = true;
+  // Load data from cache if noCache !== true
+  if (!noCache && cacheId) {
+    data = await cacheHelper.loadFromCache(cacheId);
   }
 
-  // Try to load from API
-  if (!data && await isConnected()) {
-    try {
-      data = await loadFromApi(apiPromise, timeout);
-
-      if (data && cacheId) {
-        saveToCache(cacheId, lifeTime, data);
-      }
-    } catch (e) {
-      error = e.message;
-      log.warn(e + (e.errorName ? ` (${e.errorName})` : ''));
+  // If no data and no connection go to error page
+  if (!data && !isConnected) {
+    if (showErrorPage) {
+      Navigation.showModal({
+        screen: 'core.ErrorPage',
+        passProps: {
+          message: networkHelper.errorMessage,
+          onBack: Navigation.dismissModal.bind(null, { animated: true }),
+        },
+      });
     }
+
+    return { data: null, error: networkHelper.errorMessage };
   }
 
-  // If there is still no data try to load cache even if it's expired
-  // and even if noCache = true
-  if (cacheId && !data && !cacheWasUsed) {
-    data = await loadFromCache(cacheId);
+  // If cache up to date or there is no internet return cache data
+  if (!noCache && (!isConnected
+    || cacheHelper.isCacheUpToDate(cacheId, lifeTime))) {
+    return {
+      data,
+      error: data ? '' : networkHelper.errorMessage,
+    };
   }
 
-  if (!data && !error) {
-    error = NETWORK_ERROR;
+  // Load from API and update data in cache
+  try {
+    data = await networkHelper.loadFromApi(apiEndPoint(), timeout);
+    if (data && cacheId) {
+      cacheHelper.saveToCache(cacheId, lifeTime, data);
+    }
+  } catch (e) {
+    log.warn(e + (e.errorName ? ` (${e.errorName})` : ''));
   }
 
-  return { data, error };
+  return {
+    data,
+    error: data ? '' : networkHelper.errorMessage,
+  };
 }
 
 type CacheOptions = {

@@ -74,16 +74,17 @@ export default class CommunicationStore {
 
   @action
   async loadMessengerInfo(profile: BusinessProfile) {
-    const { api } = this.store;
+    const { messenger } = this.store.api;
 
-    let apiPromise;
+    let apiEndPoint;
     if (profile.isBusiness) {
-      apiPromise = api.messenger.getBusiness(profile.business.slug);
+      apiEndPoint =
+        messenger.getBusiness.bind(messenger, profile.business.slug);
     } else {
-      apiPromise = api.messenger.getPrivate();
+      apiEndPoint = messenger.getPrivate.bind(messenger);
     }
 
-    return apiHelper(apiPromise, this)
+    return apiHelper(apiEndPoint, this)
       .cache('communication:messengerInfo:' + profile.id)
       .success((data: MessengerData) => {
         this.initSocket(data.wsUrl, data.messengerUser.id);
@@ -105,8 +106,10 @@ export default class CommunicationStore {
     const userId = socket.userId;
     const type = this.messengerInfo.getConversationType(id);
 
-    return apiHelper(socket.getConversation({ id, type, limit }), this)
-      .cache(`communication:conversations:${userId}:${id}`)
+    return apiHelper(
+      socket.getConversation.bind(socket, { id, type, limit }),
+      this
+    ).cache(`communication:conversations:${userId}:${id}`)
       .success(async (data) => {
         const conversation = new Conversation(
           data,
@@ -178,7 +181,7 @@ export default class CommunicationStore {
 
     if (unreadIds.length > 0) {
       const socket = await this.store.api.messenger.getSocket();
-      await apiHelper(socket.updateMessagesReadStatus(unreadIds))
+      await apiHelper(socket.updateMessagesReadStatus.bind(socket, unreadIds))
         .error(log.error)
         .promise();
     }
@@ -203,7 +206,7 @@ export default class CommunicationStore {
     const { messengerUser } = this.messengerInfo;
 
     return apiHelper(
-      messenger.getAvailableContacts(messengerUser.id, query),
+      messenger.getAvailableContacts.bind(messenger, messengerUser.id, query),
       this
     ).success((data) => {
       this.contactsAutocomplete = data;
@@ -214,7 +217,7 @@ export default class CommunicationStore {
   @action
   getContactData(contactId: number) {
     const { api: { messenger } } = this.store;
-    return apiHelper(messenger.getContactData(contactId))
+    return apiHelper(messenger.getContactData.bind(messenger, contactId))
       .success(data => data)
       .promise();
   }
@@ -307,7 +310,7 @@ export default class CommunicationStore {
   @action
   async searchMessages(query) {
     const socket = await this.store.api.messenger.getSocket();
-    return apiHelper(socket.searchMessages(query))
+    return apiHelper(socket.searchMessages.bind(socket, query))
       .success((data) => {
         const messages = data.messages || [];
         this.foundMessages = messages.map(m => new Message(m));
@@ -352,14 +355,13 @@ export default class CommunicationStore {
     const { api: { messenger } } = this.store;
     const { messengerUser } = this.messengerInfo;
 
-    apiHelper(messenger.saveSettings(messengerUser.id, settings))
-      .success(() => {
-        const userSettings = new UserSettings(settings);
-        soundHelper.setUserSettings(userSettings);
-
-        extendObservable(this.messengerInfo, { userSettings });
-      })
-      .error(log.error);
+    apiHelper(
+      messenger.saveSettings.bind(messenger, messengerUser.id, settings)
+    ).success(() => {
+      const userSettings = new UserSettings(settings);
+      soundHelper.setUserSettings(userSettings);
+      extendObservable(this.messengerInfo, { userSettings });
+    }).error(log.error);
   }
 
   @action
@@ -590,7 +592,8 @@ export default class CommunicationStore {
         (userContacts.length - 1 !== index ? ',' : '');
     }, recipients + (userContacts.length === 0 ? '' : ','));
 
-    apiHelper(messenger.createNewGroup(
+    apiHelper(messenger.createNewGroup.bind(
+       messenger,
        messengerUser.id,
        groupName,
        recipients,
@@ -606,7 +609,7 @@ export default class CommunicationStore {
   async getConversationSettings(id) {
     const socket = await this.store.api.messenger.getSocket();
 
-    return apiHelper(socket.getConversationSettings(id), this)
+    return apiHelper(socket.getConversationSettings.bind(socket, id), this)
       .success(data => new ConversationSettingsData(data))
       .promise();
   }
@@ -615,8 +618,8 @@ export default class CommunicationStore {
   async changeConvNotificationProp(state) {
     const socket = await this.store.api.messenger.getSocket();
 
-    apiHelper(socket.changeConvNotificationProp(
-      this.selectedConversationId, state
+    apiHelper(socket.changeConvNotificationProp.bind(
+      socket, this.selectedConversationId, state
     )).success();
 
     this.selectedConversation.setNotificationSetting(state);
@@ -629,7 +632,7 @@ export default class CommunicationStore {
   @action
   async getChatGroupSettings(groupId: number) {
     const socket = await this.store.api.messenger.getSocket();
-    return apiHelper(socket.getChatGroupSettings(groupId), this)
+    return apiHelper(socket.getChatGroupSettings.bind(socket, groupId), this)
       .success(data => data)
       .promise();
   }
@@ -637,8 +640,10 @@ export default class CommunicationStore {
   @action
   async getMarketingGroupSettings(groupId: number) {
     const socket = await this.store.api.messenger.getSocket();
-    return apiHelper(socket.getMarketingGroupSettings(groupId), this)
-      .success(data => data)
+    return apiHelper(
+      socket.getMarketingGroupSettings.bind(socket, groupId),
+      this
+    ).success(data => data)
       .promise();
   }
 
@@ -658,7 +663,7 @@ export default class CommunicationStore {
   async removeGroupMember(groupId: number, memberId: number) {
     const socket = await this.store.api.messenger.getSocket();
 
-    apiHelper(socket.removeGroupMember(groupId, memberId))
+    apiHelper(socket.removeGroupMember.bind(socket, groupId, memberId))
       .success(() => {
         this.selectedConversation.removeMember(memberId);
         this.markConversationAsRead(this.selectedConversationId);
@@ -669,7 +674,7 @@ export default class CommunicationStore {
   @action
   async addGroupMember(groupId: number, memberAlias: string) {
     const socket = await this.store.api.messenger.getSocket();
-    return apiHelper(socket.addGroupMember(groupId, memberAlias))
+    return apiHelper(socket.addGroupMember.bind(socket, groupId, memberAlias))
       .success((data) => {
         this.selectedConversation.addMember(data);
 
@@ -696,7 +701,7 @@ export default class CommunicationStore {
   async deleteGroup(groupId: number) {
     const socket = await this.store.api.messenger.getSocket();
 
-    return apiHelper(socket.deleteGroup(groupId))
+    return apiHelper(socket.deleteGroup.bind(socket, groupId))
       .success(() => {
         // Remove group locally
         const { groups } = this.messengerInfo;
@@ -739,7 +744,8 @@ export default class CommunicationStore {
 
     const { messengerUser } = this.messengerInfo;
 
-    apiHelper(api.messenger.sendMessage(
+    apiHelper(api.messenger.sendMessage.bind(
+      api.messenger,
       messengerUser.id,
       recipients,
       message
@@ -752,10 +758,11 @@ export default class CommunicationStore {
 
   @action
   sendMsgToMarketingGroup(groupRecipientId, message: string) {
-    const { api } = this.store;
+    const { messenger } = this.store.api;
     const { messengerUser } = this.messengerInfo;
 
-    apiHelper(api.messenger.sendMessage(
+    apiHelper(messenger.sendMessage.bind(
+      messenger,
       messengerUser.id,
       groupRecipientId,
       message

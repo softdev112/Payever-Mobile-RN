@@ -56,7 +56,8 @@ export default class ContactsStore {
     }
 
     return apiHelper(
-      api.contacts.getAllContacts(
+      api.contacts.getAllContacts.bind(
+        api.contacts,
         profiles.currentProfile.business.slug,
         currentPage + 1
       ),
@@ -94,7 +95,8 @@ export default class ContactsStore {
     }
 
     return apiHelper(
-      api.contacts.getAllContactGroups(
+      api.contacts.getAllContactGroups.bind(
+        api.contacts,
         profiles.currentProfile.business.slug,
         currentPage + 1
       ),
@@ -108,8 +110,8 @@ export default class ContactsStore {
 
   @action
   getGroupDetails(groupId: number) {
-    const { api } = this.store;
-    return apiHelper(api.contacts.getGroupDetails(groupId))
+    const { contacts } = this.store.api;
+    return apiHelper(contacts.getGroupDetails.bind(contacts, groupId))
       .success(data => data)
       .error(log.error)
       .promise();
@@ -117,11 +119,13 @@ export default class ContactsStore {
 
   @action
   createNewContact(contact: CustomerContactInfo) {
-    const { api } = this.store;
+    const { contacts } = this.store.api;
 
     const slug = this.store.profiles.currentProfile.business.slug;
-    return apiHelper(api.contacts.createNewContact(contact, slug), this)
-      .success(data => data)
+    return apiHelper(
+      contacts.createNewContact.bind(contacts, contact, slug),
+      this
+    ).success(data => data)
       .error(log.error)
       .promise();
   }
@@ -194,10 +198,12 @@ export default class ContactsStore {
 
   @action
   sendInviteMessage(contactId: number) {
-    const { api } = this.store;
+    const { contacts } = this.store.api;
 
-    return apiHelper(api.contacts.sendInviteMessage([contactId]), this)
-      .success()
+    return apiHelper(
+      contacts.sendInviteMessage.bind(contacts, [contactId]),
+      this
+    ).success()
       .error(log.error)
       .promise();
   }

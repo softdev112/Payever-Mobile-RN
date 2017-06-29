@@ -4,7 +4,7 @@
 import {
   isConnected,
   loadFromApi,
-} from '../../src/common/utils/apiHelper/network';
+} from '../../src/common/utils/networkHelper';
 import apiHelper from '../../src/common/utils/apiHelper';
 
 jest.mock('../../src/common/utils/apiHelper/network');
@@ -25,6 +25,6 @@ describe('apiHelper Tests', () => {
   it('apiHelper if promise is null should return null', () => {
     const result = apiHelper(null);
 
-    expect(result.apiPromise).toBeNull();
+    expect(result.fetchPromise).toBeNull();
   });
 });

@@ -28,9 +28,9 @@ export default class AuthStore {
 
   @action
   signIn(username, password): Promise<SignInResult> {
-    const { api } = this.store;
+    const { auth } = this.store.api;
 
-    return apiHelper(api.auth.login(username, password), this)
+    return apiHelper(auth.login.bind(auth, username, password), this)
       .success((data: AuthData) => {
         this.updateTokens(data);
       })
@@ -39,9 +39,9 @@ export default class AuthStore {
 
   @action
   registerNewUser(user) {
-    const { api } = this.store;
+    const { auth } = this.store.api;
 
-    return apiHelper(api.auth.registerNewUser(user), this)
+    return apiHelper(auth.registerNewUser.bind(auth, user), this)
       .success()
       .error(log.error)
       .promise();
@@ -49,9 +49,9 @@ export default class AuthStore {
 
   @action
   resetPassword(email) {
-    const { api } = this.store;
+    const { auth } = this.store.api;
 
-    return apiHelper(api.auth.resetPassword(email), this)
+    return apiHelper(auth.resetPassword.bind(auth, email), this)
       .success(() => true)
       .error((err) => {
         log.error(err);
@@ -62,9 +62,9 @@ export default class AuthStore {
 
   @action
   resendConfirmationEmail(email) {
-    const { api } = this.store;
+    const { auth } = this.store.api;
 
-    return apiHelper(api.auth.resendConfirmationEmail(email), this)
+    return apiHelper(auth.resendConfirmationEmail.bind(auth, email), this)
       .success(() => true)
       .error((err) => {
         log.error(err);
@@ -75,14 +75,15 @@ export default class AuthStore {
 
   @action
   async signInWithSocial(socialNetwork: string, socialUserInfo) {
-    const { api } = this.store;
+    const { auth } = this.store.api;
 
     const userInfo = await this.connectToSocial(socialNetwork, socialUserInfo);
 
-    return apiHelper(api.auth.loginWithTemporarySocialUser(
-        userInfo.client_id,
-        userInfo.secret_key
-      ),
+    return apiHelper(auth.loginWithTemporarySocialUser.bind(
+      auth,
+      userInfo.client_id,
+      userInfo.secret_key
+    ),
       this
     ).success((data: AuthData) => {
       this.updateTokens(data);
@@ -92,10 +93,12 @@ export default class AuthStore {
 
   @action
   connectToSocial(socialName, credentials: SocialCredentials) {
-    const { api } = this.store;
+    const { auth } = this.store.api;
 
-    return apiHelper(api.auth.connectToSocial(socialName, credentials), this)
-      .success((data: AuthData) => data)
+    return apiHelper(
+      auth.connectToSocial.bind(auth, socialName, credentials),
+      this
+    ).success((data: AuthData) => data)
       .error(log.error)
       .promise();
   }
@@ -120,7 +123,7 @@ export default class AuthStore {
 
   @action
   async getAccessToken() {
-    const { api } = this.store;
+    const { auth } = this.store.api;
 
     log.debug('Expires value', this.expiresIn);
 
@@ -135,16 +138,17 @@ export default class AuthStore {
       throw new Error('AuthStore: Couldn\'t refresh, refreshToken is null');
     }
 
-    return apiHelper(api.auth.refreshToken(this.refreshToken))
-      .success((data: AuthData) => {
-        this.updateTokens(data);
-        return data.access_token;
-      })
-      .error((e) => {
-        log.warn('Could not refresh token. Try to restart application', e);
-        showScreen('core.LaunchScreen');
-      })
-      .promise();
+    return apiHelper(
+      auth.refreshToken.bind(auth, this.refreshToken),
+      this,
+      false
+    ).success((data: AuthData) => {
+      this.updateTokens(data);
+      return data.access_token;
+    }).error((e) => {
+      log.warn('Could not refresh token. Try to restart application', e);
+      showScreen('core.LaunchScreen');
+    }).promise();
   }
 
   updateTokens(data) {

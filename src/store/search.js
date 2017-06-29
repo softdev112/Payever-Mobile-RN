@@ -20,11 +20,11 @@ export default class SearchStore {
 
   @action
   async search(query) {
-    const { api } = this.store;
+    const { profiles } = this.store.api;
 
     this.isSearching = true;
 
-    apiHelper(api.profiles.search(query), this)
+    apiHelper(profiles.search.bind(profiles, query), this)
       .success((data: Array<SearchDataRow>) => {
         if (data.length > 0) {
           this.items = data.map(d => new SearchRow(d));
@@ -39,7 +39,7 @@ export default class SearchStore {
 
   @action
   async follow(businessId) {
-    const { api } = this.store;
+    const { profiles } = this.store.api;
 
     // find row element
     const item: SearchRow = this.items.find((row) => row.id === businessId);
@@ -52,7 +52,7 @@ export default class SearchStore {
     // Set follow/unfollow processing flag for row
     runInAction(() => item.is_followUpdating = true);
 
-    apiHelper(api.profiles.follow(businessId), this)
+    apiHelper(profiles.follow.bind(profiles, businessId), this)
       .success(() => {
         item.is_following = true;
       })
@@ -61,7 +61,7 @@ export default class SearchStore {
 
   @action
   async unfollow(businessId) {
-    const { api } = this.store;
+    const { profiles } = this.store.api;
 
     // find row element
     const item: SearchRow = this.items.find((row) => row.id === businessId);
@@ -74,7 +74,7 @@ export default class SearchStore {
     // Set follow/unfollow processing flag for row
     runInAction(() => item.is_followUpdating = true);
 
-    apiHelper(api.profiles.unfollow(businessId), this)
+    apiHelper(profiles.unfollow.bind(profiles, businessId), this)
       .success(() => {
         item.is_following = false;
       })

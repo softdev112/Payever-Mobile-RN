@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import type { Navigator } from 'react-native-navigation';
-import { Button, ErrorBox, Header, StyleSheet, View } from 'ui';
+import { Button, Error, Header, StyleSheet, View } from 'ui';
 
 export default class ErrorPage extends Component {
   static navigatorStyle = {
@@ -10,17 +10,13 @@ export default class ErrorPage extends Component {
   props: {
     message: string;
     navigator: Navigator;
-    onBack?: () => {};
   };
 
-  onGoBack() {
-    const { navigator, onBack } = this.props;
-
-    if (onBack) {
-      onBack();
-    } else {
-      navigator.pop({ animated: true });
-    }
+  onGoToLogin() {
+    this.props.navigator.push({
+      screen: 'auth.Login',
+      animated: true,
+    });
   }
 
   render() {
@@ -28,11 +24,14 @@ export default class ErrorPage extends Component {
       <View style={styles.container}>
         <Header>Error</Header>
         <View style={styles.errorContainer}>
-          <ErrorBox message={this.props.message} />
+          <Error
+            style={styles.error}
+            message={this.props.message}
+          />
           <Button
             style={styles.button}
-            title={'Back'}
-            onPress={::this.onGoBack}
+            title={'Go To Login'}
+            onPress={::this.onGoToLogin}
           />
         </View>
       </View>
@@ -46,9 +45,9 @@ const styles = StyleSheet.create({
   },
 
   errorContainer: {
-    alignItems: 'center',
-    paddingTop: '15%',
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 
   error: {
@@ -56,8 +55,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    marginTop: 30,
+    marginTop: 10,
     width: 120,
-    elevation: 2,
   },
 });

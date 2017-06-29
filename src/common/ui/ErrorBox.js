@@ -7,7 +7,7 @@ export default function ErrorBox({ message }: PropTypes) {
   return (
     <View style={styles.container}>
       <Icon style={styles.icon} source="icon-alert-32" />
-      <Text>{message}</Text>
+      <Text style={styles.message}>{message}</Text>
     </View>
   );
 }
@@ -15,7 +15,6 @@ export default function ErrorBox({ message }: PropTypes) {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    flex: 1,
     justifyContent: 'center',
     padding: 20,
   },
@@ -23,6 +22,11 @@ const styles = StyleSheet.create({
   icon: {
     color: '$pe_color_red',
     marginBottom: 10,
+  },
+
+  message: {
+    textAlign: 'center',
+    fontSize: 15,
   },
 });
 

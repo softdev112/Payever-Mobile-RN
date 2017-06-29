@@ -3,7 +3,7 @@ import { View, Linking } from 'react-native';
 import { observer, inject } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import { NavBar, StyleSheet, WebViewEx as ReactWebView } from 'ui';
-import { log } from 'utils';
+import { log, networkHelper } from 'utils';
 
 import injectedCode, { getLoaderHtml } from './injectedCode';
 import WebViewError from './WebViewError';
@@ -18,7 +18,7 @@ const BACK_ON_URLS = [
   { urlMask: '/login',   screen: 'core.LaunchScreen' },
 ];
 
-@inject('auth', 'config')
+@inject('auth', 'config', 'profiles')
 @observer
 export default class WebView extends Component {
   static defaultProps = {
@@ -67,6 +67,21 @@ export default class WebView extends Component {
     };
   }
 
+  async componentWillMount() {
+    const { navigator } = this.props;
+
+    if (!await networkHelper.isConnected()) {
+      navigator.showModal({
+        screen: 'core.ErrorPage',
+        passProps: {
+          message: networkHelper.errorMessage,
+          onBack: () => navigator.dismissModal({ animationType: 'none' }),
+        },
+      });
+      navigator.pop({ animated: false });
+    }
+  }
+
   onError({ nativeEvent }) {
     this.setState({
       errorMsg: nativeEvent.description,
@@ -79,7 +94,7 @@ export default class WebView extends Component {
   }
 
   onLoadStart({ nativeEvent }) {
-    const { auth, navigator } = this.props;
+    const { auth, config, navigator } = this.props;
 
     if (nativeEvent.url.startsWith('react-js-navigation')) {
       return;
@@ -88,7 +103,7 @@ export default class WebView extends Component {
     this.setState({ isCustomNavBar: false });
 
     if (nativeEvent.url
-      && !nativeEvent.url.startsWith(this.props.config.siteUrl)
+      && !nativeEvent.url.startsWith(config.siteUrl)
       && !nativeEvent.url.includes('about:blank')
       && !nativeEvent.url.startsWith('data:text')) {
       if (this.props.enableExternalBrowser) {
@@ -122,7 +137,10 @@ export default class WebView extends Component {
 
   onMessage({ nativeEvent }) {
     const siteUrl = this.props.config.siteUrl;
-    if (nativeEvent.url && !nativeEvent.url.startsWith(siteUrl)) return;
+    if (nativeEvent.url && !nativeEvent.url.startsWith(siteUrl)
+      && !nativeEvent.url.includes('about:blank')) {
+      return;
+    }
 
     const data = nativeEvent.data;
     const object = JSON.parse(data);

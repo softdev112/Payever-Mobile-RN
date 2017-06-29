@@ -7,7 +7,7 @@ import config from '../../../src/config';
 import {
   isConnected,
   loadFromApi,
-} from '../../../src/common/utils/apiHelper/network';
+} from '../../../src/common/utils/networkHelper';
 
 jest.mock('../../../src/common/utils/apiHelper/network');
 jest.mock('../../../src/common/utils/apiHelper/cache');

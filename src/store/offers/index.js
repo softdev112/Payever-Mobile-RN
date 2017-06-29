@@ -15,8 +15,8 @@ export default class OffersStore {
 
   @action
   getOfferById(id: string) {
-    const { api } = this.store;
-    return apiHelper(api.profiles.getOfferById(id), this)
+    const { profiles } = this.store.api;
+    return apiHelper(profiles.getOfferById.bind(profiles, id), this)
       .success(offer => new Offer(offer))
       .promise();
   }

@@ -49,9 +49,9 @@ export default class ProfilesStore {
 
   @action
   async load(options = {}): Promise<boolean> {
-    const { api } = this.store;
+    const { profiles } = this.store.api;
 
-    return apiHelper(api.profiles.getAccessibleList(), this)
+    return apiHelper(profiles.getAccessibleList.bind(profiles), this)
       .cache('profiles', { lifetime: 3600, noCache: !!options.noCache })
       .success((data: ProfilesData) => {
         this.ownBusinesses = data.businesses_own.map((profile) => {
@@ -67,14 +67,14 @@ export default class ProfilesStore {
 
   @action
   async loadApplications(profileId) {
-    const { api } = this.store;
+    const { menu } = this.store.api;
 
     const profile = this.businessById(profileId);
     if (profile.applications.length > 0) {
       return profile.applications;
     }
 
-    return apiHelper(api.menu.getList(profileId))
+    return apiHelper(menu.getList.bind(menu, profileId))
       .cache(`applications-${profileId}`, { lifetime: 3600 })
       .success((data: Array<MenuItemData>) => {
         const apps = data
@@ -88,7 +88,7 @@ export default class ProfilesStore {
 
   @action
   async loadActivities(profileId) {
-    const { api } = this.store;
+    const { business } = this.store.api;
 
     const profile = this.businessById(profileId);
     if (profile.activities.length > 0) {
@@ -96,7 +96,7 @@ export default class ProfilesStore {
     }
 
     const slug = profile.business.slug;
-    return apiHelper(api.business.getActivities(slug))
+    return apiHelper(business.getActivities.bind(business, slug))
       .cache(`activities-${profileId}`, { lifetime: 3600 })
       .success((data: Array<ActivityItemData>) => {
         const activities = data
@@ -110,7 +110,7 @@ export default class ProfilesStore {
 
   @action
   async loadTodos(profileId) {
-    const { api } = this.store;
+    const { business } = this.store.api;
 
     const profile = this.businessById(profileId);
     if (profile.todos.length > 0) {
@@ -118,7 +118,7 @@ export default class ProfilesStore {
     }
 
     const slug = profile.business.slug;
-    return apiHelper(api.business.getTodos(slug))
+    return apiHelper(business.getTodos.bind(business, slug))
       .cache(`todos-${profileId}`, { lifetime: 3600 })
       .success((data: Array<ActivityItemData>) => {
         const activities = data
@@ -133,9 +133,9 @@ export default class ProfilesStore {
 
   @action
   getAllOffers(id: number) {
-    const { api } = this.store;
+    const { profiles } = this.store.api;
 
-    return apiHelper(api.profiles.getAllOffers(id), this)
+    return apiHelper(profiles.getAllOffers.bind(profiles, id), this)
       .success((data) => {
         this.profileOffers = data.map(o => new Offer(o));
         return this.profileOffers;
@@ -149,20 +149,22 @@ export default class ProfilesStore {
   }
 
   @action
-  createNewBusiness(business) {
-    const { api } = this.store;
+  createNewBusiness(newBusiness) {
+    const { business } = this.store.api;
 
-    return apiHelper(api.business.createNewBusiness(business), this)
-      .success(data => data)
+    return apiHelper(
+      business.createNewBusiness.bind(business, newBusiness),
+      this
+    ).success(data => data)
       .error(log.error)
       .promise();
   }
 
   @action
   getBusinessInfo(slug: string) {
-    const { api } = this.store;
+    const { business } = this.store.api;
 
-    return apiHelper(api.business.getBusinessInfo(slug), this)
+    return apiHelper(business.getBusinessInfo.bind(business, slug), this)
       .success(data => data)
       .error(log.error)
       .promise();
