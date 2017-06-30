@@ -2,6 +2,7 @@ import {
   action, autorun, computed, extendObservable, observable, ObservableMap,
 } from 'mobx';
 import { apiHelper, log, soundHelper } from 'utils';
+import moment from 'moment';
 import { throttle } from 'lodash';
 
 import UserSettings from './models/UserSettings';
@@ -36,6 +37,7 @@ export default class CommunicationStore {
   @observable contactsFilter: string = '';
 
   @observable selectedMessages: Array<Message> = [];
+  @observable sendingMessages: Array<Message> = [];
 
   @observable contactsAutocomplete: Array = [];
   @observable contactsForAction: Array<Contact> = [];
@@ -226,6 +228,8 @@ export default class CommunicationStore {
   async sendMessage(conversationId, body, channelSetId = '') {
     const socket = await this.store.api.messenger.getSocket();
 
+    this.addSendingMessage(body);
+
     const options = {
       conversationId,
       body,
@@ -288,6 +292,22 @@ export default class CommunicationStore {
       },
       this.updateFileUploadProgress.bind(this)
     ).catch(log.error);
+  }
+
+  @action
+  addSendingMessage(body) {
+    const sendMessage = {
+      body,
+      messengerUser: this.messengerInfo.messengerUser,
+      id: String(Date.now()),
+      conversationId: this.selectedConversationId,
+      date: new Date(),
+      isSendingMessage: true,
+    };
+
+    let { messages } = this.selectedConversation;
+    messages = messages.concat(sendMessage);
+    this.selectedConversation.messages = messages;
   }
 
   @action
@@ -403,8 +423,27 @@ export default class CommunicationStore {
     return this.conversations.get(this.selectedConversationId);
   }
 
-  @computed get isContactsForActionAvailable() {
+  @computed
+  get isContactsForActionAvailable() {
     return this.contactsForAction.length > 0;
+  }
+
+  @computed
+  get conversationMessages() {
+    const sendingMessages = this.sendingMessages.filter(
+      m => m.conversation.id === this.selectedConversationId
+    );
+
+    function sortMessagesByDate(m1, m2) {
+      if (moment(m1.date).isSame(m2.date)) return 0;
+
+      return moment(m1.date).isBefore(m2.date) ? 1 : -1;
+    }
+
+    return this.selectedConversation.messages
+      .slice()
+      .concat(sendingMessages.slice())
+      .sort(sortMessagesByDate);
   }
 
   @action

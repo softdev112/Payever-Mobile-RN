@@ -88,7 +88,7 @@ export default class Conversation {
       return;
     }
 
-    this.conversationInfo.latestMessage = message;
+    this.conversationInfo.setLatestMessage(message);
 
     // Test if it has media and remove upload progress message with this one
     if (message.medias.length > 0) {
@@ -120,6 +120,15 @@ export default class Conversation {
 
         return;
       }
+    }
+
+    // Replace sending message stub with real message
+    const sendingMessageIdx = this.messages.findIndex(
+      m => m.body === message.body && m.isSendingMessage
+    );
+    if (sendingMessageIdx !== -1) {
+      this.messages[sendingMessageIdx] = message;
+      return;
     }
 
     this.messages.push(message);

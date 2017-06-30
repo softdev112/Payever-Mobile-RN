@@ -5,6 +5,7 @@ import { Html, RoundSwitch, StyleSheet, Text, View } from 'ui';
 
 import MediaView from './MediaView';
 import UploadFileMsgView from './UploadFileMsgView';
+import SendingMessage from './SendingMessage';
 import Avatar from '../contacts/Avatar';
 import type Message from '../../../../store/communication/models/Message';
 import Offer from '../../../marketing/components/OfferDetails';
@@ -109,7 +110,10 @@ export default class MessageView extends PureComponent {
   onMessageLongPress({ nativeEvent }) {
     const { message, onLongPress } = this.props;
 
-    if (message.deleted) return;
+    if (message.deleted || message.isFileUploading
+      || message.isSendingMessage) {
+      return;
+    }
 
     if (onLongPress) {
       onLongPress(nativeEvent, message);
@@ -149,6 +153,10 @@ export default class MessageView extends PureComponent {
 
     if (message.isFileUploading) {
       return <UploadFileMsgView message={message} />;
+    }
+
+    if (message.isSendingMessage) {
+      return <SendingMessage message={message} />;
     }
 
     if (message.isSystem) {

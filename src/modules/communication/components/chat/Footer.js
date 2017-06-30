@@ -1,5 +1,5 @@
 import { Component, PropTypes } from 'react';
-import { Animated, Keyboard, TextInput } from 'react-native';
+import { Animated, Keyboard, Platform, TextInput } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
 import * as Animatable from 'react-native-animatable';
@@ -251,7 +251,12 @@ export default class Footer extends Component {
           returnKeyType="done"
           underlineColorAndroid="transparent"
           value={this.state.text}
-          onChange={::this.onInputContentSizeChange}
+          onContentSizeChange={
+            Platform.OS === 'ios' ? ::this.onInputContentSizeChange : null
+          }
+          onChange={
+            Platform.OS === 'android' ? ::this.onInputContentSizeChange : null
+          }
         />
         <Icon
           style={sendBtnStyle}

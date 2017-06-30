@@ -378,7 +378,7 @@ export default class Chat extends Component {
     if (ui.searchMessagesMode && foundMessages.length !== 0) {
       data = foundMessages.slice().filter(m => !m.deleted).reverse();
     } else {
-      data = conversation.messages.slice().reverse();
+      data = communication.conversationMessages;
     }
 
     return (

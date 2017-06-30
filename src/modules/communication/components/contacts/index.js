@@ -70,8 +70,15 @@ export default class Contacts extends Component {
     const sections = communication.getContactsAndGroupsData()
       .map((section, idx) => {
         function sortByLastMessage(contact1, contact2) {
-          if (!contact1 || !contact1.latestMessage) return -1;
-          if (!contact2 || !contact2.latestMessage) return 1;
+          if (!contact1 || !contact1.latestMessage
+            || !contact1.latestMessage.date) {
+            return 1;
+          }
+
+          if (!contact2 || !contact2.latestMessage
+            || !contact2.latestMessage.date) {
+            return -1;
+          }
 
           const date1 = contact1.latestMessage.date;
           const date2 = contact2.latestMessage.date;

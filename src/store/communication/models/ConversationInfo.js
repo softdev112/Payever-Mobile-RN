@@ -1,4 +1,4 @@
-import { computed, extendObservable, observable } from 'mobx';
+import { action, computed, extendObservable, observable } from 'mobx';
 import type Avatar from './Avatar';
 import type Message from './Message';
 import type { ConversationStatus } from './Conversation';
@@ -28,5 +28,10 @@ export default class ConversationInfo {
   @computed
   get isGroup() {
     return this.type.endsWith('group');
+  }
+
+  @action
+  setLatestMessage(message: Message) {
+    extendObservable(this, { latestMessage: message });
   }
 }

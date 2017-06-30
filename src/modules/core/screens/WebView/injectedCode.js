@@ -26,7 +26,7 @@ function injectedBody(options) {
 
     setTimeout(() => sendData({
       command: 'hide-loader',
-    }, 400));
+    }, 500));
   }
 
   function replaceHeaderButtons() {

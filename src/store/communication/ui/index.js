@@ -5,7 +5,7 @@ export default class CommunicationUI {
   @observable forwardMode: boolean = false;
   @observable selectMode: boolean = false;
   @observable pickContactMode: boolean = false;
-  @observable chatFooterHeight: boolean = false;
+  @observable chatFooterHeight: number = 50;
 
   @action
   setSearchMessagesMode(mode: boolean) {
