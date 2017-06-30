@@ -28,7 +28,7 @@ const APPS: Array<Object> = [
   },
 ];
 
-@inject('config', 'profiles', 'ui')
+@inject('config', 'contacts', 'profiles', 'ui')
 @observer
 export default class Dock extends Component {
   static defaultProps = {
@@ -63,8 +63,11 @@ export default class Dock extends Component {
   }
 
   async componentWillMount() {
-    const { config, profiles } = this.props;
+    const { contacts, config, profiles } = this.props;
     const profile = profiles.currentProfile;
+
+    // Ping to restore session if app was previously closed
+    await contacts.store.api.sessionRestorationPing();
 
     let apps = [];
     if (profiles.currentProfile.isBusiness) {
@@ -89,7 +92,7 @@ export default class Dock extends Component {
     this.setState({ appsBottom: apps });
   }
 
-  onAppClick(app: AppItem) {
+  async onAppClick(app: AppItem) {
     const { onAppClick, ui } = this.props;
     const { navigator } = this.context;
     const { settings } = app;

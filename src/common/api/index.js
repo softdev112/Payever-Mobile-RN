@@ -91,16 +91,21 @@ export default class PayeverApi {
   }
 
   //noinspection InfiniteRecursionJS
-  async fetch(url: string, options: Object = {}): Promise<ApiResp> {
+  async fetch(
+    url: string,
+    options: Object = { showErrorPage: true }
+  ): Promise<ApiResp> {
     // Test if connection available if not and there is
     // no cache show error screen
     if (url !== '/device/link' && !await networkHelper.isConnected()) {
-      Navigation.showModal({
-        screen: 'core.ErrorPage',
-        passProps: {
-          message: networkHelper.errorMessage,
-        },
-      });
+      if (options.showErrorPage) {
+        Navigation.showModal({
+          screen: 'core.ErrorPage',
+          passProps: {
+            message: networkHelper.errorMessage,
+          },
+        });
+      }
 
       return null;
     }
@@ -132,6 +137,19 @@ export default class PayeverApi {
     }
 
     return response;
+  }
+
+  // TODO: Find workaround losing session Id when close app
+  // TODO: backend sends session id with session: true and if user close app
+  // TODO: we will lost session and WebView starts to redirect us to login page
+  // TODO: temporary we invoke this request to init new session to get WebView
+  // TODO: work one way to solve it change backend to send session Id with
+  // TODO: expired time not limit it with session lifetime
+  sessionRestorationPing() {
+    return this.get(
+      '/api/rest/v1/contact/business/cool-business',
+      { method: 'HEAD', showErrorPage: false }
+    );
   }
 
   normalizeUrl(url: string, query: Object = null) {

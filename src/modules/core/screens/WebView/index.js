@@ -78,7 +78,8 @@ export default class WebView extends Component {
           onBack: () => navigator.dismissModal({ animationType: 'none' }),
         },
       });
-      navigator.pop({ animated: false });
+
+      setTimeout(() => navigator.pop({ animated: false }), 500);
     }
   }
 

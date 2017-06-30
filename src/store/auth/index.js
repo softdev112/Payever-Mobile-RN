@@ -1,7 +1,7 @@
 import { action, observable, runInAction } from 'mobx';
 import { now, isDate } from 'lodash';
-import { AsyncStorage, NetInfo } from 'react-native';
-import { apiHelper, log } from 'utils';
+import { AsyncStorage } from 'react-native';
+import { apiHelper, log, networkHelper } from 'utils';
 import type Store from './../index';
 import type { AuthData } from '../../common/api/AuthApi';
 import { showScreen } from '../../common/Navigation';
@@ -122,15 +122,14 @@ export default class AuthStore {
   }
 
   @action
-  async getAccessToken() {
+  async getAccessToken(forceUpdate: boolean = false) {
     const { auth } = this.store.api;
-
     log.debug('Expires value', this.expiresIn);
 
     // Test if internet connection available if not do not update token
     // but grunt access
-    if ((this.accessToken && this.expiresIn > new Date())
-      || !(await NetInfo.isConnected)) {
+    if ((!forceUpdate && this.accessToken && this.expiresIn > new Date())
+      || !(await networkHelper.isConnected())) {
       return this.accessToken;
     }
 
