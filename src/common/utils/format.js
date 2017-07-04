@@ -19,4 +19,12 @@ export default {
     return +(bytes / (1000 ** e)).toFixed(1) + ' ' +
       'BKMGTP'.charAt(e).replace('B', '') + 'B';
   },
+
+  /**
+   * Return string without any html tags
+   *
+   */
+  stripHtml(text: string): string {
+    return text.replace(/<[^>]*>/g, '');
+  },
 };

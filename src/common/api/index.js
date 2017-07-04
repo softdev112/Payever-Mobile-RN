@@ -102,7 +102,7 @@ export default class PayeverApi {
         Navigation.showModal({
           screen: 'core.ErrorPage',
           passProps: {
-            message: networkHelper.errorMessage,
+            message: networkHelper.errorConnection,
           },
         });
       }

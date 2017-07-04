@@ -193,13 +193,13 @@ async function loadData(
       Navigation.showModal({
         screen: 'core.ErrorPage',
         passProps: {
-          message: networkHelper.errorMessage,
+          message: networkHelper.errorConnection,
           onBack: Navigation.dismissModal.bind(null, { animated: true }),
         },
       });
     }
 
-    return { data: null, error: networkHelper.errorMessage };
+    return { data: null, error: networkHelper.errorConnection };
   }
 
   // If cache up to date or there is no internet return cache data
@@ -207,23 +207,25 @@ async function loadData(
     || cacheHelper.isCacheUpToDate(cacheId, lifeTime))) {
     return {
       data,
-      error: data ? '' : networkHelper.errorMessage,
+      error: data ? '' : networkHelper.errorConnection,
     };
   }
 
-  // Load from API and update data in cache
-  try {
-    data = await networkHelper.loadFromApi(apiEndPoint(), timeout);
-    if (data && cacheId) {
-      cacheHelper.saveToCache(cacheId, lifeTime, data);
+  // Load from API and update data in cache if connected
+  if (isConnected) {
+    try {
+      data = await networkHelper.loadFromApi(apiEndPoint(), timeout);
+      if (data && cacheId) {
+        cacheHelper.saveToCache(cacheId, lifeTime, data);
+      }
+    } catch (e) {
+      log.warn(e + (e.errorName ? ` (${e.errorName})` : ''));
     }
-  } catch (e) {
-    log.warn(e + (e.errorName ? ` (${e.errorName})` : ''));
   }
 
   return {
     data,
-    error: data ? '' : networkHelper.errorMessage,
+    error: data ? '' : networkHelper.errorTimeout,
   };
 }
 

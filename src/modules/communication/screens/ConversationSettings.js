@@ -76,9 +76,7 @@ export default class ConversationSettings extends Component {
 
   render() {
     const {
-      isLoading,
-      error,
-      selectedConversation: { settings },
+      settingsLoading, selectedConversation: { settings },
     } = this.props.communication;
 
     return (
@@ -87,9 +85,12 @@ export default class ConversationSettings extends Component {
           <NavBar.Back />
           <NavBar.Title title="Conversation Settings" />
         </NavBar>
-        <Loader isLoading={isLoading}>
-          {error || !settings ? (
-            <ErrorBox message={error} />
+        <Loader isLoading={settingsLoading.isLoading}>
+          {settingsLoading.error || !settings ? (
+            <ErrorBox
+              message={settingsLoading.error
+                || 'Error while loading settings. Try again later please'}
+            />
           ) : (
             <View style={styles.userInfo}>
               <Avatar

@@ -4,7 +4,10 @@ import config from '../../config';
 export const NETWORK_ERROR =
   'No Internet connection available.' +
   ' Please check out your connection settings and try again later.';
-const TIMEOUT: number = 7000;
+export const TIMEOUT_ERROR =
+  'Sorry! Server is unreachable at the moment. Try again later, please!';
+
+const TIMEOUT: number = 10000;
 const requestTimers = [];
 
 async function timeoutPromise(timerIdx, timeout = TIMEOUT) {
@@ -12,7 +15,7 @@ async function timeoutPromise(timerIdx, timeout = TIMEOUT) {
     requestTimers[timerIdx] = setTimeout((arg) => {
       requestTimers[timerIdx] = null;
       reject(arg);
-    }, timeout, NETWORK_ERROR);
+    }, timeout, TIMEOUT_ERROR);
   });
 }
 
@@ -62,5 +65,6 @@ export default {
     return resp && resp.data;
   },
 
-  errorMessage: NETWORK_ERROR,
+  errorConnection: NETWORK_ERROR,
+  errorTimeout: TIMEOUT_ERROR,
 };

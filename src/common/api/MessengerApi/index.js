@@ -108,6 +108,10 @@ export default class MessengerApi {
     });
   }
 
+  getGroupInfo(groupId: number): Promise<GroupResp> {
+    return this.client.get(`/api/rest/v1/messenger/contact-group/${groupId}`);
+  }
+
   sendMessage(
     userId: number,
     recipients: string,

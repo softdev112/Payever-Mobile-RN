@@ -74,7 +74,7 @@ export default class WebView extends Component {
       navigator.showModal({
         screen: 'core.ErrorPage',
         passProps: {
-          message: networkHelper.errorMessage,
+          message: networkHelper.errorConnection,
           onBack: () => navigator.dismissModal({ animationType: 'none' }),
         },
       });

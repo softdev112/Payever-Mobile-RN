@@ -17,6 +17,10 @@ import type UIStore from '../../../../store/ui';
 @inject('communication', 'ui')
 @observer
 export default class Contact extends Component {
+  static defaultProps = {
+    selected: false,
+  };
+
   static contextTypes = {
     navigator: PropTypes.object.isRequired,
   };
@@ -27,16 +31,23 @@ export default class Contact extends Component {
 
   props: {
     communication?: CommunicationStore;
-    item: Object;
+    item: ConversationInfo | Message;
+    selected?: boolean;
+    onSelected: () => {};
     ui: UIStore;
   };
 
   onContactSelect(item: ConversationInfo | Message) {
-    const { communication, ui } = this.props;
+    const { communication, ui, onSelected } = this.props;
     const { navigator } = this.context;
     const conversationId = item.conversation ? item.conversation.id : item.id;
     communication.setSelectedConversationId(conversationId);
 
+    if (onSelected) {
+      onSelected(item);
+    }
+
+    // If not tablet mode go to separate Chat Screen
     if (!ui.phoneMode) return;
 
     communication.ui.setPickContactMode(false);
@@ -54,8 +65,7 @@ export default class Contact extends Component {
   }
 
   renderContact(item: ConversationInfo) {
-    const current = this.props.communication.selectedConversationId === item.id;
-    const style = current ? styles.current : null;
+    const style = this.props.selected ? styles.current : null;
     const latestMessage = item.latestMessage
       ? this.preprocessLatestMsgText(item.latestMessage.editBody) : '';
 
@@ -87,8 +97,7 @@ export default class Contact extends Component {
   }
 
   renderGroup(item: ConversationInfo) {
-    const current = this.props.communication.selectedConversationId === item.id;
-    const style = current ? styles.current : null;
+    const style = this.props.selected ? styles.current : null;
     const latestMessage = item.latestMessage
       ? this.preprocessLatestMsgText(item.latestMessage.editBody) : '';
 
@@ -125,8 +134,7 @@ export default class Contact extends Component {
     const name = item.own ? 'You' : item.senderName.split(' ')[0];
     const text = item.editBody.replace(/\s+/g, ' ');
 
-    const current = this.props.communication.selectedConversationId === item.id;
-    const style = current ? styles.current : null;
+    const style = this.props.selected ? styles.current : null;
 
     return (
       <TouchableOpacity

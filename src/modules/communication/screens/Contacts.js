@@ -1,4 +1,4 @@
-import { Component, PropTypes } from 'react';
+import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
 import { Navigator } from 'react-native-navigation';
 import { images, NavBar, StyleSheet, View } from 'ui';
@@ -6,31 +6,33 @@ import Contacts from '../components/contacts';
 
 import CommunicationStore from '../../../store/communication';
 
-@inject('communication')
+@inject('communication', 'profiles')
 @observer
 export default class ContactsScreen extends Component {
-  static contextTypes = {
-    navigator: PropTypes.object.isRequired,
-  };
-
   static navigatorStyle = {
     navBarHidden: true,
   };
 
   props: {
     communication: CommunicationStore;
+    navigator: Navigator;
     style?: Object;
   };
 
-  context: {
-    navigator: Navigator;
-  };
+  async componentDidMount() {
+    const { communication, profiles } = this.props;
+
+    //noinspection JSIgnoredPromiseFromCall
+    if (!communication.ui.pickContactMode) {
+      await communication.loadMessengerInfo(profiles.currentProfile);
+    }
+  }
 
   onCancelForwarding() {
-    const { communication } = this.props;
+    const { communication, navigator } = this.props;
     communication.ui.setSelectMode(true);
     communication.ui.setPickContactMode(false);
-    this.context.navigator.push({
+    navigator.push({
       screen: 'communication.Chat',
       animated: false,
     });
@@ -59,7 +61,7 @@ export default class ContactsScreen extends Component {
           )}
           <NavBar.Menu />
         </NavBar>
-        <Contacts />
+        <Contacts id={communication.selectedConversationId} />
       </View>
     );
   }

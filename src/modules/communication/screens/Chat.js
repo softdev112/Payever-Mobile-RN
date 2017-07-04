@@ -37,6 +37,14 @@ export default class ChatScreen extends Component {
     };
   }
 
+  componentWillUnmount() {
+    // Save undelivered messages to storage
+    const { communication: { selectedConversation } } = this.props;
+    if (selectedConversation) {
+      selectedConversation.saveUndeliveredMsgs();
+    }
+  }
+
   onDeleteAllMessages() {
     const { communication } = this.props;
     const { selectedConversation } = communication;

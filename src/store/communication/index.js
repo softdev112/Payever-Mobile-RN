@@ -2,7 +2,6 @@ import {
   action, autorun, computed, extendObservable, observable, ObservableMap,
 } from 'mobx';
 import { apiHelper, log, soundHelper } from 'utils';
-import moment from 'moment';
 import { throttle } from 'lodash';
 
 import UserSettings from './models/UserSettings';
@@ -16,6 +15,7 @@ import { MessengerData } from '../../common/api/MessengerApi';
 import SocketHandlers from './SocketHandlers';
 import Message from './models/Message';
 import CommunicationUI from './ui';
+import Group from './models/Group';
 import type SocketApi from '../../common/api/MessengerApi/SocketApi';
 import type ConversationInfo from './models/ConversationInfo';
 import type BusinessProfile from '../profiles/models/BusinessProfile';
@@ -26,10 +26,16 @@ const MSGS_REQUEST_LIMIT = 30;
 
 export default class CommunicationStore {
   @observable conversations: ObservableMap<Conversation> = observable.map();
-  @observable messengerInfo: MessengerInfo;
+  @observable messengerInfo: MessengerInfo = { groups: [], conversations: [] };
 
   @observable isLoading: boolean = false;
   @observable error: string = '';
+
+  // Additional loading object for settings because it loads in parallel
+  @observable settingsLoading: SettingsLoadingObject = {
+    isLoading: false,
+    error: '',
+  };
 
   @observable selectedConversationId: number;
 
@@ -37,7 +43,6 @@ export default class CommunicationStore {
   @observable contactsFilter: string = '';
 
   @observable selectedMessages: Array<Message> = [];
-  @observable sendingMessages: Array<Message> = [];
 
   @observable contactsAutocomplete: Array = [];
   @observable contactsForAction: Array<Contact> = [];
@@ -87,7 +92,7 @@ export default class CommunicationStore {
     }
 
     return apiHelper(apiEndPoint, this)
-      .cache('communication:messengerInfo:' + profile.id)
+      .cache(`communication:messengerInfo:${profile.id}`)
       .success((data: MessengerData) => {
         this.initSocket(data.wsUrl, data.messengerUser.id);
         this.messengerInfo = new MessengerInfo(data);
@@ -117,20 +122,21 @@ export default class CommunicationStore {
           data,
           this.messengerInfo.byId(id)
         );
-        conversation.allMessagesFetched =
-          data.messages.length < limit;
+        conversation.allMessagesFetched = data.messages.length < limit;
 
-        // Load settings
-        let settings = null;
-        if (conversation.isGroup) {
-          settings = await this.getGroupSettings(id, conversation.type);
-        } else {
-          settings = await this.getConversationSettings(id);
+        // Load settings synchroniously for groups course it using data from
+        // setting to display header and async for conversation
+        try {
+          let settings;
+          if (conversation.isGroup) {
+            settings = await this.getGroupSettings(id, conversation.type);
+            conversation.setConversationSettings(settings);
+          }
+        } catch (err) {
+          log.error(err);
         }
 
-        conversation.setConversationSettings(settings);
         this.conversations.merge({ [id]: observable(conversation) });
-
         return conversation;
       })
       .promise();
@@ -226,9 +232,9 @@ export default class CommunicationStore {
 
   @action
   async sendMessage(conversationId, body, channelSetId = '') {
-    const socket = await this.store.api.messenger.getSocket();
-
     this.addSendingMessage(body);
+
+    const socket = await this.store.api.messenger.getSocket();
 
     const options = {
       conversationId,
@@ -262,9 +268,6 @@ export default class CommunicationStore {
       soundHelper.playMsgSent();
     }
 
-    let { messages } = this.selectedConversation;
-    this.isFileUploading = true;
-
     const uploadMessage = {
       id: String(Date.now()),
       fileName: mediaFileInfo.fileName,
@@ -277,8 +280,7 @@ export default class CommunicationStore {
       isPicture: mediaFileInfo.isPicture,
     };
 
-    messages = messages.concat(uploadMessage);
-    this.selectedConversation.messages = messages;
+    this.selectedConversation.addMessage(uploadMessage);
 
     this.filesUploadingProgress.set(uploadMessage.id, 0);
 
@@ -305,9 +307,7 @@ export default class CommunicationStore {
       isSendingMessage: true,
     };
 
-    let { messages } = this.selectedConversation;
-    messages = messages.concat(sendMessage);
-    this.selectedConversation.messages = messages;
+    this.selectedConversation.addMessage(sendMessage);
   }
 
   @action
@@ -423,29 +423,6 @@ export default class CommunicationStore {
     return this.conversations.get(this.selectedConversationId);
   }
 
-  @computed
-  get isContactsForActionAvailable() {
-    return this.contactsForAction.length > 0;
-  }
-
-  @computed
-  get conversationMessages() {
-    const sendingMessages = this.sendingMessages.filter(
-      m => m.conversation.id === this.selectedConversationId
-    );
-
-    function sortMessagesByDate(m1, m2) {
-      if (moment(m1.date).isSame(m2.date)) return 0;
-
-      return moment(m1.date).isBefore(m2.date) ? 1 : -1;
-    }
-
-    return this.selectedConversation.messages
-      .slice()
-      .concat(sendingMessages.slice())
-      .sort(sortMessagesByDate);
-  }
-
   @action
   updateUserStatus(status: ConversationStatus, typing = false) {
     this.conversations.forEach((conversation: Conversation) => {
@@ -462,7 +439,7 @@ export default class CommunicationStore {
   }
 
   @action
-  updateMessage(message: Message) {
+  async updateMessage(message: Message) {
     const conversationId = message.conversation.id;
 
     // Update a conversation if it's opened
@@ -476,7 +453,7 @@ export default class CommunicationStore {
     // Reload messengerInfo if it's new conversation
     if (!info) {
       //noinspection JSIgnoredPromiseFromCall
-      this.loadMessengerInfo(this.store.profiles.currentProfile);
+      await this.loadMessengerInfo(this.store.profiles.currentProfile);
       return;
     }
 
@@ -645,11 +622,24 @@ export default class CommunicationStore {
   }
 
   @action
+  getGroupInfo(id) {
+    const { messenger } = this.store.api;
+
+    return apiHelper(
+      messenger.getGroupInfo.bind(messenger, id),
+      this.settingsLoading
+    ).success(data => new Group(data))
+      .promise();
+  }
+
+  @action
   async getConversationSettings(id) {
     const socket = await this.store.api.messenger.getSocket();
 
-    return apiHelper(socket.getConversationSettings.bind(socket, id), this)
-      .success(data => new ConversationSettingsData(data))
+    return apiHelper(
+      socket.getConversationSettings.bind(socket, id),
+      this.settingsLoading
+    ).success(data => new ConversationSettingsData(data))
       .promise();
   }
 
@@ -671,8 +661,10 @@ export default class CommunicationStore {
   @action
   async getChatGroupSettings(groupId: number) {
     const socket = await this.store.api.messenger.getSocket();
-    return apiHelper(socket.getChatGroupSettings.bind(socket, groupId), this)
-      .success(data => data)
+    return apiHelper(
+      socket.getChatGroupSettings.bind(socket, groupId),
+      this.settingsLoading
+    ).success(data => data)
       .promise();
   }
 
@@ -681,7 +673,7 @@ export default class CommunicationStore {
     const socket = await this.store.api.messenger.getSocket();
     return apiHelper(
       socket.getMarketingGroupSettings.bind(socket, groupId),
-      this
+      this.settingsLoading
     ).success(data => data)
       .promise();
   }
@@ -831,3 +823,8 @@ export default class CommunicationStore {
     });
   }
 }
+
+type SettingsLoadingObject = {
+  isLoading: boolean;
+  error: string;
+};

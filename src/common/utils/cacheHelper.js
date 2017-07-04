@@ -39,6 +39,7 @@ export default {
   },
 
   isCacheAvailable(cacheId) {
+    // TODO: implement this function
     return cacheId;
   },
 

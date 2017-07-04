@@ -12,7 +12,7 @@ const MSG_UNSUBSCRIBE = 6;
 const MSG_PUBLISH     = 7;
 const MSG_EVENT       = 8;
 
-const CONNECTION_TIMEOUT = 7000;
+const CONNECTION_TIMEOUT = 10000;
 
 /**
  * WAMP protocol v1 implementation for GeniusesOfSymfony/WebSocketBundle

@@ -9,6 +9,8 @@ import ListHeader from './ListHeader';
 import Search from './Search';
 
 import type CommunicationStore from '../../../../store/communication';
+import type ConversationInfo
+  from '../../../../store/communication/models/ConversationInfo';
 import type ProfilesStore from '../../../../store/profiles';
 
 const NUM_CONTACTS_TO_SHOW = 5;
@@ -24,6 +26,7 @@ export default class Contacts extends Component {
 
   state: {
     isListShrink: boolean;
+    selectedContact: ConversationInfo;
   };
 
   renderHeader: () => Component;
@@ -38,6 +41,7 @@ export default class Contacts extends Component {
 
     this.state = {
       isListShrink: true,
+      selectedContact: null,
     };
   }
 
@@ -56,6 +60,10 @@ export default class Contacts extends Component {
     });
 
     communication.search('');
+  }
+
+  onContactSelected(item) {
+    this.setState({ selectedContact: item });
   }
 
   onShowMoreContacts() {
@@ -146,6 +154,8 @@ export default class Contacts extends Component {
 
   render() {
     const { communication, style } = this.props;
+    const { selectedContact } = this.state;
+    const selectedContactId = selectedContact && selectedContact.id;
     const info = communication.messengerInfo;
 
     if (!info) {
@@ -169,7 +179,13 @@ export default class Contacts extends Component {
           ListFooterComponent={this.renderFooter}
           sections={this.getSectionsData()}
           initialNumToRender={20}
-          renderItem={({ item }) => <Contact item={item} />}
+          renderItem={({ item }) => (
+            <Contact
+              onSelected={::this.onContactSelected}
+              item={item}
+              selected={selectedContactId === item.id}
+            />
+          )}
           renderSectionHeader={({ section }) => (
             <ListHeader
               conversationInfo={info}

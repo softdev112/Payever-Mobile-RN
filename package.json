@@ -24,7 +24,6 @@
     "base-64": "^0.1.0",
     "immutable": "^3.8.1",
     "jest": "^20.0.4",
-    "jest-react-native": "^18.0.0",
     "lodash": "^4.17.2",
     "mobx": "^3.1.6",
     "mobx-logger": "^0.4.0",
@@ -51,26 +50,22 @@
     "react-native-simple-auth": "^2.1.0",
     "react-native-sound": "^0.10.1",
     "react-native-swipeable": "^0.4.0",
-    "react-test-renderer": "^15.5.4",
+    "react-test-renderer": "^15.6.1",
     "redux": "^3.6.0"
   },
   "jest": {
     "preset": "react-native",
-    "globals": {
-      "__DEV__": true
-    },
     "rootDir": ".",
     "setupTestFrameworkScriptFile": "./__tests__/jest-env.js",
     "modulePathIgnorePatterns": [
       "test-data",
-      "jest-env.js",
-      "node_modules",
-      "node_modules/react-native/Libraries/"
+      "jest-env.js"
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "./__mocks__/fileMock.js",
       "\\.(css|less)$": "./__mocks__/styleMock.js"
-    }
+    },
+    "verbose": true
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -95,6 +90,7 @@
     "gulp-svg2ttf": "^2.0.0",
     "gulp-svgicons2svgfont": "^3.0.1",
     "gulp-task-doc": "^1.0.11",
+    "jest-react-native": "^18.0.0",
     "minimist": "^1.2.0",
     "vinyl": "^2.0.1"
   },

@@ -77,7 +77,7 @@ export default class GroupSettings extends Component {
   render() {
     const { communication } = this.props;
     const {
-      isLoading, error, selectedConversation: conversation,
+      settingsLoading, selectedConversation: conversation,
     } = communication;
 
     const membersCount = conversation ? conversation.membersCount : 0;
@@ -88,9 +88,12 @@ export default class GroupSettings extends Component {
           <NavBar.Back />
           <NavBar.Title title="Group Settings" showTitle="always" />
         </NavBar>
-        <Loader isLoading={isLoading}>
-          {error || !conversation || !conversation.settings ? (
-            <ErrorBox message={error || 'Error while reading settings'} />
+        <Loader isLoading={settingsLoading.isLoading}>
+          {settingsLoading.error || !conversation || !conversation.settings ? (
+            <ErrorBox
+              message={settingsLoading.error
+                || 'Error while loading settings. Try again later please'}
+            />
           ) : (
             <View style={styles.userInfo}>
               <View style={styles.nameContainer}>

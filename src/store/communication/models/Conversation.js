@@ -2,7 +2,7 @@ import { action, extendObservable, observable, computed } from 'mobx';
 import { debounce } from 'lodash';
 import { Platform } from 'react-native';
 import RNFetchBlob from 'react-native-fetch-blob';
-import { log, soundHelper } from 'utils';
+import { cacheHelper, format, log, soundHelper } from 'utils';
 import Message from './Message';
 import ConversationSettingsInfo from './ConversationSettingsInfo';
 import GroupSettingsInfo from './GroupSettingsInfo';
@@ -34,6 +34,7 @@ export default class Conversation {
       6000
     );
 
+    this.loadUndeliveredMsgs();
     this.conversationInfo = conversationInfo;
   }
 
@@ -124,7 +125,8 @@ export default class Conversation {
 
     // Replace sending message stub with real message
     const sendingMessageIdx = this.messages.findIndex(
-      m => m.body === message.body && m.isSendingMessage
+      m => m.body.trim() === format.stripHtml(message.body.trim())
+        && m.isSendingMessage
     );
     if (sendingMessageIdx !== -1) {
       this.messages[sendingMessageIdx] = message;
@@ -188,6 +190,40 @@ export default class Conversation {
     if (this.settings) {
       this.settings.notification = value;
     }
+  }
+
+  @action
+  saveUndeliveredMsgs() {
+    const undeliveredMsgs = this.messages.filter(m => m.isSendingMessage);
+    cacheHelper.saveToCache(
+      `communication:conversation:${this.id}:undelivered`, null, undeliveredMsgs
+    );
+  }
+
+  @action
+  async loadUndeliveredMsgs() {
+    let undeliveredMsg;
+    try {
+      undeliveredMsg = await cacheHelper.loadFromCache(
+        `communication:conversation:${this.id}:undelivered`
+      );
+    } catch (err) {
+      log.error(err);
+    }
+
+    if (!undeliveredMsg || undeliveredMsg.length === 0) return;
+
+    this.messages = this.messages.concat(undeliveredMsg);
+  }
+
+  @action
+  async removeMessage(messageId: number) {
+    this.messages = this.messages.filter(m => m.id !== messageId);
+  }
+
+  @action
+  async addMessage(message: Message) {
+    this.messages = this.messages.concat(message);
   }
 }
 
