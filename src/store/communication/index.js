@@ -608,13 +608,16 @@ export default class CommunicationStore {
         (userContacts.length - 1 !== index ? ',' : '');
     }, recipients + (userContacts.length === 0 ? '' : ','));
 
-    apiHelper(messenger.createNewGroup.bind(
-       messenger,
-       messengerUser.id,
-       groupName,
-       recipients,
-       isAllowGroupChat
-    )).success()
+    apiHelper(
+      messenger.createNewGroup.bind(
+        messenger,
+        messengerUser.id,
+        groupName,
+        recipients,
+        isAllowGroupChat
+      ),
+      this
+    ).success()
       .complete(() => {
         this.clearContactsForAction();
         contacts.clearSelectedContacts();

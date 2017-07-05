@@ -158,7 +158,7 @@ export default class Contacts extends Component {
     const selectedContactId = selectedContact && selectedContact.id;
     const info = communication.messengerInfo;
 
-    if (!info) {
+    if (!info || communication.isLoading) {
       return (
         <View style={[styles.container, style]}>
           <Loader isLoading={communication.isLoading}>
