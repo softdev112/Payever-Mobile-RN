@@ -5,6 +5,8 @@ export default class CommunicationUI {
   @observable forwardMode: boolean = false;
   @observable selectMode: boolean = false;
   @observable pickContactMode: boolean = false;
+  @observable chatScreenOpen: boolean = false;
+
   @observable chatFooterHeight: number = 50;
 
   @action
@@ -30,5 +32,10 @@ export default class CommunicationUI {
   @action
   setChatFooterHeight(height: number) {
     this.chatFooterHeight = height;
+  }
+
+  @action
+  setChatScreenOpen(chatOpen: boolean) {
+    this.chatScreenOpen = chatOpen;
   }
 }

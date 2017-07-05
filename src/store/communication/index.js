@@ -462,8 +462,18 @@ export default class CommunicationStore {
     }
 
     if (message.unread) {
-      info.unreadCount = +info.unreadCount + 1;
-      log.info('Increase count', info);
+      if (message.conversation.id === this.selectedConversationId
+        && this.ui.chatScreenOpen) {
+        const socket = await this.store.api.messenger.getSocket();
+        await apiHelper(
+          socket.updateMessagesReadStatus.bind(socket, [message.id])
+        ).error(log.error)
+          .promise();
+        message.unread = false;
+      } else {
+        info.unreadCount = +info.unreadCount + 1;
+        log.info('Increase count', info);
+      }
     }
   }
 

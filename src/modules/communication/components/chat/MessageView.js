@@ -61,7 +61,6 @@ export default class MessageView extends PureComponent {
 
   componentWillReceiveProps(newProps) {
     const { selectMode } = this.props;
-
     if (!selectMode && newProps.selectMode) {
       this.onSelectModeOn();
     } else if (selectMode && !newProps.selectMode) {
@@ -101,7 +100,6 @@ export default class MessageView extends PureComponent {
 
   onMessagePress({ nativeEvent }) {
     const { onPress } = this.props;
-
     if (onPress) {
       onPress(nativeEvent);
     }

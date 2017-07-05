@@ -50,6 +50,10 @@ export default class Chat extends Component {
   $inputFooter: Footer;
   keyboardListeners: Array<Object>;
 
+  // TODO: onViewableItemsChange triggers after componentWillUnmount
+  // TODO: guess it's RN bug so for now using flag to avoid setState on unmount
+  isScreenUnmount: boolean = false;
+
   constructor(props) {
     super(props);
 
@@ -94,17 +98,21 @@ export default class Chat extends Component {
         () => this.setState({ keyboardHeight: 0 })
       ),
     ];
+
+    this.props.communication.ui.setChatScreenOpen(true);
   }
 
   componentWillUnmount() {
     const { communication } = this.props;
     communication.removeMessageForReply();
     communication.removeMessageForEdit();
+    communication.ui.setChatScreenOpen(false);
 
     if (this.loaderTimer) {
       clearTimeout(this.loaderTimer);
     }
 
+    this.isScreenUnmount = true;
     this.keyboardListeners.forEach(listener => listener.remove());
   }
 
@@ -148,7 +156,9 @@ export default class Chat extends Component {
   }
 
   async onViewableItemsChange({ viewableItems }) {
-    if (!viewableItems || viewableItems.length === 0) return;
+    if (this.isScreenUnmount || !viewableItems || viewableItems.length === 0) {
+      return;
+    }
 
     const { communication } = this.props;
     const { selectedConversation } = communication;

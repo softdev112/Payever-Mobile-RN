@@ -105,7 +105,7 @@
                 DomHandler = index.DomHandler,
                 DomUtils = index.DomUtils;
 
-//TODO: make this a streamable handler
+// TODO: make this a streamable handler
             function FeedHandler(callback, options) {
                 this.init(callback, options);
             }

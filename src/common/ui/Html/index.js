@@ -14,6 +14,7 @@ export default class HtmlView extends Component {
   };
 
   renderingHtml: boolean;
+  updateTimer: number;
 
   constructor(props) {
     super(props);
@@ -28,6 +29,14 @@ export default class HtmlView extends Component {
 
   componentWillReceiveProps(newProps) {
     this.startHtmlRender(newProps.source).catch(log.warn);
+  }
+
+  componentWillUnmount() {
+    this.renderingHtml = false;
+    if (this.updateTimer) {
+      clearImmediate(this.updateTimer);
+      this.updateTimer = null;
+    }
   }
 
   onLinkPress(url) {
@@ -47,19 +56,22 @@ export default class HtmlView extends Component {
 
     const html = autoLinker.link(source);
 
-    try {
-      this.renderingHtml = true;
-      const elements = await htmlToElements(html, opts);
-      this.setState({ elements });
-    } finally {
-      this.renderingHtml = false;
-    }
+    this.updateTimer = setImmediate(async () => {
+      try {
+        this.renderingHtml = true;
+        const elements = await htmlToElements(html, opts);
+        this.setState({ elements });
+      } finally {
+        this.renderingHtml = false;
+      }
+    });
   }
 
   render() {
     if (this.state.elements) {
       return (<View cstyle={{ flex: 1 }}>{this.state.elements}</View>);
     }
+
     return (<View />);
   }
 }
