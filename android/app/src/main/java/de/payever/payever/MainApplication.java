@@ -1,5 +1,7 @@
 package de.payever.payever;
 
+import android.support.compat.BuildConfig;
+
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.smixx.fabric.FabricPackage;
 import com.facebook.react.ReactPackage;

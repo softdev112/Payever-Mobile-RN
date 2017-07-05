@@ -124,6 +124,14 @@ export default class Footer extends Component {
       }
 
       this.setState({ text: '' });
+
+      // Fake call for Android because it didn't call nor onChange
+      // neither onContentSizeChange then set text = ''
+      if (Platform.OS === 'android') {
+        this.onInputContentSizeChange(
+          { nativeEvent: { contentSize: { height: MIN_FOOTER_HEIGHT } } }
+        );
+      }
     });
   }
 
@@ -163,6 +171,14 @@ export default class Footer extends Component {
 
     Keyboard.dismiss();
     this.setState({ text: '' });
+
+    // Fake call for Android because it didn't call nor onChange
+    // neither onContentSizeChange then set text = ''
+    if (Platform.OS === 'android') {
+      this.onInputContentSizeChange(
+        { nativeEvent: { contentSize: { height: MIN_FOOTER_HEIGHT } } }
+      );
+    }
   }
 
   onType(text) {
