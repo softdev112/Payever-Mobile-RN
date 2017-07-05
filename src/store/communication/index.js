@@ -26,7 +26,11 @@ const MSGS_REQUEST_LIMIT = 30;
 
 export default class CommunicationStore {
   @observable conversations: ObservableMap<Conversation> = observable.map();
-  @observable messengerInfo: MessengerInfo = { groups: [], conversations: [] };
+  @observable messengerInfo: MessengerInfo = {
+    conversations: [],
+    groups: [],
+    marketingGroups: [],
+  };
 
   @observable isLoading: boolean = false;
   @observable error: string = '';

@@ -8,7 +8,7 @@ import Avatar from '../contacts/Avatar';
 import CommunicationStore from '../../../../store/communication';
 
 // Message lifetime sec
-const MESSAGE_LIFETIME = 60000;
+const MESSAGE_LIFETIME = 20000;
 
 @inject('communication')
 @observer
