@@ -113,7 +113,14 @@ export default class CommunicationStore {
 
   @action
   async loadConversation(id: number, limit: number = MSGS_REQUEST_LIMIT) {
-    const socket = await this.store.api.messenger.getSocket();
+    const { api } = this.store;
+    let socket = api.messenger.socket;
+    try {
+      socket = await api.messenger.getSocket();
+    } catch (err) {
+      log.error(err);
+    }
+
     const userId = socket.userId;
     const type = this.messengerInfo.getConversationType(id);
 
@@ -835,6 +842,7 @@ export default class CommunicationStore {
     if (this.socketObserver) {
       this.socketObserver();
     }
+
     this.socketObserver = autorun(() => {
       this.socket.setAccessToken(auth.getAccessToken());
     });

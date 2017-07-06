@@ -1,0 +1,2603 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for store/communication/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">All files</a> / <a href="index.html">store/communication</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0.35% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>1/283</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/128</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/96</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0.37% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>1/269</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import {
+  action, autorun, computed, extendObservable, observable, ObservableMap,
+} from 'mobx';
+import { apiHelper, log, soundHelper } from 'utils';
+import { throttle } from 'lodash';
+&nbsp;
+import UserSettings from './models/UserSettings';
+import MessengerInfo from './models/MessengerInfo';
+import Contact from './models/Contact';
+import Conversation, { ConversationStatus }
+  from './models/Conversation';
+import ConversationSettingsData from './models/ConversationSettingsInfo';
+import GroupSettingsData from './models/GroupSettingsInfo';
+import { MessengerData } from '../../common/api/MessengerApi';
+import SocketHandlers from './SocketHandlers';
+import Message from './models/Message';
+import CommunicationUI from './ui';
+import Group from './models/Group';
+import type SocketApi from '../../common/api/MessengerApi/SocketApi';
+import type ConversationInfo from './models/ConversationInfo';
+import type BusinessProfile from '../profiles/models/BusinessProfile';
+import type GroupMemberInfo from './models/GroupMemberInfo';
+import type Store from '../index';
+&nbsp;
+const MSGS_REQUEST_LIMIT = 30;
+&nbsp;
+export default class CommunicationStore {
+  @observable conversations: ObservableMap&lt;Conversation&gt; = observable.map();
+  @observable messengerInfo: MessengerInfo = {
+    conversations: [],
+    groups: [],
+    marketingGroups: [],
+  };
+&nbsp;
+  @observable isLoading: boolean = false;
+  @observable error: string = '';
+&nbsp;
+  // Additional loading object for settings because it loads in parallel
+  @observable settingsLoading: SettingsLoadingObject = {
+    isLoading: false,
+    error: '',
+  };
+&nbsp;
+  @observable selectedConversationId: number;
+&nbsp;
+  @observable foundMessages: Array&lt;Message&gt; = [];
+  @observable contactsFilter: string = '';
+&nbsp;
+  @observable selectedMessages: Array&lt;Message&gt; = [];
+&nbsp;
+  @observable contactsAutocomplete: Array = [];
+  @observable contactsForAction: Array&lt;Contact&gt; = [];
+&nbsp;
+  @observable messageForReply: Message = null;
+  @observable messageForEdit: Message = null;
+&nbsp;
+  @observable filesUploadingProgress: ObservableMap&lt;number&gt; = observable.map();
+&nbsp;
+  // UI
+  @observable ui: CommunicationUI = {};
+&nbsp;
+  store: Store;
+  socket: SocketApi;
+  socketHandlers: SocketHandlers;
+  socketObserver: Function;
+&nbsp;
+<span class="fstat-no" title="function not covered" >  co</span>nstructor(store: Store) {
+<span class="cstat-no" title="statement not covered" >    this.store = store;</span>
+<span class="cstat-no" title="statement not covered" >    this.socketHandlers = new SocketHandlers(this);</span>
+&nbsp;
+    // Allow to send typingStatus only once per 5sec
+<span class="cstat-no" title="statement not covered" >    this.updateTypingStatus = this::throttle(this.updateTypingStatus, 5000);</span>
+<span class="cstat-no" title="statement not covered" >    this.ui = new CommunicationUI();</span>
+  }
+&nbsp;
+  @computed <span class="fstat-no" title="function not covered" >ge</span>t isError() {
+<span class="cstat-no" title="statement not covered" >    return this.error !== '';</span>
+  }
+&nbsp;
+  @computed
+<span class="fstat-no" title="function not covered" >  ge</span>t conversationsCount() {
+    const { conversations, groups } = <span class="cstat-no" title="statement not covered" >this.messengerInfo;</span>
+<span class="cstat-no" title="statement not covered" >    return conversations.length + groups.length + this.foundMessages.length;</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync loadMessengerInfo(profile: BusinessProfile) {
+    const { messenger } = <span class="cstat-no" title="statement not covered" >this.store.api;</span>
+&nbsp;
+    let apiEndPoint;
+<span class="cstat-no" title="statement not covered" >    if (profile.isBusiness) {</span>
+<span class="cstat-no" title="statement not covered" >      apiEndPoint =</span>
+        messenger.getBusiness.bind(messenger, profile.business.slug);
+    } else {
+<span class="cstat-no" title="statement not covered" >      apiEndPoint = messenger.getPrivate.bind(messenger);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return apiHelper(apiEndPoint, this)</span>
+      .cache(`communication:messengerInfo:${profile.id}`)
+      .success(<span class="fstat-no" title="function not covered" >(d</span>ata: MessengerData) =&gt; {
+<span class="cstat-no" title="statement not covered" >        this.initSocket(data.wsUrl, data.messengerUser.id);</span>
+<span class="cstat-no" title="statement not covered" >        this.messengerInfo = new MessengerInfo(data);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!this.store.ui.phoneMode &amp;&amp; !this.selectedConversationId) {</span>
+          const conversation = <span class="cstat-no" title="statement not covered" >this.messengerInfo.getDefaultConversation();</span>
+<span class="cstat-no" title="statement not covered" >          this.setSelectedConversationId(conversation.id);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return this.messengerInfo;</span>
+      })
+      .promise();
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync loadConversation(id: number, limit: number = <span class="branch-0 cbranch-no" title="branch not covered" >MSGS_REQUEST_LIMIT)</span> {
+    const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+    const userId = <span class="cstat-no" title="statement not covered" >socket.userId;</span>
+    const type = <span class="cstat-no" title="statement not covered" >this.messengerInfo.getConversationType(id);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return apiHelper(</span>
+      socket.getConversation.bind(socket, { id, type, limit }),
+      this
+    ).cache(`communication:conversations:${userId}:${id}`)
+      .success(<span class="fstat-no" title="function not covered" >as</span>ync (data) =&gt; {
+        const conversation = <span class="cstat-no" title="statement not covered" >new Conversation(</span>
+          data,
+          this.messengerInfo.byId(id)
+        );
+<span class="cstat-no" title="statement not covered" >        conversation.allMessagesFetched = data.messages.length &lt; limit;</span>
+&nbsp;
+        // Load settings synchroniously for groups course it using data from
+        // setting to display header and async for conversation
+<span class="cstat-no" title="statement not covered" >        try {</span>
+          let settings;
+<span class="cstat-no" title="statement not covered" >          if (conversation.isGroup) {</span>
+<span class="cstat-no" title="statement not covered" >            settings = await this.getGroupSettings(id, conversation.type);</span>
+<span class="cstat-no" title="statement not covered" >            conversation.setConversationSettings(settings);</span>
+          }
+        } catch (err) {
+<span class="cstat-no" title="statement not covered" >          log.error(err);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.conversations.merge({ [id]: observable(conversation) });</span>
+<span class="cstat-no" title="statement not covered" >        return conversation;</span>
+      })
+      .promise();
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync loadOlderMessages(id: number) {
+    const conversation = <span class="cstat-no" title="statement not covered" >this.conversations.get(id);</span>
+<span class="cstat-no" title="statement not covered" >    if (!conversation) <span class="cstat-no" title="statement not covered" >return null;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (conversation.allMessagesFetched || this.isLoading) {</span>
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    }
+&nbsp;
+    const newMsgsLimit = <span class="cstat-no" title="statement not covered" >conversation.messages.length + MSGS_REQUEST_LIMIT;</span>
+<span class="cstat-no" title="statement not covered" >    return await this.loadConversation(id, newMsgsLimit);</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync setSelectedConversationId(id) {
+<span class="cstat-no" title="statement not covered" >    this.selectedConversationId = id;</span>
+<span class="cstat-no" title="statement not covered" >    if (id) {</span>
+      let conversation = <span class="cstat-no" title="statement not covered" >this.conversations.get(id);</span>
+<span class="cstat-no" title="statement not covered" >      if (!conversation) {</span>
+        //noinspection JSIgnoredPromiseFromCall
+<span class="cstat-no" title="statement not covered" >        conversation = await this.loadConversation(id);</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (conversation) {</span>
+<span class="cstat-no" title="statement not covered" >        await this.markConversationAsRead(id);</span>
+      }
+    }
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync markConversationAsRead(id) {
+<span class="cstat-no" title="statement not covered" >    if (!id) <span class="cstat-no" title="statement not covered" >return;</span></span>
+    const conversation: Conversation = <span class="cstat-no" title="statement not covered" >this.conversations.get(id);</span>
+    const unreadIds = <span class="cstat-no" title="statement not covered" >conversation.getUnreadIds();</span>
+<span class="cstat-no" title="statement not covered" >    if (conversation) {</span>
+<span class="cstat-no" title="statement not covered" >      conversation.messages.forEach(<span class="fstat-no" title="function not covered" >m </span>=&gt; <span class="cstat-no" title="statement not covered" >m.unread = false)</span>;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.messengerInfo) {</span>
+      const info = <span class="cstat-no" title="statement not covered" >this.messengerInfo.byId(id);</span>
+<span class="cstat-no" title="statement not covered" >      if (info) {</span>
+<span class="cstat-no" title="statement not covered" >        info.unreadCount = 0;</span>
+      }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (unreadIds.length &gt; 0) {</span>
+      const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+<span class="cstat-no" title="statement not covered" >      await apiHelper(socket.updateMessagesReadStatus.bind(socket, unreadIds))</span>
+        .error(log.error)
+        .promise();
+    }
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync search(text) {
+<span class="cstat-no" title="statement not covered" >    this.contactsFilter = text || '';</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!text) {</span>
+<span class="cstat-no" title="statement not covered" >      this.foundMessages = [];</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+&nbsp;
+    //noinspection JSIgnoredPromiseFromCall
+<span class="cstat-no" title="statement not covered" >    await this.searchMessages(this.contactsFilter.toLowerCase());</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  se</span>archContactsAutocomplete(query) {
+    const { api: { messenger } } = <span class="cstat-no" title="statement not covered" >this.store;</span>
+    const { messengerUser } = <span class="cstat-no" title="statement not covered" >this.messengerInfo;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return apiHelper(</span>
+      messenger.getAvailableContacts.bind(messenger, messengerUser.id, query),
+      this
+    ).success(<span class="fstat-no" title="function not covered" >(d</span>ata) =&gt; {
+<span class="cstat-no" title="statement not covered" >      this.contactsAutocomplete = data;</span>
+    }).error(log.error)
+    .promise();
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  ge</span>tContactData(contactId: number) {
+    const { api: { messenger } } = <span class="cstat-no" title="statement not covered" >this.store;</span>
+<span class="cstat-no" title="statement not covered" >    return apiHelper(messenger.getContactData.bind(messenger, contactId))</span>
+      .success(<span class="fstat-no" title="function not covered" >da</span>ta =&gt; <span class="cstat-no" title="statement not covered" >data)</span>
+      .promise();
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync sendMessage(conversationId, body, channelSetId = <span class="branch-0 cbranch-no" title="branch not covered" >'')</span> {
+<span class="cstat-no" title="statement not covered" >    this.addSendingMessage(body);</span>
+&nbsp;
+    const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+&nbsp;
+    const options = <span class="cstat-no" title="statement not covered" >{</span>
+      conversationId,
+      body,
+      channelSetId,
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.messageForReply) {</span>
+<span class="cstat-no" title="statement not covered" >      options.replyToId = this.messageForReply.id;</span>
+<span class="cstat-no" title="statement not covered" >      this.messageForReply = null;</span>
+    }
+&nbsp;
+    const { settings } = <span class="cstat-no" title="statement not covered" >this.selectedConversation;</span>
+<span class="cstat-no" title="statement not covered" >    if (settings &amp;&amp; settings.notification) {</span>
+<span class="cstat-no" title="statement not covered" >      soundHelper.playMsgSent();</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return socket.sendMessage(options);</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync sendMessageWithMedias(
+    body,
+    mediaFileInfo,
+    conversationId = <span class="branch-0 cbranch-no" title="branch not covered" >this.selectedConversationId</span>
+  ) {
+    const { messengerUser } = <span class="cstat-no" title="statement not covered" >this.messengerInfo;</span>
+&nbsp;
+    const { settings } = <span class="cstat-no" title="statement not covered" >this.selectedConversation;</span>
+<span class="cstat-no" title="statement not covered" >    if (settings &amp;&amp; settings.notification) {</span>
+<span class="cstat-no" title="statement not covered" >      soundHelper.playMsgSent();</span>
+    }
+&nbsp;
+    const uploadMessage = <span class="cstat-no" title="statement not covered" >{</span>
+      id: String(Date.now()),
+      fileName: mediaFileInfo.fileName,
+      uri: mediaFileInfo.uri,
+      path: mediaFileInfo.path,
+      isFileUploading: true,
+      width: mediaFileInfo.width,
+      height: mediaFileInfo.height,
+      fileSize: mediaFileInfo.fileSize,
+      isPicture: mediaFileInfo.isPicture,
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.selectedConversation.addMessage(uploadMessage);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.filesUploadingProgress.set(uploadMessage.id, 0);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    await this.store.api.messenger.sendMessageWithMedias(</span>
+      messengerUser.id,
+      conversationId,
+      body,
+      {
+        ...mediaFileInfo,
+        uploadProgressKey: uploadMessage.id,
+      },
+      this.updateFileUploadProgress.bind(this)
+    ).catch(log.error);
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  ad</span>dSendingMessage(body) {
+    const sendMessage = <span class="cstat-no" title="statement not covered" >{</span>
+      body,
+      messengerUser: this.messengerInfo.messengerUser,
+      id: String(Date.now()),
+      conversationId: this.selectedConversationId,
+      date: new Date(),
+      isSendingMessage: true,
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.selectedConversation.addMessage(sendMessage);</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  up</span>dateFileUploadProgress(progressId: string, value: number) {
+    const key = <span class="cstat-no" title="statement not covered" >progressId;</span>
+<span class="cstat-no" title="statement not covered" >    if (this.filesUploadingProgress.has(key)) {</span>
+<span class="cstat-no" title="statement not covered" >      if (value &gt;= 100) {</span>
+<span class="cstat-no" title="statement not covered" >        this.filesUploadingProgress.set(key, 100);</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        this.filesUploadingProgress.set(key, value);</span>
+      }
+    }
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  re</span>moveFileUploadingProgress(progressId: string) {
+<span class="cstat-no" title="statement not covered" >    this.filesUploadingProgress.delete(progressId);</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync searchMessages(query) {
+    const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+<span class="cstat-no" title="statement not covered" >    return apiHelper(socket.searchMessages.bind(socket, query))</span>
+      .success(<span class="fstat-no" title="function not covered" >(d</span>ata) =&gt; {
+        const messages = <span class="cstat-no" title="statement not covered" >data.messages || [];</span>
+<span class="cstat-no" title="statement not covered" >        this.foundMessages = messages.map(<span class="fstat-no" title="function not covered" >m </span>=&gt; <span class="cstat-no" title="statement not covered" >new Message(m))</span>;</span>
+<span class="cstat-no" title="statement not covered" >        return this.foundMessages;</span>
+      })
+      .promise();
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  cl</span>earFoundMessages() {
+<span class="cstat-no" title="statement not covered" >    this.foundMessages = [];</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  se</span>tMessageForReply(message: Message) {
+    // Clear all selections
+<span class="cstat-no" title="statement not covered" >    this.removeMessageForEdit();</span>
+<span class="cstat-no" title="statement not covered" >    this.clearSelectedMessages();</span>
+<span class="cstat-no" title="statement not covered" >    this.ui.setSelectMode(false);</span>
+<span class="cstat-no" title="statement not covered" >    this.ui.setForwardMode(false);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.messageForReply = message;</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  re</span>moveMessageForReply() {
+<span class="cstat-no" title="statement not covered" >    this.messageForReply = null;</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  se</span>tMessageForEdit(message: Message) {
+<span class="cstat-no" title="statement not covered" >    this.messageForEdit = message;</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  re</span>moveMessageForEdit() {
+<span class="cstat-no" title="statement not covered" >    this.messageForEdit = null;</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync saveUserSettings(settings: UserSettings) {
+    const { api: { messenger } } = <span class="cstat-no" title="statement not covered" >this.store;</span>
+    const { messengerUser } = <span class="cstat-no" title="statement not covered" >this.messengerInfo;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    apiHelper(</span>
+      messenger.saveSettings.bind(messenger, messengerUser.id, settings)
+    ).success(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+      const userSettings = <span class="cstat-no" title="statement not covered" >new UserSettings(settings);</span>
+<span class="cstat-no" title="statement not covered" >      soundHelper.setUserSettings(userSettings);</span>
+<span class="cstat-no" title="statement not covered" >      extendObservable(this.messengerInfo, { userSettings });</span>
+    }).error(log.error);
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync updateTypingStatus(conversationId) {
+    const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+<span class="cstat-no" title="statement not covered" >    return await socket.updateTypingStatus(conversationId);</span>
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  ge</span>tContactsAndGroupsData() {
+    const filter = <span class="cstat-no" title="statement not covered" >this.contactsFilter;</span>
+    const info = <span class="cstat-no" title="statement not covered" >this.messengerInfo;</span>
+&nbsp;
+    let contacts = <span class="cstat-no" title="statement not covered" >info ? info.conversations.slice() : [];</span>
+    let groups   = <span class="cstat-no" title="statement not covered" >info ? info.groups.slice() : [];</span>
+    const foundMessages = <span class="cstat-no" title="statement not covered" >this.foundMessages.slice();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (filter) {</span>
+<span class="cstat-no" title="statement not covered" >      contacts = contacts.filter(<span class="fstat-no" title="function not covered" >c </span>=&gt; <span class="cstat-no" title="statement not covered" >c.name.toLowerCase().includes(filter))</span>;</span>
+<span class="cstat-no" title="statement not covered" >      groups = groups.filter(<span class="fstat-no" title="function not covered" >c </span>=&gt; <span class="cstat-no" title="statement not covered" >c.name.toLowerCase().includes(filter))</span>;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return [{</span>
+      data: contacts,
+      title: 'contacts',
+      key: '1',
+    }, {
+      data: groups,
+      title: 'groups',
+      key: '2',
+    }, {
+      data: foundMessages,
+      title: 'foundMessages',
+      key: '3',
+    }];
+  }
+&nbsp;
+  @computed
+<span class="fstat-no" title="function not covered" >  ge</span>t selectedConversation(): Conversation {
+<span class="cstat-no" title="statement not covered" >    return this.conversations.get(this.selectedConversationId);</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  up</span>dateUserStatus(status: ConversationStatus, typing = <span class="branch-0 cbranch-no" title="branch not covered" >false)</span> {
+<span class="cstat-no" title="statement not covered" >    this.conversations.forEach(<span class="fstat-no" title="function not covered" >(c</span>onversation: Conversation) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (!conversation || !conversation.status) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >      if (conversation.status.userId !== status.userId) <span class="cstat-no" title="statement not covered" >return;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      conversation.updateStatus(status, typing);</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.messengerInfo.conversations.forEach(<span class="fstat-no" title="function not covered" >(i</span>nfo: ConversationInfo) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (info.status.userId !== status.userId) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >      info.updateStatus(status);</span>
+    });
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync updateMessage(message: Message) {
+    const conversationId = <span class="cstat-no" title="statement not covered" >message.conversation.id;</span>
+&nbsp;
+    // Update a conversation if it's opened
+    const conversation = <span class="cstat-no" title="statement not covered" >this.conversations.get(conversationId);</span>
+<span class="cstat-no" title="statement not covered" >    if (conversation) {</span>
+<span class="cstat-no" title="statement not covered" >      conversation.updateMessage(message);</span>
+    }
+&nbsp;
+    const info = <span class="cstat-no" title="statement not covered" >this.messengerInfo.byId(conversationId);</span>
+&nbsp;
+    // Reload messengerInfo if it's new conversation
+<span class="cstat-no" title="statement not covered" >    if (!info) {</span>
+      //noinspection JSIgnoredPromiseFromCall
+<span class="cstat-no" title="statement not covered" >      await this.loadMessengerInfo(this.store.profiles.currentProfile);</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (message.unread) {</span>
+<span class="cstat-no" title="statement not covered" >      if (message.conversation.id === this.selectedConversationId</span>
+        &amp;&amp; this.ui.chatScreenOpen) {
+        const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+<span class="cstat-no" title="statement not covered" >        await apiHelper(</span>
+          socket.updateMessagesReadStatus.bind(socket, [message.id])
+        ).error(log.error)
+          .promise();
+<span class="cstat-no" title="statement not covered" >        message.unread = false;</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        info.unreadCount = +info.unreadCount + 1;</span>
+<span class="cstat-no" title="statement not covered" >        log.info('Increase count', info);</span>
+      }
+    }
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync forwardMessage(forwardFromId) {
+    const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+<span class="cstat-no" title="statement not covered" >    return socket.sendMessage({</span>
+      forwardFromId,
+      conversationId: this.selectedConversationId,
+    });
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  fo</span>rwardSelectedMessages() {
+<span class="cstat-no" title="statement not covered" >    this.selectedMessages.forEach(<span class="fstat-no" title="function not covered" >as</span>ync (m) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      await this.forwardMessage(m.id);</span>
+    });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.clearSelectedMessages();</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync deleteMessage(messageId) {
+    const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+<span class="cstat-no" title="statement not covered" >    if (this.messageForEdit &amp;&amp; this.messageForEdit.id === messageId) {</span>
+<span class="cstat-no" title="statement not covered" >      this.messageForEdit = null;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.messageForReply &amp;&amp; this.messageForReply.id === messageId) {</span>
+<span class="cstat-no" title="statement not covered" >      this.messageForReply = null;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.selectedMessages.find(<span class="fstat-no" title="function not covered" >m </span>=&gt; <span class="cstat-no" title="statement not covered" >m.id === messageId)</span>) {</span>
+<span class="cstat-no" title="statement not covered" >      this.selectedMessages = this.selectedMessages.filter(</span>
+<span class="fstat-no" title="function not covered" >        m </span>=&gt; <span class="cstat-no" title="statement not covered" >m.id !== messageId</span>
+      );
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return socket.deleteMessage(messageId);</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  de</span>leteSelectedMessages() {
+<span class="cstat-no" title="statement not covered" >    this.selectedMessages.forEach(<span class="fstat-no" title="function not covered" >as</span>ync (m) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (!m.deleted &amp;&amp; m.deletable) {</span>
+<span class="cstat-no" title="statement not covered" >        await this.deleteMessage(m.id);</span>
+      }
+    });
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  de</span>leteAllMsgsInSelectConversation() {
+<span class="cstat-no" title="statement not covered" >    this.clearSelectedMessages();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.selectedConversation.messages.forEach(<span class="fstat-no" title="function not covered" >as</span>ync (m) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      if (!m.deleted &amp;&amp; m.deletable) {</span>
+<span class="cstat-no" title="statement not covered" >        await this.deleteMessage(m.id);</span>
+      }
+    });
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync editMessage(id, newValue) {
+    const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return socket.editMessage({ id, newValue });</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  se</span>lectMessage(message: Message) {
+<span class="cstat-no" title="statement not covered" >    if (this.checkMessageSelected(message.id)) <span class="cstat-no" title="statement not covered" >return;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    extendObservable(this, {</span>
+      selectedMessages: this.selectedMessages.concat(message),
+    });
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  de</span>selectMessage(messageId: number) {
+<span class="cstat-no" title="statement not covered" >    extendObservable(this, {</span>
+      selectedMessages: this.selectedMessages.filter(<span class="fstat-no" title="function not covered" >m </span>=&gt; <span class="cstat-no" title="statement not covered" >m.id !== messageId)</span>,
+    });
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  cl</span>earSelectedMessages() {
+<span class="cstat-no" title="statement not covered" >    extendObservable(this, {</span>
+      selectedMessages: [],
+    });
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  ch</span>eckMessageSelected(messageId: number) {
+<span class="cstat-no" title="statement not covered" >    return !!this.selectedMessages.find(<span class="fstat-no" title="function not covered" >m </span>=&gt; <span class="cstat-no" title="statement not covered" >m.id === messageId)</span>;</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  ad</span>dContactForAction(contact: Contact) {
+<span class="cstat-no" title="statement not covered" >    if (this.checkContactAddedForAction(contact.id)) <span class="cstat-no" title="statement not covered" >return;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.contactsForAction.push(contact);</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  re</span>moveContactForAction(contactId: string) {
+<span class="cstat-no" title="statement not covered" >    this.contactsForAction =</span>
+      this.contactsForAction.filter(<span class="fstat-no" title="function not covered" >co</span>ntact =&gt; <span class="cstat-no" title="statement not covered" >contact.id !== contactId)</span>;
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  ch</span>eckContactAddedForAction(contactId: number) {
+    // savedId - it's id which might be manually added when converting
+    // saved contact to general contact (getContactData - gets general data
+    // for contact by savedContact Id
+<span class="cstat-no" title="statement not covered" >    return !!this.contactsForAction.find(</span>
+<span class="fstat-no" title="function not covered" >      co</span>ntact =&gt; <span class="cstat-no" title="statement not covered" >contact.id === contactId || contact.savedId === contactId</span>
+    );
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  cl</span>earContactsForAction() {
+<span class="cstat-no" title="statement not covered" >    this.contactsForAction = [];</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  cl</span>earAtocomleteContactsSearch() {
+<span class="cstat-no" title="statement not covered" >    this.contactsAutocomplete = [];</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  cr</span>eateNewGroup(groupName: string, isAllowGroupChat: boolean) {
+    const { api: { messenger }, contacts } = <span class="cstat-no" title="statement not covered" >this.store;</span>
+    const { messengerUser } = <span class="cstat-no" title="statement not covered" >this.messengerInfo;</span>
+&nbsp;
+    let recipients = <span class="cstat-no" title="statement not covered" >this.contactsForAction.slice()</span>
+      .reduce(<span class="fstat-no" title="function not covered" >(r</span>esult, contact, index, allContacts) =&gt; {
+<span class="cstat-no" title="statement not covered" >        return result + contact.id +</span>
+          (allContacts.length - 1 !== index ? ',' : '');
+      }, '');
+&nbsp;
+&nbsp;
+    // Add recipients from contacts
+    const userContacts = <span class="cstat-no" title="statement not covered" >contacts.selectedContacts.slice();</span>
+<span class="cstat-no" title="statement not covered" >    recipients = userContacts.reduce(<span class="fstat-no" title="function not covered" >(r</span>esult, contact, index) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      return result + `contact-${contact.id}` +</span>
+        (userContacts.length - 1 !== index ? ',' : '');
+    }, recipients + (userContacts.length === 0 ? '' : ','));
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    apiHelper(</span>
+      messenger.createNewGroup.bind(
+        messenger,
+        messengerUser.id,
+        groupName,
+        recipients,
+        isAllowGroupChat
+      ),
+      this
+    ).success()
+      .complete(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >        this.clearContactsForAction();</span>
+<span class="cstat-no" title="statement not covered" >        contacts.clearSelectedContacts();</span>
+      });
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  ge</span>tGroupInfo(id) {
+    const { messenger } = <span class="cstat-no" title="statement not covered" >this.store.api;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return apiHelper(</span>
+      messenger.getGroupInfo.bind(messenger, id),
+      this.settingsLoading
+    ).success(<span class="fstat-no" title="function not covered" >da</span>ta =&gt; <span class="cstat-no" title="statement not covered" >new Group(data))</span>
+      .promise();
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync getConversationSettings(id) {
+    const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return apiHelper(</span>
+      socket.getConversationSettings.bind(socket, id),
+      this.settingsLoading
+    ).success(<span class="fstat-no" title="function not covered" >da</span>ta =&gt; <span class="cstat-no" title="statement not covered" >new ConversationSettingsData(data))</span>
+      .promise();
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync changeConvNotificationProp(state) {
+    const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    apiHelper(socket.changeConvNotificationProp.bind(</span>
+      socket, this.selectedConversationId, state
+    )).success();
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.selectedConversation.setNotificationSetting(state);</span>
+    const convInfo = <span class="cstat-no" title="statement not covered" >this.messengerInfo.byId(this.selectedConversationId);</span>
+<span class="cstat-no" title="statement not covered" >    if (convInfo) {</span>
+<span class="cstat-no" title="statement not covered" >      convInfo.notification = state;</span>
+    }
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync getChatGroupSettings(groupId: number) {
+    const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+<span class="cstat-no" title="statement not covered" >    return apiHelper(</span>
+      socket.getChatGroupSettings.bind(socket, groupId),
+      this.settingsLoading
+    ).success(<span class="fstat-no" title="function not covered" >da</span>ta =&gt; <span class="cstat-no" title="statement not covered" >data)</span>
+      .promise();
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync getMarketingGroupSettings(groupId: number) {
+    const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+<span class="cstat-no" title="statement not covered" >    return apiHelper(</span>
+      socket.getMarketingGroupSettings.bind(socket, groupId),
+      this.settingsLoading
+    ).success(<span class="fstat-no" title="function not covered" >da</span>ta =&gt; <span class="cstat-no" title="statement not covered" >data)</span>
+      .promise();
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync getGroupSettings(groupId, type: 'chat-group' | 'marketing-group') {
+    let currentGroupSettings = <span class="cstat-no" title="statement not covered" >null;</span>
+<span class="cstat-no" title="statement not covered" >    if (type === 'chat-group') {</span>
+<span class="cstat-no" title="statement not covered" >      currentGroupSettings = await this.getChatGroupSettings(groupId);</span>
+    } else <span class="cstat-no" title="statement not covered" >if (type === 'marketing-group') {</span>
+<span class="cstat-no" title="statement not covered" >      currentGroupSettings = await this.getMarketingGroupSettings(groupId);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return new GroupSettingsData(currentGroupSettings);</span>
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync removeGroupMember(groupId: number, memberId: number) {
+    const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    apiHelper(socket.removeGroupMember.bind(socket, groupId, memberId))</span>
+      .success(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >        this.selectedConversation.removeMember(memberId);</span>
+<span class="cstat-no" title="statement not covered" >        this.markConversationAsRead(this.selectedConversationId);</span>
+      })
+      .error(log.error);
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync addGroupMember(groupId: number, memberAlias: string) {
+    const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+<span class="cstat-no" title="statement not covered" >    return apiHelper(socket.addGroupMember.bind(socket, groupId, memberAlias))</span>
+      .success(<span class="fstat-no" title="function not covered" >(d</span>ata) =&gt; {
+<span class="cstat-no" title="statement not covered" >        this.selectedConversation.addMember(data);</span>
+&nbsp;
+        // Mark conversation as read to avoid badge appearance
+<span class="cstat-no" title="statement not covered" >        this.markConversationAsRead(this.selectedConversationId);</span>
+      })
+      .promise();
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  ad</span>dAllMembersToGroup(groupId: number) {
+    const contacts = <span class="cstat-no" title="statement not covered" >this.store.contacts.selectedContacts.slice().map(<span class="fstat-no" title="function not covered" >(m</span>) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      m.id = `contact-${m.id}`;</span>
+<span class="cstat-no" title="statement not covered" >      return m;</span>
+    });
+&nbsp;
+    const members = <span class="cstat-no" title="statement not covered" >contacts.concat(this.contactsForAction.slice());</span>
+<span class="cstat-no" title="statement not covered" >    members.forEach(<span class="fstat-no" title="function not covered" >as</span>ync (member: GroupMemberInfo) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      await this.addGroupMember(groupId, member.id);</span>
+    });
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  as</span>ync deleteGroup(groupId: number) {
+    const socket = <span class="cstat-no" title="statement not covered" >await this.store.api.messenger.getSocket();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return apiHelper(socket.deleteGroup.bind(socket, groupId))</span>
+      .success(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+        // Remove group locally
+        const { groups } = <span class="cstat-no" title="statement not covered" >this.messengerInfo;</span>
+        const delGroupIndex = <span class="cstat-no" title="statement not covered" >groups.findIndex(<span class="fstat-no" title="function not covered" >gr</span>oup =&gt; <span class="cstat-no" title="statement not covered" >group.id === groupId)</span>;</span>
+&nbsp;
+        // Find new group to display
+        let newIndex = <span class="cstat-no" title="statement not covered" >-1;</span>
+<span class="cstat-no" title="statement not covered" >        if (groups.length &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >          newIndex = delGroupIndex &gt; 0 ? delGroupIndex - 1 : delGroupIndex + 1;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (newIndex !== -1) {</span>
+<span class="cstat-no" title="statement not covered" >          this.setSelectedConversationId(groups[newIndex].id);</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          this.setSelectedConversationId(null);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        this.messengerInfo.groups = groups.filter(</span>
+<span class="fstat-no" title="function not covered" >          gr</span>oup =&gt; <span class="cstat-no" title="statement not covered" >group.id !== groupId</span>
+        );
+      })
+      .error(log.error)
+      .promise();
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  se</span>ndInviteMsgToContacts(message: string) {
+    const { api, contacts, profiles } = <span class="cstat-no" title="statement not covered" >this.store;</span>
+    const userContacts = <span class="cstat-no" title="statement not covered" >contacts.selectedContacts.slice()</span>
+      .map(<span class="fstat-no" title="function not covered" >(m</span>) =&gt; {
+<span class="cstat-no" title="statement not covered" >        m.id = `contact-${m.id}`;</span>
+<span class="cstat-no" title="statement not covered" >        return m;</span>
+      });
+&nbsp;
+    const recipients = <span class="cstat-no" title="statement not covered" >userContacts.concat(this.contactsForAction.slice())</span>
+      .reduce(<span class="fstat-no" title="function not covered" >(r</span>esult, contact, index, allContacts) =&gt; {
+<span class="cstat-no" title="statement not covered" >        return result + contact.id +</span>
+          (allContacts.length - 1 !== index ? ',' : '');
+      }, '');
+&nbsp;
+    const { messengerUser } = <span class="cstat-no" title="statement not covered" >this.messengerInfo;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    apiHelper(api.messenger.sendMessage.bind(</span>
+      api.messenger,
+      messengerUser.id,
+      recipients,
+      message
+    )).success(<span class="fstat-no" title="function not covered" >()</span> =&gt; {
+<span class="cstat-no" title="statement not covered" >      this.clearAtocomleteContactsSearch();</span>
+<span class="cstat-no" title="statement not covered" >      contacts.clearSelectedContacts();</span>
+<span class="cstat-no" title="statement not covered" >      this.loadMessengerInfo(profiles.currentProfile);</span>
+    });
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  se</span>ndMsgToMarketingGroup(groupRecipientId, message: string) {
+    const { messenger } = <span class="cstat-no" title="statement not covered" >this.store.api;</span>
+    const { messengerUser } = <span class="cstat-no" title="statement not covered" >this.messengerInfo;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    apiHelper(messenger.sendMessage.bind(</span>
+      messenger,
+      messengerUser.id,
+      groupRecipientId,
+      message
+    )).success();
+  }
+&nbsp;
+<span class="fstat-no" title="function not covered" >  in</span>itSocket(url, userId) {
+    const { api, auth } = <span class="cstat-no" title="statement not covered" >this.store;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.socket &amp;&amp; this.socket.userId === userId) {</span>
+<span class="cstat-no" title="statement not covered" >      return;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.socket = api.messenger.connectToWebSocket(</span>
+      url,
+      userId,
+      auth.getAccessToken()
+    );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    this.socketHandlers.subscribe(this.socket);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.socketObserver) {</span>
+<span class="cstat-no" title="statement not covered" >      this.socketObserver();</span>
+    }
+<span class="cstat-no" title="statement not covered" >    this.socketObserver = autorun(<span class="fstat-no" title="function not covered" >()</span> =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >      this.socket.setAccessToken(auth.getAccessToken());</span>
+    });
+  }
+}
+&nbsp;
+type SettingsLoadingObject = {
+  isLoading: boolean;
+  error: string;
+};</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 06 2017 09:31:11 GMT+0300 (MSK)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

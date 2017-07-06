@@ -42,6 +42,7 @@ export default class MessengerApi {
     if (!this.socket) {
       throw new Error('WAMP socket isn\'t initialized');
     }
+
     return this.socket.resolveWhenConnected();
   }
 

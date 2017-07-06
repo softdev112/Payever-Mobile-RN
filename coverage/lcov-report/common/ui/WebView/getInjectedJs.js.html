@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for common/ui/WebView/getInjectedJs.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">common/ui/WebView</a> getInjectedJs.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/44</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/24</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/13</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/43</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable */
+export default function <span class="fstat-no" title="function not covered" >getInjectedJs(</span>options: InjectOptions) {
+  const optionsJson = <span class="cstat-no" title="statement not covered" >JSON.stringify(options);</span>
+<span class="cstat-no" title="statement not covered" >  return `(${injectedBody.toString()})(${optionsJson})`;</span>
+}
+&nbsp;
+function <span class="fstat-no" title="function not covered" >injectedBody(</span>options: InjectOptions) {
+  'use strict';
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  init(options);</span>
+&nbsp;
+  function <span class="fstat-no" title="function not covered" >init(</span>options) {
+<span class="cstat-no" title="statement not covered" >    window.__DEV__ = options.isDev;</span>
+<span class="cstat-no" title="statement not covered" >    window.callWebViewOnMessage = callWebViewOnMessage;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    patchMenuButtonPress();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (options.platform === 'android') {</span>
+<span class="cstat-no" title="statement not covered" >      patchSelectElementsForAndroid();</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (__DEV__) {</span>
+<span class="cstat-no" title="statement not covered" >      attachErrorHandler();</span>
+<span class="cstat-no" title="statement not covered" >      patchPostMessage();</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    updateNavBarTitle();</span>
+  }
+&nbsp;
+  function <span class="fstat-no" title="function not covered" >patchMenuButtonPress(</span>) {
+    var $btnMenu = <span class="cstat-no" title="statement not covered" >document.querySelector('#user-nav-block .dropdown-toggle');</span>
+<span class="cstat-no" title="statement not covered" >    if ($btnMenu) {</span>
+      var $replace = <span class="cstat-no" title="statement not covered" >$btnMenu.cloneNode(true);</span>
+<span class="cstat-no" title="statement not covered" >      $replace.href = 'javascript:return void()';</span>
+<span class="cstat-no" title="statement not covered" >      $replace.style.marginRight = 0;</span>
+<span class="cstat-no" title="statement not covered" >      $replace.addEventListener('click', <span class="fstat-no" title="function not covered" >fu</span>nction(e) {</span>
+<span class="cstat-no" title="statement not covered" >        e.preventDefault();</span>
+<span class="cstat-no" title="statement not covered" >        e.stopImmediatePropagation();</span>
+<span class="cstat-no" title="statement not covered" >        callWebViewOnMessage({ command: 'show-menu' });</span>
+      });
+<span class="cstat-no" title="statement not covered" >      $btnMenu.parentNode.replaceChild($replace, $btnMenu);</span>
+    }
+  }
+&nbsp;
+  function <span class="fstat-no" title="function not covered" >patchSelectElementsForAndroid(</span>) {
+    // In Android WebView Select elements
+    // don't display well if they have css border just switch off css
+    //noinspection ES6ConvertVarToLetConst
+    var $selects = <span class="cstat-no" title="statement not covered" >document.querySelectorAll('select');</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (!$selects) <span class="cstat-no" title="statement not covered" >return;</span></span>
+<span class="cstat-no" title="statement not covered" >    for (let i = 0; i &lt; $selects.length; ++i) {</span>
+      // select-custom form-control select-custom-ready
+      // select-custom = {opacity: 0} it was only android issue
+<span class="cstat-no" title="statement not covered" >      $selects[i].className = 'form-control select-custom-ready';</span>
+    }
+  }
+&nbsp;
+  function <span class="fstat-no" title="function not covered" >patchPostMessage(</span>) {
+    // To prevent error message in iOS WebView
+    var originalPostMessage = <span class="cstat-no" title="statement not covered" >window.postMessage;</span>
+    var patchedPostMessage = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >fu</span>nction(message, targetOrigin, transfer) {</span>
+<span class="cstat-no" title="statement not covered" >      originalPostMessage(message, targetOrigin, transfer);</span>
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    patchedPostMessage.toString = <span class="fstat-no" title="function not covered" >fu</span>nction() {</span>
+      //noinspection JSUnresolvedVariable
+<span class="cstat-no" title="statement not covered" >      return String(Object.hasOwnProperty)</span>
+        .replace('hasOwnProperty', 'postMessage');
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    window.postMessage = patchedPostMessage;</span>
+  }
+&nbsp;
+  function <span class="fstat-no" title="function not covered" >attachErrorHandler(</span>) {
+<span class="cstat-no" title="statement not covered" >    window.addEventListener('error', onError);</span>
+&nbsp;
+    function <span class="fstat-no" title="function not covered" >onError(</span>event) {
+      var error = <span class="cstat-no" title="statement not covered" >event.error;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      callWebViewOnMessage({</span>
+        column:    error.column    || event.colno,
+        command:   'error',
+        line:      error.line      || event.lineno,
+        message:   error.message   || event.message,
+        sourceUrl: error.sourceUrl || event.filename,
+        stack:     error.stack
+      });
+    }
+  }
+&nbsp;
+  // Overridden window.postMessage can be not available when calling
+  function <span class="fstat-no" title="function not covered" >callWebViewOnMessage(</span>data) {
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >      window.postMessage(JSON.stringify(data));</span>
+    } catch(e) {}
+  }
+&nbsp;
+  function <span class="fstat-no" title="function not covered" >updateNavBarTitle(</span>) {
+    var $titleImg = <span class="cstat-no" title="statement not covered" >document.querySelector('.channel-title img');</span>
+    var image = <span class="cstat-no" title="statement not covered" >$titleImg ? $titleImg.src : null;</span>
+&nbsp;
+    var $title = <span class="cstat-no" title="statement not covered" >document.querySelector('.channel-title .title');</span>
+    var title = <span class="cstat-no" title="statement not covered" >$title ? $title.innerText : null;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (title || image) {</span>
+<span class="cstat-no" title="statement not covered" >      callWebViewOnMessage({</span>
+        command: 'set-title',
+        title: title,
+        image: image,
+      });
+    }
+  }
+}
+&nbsp;
+type InjectOptions = {
+  isDev: boolean;
+  platform: 'ios' | 'android';
+};</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jul 06 2017 09:31:11 GMT+0300 (MSK)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
