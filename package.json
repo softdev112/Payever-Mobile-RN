@@ -59,13 +59,32 @@
     "setupTestFrameworkScriptFile": "./__tests__/jest-env.js",
     "modulePathIgnorePatterns": [
       "test-data",
-      "jest-env.js"
+      "jest-env.js",
+      "sounds"
     ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "./__mocks__/fileMock.js",
-      "\\.(css|less)$": "./__mocks__/styleMock.js"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\sounds": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "./__mocks__/styleMock.js",
+      "utils$": "<rootDir>/src/common/utils",
+      "ui$": "<rootDir>/src/common/ui"
     },
-    "verbose": true
+    "moduleFileExtensions": ["js", "json", "jsx", "node"],
+    "verbose": true,
+    "testRegex": ".*\\.js$",
+    "haste": {
+      "defaultPlatform": "ios",
+      "platforms": ["android", "ios"],
+      "providesModuleNodeModules": [
+        "react",
+        "react-native",
+        "my-awesome-module",
+        "my-text-component"
+      ]
+    },
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
@@ -90,7 +109,6 @@
     "gulp-svg2ttf": "^2.0.0",
     "gulp-svgicons2svgfont": "^3.0.1",
     "gulp-task-doc": "^1.0.11",
-    "jest-react-native": "^18.0.0",
     "minimist": "^1.2.0",
     "vinyl": "^2.0.1"
   },

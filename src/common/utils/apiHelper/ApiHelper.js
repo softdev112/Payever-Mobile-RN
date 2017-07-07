@@ -203,7 +203,7 @@ async function loadData(
   }
 
   // If cache up to date or there is no internet return cache data
-  if (!noCache && (!isConnected
+  if (cacheId && !noCache && (!isConnected
     || cacheHelper.isCacheUpToDate(cacheId, lifeTime))) {
     return {
       data,

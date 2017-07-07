@@ -45,6 +45,7 @@ export default {
   async loadFromApi(apiPromise, timeout = TIMEOUT) {
     let resp;
     const timerIdx = requestTimers.length;
+
     try {
       resp = await Promise.race(
         [apiPromise, timeoutPromise(timerIdx, timeout)]

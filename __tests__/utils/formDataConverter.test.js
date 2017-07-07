@@ -1,6 +1,3 @@
-/**
- * Created by Elf on 12.01.2017.
- */
 import Store from '../../src/store';
 import config from '../../src/config';
 

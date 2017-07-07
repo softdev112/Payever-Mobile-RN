@@ -67,6 +67,8 @@ export default class ProfilesStore {
 
   @action
   async loadApplications(profileId) {
+    if (profileId === null || profileId === undefined) return [];
+
     const { menu } = this.store.api;
 
     const profile = this.businessById(profileId);
@@ -88,6 +90,8 @@ export default class ProfilesStore {
 
   @action
   async loadActivities(profileId) {
+    if (profileId === null || profileId === undefined) return [];
+
     const { business } = this.store.api;
 
     const profile = this.businessById(profileId);
@@ -110,6 +114,8 @@ export default class ProfilesStore {
 
   @action
   async loadTodos(profileId) {
+    if (profileId === null || profileId === undefined) return [];
+
     const { business } = this.store.api;
 
     const profile = this.businessById(profileId);
@@ -134,6 +140,8 @@ export default class ProfilesStore {
   @action
   getAllOffers(id: number) {
     const { profiles } = this.store.api;
+
+    if (id === null || id === undefined) return null;
 
     return apiHelper(profiles.getAllOffers.bind(profiles, id), this)
       .success((data) => {

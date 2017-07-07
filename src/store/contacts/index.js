@@ -19,6 +19,7 @@ export default class ContactsStore {
   @observable selectedContacts: Array<CustomerContactInfo> = [];
   @observable logoUploadingProgress: number = 0;
 
+  // Contacts UI
   @observable ui: ContactsUI = {};
 
   // eslint-disable-next-line flowtype/no-primitive-constructor-types
