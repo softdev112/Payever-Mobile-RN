@@ -51,6 +51,8 @@ const TEST_PROFILE = {
 
 describe('Profiles/Store', () => {
   let store;
+  let getSpy;
+  let postSpy;
 
   beforeAll(() => {
 
@@ -58,7 +60,11 @@ describe('Profiles/Store', () => {
 
   beforeEach(() => {
     store = new Store(config);
-    store.api.fetch = jest.fn((url, options) => options.body);
+    store.api.fetch = jest.fn((url, options) => url);
+    getSpy = jest.spyOn(store.api, 'get');
+    postSpy = jest.spyOn(store.api, 'post');
+    store.api.fetch = jest.fn((url, options) => url);
+
     store.profiles.businessById = jest.fn(() => TEST_PROFILE);
     cacheHelper.loadFromCache.mockImplementation(() => {});
     cacheHelper.isCacheUpToDate.mockImplementation(() => false);
@@ -316,6 +322,80 @@ describe('Profiles/Store', () => {
 
       store.profiles.setCurrentProfile(TEST_PROFILE);
       expect(mobx.toJS(store.profiles.currentProfile)).toEqual(TEST_PROFILE);
+    });
+  });
+
+  describe('Profiles Store/createNewBusiness(newBusiness)', () => {
+    it('Test if newBusiness === null or newBusiness === undefined createNewBusiness should not call api', async () => {
+      const apiSpy = jest.spyOn(store.api.business, 'createNewBusiness');
+      await store.profiles.createNewBusiness(null);
+
+      expect(networkHelper.isConnected).toHaveBeenCalledTimes(0);
+      expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(0);
+      expect(apiSpy).not.toHaveBeenCalled();
+      expect(store.api.fetch).not.toHaveBeenCalled();
+
+      await store.profiles.createNewBusiness(undefined);
+
+      expect(networkHelper.isConnected).toHaveBeenCalledTimes(0);
+      expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(0);
+      expect(apiSpy).not.toHaveBeenCalled();
+      expect(store.api.fetch).not.toHaveBeenCalled();
+    });
+
+    it('Test newBusiness !== undefined or null createNewBusiness should call api', async () => {
+      const apiSpy = jest.spyOn(store.api.business, 'createNewBusiness');
+      await store.profiles.createNewBusiness({ name: 'New Business' });
+
+      expect(networkHelper.isConnected).toHaveBeenCalledTimes(1);
+      expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(1);
+      expect(apiSpy).toHaveBeenCalled();
+      expect(postSpy).toHaveBeenCalled();
+      expect(store.api.fetch).toHaveBeenCalled();
+      expect(store.api.fetch.mock.calls.length).toBe(1);
+      expect(store.api.fetch.mock.calls[0][0]).toBe('/api/rest/v1/business/create');
+    });
+  });
+
+  describe('Profiles Store/getBusinessInfo(slug: string) {', () => {
+    it('Test if slug === null | undefined getBusinessInfo should not call api', async () => {
+      const apiSpy = jest.spyOn(store.api.business, 'createNewBusiness');
+      await store.profiles.getBusinessInfo(null);
+
+      expect(networkHelper.isConnected).toHaveBeenCalledTimes(0);
+      expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(0);
+      expect(apiSpy).not.toHaveBeenCalled();
+      expect(getSpy).not.toHaveBeenCalled();
+      expect(store.api.fetch).not.toHaveBeenCalled();
+
+      await store.profiles.getBusinessInfo(undefined);
+
+      expect(networkHelper.isConnected).toHaveBeenCalledTimes(0);
+      expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(0);
+      expect(apiSpy).not.toHaveBeenCalled();
+      expect(getSpy).not.toHaveBeenCalled();
+      expect(store.api.fetch).not.toHaveBeenCalled();
+
+      await store.profiles.getBusinessInfo('');
+
+      expect(networkHelper.isConnected).toHaveBeenCalledTimes(0);
+      expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(0);
+      expect(apiSpy).not.toHaveBeenCalled();
+      expect(getSpy).not.toHaveBeenCalled();
+      expect(store.api.fetch).not.toHaveBeenCalled();
+    });
+
+    it('Test slug !== undefined or null getBusinessInfo should call api', async () => {
+      const apiSpy = jest.spyOn(store.api.business, 'getBusinessInfo');
+      await store.profiles.getBusinessInfo('11111');
+
+      expect(networkHelper.isConnected).toHaveBeenCalledTimes(1);
+      expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(1);
+      expect(apiSpy).toHaveBeenCalled();
+      expect(getSpy).toHaveBeenCalled();
+      expect(store.api.fetch).toHaveBeenCalled();
+      expect(store.api.fetch.mock.calls.length).toBe(1);
+      expect(store.api.fetch.mock.calls[0][0]).toBe('/api/rest/v1/business/11111');
     });
   });
 });

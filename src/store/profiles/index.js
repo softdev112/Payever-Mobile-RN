@@ -158,6 +158,7 @@ export default class ProfilesStore {
 
   @action
   createNewBusiness(newBusiness) {
+    if (!newBusiness) return null;
     const { business } = this.store.api;
 
     return apiHelper(
@@ -170,6 +171,7 @@ export default class ProfilesStore {
 
   @action
   getBusinessInfo(slug: string) {
+    if (!slug) return null;
     const { business } = this.store.api;
 
     return apiHelper(business.getBusinessInfo.bind(business, slug), this)
