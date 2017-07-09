@@ -60,10 +60,9 @@ describe('Profiles/Store', () => {
 
   beforeEach(() => {
     store = new Store(config);
-    store.api.fetch = jest.fn((url, options) => url);
+    store.api.fetch = jest.fn(url => url);
     getSpy = jest.spyOn(store.api, 'get');
     postSpy = jest.spyOn(store.api, 'post');
-    store.api.fetch = jest.fn((url, options) => url);
 
     store.profiles.businessById = jest.fn(() => TEST_PROFILE);
     cacheHelper.loadFromCache.mockImplementation(() => {});
