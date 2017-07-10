@@ -108,6 +108,7 @@ describe('Profiles/Store', () => {
       expect(cacheHelper.loadFromCache).toHaveBeenCalledTimes(1);
       expect(networkHelper.loadFromApi).not.toHaveBeenCalled();
       expect(apiSpy).not.toHaveBeenCalled();
+      expect(getSpy).not.toHaveBeenCalled();
       expect(store.api.fetch).not.toHaveBeenCalled();
     });
 
@@ -119,7 +120,8 @@ describe('Profiles/Store', () => {
       expect(cacheHelper.isCacheUpToDate).toHaveBeenCalledTimes(1);
       expect(cacheHelper.loadFromCache).toHaveBeenCalledTimes(1);
       expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(1);
-      expect(apiSpy).toHaveBeenCalledTimes(1);
+      expect(apiSpy).toHaveBeenCalled();
+      expect(getSpy).toHaveBeenCalled();
       expect(store.api.fetch).toHaveBeenCalled();
       expect(store.api.fetch).toHaveBeenCalledWith(
         '/api/rest/v1/profiles/accessible-list',
@@ -137,6 +139,7 @@ describe('Profiles/Store', () => {
       expect(cacheHelper.isCacheUpToDate).not.toHaveBeenCalled();
       expect(networkHelper.loadFromApi).not.toHaveBeenCalled();
       expect(apiSpy).not.toHaveBeenCalled();
+      expect(getSpy).not.toHaveBeenCalled();
       expect(store.api.fetch).not.toHaveBeenCalled();
     });
 
@@ -149,7 +152,8 @@ describe('Profiles/Store', () => {
       expect(cacheHelper.loadFromCache).not.toHaveBeenCalled();
       expect(cacheHelper.isCacheUpToDate).not.toHaveBeenCalled();
       expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(1);
-      expect(apiSpy).toHaveBeenCalledTimes(1);
+      expect(apiSpy).toHaveBeenCalled();
+      expect(getSpy).toHaveBeenCalled();
       expect(store.api.fetch).toHaveBeenCalledTimes(1);
       expect(store.api.fetch).toHaveBeenCalledWith(
         '/api/rest/v1/profiles/accessible-list',
@@ -172,6 +176,7 @@ describe('Profiles/Store', () => {
       expect(cacheHelper.loadFromCache).not.toHaveBeenCalled();
       expect(networkHelper.loadFromApi).not.toHaveBeenCalled();
       expect(apiSpy).not.toHaveBeenCalled();
+      expect(getSpy).not.toHaveBeenCalled();
       expect(store.api.fetch).not.toHaveBeenCalled();
     });
 
@@ -191,6 +196,7 @@ describe('Profiles/Store', () => {
       expect(cacheHelper.loadFromCache).toHaveBeenCalledTimes(1);
       expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(1);
       expect(apiSpy).toHaveBeenCalled();
+      expect(getSpy).toHaveBeenCalled();
       expect(store.api.fetch).toHaveBeenCalled();
       expect(store.api.fetch).toHaveBeenCalledWith(
         '/api/rest/v1/menu/list/11111',
@@ -213,6 +219,7 @@ describe('Profiles/Store', () => {
       expect(cacheHelper.loadFromCache).not.toHaveBeenCalled();
       expect(networkHelper.loadFromApi).not.toHaveBeenCalled();
       expect(apiSpy).not.toHaveBeenCalled();
+      expect(getSpy).not.toHaveBeenCalled();
       expect(store.api.fetch).not.toHaveBeenCalled();
     });
 
@@ -232,6 +239,7 @@ describe('Profiles/Store', () => {
       expect(cacheHelper.loadFromCache).toHaveBeenCalledTimes(1);
       expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(1);
       expect(apiSpy).toHaveBeenCalled();
+      expect(getSpy).toHaveBeenCalled();
       expect(store.api.fetch).toHaveBeenCalled();
       expect(store.api.fetch).toHaveBeenCalledWith(
         '/api/rest/v1/business/11111/activities',
@@ -254,6 +262,7 @@ describe('Profiles/Store', () => {
       expect(cacheHelper.loadFromCache).not.toHaveBeenCalled();
       expect(networkHelper.loadFromApi).not.toHaveBeenCalled();
       expect(apiSpy).not.toHaveBeenCalled();
+      expect(getSpy).not.toHaveBeenCalled();
       expect(store.api.fetch).not.toHaveBeenCalled();
     });
 
@@ -273,6 +282,7 @@ describe('Profiles/Store', () => {
       expect(cacheHelper.loadFromCache).toHaveBeenCalledTimes(1);
       expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(1);
       expect(apiSpy).toHaveBeenCalled();
+      expect(getSpy).toHaveBeenCalled();
       expect(store.api.fetch).toHaveBeenCalled();
       expect(store.api.fetch).toHaveBeenCalledWith(
         '/api/rest/v1/business/11111/todos',
@@ -289,6 +299,7 @@ describe('Profiles/Store', () => {
       expect(networkHelper.isConnected).toHaveBeenCalledTimes(1);
       expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(1);
       expect(apiSpy).toHaveBeenCalled();
+      expect(getSpy).toHaveBeenCalled();
       expect(store.api.fetch).toHaveBeenCalled();
       expect(store.api.fetch).toHaveBeenCalledWith(
         '/api/rest/v1/profiles/11111/offers',
@@ -303,6 +314,7 @@ describe('Profiles/Store', () => {
       expect(networkHelper.isConnected).toHaveBeenCalledTimes(0);
       expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(0);
       expect(apiSpy).not.toHaveBeenCalled();
+      expect(getSpy).not.toHaveBeenCalled();
       expect(store.api.fetch).not.toHaveBeenCalled();
 
       await store.profiles.getAllOffers(undefined);
@@ -310,6 +322,7 @@ describe('Profiles/Store', () => {
       expect(networkHelper.isConnected).toHaveBeenCalledTimes(0);
       expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(0);
       expect(apiSpy).not.toHaveBeenCalled();
+      expect(getSpy).not.toHaveBeenCalled();
       expect(store.api.fetch).not.toHaveBeenCalled();
     });
   });
@@ -332,6 +345,7 @@ describe('Profiles/Store', () => {
       expect(networkHelper.isConnected).toHaveBeenCalledTimes(0);
       expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(0);
       expect(apiSpy).not.toHaveBeenCalled();
+      expect(postSpy).not.toHaveBeenCalled();
       expect(store.api.fetch).not.toHaveBeenCalled();
 
       await store.profiles.createNewBusiness(undefined);
@@ -339,6 +353,7 @@ describe('Profiles/Store', () => {
       expect(networkHelper.isConnected).toHaveBeenCalledTimes(0);
       expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(0);
       expect(apiSpy).not.toHaveBeenCalled();
+      expect(postSpy).not.toHaveBeenCalled();
       expect(store.api.fetch).not.toHaveBeenCalled();
     });
 
