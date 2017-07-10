@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { inject, observer } from 'mobx-react/native';
+import { Navigator } from 'react-native-navigation';
 import {
   findNodeHandle, Keyboard, Platform, ScrollView, Switch,
 } from 'react-native';
@@ -33,6 +34,7 @@ export default class AddNewCustomerContact extends Component {
 
   props: {
     contacts: ContactsStore;
+    navigator: Navigator;
   };
 
   state: {

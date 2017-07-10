@@ -4,6 +4,7 @@ import { Navigator } from 'react-native-navigation';
 import { IconText, images, StyleSheet, View } from 'ui';
 
 import ProfilesStore from '../../../store/profiles';
+import ContactsStore from '../../../store/contacts';
 import UIStore from '../../../store/ui';
 import { Config } from '../../../config';
 import AppItem from '../../../store/profiles/models/AppItem';
@@ -42,6 +43,7 @@ export default class Dock extends Component {
   props: {
     onAppClick: (item: AppItem) => any;
     config: Config;
+    contacts: ContactsStore;
     profiles: ProfilesStore;
     ui: UIStore;
   };

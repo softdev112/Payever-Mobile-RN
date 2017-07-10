@@ -86,7 +86,6 @@ export default class ProfileInfo extends Component {
                 source={logo ? { uri: logo } : images.noAvatar}
               />
               <Text style={styles.name}>{profile.business.name}</Text>
-
               <View style={styles.offersContainer}>
                 <Text style={styles.offersTitle}>
                   Offers: {profileOffers.length}

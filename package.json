@@ -59,8 +59,7 @@
     "setupTestFrameworkScriptFile": "./__tests__/jest-env.js",
     "modulePathIgnorePatterns": [
       "test-data",
-      "jest-env.js",
-      "sounds"
+      "jest-env.js"
     ],
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
@@ -69,12 +68,20 @@
       "utils$": "<rootDir>/src/common/utils",
       "ui$": "<rootDir>/src/common/ui"
     },
-    "moduleFileExtensions": ["js", "json", "jsx", "node"],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx",
+      "node"
+    ],
     "verbose": true,
     "testRegex": ".*\\.js$",
     "haste": {
       "defaultPlatform": "ios",
-      "platforms": ["android", "ios"],
+      "platforms": [
+        "android",
+        "ios"
+      ],
       "providesModuleNodeModules": [
         "react",
         "react-native",
@@ -101,7 +108,7 @@
     "eslint-plugin-flowtype": "^2.34.0",
     "eslint-plugin-import": "^2.3.0",
     "eslint-plugin-jsx-a11y": "2.2.3",
-    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-react": "6.6.0",
     "eslint-plugin-sort-class-members": "^1.1.1",
     "git-validate": "^2.2.2",
     "gulp": "^3.9.1",

@@ -1,24 +1,25 @@
 /* eslint-disable max-len, global-require */
-import { networkHelper, cacheHelper } from 'utils';
+import networkHelper from '../../../common/utils/networkHelper';
+import cacheHelper from '../../../common/utils/cacheHelper';
 
 import Store from '../../../store';
 import config from '../../../config';
 
 const mobx = require('mobx');
 
-jest.mock(
-  '../../../store/communication/ui',
-  () => function CommunicationUI() { return {}; }
-).mock('../../../common/utils/networkHelper')
+jest.mock('react-native-navigation', () => ({
+  Navigation: {
+    showModal: jest.fn(() => {}),
+    dismissModal: jest.fn(() => {}),
+  },
+})).mock('react-native-logging')
+  .mock(
+    '../../../store/communication/ui',
+    () => function CommunicationUI() { return {}; }
+  ).mock('../../../common/utils/networkHelper')
   .mock('../../../common/utils/cacheHelper')
-  .mock('../../../store/auth')
-  .mock('react-native-navigation', () => ({
-    Navigation: {
-      showModal: jest.fn(() => {}),
-      dismissModal: jest.fn(() => {}),
-    },
-  }))
-  .mock('react-native-logging');
+  .mock('../../../store/auth');
+
 
 networkHelper.isConnected.mockImplementation(() => true)
   .mockImplementationOnce(() => true)
@@ -54,10 +55,6 @@ describe('Profiles/Store', () => {
   let getSpy;
   let postSpy;
 
-  beforeAll(() => {
-
-  });
-
   beforeEach(() => {
     store = new Store(config);
     store.api.fetch = jest.fn(url => url);
@@ -65,13 +62,12 @@ describe('Profiles/Store', () => {
     postSpy = jest.spyOn(store.api, 'post');
 
     store.profiles.businessById = jest.fn(() => TEST_PROFILE);
-    cacheHelper.loadFromCache.mockImplementation(() => {});
+    cacheHelper.loadFromCache.mockImplementation(() => ({ data: 'data' }));
     cacheHelper.isCacheUpToDate.mockImplementation(() => false);
-
-    jest.clearAllMocks();
   });
 
   afterEach(() => {
+    jest.clearAllMocks();
     store = null;
   });
 

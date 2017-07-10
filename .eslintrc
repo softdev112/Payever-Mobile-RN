@@ -85,6 +85,7 @@
     "prefer-template": 0,
     "react/jsx-filename-extension": [2, { "extensions": [".js"] }],
     "react/jsx-no-bind": 0,
+    "react/jsx-indent": 0,
     "react/react-in-jsx-scope": 0,
     "react/sort-comp": 0,
     "sort-class-members/sort-class-members": [2, {

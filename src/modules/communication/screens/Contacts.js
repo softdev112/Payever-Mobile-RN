@@ -5,6 +5,7 @@ import { images, NavBar, StyleSheet, View } from 'ui';
 import Contacts from '../components/contacts';
 
 import CommunicationStore from '../../../store/communication';
+import ProfilesStore from '../../../store/profiles';
 
 @inject('communication', 'profiles')
 @observer
@@ -15,6 +16,7 @@ export default class ContactsScreen extends Component {
 
   props: {
     communication: CommunicationStore;
+    profiles: ProfilesStore;
     navigator: Navigator;
     style?: Object;
   };

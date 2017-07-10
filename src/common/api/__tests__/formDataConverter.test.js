@@ -1,5 +1,5 @@
-import Store from '../../src/store';
-import config from '../../src/config';
+import Store from '../../../store';
+import config from '../../../config';
 
 /* eslint-disable no-underscore-dangle */
 describe('Object to FormData converter tests', () => {

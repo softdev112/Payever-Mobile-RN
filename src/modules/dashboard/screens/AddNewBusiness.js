@@ -3,6 +3,7 @@ import { inject, observer } from 'mobx-react/native';
 import {
   Keyboard, findNodeHandle, Platform, ScrollView, Text,
 } from 'react-native';
+import { Navigator } from 'react-native-navigation';
 import ImagePicker from 'react-native-image-picker';
 import RNFetchBlob from 'react-native-fetch-blob';
 import DeviceInfo from 'react-native-device-info';
@@ -63,6 +64,7 @@ export default class AddNewBusiness extends Component {
 
   props: {
     profiles?: ProfilesStore;
+    navigator: Navigator;
   };
 
   state: {

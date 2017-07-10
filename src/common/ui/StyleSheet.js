@@ -1,6 +1,6 @@
 import { StyleSheet, Platform, PixelRatio } from 'react-native';
 import Api from 'react-native-extended-stylesheet/src/api';
-import { ScreenParams } from 'utils';
+import { screenParams } from 'utils';
 
 const styleSheet = new Api();
 
@@ -34,15 +34,15 @@ styleSheet.build({
 styleSheet.flatten = StyleSheet.flatten;
 
 function getRemKoef(): number {
-  if (ScreenParams.width * PixelRatio.get() <= 640) {
+  if (screenParams.width * PixelRatio.get() <= 640) {
     return 8;
   }
 
-  if (ScreenParams.width * PixelRatio.get() <= 1250) {
+  if (screenParams.width * PixelRatio.get() <= 1250) {
     return 10;
   }
 
-  if (ScreenParams.width * PixelRatio.get() <= 2000) {
+  if (screenParams.width * PixelRatio.get() <= 2000) {
     return 14;
   }
 

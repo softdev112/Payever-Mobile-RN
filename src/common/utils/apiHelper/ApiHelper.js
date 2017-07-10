@@ -185,30 +185,13 @@ async function loadData(
   // Load data from cache if noCache !== true
   if (!noCache && cacheId) {
     data = await cacheHelper.loadFromCache(cacheId);
-  }
-
-  // If no data and no connection go to error page
-  if (!data && !isConnected) {
-    if (showErrorPage) {
-      Navigation.showModal({
-        screen: 'core.ErrorPage',
-        passProps: {
-          message: networkHelper.errorConnection,
-          onBack: Navigation.dismissModal.bind(null, { animated: true }),
-        },
-      });
+    if ((data && cacheHelper.isCacheUpToDate(cacheId, lifeTime))
+      || !isConnected) {
+      return {
+        data,
+        error: '',
+      };
     }
-
-    return { data: null, error: networkHelper.errorConnection };
-  }
-
-  // If cache up to date or there is no internet return cache data
-  if (cacheId && !noCache && (!isConnected
-    || cacheHelper.isCacheUpToDate(cacheId, lifeTime))) {
-    return {
-      data,
-      error: data ? '' : networkHelper.errorConnection,
-    };
   }
 
   // Load from API and update data in cache if connected
@@ -221,11 +204,19 @@ async function loadData(
     } catch (e) {
       log.warn(e + (e.errorName ? ` (${e.errorName})` : ''));
     }
+  } else if (showErrorPage) {
+    Navigation.showModal({
+      screen: 'core.ErrorPage',
+      passProps: {
+        message: networkHelper.errorConnection,
+        onBack: Navigation.dismissModal.bind(null, { animated: true }),
+      },
+    });
   }
 
   return {
     data,
-    error: data ? '' : networkHelper.errorTimeout,
+    error: data ? '' : networkHelper.errorConnection,
   };
 }
 
