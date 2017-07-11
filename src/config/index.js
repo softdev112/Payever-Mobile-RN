@@ -15,6 +15,7 @@ export class Config {
     logSUrl: string;
     logWampCall: boolean;
   };
+  reqTimeout: number = 10000;
 
   constructor(data) {
     data.debug = data.debug || {};

@@ -11,7 +11,7 @@ export default Object.assign({
   debug: {
     logApiCall: true,
   },
-
+  reqTimeout: 10000,
   oauthData: {
     twitter: {
       appId: 'oRCkHDAnAFSXiO1wayGlpBkwn',

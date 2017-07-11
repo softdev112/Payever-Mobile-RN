@@ -357,4 +357,69 @@ describe('Utils/apiHelper', () => {
       expect(result).toBe(true);
     });
   });
+
+  describe('apiHelper/state', () => {
+    it('apiHelper should set state.isLoading to true while resolving promise and return it to false', async () => {
+      jest.useFakeTimers();
+
+      networkHelper.loadFromApi.mockImplementationOnce(
+        () => new Promise((res) => {
+          setTimeout(() => res(1), 2000);
+          expect(store.isLoading).toBe(true);
+          jest.runOnlyPendingTimers();
+        })
+      );
+
+      const successMockFn = jest.fn((data) => {
+        expect(store.isLoading).toBe(true);
+        return data;
+      });
+
+      expect(store.isLoading).toBe(false);
+      await apiHelper(() => Promise.resolve(1), store, true)
+        .success(successMockFn)
+        .promise();
+
+      expect(store.isLoading).toBe(false);
+      expect(networkHelper.isConnected).toHaveBeenCalledTimes(1);
+      expect(networkHelper.loadFromApi).toHaveBeenCalled();
+      expect(successMockFn).toHaveBeenCalledTimes(1);
+      expect(successMockFn).toHaveBeenLastCalledWith(1);
+
+      jest.clearAllTimers();
+    });
+
+    it('apiHelper should set state error if there was errors while reading from api', async () => {
+      jest.useFakeTimers();
+
+      networkHelper.loadFromApi.mockImplementationOnce(
+        () => new Promise((res, rej) => {
+          setTimeout(() => rej(networkHelper.errorConnection), 2000);
+          expect(store.isLoading).toBe(true);
+          expect(store.error).toBe('');
+          jest.runOnlyPendingTimers();
+        })
+      );
+
+      const errorMockFn = jest.fn((data) => {
+        expect(store.isLoading).toBe(true);
+        return data;
+      });
+
+      expect(store.isLoading).toBe(false);
+      expect(store.error).toBe('');
+      await apiHelper(() => Promise.resolve(1), store, true)
+        .error(errorMockFn)
+        .promise();
+
+      expect(store.isLoading).toBe(false);
+      expect(store.error).toBe(networkHelper.errorConnection);
+      expect(networkHelper.isConnected).toHaveBeenCalledTimes(1);
+      expect(networkHelper.loadFromApi).toHaveBeenCalled();
+      expect(errorMockFn).toHaveBeenCalledTimes(1);
+      expect(errorMockFn).toHaveBeenLastCalledWith({ error: networkHelper.errorConnection });
+
+      jest.clearAllTimers();
+    });
+  });
 });
