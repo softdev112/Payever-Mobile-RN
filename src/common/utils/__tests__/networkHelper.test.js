@@ -1,13 +1,6 @@
 /* eslint-disable max-len, global-require */
 import { networkHelper } from 'utils';
 
-jest.mock('react-native-navigation', () => ({
-  Navigation: {
-    showModal: jest.fn(() => {}),
-    dismissModal: jest.fn(() => {}),
-  },
-})).mock('react-native-logging');
-
 global.fetch = jest.fn();
 
 const OK_RESP = {
