@@ -50,7 +50,7 @@ const TEST_PROFILE = {
   },
 };
 
-describe('Profiles/Store', () => {
+describe('Store/Profiles', () => {
   let store;
   let getSpy;
   let postSpy;

@@ -50,14 +50,6 @@ export default class AuthApi {
     );
   }
 
-  resendConfirmationEmail(email): Promise<ApiResp> {
-    return this.client.post(
-      '/api/rest/v1/user/resetting/send-email',
-      { email },
-      { addTokenToHeader: false }
-    );
-  }
-
   async refreshToken(refreshToken): Promise<AuthResp> {
     return await this.client.fetch('/oauth/v2/token', {
       query: {

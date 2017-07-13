@@ -26,7 +26,7 @@ jest.mock('react-native-navigation', () => ({
   .mock('../../../common/utils/cacheHelper')
   .mock('../../../store/auth');
 
-describe('Contacts/Store', () => {
+describe('Store/Searh', () => {
   let store;
   let search;
   let api;

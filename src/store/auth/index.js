@@ -29,6 +29,7 @@ export default class AuthStore {
   @action
   signIn(username, password): Promise<SignInResult> {
     const { auth } = this.store.api;
+    if (!username || !password) return null;
 
     return apiHelper(auth.login.bind(auth, username, password), this)
       .success((data: AuthData) => {
@@ -40,6 +41,7 @@ export default class AuthStore {
   @action
   registerNewUser(user) {
     const { auth } = this.store.api;
+    if (!user) return null;
 
     return apiHelper(auth.registerNewUser.bind(auth, user), this)
       .success()
@@ -50,21 +52,9 @@ export default class AuthStore {
   @action
   resetPassword(email) {
     const { auth } = this.store.api;
+    if (!email || email === '') return null;
 
     return apiHelper(auth.resetPassword.bind(auth, email), this)
-      .success(() => true)
-      .error((err) => {
-        log.error(err);
-        return false;
-      })
-      .promise();
-  }
-
-  @action
-  resendConfirmationEmail(email) {
-    const { auth } = this.store.api;
-
-    return apiHelper(auth.resendConfirmationEmail.bind(auth, email), this)
       .success(() => true)
       .error((err) => {
         log.error(err);
@@ -77,13 +67,23 @@ export default class AuthStore {
   async signInWithSocial(socialNetwork: string, socialUserInfo) {
     const { auth } = this.store.api;
 
-    const userInfo = await this.connectToSocial(socialNetwork, socialUserInfo);
+    if (!socialNetwork || !socialUserInfo) return null;
 
-    return apiHelper(auth.loginWithTemporarySocialUser.bind(
-      auth,
-      userInfo.client_id,
-      userInfo.secret_key
-    ),
+    let userInfo;
+    try {
+      userInfo = await this.connectToSocial(socialNetwork, socialUserInfo);
+    } catch (err) {
+      log.error(err);
+    }
+
+    if (!userInfo) return null;
+
+    return apiHelper(
+      auth.loginWithTemporarySocialUser.bind(
+        auth,
+        userInfo.client_id,
+        userInfo.secret_key
+      ),
       this
     ).success((data: AuthData) => {
       this.updateTokens(data);
@@ -94,6 +94,7 @@ export default class AuthStore {
   @action
   connectToSocial(socialName, credentials: SocialCredentials) {
     const { auth } = this.store.api;
+    if (!socialName || !credentials) return null;
 
     return apiHelper(
       auth.connectToSocial.bind(auth, socialName, credentials),
@@ -105,7 +106,7 @@ export default class AuthStore {
 
   @action
   setError(error: string) {
-    this.error = error;
+    this.error = error || '';
   }
 
   @action
@@ -118,7 +119,8 @@ export default class AuthStore {
     this.isLoggedIn = null;
 
     return api.auth.logout()
-      .then(() => AsyncStorage.clear());
+      .then(() => AsyncStorage.clear())
+      .catch(log.error);
   }
 
   @action
