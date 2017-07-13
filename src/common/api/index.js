@@ -82,7 +82,7 @@ export default class PayeverApi {
   }
 
   //noinspection ReservedWordAsName
-  async delete(
+  delete(
     url: string,
     data: Object = null,
     options: RequestOptions = {}

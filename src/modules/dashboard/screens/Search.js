@@ -88,7 +88,7 @@ export default class SearchForm extends Component {
 
   render() {
     const { query } = this.state;
-    const search:SearchStore = this.props.search;
+    const { search } = this.props;
 
     return (
       <View style={styles.container}>

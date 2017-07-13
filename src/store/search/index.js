@@ -1,4 +1,4 @@
-import { action, computed, observable, runInAction } from 'mobx';
+import { action, computed, observable, extendObservable } from 'mobx';
 import { apiHelper } from 'utils';
 import { images } from 'ui';
 
@@ -39,36 +39,26 @@ export default class SearchStore {
   }
 
   @action
-  async follow(businessId) {
+  follow(businessId) {
     const { profiles } = this.store.api;
 
-    const item: SearchRow = this.items.find((row) => row.id === businessId);
+    const item = this.items.find(i => i.id === businessId);
+    if (!item) return;
 
-    if (!item) {
-      runInAction(() => this.error = 'Sorry, internal error occurred.');
-      return;
-    }
-
-    runInAction(() => item.is_followUpdating = true);
-
+    item.is_followUpdating = true;
     apiHelper(profiles.follow.bind(profiles, businessId), this)
       .success(() => item.is_following = true)
       .complete(() => item.is_followUpdating = false);
   }
 
   @action
-  async unfollow(businessId) {
+  unfollow(businessId) {
     const { profiles } = this.store.api;
 
-    const item: SearchRow = this.items.find((row) => row.id === businessId);
+    const item = this.items.find(i => i.id === businessId);
+    if (!item) return;
 
-    if (!item) {
-      runInAction(() => this.error = 'Sorry, internal error occurred.');
-      return;
-    }
-
-    runInAction(() => item.is_followUpdating = true);
-
+    item.is_followUpdating = true;
     apiHelper(profiles.unfollow.bind(profiles, businessId), this)
       .success(() => item.is_following = false)
       .complete(() => item.is_followUpdating = false);
@@ -91,11 +81,14 @@ export class SearchRow {
     slug: string;
     logo: ?string;
   };
-  @observable is_following: boolean;
-  @observable is_followUpdating: boolean;
+  is_following: boolean;
+  is_followUpdating: boolean;
 
   constructor(data) {
-    Object.assign(this, data);
+    extendObservable(this, {
+      ...data,
+      is_followUpdating: false,
+    });
   }
 
   @computed get logoSource() {

@@ -5,7 +5,7 @@ import Store from '../../../store';
 import config from '../../../config';
 import searchData from './data';
 
-// const mobx = require('mobx');
+const mobx = require('mobx');
 
 const PROFILE = {
   business: {
@@ -31,7 +31,8 @@ describe('Contacts/Store', () => {
   let search;
   let api;
   let getSpy;
-//  let postSpy;
+  let postSpy;
+  let deleteSpy;
 
   beforeAll(() => {
     networkHelper.isConnected.mockImplementation(() => true);
@@ -45,9 +46,10 @@ describe('Contacts/Store', () => {
     api = store.api;
     store.profiles.currentProfile = PROFILE;
 
-    store.api.fetch = jest.fn(url => url);
+    api.fetch = jest.fn(url => url);
     getSpy = jest.spyOn(store.api, 'get');
-    // postSpy = jest.spyOn(store.api, 'post');
+    postSpy = jest.spyOn(store.api, 'post');
+    deleteSpy = jest.spyOn(store.api, 'delete');
   });
 
   afterEach(() => {
@@ -61,7 +63,7 @@ describe('Contacts/Store', () => {
 
   describe('Search/search(query)', () => {
     it('search should call api with right url', async () => {
-      const apySpy = jest.spyOn(search, 'search');
+      const apySpy = jest.spyOn(api.profiles, 'search');
 
       await search.search('xc');
 
@@ -78,8 +80,8 @@ describe('Contacts/Store', () => {
       );
     });
 
-    fit('search should makes right store state after receiving data', async () => {
-      const apySpy = jest.spyOn(search, 'search');
+    it('search should makes right store state after receiving data', async () => {
+      const apySpy = jest.spyOn(api.profiles, 'search');
       networkHelper.loadFromApi.mockImplementationOnce(
         () => Promise.resolve(searchData)
       );
@@ -95,7 +97,110 @@ describe('Contacts/Store', () => {
         '/api/rest/v1/profiles/search',
         { query: { access_token: undefined, c: 20, k: 'xc' } }
       );
-      expect(search.items).toHaveLength(search.items.length);
+      expect(search.items).toHaveLength(searchData.length);
+      expect(mobx.toJS(search.items)).toEqual(
+        searchData.map(i => {
+          i.is_followUpdating = false;
+          return i;
+        })
+      );
+    });
+  });
+
+  describe('Search/follow)', () => {
+    it('follow should call api with right url', async () => {
+      const apySpy = jest.spyOn(api.profiles, 'follow');
+      networkHelper.loadFromApi.mockImplementationOnce(
+        () => Promise.resolve(searchData)
+      );
+
+      expect(search.items).toHaveLength(0);
+      await search.search('xc');
+      expect(search.items).toHaveLength(searchData.length);
+
+      jest.clearAllMocks();
+      await search.follow(168510);
+
+      expect(networkHelper.isConnected).toHaveBeenCalledTimes(1);
+      expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(1);
+      expect(cacheHelper.loadFromCache).not.toHaveBeenCalled();
+      expect(cacheHelper.isCacheUpToDate).not.toHaveBeenCalled();
+      expect(apySpy).toHaveBeenCalled();
+      expect(postSpy).toHaveBeenCalled();
+      expect(postSpy).toHaveBeenLastCalledWith(
+        '/api/rest/v1/profiles/168510/follow'
+      );
+    });
+
+    it('follow should NOT call api if it gets wrong business id', async () => {
+      const apySpy = jest.spyOn(api.profiles, 'follow');
+      networkHelper.loadFromApi.mockImplementationOnce(
+        () => Promise.resolve(searchData)
+      );
+
+      expect(search.items).toHaveLength(0);
+      await search.search('xc');
+      expect(search.items).toHaveLength(searchData.length);
+
+      jest.clearAllMocks();
+      await search.follow(168510000);
+
+      expect(networkHelper.isConnected).not.toHaveBeenCalled();
+      expect(networkHelper.loadFromApi).not.toHaveBeenCalled();
+      expect(apySpy).not.toHaveBeenCalled();
+      expect(postSpy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Search/unfollow)', () => {
+    it('unfollow should call api with right url', async () => {
+      const apySpy = jest.spyOn(api.profiles, 'unfollow');
+      networkHelper.loadFromApi.mockImplementationOnce(
+        () => Promise.resolve(searchData)
+      );
+
+      expect(search.items).toHaveLength(0);
+      await search.search('xc');
+      expect(search.items).toHaveLength(searchData.length);
+
+      jest.clearAllMocks();
+      await search.unfollow(168510);
+
+      expect(networkHelper.isConnected).toHaveBeenCalledTimes(1);
+      expect(networkHelper.loadFromApi).toHaveBeenCalledTimes(1);
+      expect(cacheHelper.loadFromCache).not.toHaveBeenCalled();
+      expect(cacheHelper.isCacheUpToDate).not.toHaveBeenCalled();
+      expect(apySpy).toHaveBeenCalled();
+      expect(deleteSpy).toHaveBeenCalled();
+      expect(deleteSpy).toHaveBeenLastCalledWith(
+        '/api/rest/v1/profiles/168510/unfollow'
+      );
+      expect(postSpy).toHaveBeenCalled();
+      expect(postSpy).toHaveBeenLastCalledWith(
+        '/api/rest/v1/profiles/168510/unfollow',
+        null,
+        { method: 'DELETE' }
+      );
+    });
+
+    it('unfollow should NOT call api if it gets wrong business id', async () => {
+      const apySpy = jest.spyOn(api.profiles, 'unfollow');
+      networkHelper.loadFromApi.mockImplementationOnce(
+        () => Promise.resolve(searchData)
+      );
+
+      expect(search.items).toHaveLength(0);
+      await search.search('xc');
+      expect(search.items).toHaveLength(searchData.length);
+
+      jest.clearAllMocks();
+      await search.unfollow(168510000);
+
+      expect(networkHelper.isConnected).not.toHaveBeenCalled();
+      expect(networkHelper.loadFromApi).not.toHaveBeenCalled();
+      expect(apySpy).not.toHaveBeenCalled();
+      expect(postSpy).not.toHaveBeenCalled();
+      expect(deleteSpy).not.toHaveBeenCalled();
     });
   });
 });
