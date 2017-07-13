@@ -2,7 +2,7 @@ import { Component, PropTypes } from 'react';
 import { Platform, Text, TouchableOpacity, View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-import { ScreenParams } from '../../utils';
+import { screenParams } from '../../utils';
 import StyleSheet from '../StyleSheet';
 
 const MENU_INSIDE_HEIGHT = 35;
@@ -78,7 +78,7 @@ export default class PopupMenu extends Component {
 
   getMenuXPos(touchX) {
     const { actions } = this.props;
-    const { width: screenWidth } = ScreenParams;
+    const { width: screenWidth } = screenParams;
     const btnsWidth = actions.length * BUTTON_WIDTH;
 
     if (screenWidth - touchX <= btnsWidth) {
@@ -106,7 +106,7 @@ export default class PopupMenu extends Component {
 
   getArrowXPos(touchX) {
     const { actions } = this.props;
-    const screen30PerWidth = ScreenParams.width * 0.3;
+    const screen30PerWidth = screenParams.width * 0.3;
     const arrowXPosSetIndex = actions.length > 2 ? 1 : 0;
 
     if (touchX <= screen30PerWidth) {

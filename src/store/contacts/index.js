@@ -65,7 +65,9 @@ export default class ContactsStore {
       this
     ).success((data) => {
       this.contactsPaginationData = data.pagination_data;
-      this.contacts = this.contacts.concat(data.contact_models);
+      if (data.contact_models && data.contact_models.length > 0) {
+        this.contacts = this.contacts.concat(data.contact_models);
+      }
     }).error(log.error)
       .promise();
   }
@@ -104,13 +106,17 @@ export default class ContactsStore {
       this
     ).success((data) => {
       this.contactGroupsPaginationData = data.pagination_data;
-      this.contactGroups = this.contactGroups.concat(data.group_list);
+      if (data.group_list && data.group_list.length > 0) {
+        this.contactGroups = this.contactGroups.concat(data.group_list);
+      }
     }).error(log.error)
       .promise();
   }
 
   @action
   getGroupDetails(groupId: number) {
+    if (!groupId) return null;
+
     const { contacts } = this.store.api;
     return apiHelper(contacts.getGroupDetails.bind(contacts, groupId))
       .success(data => data)
@@ -120,6 +126,8 @@ export default class ContactsStore {
 
   @action
   createNewContact(contact: CustomerContactInfo) {
+    if (!contact) return null;
+
     const { contacts } = this.store.api;
 
     const slug = this.store.profiles.currentProfile.business.slug;
@@ -133,6 +141,8 @@ export default class ContactsStore {
 
   @action
   uploadContactLogo(mediaFileInfo) {
+    if (!mediaFileInfo) return null;
+
     this.logoUploadingProgress = 0;
     return this.store.api.contacts.uploadContactLogo(mediaFileInfo)
       .catch(log.error);
@@ -148,8 +158,10 @@ export default class ContactsStore {
 
   @action
   addContactToSelected(contact: CustomerContactInfo) {
+    if (!contact) return;
+
     if (!this.checkContactSelected(contact.id)) {
-      this.selectedContacts.push(contact);
+      this.selectedContacts = this.selectedContacts.concat(contact);
     }
   }
 
@@ -199,6 +211,8 @@ export default class ContactsStore {
 
   @action
   sendInviteMessage(contactId: number) {
+    if (contactId === undefined) return null;
+
     const { contacts } = this.store.api;
 
     return apiHelper(

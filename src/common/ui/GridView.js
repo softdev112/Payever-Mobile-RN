@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { FlatList } from 'react-native';
 import StyleSheet from './StyleSheet';
-import { ScreenParams } from '../utils';
+import { screenParams } from '../utils';
 
 export default class GridView extends Component {
   static defaultProps = {
@@ -67,9 +67,9 @@ export default class GridView extends Component {
     const { gridHeight } = this.state;
 
     const numOfColumns = numColumns
-      || Math.floor(ScreenParams.width / itemWidth);
+      || Math.floor(screenParams.width / itemWidth);
     const marginLeft =
-      (ScreenParams.width - (numOfColumns * itemWidth)) / (numOfColumns + 1);
+      (screenParams.width - (numOfColumns * itemWidth)) / (numOfColumns + 1);
 
     const contentStyle = [styles.content, contentContainerStyle];
     const columnHeight =

@@ -2,8 +2,8 @@ import { action, computed, observable, runInAction } from 'mobx';
 import { apiHelper } from 'utils';
 import { images } from 'ui';
 
-import type { SearchDataRow } from '../common/api/ProfilesApi';
-import type Store from './index';
+import type { SearchDataRow } from '../../common/api/ProfilesApi';
+import type Store from './../index';
 
 export default class SearchStore {
   @observable items: Array<SearchRow> = [];
@@ -24,7 +24,7 @@ export default class SearchStore {
 
     this.isSearching = true;
 
-    apiHelper(profiles.search.bind(profiles, query), this)
+    return apiHelper(profiles.search.bind(profiles, query), this)
       .success((data: Array<SearchDataRow>) => {
         if (data.length > 0) {
           this.items = data.map(d => new SearchRow(d));
@@ -34,14 +34,14 @@ export default class SearchStore {
           this.items = [];
         }
       })
-      .complete(() => this.isSearching = false);
+      .complete(() => this.isSearching = false)
+      .promise();
   }
 
   @action
   async follow(businessId) {
     const { profiles } = this.store.api;
 
-    // find row element
     const item: SearchRow = this.items.find((row) => row.id === businessId);
 
     if (!item) {
@@ -49,13 +49,10 @@ export default class SearchStore {
       return;
     }
 
-    // Set follow/unfollow processing flag for row
     runInAction(() => item.is_followUpdating = true);
 
     apiHelper(profiles.follow.bind(profiles, businessId), this)
-      .success(() => {
-        item.is_following = true;
-      })
+      .success(() => item.is_following = true)
       .complete(() => item.is_followUpdating = false);
   }
 
@@ -63,7 +60,6 @@ export default class SearchStore {
   async unfollow(businessId) {
     const { profiles } = this.store.api;
 
-    // find row element
     const item: SearchRow = this.items.find((row) => row.id === businessId);
 
     if (!item) {
@@ -71,13 +67,10 @@ export default class SearchStore {
       return;
     }
 
-    // Set follow/unfollow processing flag for row
     runInAction(() => item.is_followUpdating = true);
 
     apiHelper(profiles.unfollow.bind(profiles, businessId), this)
-      .success(() => {
-        item.is_following = false;
-      })
+      .success(() => item.is_following = false)
       .complete(() => item.is_followUpdating = false);
   }
 }

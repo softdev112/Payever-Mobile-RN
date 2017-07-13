@@ -24,7 +24,6 @@ export default class SettingsFloatMenu extends Component {
   props: {
     communication: CommunicationStore;
     profiles: ProfilesStore;
-    conversationId: number;
     onRemove?: (cb?: () => void) => void;
     style?: Object;
   };
@@ -49,7 +48,9 @@ export default class SettingsFloatMenu extends Component {
   }
 
   onSendOffer() {
-    const { conversationId } = this.props;
+    const {
+      selectedConversationId: conversationId,
+    } = this.props.communication;
 
     this.context.navigator.push({
       screen: 'marketing.CreateOffer',

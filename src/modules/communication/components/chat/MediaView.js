@@ -4,7 +4,7 @@ import { Navigator } from 'react-native-navigation';
 import FileOpener from 'react-native-file-opener';
 import RNFetchBlob from 'react-native-fetch-blob';
 import { Icon, StyleSheet, Text, View } from 'ui';
-import { format, log, ScreenParams, androidMimeTypes } from 'utils';
+import { format, log, screenParams, androidMimeTypes } from 'utils';
 import Media from '../../../../store/communication/models/Media';
 import config from '../../../../config';
 
@@ -115,7 +115,7 @@ export function calcImageDimensions(imageProperties) {
   const OFFSET = 130;
   const MAX = 300;
 
-  const { width: wndWidth, height: wndHeight } = ScreenParams;
+  const { width: wndWidth, height: wndHeight } = screenParams;
   const {
     width: srcWidth = MAX,
     height: srcHeight = MAX,

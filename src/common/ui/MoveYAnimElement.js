@@ -1,14 +1,14 @@
 import { Component } from 'react';
 import { Animated, Easing } from 'react-native';
-import ScreenParams from '../utils/screenParams';
+import screenParams from '../utils/screenParams';
 
 import Text from './Text';
 import StyleSheet from './StyleSheet';
 
 const ANIM_DURATION_KOEF = 0.4;
-const MAX_ANIM_HEIGHT = ScreenParams.height - 160;
-const MID_X_POSITION = ScreenParams.isTabletLayout()
-  ? 140 : ScreenParams.width / 2;
+const MAX_ANIM_HEIGHT = screenParams.height - 160;
+const MID_X_POSITION = screenParams.isTabletLayout()
+  ? 140 : screenParams.width / 2;
 const START_WIDTH = 300;
 const END_WIDTH = 150;
 
@@ -49,7 +49,7 @@ export default class MoveYAnimElement extends Component {
 
   getDurationOnRowYPos() {
     // duration = ANIM_DURATION_KOEF * (screenHeight - Y)
-    return ANIM_DURATION_KOEF * (ScreenParams.height - this.props.startPosY);
+    return ANIM_DURATION_KOEF * (screenParams.height - this.props.startPosY);
   }
 
   render() {

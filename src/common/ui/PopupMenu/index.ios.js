@@ -2,7 +2,7 @@ import { Component, PropTypes } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-import { ScreenParams } from '../../utils';
+import { screenParams } from '../../utils';
 import StyleSheet from '../StyleSheet';
 
 const MENU_HEIGHT = 35;
@@ -25,7 +25,7 @@ export default class PopupMenu extends Component {
   static defaultProps = {
     posY: DEFAULT_Y_POS,
     posX: DEFAULT_X_POS,
-    maxX: ScreenParams.width,
+    maxX: screenParams.width,
   };
 
   props: {

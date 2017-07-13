@@ -1,11 +1,11 @@
 import { action, observable } from 'mobx';
-import { ScreenParams } from 'utils';
+import { screenParams } from 'utils';
 
 import type Store from '../../store';
 
 export default class UIStore {
   deepLink: string = '';
-  @observable phoneMode: boolean = !ScreenParams.isTabletLayout();
+  @observable phoneMode: boolean = !screenParams.isTabletLayout();
   store: Store;
 
   constructor(store: Store) {

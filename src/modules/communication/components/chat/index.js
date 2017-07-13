@@ -3,7 +3,7 @@ import { Animated, Keyboard, FlatList, Platform } from 'react-native';
 import { Navigator } from 'react-native-navigation';
 import { inject, observer } from 'mobx-react/native';
 import { ErrorBox, Loader, PopupMenu, StyleSheet, View } from 'ui';
-import { ScreenParams } from 'utils';
+import { screenParams } from 'utils';
 
 import Footer from './Footer';
 import SelectionFooter from './SelectionFooter';
@@ -74,8 +74,8 @@ export default class Chat extends Component {
       selectedMessage: null,
       keyboardHeight: 0,
       chatLayout: {
-        width: ScreenParams.width,
-        height: ScreenParams.height,
+        width: screenParams.width,
+        height: screenParams.height,
       },
       animValue: new Animated.Value(0),
     };
@@ -202,7 +202,7 @@ export default class Chat extends Component {
     this.setState({
       showPopupMenu: true,
       popupPosY: event.pageY,
-      popupPosX: event.pageX - (ScreenParams.width - chatLayout.width),
+      popupPosX: event.pageX - (screenParams.width - chatLayout.width),
       selectedMessage: message,
     });
   }

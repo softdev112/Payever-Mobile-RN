@@ -75,13 +75,12 @@ export default {
   async loadFromApi(apiPromise, timeout = TIMEOUT) {
     let resp;
     const timerIdx = getTimerIdx();
-
     try {
       resp = await Promise.race(
         [apiPromise, timeoutPromise(timerIdx, timeout)]
       );
 
-      if (!resp || !resp.ok || resp.error || resp.status !== 200) {
+      if (!resp || !resp.ok || resp.error) {
         const errorMessage = resp.errorDescription || NETWORK_ERROR;
         const error = new Error(errorMessage);
         error.errorName = resp.error;
