@@ -12,11 +12,11 @@ jest.mock('mobx-react/native', () => require('mobx-react/custom'))
     '../src/common/utils/soundHelper/sounds',
     () => require('../src/common/utils/soundHelper/sounds/__mocks__')
   )
-  .mock('../src/common/utils/soundHelper', () => {})
   .mock('../src/common/utils', () => ({
     screenParams: require('../src/common/utils/screenParams').default,
     apiHelper: require('../src/common/utils/apiHelper').default,
     log: require.requireActual('react-native-logging'),
     networkHelper: require('../src/common/utils/networkHelper').default,
     cacheHelper: require('../src/common/utils/cacheHelper').default,
+    soundHelper: require('../src/common/utils/soundHelper').default,
   }));

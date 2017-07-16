@@ -1,7 +1,4 @@
-/**
- * Created by Elf on 29.01.2017.
- */
-const data = {
+export default {
   slug: 'again-9',
   wsUrl: 'wss://mein.payever.de/chat/',
   messengerUser: {
@@ -292,5 +289,3 @@ const data = {
     },
   ],
 };
-
-export default data;

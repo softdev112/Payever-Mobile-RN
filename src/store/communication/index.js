@@ -85,6 +85,7 @@ export default class CommunicationStore {
 
   @action
   async loadMessengerInfo(profile: BusinessProfile) {
+    if (!profile) return null;
     const { messenger } = this.store.api;
 
     let apiEndPoint;
@@ -108,6 +109,7 @@ export default class CommunicationStore {
 
         return this.messengerInfo;
       })
+      .error(log.error)
       .promise();
   }
 
@@ -121,6 +123,8 @@ export default class CommunicationStore {
       log.error(err);
     }
 
+    if (!socket || id === null || id === undefined) return null;
+
     const userId = socket.userId;
     const type = this.messengerInfo.getConversationType(id);
 
@@ -133,6 +137,7 @@ export default class CommunicationStore {
           data,
           this.messengerInfo.byId(id)
         );
+
         conversation.allMessagesFetched = data.messages.length < limit;
 
         // Load settings synchroniously for groups course it using data from
@@ -150,6 +155,7 @@ export default class CommunicationStore {
         this.conversations.merge({ [id]: observable(conversation) });
         return conversation;
       })
+      .error(log.error)
       .promise();
   }
 
@@ -221,8 +227,12 @@ export default class CommunicationStore {
 
   @action
   searchContactsAutocomplete(query) {
+    if (!query || query === '') return null;
+
     const { api: { messenger } } = this.store;
     const { messengerUser } = this.messengerInfo;
+
+    if (!messengerUser) return null;
 
     return apiHelper(
       messenger.getAvailableContacts.bind(messenger, messengerUser.id, query),
@@ -235,6 +245,8 @@ export default class CommunicationStore {
 
   @action
   getContactData(contactId: number) {
+    if (!contactId) return null;
+
     const { api: { messenger } } = this.store;
     return apiHelper(messenger.getContactData.bind(messenger, contactId))
       .success(data => data)
@@ -246,6 +258,7 @@ export default class CommunicationStore {
     this.addSendingMessage(body);
 
     const socket = await this.store.api.messenger.getSocket();
+    if (!socket) return null;
 
     const options = {
       conversationId,
@@ -273,6 +286,7 @@ export default class CommunicationStore {
     conversationId = this.selectedConversationId
   ) {
     const { messengerUser } = this.messengerInfo;
+    if (!messengerUser) return;
 
     const { settings } = this.selectedConversation;
     if (settings && settings.notification) {
@@ -309,6 +323,7 @@ export default class CommunicationStore {
 
   @action
   addSendingMessage(body) {
+    if (!this.selectedConversation) return;
     const sendMessage = {
       body,
       messengerUser: this.messengerInfo.messengerUser,
