@@ -6,13 +6,16 @@ exports[`src/modules/core/screens/ErrorPage.js src/modules/core/screens/ErrorPag
     Object {
       "flex": 1,
     }
-  }>
+  }
+>
   <View
     style={
       Array [
         Object {
+          "backgroundColor": "#FFF",
           "borderBottomColor": "#e1e1e1",
           "borderBottomWidth": 1,
+          "elevation": 8,
           "flexDirection": "row",
           "justifyContent": "center",
           "marginTop": 10,
@@ -20,7 +23,8 @@ exports[`src/modules/core/screens/ErrorPage.js src/modules/core/screens/ErrorPag
         },
         undefined,
       ]
-    }>
+    }
+  >
     <Text
       accessible={true}
       allowFontScaling={true}
@@ -28,14 +32,21 @@ exports[`src/modules/core/screens/ErrorPage.js src/modules/core/screens/ErrorPag
       style={
         Array [
           Object {
-            "fontFamily": "Helvetica Neue",
-          },
-          Object {
             "color": "#3d3d3d",
-            "textAlign": "center",
+            "fontFamily": "Helvetica Neue",
+            "fontWeight": "200",
           },
+          Array [
+            Object {
+              "color": "#3d3d3d",
+              "fontWeight": "400",
+              "textAlign": "center",
+            },
+            undefined,
+          ],
         ]
-      }>
+      }
+    >
       Error
     </Text>
   </View>
@@ -44,60 +55,46 @@ exports[`src/modules/core/screens/ErrorPage.js src/modules/core/screens/ErrorPag
       Object {
         "alignItems": "center",
         "flex": 1,
-        "justifyContent": "center",
+        "paddingTop": 200.1,
       }
-    }>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      duration={0}
-      ellipsizeMode="tail"
-      message="Hello World!"
-      style={
-        Array [
-          Object {
-            "borderColor": "red",
-            "borderRadius": 4,
-            "borderWidth": 1,
-            "color": "red",
-            "padding": 5,
-            "textAlign": "center",
-          },
-          Object {
-            "width": 600,
-          },
-        ]
-      }>
-      Hello World!
-    </Text>
+    }
+  >
     <View
-      accessibilityComponentType="button"
-      accessibilityLabel={undefined}
-      accessibilityTraits={
-        Array [
-          "button",
-        ]
-      }
-      accessible={true}
-      hitSlop={undefined}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
       style={
         Object {
-          "backgroundColor": "#0084ff",
-          "borderRadius": 4,
-          "marginTop": 10,
-          "opacity": 1,
-          "padding": 3,
-          "width": 120,
+          "alignItems": "center",
+          "justifyContent": "center",
+          "padding": 20,
         }
       }
-      testID={undefined}>
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        source="icon-alert-32"
+        style={
+          Array [
+            Object {
+              "fontFamily": "payeverIcons",
+              "fontSize": 32,
+            },
+            Array [
+              Object {
+                "fontFamily": "payeverIcons",
+                "fontSize": 32,
+              },
+              Object {
+                "color": "#ff3c30",
+                "marginBottom": 10,
+              },
+            ],
+          ]
+        }
+      >
+        
+      </Text>
       <Text
         accessible={true}
         allowFontScaling={true}
@@ -105,15 +102,80 @@ exports[`src/modules/core/screens/ErrorPage.js src/modules/core/screens/ErrorPag
         style={
           Array [
             Object {
-              "color": "white",
-              "fontWeight": "500",
-              "padding": 8,
+              "color": "#3d3d3d",
+              "fontFamily": "Helvetica Neue",
+              "fontWeight": "200",
+            },
+            Object {
+              "fontSize": 15,
               "textAlign": "center",
             },
           ]
-        }>
-        Go To Login
+        }
+      >
+        Hello World!
       </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+    >
+      <View
+        accessibilityComponentType="button"
+        accessibilityLabel={undefined}
+        accessibilityTraits={
+          Array [
+            "button",
+          ]
+        }
+        accessible={true}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#0084ff",
+            "borderRadius": 4,
+            "elevation": 2,
+            "height": 41,
+            "justifyContent": "center",
+            "marginTop": 30,
+            "opacity": 1,
+            "width": 120,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "white",
+                "fontSize": 16,
+                "fontWeight": "400",
+                "padding": 8,
+                "textAlign": "center",
+              },
+            ]
+          }
+        >
+          Back
+        </Text>
+      </View>
     </View>
   </View>
 </View>

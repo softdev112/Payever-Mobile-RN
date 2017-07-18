@@ -9,7 +9,6 @@ import { observer, inject } from 'mobx-react/native';
 
 import AuthStore from '../../../store/auth';
 import SegmentedControl from '../../../common/ui/SegmentedControl/index.android';
-const testSound = require('../../../store/communication/resources/sounds/receive_msg.mp3');
 
 @inject('auth')
 @observer

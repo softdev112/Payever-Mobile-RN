@@ -33,7 +33,12 @@ jest.mock('react-native-navigation', () => ({
 })).mock('react-native-logging')
   .mock(
     '../../../store/communication/ui',
-    () => function CommunicationUI() { return {}; }
+    () => function CommunicationUI() {
+      return ({
+        setSelectMode: jest.fn(),
+        setForwardMode: jest.fn(),
+      });
+    }
   ).mock('../../../common/utils/networkHelper')
   .mock('../../../common/utils/cacheHelper')
   .mock('../../../common/utils/soundHelper')
@@ -897,6 +902,101 @@ describe('Store/Communication', () => {
       expect(apiSpy).toHaveBeenCalledWith(query);
       expect(communication.foundMessages)
         .toHaveLength(conversation.messages.length);
+    });
+  });
+
+  describe('Communication/clearFoundMessages()', () => {
+    it('clearFoundMessages should clear communication.foundMessages', () => {
+      communication.foundMessages = [1, 2, 3];
+
+      expect(communication.foundMessages).toHaveLength(3);
+      communication.clearFoundMessages();
+      expect(communication.foundMessages).toHaveLength(0);
+    });
+  });
+
+  describe('Communication/setMessageForReply(message: Message)', () => {
+    it('setMessageForReply should set communication.messageForReply = message, and set ui flags', () => {
+      const { conversation: { messages } } = conversationData;
+      const removeMessageSpy =
+        jest.spyOn(communication, 'removeMessageForEdit');
+      const clearSelectedMsgsSpy =
+        jest.spyOn(communication, 'clearSelectedMessages');
+
+      expect(communication.messageForReply).toBe(null);
+      communication.setMessageForReply(messages[0]);
+
+      expect(mobx.toJS(communication.messageForReply)).toEqual(messages[0]);
+      expect(removeMessageSpy).toHaveBeenCalled();
+      expect(clearSelectedMsgsSpy).toHaveBeenCalled();
+      expect(communication.ui.setForwardMode).toHaveBeenCalled();
+      expect(communication.ui.setForwardMode).toHaveBeenCalledWith(false);
+      expect(communication.ui.setSelectMode).toHaveBeenCalled();
+      expect(communication.ui.setSelectMode).toHaveBeenCalledWith(false);
+    });
+
+    it('setMessageForReply should NOT set communication.messageForReply = message, and should NOT set ui flags if message = null', () => {
+      const removeMessageSpy =
+        jest.spyOn(communication, 'removeMessageForEdit');
+      const clearSelectedMsgsSpy =
+        jest.spyOn(communication, 'clearSelectedMessages');
+
+      expect(communication.messageForReply).toBe(null);
+      communication.setMessageForReply(null);
+      communication.setMessageForReply(undefined);
+
+      expect(mobx.toJS(communication.messageForReply)).toBe(null);
+      expect(removeMessageSpy).not.toHaveBeenCalled();
+      expect(clearSelectedMsgsSpy).not.toHaveBeenCalled();
+      expect(communication.ui.setForwardMode).not.toHaveBeenCalled();
+      expect(communication.ui.setSelectMode).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Communication/removeMessageForReply()', () => {
+    it('removeMessageForReply should set communication.messageForReply = null', () => {
+      const { conversation: { messages } } = conversationData;
+
+      expect(communication.messageForReply).toBe(null);
+      communication.setMessageForReply(messages[0]);
+
+      expect(mobx.toJS(communication.messageForReply)).toEqual(messages[0]);
+      communication.removeMessageForReply();
+
+      expect(communication.messageForReply).toBe(null);
+    });
+  });
+
+  describe('Communication/setMessageForEdit(message)', () => {
+    it('setMessageForEdit should set communication.messageForEdit = message, and set ui flags', () => {
+      const { conversation: { messages } } = conversationData;
+
+      expect(communication.messageForEdit).toBe(null);
+      communication.setMessageForEdit(messages[0]);
+
+      expect(mobx.toJS(communication.messageForEdit)).toEqual(messages[0]);
+    });
+
+    it('setMessageForEdit should NOT set communication.messageForEdit = message if message = null | undefined', () => {
+      expect(communication.messageForEdit).toBe(null);
+      communication.setMessageForEdit(null);
+      communication.setMessageForEdit(undefined);
+
+      expect(mobx.toJS(communication.messageForEdit)).toBe(null);
+    });
+  });
+
+  describe('Communication/removeMessageForEdit()', () => {
+    it('removeMessageForEdit should set communication.messageForEdit = null', () => {
+      const { conversation: { messages } } = conversationData;
+
+      expect(communication.messageForEdit).toBe(null);
+      communication.setMessageForEdit(messages[0]);
+
+      expect(mobx.toJS(communication.messageForEdit)).toEqual(messages[0]);
+      communication.removeMessageForEdit();
+
+      expect(communication.messageForEdit).toBe(null);
     });
   });
 });

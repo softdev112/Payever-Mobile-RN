@@ -11,7 +11,7 @@ import type Profile from '../../../store/profiles/models/Profile';
 import type UIStore from '../../../store/ui';
 
 const ADD_BUSINESS_PROFILE = {
-  id: Date.now(),
+  id: 1,
   logoSource: images.addBusiness,
   displayName: 'Add New Business',
 };

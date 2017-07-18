@@ -372,6 +372,8 @@ export default class CommunicationStore {
 
   @action
   setMessageForReply(message: Message) {
+    if (!message) return;
+
     // Clear all selections
     this.removeMessageForEdit();
     this.clearSelectedMessages();
@@ -388,6 +390,7 @@ export default class CommunicationStore {
 
   @action
   setMessageForEdit(message: Message) {
+    if (!message) return;
     this.messageForEdit = message;
   }
 

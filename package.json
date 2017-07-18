@@ -56,6 +56,10 @@
   "jest": {
     "preset": "react-native",
     "rootDir": ".",
+    "roots": [
+      ".",
+      "./src"
+    ],
     "setupTestFrameworkScriptFile": "./__tests__/jest-env.js",
     "modulePathIgnorePatterns": [
       "test-data",
@@ -65,8 +69,8 @@
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\sounds": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "./__mocks__/styleMock.js",
-      "utils$": "<rootDir>/src/common/utils",
-      "ui$": "<rootDir>/src/common/ui"
+      "common/utils$": "<rootDir>/src/common/utils",
+      "common/ui$": "<rootDir>/src/common/ui"
     },
     "moduleFileExtensions": [
       "js",
@@ -75,20 +79,7 @@
       "node"
     ],
     "verbose": true,
-    "testRegex": ".*\\.js$",
-    "haste": {
-      "defaultPlatform": "ios",
-      "platforms": [
-        "android",
-        "ios"
-      ],
-      "providesModuleNodeModules": [
-        "react",
-        "react-native",
-        "my-awesome-module",
-        "my-text-component"
-      ]
-    },
+    "testRegex": ".[test,spec].js$",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ]
@@ -101,6 +92,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "cheerio": "^0.22.0",
+    "enzyme": "^2.9.1",
     "eslint": "3.12.2",
     "eslint-config-airbnb": "13.0.0",
     "eslint-import-resolver-node": "^0.3.0",
@@ -117,6 +109,7 @@
     "gulp-svgicons2svgfont": "^3.0.1",
     "gulp-task-doc": "^1.0.11",
     "minimist": "^1.2.0",
+    "react-dom": "^15.6.1",
     "vinyl": "^2.0.1"
   },
   "pre-commit": [
