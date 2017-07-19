@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`modules/core/screens/LaunchScreen LaunchScreen should render correctly with dummy data and should NOT called processDeepLink if store.ui.deepLink not set 1`] = `
+exports[`modules/core/screens/LaunchScreen LaunchScreen should render correctly and should NOT called processDeepLink if store.ui.deepLink not set 1`] = `
 <View
   style={
     Object {
@@ -280,7 +280,7 @@ exports[`modules/core/screens/LaunchScreen LaunchScreen should render correctly 
 </View>
 `;
 
-exports[`modules/core/screens/LaunchScreen LaunchScreen should render correctly with dummy data and should call processDeepLink if store.ui.deepLink = url 1`] = `
+exports[`modules/core/screens/LaunchScreen LaunchScreen should render correctly and should call processDeepLink if store.ui.deepLink = url 1`] = `
 <View
   style={
     Object {

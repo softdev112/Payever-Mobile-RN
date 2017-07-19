@@ -1,8 +1,6 @@
 import { Navigator } from 'react-native-navigation';
 import config from '../../../config';
-import ProfilesStore from '../../../store/profiles';
 import { showScreen } from '../../Navigation';
-
 
 export default {
   processDeepLink,
@@ -10,7 +8,7 @@ export default {
 
 async function processDeepLink(
   url: string,
-  profiles: ProfilesStore,
+  profiles,
   navigator: Navigator = null
 ) {
   if (!url) return;

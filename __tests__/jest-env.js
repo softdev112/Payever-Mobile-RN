@@ -19,8 +19,7 @@ jest.mock('mobx-react/native', () => require('mobx-react/custom'))
   .mock('../src/common/utils', () => ({
     apiHelper: require('../src/common/utils/apiHelper').default,
     cacheHelper: require('../src/common/utils/cacheHelper').default,
-    deepLinksHelper:
-      require.requireActual('../src/common/utils/deepLinksHelper').default,
+    deepLinksHelper: require('../src/common/utils/deepLinksHelper').default,
     log: require.requireActual('react-native-logging'),
     networkHelper: require('../src/common/utils/networkHelper').default,
     screenParams: require('../src/common/utils/screenParams').default,

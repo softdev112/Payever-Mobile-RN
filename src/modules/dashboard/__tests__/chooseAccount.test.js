@@ -49,6 +49,7 @@ describe('modules/dashboard/screens/ChooseAccount', () => {
         navigator={navigator}
       />
     ).toJSON();
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -62,6 +63,7 @@ describe('modules/dashboard/screens/ChooseAccount', () => {
         navigator={navigator}
       />
     ).toJSON();
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -73,6 +75,7 @@ describe('modules/dashboard/screens/ChooseAccount', () => {
         navigator={navigator}
       />
     ).toJSON();
+
     expect(tree).toMatchSnapshot();
   });
 

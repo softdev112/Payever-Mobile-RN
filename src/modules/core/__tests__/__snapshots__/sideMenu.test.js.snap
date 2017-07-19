@@ -1,0 +1,2274 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modules/core/screens/SideMenu SideMenu should render correctly with dummy data 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "white",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "height": 44,
+        "justifyContent": "center",
+        "position": "absolute",
+        "right": 5,
+        "top": 11,
+        "width": 44,
+        "zIndex": 2,
+      }
+    }
+  >
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
+      accessible={true}
+      hitSlop={
+        Object {
+          "bottom": 14,
+          "left": 14,
+          "right": 14,
+          "top": 14,
+        }
+      }
+      isTVSelectable={true}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        disabled={false}
+        ellipsizeMode="tail"
+        source="icon-x-16"
+        style={
+          Array [
+            Object {
+              "fontFamily": "payeverIcons",
+              "fontSize": 16,
+            },
+            Array [
+              Object {
+                "fontFamily": "payeverIcons",
+                "fontSize": 16,
+              },
+              undefined,
+            ],
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <RCTScrollView
+      showsVerticalScrollIndicator={false}
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <View>
+        <View
+          style={
+            Object {
+              "borderBottomColor": "#f4f4f4",
+              "borderBottomWidth": 1,
+              "paddingBottom": 19,
+              "paddingLeft": 25,
+              "paddingRight": 19,
+              "paddingTop": 25,
+            }
+          }
+        >
+          <View
+            accessibilityComponentType="button"
+            accessibilityLabel={undefined}
+            accessibilityTraits={
+              Array [
+                "button",
+              ]
+            }
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "borderRadius": 32,
+                "height": 64,
+                "opacity": 1,
+                "width": 64,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={
+                Object {
+                  "uri": "https://stage.payever.de/media/cache/avatar.profile.square/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                }
+              }
+              style={
+                Object {
+                  "borderRadius": 32,
+                  "height": 64,
+                  "width": 64,
+                }
+              }
+            />
+          </View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            onPress={[Function]}
+            style={
+              Array [
+                Object {
+                  "color": "#3d3d3d",
+                  "fontFamily": "Helvetica Neue",
+                  "fontWeight": "200",
+                },
+                Object {
+                  "color": "#0084ff",
+                  "fontSize": 15,
+                  "fontWeight": "400",
+                  "paddingTop": 20,
+                },
+              ]
+            }
+          >
+            Stub Declined
+          </Text>
+          <View>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              onPress={[Function]}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#b3b3b3",
+                    "fontSize": 13,
+                    "fontWeight": "400",
+                    "paddingTop": 8,
+                  },
+                ]
+              }
+            >
+              My Account
+            </Text>
+            <View
+              style={
+                Object {
+                  "position": "absolute",
+                  "right": 0,
+                  "top": -22,
+                }
+              }
+            >
+              <View
+                accessibilityComponentType={undefined}
+                accessibilityLabel={undefined}
+                accessibilityTraits={undefined}
+                accessible={true}
+                hitSlop={
+                  Object {
+                    "bottom": 10,
+                    "left": 10,
+                    "right": 10,
+                    "top": 10,
+                  }
+                }
+                isTVSelectable={true}
+                onLayout={undefined}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "opacity": 1,
+                  }
+                }
+                testID={undefined}
+                tvParallaxProperties={undefined}
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  disabled={false}
+                  ellipsizeMode="tail"
+                  source="icon-settings-24"
+                  style={
+                    Array [
+                      Object {
+                        "fontFamily": "payeverIcons",
+                        "fontSize": 24,
+                      },
+                      Array [
+                        Object {
+                          "fontFamily": "payeverIcons",
+                          "fontSize": 24,
+                        },
+                        Object {
+                          "color": "#b3b3b3",
+                        },
+                      ],
+                    ]
+                  }
+                >
+                  
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          style={
+            Object {
+              "borderTopColor": "#f4f4f4",
+              "borderTopWidth": 1,
+              "flex": 1,
+            }
+          }
+        >
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={
+                Object {
+                  "uri": "https://stage.payever.de/media/cache/business_logo.big.uncropped/34/4d/344d75362126d2b744f91dbbcfb9935a.png",
+                }
+              }
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              Cool busines11
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              RK Company new
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              dfs
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={
+                Object {
+                  "uri": "https://stage.payever.de/media/cache/business_logo.big.uncropped/61/a0/61a098c12d215ed4bf812d5ac2499fe1.jpg",
+                }
+              }
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              Marketing business
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              My company
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={
+                Object {
+                  "uri": "https://stage.payever.de/media/cache/business_logo.big.uncropped/3b/2f/3b2f54a0aaaade98cd0dba5815094bfc.jpg",
+                }
+              }
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              test123
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              Super business
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              site corp
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              for offer
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={
+                Object {
+                  "uri": "https://stage.payever.de/media/cache/business_logo.big.uncropped/1a/54/1a5441917a4db2c3668751f76fa7b03b.png",
+                }
+              }
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              ooo
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              Paypal 2
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              android
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              android company
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              last company
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              last test
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              hukvgjkvgjkv
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              моп
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              gggggg
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              test
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              Stan buisness
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={
+                Object {
+                  "uri": "https://stage.payever.de/media/cache/business_logo.big.uncropped/44/af/44af171e60aa526d223da680a9fb580c.jpg",
+                }
+              }
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              test2
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              Baton
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              123
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              Dash
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={
+                Object {
+                  "uri": "https://stage.payever.de/media/cache/business_logo.big.uncropped/f2/0a/f20a661c85c601196c0aa515a514c62f.jpg",
+                }
+              }
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              TEST SHOP2
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              Your Business2709
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={
+                Object {
+                  "uri": "https://stage.payever.de/media/cache/business_logo.big.uncropped/42/9a/429a2ee4f30392406d93d81d305d8631.jpg",
+                }
+              }
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              Demoshop
+            </Text>
+          </View>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomColor": "#f4f4f4",
+                "borderBottomWidth": 1,
+                "flexDirection": "row",
+                "marginLeft": 16,
+                "opacity": 1,
+                "paddingBottom": 15,
+                "paddingLeft": 8,
+                "paddingRight": 19,
+                "paddingTop": 15,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Image
+              source={1}
+              style={
+                Object {
+                  "borderRadius": 16,
+                  "height": 32,
+                  "width": 32,
+                }
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              numberOfLines={1}
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontWeight": "400",
+                    "paddingLeft": 20,
+                    "paddingRight": 15,
+                  },
+                ]
+              }
+            >
+              Odessa - 2
+            </Text>
+          </View>
+        </View>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          onPress={[Function]}
+          style={
+            Array [
+              Object {
+                "color": "#3d3d3d",
+                "fontFamily": "Helvetica Neue",
+                "fontWeight": "200",
+              },
+              Object {
+                "color": "#0084ff",
+                "fontSize": 15,
+                "fontWeight": "400",
+                "marginLeft": 24,
+                "paddingVertical": 16,
+              },
+            ]
+          }
+        >
+          Add New Business
+        </Text>
+      </View>
+    </RCTScrollView>
+  </View>
+  <View
+    style={
+      Object {
+        "flexDirection": "column",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Array [
+          Object {
+            "color": "#3d3d3d",
+            "fontFamily": "Helvetica Neue",
+            "fontWeight": "200",
+          },
+          Object {
+            "borderTopColor": "#f4f4f4",
+            "borderTopWidth": 1,
+            "color": "#0084ff",
+            "fontSize": 15,
+            "fontWeight": "400",
+            "paddingHorizontal": 24,
+            "paddingVertical": 18,
+          },
+        ]
+      }
+    >
+      Debug page
+    </Text>
+    <View
+      style={
+        Array [
+          Object {
+            "alignSelf": "flex-start",
+          },
+          Object {
+            "paddingHorizontal": 24,
+          },
+        ]
+      }
+    >
+      <View
+        accessibilityComponentType="button"
+        accessibilityLabel={undefined}
+        accessibilityTraits={
+          Array [
+            "button",
+          ]
+        }
+        accessible={true}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": "#0084ff",
+                "fontSize": 16,
+                "fontWeight": "400",
+              },
+              undefined,
+            ]
+          }
+        >
+          All Contacts
+        </Text>
+      </View>
+    </View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={[Function]}
+      style={
+        Array [
+          Object {
+            "color": "#3d3d3d",
+            "fontFamily": "Helvetica Neue",
+            "fontWeight": "200",
+          },
+          Object {
+            "borderTopColor": "#f4f4f4",
+            "borderTopWidth": 1,
+            "color": "#0084ff",
+            "fontSize": 15,
+            "fontWeight": "400",
+            "paddingHorizontal": 24,
+            "paddingVertical": 18,
+          },
+        ]
+      }
+    >
+      Logout
+    </Text>
+  </View>
+</View>
+`;
