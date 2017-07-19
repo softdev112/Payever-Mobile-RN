@@ -21,9 +21,8 @@ export default class Register extends Component {
     navigator: Navigator;
   };
 
-  async onRegisterWithTwitter() {
+  onRegisterWithTwitter() {
     const { auth, config: { siteUrl, oauthData } } = this.props;
-
     twitter({
       appId: oauthData.twitter.appId,
       appSecret: oauthData.twitter.appSecret,

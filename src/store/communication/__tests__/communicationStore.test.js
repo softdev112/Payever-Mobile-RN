@@ -50,7 +50,7 @@ describe('Store/Communication', () => {
   let communication;
   let api;
   let getSpy;
-  // let postSpy;
+  let postSpy;
   let wampCall;
 
   beforeAll(() => {
@@ -71,7 +71,7 @@ describe('Store/Communication', () => {
 
     api.fetch = jest.fn(url => url);
     getSpy = jest.spyOn(store.api, 'get');
-    // postSpy = jest.spyOn(store.api, 'post');
+    postSpy = jest.spyOn(store.api, 'post');
   });
 
   afterEach(() => {
@@ -997,6 +997,18 @@ describe('Store/Communication', () => {
       communication.removeMessageForEdit();
 
       expect(communication.messageForEdit).toBe(null);
+    });
+  });
+
+  describe('Communication/saveUserSettings(settings: UserSettings)', () => {
+    fit('saveUserSettings should call right api with right url', () => {
+      const apiSpy = jest.spyOn(api.messenger, 'saveSettings');
+
+      communication.messengerInfo.messengerUser = messengerData.messengerUser;
+      communication.saveUserSettings(messengerData.userSettings);
+
+      expect(apiSpy).toHaveBeenCalled();
+      expect(postSpy).toHaveBeenCalled();
     });
   });
 });

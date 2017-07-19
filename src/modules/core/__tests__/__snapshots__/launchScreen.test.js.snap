@@ -1,0 +1,561 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modules/core/screens/LaunchScreen LaunchScreen should render correctly with dummy data and should NOT called processDeepLink if store.ui.deepLink not set 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <SvgIconsShow
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 60,
+        "flexBasis": 40,
+        "justifyContent": "center",
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flex": 40,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "paddingHorizontal": 16,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#3d3d3d",
+              "fontFamily": "Helvetica Neue",
+              "fontWeight": "200",
+            },
+            Object {
+              "alignSelf": "center",
+              "fontFamily": "Helvetica Neue",
+              "fontSize": 43.4,
+              "fontWeight": "300",
+            },
+          ]
+        }
+      >
+        Welcome to payever
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#3d3d3d",
+              "fontFamily": "Helvetica Neue",
+              "fontWeight": "200",
+            },
+            Object {
+              "color": "#7d7d7d",
+              "fontFamily": "Helvetica Neue",
+              "fontSize": 23.8,
+              "fontWeight": "400",
+              "marginTop": 20,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Start, run and grow your business or get personal offers
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "flex-end",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "#f0eff5",
+            "height": 1,
+            "marginLeft": 20,
+          }
+        }
+      />
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "height": 45,
+              "justifyContent": "space-between",
+              "paddingLeft": 20,
+              "paddingRight": 10,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#3d3d3d",
+                  "fontFamily": "Helvetica Neue",
+                  "fontWeight": "200",
+                },
+                Object {
+                  "color": "#0084ff",
+                  "fontSize": 16,
+                  "fontWeight": "400",
+                },
+              ]
+            }
+          >
+            Sign In
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            disabled={false}
+            ellipsizeMode="tail"
+            source="icon-arrow-right-ios-16"
+            style={
+              Array [
+                Object {
+                  "fontFamily": "payeverIcons",
+                  "fontSize": 16,
+                },
+                Array [
+                  Object {
+                    "fontFamily": "payeverIcons",
+                    "fontSize": 16,
+                  },
+                  Object {
+                    "color": "#e1e1e1",
+                    "fontSize": 16,
+                    "fontWeight": "300",
+                  },
+                ],
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#f0eff5",
+            "height": 1,
+            "marginLeft": 20,
+          }
+        }
+      />
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "height": 45,
+              "justifyContent": "space-between",
+              "paddingLeft": 20,
+              "paddingRight": 10,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#3d3d3d",
+                  "fontFamily": "Helvetica Neue",
+                  "fontWeight": "200",
+                },
+                Object {
+                  "color": "#0084ff",
+                  "fontSize": 16,
+                  "fontWeight": "400",
+                },
+              ]
+            }
+          >
+            Create Account
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            disabled={false}
+            ellipsizeMode="tail"
+            source="icon-arrow-right-ios-16"
+            style={
+              Array [
+                Object {
+                  "fontFamily": "payeverIcons",
+                  "fontSize": 16,
+                },
+                Array [
+                  Object {
+                    "fontFamily": "payeverIcons",
+                    "fontSize": 16,
+                  },
+                  Object {
+                    "color": "#e1e1e1",
+                    "fontSize": 16,
+                    "fontWeight": "300",
+                  },
+                ],
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`modules/core/screens/LaunchScreen LaunchScreen should render correctly with dummy data and should call processDeepLink if store.ui.deepLink = url 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <SvgIconsShow
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 60,
+        "flexBasis": 40,
+        "justifyContent": "center",
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "flex": 40,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "paddingHorizontal": 16,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#3d3d3d",
+              "fontFamily": "Helvetica Neue",
+              "fontWeight": "200",
+            },
+            Object {
+              "alignSelf": "center",
+              "fontFamily": "Helvetica Neue",
+              "fontSize": 43.4,
+              "fontWeight": "300",
+            },
+          ]
+        }
+      >
+        Welcome to payever
+      </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#3d3d3d",
+              "fontFamily": "Helvetica Neue",
+              "fontWeight": "200",
+            },
+            Object {
+              "color": "#7d7d7d",
+              "fontFamily": "Helvetica Neue",
+              "fontSize": 23.8,
+              "fontWeight": "400",
+              "marginTop": 20,
+              "textAlign": "center",
+            },
+          ]
+        }
+      >
+        Start, run and grow your business or get personal offers
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "flex": 1,
+          "justifyContent": "flex-end",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "backgroundColor": "#f0eff5",
+            "height": 1,
+            "marginLeft": 20,
+          }
+        }
+      />
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "height": 45,
+              "justifyContent": "space-between",
+              "paddingLeft": 20,
+              "paddingRight": 10,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#3d3d3d",
+                  "fontFamily": "Helvetica Neue",
+                  "fontWeight": "200",
+                },
+                Object {
+                  "color": "#0084ff",
+                  "fontSize": 16,
+                  "fontWeight": "400",
+                },
+              ]
+            }
+          >
+            Sign In
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            disabled={false}
+            ellipsizeMode="tail"
+            source="icon-arrow-right-ios-16"
+            style={
+              Array [
+                Object {
+                  "fontFamily": "payeverIcons",
+                  "fontSize": 16,
+                },
+                Array [
+                  Object {
+                    "fontFamily": "payeverIcons",
+                    "fontSize": 16,
+                  },
+                  Object {
+                    "color": "#e1e1e1",
+                    "fontSize": 16,
+                    "fontWeight": "300",
+                  },
+                ],
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#f0eff5",
+            "height": 1,
+            "marginLeft": 20,
+          }
+        }
+      />
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "opacity": 1,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "flexDirection": "row",
+              "height": 45,
+              "justifyContent": "space-between",
+              "paddingLeft": 20,
+              "paddingRight": 10,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#3d3d3d",
+                  "fontFamily": "Helvetica Neue",
+                  "fontWeight": "200",
+                },
+                Object {
+                  "color": "#0084ff",
+                  "fontSize": 16,
+                  "fontWeight": "400",
+                },
+              ]
+            }
+          >
+            Create Account
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            disabled={false}
+            ellipsizeMode="tail"
+            source="icon-arrow-right-ios-16"
+            style={
+              Array [
+                Object {
+                  "fontFamily": "payeverIcons",
+                  "fontSize": 16,
+                },
+                Array [
+                  Object {
+                    "fontFamily": "payeverIcons",
+                    "fontSize": 16,
+                  },
+                  Object {
+                    "color": "#e1e1e1",
+                    "fontSize": 16,
+                    "fontWeight": "300",
+                  },
+                ],
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;

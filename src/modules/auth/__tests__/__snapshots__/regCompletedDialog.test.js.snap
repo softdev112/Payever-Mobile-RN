@@ -1,0 +1,285 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modules/auth/screens/RegCompletedDialog RegCompletedDialog should render correctly if auth.error does not set 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFF",
+      "borderRadius": 15,
+      "flex": 1,
+      "height": 300,
+      "paddingHorizontal": 15,
+      "paddingTop": 15,
+      "width": 250,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+    source="icon-checked-64"
+    style={
+      Array [
+        Object {
+          "color": "#75b636",
+          "fontFamily": "payeverIcons",
+          "fontSize": 64,
+        },
+        Array [
+          Object {
+            "color": "#75b636",
+            "fontFamily": "payeverIcons",
+            "fontSize": 64,
+          },
+          Array [
+            Object {
+              "color": "#75b636",
+              "fontSize": 28,
+              "marginBottom": 10,
+            },
+          ],
+        ],
+      ]
+    }
+  >
+    
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": "#3d3d3d",
+          "fontFamily": "Helvetica Neue",
+          "fontWeight": "200",
+        },
+        Object {
+          "fontFamily": "Helvetica Neue",
+          "fontSize": 15,
+          "textAlign": "justify",
+        },
+      ]
+    }
+  >
+     New user was successfully created. Confirmation email was sent to your address. Check out it please and confirm it. After that you will be able to login with your email and password. Thanks and welcome to Payever!
+  </Text>
+  <View
+    style={
+      Array [
+        Object {
+          "alignSelf": "flex-start",
+        },
+        Object {
+          "bottom": 20,
+          "position": "absolute",
+          "right": 40,
+        },
+      ]
+    }
+  >
+    <View
+      accessibilityComponentType="button"
+      accessibilityLabel={undefined}
+      accessibilityTraits={
+        Array [
+          "button",
+        ]
+      }
+      accessible={true}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#0084ff",
+              "fontSize": 16,
+              "fontWeight": "400",
+            },
+            undefined,
+          ]
+        }
+      >
+        OK
+      </Text>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`modules/auth/screens/RegCompletedDialog RegCompletedDialog should render correctly if auth.error is set 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFF",
+      "borderRadius": 15,
+      "flex": 1,
+      "height": 300,
+      "paddingHorizontal": 15,
+      "paddingTop": 15,
+      "width": 250,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    disabled={false}
+    ellipsizeMode="tail"
+    source="icon-alert-32"
+    style={
+      Array [
+        Object {
+          "fontFamily": "payeverIcons",
+          "fontSize": 32,
+        },
+        Array [
+          Object {
+            "fontFamily": "payeverIcons",
+            "fontSize": 32,
+          },
+          Array [
+            Object {
+              "color": "#75b636",
+              "fontSize": 28,
+              "marginBottom": 10,
+            },
+            Object {
+              "color": "#ff3c30",
+            },
+          ],
+        ],
+      ]
+    }
+  >
+    
+  </Text>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#3d3d3d",
+            "fontFamily": "Helvetica Neue",
+            "fontWeight": "200",
+          },
+          Object {
+            "fontFamily": "Helvetica Neue",
+            "fontSize": 15,
+            "textAlign": "justify",
+          },
+        ]
+      }
+    >
+      Sorry. There are some errors occurred. Try again later please!
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#3d3d3d",
+            "fontFamily": "Helvetica Neue",
+            "fontWeight": "200",
+          },
+          Object {
+            "fontFamily": "Helvetica Neue",
+            "fontSize": 15,
+            "textAlign": "justify",
+          },
+        ]
+      }
+    >
+      Test eror
+    </Text>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "alignSelf": "flex-start",
+        },
+        Object {
+          "bottom": 20,
+          "position": "absolute",
+          "right": 40,
+        },
+      ]
+    }
+  >
+    <View
+      accessibilityComponentType="button"
+      accessibilityLabel={undefined}
+      accessibilityTraits={
+        Array [
+          "button",
+        ]
+      }
+      accessible={true}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "opacity": 1,
+        }
+      }
+      testID={undefined}
+      tvParallaxProperties={undefined}
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#0084ff",
+              "fontSize": 16,
+              "fontWeight": "400",
+            },
+            undefined,
+          ]
+        }
+      >
+        OK
+      </Text>
+    </View>
+  </View>
+</View>
+`;

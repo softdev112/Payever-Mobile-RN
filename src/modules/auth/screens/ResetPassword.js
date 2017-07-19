@@ -17,7 +17,7 @@ const errorMessage = 'It should be not empty valid email address for example som
 
 @inject('auth')
 @observer
-export default class RegisterWithEmail extends Component {
+export default class ResetPassword extends Component {
   static navigatorStyle = {
     navBarHidden: true,
   };

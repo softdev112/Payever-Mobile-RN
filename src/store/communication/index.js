@@ -400,7 +400,7 @@ export default class CommunicationStore {
   }
 
   @action
-  async saveUserSettings(settings: UserSettings) {
+  saveUserSettings(settings: UserSettings) {
     const { api: { messenger } } = this.store;
     const { messengerUser } = this.messengerInfo;
 

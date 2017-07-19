@@ -17,15 +17,23 @@ jest.mock('mobx-react/native', () => require('mobx-react/custom'))
     () => require('../src/common/utils/soundHelper/sounds/__mocks__')
   )
   .mock('../src/common/utils', () => ({
-    screenParams: require('../src/common/utils/screenParams').default,
     apiHelper: require('../src/common/utils/apiHelper').default,
+    cacheHelper: require('../src/common/utils/cacheHelper').default,
+    deepLinksHelper:
+      require.requireActual('../src/common/utils/deepLinksHelper').default,
     log: require.requireActual('react-native-logging'),
     networkHelper: require('../src/common/utils/networkHelper').default,
-    cacheHelper: require('../src/common/utils/cacheHelper').default,
+    screenParams: require('../src/common/utils/screenParams').default,
     soundHelper: require('../src/common/utils/soundHelper').default,
   }))
   .mock('react-native-navigation', () => ({
     ...require.requireActual('react-native-navigation'),
     Navigator: {},
   }))
-  .mock('react-native-animatable');
+  .mock('react-native-animatable')
+  .mock('AsyncStorage', () => ({
+    setItem: jest.fn(() => Promise.resolve()),
+    getItem: jest.fn(() => Promise.resolve()),
+    clear: jest.fn(() => Promise.resolve()),
+    multiGet: jest.fn(() => Promise.resolve()),
+  }));
