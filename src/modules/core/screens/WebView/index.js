@@ -110,7 +110,10 @@ export default class WebView extends Component {
       if (this.props.enableExternalBrowser) {
         // If enableExternalBrowser === true run link in a external browser
         //noinspection JSUnresolvedFunction
-        this.$view.stopLoading();
+        if (this.$view) {
+          this.$view.stopLoading();
+        }
+
         Linking.openURL(nativeEvent.url).catch(log.error);
         return;
       }
@@ -124,7 +127,9 @@ export default class WebView extends Component {
     BACK_ON_URLS.forEach((url) => {
       if (nativeEvent.url.endsWith(url.urlMask)) {
         //noinspection JSUnresolvedFunction
-        this.$view.stopLoading();
+        if (this.$view) {
+          this.$view.stopLoading();
+        }
 
         if (url.authRequired && !auth.isLoggedIn) {
           showScreen('auth.Login');
@@ -138,8 +143,8 @@ export default class WebView extends Component {
 
   onMessage({ nativeEvent }) {
     const siteUrl = this.props.config.siteUrl;
-    if (nativeEvent.url && !nativeEvent.url.startsWith(siteUrl)
-      && !nativeEvent.url.includes('about:blank')) {
+    if (!nativeEvent.url || !nativeEvent.url.startsWith(siteUrl)
+      || nativeEvent.url.includes('about:blank')) {
       return;
     }
 

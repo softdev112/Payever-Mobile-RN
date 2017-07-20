@@ -1,0 +1,253 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modules/core/screens/WebView WebView should render correctly if network connection available and should NOT call navigator.showModal 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "marginTop": 15,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <RCTWebView
+      allowsInlineMediaPlayback={undefined}
+      automaticallyAdjustContentInsets={undefined}
+      bounces={false}
+      contentInset={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "right": 0,
+          "top": 0,
+        }
+      }
+      dataDetectorTypes={undefined}
+      decelerationRate={undefined}
+      injectedJavaScript="(function injectedBody(options){init(options);function init(options){window.__DEV__=options.isDev;if(options.platform==='android'){patchSelectElementsForAndroid();}replaceHeaderButtons();if(__DEV__){attachOnError();patchPostMessage();}getNavBarInfo();patchAddApp();setTimeout(function(){return sendData({command:'hide-loader'},500);});}function replaceHeaderButtons(){var $btnMenu=document.querySelector('#user-nav-block .dropdown-toggle');if($btnMenu){var $replace=$btnMenu.cloneNode(true);$replace.href='javascript:return void()';$replace.style.marginRight=0;$replace.addEventListener('click',function(e){e.preventDefault();e.stopImmediatePropagation();sendData({command:'show-menu'});});$btnMenu.parentNode.replaceChild($replace,$btnMenu);}var $backBtn=document.querySelector('.btn-primary.btn-link');if($backBtn&&$backBtn.href&&$backBtn.href.includes('#')){$replace=$backBtn.cloneNode(true);$replace.href=$backBtn.href.split('#')[0];$replace.style.marginRight=0;$backBtn.parentNode.replaceChild($replace,$backBtn);}}function patchAddApp(){function searchModal(){var $dialogFooter=document.querySelector('.edit-campaign-add-item > .modal-content > .modal-footer');if($dialogFooter){var $submitButton=$dialogFooter.querySelector('.btn-link.submits-modal');function submitHandler(){if($submitButton){$submitButton.click();}}var $topFooter=$dialogFooter.cloneNode(true);$topFooter.style.position='fixed';$topFooter.style.right=0;$topFooter.style.top=0;$topFooter.style.borderBottom='1px solid #e1e1e1';$topFooter.style.backgroundColor='white';$topFooter.style.width='100%';$topFooter.style.padding='8px';$topFooter.style.paddingRight='0px';var $topSubmitBtn=$topFooter.querySelector('.btn-link.submits-modal');if($topSubmitBtn){$topSubmitBtn.addEventListener('click',submitHandler);}var $dialog=document.querySelector('.edit-campaign-add-item');$dialog.appendChild($topFooter);}setTimeout(searchModal,2000);}setTimeout(searchModal,2000);}function patchSelectElementsForAndroid(){var $selects=document.querySelectorAll('select');if(!$selects)return;for(var i=0;i<$selects.length;++i){$selects[i].className='form-control select-custom-ready';}}function patchPostMessage(){var originalPostMessage=window.postMessage;var patchedPostMessage=function patchedPostMessage(message,targetOrigin,transfer){originalPostMessage(message,targetOrigin,transfer);};patchedPostMessage.toString=function(){return String(Object.hasOwnProperty).replace('hasOwnProperty','postMessage');};window.postMessage=patchedPostMessage;}function attachOnError(){window.onerror=function(errorMsg,url,lineNumber){sendData({errorMsg:errorMsg,url:url,lineNumber:lineNumber,command:'error'});};}function sendData(data){try{window.postMessage(JSON.stringify(data));}catch(e){}}function getNavBarInfo(){var title='';var titleImgUrl='';var $titleImg=document.querySelector('.channel-title img');if($titleImg){titleImgUrl=$titleImg.getAttribute('src');}var $title=document.querySelector('.channel-title .title');if($title){title=$title.innerText;}if(title!==''&&titleImgUrl!==''){sendData({title:title,titleImgUrl:titleImgUrl,command:'navbar-info'});}}})({\\"isDev\\":true})"
+      mediaPlaybackRequiresUserAction={undefined}
+      messagingEnabled={true}
+      onLoadingError={[Function]}
+      onLoadingFinish={[Function]}
+      onLoadingStart={[Function]}
+      onMessage={[Function]}
+      onShouldStartLoadWithRequest={undefined}
+      scalesPageToFit={undefined}
+      scrollEnabled={undefined}
+      source={
+        Object {
+          "html": "
+            <!doctype html>
+            <html>
+            <head>
+              <title>Loading...</title>
+              <meta charset=\\"utf-8\\">
+              <style>
+                @-webkit-keyframes spin {
+                  0% {  -webkit-transform: rotate(0); }
+                  100% { -webkit-transform: rotate(360deg); }
+                }
+                @keyframes spin {
+                  0% { -webkit-transform: rotate(0); transform: rotate(0); }
+                  100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+                }
+                .spinner {
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  margin: -32px;
+                  width: 64px;
+                  height: 64px;
+                  -webkit-animation: spin 1s linear infinite;
+                  animation: spin 1s linear infinite;
+                  -webkit-transform: translateZ(0);
+                  transform: translateZ(0);
+                }
+                .spinner path {
+                  fill: none;
+                  stroke: #e1e1e1;
+                  stroke-width: 1;
+                  stroke-linecap: butt;
+                  stroke-linejoin: miter;
+                  stroke-miterlimit: 10;
+                  stroke-opacity: 1;
+                }
+                .spinner .path2 { stroke: #0084ff;}
+              </style>
+            </head>
+            <body>
+              <svg 
+                class=\\"spinner\\"
+                xmlns=\\"http://www.w3.org/2000/svg\\"
+                viewBox=\\"0 0 64 64\\"
+                preserveAspectRatio=\\"xMidYMin slice\\"
+                >
+                <path 
+                  class=\\"path1\\"
+                  d=\\"M32,0.501c-17.369,0-31.5,14.131-31.5,31.5s14.131,31.5,31.5,31.5s31.5-14.131,31.5-31.5S49.369,0.501,32,0.501 z\\"
+                />
+                <path 
+                  class=\\"path2\\"
+                  d=\\"M32,0.501c-17.369,0-31.5,14.131-31.5,31.5\\"
+                />
+              </svg>
+              <script>location.href = 'undefined';</script>
+            </body>
+            </html>
+          ",
+        }
+      }
+      style={
+        Array [
+          Object {
+            "flex": 1,
+          },
+          Object {
+            "backgroundColor": "#ffffff",
+          },
+          undefined,
+        ]
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+        "zIndex": 4,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+            "justifyContent": "center",
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "paddingLeft": 1,
+            "paddingTop": 1,
+            "transform": Array [
+              Object {
+                "rotate": "0deg",
+              },
+            ],
+          }
+        }
+      >
+        <View
+          disabled={false}
+          layers={
+            Array [
+              Object {
+                "component": "vector",
+                "source": "spinner-container",
+                "style": Object {
+                  "color": "#e1e1e1",
+                },
+              },
+              Object {
+                "component": "vector",
+                "source": "spinner-roller",
+                "style": Object {
+                  "color": "#0084ff",
+                },
+              },
+            ]
+          }
+          source="spinner"
+          style={
+            Array [
+              Object {
+                "height": 65,
+                "width": 65,
+              },
+              undefined,
+            ]
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            source="spinner-container"
+            style={
+              Array [
+                Object {
+                  "fontFamily": "payeverIcons",
+                  "fontSize": 64,
+                },
+                Array [
+                  Array [
+                    Object {
+                      "backgroundColor": "transparent",
+                      "left": 0,
+                      "position": "absolute",
+                      "top": 0,
+                    },
+                    Object {
+                      "color": "#e1e1e1",
+                    },
+                  ],
+                  undefined,
+                ],
+              ]
+            }
+          >
+            
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            source="spinner-roller"
+            style={
+              Array [
+                Object {
+                  "fontFamily": "payeverIcons",
+                  "fontSize": 64,
+                },
+                Array [
+                  Array [
+                    Object {
+                      "backgroundColor": "transparent",
+                      "left": 0,
+                      "position": "absolute",
+                      "top": 0,
+                    },
+                    Object {
+                      "color": "#0084ff",
+                    },
+                  ],
+                  undefined,
+                ],
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
