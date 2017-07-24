@@ -181,6 +181,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -1335,6 +1346,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -2472,6 +2494,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -3609,6 +3642,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -4746,6 +4790,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -5883,6 +5938,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -7020,6 +7086,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -8157,6 +8234,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -9294,6 +9382,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -10431,6 +10530,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -11568,6 +11678,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -12705,6 +12826,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -13842,6 +13974,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -14979,6 +15122,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -16116,6 +16270,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -17253,6 +17418,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -18390,6 +18566,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -19527,6 +19714,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -20664,6 +20862,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -21801,6 +22010,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -22938,6 +23158,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -24075,6 +24306,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -25212,6 +25454,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -26349,6 +26602,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -27486,6 +27750,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -28623,6 +28898,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -29760,6 +30046,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -30897,6 +31194,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],
@@ -32034,6 +32342,17 @@ exports[`modules/dashboard/screens/ChooseAccount ChooseAccount should render cor
                 "store": [Circular],
               },
               "communication": CommunicationStore {
+                "chatMessagesState": ChatMessagesProcState {
+                  "store": [Circular],
+                  "ui": CommunicationUI {
+                    "chatFooterHeight": 50,
+                    "chatScreenOpen": false,
+                    "forwardMode": false,
+                    "pickContactMode": false,
+                    "searchMessagesMode": false,
+                    "selectMode": false,
+                  },
+                },
                 "contactsAutocomplete": Array [],
                 "contactsFilter": "",
                 "contactsForAction": Array [],

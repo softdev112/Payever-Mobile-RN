@@ -160,7 +160,9 @@ describe('modules/communication/screens/Chat', () => {
   });
 
   it('Chat/onCancelSelectedMode() should switch off selecMode state of communication ui', () => {
-    communication.clearSelectedMessages = jest.fn();
+    const modeSwitchSpy = jest.spyOn(
+      communication.chatMessagesState, 'initState'
+    );
     communication.ui.selectMode = true;
     communication.ui.forwardMode = true;
 
@@ -179,7 +181,7 @@ describe('modules/communication/screens/Chat', () => {
       .props()
       .onPress();
 
-    expect(communication.clearSelectedMessages).toHaveBeenCalled();
+    expect(modeSwitchSpy).toHaveBeenCalled();
     expect(communication.ui.selectMode).toBe(false);
     expect(communication.ui.forwardMode).toBe(false);
   });

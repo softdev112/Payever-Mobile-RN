@@ -92,14 +92,14 @@ describe('modules/communication/screens/Contacts', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('Contacts/onCancelForwarding() should switch communication ui from forwarding mode', () => {
-    store.ui.phoneMode = true;
-    communication.ui.selectMode = true;
-    communication.ui.pickContactMode = true;
+  it('Contacts/onCancelForwarding() should call navigator.push => communication.Chat and don NOT switch select forward mode', () => {
     communication.loadMessengerInfo = jest.fn(() => {
-      communication.messengerInfo =
-        new MessengerInfo(JSON.parse(JSON.stringify(messengerData)));
+      communication.messengerInfo = cloneObject(messengerData);
     });
+
+    communication.ui.selectMode = true;
+    communication.ui.forwardMode = true;
+    communication.ui.pickContactMode = true;
 
     const wrapper = shallow(
       <ContactsScreen
@@ -108,9 +108,6 @@ describe('modules/communication/screens/Contacts', () => {
         navigator={navigator}
       />
     );
-
-    expect(communication.ui.selectMode).toBe(true);
-    expect(communication.ui.pickContactMode).toBe(true);
 
     wrapper.dive()
       .dive()
@@ -122,7 +119,8 @@ describe('modules/communication/screens/Contacts', () => {
       .onPress();
 
     expect(communication.ui.selectMode).toBe(true);
-    expect(communication.ui.pickContactMode).toBe(false);
+    expect(communication.ui.forwardMode).toBe(true);
+    expect(communication.ui.pickContactMode).toBe(true);
     expect(navigator.push).toHaveBeenCalled();
     expect(navigator.push).toHaveBeenCalledWith(
       { animated: false, screen: 'communication.Chat' }

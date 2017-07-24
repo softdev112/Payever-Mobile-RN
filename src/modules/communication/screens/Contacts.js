@@ -31,9 +31,8 @@ export default class ContactsScreen extends Component {
   }
 
   onCancelForwarding() {
-    const { communication, navigator } = this.props;
-    communication.ui.setSelectMode(true);
-    communication.ui.setPickContactMode(false);
+    const { navigator } = this.props;
+
     navigator.push({
       screen: 'communication.Chat',
       animated: false,

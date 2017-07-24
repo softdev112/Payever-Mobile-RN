@@ -918,22 +918,28 @@ describe('Store/Communication', () => {
 
   describe('Communication/setMessageForReply(message: Message)', () => {
     it('setMessageForReply should set communication.messageForReply = message, and set ui flags', () => {
+      const msgsSwitchModeSpy = jest.spyOn(
+        communication.chatMessagesState,
+        'replyState'
+      );
       const { conversation: { messages } } = conversationData;
-      const removeMessageSpy =
-        jest.spyOn(communication, 'removeMessageForEdit');
-      const clearSelectedMsgsSpy =
-        jest.spyOn(communication, 'clearSelectedMessages');
+
+      communication.ui.selectMode = true;
+      communication.ui.searchMessagesMode = true;
+      communication.ui.forwardMode = true;
+      communication.messageForEdit = { message: 'Hello' };
+      communication.selectedMessages = ['message1', 'message2', 'message3'];
 
       expect(communication.messageForReply).toBe(null);
       communication.setMessageForReply(messages[0]);
 
       expect(mobx.toJS(communication.messageForReply)).toEqual(messages[0]);
-      expect(removeMessageSpy).toHaveBeenCalled();
-      expect(clearSelectedMsgsSpy).toHaveBeenCalled();
-      expect(communication.ui.setForwardMode).toHaveBeenCalled();
-      expect(communication.ui.setForwardMode).toHaveBeenCalledWith(false);
-      expect(communication.ui.setSelectMode).toHaveBeenCalled();
-      expect(communication.ui.setSelectMode).toHaveBeenCalledWith(false);
+      expect(msgsSwitchModeSpy).toHaveBeenCalled();
+      expect(communication.ui.selectMode).toBe(false);
+      expect(communication.ui.searchMessagesMode).toBe(false);
+      expect(communication.ui.forwardMode).toBe(false);
+      expect(communication.messageForEdit).toBe(null);
+      expect(communication.selectedMessages).toHaveLength(0);
     });
 
     it('setMessageForReply should NOT set communication.messageForReply = message, and should NOT set ui flags if message = null', () => {

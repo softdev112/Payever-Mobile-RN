@@ -81,10 +81,7 @@ export default class ChatScreen extends Component {
 
   onCancelSelectedMode() {
     const { communication } = this.props;
-
-    communication.clearSelectedMessages();
-    communication.ui.setSelectMode(false);
-    communication.ui.setForwardMode(false);
+    communication.chatMessagesState.initState();
   }
 
   onSettingsPress() {

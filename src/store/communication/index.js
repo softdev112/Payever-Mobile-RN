@@ -16,6 +16,7 @@ import SocketHandlers from './SocketHandlers';
 import Message from './models/Message';
 import CommunicationUI from './ui';
 import Group from './models/Group';
+import ChatMessagesProcState from './ChatMessagesProcState';
 import type SocketApi from '../../common/api/MessengerApi/SocketApi';
 import type ConversationInfo from './models/ConversationInfo';
 import type BusinessProfile from '../profiles/models/BusinessProfile';
@@ -59,6 +60,9 @@ export default class CommunicationStore {
   // UI
   @observable ui: CommunicationUI = {};
 
+  // Chat messages state
+  chatMessagesState: ChatMessagesProcState = null;
+
   store: Store;
   socket: SocketApi;
   socketHandlers: SocketHandlers;
@@ -71,6 +75,9 @@ export default class CommunicationStore {
     // Allow to send typingStatus only once per 5sec
     this.updateTypingStatus = this::throttle(this.updateTypingStatus, 5000);
     this.ui = new CommunicationUI();
+
+    this.chatMessagesState = new ChatMessagesProcState(this, this.ui);
+    this.chatMessagesState.initState();
   }
 
   @computed get isError() {
@@ -268,13 +275,14 @@ export default class CommunicationStore {
 
     if (this.messageForReply) {
       options.replyToId = this.messageForReply.id;
-      this.messageForReply = null;
     }
 
     const { settings } = this.selectedConversation;
     if (settings && settings.notification) {
       soundHelper.playMsgSent();
     }
+
+    this.chatMessagesState.initState();
 
     return socket.sendMessage(options);
   }
@@ -373,14 +381,8 @@ export default class CommunicationStore {
   @action
   setMessageForReply(message: Message) {
     if (!message) return;
-
-    // Clear all selections
-    this.removeMessageForEdit();
-    this.clearSelectedMessages();
-    this.ui.setSelectMode(false);
-    this.ui.setForwardMode(false);
-
     this.messageForReply = message;
+    this.chatMessagesState.replyState();
   }
 
   @action
@@ -392,6 +394,7 @@ export default class CommunicationStore {
   setMessageForEdit(message: Message) {
     if (!message) return;
     this.messageForEdit = message;
+    this.chatMessagesState.editState();
   }
 
   @action
@@ -517,7 +520,7 @@ export default class CommunicationStore {
       await this.forwardMessage(m.id);
     });
 
-    this.clearSelectedMessages();
+    this.chatMessagesState.initState();
   }
 
   @action
@@ -547,17 +550,19 @@ export default class CommunicationStore {
         await this.deleteMessage(m.id);
       }
     });
+
+    this.chatMessagesState.initState();
   }
 
   @action
   deleteAllMsgsInSelectConversation() {
-    this.clearSelectedMessages();
-
     this.selectedConversation.messages.forEach(async (m) => {
       if (!m.deleted && m.deletable) {
         await this.deleteMessage(m.id);
       }
     });
+
+    this.chatMessagesState.initState();
   }
 
   @action

@@ -25,11 +25,9 @@ export default class SelectionFooter extends Component {
   };
 
   onForwardMessages() {
-    const { communication, ui } = this.props;
-    communication.ui.setSelectMode(false);
+    const { ui } = this.props;
 
     if (ui.phoneMode) {
-      communication.ui.setPickContactMode(true);
       this.context.navigator.pop({ animated: false });
     }
   }

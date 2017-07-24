@@ -50,7 +50,7 @@ export default class Contact extends Component {
     // If not tablet mode go to separate Chat Screen
     if (!ui.phoneMode) return;
 
-    communication.ui.setPickContactMode(false);
+    communication.chatMessagesState.forwardState();
     navigator.push({ screen: 'communication.Chat' });
   }
 

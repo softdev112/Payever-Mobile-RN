@@ -104,9 +104,9 @@ export default class Chat extends Component {
 
   componentWillUnmount() {
     const { communication } = this.props;
-    communication.removeMessageForReply();
-    communication.removeMessageForEdit();
-    communication.ui.setChatScreenOpen(false);
+    if (!communication.ui.pickContactMode) {
+      communication.chatMessagesState.initState();
+    }
 
     if (this.loaderTimer) {
       clearTimeout(this.loaderTimer);
@@ -223,12 +223,7 @@ export default class Chat extends Component {
   onDeleteMessage() {
     const { communication } = this.props;
 
-    this.clearAllCurrentSelections();
-
-    // TODO: refactor communication ui use something like state-pattern
-    // TODO: delete-state, forward-state
-    communication.ui.setSelectMode(true);
-    communication.ui.setForwardMode(false);
+    communication.chatMessagesState.deleteState();
     communication.selectMessage(this.state.selectedMessage);
     this.onDismissPopupMenu();
   }
@@ -243,8 +238,8 @@ export default class Chat extends Component {
 
     if (!selectedMessage) return;
 
-    this.clearAllCurrentSelections();
     communication.setMessageForEdit(selectedMessage);
+    communication.chatMessagesState.editState();
 
     this.onDismissPopupMenu();
     if (this.$inputFooter) {
@@ -271,6 +266,8 @@ export default class Chat extends Component {
     if (!selectedMessage) return;
 
     communication.setMessageForReply(selectedMessage);
+    communication.chatMessagesState.replyState();
+
     this.onDismissPopupMenu();
 
     if (this.$inputFooter) {
@@ -281,9 +278,9 @@ export default class Chat extends Component {
   onForwardMessage() {
     const { communication } = this.props;
 
-    communication.ui.setSelectMode(true);
-    communication.ui.setForwardMode(true);
+    communication.chatMessagesState.selectForwardState();
     communication.selectMessage(this.state.selectedMessage);
+
     this.onDismissPopupMenu();
   }
 
