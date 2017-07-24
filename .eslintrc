@@ -32,7 +32,9 @@
     "Headers": true,
     "log": true,
     "WebSocket": true,
-    "requestAnimationFrame": true
+    "requestAnimationFrame": true,
+    "React": true,
+    "cloneObject": true
   },
 
   "rules": {

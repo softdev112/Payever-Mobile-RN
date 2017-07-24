@@ -19,9 +19,9 @@ const NUM_CONTACTS_TO_SHOW = 5;
 @observer
 export default class Contacts extends Component {
   props: {
-    communication?: CommunicationStore;
+    communication: CommunicationStore;
+    profiles: ProfilesStore;
     style?: Object | number;
-    profiles?: ProfilesStore;
   };
 
   state: {

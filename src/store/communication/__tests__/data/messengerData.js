@@ -28,7 +28,7 @@ export default {
   },
   conversations: [
     {
-      id: 16591,
+      id: 114725,
       name: 'Personal Assistant',
       type: 'conversation',
       recipient_id: 'bot-914',

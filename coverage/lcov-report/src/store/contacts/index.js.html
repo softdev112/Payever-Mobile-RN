@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/store/contacts/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/store/contacts</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">85.71% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>72/84</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">83.87% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>52/62</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">81.82% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>18/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">87.5% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>63/72</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">205x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">205x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { observable, action } from 'mobx';
+import { apiHelper, log } from 'utils';
+&nbsp;
+import type { ContactsPaginationData } from '../../common/api/ContactsApi';
+import type Store from './index';
+import type CustomerContactInfo from './models/CustomerContactInfo';
+import ContactsUI from './ui';
+&nbsp;
+export default class ContactsStore {
+  @observable contacts: Array&lt;CustomerContactInfo&gt; = [];
+  contactsPaginationData: ContactsPaginationData = null;
+&nbsp;
+  @observable contactGroups: Array&lt;any&gt; = [];
+  contactGroupsPaginationData: ContactsPaginationData = null;
+&nbsp;
+  @observable error: string     = '';
+  @observable isLoading: boolean = false;
+&nbsp;
+  @observable selectedContacts: Array&lt;CustomerContactInfo&gt; = [];
+  @observable logoUploadingProgress: number = 0;
+&nbsp;
+  // Contacts UI
+  @observable ui: ContactsUI = {};
+&nbsp;
+  // eslint-disable-next-line flowtype/no-primitive-constructor-types
+  contactGroupsCache: Map&lt;Number, Object&gt; = new Map();
+&nbsp;
+  store: Store;
+&nbsp;
+  constructor(store: Store) {
+    this.store = store;
+&nbsp;
+    this.ui = new ContactsUI();
+  }
+&nbsp;
+  @action
+  loadAllContacts(options: LoadContactsOptions = { fromFirstPage: false }) {
+    const { api, profiles } = this.store;
+    let pageCount = 0;
+    let currentPage = 0;
+&nbsp;
+    if (this.contactsPaginationData &amp;&amp; !options.fromFirstPage) {
+      // pageCount - number, current - string
+      pageCount = this.contactsPaginationData.pageCount;
+      currentPage = +this.contactsPaginationData.current;
+&nbsp;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (pageCount === 0) <span class="cstat-no" title="statement not covered" >return null;</span>
+    }
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (this.isLoading || (currentPage !== 0 &amp;&amp; currentPage === pageCount)) {
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    }
+&nbsp;
+    if (options.fromFirstPage) {
+      this.contactsPaginationData = null;
+      this.contacts = [];
+    }
+&nbsp;
+    return apiHelper(
+      api.contacts.getAllContacts.bind(
+        api.contacts,
+        profiles.currentProfile.business.slug,
+        currentPage + 1
+      ),
+      this
+    ).success((data) =&gt; {
+      this.contactsPaginationData = data.pagination_data;
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (data.contact_models &amp;&amp; data.contact_models.length &gt; 0) {
+        this.contacts = this.contacts.concat(data.contact_models);
+      }
+    }).error(log.error)
+      .promise();
+  }
+&nbsp;
+  @action
+  loadAllContactGroups(
+    options: LoadContactsOptions = { fromFirstPage: false }
+  ) {
+    const { api, profiles } = this.store;
+    let pageCount = 0;
+    let currentPage = 0;
+&nbsp;
+    if (this.contactGroupsPaginationData &amp;&amp; !options.fromFirstPage) {
+      // pageCount - number, current - string
+      pageCount = this.contactGroupsPaginationData.pageCount;
+      currentPage = +this.contactGroupsPaginationData.current;
+&nbsp;
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (pageCount === 0) <span class="cstat-no" title="statement not covered" >return null;</span>
+    }
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (this.isLoading || (currentPage !== 0 &amp;&amp; currentPage === pageCount)) {
+<span class="cstat-no" title="statement not covered" >      return null;</span>
+    }
+&nbsp;
+    if (options.fromFirstPage) {
+      this.contactGroupsPaginationData = null;
+      this.contactGroups = [];
+    }
+&nbsp;
+    return apiHelper(
+      api.contacts.getAllContactGroups.bind(
+        api.contacts,
+        profiles.currentProfile.business.slug,
+        currentPage + 1
+      ),
+      this
+    ).success((data) =&gt; {
+      this.contactGroupsPaginationData = data.pagination_data;
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (data.group_list &amp;&amp; data.group_list.length &gt; 0) {
+        this.contactGroups = this.contactGroups.concat(data.group_list);
+      }
+    }).error(log.error)
+      .promise();
+  }
+&nbsp;
+  @action
+  getGroupDetails(groupId: number) {
+    if (!groupId) return null;
+&nbsp;
+    const { contacts } = this.store.api;
+    return apiHelper(contacts.getGroupDetails.bind(contacts, groupId))
+      .success(<span class="fstat-no" title="function not covered" >da</span>ta =&gt; <span class="cstat-no" title="statement not covered" >data)</span>
+      .error(log.error)
+      .promise();
+  }
+&nbsp;
+  @action
+  createNewContact(contact: CustomerContactInfo) {
+    if (!contact) return null;
+&nbsp;
+    const { contacts } = this.store.api;
+&nbsp;
+    const slug = this.store.profiles.currentProfile.business.slug;
+    return apiHelper(
+      contacts.createNewContact.bind(contacts, contact, slug),
+      this
+    ).success(<span class="fstat-no" title="function not covered" >da</span>ta =&gt; <span class="cstat-no" title="statement not covered" >data)</span>
+      .error(log.error)
+      .promise();
+  }
+&nbsp;
+  @action
+  uploadContactLogo(mediaFileInfo) {
+    if (!mediaFileInfo) return null;
+&nbsp;
+    this.logoUploadingProgress = 0;
+    return this.store.api.contacts.uploadContactLogo(mediaFileInfo)
+      .catch(log.error);
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  up</span>dateLogoUploadProgress(value: number) {
+<span class="cstat-no" title="statement not covered" >    this.logoUploadingProgress = 0;</span>
+<span class="cstat-no" title="statement not covered" >    if (value &gt;= 100) {</span>
+<span class="cstat-no" title="statement not covered" >      this.logoUploadingProgress = 100;</span>
+    }
+  }
+&nbsp;
+  @action
+  addContactToSelected(contact: CustomerContactInfo) {
+    if (!contact) return;
+&nbsp;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (!this.checkContactSelected(contact.id)) {
+      this.selectedContacts = this.selectedContacts.concat(contact);
+    }
+  }
+&nbsp;
+  @action
+  removeContactFromSelected(id: number) {
+    this.selectedContacts = this.selectedContacts.filter(c =&gt; c.id !== id);
+  }
+&nbsp;
+  @action
+<span class="fstat-no" title="function not covered" >  cl</span>earSelectedContacts() {
+<span class="cstat-no" title="statement not covered" >    this.selectedContacts = [];</span>
+<span class="cstat-no" title="statement not covered" >    this.contactGroupsCache.clear();</span>
+  }
+&nbsp;
+  @action
+  checkContactSelected(id: number) {
+    return !!this.selectedContacts.find(c =&gt; c.id === id);
+  }
+&nbsp;
+  @action
+  async addContactsFromGroupToSelected(groupId: number) {
+    let groupDetails = this.contactGroupsCache.get(groupId);
+    if (!groupDetails) {
+      groupDetails = await this.getGroupDetails(groupId);
+      this.contactGroupsCache.set(groupId, groupDetails);
+    }
+&nbsp;
+    if (!groupDetails || !groupDetails.contact_models) return;
+&nbsp;
+    groupDetails.contact_models.forEach(c =&gt; this.addContactToSelected(c));
+  }
+&nbsp;
+  @action
+  async removeContactsGroupFromSelected(groupId: number) {
+    let groupDetails = this.contactGroupsCache.get(groupId);
+    if (!groupDetails) {
+      groupDetails = await this.getGroupDetails(groupId);
+      this.contactGroupsCache.set(groupId, groupDetails);
+    }
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (!groupDetails || !groupDetails.contact_models) <span class="cstat-no" title="statement not covered" >return;</span>
+&nbsp;
+    groupDetails.contact_models.forEach(
+      c =&gt; this.removeContactFromSelected(c.id)
+    );
+  }
+&nbsp;
+  @action
+  sendInviteMessage(contactId: number) {
+    if (contactId === undefined) return null;
+&nbsp;
+    const { contacts } = this.store.api;
+&nbsp;
+    return apiHelper(
+      contacts.sendInviteMessage.bind(contacts, [contactId]),
+      this
+    ).success()
+      .error(log.error)
+      .promise();
+  }
+}
+&nbsp;
+type LoadContactsOptions = {
+  fromFirstPage: boolean;
+};</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 24 2017 13:01:41 GMT+0300 (MSK)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

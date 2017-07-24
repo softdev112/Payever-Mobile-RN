@@ -1,0 +1,404 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Contacts App components renders correctly contacts/screens/BusinessContacts.js renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#FFF",
+            "borderBottomColor": "#e1e1e1",
+            "borderBottomWidth": 1,
+            "elevation": 8,
+            "flexDirection": "row",
+            "height": 55,
+            "justifyContent": "flex-end",
+            "marginTop": 15,
+            "paddingHorizontal": 18,
+            "zIndex": 1000,
+          },
+        ],
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "bottom": 0,
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "left": 18,
+            "position": "absolute",
+            "top": 0,
+            "zIndex": 1002,
+          },
+          null,
+        ]
+      }
+    >
+      <View
+        accessibilityComponentType="button"
+        accessibilityLabel={undefined}
+        accessibilityTraits={
+          Array [
+            "button",
+          ]
+        }
+        accessible={true}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "opacity": 1,
+            "padding": 6,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          source="icon-arrow-left-ios-24"
+          style={
+            Array [
+              Object {
+                "fontFamily": "payeverIcons",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "fontFamily": "payeverIcons",
+                  "fontSize": 24,
+                },
+                Array [
+                  Object {
+                    "height": 24,
+                    "width": 24,
+                  },
+                  Object {
+                    "color": "#0084ff",
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          touchStyle={
+            Object {
+              "alignItems": "center",
+              "borderColor": "blue",
+              "borderWidth": 1,
+              "justifyContent": "center",
+            }
+          }
+        >
+          
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#0084ff",
+                "fontSize": 16,
+                "marginLeft": 2,
+              },
+              Object {
+                "fontSize": 16,
+                "fontWeight": "400",
+                "marginLeft": 2,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "bottom": 0,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "zIndex": 1001,
+        }
+      }
+    >
+      <View
+        accessibilityComponentType="button"
+        accessibilityLabel={undefined}
+        accessibilityTraits={
+          Array [
+            "button",
+          ]
+        }
+        accessible={true}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "opacity": 1,
+            "padding": 6,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <RCTSegmentedControl
+          enabled={true}
+          onChange={[Function]}
+          onValueChange={[Function]}
+          selectedIndex={0}
+          style={
+            Array [
+              Object {
+                "height": 28,
+              },
+              Object {
+                "width": 160,
+              },
+            ]
+          }
+          values={
+            Array [
+              "Customers",
+              "Groups",
+            ]
+          }
+        />
+      </View>
+    </View>
+    <Image
+      source={1}
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "height": null,
+          "justifyContent": "flex-end",
+          "paddingLeft": 20,
+          "resizeMode": "stretch",
+          "width": null,
+          "zIndex": 1002,
+        }
+      }
+    >
+      <View
+        accessibilityComponentType="button"
+        accessibilityLabel={undefined}
+        accessibilityTraits={
+          Array [
+            "button",
+          ]
+        }
+        accessible={true}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "opacity": 1,
+            "padding": 6,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          source="icon-plus-24"
+          style={
+            Array [
+              Object {
+                "fontFamily": "payeverIcons",
+                "fontSize": 24,
+              },
+              Array [
+                Object {
+                  "fontFamily": "payeverIcons",
+                  "fontSize": 24,
+                },
+                Array [
+                  Object {
+                    "height": 24,
+                    "width": 24,
+                  },
+                  Object {
+                    "color": "#0084ff",
+                  },
+                  undefined,
+                ],
+              ],
+            ]
+          }
+          touchStyle={
+            Object {
+              "alignItems": "center",
+              "borderColor": "blue",
+              "borderWidth": 1,
+              "justifyContent": "center",
+            }
+          }
+        >
+          
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#0084ff",
+                "fontSize": 16,
+                "marginLeft": 2,
+              },
+              undefined,
+            ]
+          }
+        />
+      </View>
+    </Image>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "flex": 1,
+            "paddingHorizontal": 5,
+          },
+          undefined,
+        ]
+      }
+    >
+      <RCTScrollView
+        ItemSeparatorComponent={[Function]}
+        ListEmptyComponent={[Function]}
+        contentInset={
+          Object {
+            "bottom": 8,
+            "top": 8,
+          }
+        }
+        data={Array []}
+        disableVirtualization={false}
+        extraData={
+          Array [
+            false,
+          ]
+        }
+        getItem={[Function]}
+        getItemCount={[Function]}
+        horizontal={false}
+        initialNumToRender={20}
+        keyExtractor={[Function]}
+        keyboardShouldPersistTaps="always"
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onContentSizeChange={[Function]}
+        onEndReached={[Function]}
+        onEndReachedThreshold={80}
+        onLayout={[Function]}
+        onScroll={[Function]}
+        onScrollBeginDrag={[Function]}
+        onViewableItemsChanged={undefined}
+        removeClippedSubviews={true}
+        renderFooter={[Function]}
+        renderItem={[Function]}
+        renderScrollComponent={[Function]}
+        scrollEventThrottle={50}
+        stickyHeaderIndices={Array []}
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      >
+        <View />
+      </RCTScrollView>
+    </View>
+  </View>
+</View>
+`;

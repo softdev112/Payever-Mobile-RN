@@ -3,6 +3,7 @@ import RNFetchBlob from 'react-native-fetch-blob';
 import { cacheHelper, networkHelper, soundHelper } from 'utils';
 
 import Conversation from '../models/Conversation';
+import MessengerInfo from '../models/MessengerInfo';
 import Store from '../../../store';
 import config from '../../../config';
 import WampClient from '../../../common/api/MessengerApi/WampClient';
@@ -1001,13 +1002,15 @@ describe('Store/Communication', () => {
   });
 
   describe('Communication/saveUserSettings(settings: UserSettings)', () => {
-    fit('saveUserSettings should call right api with right url', () => {
+    xit('saveUserSettings should call right api with right url', () => {
       const apiSpy = jest.spyOn(api.messenger, 'saveSettings');
+      networkHelper.loadFromApi.mockImplementationOnce(() => ({ data: true }));
 
-      communication.messengerInfo.messengerUser = messengerData.messengerUser;
-      communication.saveUserSettings(messengerData.userSettings);
+      communication.messengerInfo = new MessengerInfo(cloneObject(messengerData));
+      communication.saveUserSettings(communication.messengerInfo.userSettings);
 
       expect(apiSpy).toHaveBeenCalled();
+      expect(networkHelper.loadFromApi).toHaveBeenCalledWith();
       expect(postSpy).toHaveBeenCalled();
     });
   });

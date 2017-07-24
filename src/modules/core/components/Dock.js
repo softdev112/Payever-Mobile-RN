@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
 
   title: {
     color: '$pe_color_gray_2',
-    fontSize: 11,
+    fontSize: 12,
     padding: 0,
     fontWeight: '400',
   },

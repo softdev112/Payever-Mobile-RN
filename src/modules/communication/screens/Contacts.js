@@ -4,8 +4,8 @@ import { Navigator } from 'react-native-navigation';
 import { images, NavBar, StyleSheet, View } from 'ui';
 import Contacts from '../components/contacts';
 
-import CommunicationStore from '../../../store/communication';
-import ProfilesStore from '../../../store/profiles';
+import type CommunicationStore from '../../../store/communication';
+import type ProfilesStore from '../../../store/profiles';
 
 @inject('communication', 'profiles')
 @observer
@@ -61,6 +61,7 @@ export default class ContactsScreen extends Component {
           ) : (
             <NavBar.Title title="Communication" source={images.communication} />
           )}
+
           <NavBar.Menu />
         </NavBar>
         <Contacts id={communication.selectedConversationId} />

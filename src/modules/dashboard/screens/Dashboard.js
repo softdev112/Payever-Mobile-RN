@@ -201,6 +201,13 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 
+  // iPhone 7+, 6+
+  '@media (min-width: 400)': {
+    title: {
+      fontSize: 13,
+    },
+  },
+
   // iPad Air, Air 2 etc
   '@media (min-width: 750)': {
     icon: {

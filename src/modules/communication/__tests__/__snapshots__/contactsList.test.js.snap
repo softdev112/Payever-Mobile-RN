@@ -1,0 +1,3257 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modules/communication/screens/Contacts Contacts should render correctly if NOT in pickContactMode 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#FFF",
+            "borderBottomColor": "#e1e1e1",
+            "borderBottomWidth": 1,
+            "elevation": 8,
+            "flexDirection": "row",
+            "height": 55,
+            "justifyContent": "flex-end",
+            "marginTop": 15,
+            "paddingHorizontal": 18,
+            "zIndex": 1000,
+          },
+        ],
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "bottom": 0,
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "left": 18,
+            "position": "absolute",
+            "top": 0,
+            "zIndex": 1002,
+          },
+          null,
+        ]
+      }
+    >
+      <View
+        accessibilityComponentType="button"
+        accessibilityLabel={undefined}
+        accessibilityTraits={
+          Array [
+            "button",
+          ]
+        }
+        accessible={true}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "opacity": 1,
+            "padding": 6,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Icon
+          source="icon-arrow-left-ios-24"
+          style={
+            Array [
+              Object {
+                "height": 24,
+                "width": 24,
+              },
+              Object {
+                "color": "#0084ff",
+              },
+              undefined,
+            ]
+          }
+          touchStyle={
+            Object {
+              "alignItems": "center",
+              "borderColor": "blue",
+              "borderWidth": 1,
+              "justifyContent": "center",
+            }
+          }
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#0084ff",
+                "fontSize": 16,
+                "marginLeft": 2,
+              },
+              Object {
+                "fontSize": 16,
+                "fontWeight": "400",
+                "marginLeft": 2,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "bottom": 0,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "zIndex": 1001,
+        }
+      }
+    >
+      <View
+        accessibilityComponentType="button"
+        accessibilityLabel={undefined}
+        accessibilityTraits={
+          Array [
+            "button",
+          ]
+        }
+        accessible={true}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "opacity": 1,
+            "padding": 6,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Icon
+          source={1}
+          style={
+            Object {
+              "borderColor": "#00000014",
+              "borderRadius": 8,
+              "borderWidth": 1,
+              "height": 36,
+              "width": 36,
+            }
+          }
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#000",
+                "fontSize": 18,
+                "textAlign": "center",
+              },
+              Object {
+                "marginLeft": 13,
+                "textAlign": "left",
+              },
+              Object {},
+            ]
+          }
+        >
+          Communication
+        </Text>
+      </View>
+    </View>
+    <Image
+      source={1}
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "height": null,
+          "justifyContent": "flex-end",
+          "paddingLeft": 20,
+          "resizeMode": "stretch",
+          "width": null,
+          "zIndex": 1002,
+        }
+      }
+    >
+      <View
+        accessibilityComponentType="button"
+        accessibilityLabel={undefined}
+        accessibilityTraits={
+          Array [
+            "button",
+          ]
+        }
+        accessible={true}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "opacity": 1,
+            "padding": 6,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Icon
+          source={1}
+          style={
+            Array [
+              Object {
+                "height": 24,
+                "width": 24,
+              },
+              undefined,
+              Object {
+                "borderRadius": 16,
+                "height": 32,
+                "width": 32,
+              },
+            ]
+          }
+          touchStyle={
+            Object {
+              "alignItems": "center",
+              "borderColor": "blue",
+              "borderWidth": 1,
+              "justifyContent": "center",
+            }
+          }
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#0084ff",
+                "fontSize": 16,
+                "marginLeft": 2,
+              },
+              undefined,
+            ]
+          }
+        />
+      </View>
+    </Image>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RCTScrollView
+      ItemSeparatorComponent={undefined}
+      ListFooterComponent={[Function]}
+      ListHeaderComponent={[Function]}
+      contentContainerStyle={
+        Object {
+          "paddingVertical": 8,
+        }
+      }
+      data={
+        Array [
+          Object {
+            "data": Array [
+              ConversationInfo {
+                "archived": false,
+                "avatar": Object {
+                  "type": "url",
+                  "value": "/images/payeverbot-32.png?v5.3.0",
+                },
+                "hasUnread": false,
+                "id": 114725,
+                "isBot": true,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "A9",
+                  },
+                  "body": "cxcx",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16591,
+                    "name": "Personal Assistant",
+                    "notification": true,
+                    "type": "conversation",
+                  },
+                  "date": "2017-01-27T08:20:02+01:00",
+                  "dateFormated": "Friday 8:20AM",
+                  "dateOnly": "27.01.17",
+                  "deletable": true,
+                  "deleted": false,
+                  "editBody": "cxcx",
+                  "editable": true,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 120787,
+                  "isSystem": false,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": false,
+                  "own": true,
+                  "recipient": "bot-914",
+                  "replyTo": null,
+                  "senderId": 16227,
+                  "senderName": "Again 9",
+                  "unread": false,
+                },
+                "name": "Personal Assistant",
+                "notification": true,
+                "recipient_id": "bot-914",
+                "status": Object {
+                  "label": "",
+                  "lastVisit": null,
+                  "online": true,
+                  "userId": 914,
+                },
+                "type": "conversation",
+                "unreadCount": 0,
+              },
+            ],
+            "key": "1",
+            "title": "contacts",
+          },
+          Object {
+            "data": Array [
+              Group {
+                "addDate": "2017-01-18T11:55:36+01:00",
+                "addDateFormated": "18 Jan 11:55AM",
+                "avatar": Object {
+                  "type": "letters",
+                  "value": "F",
+                },
+                "hasUnread": false,
+                "id": 16968,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "A9",
+                  },
+                  "body": "11111",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16968,
+                    "name": "#First",
+                    "notification": true,
+                    "type": "chat-group",
+                  },
+                  "date": "2017-01-27T08:52:15+01:00",
+                  "dateFormated": "Friday 8:52AM",
+                  "dateOnly": "27.01.17",
+                  "deletable": true,
+                  "deleted": false,
+                  "editBody": "11111",
+                  "editable": true,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 120799,
+                  "isSystem": false,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": true,
+                  "own": true,
+                  "recipient": "chat-group-16968",
+                  "replyTo": null,
+                  "senderId": 16227,
+                  "senderName": "Again 9",
+                  "unread": false,
+                },
+                "name": "#First",
+                "participantsCount": "2",
+                "recipient_id": "chat-group-16968",
+                "type": "chat-group",
+                "unreadCount": 0,
+              },
+              Group {
+                "addDate": "2017-01-18T11:53:30+01:00",
+                "addDateFormated": "18 Jan 11:53AM",
+                "avatar": Object {
+                  "type": "letters",
+                  "value": "S",
+                },
+                "hasUnread": false,
+                "id": 16964,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "A9",
+                  },
+                  "body": "<p>Fhhbcxf</p>",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16964,
+                    "name": "#Second",
+                    "notification": true,
+                    "type": "marketing-group",
+                  },
+                  "date": "2017-01-18T14:12:37+01:00",
+                  "dateFormated": "18 Jan 2:12PM",
+                  "dateOnly": "18.01.17",
+                  "deletable": true,
+                  "deleted": false,
+                  "editBody": "Fhhbcxf",
+                  "editable": true,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 116641,
+                  "isSystem": false,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": true,
+                  "own": true,
+                  "recipient": "marketing-group-16964",
+                  "replyTo": null,
+                  "senderId": 16227,
+                  "senderName": "Again 9",
+                  "unread": false,
+                },
+                "name": "#Second",
+                "participantsCount": "1",
+                "recipient_id": "marketing-group-16964",
+                "type": "marketing-group",
+                "unreadCount": 0,
+              },
+              Group {
+                "addDate": "2017-01-18T11:52:51+01:00",
+                "addDateFormated": "18 Jan 11:52AM",
+                "avatar": Object {
+                  "type": "letters",
+                  "value": "F",
+                },
+                "hasUnread": false,
+                "id": 16960,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "S",
+                  },
+                  "body": "Again 9 created group #First",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16960,
+                    "name": "#First",
+                    "notification": true,
+                    "type": "chat-group",
+                  },
+                  "date": "2017-01-18T11:52:51+01:00",
+                  "dateFormated": "18 Jan 11:52AM",
+                  "dateOnly": "18.01.17",
+                  "deletable": false,
+                  "deleted": false,
+                  "editBody": "Again 9 created group #First",
+                  "editable": false,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 116524,
+                  "isSystem": true,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": true,
+                  "own": false,
+                  "recipient": "chat-group-16960",
+                  "replyTo": null,
+                  "senderId": 6872,
+                  "senderName": "System",
+                  "unread": false,
+                },
+                "name": "#First",
+                "participantsCount": "2",
+                "recipient_id": "chat-group-16960",
+                "type": "chat-group",
+                "unreadCount": 0,
+              },
+            ],
+            "key": "2",
+            "title": "groups",
+          },
+          Object {
+            "data": Array [],
+            "key": "3",
+            "title": "foundMessages",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      getItem={[Function]}
+      getItemCount={[Function]}
+      horizontal={false}
+      initialNumToRender={20}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      onContentSizeChange={[Function]}
+      onEndReached={[Function]}
+      onEndReachedThreshold={2}
+      onLayout={[Function]}
+      onScroll={[Function]}
+      onScrollBeginDrag={[Function]}
+      onViewableItemsChanged={undefined}
+      removeClippedSubviews={true}
+      renderItem={[Function]}
+      renderScrollComponent={[Function]}
+      renderSectionHeader={[Function]}
+      scrollEventThrottle={50}
+      sections={
+        Array [
+          Object {
+            "data": Array [
+              ConversationInfo {
+                "archived": false,
+                "avatar": Object {
+                  "type": "url",
+                  "value": "/images/payeverbot-32.png?v5.3.0",
+                },
+                "hasUnread": false,
+                "id": 114725,
+                "isBot": true,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "A9",
+                  },
+                  "body": "cxcx",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16591,
+                    "name": "Personal Assistant",
+                    "notification": true,
+                    "type": "conversation",
+                  },
+                  "date": "2017-01-27T08:20:02+01:00",
+                  "dateFormated": "Friday 8:20AM",
+                  "dateOnly": "27.01.17",
+                  "deletable": true,
+                  "deleted": false,
+                  "editBody": "cxcx",
+                  "editable": true,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 120787,
+                  "isSystem": false,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": false,
+                  "own": true,
+                  "recipient": "bot-914",
+                  "replyTo": null,
+                  "senderId": 16227,
+                  "senderName": "Again 9",
+                  "unread": false,
+                },
+                "name": "Personal Assistant",
+                "notification": true,
+                "recipient_id": "bot-914",
+                "status": Object {
+                  "label": "",
+                  "lastVisit": null,
+                  "online": true,
+                  "userId": 914,
+                },
+                "type": "conversation",
+                "unreadCount": 0,
+              },
+            ],
+            "key": "1",
+            "title": "contacts",
+          },
+          Object {
+            "data": Array [
+              Group {
+                "addDate": "2017-01-18T11:55:36+01:00",
+                "addDateFormated": "18 Jan 11:55AM",
+                "avatar": Object {
+                  "type": "letters",
+                  "value": "F",
+                },
+                "hasUnread": false,
+                "id": 16968,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "A9",
+                  },
+                  "body": "11111",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16968,
+                    "name": "#First",
+                    "notification": true,
+                    "type": "chat-group",
+                  },
+                  "date": "2017-01-27T08:52:15+01:00",
+                  "dateFormated": "Friday 8:52AM",
+                  "dateOnly": "27.01.17",
+                  "deletable": true,
+                  "deleted": false,
+                  "editBody": "11111",
+                  "editable": true,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 120799,
+                  "isSystem": false,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": true,
+                  "own": true,
+                  "recipient": "chat-group-16968",
+                  "replyTo": null,
+                  "senderId": 16227,
+                  "senderName": "Again 9",
+                  "unread": false,
+                },
+                "name": "#First",
+                "participantsCount": "2",
+                "recipient_id": "chat-group-16968",
+                "type": "chat-group",
+                "unreadCount": 0,
+              },
+              Group {
+                "addDate": "2017-01-18T11:53:30+01:00",
+                "addDateFormated": "18 Jan 11:53AM",
+                "avatar": Object {
+                  "type": "letters",
+                  "value": "S",
+                },
+                "hasUnread": false,
+                "id": 16964,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "A9",
+                  },
+                  "body": "<p>Fhhbcxf</p>",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16964,
+                    "name": "#Second",
+                    "notification": true,
+                    "type": "marketing-group",
+                  },
+                  "date": "2017-01-18T14:12:37+01:00",
+                  "dateFormated": "18 Jan 2:12PM",
+                  "dateOnly": "18.01.17",
+                  "deletable": true,
+                  "deleted": false,
+                  "editBody": "Fhhbcxf",
+                  "editable": true,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 116641,
+                  "isSystem": false,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": true,
+                  "own": true,
+                  "recipient": "marketing-group-16964",
+                  "replyTo": null,
+                  "senderId": 16227,
+                  "senderName": "Again 9",
+                  "unread": false,
+                },
+                "name": "#Second",
+                "participantsCount": "1",
+                "recipient_id": "marketing-group-16964",
+                "type": "marketing-group",
+                "unreadCount": 0,
+              },
+              Group {
+                "addDate": "2017-01-18T11:52:51+01:00",
+                "addDateFormated": "18 Jan 11:52AM",
+                "avatar": Object {
+                  "type": "letters",
+                  "value": "F",
+                },
+                "hasUnread": false,
+                "id": 16960,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "S",
+                  },
+                  "body": "Again 9 created group #First",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16960,
+                    "name": "#First",
+                    "notification": true,
+                    "type": "chat-group",
+                  },
+                  "date": "2017-01-18T11:52:51+01:00",
+                  "dateFormated": "18 Jan 11:52AM",
+                  "dateOnly": "18.01.17",
+                  "deletable": false,
+                  "deleted": false,
+                  "editBody": "Again 9 created group #First",
+                  "editable": false,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 116524,
+                  "isSystem": true,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": true,
+                  "own": false,
+                  "recipient": "chat-group-16960",
+                  "replyTo": null,
+                  "senderId": 6872,
+                  "senderName": "System",
+                  "unread": false,
+                },
+                "name": "#First",
+                "participantsCount": "2",
+                "recipient_id": "chat-group-16960",
+                "type": "chat-group",
+                "unreadCount": 0,
+              },
+            ],
+            "key": "2",
+            "title": "groups",
+          },
+          Object {
+            "data": Array [],
+            "key": "3",
+            "title": "foundMessages",
+          },
+        ]
+      }
+      stickyHeaderIndices={
+        Array [
+          1,
+          3,
+          7,
+        ]
+      }
+      stickySectionHeadersEnabled={true}
+      style={
+        Object {
+          "paddingHorizontal": 8,
+        }
+      }
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    >
+      <View>
+        <View
+          onLayout={[Function]}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "#FFF",
+                  "flexDirection": "row",
+                  "height": 40,
+                  "padding": 8,
+                  "paddingTop": 2,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "flex-start",
+                  "borderBottomWidth": 1,
+                  "borderColor": "#f4f4f4",
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "marginHorizontal": 9,
+                }
+              }
+            >
+              <Icon
+                onPress={[Function]}
+                source="icon-search-16"
+                style={
+                  Array [
+                    Object {
+                      "color": "#b5b9be",
+                      "fontSize": 15,
+                      "height": 15,
+                      "width": 15,
+                    },
+                    undefined,
+                  ]
+                }
+                touchStyle={
+                  Object {
+                    "marginLeft": 10,
+                    "marginTop": 5,
+                  }
+                }
+              />
+              <TextInput
+                autoCapitalize="none"
+                autoCorrect={false}
+                multiline={false}
+                onChangeText={[Function]}
+                placeholder="Search"
+                returnKeyType="search"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3d3d3d",
+                      "flex": 1,
+                      "fontSize": 14,
+                      "fontWeight": "200",
+                      "marginLeft": 12,
+                      "padding": 2,
+                    },
+                    undefined,
+                  ]
+                }
+                underlineColorAndroid="transparent"
+                value=""
+              />
+            </View>
+            <Icon
+              hitSlop={14}
+              onPress={[Function]}
+              source="icon-settings-24"
+              style={
+                Object {
+                  "color": "#b5b9be",
+                  "fontSize": 17,
+                  "height": 17,
+                  "width": 17,
+                }
+              }
+              touchStyle={
+                Object {
+                  "marginRight": 10,
+                  "marginTop": 7,
+                }
+              }
+            />
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "#FFF",
+                "flexDirection": "row",
+                "padding": 5,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 1,
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3d3d3d",
+                      "fontFamily": "Helvetica Neue",
+                      "fontWeight": "200",
+                    },
+                    Object {
+                      "color": "#959ba3",
+                      "fontSize": 14,
+                      "fontWeight": "200",
+                    },
+                  ]
+                }
+              >
+                DIRECT MESSAGES
+              </Text>
+            </View>
+            <Icon
+              onPress={[Function]}
+              source="icon-plus-circle-24"
+              style={
+                Object {
+                  "color": "#b5b9be",
+                  "fontSize": 16,
+                  "height": 17,
+                  "width": 16,
+                }
+              }
+            />
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+        >
+          <View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "minHeight": 60,
+                  "opacity": 1,
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 7,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Icon
+                source={
+                  Object {
+                    "uri": "/images/payeverbot-32.png?v5.3.0",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "borderRadius": 16,
+                      "height": 32,
+                      "width": 32,
+                    },
+                    undefined,
+                  ]
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "justifyContent": "space-around",
+                    "paddingLeft": 8,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "space-between",
+                      "marginBottom": 4,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "row",
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      numberOfLines={1}
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#3d3d3d",
+                            "flex": 1,
+                            "fontSize": 14,
+                            "fontWeight": "400",
+                          },
+                        ]
+                      }
+                    >
+                      Personal Assistant
+                    </Text>
+                  </View>
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "borderColor": "#d8d8d8",
+                          "borderRadius": 4,
+                          "borderWidth": 1,
+                          "height": 8,
+                          "width": 8,
+                        },
+                        undefined,
+                        Object {
+                          "backgroundColor": "#75b636",
+                          "borderWidth": 0,
+                        },
+                      ]
+                    }
+                  />
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3d3d3d",
+                        "fontFamily": "Helvetica Neue",
+                        "fontWeight": "200",
+                      },
+                      Object {
+                        "color": "#b3b3b3",
+                      },
+                    ]
+                  }
+                >
+                  cxcx
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "#FFF",
+                "flexDirection": "row",
+                "padding": 5,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 1,
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3d3d3d",
+                      "fontFamily": "Helvetica Neue",
+                      "fontWeight": "200",
+                    },
+                    Object {
+                      "color": "#959ba3",
+                      "fontSize": 14,
+                      "fontWeight": "200",
+                    },
+                  ]
+                }
+              >
+                GROUPS
+              </Text>
+            </View>
+            <Icon
+              onPress={[Function]}
+              source="icon-plus-circle-24"
+              style={
+                Object {
+                  "color": "#b5b9be",
+                  "fontSize": 16,
+                  "height": 17,
+                  "width": 16,
+                }
+              }
+            />
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+        >
+          <View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "minHeight": 60,
+                  "opacity": 1,
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 7,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "borderColor": "#666",
+                      "borderRadius": 16,
+                      "borderWidth": 1,
+                      "height": 32,
+                      "justifyContent": "center",
+                      "width": 32,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3d3d3d",
+                        "fontFamily": "Helvetica Neue",
+                        "fontWeight": "200",
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 16,
+                        },
+                        undefined,
+                      ],
+                    ]
+                  }
+                >
+                  F
+                </Text>
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "justifyContent": "space-around",
+                    "paddingLeft": 8,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "space-between",
+                      "marginBottom": 4,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "row",
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      numberOfLines={1}
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#3d3d3d",
+                            "flex": 1,
+                            "fontSize": 14,
+                            "fontWeight": "400",
+                          },
+                        ]
+                      }
+                    >
+                      #First
+                    </Text>
+                  </View>
+                  <Icon
+                    source="icon-settings-16"
+                    style={
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 16,
+                      }
+                    }
+                  />
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3d3d3d",
+                        "fontFamily": "Helvetica Neue",
+                        "fontWeight": "200",
+                      },
+                      Object {
+                        "color": "#b3b3b3",
+                      },
+                    ]
+                  }
+                >
+                  11111
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+        >
+          <View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "minHeight": 60,
+                  "opacity": 1,
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 7,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "borderColor": "#666",
+                      "borderRadius": 16,
+                      "borderWidth": 1,
+                      "height": 32,
+                      "justifyContent": "center",
+                      "width": 32,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3d3d3d",
+                        "fontFamily": "Helvetica Neue",
+                        "fontWeight": "200",
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 16,
+                        },
+                        undefined,
+                      ],
+                    ]
+                  }
+                >
+                  S
+                </Text>
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "justifyContent": "space-around",
+                    "paddingLeft": 8,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "space-between",
+                      "marginBottom": 4,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "row",
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      numberOfLines={1}
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#3d3d3d",
+                            "flex": 1,
+                            "fontSize": 14,
+                            "fontWeight": "400",
+                          },
+                        ]
+                      }
+                    >
+                      #Second
+                    </Text>
+                  </View>
+                  <Icon
+                    source="icon-pencil-24"
+                    style={
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 16,
+                      }
+                    }
+                  />
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3d3d3d",
+                        "fontFamily": "Helvetica Neue",
+                        "fontWeight": "200",
+                      },
+                      Object {
+                        "color": "#b3b3b3",
+                      },
+                    ]
+                  }
+                >
+                  Fhhbcxf
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+        >
+          <View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "minHeight": 60,
+                  "opacity": 1,
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 7,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "borderColor": "#666",
+                      "borderRadius": 16,
+                      "borderWidth": 1,
+                      "height": 32,
+                      "justifyContent": "center",
+                      "width": 32,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3d3d3d",
+                        "fontFamily": "Helvetica Neue",
+                        "fontWeight": "200",
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 16,
+                        },
+                        undefined,
+                      ],
+                    ]
+                  }
+                >
+                  F
+                </Text>
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "justifyContent": "space-around",
+                    "paddingLeft": 8,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "space-between",
+                      "marginBottom": 4,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "row",
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      numberOfLines={1}
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#3d3d3d",
+                            "flex": 1,
+                            "fontSize": 14,
+                            "fontWeight": "400",
+                          },
+                        ]
+                      }
+                    >
+                      #First
+                    </Text>
+                  </View>
+                  <Icon
+                    source="icon-settings-16"
+                    style={
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 16,
+                      }
+                    }
+                  />
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3d3d3d",
+                        "fontFamily": "Helvetica Neue",
+                        "fontWeight": "200",
+                      },
+                      Object {
+                        "color": "#b3b3b3",
+                      },
+                    ]
+                  }
+                >
+                  Again 9 created group #First
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+        />
+        <View
+          onLayout={[Function]}
+        />
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;
+
+exports[`modules/communication/screens/Contacts Contacts should render correctly in pickContactMode 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flex": 1,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#FFF",
+            "borderBottomColor": "#e1e1e1",
+            "borderBottomWidth": 1,
+            "elevation": 8,
+            "flexDirection": "row",
+            "height": 55,
+            "justifyContent": "flex-end",
+            "marginTop": 15,
+            "paddingHorizontal": 18,
+            "zIndex": 1000,
+          },
+        ],
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "bottom": 0,
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "left": 18,
+            "position": "absolute",
+            "top": 0,
+            "zIndex": 1002,
+          },
+          null,
+        ]
+      }
+    >
+      <View
+        accessibilityComponentType="button"
+        accessibilityLabel={undefined}
+        accessibilityTraits={
+          Array [
+            "button",
+          ]
+        }
+        accessible={true}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "opacity": 1,
+            "padding": 6,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#0084ff",
+                "fontSize": 16,
+              },
+              undefined,
+            ]
+          }
+        >
+          Cancel
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "bottom": 0,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "zIndex": 1001,
+        }
+      }
+    >
+      <View
+        accessibilityComponentType="button"
+        accessibilityLabel={undefined}
+        accessibilityTraits={
+          Array [
+            "button",
+          ]
+        }
+        accessible={true}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "opacity": 1,
+            "padding": 6,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#000",
+                "fontSize": 18,
+                "textAlign": "center",
+              },
+              Object {},
+            ]
+          }
+        >
+          Choose recipient
+        </Text>
+      </View>
+    </View>
+    <Image
+      source={1}
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "height": null,
+          "justifyContent": "flex-end",
+          "paddingLeft": 20,
+          "resizeMode": "stretch",
+          "width": null,
+          "zIndex": 1002,
+        }
+      }
+    >
+      <View
+        accessibilityComponentType="button"
+        accessibilityLabel={undefined}
+        accessibilityTraits={
+          Array [
+            "button",
+          ]
+        }
+        accessible={true}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "opacity": 1,
+            "padding": 6,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Icon
+          source={1}
+          style={
+            Array [
+              Object {
+                "height": 24,
+                "width": 24,
+              },
+              undefined,
+              Object {
+                "borderRadius": 16,
+                "height": 32,
+                "width": 32,
+              },
+            ]
+          }
+          touchStyle={
+            Object {
+              "alignItems": "center",
+              "borderColor": "blue",
+              "borderWidth": 1,
+              "justifyContent": "center",
+            }
+          }
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#0084ff",
+                "fontSize": 16,
+                "marginLeft": 2,
+              },
+              undefined,
+            ]
+          }
+        />
+      </View>
+    </Image>
+  </View>
+  <View
+    style={
+      Array [
+        Object {
+          "flex": 1,
+        },
+        undefined,
+      ]
+    }
+  >
+    <RCTScrollView
+      ItemSeparatorComponent={undefined}
+      ListFooterComponent={[Function]}
+      ListHeaderComponent={[Function]}
+      contentContainerStyle={
+        Object {
+          "paddingVertical": 8,
+        }
+      }
+      data={
+        Array [
+          Object {
+            "data": Array [
+              ConversationInfo {
+                "archived": false,
+                "avatar": Object {
+                  "type": "url",
+                  "value": "/images/payeverbot-32.png?v5.3.0",
+                },
+                "hasUnread": false,
+                "id": 114725,
+                "isBot": true,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "A9",
+                  },
+                  "body": "cxcx",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16591,
+                    "name": "Personal Assistant",
+                    "notification": true,
+                    "type": "conversation",
+                  },
+                  "date": "2017-01-27T08:20:02+01:00",
+                  "dateFormated": "Friday 8:20AM",
+                  "dateOnly": "27.01.17",
+                  "deletable": true,
+                  "deleted": false,
+                  "editBody": "cxcx",
+                  "editable": true,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 120787,
+                  "isSystem": false,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": false,
+                  "own": true,
+                  "recipient": "bot-914",
+                  "replyTo": null,
+                  "senderId": 16227,
+                  "senderName": "Again 9",
+                  "unread": false,
+                },
+                "name": "Personal Assistant",
+                "notification": true,
+                "recipient_id": "bot-914",
+                "status": Object {
+                  "label": "",
+                  "lastVisit": null,
+                  "online": true,
+                  "userId": 914,
+                },
+                "type": "conversation",
+                "unreadCount": 0,
+              },
+            ],
+            "key": "1",
+            "title": "contacts",
+          },
+          Object {
+            "data": Array [
+              Group {
+                "addDate": "2017-01-18T11:55:36+01:00",
+                "addDateFormated": "18 Jan 11:55AM",
+                "avatar": Object {
+                  "type": "letters",
+                  "value": "F",
+                },
+                "hasUnread": false,
+                "id": 16968,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "A9",
+                  },
+                  "body": "11111",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16968,
+                    "name": "#First",
+                    "notification": true,
+                    "type": "chat-group",
+                  },
+                  "date": "2017-01-27T08:52:15+01:00",
+                  "dateFormated": "Friday 8:52AM",
+                  "dateOnly": "27.01.17",
+                  "deletable": true,
+                  "deleted": false,
+                  "editBody": "11111",
+                  "editable": true,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 120799,
+                  "isSystem": false,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": true,
+                  "own": true,
+                  "recipient": "chat-group-16968",
+                  "replyTo": null,
+                  "senderId": 16227,
+                  "senderName": "Again 9",
+                  "unread": false,
+                },
+                "name": "#First",
+                "participantsCount": "2",
+                "recipient_id": "chat-group-16968",
+                "type": "chat-group",
+                "unreadCount": 0,
+              },
+              Group {
+                "addDate": "2017-01-18T11:53:30+01:00",
+                "addDateFormated": "18 Jan 11:53AM",
+                "avatar": Object {
+                  "type": "letters",
+                  "value": "S",
+                },
+                "hasUnread": false,
+                "id": 16964,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "A9",
+                  },
+                  "body": "<p>Fhhbcxf</p>",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16964,
+                    "name": "#Second",
+                    "notification": true,
+                    "type": "marketing-group",
+                  },
+                  "date": "2017-01-18T14:12:37+01:00",
+                  "dateFormated": "18 Jan 2:12PM",
+                  "dateOnly": "18.01.17",
+                  "deletable": true,
+                  "deleted": false,
+                  "editBody": "Fhhbcxf",
+                  "editable": true,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 116641,
+                  "isSystem": false,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": true,
+                  "own": true,
+                  "recipient": "marketing-group-16964",
+                  "replyTo": null,
+                  "senderId": 16227,
+                  "senderName": "Again 9",
+                  "unread": false,
+                },
+                "name": "#Second",
+                "participantsCount": "1",
+                "recipient_id": "marketing-group-16964",
+                "type": "marketing-group",
+                "unreadCount": 0,
+              },
+              Group {
+                "addDate": "2017-01-18T11:52:51+01:00",
+                "addDateFormated": "18 Jan 11:52AM",
+                "avatar": Object {
+                  "type": "letters",
+                  "value": "F",
+                },
+                "hasUnread": false,
+                "id": 16960,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "S",
+                  },
+                  "body": "Again 9 created group #First",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16960,
+                    "name": "#First",
+                    "notification": true,
+                    "type": "chat-group",
+                  },
+                  "date": "2017-01-18T11:52:51+01:00",
+                  "dateFormated": "18 Jan 11:52AM",
+                  "dateOnly": "18.01.17",
+                  "deletable": false,
+                  "deleted": false,
+                  "editBody": "Again 9 created group #First",
+                  "editable": false,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 116524,
+                  "isSystem": true,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": true,
+                  "own": false,
+                  "recipient": "chat-group-16960",
+                  "replyTo": null,
+                  "senderId": 6872,
+                  "senderName": "System",
+                  "unread": false,
+                },
+                "name": "#First",
+                "participantsCount": "2",
+                "recipient_id": "chat-group-16960",
+                "type": "chat-group",
+                "unreadCount": 0,
+              },
+            ],
+            "key": "2",
+            "title": "groups",
+          },
+        ]
+      }
+      disableVirtualization={false}
+      getItem={[Function]}
+      getItemCount={[Function]}
+      horizontal={false}
+      initialNumToRender={20}
+      keyExtractor={[Function]}
+      maxToRenderPerBatch={10}
+      onContentSizeChange={[Function]}
+      onEndReached={[Function]}
+      onEndReachedThreshold={2}
+      onLayout={[Function]}
+      onScroll={[Function]}
+      onScrollBeginDrag={[Function]}
+      onViewableItemsChanged={undefined}
+      removeClippedSubviews={true}
+      renderItem={[Function]}
+      renderScrollComponent={[Function]}
+      renderSectionHeader={[Function]}
+      scrollEventThrottle={50}
+      sections={
+        Array [
+          Object {
+            "data": Array [
+              ConversationInfo {
+                "archived": false,
+                "avatar": Object {
+                  "type": "url",
+                  "value": "/images/payeverbot-32.png?v5.3.0",
+                },
+                "hasUnread": false,
+                "id": 114725,
+                "isBot": true,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "A9",
+                  },
+                  "body": "cxcx",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16591,
+                    "name": "Personal Assistant",
+                    "notification": true,
+                    "type": "conversation",
+                  },
+                  "date": "2017-01-27T08:20:02+01:00",
+                  "dateFormated": "Friday 8:20AM",
+                  "dateOnly": "27.01.17",
+                  "deletable": true,
+                  "deleted": false,
+                  "editBody": "cxcx",
+                  "editable": true,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 120787,
+                  "isSystem": false,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": false,
+                  "own": true,
+                  "recipient": "bot-914",
+                  "replyTo": null,
+                  "senderId": 16227,
+                  "senderName": "Again 9",
+                  "unread": false,
+                },
+                "name": "Personal Assistant",
+                "notification": true,
+                "recipient_id": "bot-914",
+                "status": Object {
+                  "label": "",
+                  "lastVisit": null,
+                  "online": true,
+                  "userId": 914,
+                },
+                "type": "conversation",
+                "unreadCount": 0,
+              },
+            ],
+            "key": "1",
+            "title": "contacts",
+          },
+          Object {
+            "data": Array [
+              Group {
+                "addDate": "2017-01-18T11:55:36+01:00",
+                "addDateFormated": "18 Jan 11:55AM",
+                "avatar": Object {
+                  "type": "letters",
+                  "value": "F",
+                },
+                "hasUnread": false,
+                "id": 16968,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "A9",
+                  },
+                  "body": "11111",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16968,
+                    "name": "#First",
+                    "notification": true,
+                    "type": "chat-group",
+                  },
+                  "date": "2017-01-27T08:52:15+01:00",
+                  "dateFormated": "Friday 8:52AM",
+                  "dateOnly": "27.01.17",
+                  "deletable": true,
+                  "deleted": false,
+                  "editBody": "11111",
+                  "editable": true,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 120799,
+                  "isSystem": false,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": true,
+                  "own": true,
+                  "recipient": "chat-group-16968",
+                  "replyTo": null,
+                  "senderId": 16227,
+                  "senderName": "Again 9",
+                  "unread": false,
+                },
+                "name": "#First",
+                "participantsCount": "2",
+                "recipient_id": "chat-group-16968",
+                "type": "chat-group",
+                "unreadCount": 0,
+              },
+              Group {
+                "addDate": "2017-01-18T11:53:30+01:00",
+                "addDateFormated": "18 Jan 11:53AM",
+                "avatar": Object {
+                  "type": "letters",
+                  "value": "S",
+                },
+                "hasUnread": false,
+                "id": 16964,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "A9",
+                  },
+                  "body": "<p>Fhhbcxf</p>",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16964,
+                    "name": "#Second",
+                    "notification": true,
+                    "type": "marketing-group",
+                  },
+                  "date": "2017-01-18T14:12:37+01:00",
+                  "dateFormated": "18 Jan 2:12PM",
+                  "dateOnly": "18.01.17",
+                  "deletable": true,
+                  "deleted": false,
+                  "editBody": "Fhhbcxf",
+                  "editable": true,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 116641,
+                  "isSystem": false,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": true,
+                  "own": true,
+                  "recipient": "marketing-group-16964",
+                  "replyTo": null,
+                  "senderId": 16227,
+                  "senderName": "Again 9",
+                  "unread": false,
+                },
+                "name": "#Second",
+                "participantsCount": "1",
+                "recipient_id": "marketing-group-16964",
+                "type": "marketing-group",
+                "unreadCount": 0,
+              },
+              Group {
+                "addDate": "2017-01-18T11:52:51+01:00",
+                "addDateFormated": "18 Jan 11:52AM",
+                "avatar": Object {
+                  "type": "letters",
+                  "value": "F",
+                },
+                "hasUnread": false,
+                "id": 16960,
+                "latestMessage": Object {
+                  "avatar": Object {
+                    "type": "letters",
+                    "value": "S",
+                  },
+                  "body": "Again 9 created group #First",
+                  "conversation": Object {
+                    "archived": false,
+                    "id": 16960,
+                    "name": "#First",
+                    "notification": true,
+                    "type": "chat-group",
+                  },
+                  "date": "2017-01-18T11:52:51+01:00",
+                  "dateFormated": "18 Jan 11:52AM",
+                  "dateOnly": "18.01.17",
+                  "deletable": false,
+                  "deleted": false,
+                  "editBody": "Again 9 created group #First",
+                  "editable": false,
+                  "edited": false,
+                  "forwardFrom": null,
+                  "id": 116524,
+                  "isSystem": true,
+                  "medias": Array [],
+                  "offer": null,
+                  "offerId": null,
+                  "opponentUnread": true,
+                  "own": false,
+                  "recipient": "chat-group-16960",
+                  "replyTo": null,
+                  "senderId": 6872,
+                  "senderName": "System",
+                  "unread": false,
+                },
+                "name": "#First",
+                "participantsCount": "2",
+                "recipient_id": "chat-group-16960",
+                "type": "chat-group",
+                "unreadCount": 0,
+              },
+            ],
+            "key": "2",
+            "title": "groups",
+          },
+        ]
+      }
+      stickyHeaderIndices={
+        Array [
+          1,
+          3,
+        ]
+      }
+      stickySectionHeadersEnabled={true}
+      style={
+        Object {
+          "paddingHorizontal": 8,
+        }
+      }
+      updateCellsBatchingPeriod={50}
+      windowSize={21}
+    >
+      <View>
+        <View
+          onLayout={[Function]}
+        >
+          <View
+            style={
+              Array [
+                Object {
+                  "backgroundColor": "#FFF",
+                  "flexDirection": "row",
+                  "height": 40,
+                  "padding": 8,
+                  "paddingTop": 2,
+                },
+                undefined,
+              ]
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "flex-start",
+                  "borderBottomWidth": 1,
+                  "borderColor": "#f4f4f4",
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "marginHorizontal": 9,
+                }
+              }
+            >
+              <Icon
+                onPress={[Function]}
+                source="icon-search-16"
+                style={
+                  Array [
+                    Object {
+                      "color": "#b5b9be",
+                      "fontSize": 15,
+                      "height": 15,
+                      "width": 15,
+                    },
+                    undefined,
+                  ]
+                }
+                touchStyle={
+                  Object {
+                    "marginLeft": 10,
+                    "marginTop": 5,
+                  }
+                }
+              />
+              <TextInput
+                autoCapitalize="none"
+                autoCorrect={false}
+                multiline={false}
+                onChangeText={[Function]}
+                placeholder="Search"
+                returnKeyType="search"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3d3d3d",
+                      "flex": 1,
+                      "fontSize": 14,
+                      "fontWeight": "200",
+                      "marginLeft": 12,
+                      "padding": 2,
+                    },
+                    undefined,
+                  ]
+                }
+                underlineColorAndroid="transparent"
+                value=""
+              />
+            </View>
+            <Icon
+              hitSlop={14}
+              onPress={[Function]}
+              source="icon-settings-24"
+              style={
+                Object {
+                  "color": "#b5b9be",
+                  "fontSize": 17,
+                  "height": 17,
+                  "width": 17,
+                }
+              }
+              touchStyle={
+                Object {
+                  "marginRight": 10,
+                  "marginTop": 7,
+                }
+              }
+            />
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "#FFF",
+                "flexDirection": "row",
+                "padding": 5,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 1,
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3d3d3d",
+                      "fontFamily": "Helvetica Neue",
+                      "fontWeight": "200",
+                    },
+                    Object {
+                      "color": "#959ba3",
+                      "fontSize": 14,
+                      "fontWeight": "200",
+                    },
+                  ]
+                }
+              >
+                DIRECT MESSAGES
+              </Text>
+            </View>
+            <Icon
+              onPress={[Function]}
+              source="icon-plus-circle-24"
+              style={
+                Object {
+                  "color": "#b5b9be",
+                  "fontSize": 16,
+                  "height": 17,
+                  "width": 16,
+                }
+              }
+            />
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+        >
+          <View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "minHeight": 60,
+                  "opacity": 1,
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 7,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <Icon
+                source={
+                  Object {
+                    "uri": "/images/payeverbot-32.png?v5.3.0",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "borderRadius": 16,
+                      "height": 32,
+                      "width": 32,
+                    },
+                    undefined,
+                  ]
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "justifyContent": "space-around",
+                    "paddingLeft": 8,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "space-between",
+                      "marginBottom": 4,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "row",
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      numberOfLines={1}
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#3d3d3d",
+                            "flex": 1,
+                            "fontSize": 14,
+                            "fontWeight": "400",
+                          },
+                        ]
+                      }
+                    >
+                      Personal Assistant
+                    </Text>
+                  </View>
+                  <View
+                    style={
+                      Array [
+                        Object {
+                          "borderColor": "#d8d8d8",
+                          "borderRadius": 4,
+                          "borderWidth": 1,
+                          "height": 8,
+                          "width": 8,
+                        },
+                        undefined,
+                        Object {
+                          "backgroundColor": "#75b636",
+                          "borderWidth": 0,
+                        },
+                      ]
+                    }
+                  />
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3d3d3d",
+                        "fontFamily": "Helvetica Neue",
+                        "fontWeight": "200",
+                      },
+                      Object {
+                        "color": "#b3b3b3",
+                      },
+                    ]
+                  }
+                >
+                  cxcx
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "#FFF",
+                "flexDirection": "row",
+                "padding": 5,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flex": 1,
+                  "flexDirection": "row",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#3d3d3d",
+                      "fontFamily": "Helvetica Neue",
+                      "fontWeight": "200",
+                    },
+                    Object {
+                      "color": "#959ba3",
+                      "fontSize": 14,
+                      "fontWeight": "200",
+                    },
+                  ]
+                }
+              >
+                GROUPS
+              </Text>
+            </View>
+            <Icon
+              onPress={[Function]}
+              source="icon-plus-circle-24"
+              style={
+                Object {
+                  "color": "#b5b9be",
+                  "fontSize": 16,
+                  "height": 17,
+                  "width": 16,
+                }
+              }
+            />
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+        >
+          <View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "minHeight": 60,
+                  "opacity": 1,
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 7,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "borderColor": "#666",
+                      "borderRadius": 16,
+                      "borderWidth": 1,
+                      "height": 32,
+                      "justifyContent": "center",
+                      "width": 32,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3d3d3d",
+                        "fontFamily": "Helvetica Neue",
+                        "fontWeight": "200",
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 16,
+                        },
+                        undefined,
+                      ],
+                    ]
+                  }
+                >
+                  F
+                </Text>
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "justifyContent": "space-around",
+                    "paddingLeft": 8,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "space-between",
+                      "marginBottom": 4,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "row",
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      numberOfLines={1}
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#3d3d3d",
+                            "flex": 1,
+                            "fontSize": 14,
+                            "fontWeight": "400",
+                          },
+                        ]
+                      }
+                    >
+                      #First
+                    </Text>
+                  </View>
+                  <Icon
+                    source="icon-settings-16"
+                    style={
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 16,
+                      }
+                    }
+                  />
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3d3d3d",
+                        "fontFamily": "Helvetica Neue",
+                        "fontWeight": "200",
+                      },
+                      Object {
+                        "color": "#b3b3b3",
+                      },
+                    ]
+                  }
+                >
+                  11111
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+        >
+          <View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "minHeight": 60,
+                  "opacity": 1,
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 7,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "borderColor": "#666",
+                      "borderRadius": 16,
+                      "borderWidth": 1,
+                      "height": 32,
+                      "justifyContent": "center",
+                      "width": 32,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3d3d3d",
+                        "fontFamily": "Helvetica Neue",
+                        "fontWeight": "200",
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 16,
+                        },
+                        undefined,
+                      ],
+                    ]
+                  }
+                >
+                  S
+                </Text>
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "justifyContent": "space-around",
+                    "paddingLeft": 8,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "space-between",
+                      "marginBottom": 4,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "row",
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      numberOfLines={1}
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#3d3d3d",
+                            "flex": 1,
+                            "fontSize": 14,
+                            "fontWeight": "400",
+                          },
+                        ]
+                      }
+                    >
+                      #Second
+                    </Text>
+                  </View>
+                  <Icon
+                    source="icon-pencil-24"
+                    style={
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 16,
+                      }
+                    }
+                  />
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3d3d3d",
+                        "fontFamily": "Helvetica Neue",
+                        "fontWeight": "200",
+                      },
+                      Object {
+                        "color": "#b3b3b3",
+                      },
+                    ]
+                  }
+                >
+                  Fhhbcxf
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+        >
+          <View>
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "flexDirection": "row",
+                  "minHeight": 60,
+                  "opacity": 1,
+                  "paddingHorizontal": 10,
+                  "paddingVertical": 7,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <View
+                style={
+                  Array [
+                    Object {
+                      "alignItems": "center",
+                      "borderColor": "#666",
+                      "borderRadius": 16,
+                      "borderWidth": 1,
+                      "height": 32,
+                      "justifyContent": "center",
+                      "width": 32,
+                    },
+                    undefined,
+                  ]
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3d3d3d",
+                        "fontFamily": "Helvetica Neue",
+                        "fontWeight": "200",
+                      },
+                      Array [
+                        Object {
+                          "fontSize": 16,
+                        },
+                        undefined,
+                      ],
+                    ]
+                  }
+                >
+                  F
+                </Text>
+              </View>
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                    "justifyContent": "space-around",
+                    "paddingLeft": 8,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                      "justifyContent": "space-between",
+                      "marginBottom": 4,
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      Object {
+                        "flex": 1,
+                        "flexDirection": "row",
+                      }
+                    }
+                  >
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      numberOfLines={1}
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#3d3d3d",
+                            "flex": 1,
+                            "fontSize": 14,
+                            "fontWeight": "400",
+                          },
+                        ]
+                      }
+                    >
+                      #First
+                    </Text>
+                  </View>
+                  <Icon
+                    source="icon-settings-16"
+                    style={
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 16,
+                      }
+                    }
+                  />
+                </View>
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  numberOfLines={1}
+                  style={
+                    Array [
+                      Object {
+                        "color": "#3d3d3d",
+                        "fontFamily": "Helvetica Neue",
+                        "fontWeight": "200",
+                      },
+                      Object {
+                        "color": "#b3b3b3",
+                      },
+                    ]
+                  }
+                >
+                  Again 9 created group #First
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View
+          onLayout={[Function]}
+        />
+      </View>
+    </RCTScrollView>
+  </View>
+</View>
+`;

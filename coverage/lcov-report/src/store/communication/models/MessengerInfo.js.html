@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/store/communication/models/MessengerInfo.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/store/communication/models</a> MessengerInfo.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">88% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>22/25</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">41.18% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>7/17</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>13/13</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">86.36% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>19/22</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">54x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">18x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { computed, extendObservable, observable } from 'mobx';
+import { soundHelper } from 'utils';
+&nbsp;
+import ConversationInfo from './ConversationInfo';
+import UserSettings from './UserSettings';
+import Group from './Group';
+import type { MessengerData } from '../../../common/api/MessengerApi';
+import Avatar from './Avatar';
+&nbsp;
+export default class MessengerInfo {
+  @observable conversations: Array&lt;ConversationInfo&gt; = [];
+  @observable groups: Array&lt;Group&gt;                   = [];
+  @observable marketingGroups: Array&lt;Group&gt;          = [];
+  @observable messengerUser: {
+    avatar: Avatar;
+    id: number;
+    name: string;
+    user_type: 'business' | 'user';
+  };
+  @observable userSettings: UserSettings;
+  @observable wsUrl: string;
+&nbsp;
+  constructor(data: MessengerData) {
+    data.conversations = (data.conversations || <span class="branch-1 cbranch-no" title="branch not covered" >[])</span>
+      .map(c =&gt; new ConversationInfo(c));
+&nbsp;
+    data.groups = (data.groups || <span class="branch-1 cbranch-no" title="branch not covered" >[])</span>
+      .map(g =&gt; new Group(g));
+&nbsp;
+    data.marketingGroups = data.marketingGroups || <span class="branch-1 cbranch-no" title="branch not covered" >[];</span>
+&nbsp;
+    data.messengerUser = data.messengerUser || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+    data.messengerUser.avatar = new Avatar(data.messengerUser.avatar);
+&nbsp;
+    data.userSettings = new UserSettings(data.userSettings);
+    soundHelper.setUserSettings(data.userSettings);
+&nbsp;
+    extendObservable(this, data);
+  }
+&nbsp;
+  @computed get isBusiness() {
+    return this.messengerUser.user_type === 'business';
+  }
+&nbsp;
+  @computed
+  get unreadCount() {
+    return this.conversations.reduce((res, c) =&gt; res + +c.unreadCount, 0);
+  }
+&nbsp;
+  @computed
+  get unreadGroupCount() {
+    return this.groups.reduce((res, c) =&gt; res + +c.unreadCount, 0);
+  }
+&nbsp;
+  getDefaultConversation(): ConversationInfo | Group {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (this.conversations[0]) {
+      return this.conversations[0];
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (this.groups[0]) {</span>
+<span class="cstat-no" title="statement not covered" >      return this.groups[0];</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return null;</span>
+  }
+&nbsp;
+  find(callback): ConversationInfo {
+    return this.conversations.find(callback)
+      || <span class="branch-1 cbranch-no" title="branch not covered" >this.groups.find(callback)</span>
+      || <span class="branch-2 cbranch-no" title="branch not covered" >this.marketingGroups.find(callback);</span>
+  }
+&nbsp;
+  byId(conversationId): ConversationInfo {
+    return this.find(c =&gt; c.id === conversationId);
+  }
+&nbsp;
+  getConversationType(conversationId) {
+    const conversation = this.byId(conversationId);
+    return conversation ? conversation.type : <span class="branch-1 cbranch-no" title="branch not covered" >null;</span>
+  }
+}</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jul 24 2017 13:01:41 GMT+0300 (MSK)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

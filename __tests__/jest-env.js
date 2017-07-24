@@ -3,6 +3,19 @@ import { NativeModules, ScrollView } from 'react-native';
 
 NativeModules.RNSound = { IsAndroid: false };
 global.React = React;
+global.cloneObject = function cloneObject(obj) {
+  if (typeof obj !== 'object') {
+    return obj;
+  }
+
+  try {
+    return JSON.parse(JSON.stringify(obj));
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err);
+    return obj;
+  }
+};
 
 // TODO: Find decision code below is for import WebView otherwise getting error
 // TODO: Cannot read property 'decelerationRate' of undefined
@@ -20,7 +33,7 @@ jest.mock('mobx-react/native', () => require('mobx-react/custom'))
     apiHelper: require('../src/common/utils/apiHelper').default,
     cacheHelper: require('../src/common/utils/cacheHelper').default,
     deepLinksHelper: require('../src/common/utils/deepLinksHelper').default,
-    log: require.requireActual('react-native-logging'),
+    log: require('react-native-logging'),
     networkHelper: require('../src/common/utils/networkHelper').default,
     screenParams: require('../src/common/utils/screenParams').default,
     soundHelper: require('../src/common/utils/soundHelper').default,

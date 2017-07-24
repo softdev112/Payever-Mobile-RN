@@ -79,7 +79,7 @@
       "node"
     ],
     "verbose": true,
-    "testRegex": ".[test,spec].js$",
+    "testRegex": "\\.test\\.js?$",
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ]

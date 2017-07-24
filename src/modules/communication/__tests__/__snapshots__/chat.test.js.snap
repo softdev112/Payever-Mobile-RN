@@ -1,0 +1,3591 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modules/communication/screens/Chat Chat should render correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+      "zIndex": 0,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#FFF",
+            "borderBottomColor": "#e1e1e1",
+            "borderBottomWidth": 1,
+            "elevation": 8,
+            "flexDirection": "row",
+            "height": 55,
+            "justifyContent": "flex-end",
+            "marginTop": 15,
+            "paddingHorizontal": 18,
+            "zIndex": 1000,
+          },
+        ],
+        undefined,
+      ]
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "bottom": 0,
+            "flexDirection": "row",
+            "justifyContent": "flex-start",
+            "left": 18,
+            "position": "absolute",
+            "top": 0,
+            "zIndex": 1002,
+          },
+          null,
+        ]
+      }
+    >
+      <View
+        accessibilityComponentType="button"
+        accessibilityLabel={undefined}
+        accessibilityTraits={
+          Array [
+            "button",
+          ]
+        }
+        accessible={true}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "flexDirection": "row",
+            "justifyContent": "flex-end",
+            "opacity": 1,
+            "padding": 6,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Icon
+          source="icon-arrow-left-ios-24"
+          style={
+            Array [
+              Object {
+                "height": 24,
+                "width": 24,
+              },
+              Object {
+                "color": "#0084ff",
+              },
+              undefined,
+            ]
+          }
+          touchStyle={
+            Object {
+              "alignItems": "center",
+              "borderColor": "blue",
+              "borderWidth": 1,
+              "justifyContent": "center",
+            }
+          }
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Array [
+              Object {
+                "color": "#0084ff",
+                "fontSize": 16,
+                "marginLeft": 2,
+              },
+              Object {
+                "fontSize": 16,
+                "fontWeight": "400",
+                "marginLeft": 2,
+              },
+            ]
+          }
+        />
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "bottom": 0,
+          "flexDirection": "row",
+          "justifyContent": "center",
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+          "zIndex": 1001,
+        }
+      }
+    >
+      <View
+        accessibilityComponentType="button"
+        accessibilityLabel={undefined}
+        accessibilityTraits={
+          Array [
+            "button",
+          ]
+        }
+        accessible={true}
+        hitSlop={
+          Object {
+            "bottom": 10,
+            "left": 10,
+            "right": 10,
+            "top": 10,
+          }
+        }
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "transparent",
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "opacity": 1,
+            "padding": 6,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            numberOfLines={1}
+            style={
+              Array [
+                Object {
+                  "color": "#3d3d3d",
+                  "fontFamily": "Helvetica Neue",
+                  "fontWeight": "200",
+                },
+                Object {
+                  "color": "#000",
+                  "fontSize": 15,
+                  "fontWeight": "400",
+                  "maxWidth": 450,
+                },
+              ]
+            }
+          >
+            Payevertest1 test
+          </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flexDirection": "row",
+              }
+            }
+          >
+            <View
+              style={
+                Array [
+                  Object {
+                    "borderColor": "#d8d8d8",
+                    "borderRadius": 4,
+                    "borderWidth": 1,
+                    "height": 8,
+                    "width": 8,
+                  },
+                  Object {
+                    "marginRight": 4,
+                    "marginTop": 2,
+                  },
+                  Object {
+                    "backgroundColor": "#FFF",
+                    "borderWidth": 1,
+                  },
+                ]
+              }
+            />
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "color": "#959ba3",
+                    "fontSize": 12,
+                  },
+                ]
+              }
+            >
+              last seen 11.07.2017
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+    <Image
+      source={1}
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "height": null,
+          "justifyContent": "flex-end",
+          "paddingLeft": 20,
+          "resizeMode": "stretch",
+          "width": null,
+          "zIndex": 1002,
+        }
+      }
+    >
+      <Icon
+        onPress={[Function]}
+        source={
+          Object {
+            "uri": "/images/payeverbot-32.png?v5.3.0",
+          }
+        }
+        style={
+          Array [
+            Object {
+              "borderRadius": 16,
+              "height": 32,
+              "width": 32,
+            },
+            undefined,
+          ]
+        }
+      />
+    </Image>
+  </View>
+  <View
+    contentContainerStyle={
+      Object {
+        "flex": 1,
+        "flexDirection": "row",
+        "zIndex": 1,
+      }
+    }
+    keyboardVerticalOffset={0}
+    onLayout={[Function]}
+    style={
+      Array [
+        Object {
+          "flex": 1,
+          "flexDirection": "row",
+          "zIndex": 1,
+        },
+        Object {
+          "paddingBottom": 0,
+        },
+      ]
+    }
+  >
+    <View
+      onLayout={[Function]}
+      onResponderGrant={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Array [
+          Object {
+            "flex": 1,
+            "zIndex": 0,
+          },
+          Object {
+            "flex": 1.55,
+          },
+        ]
+      }
+    >
+      <RCTScrollView
+        ListFooterComponent={[Function]}
+        contentContainerStyle={
+          Object {
+            "paddingHorizontal": 10,
+            "paddingVertical": 10,
+          }
+        }
+        data={
+          Array [
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Hj",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-07-03T12:19:40+00:00",
+              "dateFormated": "03 Jul 12:19PM",
+              "dateOnly": "03.07.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Hj",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 413782,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Fttt",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T15:04:51+00:00",
+              "dateFormated": "30 Jun 3:04PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Fttt",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410496,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Rt",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T15:03:43+00:00",
+              "dateFormated": "30 Jun 3:03PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Rt",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410495,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Df",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T15:03:35+00:00",
+              "dateFormated": "30 Jun 3:03PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Df",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410494,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Df",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T15:02:01+00:00",
+              "dateFormated": "30 Jun 3:02PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Df",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410493,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Tt",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T15:01:53+00:00",
+              "dateFormated": "30 Jun 3:01PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Tt",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410492,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Da",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T15:01:28+00:00",
+              "dateFormated": "30 Jun 3:01PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Da",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410491,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Df",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T15:01:21+00:00",
+              "dateFormated": "30 Jun 3:01PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Df",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410490,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Ddd",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T15:01:14+00:00",
+              "dateFormated": "30 Jun 3:01PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Ddd",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410489,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Df",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T15:01:05+00:00",
+              "dateFormated": "30 Jun 3:01PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Df",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410488,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "D.C.",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T14:59:57+00:00",
+              "dateFormated": "30 Jun 2:59PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "D.C.",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410487,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Dfd",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T14:59:40+00:00",
+              "dateFormated": "30 Jun 2:59PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Dfd",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410486,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Did",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T14:59:31+00:00",
+              "dateFormated": "30 Jun 2:59PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Did",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410485,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Df",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T14:59:26+00:00",
+              "dateFormated": "30 Jun 2:59PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Df",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410484,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Df",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T14:46:11+00:00",
+              "dateFormated": "30 Jun 2:46PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Df",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410483,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Vv",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T14:36:11+00:00",
+              "dateFormated": "30 Jun 2:36PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Vv",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410482,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Tttyy",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T14:36:04+00:00",
+              "dateFormated": "30 Jun 2:36PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Tttyy",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410481,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "ratty",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T14:35:56+00:00",
+              "dateFormated": "30 Jun 2:35PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "ratty",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410480,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Rt",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T14:35:52+00:00",
+              "dateFormated": "30 Jun 2:35PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Rt",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410479,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Ere",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T14:33:39+00:00",
+              "dateFormated": "30 Jun 2:33PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Ere",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410478,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Ere",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T14:33:36+00:00",
+              "dateFormated": "30 Jun 2:33PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Ere",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410477,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Ty",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T14:30:09+00:00",
+              "dateFormated": "30 Jun 2:30PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Ty",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410476,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Ty",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T14:30:00+00:00",
+              "dateFormated": "30 Jun 2:30PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Ty",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410475,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Hi",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T14:22:39+00:00",
+              "dateFormated": "30 Jun 2:22PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Hi",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410474,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Diff",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T13:08:42+00:00",
+              "dateFormated": "30 Jun 1:08PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Diff",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410448,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Dfdf",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T13:08:39+00:00",
+              "dateFormated": "30 Jun 1:08PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Dfdf",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410447,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T13:04:31+00:00",
+              "dateFormated": "30 Jun 1:04PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": true,
+              "editBody": "try",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410412,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Rtt",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T13:04:28+00:00",
+              "dateFormated": "30 Jun 1:04PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Rtt",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410411,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Ddfgfgdfgdf",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T13:01:29+00:00",
+              "dateFormated": "30 Jun 1:01PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Ddfgfgdfgdf",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410386,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "did<br />
+          ",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-30T13:01:19+00:00",
+              "dateFormated": "30 Jun 1:01PM",
+              "dateOnly": "30.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "did
+          ",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 410384,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/avatar.profile.square.32.retina/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                "valueRetina": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+              },
+              "body": "Hi",
+              "bodyExtendedData": Object {
+                "data": Array [],
+                "type": "text",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-29T07:12:40+00:00",
+              "dateFormated": "29 Jun 7:12AM",
+              "dateOnly": "29.06.17",
+              "deletable": false,
+              "deleted": false,
+              "editBody": "Hi",
+              "editable": false,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 407458,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": null,
+              "offerId": null,
+              "opponentUnread": false,
+              "own": false,
+              "recipient": "business-697",
+              "replyTo": null,
+              "senderId": 11,
+              "senderName": "a a",
+              "unread": true,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/business_logo.profile.square.32.retina/34/4d/344d75362126d2b744f91dbbcfb9935a.png",
+                "valueRetina": "https://stage.payever.de/media/cache/business_logo.mail/34/4d/344d75362126d2b744f91dbbcfb9935a.png",
+              },
+              "body": "[offer_id=49396]",
+              "bodyExtendedData": Object {
+                "data": Object {
+                  "created_at": "2017-06-28 08:21:43",
+                  "description": "<h1>A special offer. Just for you.</h1>
+          
+          <p>As you previously bought from us we wanted to thank you by showing you this offer below before everyone else sees it.</p>
+          
+          <p>Best,<br />
+          Cool busines11</p>",
+                  "id": "49396",
+                  "marketing_channel_set": Object {
+                    "id": 394228,
+                    "name": "Personal offer from Cool busines11",
+                    "slug": "germanygermanychangednamechangednamechangednamechangednamecool-store/marketing/personal-offer-from-cool-busines11-51",
+                    "store": Object {
+                      "business": Object {
+                        "logo": "https://stage.payever.de/media/cache/business_logo.profile/34/4d/344d75362126d2b744f91dbbcfb9935a.png",
+                        "name": "Cool busines11",
+                        "slug": "cool-busines",
+                      },
+                      "id": "79941",
+                      "items": Array [
+                        Object {
+                          "description": "<p>Cup of coffee</p>",
+                          "id": "68497",
+                          "media": Array [
+                            Array [
+                              [Function],
+                            ],
+                          ],
+                          "name": "Cup of coffee",
+                          "origin_image": "https://stage.payever.de/media/cache/customer_shop_item/bc/ad/bcadd1b6633f621e6bda53217828b49d.png",
+                          "positions": Array [
+                            Array [
+                              [Function],
+                            ],
+                          ],
+                          "thumbnail": "https://stage.payever.de/media/cache/customer_shop_item.origin/bc/ad/bcadd1b6633f621e6bda53217828b49d.png",
+                        },
+                      ],
+                    },
+                  },
+                  "since": 1204441,
+                  "status": "SENT",
+                  "title": "Personal offer from Cool busines11",
+                  "visibility": "ALL",
+                },
+                "type": "offer",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-28T08:21:43+00:00",
+              "dateFormated": "28 Jun 8:21AM",
+              "dateOnly": "28.06.17",
+              "deletable": true,
+              "deleted": false,
+              "editBody": "[offer_id=49396]",
+              "editable": true,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 404419,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": Offer {
+                "created_at": "2017-06-28 08:21:43",
+                "description": "<h1>A special offer. Just for you.</h1>
+          
+          <p>As you previously bought from us we wanted to thank you by showing you this offer below before everyone else sees it.</p>
+          
+          <p>Best,<br />
+          Cool busines11</p>",
+                "id": "49396",
+                "marketing_channel_set": Object {
+                  "id": 394228,
+                  "name": "Personal offer from Cool busines11",
+                  "slug": "germanygermanychangednamechangednamechangednamechangednamecool-store/marketing/personal-offer-from-cool-busines11-51",
+                  "store": Object {
+                    "business": Object {
+                      "logo": "https://stage.payever.de/media/cache/business_logo.profile/34/4d/344d75362126d2b744f91dbbcfb9935a.png",
+                      "name": "Cool busines11",
+                      "slug": "cool-busines",
+                    },
+                    "id": "79941",
+                    "items": Array [
+                      OfferItem {
+                        "description": "<p>Cup of coffee</p>",
+                        "id": "68497",
+                        "media": Array [
+                          OfferMedia {
+                            "id": "80002",
+                            "is_video": false,
+                            "thumbnail": "https://stage.payever.de/media/cache/customer_shop_item/bc/ad/bcadd1b6633f621e6bda53217828b49d.png",
+                          },
+                        ],
+                        "name": "Cup of coffee",
+                        "origin_image": "https://stage.payever.de/media/cache/customer_shop_item/bc/ad/bcadd1b6633f621e6bda53217828b49d.png",
+                        "positions": Array [
+                          OfferPosition {
+                            "id": "108178",
+                            "name": "Test",
+                            "price": "10.00",
+                          },
+                        ],
+                        "thumbnail": "https://stage.payever.de/media/cache/customer_shop_item.origin/bc/ad/bcadd1b6633f621e6bda53217828b49d.png",
+                      },
+                    ],
+                  },
+                },
+                "since": 1204441,
+                "status": "SENT",
+                "title": "Personal offer from Cool busines11",
+                "visibility": "ALL",
+              },
+              "offerId": 49396,
+              "opponentUnread": false,
+              "own": true,
+              "recipient": "user-1604",
+              "replyTo": null,
+              "senderId": 14,
+              "senderName": "Cool busines11",
+              "unread": false,
+            },
+            Message {
+              "avatar": Object {
+                "type": "url",
+                "value": "https://stage.payever.de/media/cache/business_logo.profile.square.32.retina/34/4d/344d75362126d2b744f91dbbcfb9935a.png",
+                "valueRetina": "https://stage.payever.de/media/cache/business_logo.mail/34/4d/344d75362126d2b744f91dbbcfb9935a.png",
+              },
+              "body": "[offer_id=49023]",
+              "bodyExtendedData": Object {
+                "data": Object {
+                  "created_at": "2017-06-26 12:36:16",
+                  "description": "<h1>A special offer. Just for you.</h1>
+          
+          <p>As you previously bought from us we wanted to thank you by showing you this offer below before everyone else sees it.</p>
+          
+          <p>Best,<br />
+          Cool busines11</p>",
+                  "id": "49023",
+                  "marketing_channel_set": Object {
+                    "id": 386237,
+                    "name": "Personal offer from Cool busines11",
+                    "slug": "germanygermanychangednamechangednamechangednamechangednamecool-store/marketing/personal-offer-from-cool-busines11-50",
+                    "store": Object {
+                      "business": Object {
+                        "logo": "https://stage.payever.de/media/cache/business_logo.profile/34/4d/344d75362126d2b744f91dbbcfb9935a.png",
+                        "name": "Cool busines11",
+                        "slug": "cool-busines",
+                      },
+                      "id": "79143",
+                      "items": Array [
+                        Object {
+                          "description": "<p>qwe</p>",
+                          "id": "44429",
+                          "media": Array [
+                            Array [
+                              [Function],
+                            ],
+                          ],
+                          "name": "qwerty",
+                          "origin_image": "https://stage.payever.de/media/cache/customer_shop_item/45/a8/45a88e9091ff0d1e374a045a3f556eed.jpg",
+                          "positions": Array [
+                            Array [
+                              [Function],
+                            ],
+                          ],
+                          "thumbnail": "https://stage.payever.de/media/cache/customer_shop_item.origin/45/a8/45a88e9091ff0d1e374a045a3f556eed.jpg",
+                        },
+                      ],
+                    },
+                  },
+                  "since": 1361965,
+                  "status": "SENT",
+                  "title": "Personal offer from Cool busines11",
+                  "visibility": "ALL",
+                },
+                "type": "offer",
+              },
+              "conversation": Object {
+                "archived": false,
+                "id": 114725,
+                "name": "Payevertest1 test",
+                "notification": true,
+                "type": "conversation",
+              },
+              "date": "2017-06-26T12:36:19+00:00",
+              "dateFormated": "26 Jun 12:36PM",
+              "dateOnly": "26.06.17",
+              "deletable": true,
+              "deleted": false,
+              "editBody": "[offer_id=49023]",
+              "editable": true,
+              "edited": false,
+              "forwardFrom": null,
+              "id": 396769,
+              "isSystem": false,
+              "medias": Array [],
+              "offer": Offer {
+                "created_at": "2017-06-26 12:36:16",
+                "description": "<h1>A special offer. Just for you.</h1>
+          
+          <p>As you previously bought from us we wanted to thank you by showing you this offer below before everyone else sees it.</p>
+          
+          <p>Best,<br />
+          Cool busines11</p>",
+                "id": "49023",
+                "marketing_channel_set": Object {
+                  "id": 386237,
+                  "name": "Personal offer from Cool busines11",
+                  "slug": "germanygermanychangednamechangednamechangednamechangednamecool-store/marketing/personal-offer-from-cool-busines11-50",
+                  "store": Object {
+                    "business": Object {
+                      "logo": "https://stage.payever.de/media/cache/business_logo.profile/34/4d/344d75362126d2b744f91dbbcfb9935a.png",
+                      "name": "Cool busines11",
+                      "slug": "cool-busines",
+                    },
+                    "id": "79143",
+                    "items": Array [
+                      OfferItem {
+                        "description": "<p>qwe</p>",
+                        "id": "44429",
+                        "media": Array [
+                          OfferMedia {
+                            "id": "53350",
+                            "is_video": false,
+                            "thumbnail": "https://stage.payever.de/media/cache/customer_shop_item/45/a8/45a88e9091ff0d1e374a045a3f556eed.jpg",
+                          },
+                        ],
+                        "name": "qwerty",
+                        "origin_image": "https://stage.payever.de/media/cache/customer_shop_item/45/a8/45a88e9091ff0d1e374a045a3f556eed.jpg",
+                        "positions": Array [
+                          OfferPosition {
+                            "id": "73967",
+                            "name": "ddddd",
+                            "price": "3258.28",
+                          },
+                        ],
+                        "thumbnail": "https://stage.payever.de/media/cache/customer_shop_item.origin/45/a8/45a88e9091ff0d1e374a045a3f556eed.jpg",
+                      },
+                    ],
+                  },
+                },
+                "since": 1361965,
+                "status": "SENT",
+                "title": "Personal offer from Cool busines11",
+                "visibility": "ALL",
+              },
+              "offerId": 49023,
+              "opponentUnread": false,
+              "own": true,
+              "recipient": "user-1604",
+              "replyTo": null,
+              "senderId": 14,
+              "senderName": "Cool busines11",
+              "unread": false,
+            },
+          ]
+        }
+        disableVirtualization={false}
+        getItem={[Function]}
+        getItemCount={[Function]}
+        horizontal={false}
+        initialNumToRender={10}
+        keyExtractor={[Function]}
+        keyboardShouldPersistTaps="always"
+        maxToRenderPerBatch={10}
+        numColumns={1}
+        onContentSizeChange={[Function]}
+        onEndReached={[Function]}
+        onEndReachedThreshold={2}
+        onLayout={[Function]}
+        onScroll={[Function]}
+        onScrollBeginDrag={[Function]}
+        onViewableItemsChanged={[Function]}
+        removeClippedSubviews={false}
+        renderItem={[Function]}
+        renderScrollComponent={[Function]}
+        scrollEventThrottle={50}
+        stickyHeaderIndices={Array []}
+        style={
+          Object {
+            "flex": 1,
+            "transform": Array [
+              Object {
+                "scaleY": -1,
+              },
+            ],
+          }
+        }
+        updateCellsBatchingPeriod={50}
+        windowSize={21}
+      >
+        <View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "minHeight": 50,
+                  "padding": 4,
+                  "paddingBottom": 8,
+                  "paddingLeft": 0,
+                  "transform": Array [
+                    Object {
+                      "scaleY": -1,
+                    },
+                  ],
+                }
+              }
+              testID={undefined}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#FFF",
+                    "borderRadius": 12,
+                    "height": 24,
+                    "justifyContent": "center",
+                    "left": -40,
+                    "overflow": "hidden",
+                    "position": "absolute",
+                    "top": 8,
+                    "transform": Array [
+                      Object {
+                        "scale": 1,
+                      },
+                    ],
+                    "width": 24,
+                  }
+                }
+              >
+                <Icon
+                  disabled={true}
+                  onPress={[Function]}
+                  source="icon-checkbox-24"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 22,
+                        "fontWeight": "100",
+                      },
+                      undefined,
+                      Object {
+                        "color": "#f7f7f7",
+                      },
+                    ]
+                  }
+                />
+              </View>
+              <Icon
+                source={
+                  Object {
+                    "uri": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "borderRadius": 16,
+                      "height": 32,
+                      "width": 32,
+                    },
+                    Object {
+                      "marginRight": 22,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontFamily": "Helvetica Neue",
+                          "fontWeight": "200",
+                        },
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontSize": 13,
+                          "fontWeight": "500",
+                        },
+                      ]
+                    }
+                  >
+                    a a 
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#b5b9be",
+                            "fontSize": 11,
+                            "marginLeft": 5,
+                          },
+                        ]
+                      }
+                    >
+                      03 Jul 12:19PM
+                       
+                      
+                       
+                      
+                    </Text>
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Object {
+                      "overflow": "scroll",
+                    }
+                  }
+                >
+                  <View />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "minHeight": 50,
+                  "padding": 4,
+                  "paddingBottom": 8,
+                  "paddingLeft": 0,
+                  "transform": Array [
+                    Object {
+                      "scaleY": -1,
+                    },
+                  ],
+                }
+              }
+              testID={undefined}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#FFF",
+                    "borderRadius": 12,
+                    "height": 24,
+                    "justifyContent": "center",
+                    "left": -40,
+                    "overflow": "hidden",
+                    "position": "absolute",
+                    "top": 8,
+                    "transform": Array [
+                      Object {
+                        "scale": 1,
+                      },
+                    ],
+                    "width": 24,
+                  }
+                }
+              >
+                <Icon
+                  disabled={true}
+                  onPress={[Function]}
+                  source="icon-checkbox-24"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 22,
+                        "fontWeight": "100",
+                      },
+                      undefined,
+                      Object {
+                        "color": "#f7f7f7",
+                      },
+                    ]
+                  }
+                />
+              </View>
+              <Icon
+                source={
+                  Object {
+                    "uri": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "borderRadius": 16,
+                      "height": 32,
+                      "width": 32,
+                    },
+                    Object {
+                      "marginRight": 22,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontFamily": "Helvetica Neue",
+                          "fontWeight": "200",
+                        },
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontSize": 13,
+                          "fontWeight": "500",
+                        },
+                      ]
+                    }
+                  >
+                    a a 
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#b5b9be",
+                            "fontSize": 11,
+                            "marginLeft": 5,
+                          },
+                        ]
+                      }
+                    >
+                      30 Jun 3:04PM
+                       
+                      
+                       
+                      
+                    </Text>
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Object {
+                      "overflow": "scroll",
+                    }
+                  }
+                >
+                  <View />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "minHeight": 50,
+                  "padding": 4,
+                  "paddingBottom": 8,
+                  "paddingLeft": 0,
+                  "transform": Array [
+                    Object {
+                      "scaleY": -1,
+                    },
+                  ],
+                }
+              }
+              testID={undefined}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#FFF",
+                    "borderRadius": 12,
+                    "height": 24,
+                    "justifyContent": "center",
+                    "left": -40,
+                    "overflow": "hidden",
+                    "position": "absolute",
+                    "top": 8,
+                    "transform": Array [
+                      Object {
+                        "scale": 1,
+                      },
+                    ],
+                    "width": 24,
+                  }
+                }
+              >
+                <Icon
+                  disabled={true}
+                  onPress={[Function]}
+                  source="icon-checkbox-24"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 22,
+                        "fontWeight": "100",
+                      },
+                      undefined,
+                      Object {
+                        "color": "#f7f7f7",
+                      },
+                    ]
+                  }
+                />
+              </View>
+              <Icon
+                source={
+                  Object {
+                    "uri": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "borderRadius": 16,
+                      "height": 32,
+                      "width": 32,
+                    },
+                    Object {
+                      "marginRight": 22,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontFamily": "Helvetica Neue",
+                          "fontWeight": "200",
+                        },
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontSize": 13,
+                          "fontWeight": "500",
+                        },
+                      ]
+                    }
+                  >
+                    a a 
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#b5b9be",
+                            "fontSize": 11,
+                            "marginLeft": 5,
+                          },
+                        ]
+                      }
+                    >
+                      30 Jun 3:03PM
+                       
+                      
+                       
+                      
+                    </Text>
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Object {
+                      "overflow": "scroll",
+                    }
+                  }
+                >
+                  <View />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "minHeight": 50,
+                  "padding": 4,
+                  "paddingBottom": 8,
+                  "paddingLeft": 0,
+                  "transform": Array [
+                    Object {
+                      "scaleY": -1,
+                    },
+                  ],
+                }
+              }
+              testID={undefined}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#FFF",
+                    "borderRadius": 12,
+                    "height": 24,
+                    "justifyContent": "center",
+                    "left": -40,
+                    "overflow": "hidden",
+                    "position": "absolute",
+                    "top": 8,
+                    "transform": Array [
+                      Object {
+                        "scale": 1,
+                      },
+                    ],
+                    "width": 24,
+                  }
+                }
+              >
+                <Icon
+                  disabled={true}
+                  onPress={[Function]}
+                  source="icon-checkbox-24"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 22,
+                        "fontWeight": "100",
+                      },
+                      undefined,
+                      Object {
+                        "color": "#f7f7f7",
+                      },
+                    ]
+                  }
+                />
+              </View>
+              <Icon
+                source={
+                  Object {
+                    "uri": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "borderRadius": 16,
+                      "height": 32,
+                      "width": 32,
+                    },
+                    Object {
+                      "marginRight": 22,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontFamily": "Helvetica Neue",
+                          "fontWeight": "200",
+                        },
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontSize": 13,
+                          "fontWeight": "500",
+                        },
+                      ]
+                    }
+                  >
+                    a a 
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#b5b9be",
+                            "fontSize": 11,
+                            "marginLeft": 5,
+                          },
+                        ]
+                      }
+                    >
+                      30 Jun 3:03PM
+                       
+                      
+                       
+                      
+                    </Text>
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Object {
+                      "overflow": "scroll",
+                    }
+                  }
+                >
+                  <View />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "minHeight": 50,
+                  "padding": 4,
+                  "paddingBottom": 8,
+                  "paddingLeft": 0,
+                  "transform": Array [
+                    Object {
+                      "scaleY": -1,
+                    },
+                  ],
+                }
+              }
+              testID={undefined}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#FFF",
+                    "borderRadius": 12,
+                    "height": 24,
+                    "justifyContent": "center",
+                    "left": -40,
+                    "overflow": "hidden",
+                    "position": "absolute",
+                    "top": 8,
+                    "transform": Array [
+                      Object {
+                        "scale": 1,
+                      },
+                    ],
+                    "width": 24,
+                  }
+                }
+              >
+                <Icon
+                  disabled={true}
+                  onPress={[Function]}
+                  source="icon-checkbox-24"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 22,
+                        "fontWeight": "100",
+                      },
+                      undefined,
+                      Object {
+                        "color": "#f7f7f7",
+                      },
+                    ]
+                  }
+                />
+              </View>
+              <Icon
+                source={
+                  Object {
+                    "uri": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "borderRadius": 16,
+                      "height": 32,
+                      "width": 32,
+                    },
+                    Object {
+                      "marginRight": 22,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontFamily": "Helvetica Neue",
+                          "fontWeight": "200",
+                        },
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontSize": 13,
+                          "fontWeight": "500",
+                        },
+                      ]
+                    }
+                  >
+                    a a 
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#b5b9be",
+                            "fontSize": 11,
+                            "marginLeft": 5,
+                          },
+                        ]
+                      }
+                    >
+                      30 Jun 3:02PM
+                       
+                      
+                       
+                      
+                    </Text>
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Object {
+                      "overflow": "scroll",
+                    }
+                  }
+                >
+                  <View />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "minHeight": 50,
+                  "padding": 4,
+                  "paddingBottom": 8,
+                  "paddingLeft": 0,
+                  "transform": Array [
+                    Object {
+                      "scaleY": -1,
+                    },
+                  ],
+                }
+              }
+              testID={undefined}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#FFF",
+                    "borderRadius": 12,
+                    "height": 24,
+                    "justifyContent": "center",
+                    "left": -40,
+                    "overflow": "hidden",
+                    "position": "absolute",
+                    "top": 8,
+                    "transform": Array [
+                      Object {
+                        "scale": 1,
+                      },
+                    ],
+                    "width": 24,
+                  }
+                }
+              >
+                <Icon
+                  disabled={true}
+                  onPress={[Function]}
+                  source="icon-checkbox-24"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 22,
+                        "fontWeight": "100",
+                      },
+                      undefined,
+                      Object {
+                        "color": "#f7f7f7",
+                      },
+                    ]
+                  }
+                />
+              </View>
+              <Icon
+                source={
+                  Object {
+                    "uri": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "borderRadius": 16,
+                      "height": 32,
+                      "width": 32,
+                    },
+                    Object {
+                      "marginRight": 22,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontFamily": "Helvetica Neue",
+                          "fontWeight": "200",
+                        },
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontSize": 13,
+                          "fontWeight": "500",
+                        },
+                      ]
+                    }
+                  >
+                    a a 
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#b5b9be",
+                            "fontSize": 11,
+                            "marginLeft": 5,
+                          },
+                        ]
+                      }
+                    >
+                      30 Jun 3:01PM
+                       
+                      
+                       
+                      
+                    </Text>
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Object {
+                      "overflow": "scroll",
+                    }
+                  }
+                >
+                  <View />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "minHeight": 50,
+                  "padding": 4,
+                  "paddingBottom": 8,
+                  "paddingLeft": 0,
+                  "transform": Array [
+                    Object {
+                      "scaleY": -1,
+                    },
+                  ],
+                }
+              }
+              testID={undefined}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#FFF",
+                    "borderRadius": 12,
+                    "height": 24,
+                    "justifyContent": "center",
+                    "left": -40,
+                    "overflow": "hidden",
+                    "position": "absolute",
+                    "top": 8,
+                    "transform": Array [
+                      Object {
+                        "scale": 1,
+                      },
+                    ],
+                    "width": 24,
+                  }
+                }
+              >
+                <Icon
+                  disabled={true}
+                  onPress={[Function]}
+                  source="icon-checkbox-24"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 22,
+                        "fontWeight": "100",
+                      },
+                      undefined,
+                      Object {
+                        "color": "#f7f7f7",
+                      },
+                    ]
+                  }
+                />
+              </View>
+              <Icon
+                source={
+                  Object {
+                    "uri": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "borderRadius": 16,
+                      "height": 32,
+                      "width": 32,
+                    },
+                    Object {
+                      "marginRight": 22,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontFamily": "Helvetica Neue",
+                          "fontWeight": "200",
+                        },
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontSize": 13,
+                          "fontWeight": "500",
+                        },
+                      ]
+                    }
+                  >
+                    a a 
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#b5b9be",
+                            "fontSize": 11,
+                            "marginLeft": 5,
+                          },
+                        ]
+                      }
+                    >
+                      30 Jun 3:01PM
+                       
+                      
+                       
+                      
+                    </Text>
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Object {
+                      "overflow": "scroll",
+                    }
+                  }
+                >
+                  <View />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "minHeight": 50,
+                  "padding": 4,
+                  "paddingBottom": 8,
+                  "paddingLeft": 0,
+                  "transform": Array [
+                    Object {
+                      "scaleY": -1,
+                    },
+                  ],
+                }
+              }
+              testID={undefined}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#FFF",
+                    "borderRadius": 12,
+                    "height": 24,
+                    "justifyContent": "center",
+                    "left": -40,
+                    "overflow": "hidden",
+                    "position": "absolute",
+                    "top": 8,
+                    "transform": Array [
+                      Object {
+                        "scale": 1,
+                      },
+                    ],
+                    "width": 24,
+                  }
+                }
+              >
+                <Icon
+                  disabled={true}
+                  onPress={[Function]}
+                  source="icon-checkbox-24"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 22,
+                        "fontWeight": "100",
+                      },
+                      undefined,
+                      Object {
+                        "color": "#f7f7f7",
+                      },
+                    ]
+                  }
+                />
+              </View>
+              <Icon
+                source={
+                  Object {
+                    "uri": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "borderRadius": 16,
+                      "height": 32,
+                      "width": 32,
+                    },
+                    Object {
+                      "marginRight": 22,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontFamily": "Helvetica Neue",
+                          "fontWeight": "200",
+                        },
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontSize": 13,
+                          "fontWeight": "500",
+                        },
+                      ]
+                    }
+                  >
+                    a a 
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#b5b9be",
+                            "fontSize": 11,
+                            "marginLeft": 5,
+                          },
+                        ]
+                      }
+                    >
+                      30 Jun 3:01PM
+                       
+                      
+                       
+                      
+                    </Text>
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Object {
+                      "overflow": "scroll",
+                    }
+                  }
+                >
+                  <View />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "minHeight": 50,
+                  "padding": 4,
+                  "paddingBottom": 8,
+                  "paddingLeft": 0,
+                  "transform": Array [
+                    Object {
+                      "scaleY": -1,
+                    },
+                  ],
+                }
+              }
+              testID={undefined}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#FFF",
+                    "borderRadius": 12,
+                    "height": 24,
+                    "justifyContent": "center",
+                    "left": -40,
+                    "overflow": "hidden",
+                    "position": "absolute",
+                    "top": 8,
+                    "transform": Array [
+                      Object {
+                        "scale": 1,
+                      },
+                    ],
+                    "width": 24,
+                  }
+                }
+              >
+                <Icon
+                  disabled={true}
+                  onPress={[Function]}
+                  source="icon-checkbox-24"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 22,
+                        "fontWeight": "100",
+                      },
+                      undefined,
+                      Object {
+                        "color": "#f7f7f7",
+                      },
+                    ]
+                  }
+                />
+              </View>
+              <Icon
+                source={
+                  Object {
+                    "uri": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "borderRadius": 16,
+                      "height": 32,
+                      "width": 32,
+                    },
+                    Object {
+                      "marginRight": 22,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontFamily": "Helvetica Neue",
+                          "fontWeight": "200",
+                        },
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontSize": 13,
+                          "fontWeight": "500",
+                        },
+                      ]
+                    }
+                  >
+                    a a 
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#b5b9be",
+                            "fontSize": 11,
+                            "marginLeft": 5,
+                          },
+                        ]
+                      }
+                    >
+                      30 Jun 3:01PM
+                       
+                      
+                       
+                      
+                    </Text>
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Object {
+                      "overflow": "scroll",
+                    }
+                  }
+                >
+                  <View />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "flexDirection": "row",
+                  "minHeight": 50,
+                  "padding": 4,
+                  "paddingBottom": 8,
+                  "paddingLeft": 0,
+                  "transform": Array [
+                    Object {
+                      "scaleY": -1,
+                    },
+                  ],
+                }
+              }
+              testID={undefined}
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "#FFF",
+                    "borderRadius": 12,
+                    "height": 24,
+                    "justifyContent": "center",
+                    "left": -40,
+                    "overflow": "hidden",
+                    "position": "absolute",
+                    "top": 8,
+                    "transform": Array [
+                      Object {
+                        "scale": 1,
+                      },
+                    ],
+                    "width": 24,
+                  }
+                }
+              >
+                <Icon
+                  disabled={true}
+                  onPress={[Function]}
+                  source="icon-checkbox-24"
+                  style={
+                    Array [
+                      Object {
+                        "color": "#b5b9be",
+                        "fontSize": 22,
+                        "fontWeight": "100",
+                      },
+                      undefined,
+                      Object {
+                        "color": "#f7f7f7",
+                      },
+                    ]
+                  }
+                />
+              </View>
+              <Icon
+                source={
+                  Object {
+                    "uri": "https://stage.payever.de/media/cache/avatar.mail/56/95/56959b3a3fa41eae8ccf403af4cab3af.jpg",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "borderRadius": 16,
+                      "height": 32,
+                      "width": 32,
+                    },
+                    Object {
+                      "marginRight": 22,
+                    },
+                  ]
+                }
+              />
+              <View
+                style={
+                  Object {
+                    "flex": 1,
+                  }
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    ellipsizeMode="tail"
+                    style={
+                      Array [
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontFamily": "Helvetica Neue",
+                          "fontWeight": "200",
+                        },
+                        Object {
+                          "color": "#3d3d3d",
+                          "fontSize": 13,
+                          "fontWeight": "500",
+                        },
+                      ]
+                    }
+                  >
+                    a a 
+                    <Text
+                      accessible={true}
+                      allowFontScaling={true}
+                      ellipsizeMode="tail"
+                      style={
+                        Array [
+                          Object {
+                            "color": "#3d3d3d",
+                            "fontFamily": "Helvetica Neue",
+                            "fontWeight": "200",
+                          },
+                          Object {
+                            "color": "#b5b9be",
+                            "fontSize": 11,
+                            "marginLeft": 5,
+                          },
+                        ]
+                      }
+                    >
+                      30 Jun 3:01PM
+                       
+                      
+                       
+                      
+                    </Text>
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Object {
+                      "overflow": "scroll",
+                    }
+                  }
+                >
+                  <View />
+                </View>
+              </View>
+            </View>
+          </View>
+          <View
+            style={
+              Object {
+                "height": 0,
+              }
+            }
+          />
+          <View
+            onLayout={[Function]}
+          >
+            <View
+              style={
+                Object {
+                  "paddingVertical": 5,
+                }
+              }
+            />
+          </View>
+        </View>
+      </RCTScrollView>
+      <View
+        style={
+          Object {
+            "height": 0,
+          }
+        }
+      />
+    </View>
+  </View>
+</View>
+`;
