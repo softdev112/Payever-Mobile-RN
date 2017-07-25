@@ -4,13 +4,18 @@ import { Provider } from 'mobx-react/native';
 import Store from '../../../../store';
 import config from '../../../../config';
 import BusinessContacts from '../../screens/BusinessContacts';
+import navigator from '../../../../../__mocks__/navigator';
 
 describe('Contacts App components renders correctly', () => {
   let store;
   let contacts;
 
   beforeAll(() => {
+    BusinessContacts.prototype.getChildContext = function getContext() {
+      return { navigator };
+    };
 
+    BusinessContacts.childContextTypes = { navigator: React.PropTypes.object };
   });
 
   beforeEach(() => {

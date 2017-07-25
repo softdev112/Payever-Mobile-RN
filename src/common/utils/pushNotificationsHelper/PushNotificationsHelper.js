@@ -84,6 +84,7 @@ export default class PushNotificationsHelper {
 
       const initNotification = await PendingNotifications
         .getInitialNotification();
+
       if (initNotification) {
         this.onNotificationOpened(initNotification);
       }

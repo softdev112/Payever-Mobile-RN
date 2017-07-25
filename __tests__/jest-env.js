@@ -35,6 +35,8 @@ jest.mock('mobx-react/native', () => require('mobx-react/custom'))
     deepLinksHelper: require('../src/common/utils/deepLinksHelper').default,
     log: require('react-native-logging'),
     networkHelper: require('../src/common/utils/networkHelper').default,
+    pushNotificationsHelper:
+      require('../src/common/utils/pushNotificationsHelper').default,
     screenParams: require('../src/common/utils/screenParams').default,
     soundHelper: require('../src/common/utils/soundHelper').default,
   }))

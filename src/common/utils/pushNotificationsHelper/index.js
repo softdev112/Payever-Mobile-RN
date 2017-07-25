@@ -15,15 +15,15 @@ function createInstance(
   api: PayeverApi,
   userProfile: UserAccount
 ): PushNotificationsHelper {
+  if (!api || !userProfile) return null;
   instance = new PushNotificationsHelper(api, userProfile);
-
   return instance;
 }
 
 function getInstance(): PushNotificationsHelper {
   if (!instance) {
     log.error('Push notifications helper error while getting instance');
-    throw new Error('Push notifications helper instance was not created');
+    throw new Error('Push notifications helper was not created');
   }
 
   return instance;
