@@ -133,6 +133,20 @@ describe('Utils/apiHelper', () => {
       expect(cacheHelper.saveToCache).toHaveBeenCalled();
       expect(Navigation.showModal).not.toHaveBeenCalled();
     });
+
+    it('apiHelper should NOT call saveToCache if data from api was NOT read properly', async () => {
+      cacheHelper.loadFromCache.mockImplementationOnce(() => null);
+      networkHelper.loadFromApi.mockReturnValueOnce({ error: 'Some error while reading from api' });
+      await apiHelper(() => Promise.resolve(1), store, true)
+        .cache('cacheId', { lifetime: 3600 })
+        .promise();
+
+      expect(networkHelper.isConnected).toHaveBeenCalledTimes(1);
+      expect(cacheHelper.loadFromCache).toHaveBeenCalledTimes(1);
+      expect(cacheHelper.isCacheUpToDate).not.toHaveBeenCalled();
+      expect(networkHelper.loadFromApi).toHaveBeenCalled();
+      expect(cacheHelper.saveToCache).not.toHaveBeenCalled();
+    });
   });
 
   describe('apiHelper/callbacks', () => {

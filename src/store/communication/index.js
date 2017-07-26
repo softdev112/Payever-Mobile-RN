@@ -404,6 +404,8 @@ export default class CommunicationStore {
 
   @action
   saveUserSettings(settings: UserSettings) {
+    if (!settings) return;
+
     const { api: { messenger } } = this.store;
     const { messengerUser } = this.messengerInfo;
 

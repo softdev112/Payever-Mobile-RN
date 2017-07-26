@@ -62,6 +62,7 @@ export default class ProfilesStore {
         });
         this.privateProfile = new PersonalProfile(data.private, this.store);
       })
+      .error(log.error)
       .promise();
   }
 

@@ -129,7 +129,7 @@ describe('Store/Auth', () => {
       expect(networkHelper.loadFromApi).toHaveBeenCalled();
       expect(apiSpy).toHaveBeenCalled();
       expect(api.fetch).toHaveBeenCalled();
-      expect(auth.error).toBe(networkHelper.errorConnection);
+      expect(auth.error).toBe('Server error');
     });
   });
 
@@ -199,7 +199,7 @@ describe('Store/Auth', () => {
       expect(networkHelper.loadFromApi).toHaveBeenCalled();
       expect(apiSpy).toHaveBeenCalled();
       expect(api.fetch).toHaveBeenCalled();
-      expect(auth.error).toBe(networkHelper.errorConnection);
+      expect(auth.error).toBe('Server error');
     });
   });
 

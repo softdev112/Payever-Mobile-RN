@@ -1008,16 +1008,32 @@ describe('Store/Communication', () => {
   });
 
   describe('Communication/saveUserSettings(settings: UserSettings)', () => {
-    xit('saveUserSettings should call right api with right url', () => {
+    it('saveUserSettings should call right api with right url', async () => {
       const apiSpy = jest.spyOn(api.messenger, 'saveSettings');
       networkHelper.loadFromApi.mockImplementationOnce(() => ({ data: true }));
 
       communication.messengerInfo = new MessengerInfo(cloneObject(messengerData));
-      communication.saveUserSettings(communication.messengerInfo.userSettings);
+      await communication.saveUserSettings(communication.messengerInfo.userSettings);
 
       expect(apiSpy).toHaveBeenCalled();
-      expect(networkHelper.loadFromApi).toHaveBeenCalledWith();
+      expect(networkHelper.loadFromApi).toHaveBeenCalled();
       expect(postSpy).toHaveBeenCalled();
+      expect(postSpy).toHaveBeenCalledWith(
+        '/api/rest/v1/messenger/user/settings',
+        expect.any(Object)
+      );
+    });
+
+    it('saveUserSettings should NOT call api if settings = null', async () => {
+      const apiSpy = jest.spyOn(api.messenger, 'saveSettings');
+      networkHelper.loadFromApi.mockImplementationOnce(() => ({ data: true }));
+
+      communication.messengerInfo = new MessengerInfo(cloneObject(messengerData));
+      await communication.saveUserSettings(null);
+
+      expect(apiSpy).not.toHaveBeenCalled();
+      expect(networkHelper.loadFromApi).not.toHaveBeenCalled();
+      expect(postSpy).not.toHaveBeenCalled();
     });
   });
 });

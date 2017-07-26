@@ -8,7 +8,7 @@ export default class AuthApi {
   }
 
   async login(username: string, password: string): Promise<AuthResp> {
-    return this.client.fetch('/oauth/v2/token', {
+    return await this.client.fetch('/oauth/v2/token', {
       query: {
         username,
         password,

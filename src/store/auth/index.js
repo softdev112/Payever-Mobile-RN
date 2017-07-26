@@ -35,6 +35,7 @@ export default class AuthStore {
       .success((data: AuthData) => {
         this.updateTokens(data);
       })
+      .error(log.error)
       .promise();
   }
 

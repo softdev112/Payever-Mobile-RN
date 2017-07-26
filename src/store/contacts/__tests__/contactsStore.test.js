@@ -179,7 +179,7 @@ describe('Store/Contcats', () => {
       expect(getSpy).toHaveBeenCalled();
       expect(store.contacts.contactsPaginationData).toBeNull();
       expect(store.contacts.contacts).toHaveLength(0);
-      expect(store.contacts.error).toBe(networkHelper.errorConnection);
+      expect(store.contacts.error).toBe('Server Error');
     });
 
     it('loadAllContacts isLoading should set to true while it is loading and to false then it ended it up', async (done) => {
@@ -334,7 +334,7 @@ describe('Store/Contcats', () => {
       expect(getSpy).toHaveBeenCalled();
       expect(store.contacts.contactGroupsPaginationData).toBeNull();
       expect(store.contacts.contactGroups).toHaveLength(0);
-      expect(store.contacts.error).toBe(networkHelper.errorConnection);
+      expect(store.contacts.error).toBe('Server Error');
     });
 
     it('loadAllContactGroups isLoading should set to true while it is loading and to false then it ended it up', async (done) => {

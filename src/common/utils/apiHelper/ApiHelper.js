@@ -185,6 +185,7 @@ async function loadData(
   // Load data from cache if noCache !== true
   if (!noCache && cacheId) {
     data = await cacheHelper.loadFromCache(cacheId);
+
     if ((data && cacheHelper.isCacheUpToDate(cacheId, lifeTime))
       || !isConnected) {
       return {
@@ -198,11 +199,19 @@ async function loadData(
   if (isConnected) {
     try {
       data = await networkHelper.loadFromApi(apiEndPoint(), timeout);
-      if (data && cacheId) {
+
+      if (!data || data.error) {
+        throw new Error(
+          data && data.error ? data.error : networkHelper.errorTimeout
+        );
+      }
+
+      if (cacheId) {
         cacheHelper.saveToCache(cacheId, lifeTime, data);
       }
     } catch (e) {
       log.warn(e + (e.errorName ? ` (${e.errorName})` : ''));
+      return { error: e.message || networkHelper.errorConnection };
     }
   } else if (showErrorPage) {
     Navigation.showModal({

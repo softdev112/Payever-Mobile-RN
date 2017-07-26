@@ -177,6 +177,7 @@ const styles = StyleSheet.create({
 
   error: {
     marginTop: 10,
+    alignSelf: 'center',
   },
 
   input: {
