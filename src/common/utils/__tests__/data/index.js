@@ -1,0 +1,1 @@
+export notificationsHelperData from './notificationsHelperData';

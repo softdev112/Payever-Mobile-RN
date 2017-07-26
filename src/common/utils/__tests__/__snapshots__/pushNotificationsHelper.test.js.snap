@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Utils/pushNotificationsHelper PushNotificationsHelper/class functions registerNotifications() should add right listeners for iOS 1`] = `
+Array [
+  Array [
+    "remoteNotificationsRegistered",
+    [Function],
+  ],
+  Array [
+    "notificationReceivedForeground",
+    [Function],
+  ],
+  Array [
+    "notificationReceivedBackground",
+    [Function],
+  ],
+  Array [
+    "notificationOpened",
+    [Function],
+  ],
+]
+`;

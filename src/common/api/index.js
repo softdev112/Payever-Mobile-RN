@@ -50,6 +50,7 @@ export default class PayeverApi {
       ...query,
       access_token: await this.authStore.getAccessToken(),
     };
+
     return this.fetch(url, { query });
   }
 

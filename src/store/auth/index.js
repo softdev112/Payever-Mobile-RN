@@ -131,7 +131,7 @@ export default class AuthStore {
     // Test if internet connection available if not do not update token
     // but grunt access
     if ((!forceUpdate && this.accessToken && this.expiresIn > new Date())
-      || !(await networkHelper.isConnected())) {
+      || !await networkHelper.isConnected()) {
       return this.accessToken;
     }
 

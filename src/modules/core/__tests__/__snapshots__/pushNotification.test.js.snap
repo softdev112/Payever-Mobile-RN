@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modules/core/screens/PushNotification PushNotification should render correctly with dummy data 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "yellowgreen",
+        "height": 60,
+        "justifyContent": "center",
+        "paddingHorizontal": 8,
+        "width": 750,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hitSlop={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+      }
+    }
+    testID={undefined}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      source="icon-payever-64"
+      style={
+        Array [
+          Object {
+            "fontFamily": "payeverIcons",
+            "fontSize": 64,
+          },
+          Array [
+            Object {
+              "fontFamily": "payeverIcons",
+              "fontSize": 64,
+            },
+            Object {
+              "color": "#000",
+              "fontSize": 16,
+            },
+          ],
+        ]
+      }
+    >
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#3d3d3d",
+            "fontFamily": "Helvetica Neue",
+            "fontWeight": "200",
+          },
+          Array [
+            Object {
+              "color": "#FFF",
+              "fontSize": 16,
+              "marginLeft": 10,
+            },
+            undefined,
+          ],
+        ]
+      }
+    >
+      Hello World!!!!!
+    </Text>
+  </View>
+</View>
+`;

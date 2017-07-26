@@ -45,6 +45,7 @@ export default function handleNotification(
 }
 
 function processNotificationData(params: NotificationParams) {
+  if (!params) return;
   const { subtype, data } =  params;
 
   if (subtype === 'offer') {

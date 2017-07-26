@@ -17,9 +17,7 @@ export default function PushNotification(
     <View style={[styles.container, style]}>
       <TouchableWithoutFeedback onPress={runNotificationAction}>
         <View style={styles.notifContent}>
-          <View style={styles.iconContainer}>
-            <Icon style={styles.icon} source="icon-payever-64" />
-          </View>
+          <Icon style={styles.icon} source="icon-payever-64" />
           <Text style={[styles.message, textStyle]}>{message}</Text>
         </View>
       </TouchableWithoutFeedback>
@@ -41,22 +39,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 
-  iconContainer: {
-    width: 25,
-    height: 25,
-    borderRadius: 4,
-    marginRight: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#FFF',
-  },
-
   icon: {
     fontSize: 16,
     color: '#000',
   },
 
   message: {
+    marginLeft: 10,
     color: '#FFF',
     fontSize: 16,
   },

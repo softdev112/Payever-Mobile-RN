@@ -24,17 +24,17 @@ import com.android.build.OutputFile
  * bundle directly from the development server. Below you can see all the possible configurations
  * and their defaults. If you decide to add a configuration block, make sure to add it before the
  * `apply from: "../../node_modules/react-native/react.gradle"` line.
- *
- * project.ext.react = [
- *   // the name of the generated asset file containing your JS bundle
+ */
+ project.ext.react = [
+ /*   // the name of the generated asset file containing your JS bundle
  *   bundleAssetName: "index.android.bundle",
  *
  *   // the entry file for bundle generation
  *   entryFile: "index.android.js",
  *
- *   // whether to bundle JS and assets in debug mode
- *   bundleInDebug: false,
- *
+ */   // whether to bundle JS and assets in debug mode
+    bundleInDebug: true,
+ /*
  *   // whether to bundle JS and assets in release mode
  *   bundleInRelease: true,
  *
@@ -75,9 +75,9 @@ import com.android.build.OutputFile
  *   nodeExecutableAndArgs: ["node"]
  *
  *   // supply additional arguments to the packager
- *   extraPackagerArgs: []
- * ]
- */
+ *///   extraPackagerArgs: []
+ ]
+ /**/
 
 apply from: "../../node_modules/react-native/react.gradle"
 

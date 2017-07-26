@@ -12,6 +12,7 @@ import Store from '../../../store';
 import config from '../../../config';
 import { profilesList } from '../../../store/profiles/__tests__/data';
 import UserAccount from '../../../store/profiles/models/UserAccount';
+import { notificationsHelperData } from './data';
 
 jest.mock('../../../store/auth')
   .mock('AppState', () => ({}))
@@ -39,21 +40,9 @@ jest.mock('../../../store/auth')
     },
   }));
 
-const notificationIOS = {
-  _alert: 'Hello world!!!!',
-  _sound: 'Sound',
-  _type: 'offer',
-  _badge: 0,
-  _data: {
-    parameters: {
-      type: 'offer',
-      subtype: 'offer',
-      data: {
-        offer: 11111,
-      },
-    },
-  },
-};
+const {
+  notificationIOS, notificationWithoutData,
+} = notificationsHelperData;
 
 describe('Utils/pushNotificationsHelper', () => {
   let store;
@@ -274,6 +263,7 @@ describe('Utils/pushNotificationsHelper', () => {
         .registerNotifications.call(pushHelper);
 
       expect(NotificationsIOS.addEventListener).toHaveBeenCalledTimes(4);
+      expect(NotificationsIOS.addEventListener.mock.calls).toMatchSnapshot();
 
       expect(NotificationsIOS.addEventListener.mock.calls[0])
         .toEqual(['remoteNotificationsRegistered', expect.any(Function)]);
@@ -322,6 +312,24 @@ describe('Utils/pushNotificationsHelper', () => {
       expect(PendingNotifications.getInitialNotification).toHaveBeenCalled();
       expect(onNotifOpenSpy).toHaveBeenCalled();
       expect(onNotifOpenSpy).toHaveBeenCalledWith({ data: 'data' });
+    });
+  });
+
+  describe('notificationHandlers', () => {
+    it('handleNotification should not throw error if notification have no data payload', () => {
+      const handleNotificationSpy = jest.spyOn(handlers, 'default');
+
+      const pushHelper = pushNotificationsHelper
+        .createInstance(store.api, user);
+
+      expect(() => {
+        PushNotificationsHelper.prototype
+          .onNotificationOpened.call(pushHelper, notificationWithoutData);
+      }).not.toThrow();
+
+      expect(handleNotificationSpy).toHaveBeenCalled();
+      expect(Navigation.showInAppNotification).not.toHaveBeenCalled();
+      expect(Navigation.showModal).not.toHaveBeenCalled();
     });
   });
 });
