@@ -11,7 +11,7 @@ async function processDeepLink(
   profiles,
   navigator: Navigator = null
 ) {
-  if (!url) return;
+  if (!url || !navigator) return;
 
   if (url.startsWith(config.siteUrl + '/store/')) {
     navigator.showModal({
@@ -21,11 +21,13 @@ async function processDeepLink(
     return;
   }
 
+  if (!profiles) return;
+
   let slug = '';
   if (url.startsWith(config.siteUrl + '/business/')) {
     // Business profile
     const urlParts = url.split(config.siteUrl + '/business/');
-    slug = urlParts[1].substr(0, urlParts[1].indexOf('/'));
+    slug = urlParts[1].split('/')[0];
   } else if (url.startsWith(config.siteUrl + '/private')) {
     // Private profile
     slug = 'private';

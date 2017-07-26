@@ -1,335 +1,183 @@
 /* eslint-disable max-len, global-require */
-import { Navigation } from 'react-native-navigation';
-import { pushNotificationsHelper } from 'utils';
-import { AppState, Platform } from 'react-native';
-import NotificationsIOS, {
-  NotificationsAndroid, PendingNotifications,
-} from 'react-native-notifications';
-import PushNotificationsHelper
-  from '../pushNotificationsHelper/PushNotificationsHelper';
-import * as handlers from '../pushNotificationsHelper/notificationHandlers';
+import { deepLinksHelper } from 'utils';
 import Store from '../../../store';
 import config from '../../../config';
-import { profilesList } from '../../../store/profiles/__tests__/data';
-import UserAccount from '../../../store/profiles/models/UserAccount';
-import { notificationsHelperData } from './data';
+import { showScreen } from '../../Navigation';
+import navigator from '../../../../__mocks__/navigator';
 
-jest.mock('../../../store/auth')
-  .mock('AppState', () => ({}))
-  .mock('Platform', () => ({
-    select: jest.fn(() => {}),
-    OS: 'ios',
-  }))
-  .mock('react-native-device-info', () => ({
-    getUniqueID: jest.fn(() => 11111),
-    getBrand: jest.fn(() => 'Brand'),
-    getModel: jest.fn(() => 'Phone'),
-  }))
-  .mock('react-native-notifications', () => ({
-    addEventListener: jest.fn(),
-    requestPermissions: jest.fn(),
-    consumeBackgroundQueue: jest.fn(),
-    NotificationsAndroid: {
-      setRegistrationTokenUpdateListener: jest.fn(),
-      setNotificationOpenedListener: jest.fn(),
-      setNotificationReceivedListener: jest.fn(),
-      refreshToken: jest.fn(),
-    },
-    PendingNotifications: {
-      getInitialNotification: jest.fn(() => ({ data: 'data' })),
-    },
-  }));
+jest.mock('../../Navigation');
 
-const {
-  notificationIOS, notificationWithoutData,
-} = notificationsHelperData;
+const testProfiles = [
+  {
+    slug: 'slug',
+  },
+];
 
-describe('Utils/pushNotificationsHelper', () => {
+describe('Utils/deepLinksHelper', () => {
   let store;
-  let user;
+  let profiles;
 
   beforeAll(() => {
     store = new Store(config);
-    user = new UserAccount(profilesList.private.user);
-    Navigation.showModal = jest.fn();
-    Navigation.showInAppNotification = jest.fn();
+    profiles = store.profiles;
+    profiles.getAllProfiles = jest.fn(() => testProfiles);
+    profiles.load = jest.fn();
+    profiles.setCurrentProfile = jest.fn();
   });
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  describe('pushNotificationsHelper/getInstance()', () => {
-    // It should be the first test before instance of pushNotificationsHelper
-    // will be created
-    it('getInstance should throw error if instance was NOT created before', () => {
-      expect(() => pushNotificationsHelper.getInstance())
-        .toThrowError('Push notifications helper was not created');
+  describe('deepLinksHelper/processDeepLink(url, profiles, navigator)', () => {
+    it('processDeepLink should NOT call navigation functions if url === null | undefined', () => {
+      deepLinksHelper.processDeepLink(undefined, profiles, navigator);
+      deepLinksHelper.processDeepLink(null, profiles, navigator);
+      deepLinksHelper.processDeepLink('', profiles, navigator);
+
+      expect(showScreen).not.toHaveBeenCalled();
+      expect(navigator.showModal).not.toHaveBeenCalled();
+      expect(profiles.getAllProfiles).not.toHaveBeenCalled();
     });
 
-    it('getInstance should return instance of PushNotificationHelper class if it was created before', () => {
-      pushNotificationsHelper.createInstance(store.api, user);
-      const pushInstance = pushNotificationsHelper.getInstance();
+    it('processDeepLink should NOT call navigation functions if profiles === null and url do not contain /store/ and should not throw error', () => {
+      expect(() => deepLinksHelper.processDeepLink('u', null, navigator))
+        .not.toThrow();
+      expect(() => deepLinksHelper.processDeepLink('u', undefined, navigator))
+        .not.toThrow();
 
-      expect(pushInstance).not.toBeNull();
-      expect(pushInstance).toBeInstanceOf(PushNotificationsHelper);
-    });
-  });
-
-  describe('pushNotificationsHelper/createInstance(api, userProfile)', () => {
-    it('createInstance should create and return an instance of PushNotificationHelper class if arguments != null', () => {
-      const pushsHelper = pushNotificationsHelper.createInstance(store.api, user);
-      expect(pushsHelper).toBeInstanceOf(PushNotificationsHelper);
+      expect(showScreen).not.toHaveBeenCalled();
+      expect(navigator.showModal).not.toHaveBeenCalled();
+      expect(profiles.getAllProfiles).not.toHaveBeenCalled();
     });
 
-    it('createInstance should return null if arguments === null', () => {
-      let pushsHelper = pushNotificationsHelper.createInstance(null, user);
-      expect(pushsHelper).toBeNull();
-
-      pushsHelper = pushNotificationsHelper.createInstance(store.api, null);
-      expect(pushsHelper).toBeNull();
-    });
-  });
-
-  describe('PushNotificationsHelper/class functions', () => {
-    it('onPushNotificationsRegistered(deviceToken) should call proper device api endpoint', async () => {
-      const { api } = store;
-      const apiSpy = jest.spyOn(api.device, 'linkDeviceToken');
-      const postSpy = jest.spyOn(api, 'post');
-      api.fetch = jest.fn();
-
-      const pushHelper = pushNotificationsHelper
-        .createInstance(store.api, user);
-      await PushNotificationsHelper.prototype
-        .onPushNotificationsRegistered.call(pushHelper, 'Token');
-
-      expect(apiSpy).toHaveBeenCalled();
-      expect(apiSpy).toHaveBeenCalledWith(expect.any(Object), 'Token');
-      expect(postSpy).toHaveBeenCalled();
-      expect(postSpy).toHaveBeenCalledWith(
-        '/device/link',
-        {
-          email: 'payevertest1@gmail.com',
-          emailEnabled: false,
-          label: 'Brand-Phone',
-          phone: '+12345678900',
-          platform: expect.any(String),
-          pushEnabled: true,
-          smsEnabled: false,
-          token: 'Token',
-          udid: 11111,
-        },
-        {
-          headers: {
-            token: undefined,
-          },
-        }
+    it('processDeepLink should call navigator.showModal if profiles === null and url contain /store/ and should not throw error', () => {
+      deepLinksHelper.processDeepLink(
+        config.siteUrl + '/store/cool', null, navigator
       );
-      expect(api.fetch).toHaveBeenCalled();
-      expect(api.fetch).toHaveBeenCalledWith(
-        '/device/link',
-        expect.any(Object)
+      deepLinksHelper.processDeepLink(
+        config.siteUrl + '/store/cool', undefined, navigator
       );
+
+      expect(navigator.showModal).toHaveBeenCalled();
+      expect(navigator.showModal).toHaveBeenLastCalledWith({
+        animated: true,
+        screen: 'core.DeepLinksPopup',
+      });
+      expect(profiles.getAllProfiles).not.toHaveBeenCalled();
     });
 
-    it('onNotificationReceivedForeground(notification) should call handleNotification(notification, { isBackground: false })', () => {
-      const handleNotificationSpy = jest.spyOn(handlers, 'default');
+    it('processDeepLink should NOT call navigation functions if navigator === null and should not throw error', () => {
+      expect(() => deepLinksHelper.processDeepLink('u', profiles, null))
+        .not.toThrow();
+      expect(() => deepLinksHelper.processDeepLink('u', profiles, undefined))
+        .not.toThrow();
 
-      const pushHelper = pushNotificationsHelper
-        .createInstance(store.api, user);
-      PushNotificationsHelper.prototype
-        .onNotificationReceivedForeground.call(pushHelper, notificationIOS);
+      expect(showScreen).not.toHaveBeenCalled();
+      expect(navigator.showModal).not.toHaveBeenCalled();
+      expect(profiles.getAllProfiles).not.toHaveBeenCalled();
+    });
 
-      expect(handleNotificationSpy).toHaveBeenCalled();
-      expect(handleNotificationSpy).toHaveBeenCalledWith(
-        notificationIOS,
-        { isBackground: false }
+    it('processDeepLink should call navigator.showModal => core.DeepLinksPopup if url contains site_domain/store/', () => {
+      deepLinksHelper.processDeepLink(
+        config.siteUrl + '/store/new', profiles, navigator
       );
-      expect(Navigation.showInAppNotification).toHaveBeenCalled();
-      expect(Navigation.showInAppNotification).toHaveBeenCalledWith(
-        {
-          animationType: 'none',
-          navigatorButtons: expect.any(Object),
-          navigatorStyle: expect.any(Object),
-          passProps: {
-            action: expect.any(Function),
-            message: 'Hello world!!!!',
-          },
-          screen: 'core.PushNotification',
-          title: 'Hello world!!!!',
-        }
+
+      expect(navigator.showModal).toHaveBeenCalled();
+      expect(navigator.showModal).toHaveBeenCalledWith({
+        animated: true,
+        screen: 'core.DeepLinksPopup',
+      });
+    });
+
+    it('processDeepLink should NOT call navigation functions if url do not have slug information', () => {
+      deepLinksHelper.processDeepLink(
+        config.siteUrl + '/hello/new', profiles, navigator
+      );
+
+      expect(showScreen).not.toHaveBeenCalled();
+      expect(navigator.showModal).not.toHaveBeenCalled();
+      expect(profiles.getAllProfiles).not.toHaveBeenCalled();
+    });
+
+    it('processDeepLink should call navigator.showModal => core.ErrorPage if url contains /business/slug and profiles.load() return false', async () => {
+      profiles.load.mockImplementationOnce(() => false);
+
+      await deepLinksHelper.processDeepLink(
+        config.siteUrl + '/business/slug/cool', profiles, navigator
+      );
+
+      expect(profiles.load).toHaveBeenCalled();
+      expect(showScreen).toHaveBeenCalled();
+      expect(showScreen).toHaveBeenCalledWith(
+        'core.ErrorPage',
+        { message: expect.any(String) }
       );
     });
 
-    it('onNotificationReceivedBackground(notification) should call handleNotification(notification, { isBackground: true })', () => {
-      const handleNotificationSpy = jest.spyOn(handlers, 'default');
+    it('processDeepLink should call navigator.showModal => core.ErrorPage if url contains /private and profiles.load() return false', async () => {
+      profiles.load.mockImplementationOnce(() => false);
 
-      const pushHelper = pushNotificationsHelper
-        .createInstance(store.api, user);
-      PushNotificationsHelper.prototype
-        .onNotificationReceivedBackground.call(pushHelper, notificationIOS);
-
-      expect(handleNotificationSpy).toHaveBeenCalled();
-      expect(handleNotificationSpy).toHaveBeenCalledWith(
-        notificationIOS,
-        { isBackground: true }
+      await deepLinksHelper.processDeepLink(
+        config.siteUrl + '/private', profiles, navigator
       );
-      expect(Navigation.showInAppNotification).toHaveBeenCalled();
-      expect(Navigation.showInAppNotification).toHaveBeenCalledWith(
-        {
-          animationType: 'none',
-          navigatorButtons: expect.any(Object),
-          navigatorStyle: expect.any(Object),
-          passProps: {
-            action: expect.any(Function),
-            message: 'Hello world!!!!',
-          },
-          screen: 'core.PushNotification',
-          title: 'Hello world!!!!',
-        }
+
+      expect(profiles.load).toHaveBeenCalled();
+      expect(showScreen).toHaveBeenCalled();
+      expect(showScreen).toHaveBeenCalledWith(
+        'core.ErrorPage',
+        { message: expect.any(String) }
       );
     });
 
-    it('onNotificationOpened(notification) should call handleNotification(notification, { isOpened: true }) and call Navigation.showModal', () => {
-      const handleNotificationSpy = jest.spyOn(handlers, 'default');
+    it('processDeepLink should call navigator.showModal => dashboard.Dashboard if url contains business/slug and profile was resolved successfully', async () => {
+      profiles.load.mockImplementationOnce(() => true);
 
-      const pushHelper = pushNotificationsHelper
-        .createInstance(store.api, user);
-      PushNotificationsHelper.prototype
-        .onNotificationOpened.call(pushHelper, notificationIOS);
+      await deepLinksHelper.processDeepLink(
+        config.siteUrl + '/business/slug', profiles, navigator
+      );
 
-      expect(handleNotificationSpy).toHaveBeenCalled();
-      expect(handleNotificationSpy).toHaveBeenCalledWith(
-        notificationIOS,
-        { isOpened: true }
-      );
-      expect(Navigation.showInAppNotification).not.toHaveBeenCalled();
-      expect(Navigation.showModal).toHaveBeenCalled();
-      expect(Navigation.showModal).toHaveBeenCalledWith(
-        {
-          animationType: 'slide-up',
-          navigatorButtons: expect.any(Object),
-          navigatorStyle: expect.any(Object),
-          passProps: {
-            offerId: 11111,
-          },
-          screen: 'marketing.ViewOffer',
-          title: 'Got an Offer:',
-        }
-      );
+      expect(profiles.load).toHaveBeenCalled();
+      expect(showScreen).toHaveBeenCalled();
+      expect(showScreen).toHaveBeenCalledWith('dashboard.ChooseAccount');
     });
 
-    it('onNotificationReceivedAndroid(notification) should call onNotificationReceivedForeground if AppState.currentState === active', () => {
-      const receivedForegroundSpy = jest.spyOn(
-        PushNotificationsHelper.prototype, 'onNotificationReceivedForeground'
-      );
-      const receivedBackgroundSpy = jest.spyOn(
-        PushNotificationsHelper.prototype, 'onNotificationReceivedBackground'
+    it('processDeepLink should call navigator.showModal => dashboard.Private if url contains /private and profile was resolve successfully', async () => {
+      profiles.load.mockImplementationOnce(() => true);
+
+      await deepLinksHelper.processDeepLink(
+        config.siteUrl + '/private', profiles, navigator
       );
 
-      AppState.currentState = 'active';
-      const pushHelper = pushNotificationsHelper
-        .createInstance(store.api, user);
-      PushNotificationsHelper.prototype
-        .onNotificationReceivedAndroid.call(pushHelper, notificationIOS);
-
-      expect(receivedForegroundSpy).toHaveBeenCalled();
-      expect(receivedBackgroundSpy).not.toHaveBeenCalled();
+      expect(profiles.load).toHaveBeenCalled();
+      expect(showScreen).toHaveBeenCalled();
+      expect(showScreen).toHaveBeenCalledWith('dashboard.Private');
     });
 
-    it('onNotificationReceivedAndroid(notification) should call onNotificationReceivedBackground if AppState.currentState !== active', () => {
-      const receivedForegroundSpy = jest.spyOn(
-        PushNotificationsHelper.prototype, 'onNotificationReceivedForeground'
-      );
-      const receivedBackgroundSpy = jest.spyOn(
-        PushNotificationsHelper.prototype, 'onNotificationReceivedBackground'
-      );
+    it('processDeepLink should call navigator.showModal => dashboard.ChooseAccount if url contains business/slug but profile was NOT resolved successfully', async () => {
+      profiles.load.mockImplementationOnce(() => true);
+      profiles.getAllProfiles.mockImplementationOnce(() => []);
 
-      AppState.currentState = 'background';
-      const pushHelper = pushNotificationsHelper
-        .createInstance(store.api, user);
-      PushNotificationsHelper.prototype
-        .onNotificationReceivedAndroid.call(pushHelper, notificationIOS);
-
-      expect(receivedForegroundSpy).not.toHaveBeenCalled();
-      expect(receivedBackgroundSpy).toHaveBeenCalled();
-    });
-
-    it('registerNotifications() should add right listeners for iOS', () => {
-      Platform.OS = 'ios';
-      const pushHelper = pushNotificationsHelper
-        .createInstance(store.api, user);
-      PushNotificationsHelper.prototype
-        .registerNotifications.call(pushHelper);
-
-      expect(NotificationsIOS.addEventListener).toHaveBeenCalledTimes(4);
-      expect(NotificationsIOS.addEventListener.mock.calls).toMatchSnapshot();
-
-      expect(NotificationsIOS.addEventListener.mock.calls[0])
-        .toEqual(['remoteNotificationsRegistered', expect.any(Function)]);
-
-      expect(NotificationsIOS.addEventListener.mock.calls[1])
-        .toEqual(['notificationReceivedForeground', expect.any(Function)]);
-
-      expect(NotificationsIOS.addEventListener.mock.calls[2])
-        .toEqual(['notificationReceivedBackground', expect.any(Function)]);
-
-      expect(NotificationsIOS.addEventListener.mock.calls[3])
-        .toEqual(['notificationOpened', expect.any(Function)]);
-
-      expect(NotificationsIOS.requestPermissions).toHaveBeenCalled();
-      expect(NotificationsIOS.consumeBackgroundQueue).toHaveBeenCalled();
-    });
-
-    it('registerNotifications() should add right listeners for Android', async () => {
-      const onNotifOpenSpy = jest.spyOn(
-        PushNotificationsHelper.prototype,
-        'onNotificationOpened'
+      await deepLinksHelper.processDeepLink(
+        config.siteUrl + '/business/slug', profiles, navigator
       );
 
-      Platform.OS = 'android';
-      const pushHelper = pushNotificationsHelper
-        .createInstance(store.api, user);
-      await PushNotificationsHelper.prototype
-        .registerNotifications.call(pushHelper);
-
-      expect(NotificationsAndroid.setRegistrationTokenUpdateListener)
-        .toHaveBeenCalled();
-      expect(NotificationsAndroid.setRegistrationTokenUpdateListener)
-        .toHaveBeenCalledWith(expect.any(Function));
-
-      expect(NotificationsAndroid.setNotificationOpenedListener)
-        .toHaveBeenCalled();
-      expect(NotificationsAndroid.setNotificationOpenedListener)
-        .toHaveBeenCalledWith(expect.any(Function));
-
-      expect(NotificationsAndroid.setNotificationReceivedListener)
-        .toHaveBeenCalled();
-      expect(NotificationsAndroid.setNotificationReceivedListener)
-        .toHaveBeenCalledWith(expect.any(Function));
-
-      expect(NotificationsAndroid.refreshToken).toHaveBeenCalled();
-      expect(PendingNotifications.getInitialNotification).toHaveBeenCalled();
-      expect(onNotifOpenSpy).toHaveBeenCalled();
-      expect(onNotifOpenSpy).toHaveBeenCalledWith({ data: 'data' });
+      expect(profiles.load).toHaveBeenCalled();
+      expect(showScreen).toHaveBeenCalled();
+      expect(showScreen).toHaveBeenCalledWith('dashboard.ChooseAccount');
     });
-  });
 
-  describe('notificationHandlers', () => {
-    it('handleNotification should not throw error if notification have no data payload', () => {
-      const handleNotificationSpy = jest.spyOn(handlers, 'default');
+    it('processDeepLink should call navigator.showModal => dashboard.ChooseAccount if url contains /private but profile was NOT resolve successfully', async () => {
+      profiles.load.mockImplementationOnce(() => true);
+      profiles.getAllProfiles.mockImplementationOnce(() => []);
 
-      const pushHelper = pushNotificationsHelper
-        .createInstance(store.api, user);
+      await deepLinksHelper.processDeepLink(
+        config.siteUrl + '/private', profiles, navigator
+      );
 
-      expect(() => {
-        PushNotificationsHelper.prototype
-          .onNotificationOpened.call(pushHelper, notificationWithoutData);
-      }).not.toThrow();
-
-      expect(handleNotificationSpy).toHaveBeenCalled();
-      expect(Navigation.showInAppNotification).not.toHaveBeenCalled();
-      expect(Navigation.showModal).not.toHaveBeenCalled();
+      expect(profiles.load).toHaveBeenCalled();
+      expect(showScreen).toHaveBeenCalled();
+      expect(showScreen).toHaveBeenCalledWith('dashboard.ChooseAccount');
     });
   });
 });
