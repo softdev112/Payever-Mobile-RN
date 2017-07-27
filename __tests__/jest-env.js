@@ -1,7 +1,9 @@
-import React, { PropTypes } from 'react';
-import { NativeModules, ScrollView } from 'react-native';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { ScrollView, NativeModules } from 'react-native';
 
 NativeModules.RNSound = { IsAndroid: false };
+
 global.React = React;
 global.cloneObject = function cloneObject(obj) {
   if (typeof obj !== 'object') {
@@ -25,6 +27,7 @@ ScrollView.propTypes = { decelerationRate: PropTypes.number };
 jest.mock('mobx-react/native', () => require('mobx-react/custom'))
   .mock('react-native-fetch-blob', () => ({ DocumentDir: '.' }))
   .mock('react-native-logging')
+  .mock('react-native-sound', () => jest.fn())
   .mock(
     '../src/common/utils/soundHelper/sounds',
     () => require('../src/common/utils/soundHelper/sounds/__mocks__')

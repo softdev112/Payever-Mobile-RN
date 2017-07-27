@@ -5,25 +5,25 @@ import Sounds from './sounds';
 import UserSettings, { TimePoint }
   from '../../../store/communication/models/UserSettings';
 
-class SoundHelper {
-  currentUserSettings: UserSettings = null;
+let currentUserSettings: UserSettings;
 
+export default {
   setUserSettings(settings: UserSettings) {
-    this.currentUserSettings = settings;
-  }
+    currentUserSettings = settings;
+  },
 
   playNotification() {
-    playSound(Sounds.notification, this.currentUserSettings);
-  }
+    playSound(Sounds.notification, currentUserSettings);
+  },
 
   playMsgReceive() {
-    playSound(Sounds.receiveMessage, this.currentUserSettings);
-  }
+    playSound(Sounds.receiveMessage, currentUserSettings);
+  },
 
   playMsgSent() {
-    playSound(Sounds.sentMessage, this.currentUserSettings);
-  }
-}
+    playSound(Sounds.sentMessage, currentUserSettings);
+  },
+};
 
 /**
  * Plays sound
@@ -32,13 +32,23 @@ class SoundHelper {
  * @param settings - User settings allowing sound and setting volume
  */
 function playSound(soundToPlay, settings: UserSettings = null) {
-  const { silentPeriodStart: from, silentPeriodStop: to } = settings;
-  if (settings
-    && (!settings.notificationSound || isNoDisturbPeriod(from, to))) {
+  if (!settings || !soundToPlay) return;
+
+  const {
+    notificationSound,
+    notificationVolume,
+    silentPeriodStart: from,
+    silentPeriodStop: to,
+  } = settings;
+
+  if (!notificationSound || !to || !from) {
+    return;
+  } else if (isNowSilentTime(from, to)) {
     return;
   }
 
-  const volume = settings && (settings.notificationVolume / 100);
+
+  const volume = notificationVolume ? notificationVolume / 4 : 0.5;
   let sound;
   if (Platform.OS === 'ios') {
     sound = new Sound(soundToPlay, (err) => {
@@ -60,7 +70,7 @@ function playSound(soundToPlay, settings: UserSettings = null) {
  * @param from - No disturb period start time
  * @param to - No disturb period end time
  */
-function isNoDisturbPeriod(from: TimePoint, to: TimePoint): boolean {
+function isNowSilentTime(from: TimePoint, to: TimePoint): boolean {
   const date = new Date();
   const currentHour = date.getUTCHours();
   const currentMinute = date.getUTCMinutes();
@@ -86,5 +96,3 @@ function isNoDisturbPeriod(from: TimePoint, to: TimePoint): boolean {
 
   return false;
 }
-
-export default new SoundHelper();

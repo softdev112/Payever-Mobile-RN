@@ -56,6 +56,7 @@ exports[`Contacts App components renders correctly contacts/screens/BusinessCont
           ]
         }
         accessible={true}
+        collapsable={undefined}
         hitSlop={
           Object {
             "bottom": 10,
@@ -65,6 +66,7 @@ exports[`Contacts App components renders correctly contacts/screens/BusinessCont
           }
         }
         isTVSelectable={true}
+        nativeID={undefined}
         onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -129,6 +131,7 @@ exports[`Contacts App components renders correctly contacts/screens/BusinessCont
         <Text
           accessible={true}
           allowFontScaling={true}
+          disabled={false}
           ellipsizeMode="tail"
           numberOfLines={1}
           style={
@@ -172,6 +175,7 @@ exports[`Contacts App components renders correctly contacts/screens/BusinessCont
           ]
         }
         accessible={true}
+        collapsable={undefined}
         hitSlop={
           Object {
             "bottom": 10,
@@ -181,6 +185,7 @@ exports[`Contacts App components renders correctly contacts/screens/BusinessCont
           }
         }
         isTVSelectable={true}
+        nativeID={undefined}
         onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -249,6 +254,7 @@ exports[`Contacts App components renders correctly contacts/screens/BusinessCont
           ]
         }
         accessible={true}
+        collapsable={undefined}
         hitSlop={
           Object {
             "bottom": 10,
@@ -258,6 +264,7 @@ exports[`Contacts App components renders correctly contacts/screens/BusinessCont
           }
         }
         isTVSelectable={true}
+        nativeID={undefined}
         onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -322,6 +329,7 @@ exports[`Contacts App components renders correctly contacts/screens/BusinessCont
         <Text
           accessible={true}
           allowFontScaling={true}
+          disabled={false}
           ellipsizeMode="tail"
           numberOfLines={1}
           style={
@@ -384,10 +392,11 @@ exports[`Contacts App components renders correctly contacts/screens/BusinessCont
         onEndReached={[Function]}
         onEndReachedThreshold={80}
         onLayout={[Function]}
+        onMomentumScrollEnd={[Function]}
         onScroll={[Function]}
         onScrollBeginDrag={[Function]}
+        onScrollEndDrag={[Function]}
         onViewableItemsChanged={undefined}
-        removeClippedSubviews={true}
         renderFooter={[Function]}
         renderItem={[Function]}
         renderScrollComponent={[Function]}
@@ -396,7 +405,34 @@ exports[`Contacts App components renders correctly contacts/screens/BusinessCont
         updateCellsBatchingPeriod={50}
         windowSize={21}
       >
-        <View />
+        <View>
+          <View
+            onLayout={[Function]}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              disabled={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#3d3d3d",
+                    "fontFamily": "Helvetica Neue",
+                    "fontWeight": "200",
+                  },
+                  Object {
+                    "fontSize": 18,
+                    "marginTop": 16,
+                    "textAlign": "center",
+                  },
+                ]
+              }
+            >
+              There are no contacts available
+            </Text>
+          </View>
+        </View>
       </RCTScrollView>
     </View>
   </View>

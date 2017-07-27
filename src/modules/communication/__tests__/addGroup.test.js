@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React from 'react';
+import PropTypes from 'prop-types';
 import renderer from 'react-test-renderer';
 import { Provider } from 'mobx-react/native';
 import config from '../../../config';
@@ -19,7 +19,7 @@ describe('modules/communication/screens/AddGroup', () => {
       return { navigator };
     };
 
-    AddGroup.childContextTypes = { navigator: React.PropTypes.object };
+    AddGroup.childContextTypes = { navigator: PropTypes.object };
   });
 
   beforeEach(() => {

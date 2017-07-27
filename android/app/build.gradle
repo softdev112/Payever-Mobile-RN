@@ -75,9 +75,10 @@ import com.android.build.OutputFile
  *   nodeExecutableAndArgs: ["node"]
  *
  *   // supply additional arguments to the packager
- *///   extraPackagerArgs: []
+ *   extraPackagerArgs: []
+ *
+ */
  ]
- /**/
 
 apply from: "../../node_modules/react-native/react.gradle"
 
@@ -163,7 +164,7 @@ dependencies {
     compile project(':react-native-device-info')
     compile project(':react-native-notifications')
     compile project(':react-native-navigation')
-    compile "com.android.support:appcompat-v7:23.0.1"
+    compile "com.android.support:appcompat-v7:25.0.1"
     compile "com.facebook.react:react-native:+"
     compile project(':react-native-fabric')
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {

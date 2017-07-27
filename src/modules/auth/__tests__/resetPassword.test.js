@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React from 'react';
+import PropTypes from 'prop-types';
 import renderer from 'react-test-renderer';
 import ResetPassword from '../screens/ResetPassword';
 import Store from '../../../store';
@@ -18,7 +18,7 @@ describe('modules/auth/screens/ResetPassword', () => {
     };
 
     ResetPassword.childContextTypes = {
-      navigator: React.PropTypes.object,
+      navigator: PropTypes.object,
     };
   });
 

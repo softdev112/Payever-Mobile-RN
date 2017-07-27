@@ -61,6 +61,7 @@ exports[`modules/auth/screens/RegCompletedDialog RegCompletedDialog should rende
           ]
         }
         accessible={true}
+        collapsable={undefined}
         hitSlop={
           Object {
             "bottom": 10,
@@ -70,6 +71,7 @@ exports[`modules/auth/screens/RegCompletedDialog RegCompletedDialog should rende
           }
         }
         isTVSelectable={true}
+        nativeID={undefined}
         onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -139,6 +141,7 @@ exports[`modules/auth/screens/RegCompletedDialog RegCompletedDialog should rende
         <Text
           accessible={true}
           allowFontScaling={true}
+          disabled={false}
           ellipsizeMode="tail"
           numberOfLines={1}
           style={
@@ -182,6 +185,7 @@ exports[`modules/auth/screens/RegCompletedDialog RegCompletedDialog should rende
           ]
         }
         accessible={true}
+        collapsable={undefined}
         hitSlop={
           Object {
             "bottom": 10,
@@ -191,6 +195,7 @@ exports[`modules/auth/screens/RegCompletedDialog RegCompletedDialog should rende
           }
         }
         isTVSelectable={true}
+        nativeID={undefined}
         onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -214,6 +219,7 @@ exports[`modules/auth/screens/RegCompletedDialog RegCompletedDialog should rende
         <Text
           accessible={true}
           allowFontScaling={true}
+          disabled={false}
           ellipsizeMode="tail"
           numberOfLines={1}
           style={
@@ -256,6 +262,7 @@ exports[`modules/auth/screens/RegCompletedDialog RegCompletedDialog should rende
           ]
         }
         accessible={true}
+        collapsable={undefined}
         hitSlop={
           Object {
             "bottom": 10,
@@ -265,6 +272,7 @@ exports[`modules/auth/screens/RegCompletedDialog RegCompletedDialog should rende
           }
         }
         isTVSelectable={true}
+        nativeID={undefined}
         onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -288,6 +296,7 @@ exports[`modules/auth/screens/RegCompletedDialog RegCompletedDialog should rende
         <Text
           accessible={true}
           allowFontScaling={true}
+          disabled={false}
           ellipsizeMode="tail"
           numberOfLines={1}
           style={
