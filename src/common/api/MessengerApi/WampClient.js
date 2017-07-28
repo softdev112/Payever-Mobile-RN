@@ -79,6 +79,8 @@ export default class WampClient extends EventEmitter {
   }
 
   on(event, listener, context = null) {
+    if (!event || !listener || typeof listener !== 'function') return null;
+
     return this.addListener(event, listener, context);
   }
 
@@ -93,6 +95,8 @@ export default class WampClient extends EventEmitter {
 
   /** @private */
   emitHandler(event, data) {
+    if (!event) return;
+
     (this.internalListeners[event] || [])
       .forEach(fn => fn(data));
   }

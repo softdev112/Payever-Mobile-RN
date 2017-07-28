@@ -1560,7 +1560,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PayeverMobile/payever.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = NGUZ26BK5M;
@@ -1582,8 +1582,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp;
 				PRODUCT_NAME = payever;
-				PROVISIONING_PROFILE = "6749abf9-18e3-4cc0-98b4-a6c77a528d55";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gmbh.payeverapp";
+				PROVISIONING_PROFILE = "6086bdc4-f0e9-4b4e-8a05-05450a28489a";
+				PROVISIONING_PROFILE_SPECIFIER = "com.gmbh.payeverapp Dev";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1596,7 +1596,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PayeverMobile/payever.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = NGUZ26BK5M;
 				HEADER_SEARCH_PATHS = (
@@ -1616,8 +1616,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gmbh.payeverapp;
 				PRODUCT_NAME = payever;
-				PROVISIONING_PROFILE = "6749abf9-18e3-4cc0-98b4-a6c77a528d55";
-				PROVISIONING_PROFILE_SPECIFIER = "match AdHoc com.gmbh.payeverapp";
+				PROVISIONING_PROFILE = "6086bdc4-f0e9-4b4e-8a05-05450a28489a";
+				PROVISIONING_PROFILE_SPECIFIER = "com.gmbh.payeverapp Dev";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};

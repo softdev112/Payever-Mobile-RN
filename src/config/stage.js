@@ -16,9 +16,9 @@ export default {
     },
 
     facebook: {
-      appId: '306625799760428',
-      appSecret: '4e0e5079b5c7eeff9f16295f0212ca95',
-      callback: 'fb306625799760428://authorize',
+      appId: '302838276848223',
+      appSecret: '188dcf1590b667929d5f8b4538b00075',
+      callback: 'fb302838276848223://authorize',
       scope: 'email public_profile',
       fields: [
         'id', 'name', 'first_name', 'last_name',

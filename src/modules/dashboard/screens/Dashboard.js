@@ -55,7 +55,7 @@ export default class Dashboard extends Component {
 
     const apps = await profiles.loadApplications(profile.id);
     this.setState({
-      appsTop:    apps.filter(a => a.location === 'top'),
+      appsTop: apps ? apps.filter(a => a.location === 'top') : [],
     });
   }
 

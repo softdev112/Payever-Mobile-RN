@@ -1,4 +1,5 @@
-import { Component, PropTypes } from 'react';
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Animated, Keyboard, Platform, TextInput } from 'react-native';
 import { inject, observer } from 'mobx-react/native';
 import type { Navigator } from 'react-native-navigation';
@@ -267,12 +268,7 @@ export default class Footer extends Component {
           returnKeyType="done"
           underlineColorAndroid="transparent"
           value={this.state.text}
-          onContentSizeChange={
-            Platform.OS === 'ios' ? ::this.onInputContentSizeChange : null
-          }
-          onChange={
-            Platform.OS === 'android' ? ::this.onInputContentSizeChange : null
-          }
+          onContentSizeChange={::this.onInputContentSizeChange}
         />
         <Icon
           style={sendBtnStyle}

@@ -77,6 +77,8 @@ export default class Register extends Component {
   onRegisterWithLinkedIn() {
     const { auth, config: { oauthData } } = this.props;
 
+    if (!linkedIn) return;
+
     linkedIn({
       appId: oauthData.linkedIn.appId,
       appSecret: oauthData.linkedIn.appSecret,

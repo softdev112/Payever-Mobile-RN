@@ -88,6 +88,14 @@ export default class SideMenu extends Component {
     showScreen('core.LaunchScreen');
   }
 
+  onShowChat() {
+    const { navigator } = this.props;
+
+    navigator.showModal({
+      screen: 'core.LiveChat',
+    });
+  }
+
   render() {
     const { profiles } = this.props;
 
@@ -144,24 +152,30 @@ export default class SideMenu extends Component {
 
         <View style={styles.bottomMenu}>
           {__DEV__ && (
-            <Text
-              style={styles.bottomMenu_item}
+            <TextButton
+              style={styles.bottomMenuBtn}
+              title="Debug page"
               onPress={::this.onDebugPagePress}
-            >
-              Debug page
-            </Text>
+            />
           )}
+
           <TextButton
-            style={styles.allContactsBtn}
+            style={styles.bottomMenuBtn}
+            title="Chat With Us"
+            onPress={::this.onShowChat}
+          />
+
+          <TextButton
+            style={styles.bottomMenuBtn}
             title="All Contacts"
             onPress={::this.onContactsList}
           />
-          <Text
-            style={styles.bottomMenu_item}
+
+          <TextButton
+            style={styles.bottomMenuBtn}
+            title="Logout"
             onPress={::this.onLogoutPress}
-          >
-            Logout
-          </Text>
+          />
         </View>
       </View>
     );
@@ -243,17 +257,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
 
-  bottomMenu_item: {
-    color: '$pe_color_blue',
-    borderTopWidth: 1,
-    borderTopColor: '$border_color',
-    fontSize: 15,
-    fontWeight: '400',
+  bottomMenuBtn: {
     paddingHorizontal: 24,
-    paddingVertical: 18,
-  },
-
-  allContactsBtn: {
-    paddingHorizontal: 24,
+    paddingVertical: 10,
   },
 });
