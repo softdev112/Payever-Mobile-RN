@@ -22,7 +22,10 @@ export default class LiveChat extends Component {
   render() {
     const { config } = this.props;
     const js = `(${injectedJs.toString()})()`;
-    const url = `${config.siteUrl}`;
+
+    // Add /fake to url to avoid problems with go back functionality for private
+    // account
+    const url = `${config.siteUrl}/fake`;
 
     return (
       <View style={styles.container}>

@@ -245,6 +245,7 @@ const styles = StyleSheet.create({
   nameBadgeGroup: {
     flex: 1,
     flexDirection: 'row',
+    marginRight: 4,
   },
 
   groupTypeIcon: {

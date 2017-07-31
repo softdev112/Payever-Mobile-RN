@@ -3,14 +3,16 @@ import EventEmitter from 'react-native/Libraries/EventEmitter/EventEmitter';
 import WampClient from '../MessengerApi/WampClient';
 
 const MSG_WELCOME     = 0;
-// const MSG_PREFIX      = 1;
+const MSG_PREFIX      = 1;
 // const MSG_CALL        = 2;
 const MSG_CALL_RESULT = 3;
 const MSG_CALL_ERROR  = 4;
-// const MSG_SUBSCRIBE   = 5;
+const MSG_SUBSCRIBE   = 5;
 // const MSG_UNSUBSCRIBE = 6;
 // const MSG_PUBLISH     = 7;
 const MSG_EVENT       = 8;
+const EVENT_WELCOME = 'socket/welcome';
+const EVENT_ERROR   = 'socket/error';
 
 WebSocket = jest.fn(() => ({
   readyState: 1111,
@@ -239,7 +241,7 @@ describe('api/MessengerApi/WampClient', () => {
       expect(callFn).toHaveBeenCalledWith(new Error(3));
     });
 
-    it('onMessage(event) should NOT call function from this.calls if it was ON_ERROR event and call function undefined', async () => {
+    it('onMessage(event) should NOT call function from this.calls if it was ON_ERROR event and call function is undefined', async () => {
       const wampClient = await new WampClient('host', Promise.resolve('token'), true);
       wampClient.calls[1] = null;
       wampClient.emit = jest.fn();
@@ -255,10 +257,168 @@ describe('api/MessengerApi/WampClient', () => {
       );
     });
 
-    it('onMessage(event) should call all internal {event} listeners with {data} if event = undefined', async () => {
-      // emit
-      // onWelcome
-      // onEvent
+
+    it('onError(event) should call this.emit with WampClient.EVENT_ERROR and event object', async () => {
+      const wampClient = await new WampClient('host', Promise.resolve('token'), true);
+      wampClient.emit = jest.fn();
+
+      wampClient.onError({ event: 'event' });
+
+      expect(wampClient.emit).toHaveBeenCalled();
+      expect(wampClient.emit).toHaveBeenCalledWith(
+        EVENT_ERROR,
+        { event: 'event' }
+      );
+    });
+
+    it('onWelcome(message) should call this.emit with incompatible ERROR if it receive message with version !== 1', async () => {
+      const wampClient = await new WampClient('host', Promise.resolve('token'), true);
+      wampClient.emit = jest.fn();
+      wampClient.send = jest.fn();
+
+      wampClient.onWelcome([0, 2, 1]);
+
+      expect(wampClient.send).not.toHaveBeenCalled();
+      expect(wampClient.emit).toHaveBeenCalled();
+      expect(wampClient.emit).toHaveBeenCalledWith(
+        EVENT_ERROR,
+        new Error('Server 1 uses incompatible protocol version 2')
+      );
+    });
+
+    it('onWelcome(message) should set sessionId and call this.emit with WELCOME event', async () => {
+      const wampClient = await new WampClient('host', Promise.resolve('token'), true);
+      wampClient.emit = jest.fn();
+      wampClient.send = jest.fn();
+
+      wampClient.onWelcome([1111, 1, 1]);
+
+      expect(wampClient.sessionId).toBe(1111);
+      expect(wampClient.send).not.toHaveBeenCalled();
+      expect(wampClient.emit).toHaveBeenCalled();
+      expect(wampClient.emit).toHaveBeenCalledWith(
+        EVENT_WELCOME,
+        { server: 1, sessionId: 1111, version: 1 }
+      );
+    });
+
+    it('onWelcome(message) should call this.send for all prefixes and internalListeners (this.omitSubscribe = false) if sessionId already sets', async () => {
+      const wampClient = await new WampClient('host', Promise.resolve('token'), true);
+      wampClient.emit = jest.fn();
+      wampClient.send = jest.fn();
+
+      wampClient.prefixes = {
+        1: { prefix: 'prefix 1' },
+        2: { prefix: 'prefix 2' },
+        3: { prefix: 'prefix 3' },
+      };
+      wampClient.omitSubscribe = false;
+      wampClient.internalListeners = {
+        uri1: { listener: 'listener1' },
+        uri2: { listener: 'listener1' },
+        uri3: { listener: 'listener1' },
+      };
+      wampClient.sessionId = 1111;
+
+      wampClient.onWelcome([1111, 1, 1]);
+
+      expect(wampClient.send).toHaveBeenCalledTimes(6);
+      expect(wampClient.send).toHaveBeenLastCalledWith(
+        [MSG_SUBSCRIBE, 'uri3']
+      );
+      expect(wampClient.emit).toHaveBeenCalled();
+      expect(wampClient.emit).toHaveBeenCalledWith(
+        EVENT_WELCOME,
+        { server: 1, sessionId: 1111, version: 1 }
+      );
+    });
+
+    it('onWelcome(message) should call this.send for all prefixes and NOT call for internalListeners if omitSubscribe = true', async () => {
+      const wampClient = await new WampClient('host', Promise.resolve('token'), true);
+      wampClient.emit = jest.fn();
+      wampClient.send = jest.fn();
+
+      wampClient.prefixes = {
+        1: { prefix: 'prefix 1' },
+        2: { prefix: 'prefix 2' },
+        3: { prefix: 'prefix 3' },
+      };
+      wampClient.omitSubscribe = true;
+      wampClient.internalListeners = {
+        uri1: { listener: 'listener1' },
+        uri2: { listener: 'listener1' },
+        uri3: { listener: 'listener1' },
+      };
+      wampClient.sessionId = 1111;
+
+      wampClient.onWelcome([1111, 1, 1]);
+
+      expect(wampClient.send).toHaveBeenCalledTimes(3);
+      expect(wampClient.send).toHaveBeenLastCalledWith(
+        [MSG_PREFIX, '3', { prefix: 'prefix 3' }]
+      );
+      expect(wampClient.emit).toHaveBeenCalled();
+      expect(wampClient.emit).toHaveBeenCalledWith(
+        EVENT_WELCOME,
+        { server: 1, sessionId: 1111, version: 1 }
+      );
+    });
+
+    it('onEvent(event, data) should call this.emit, this.emitHandler once if prefixes = {}', async () => {
+      const wampClient = await new WampClient('host', Promise.resolve('token'), true);
+      wampClient.emit = jest.fn();
+      wampClient.emitHandler = jest.fn();
+
+      wampClient.onEvent('event', { data: 'data' });
+
+      expect(wampClient.emit).toHaveBeenCalledTimes(1);
+      expect(wampClient.emit).toHaveBeenCalledWith(
+        'event', 'event', { data: 'data' }
+      );
+      expect(wampClient.emitHandler).toHaveBeenCalledTimes(1);
+      expect(wampClient.emitHandler).toHaveBeenCalledWith(
+        'event', { data: 'data' }
+      );
+    });
+
+    it('onEvent(event, data) should call this.emit once and this.emitHandler several times if prefixes !== {} end event starts from prefix', async () => {
+      const wampClient = await new WampClient('host', Promise.resolve('token'), true);
+      wampClient.emit = jest.fn();
+      wampClient.emitHandler = jest.fn();
+
+      wampClient.prefixes = {
+        prefix: 'expanded',
+      };
+      wampClient.onEvent('prefix:', { data: 'data' });
+
+      expect(wampClient.emit).toHaveBeenCalledTimes(1);
+      expect(wampClient.emit).toHaveBeenCalledWith(
+        'event', 'prefix:', { data: 'data' }
+      );
+      expect(wampClient.emitHandler).toHaveBeenCalledTimes(2);
+      expect(wampClient.emitHandler).toHaveBeenLastCalledWith(
+        'expanded', { data: 'data' }
+      );
+    });
+
+    it('onEvent(event, data) should call this.emit once and this.emitHandler several times if prefixes !== {} end event starts from expanded', async () => {
+      const wampClient = await new WampClient('host', Promise.resolve('token'), true);
+      wampClient.emit = jest.fn();
+      wampClient.emitHandler = jest.fn();
+
+      wampClient.prefixes = {
+        prefix: 'expanded',
+      };
+      wampClient.onEvent('expanded', { data: 'data' });
+
+      expect(wampClient.emit).toHaveBeenCalledTimes(1);
+      expect(wampClient.emit).toHaveBeenCalledWith(
+        'event', 'expanded', { data: 'data' }
+      );
+      expect(wampClient.emitHandler).toHaveBeenCalledTimes(2);
+      expect(wampClient.emitHandler).toHaveBeenLastCalledWith(
+        'prefix:', { data: 'data' }
+      );
     });
   });
 });

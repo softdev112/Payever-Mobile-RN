@@ -218,7 +218,7 @@ export default class WampClient extends EventEmitter {
 
     // emit the original version straight away
     this.emitHandler(event, data);
-    Object.keys(this.prefixes, (prefix) => {
+    Object.keys(this.prefixes).forEach((prefix) => {
       const expanded = this.prefixes[prefix];
       const pref = prefix + ':';
       if (event.indexOf(pref) === 0) {

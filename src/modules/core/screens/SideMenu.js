@@ -90,7 +90,6 @@ export default class SideMenu extends Component {
 
   onShowChat() {
     const { navigator } = this.props;
-
     navigator.showModal({
       screen: 'core.LiveChat',
     });
