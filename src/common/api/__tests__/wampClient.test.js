@@ -16,6 +16,7 @@ const EVENT_ERROR   = 'socket/error';
 
 WebSocket = jest.fn(() => ({
   readyState: 1111,
+  close: jest.fn(),
 }));
 
 WebSocket.CONNECTING = 2222;
@@ -419,6 +420,45 @@ describe('api/MessengerApi/WampClient', () => {
       expect(wampClient.emitHandler).toHaveBeenLastCalledWith(
         'prefix:', { data: 'data' }
       );
+    });
+
+    it('close() should call clearInterval, this.socket.close() and set this.checkConnectionInterval = null', async () => {
+      const wampClient = await new WampClient('host', Promise.resolve('token'), true);
+
+      wampClient.close();
+
+      expect(clearInterval).toHaveBeenCalled();
+      expect(wampClient.socket.close).toHaveBeenCalled();
+      expect(wampClient.checkConnectionInterval).toBeNull();
+    });
+
+    it('subscribe(uri, fn) should add event listener and call this.send if this.internalListeners[uri].length === 1 && !this.omitSubscribe', async () => {
+      const wampClient = await new WampClient('host', Promise.resolve('token'), true);
+      wampClient.send = jest.fn();
+      const listener = jest.fn();
+
+      wampClient.omitSubscribe = false;
+      wampClient.subscribe('uri', listener);
+
+      expect(wampClient.send).toHaveBeenCalled();
+      expect(wampClient.send).toHaveBeenCalledWith(
+        [MSG_SUBSCRIBE, 'uri']
+      );
+      expect(wampClient.internalListeners.uri).toHaveLength(1);
+      expect(wampClient.internalListeners.uri[0]).toEqual(listener);
+    });
+
+    it('subscribe(uri, fn) should add event listener and should NOT call this.send this.omitSubscribe === true', async () => {
+      const wampClient = await new WampClient('host', Promise.resolve('token'), true);
+      wampClient.send = jest.fn();
+      const listener = jest.fn();
+
+      wampClient.omitSubscribe = true;
+      wampClient.subscribe('uri', listener);
+
+      expect(wampClient.send).not.toHaveBeenCalled();
+      expect(wampClient.internalListeners.uri).toHaveLength(1);
+      expect(wampClient.internalListeners.uri[0]).toEqual(listener);
     });
   });
 });
