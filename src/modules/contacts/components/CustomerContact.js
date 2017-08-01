@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: 85,
+    minHeight: CustomerContact.MIN_ROW_HEIGHT,
   },
 
   avatar: {

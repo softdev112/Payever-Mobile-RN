@@ -48,7 +48,9 @@ export default class Search extends Component {
   }
 
   onSearchPress() {
-    this.$input.focus();
+    if (this.$input) {
+      this.$input.focus();
+    }
   }
 
   onSettingsPress() {
@@ -86,28 +88,29 @@ export default class Search extends Component {
             source="icon-search-16"
             touchStyle={styles.iconSearch_offset}
           />
+
           <TextInput
             style={[styles.input, inputStyle]}
             ref={i => this.$input = i}
             onChangeText={t => this.onTextChange(t)}
             autoCorrect={false}
-            multiline={false}
             placeholder="Search"
             returnKeyType="search"
             autoCapitalize="none"
             underlineColorAndroid="transparent"
             value={localState ? value : communication.contactsFilter}
           />
+
+          {showSettings && (
+            <Icon
+              style={styles.iconSettings}
+              hitSlop={14}
+              onPress={::this.onSettingsPress}
+              source="icon-settings-24"
+              touchStyle={styles.iconSettings_offset}
+            />
+          )}
         </View>
-        {showSettings && (
-          <Icon
-            style={styles.iconSettings}
-            hitSlop={14}
-            onPress={::this.onSettingsPress}
-            source="icon-settings-24"
-            touchStyle={styles.iconSettings_offset}
-          />
-        )}
       </View>
     );
   }

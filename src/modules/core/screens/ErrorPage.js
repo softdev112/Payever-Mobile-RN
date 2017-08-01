@@ -26,7 +26,7 @@ export default class ErrorPage extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Header>Error</Header>
+        <Header>Error!</Header>
         <View style={styles.errorContainer}>
           <ErrorBox message={this.props.message} />
           <Button

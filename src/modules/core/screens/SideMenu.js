@@ -72,15 +72,6 @@ export default class SideMenu extends Component {
     });
   }
 
-  onContactsList() {
-    const { navigator } = this.props;
-    this.onClose();
-    navigator.push({
-      screen: 'contacts.BusinessContacts',
-      animated: true,
-    });
-  }
-
   onLogoutPress() {
     const { auth } = this.props;
     auth.logout()
@@ -162,12 +153,6 @@ export default class SideMenu extends Component {
             style={styles.bottomMenuBtn}
             title="Chat With Us"
             onPress={::this.onShowChat}
-          />
-
-          <TextButton
-            style={styles.bottomMenuBtn}
-            title="All Contacts"
-            onPress={::this.onContactsList}
           />
 
           <TextButton

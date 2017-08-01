@@ -14,6 +14,8 @@ import type ConversationInfo
 import type ProfilesStore from '../../../../store/profiles';
 
 const NUM_CONTACTS_TO_SHOW = 5;
+const MIN_ROW_HEIGHT = 70;
+const INIT_LIST_HEIGHT = 400;
 
 @inject('communication', 'profiles')
 @observer
@@ -25,22 +27,23 @@ export default class Contacts extends Component {
   };
 
   state: {
-    isListShrink: boolean;
+    shrinkLists: boolean;
+    listHeight: number;
+    isContactsShrink: boolean;
+    isGroupsShrink: boolean;
     selectedContact: ConversationInfo;
   };
-
-  renderHeader: () => Component;
-  renderFooter: () => Component;
 
   constructor(props) {
     super(props);
 
     this.renderHeader = this.renderHeader.bind(this);
-    this.renderFooter = this.renderFooter.bind(this);
-    this.getSectionsData = this.getSectionsData.bind(this);
 
     this.state = {
-      isListShrink: true,
+      shrinkLists: false,
+      listHeight: INIT_LIST_HEIGHT,
+      isContactsShrink: true,
+      isGroupsShrink: true,
       selectedContact: null,
     };
   }
@@ -53,12 +56,6 @@ export default class Contacts extends Component {
       await communication.loadMessengerInfo(profiles.currentProfile);
     }
 
-    const { messengerInfo } = communication;
-    this.setState({
-      contactsCount: messengerInfo.conversations.length,
-      groupsCount: messengerInfo.groups.length,
-    });
-
     communication.search('');
   }
 
@@ -67,13 +64,34 @@ export default class Contacts extends Component {
   }
 
   onShowMoreContacts() {
-    const { isListShrink } = this.state;
-    this.setState({ isListShrink: !isListShrink });
+    const { isContactsShrink } = this.state;
+    this.setState({ isContactsShrink: !isContactsShrink });
+  }
+
+  onShowMoreGroups() {
+    const { isGroupsShrink } = this.state;
+    this.setState({ isGroupsShrink: !isGroupsShrink });
+  }
+
+  onListLayout({ nativeEvent }) {
+    const { communication: { messengerInfo } } = this.props;
+    const { conversations, groups, marketingGroups } = messengerInfo;
+
+    // If list height > rows count * MIN_ROW_HEIGHT do not show more/less
+    // buttons at all
+    const totalConvCount =
+      conversations.length + groups.length + marketingGroups.length;
+    const { height } = nativeEvent.layout;
+
+    this.setState({
+      listHeight: height,
+      shrinkLists: totalConvCount * MIN_ROW_HEIGHT >= height,
+    });
   }
 
   getSectionsData() {
     const { communication } = this.props;
-    const { isListShrink } = this.state;
+    const { isContactsShrink, isGroupsShrink, shrinkLists } = this.state;
 
     const sections = communication.getContactsAndGroupsData()
       .map((section, idx) => {
@@ -102,14 +120,16 @@ export default class Contacts extends Component {
         const patchedData = section.data.sort(sortByLastMessage);
         switch (idx) {
           case 0:
-            if (isListShrink && patchedData.length > NUM_CONTACTS_TO_SHOW) {
+            if (shrinkLists && isContactsShrink
+              && patchedData.length > NUM_CONTACTS_TO_SHOW) {
               section.data = patchedData.slice(0, NUM_CONTACTS_TO_SHOW);
             }
 
             break;
 
           case 1:
-            if (isListShrink && patchedData.length > NUM_CONTACTS_TO_SHOW) {
+            if (shrinkLists && isGroupsShrink
+              && patchedData.length > NUM_CONTACTS_TO_SHOW) {
               section.data = patchedData.slice(0, NUM_CONTACTS_TO_SHOW);
             }
 
@@ -134,20 +154,43 @@ export default class Contacts extends Component {
     return <Search />;
   }
 
-  renderFooter() {
-    const { communication: { messengerInfo } } = this.props;
-    const { isListShrink } = this.state;
+  renderSectionFooter({ section }) {
+    const { messengerInfo } = this.props.communication;
+    const { isContactsShrink, isGroupsShrink, shrinkLists } = this.state;
 
-    if (messengerInfo.conversations.length <= NUM_CONTACTS_TO_SHOW
-      && messengerInfo.groups.length <= NUM_CONTACTS_TO_SHOW) {
-      return null;
+    if (!shrinkLists) return null;
+
+    // Skip foundMessages
+    let action;
+    let btnText = '';
+    switch (section.key) {
+      case '1':
+        if (messengerInfo.conversations.length <= NUM_CONTACTS_TO_SHOW) {
+          return null;
+        }
+
+        action = ::this.onShowMoreContacts;
+        btnText = isContactsShrink ? 'More...' : 'Less...';
+        break;
+
+      case '2':
+        if (messengerInfo.groups.length <= NUM_CONTACTS_TO_SHOW) {
+          return null;
+        }
+
+        action = ::this.onShowMoreGroups;
+        btnText = isGroupsShrink ? 'More...' : 'Less...';
+        break;
+
+      default:
+        return null;
     }
 
     return (
       <TextButton
         style={styles.moreBtn}
-        title={isListShrink ? 'More...' : 'Less...'}
-        onPress={::this.onShowMoreContacts}
+        title={btnText}
+        onPress={action}
       />
     );
   }
@@ -175,8 +218,8 @@ export default class Contacts extends Component {
         <SectionList
           style={styles.contactsList}
           contentContainerStyle={styles.contentContainer}
+          onLayout={::this.onListLayout}
           ListHeaderComponent={this.renderHeader}
-          ListFooterComponent={this.renderFooter}
           sections={this.getSectionsData()}
           initialNumToRender={20}
           renderItem={({ item }) => (
@@ -192,6 +235,7 @@ export default class Contacts extends Component {
               type={section.title}
             />
           )}
+          renderSectionFooter={::this.renderSectionFooter}
           keyExtractor={c => c.id}
         />
       </View>
@@ -221,7 +265,9 @@ const styles = StyleSheet.create({
 
   moreBtn: {
     height: 30,
-    alignSelf: 'center',
+    alignSelf: 'flex-end',
+    marginRight: 20,
     justifyContent: 'center',
+    paddingBottom: 6,
   },
 });

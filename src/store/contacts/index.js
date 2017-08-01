@@ -62,7 +62,7 @@ export default class ContactsStore {
         profiles.currentProfile.business.slug,
         currentPage + 1
       ),
-      this
+      this.contacts.length > 0 ? null : this
     ).success((data) => {
       this.contactsPaginationData = data.pagination_data;
       if (data.contact_models && data.contact_models.length > 0) {
@@ -103,7 +103,7 @@ export default class ContactsStore {
         profiles.currentProfile.business.slug,
         currentPage + 1
       ),
-      this
+      this.contactGroups.length > 0 ? null : this
     ).success((data) => {
       this.contactGroupsPaginationData = data.pagination_data;
       if (data.group_list && data.group_list.length > 0) {

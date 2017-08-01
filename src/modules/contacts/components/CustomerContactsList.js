@@ -34,7 +34,9 @@ export default class BusinessContacts extends Component {
   }
 
   async onEndReached() {
-    await this.props.contacts.loadAllContacts();
+    const { contacts } = this.props;
+    if (contacts.isLoading) return;
+    await contacts.loadAllContacts();
   }
 
   onSelectedContactChange(isSelected, contact: CustomerContactInfo) {

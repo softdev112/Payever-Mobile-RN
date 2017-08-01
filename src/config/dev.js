@@ -40,7 +40,7 @@ export default Object.assign({
     linkedIn: {
       appId: '78a1v96xm7x1tt',
       appSecret: 'Umu6R25x1w7NiDt6',
-      callback: 'https://localhost:3003/auth/linkedin',
+      callback: 'https://stage.payever.de/social/mobile/connect',
       scope: 'r_basicprofile r_emailaddress',
     },
   },

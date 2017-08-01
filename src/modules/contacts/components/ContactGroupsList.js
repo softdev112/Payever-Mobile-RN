@@ -36,6 +36,7 @@ export default class ContactGroupsList extends Component {
 
   async onEndReached() {
     const { contacts } = this.props;
+    if (contacts.isLoading) return;
     await contacts.loadAllContactGroups();
   }
 
