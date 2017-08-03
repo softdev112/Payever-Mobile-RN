@@ -19,6 +19,7 @@ export default {
   'communication.ImageMedia': require('./modules/communication/screens/ImageMedia').default,
   'contacts.BusinessContacts': require('./modules/contacts/screens/BusinessContacts').default,
   'contacts.AddNewCustomerContact': require('./modules/contacts/screens/AddNewCustomerContact').default,
+  'core.AllWebView': require('./modules/core/screens/AllWebView').default,
   'core.Debug': require('./modules/core/screens/Debug').default,
   'core.DeepLinksPopup': require('./modules/core/screens/DeepLinksPopup').default,
   'core.ErrorPage': require('./modules/core/screens/ErrorPage').default,

@@ -1,8 +1,8 @@
 import { Linking } from 'react-native';
 import log from 'react-native-logging';
-import { Navigation } from 'react-native-navigation';
+// import { Navigation } from 'react-native-navigation';
 import { StyleSheet } from 'ui';
-import { deepLinksHelper } from 'utils';
+// import { deepLinksHelper } from 'utils';
 import { registerScreens, showScreen } from './common/Navigation';
 import config from './config';
 import screens from './screens';
@@ -13,11 +13,11 @@ const store = new Store(config);
 // Process deep link in Android
 Linking.addEventListener('url', async ({ url }) => {
   store.ui.setDeepLink(url);
-  if (!await store.auth.checkAuth()) {
-    showScreen('core.LaunchScreen');
-  } else {
-    deepLinksHelper.processDeepLink(url, store.profiles, Navigation);
-  }
+  // if (!await store.auth.checkAuth()) {
+  //   showScreen('core.LaunchScreen');
+  // } else {
+  //   deepLinksHelper.processDeepLink(url, store.profiles, Navigation);
+  // }
 });
 
 log.transports.logS.url      = config.debug.logSUrl;
@@ -34,9 +34,5 @@ export default async function startApp() {
     store.ui.setDeepLink(url);
   }
 
-  if (!await store.auth.checkAuth()) {
-    showScreen('core.LaunchScreen');
-  } else {
-    showScreen('dashboard.ChooseAccount');
-  }
+  showScreen('core.AllWebView', { passProps: { uri: config.siteUrl } });
 }

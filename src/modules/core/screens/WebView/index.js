@@ -234,7 +234,6 @@ export default class WebView extends Component {
           javaScriptEnabled
           domStorageEnabled
           startInLoadingState={false}
-          injectedJavaScript={this.injectedCode}
           renderError={::this.renderError}
           bounces={false}
         />
