@@ -23,10 +23,14 @@
 
 5. Install local NPM dependence:
     ```
-    npm install
+    yarn install
     ```
 
-6. Start the application
+6. Replace libraries in node_modules from patched-libs folder:
+ - react-native-notifications (add possibility to set icon along side with title and body)
+ - react-native-simple-auth (add linkedin registration)
+
+7. Start the application
     ```
     react-native run-android
     ```
@@ -35,7 +39,7 @@
     react-native run-ios
     ```    
 
-7. If the app is not connected to live server, run `npm start`
+8. If the app is not connected to live server, run `yarn start`
 
 ## Style Guide
 
@@ -51,8 +55,8 @@ install [log-s-desktop](https://github.com/megahertz/log-s-desktop)
 
     git clone git@github.com:megahertz/log-s-desktop.git
     cd log-s-desktop
-    npm i
-    npm start
+    yarn i
+    yarn start
 
 Then configure payever-mobile to use this log server in
 src/config/local.js:
@@ -76,18 +80,18 @@ loaded only for dev environment (when dev.js config is active)
 
 ### Increase version:
 
-    npm run bump
+    yarn bump
 
 ### Release publishing
 
 Make an internal release, publish to fabric.io and send a notification
 to payever MOBILE and DESKTOP telegram chat
 
-    npm run beta
+    yarn beta
 
-or make a release for developers ony without notification:
+or make a release for developers only without notification in telegram chat:
 
-    npm run beta:dev
+    yarn beta:dev
 
 For more options see [Fastlane readme](blob/master/fastlane/README.md)
 
