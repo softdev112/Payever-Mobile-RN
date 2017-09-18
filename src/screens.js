@@ -25,6 +25,7 @@ export default {
   'core.ErrorPage': require('./modules/core/screens/ErrorPage').default,
   'core.LaunchScreen': require('./modules/core/screens/LaunchScreen').default,
   'core.LiveChat': require('./modules/core/screens/LiveChat').default,
+  'core.NoInetErrorPage': require('./modules/core/screens/NoInetErrorPage').default,
   'core.PushNotification': require('./modules/core/screens/PushNotification').default,
   'core.SideMenu': require('./modules/core/screens/SideMenu').default,
   'core.WebView': require('./modules/core/screens/WebView').default,
