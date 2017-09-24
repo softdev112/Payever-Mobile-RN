@@ -1,7 +1,7 @@
 import { Linking } from 'react-native';
 import log from 'react-native-logging';
 import { StyleSheet } from 'ui';
-import { networkHelper } from 'utils';
+
 import { registerScreens, showScreen } from './common/Navigation';
 import config from './config';
 import screens from './screens';
@@ -33,9 +33,5 @@ export default async function startApp() {
     store.ui.setDeepLink(url);
   }
 
-  if (!await networkHelper.isConnected()) {
-    showScreen('core.NoInetErrorPage');
-  } else {
-    showScreen('core.AllWebView', { passProps: { uri: config.siteUrl } });
-  }
+  showScreen('core.AllWebView', { passProps: { uri: config.siteUrl } });
 }

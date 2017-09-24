@@ -680,6 +680,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		719B495E1F73BDA500D89269 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				751119A52E00430FACC37615 /* libRNDeviceInfo.a */,
+				921DD584FB3C49BE8AC4974C /* libSMXCrashlytics.a */,
+				1219D93BD00046459CABF215 /* libReactNativeNavigation.a */,
+				D43AD1EE44834059BEEB4638 /* libRNNotifications.a */,
+				704EDC39195649EA893E360A /* libRNSound.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		71B5900E1EF26E2500EB846D /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -769,6 +781,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				A9E7534BE98ADFD46DFABE79 /* Pods */,
 				B02BDC3030BB20381051C9E1 /* Frameworks */,
+				719B495E1F73BDA500D89269 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";

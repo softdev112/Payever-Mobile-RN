@@ -84,10 +84,11 @@ platform :ios do
     match(type: 'adhoc', readonly: true)
     gym(
       scheme: 'PayeverMobile',
+      export_options: { iCloudContainerEnvironment: 'Production' },
       workspace: 'ios/PayeverMobile.xcworkspace',
       export_method: 'ad-hoc',
       output_directory: 'fastlane/build/ios',
-      output_name: 'payever.ipa'   
+      output_name: 'payever.ipa'
     )
     publish_to_fabric(values, ipa_path: 'fastlane/build/ios/payever.ipa')
     notify_telegram(values)

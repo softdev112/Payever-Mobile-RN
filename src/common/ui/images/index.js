@@ -8,6 +8,8 @@ export default {
   communication: require('./communication.png'),
   noAvatar: require('./no-avatar.png'),
   noBusiness: require('./no-business.png'),
+  background: require('./background.jpg'),
+  bigLogo: require('./big_logo.png'),
 };
 
 function getIconByUrl(url: string) {
