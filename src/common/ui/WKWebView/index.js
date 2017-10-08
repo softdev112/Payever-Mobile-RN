@@ -6,7 +6,6 @@ import RNWKWebView from 'react-native-wkwebview-reborn';
 import type { Config } from '../../../config';
 import StyleSheet from '../StyleSheet';
 import WebViewLoader from './WebViewLoader';
-import NoInetErrorPage from '../../../modules/core/screens/NoInetErrorPage';
 
 @inject('config')
 @observer
@@ -18,6 +17,7 @@ export default class WKWebView extends Component {
   state: {
     showLoader: boolean;
   };
+
 
   constructor(props) {
     super(props);
@@ -46,7 +46,6 @@ export default class WKWebView extends Component {
           userAgent="Mozilla/5.0"
           onProgress={::this.onProgress}
           bounces={false}
-          renderError={() => <NoInetErrorPage />}
         />
 
         {showLoader && <WebViewLoader />}

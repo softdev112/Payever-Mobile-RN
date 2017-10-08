@@ -72,11 +72,7 @@ export default class Debug extends Component {
         <TouchableOpacity
           onPress={() => {
             navigator.push({
-              screen: 'core.ErrorPage',
-              passProps: {
-                message: 'Hello World!!! Hi dksmfksdmfksdfmksdlfmsdklfmsdkfmsdklfmskdmfksmfksdmfklsdmfksdmkf',
-              },
-              animated: true,
+              screen: 'core.NoInetErrorPage',
             });
           }}
         >
