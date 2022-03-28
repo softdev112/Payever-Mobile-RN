@@ -109,7 +109,7 @@
     "gulp-svg2ttf": "^2.0.0",
     "gulp-svgicons2svgfont": "^3.0.1",
     "gulp-task-doc": "^1.0.11",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.6",
     "react-dom": "^15.6.1",
     "vinyl": "^2.0.1"
   },
